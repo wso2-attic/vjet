@@ -234,9 +234,16 @@ public class JsNativeMeta {
 		
 		addbt(MediaList.class);
 		addbt(StyleSheet.class);
-		addbt(CSSStyleSheet.class);
+		addbt(CssStyleSheet.class);
 		addbt(StyleSheetList.class);
-		addbt(CSSRule.class);
+		addbt(CssRule.class);
+		addbt(CssStyleRule.class);
+		addbt(CssPageRule.class);
+		addbt(CssImportRule.class);
+		addbt(CssFontFaceRule.class);
+		addbt(CssCharsetRule.class);
+		addbt(CssMediaRule.class);
+		addbt(CssStyleDeclaration.class);
 		addbt(CSSRuleList.class);
 		
 		addbt(Range.class);

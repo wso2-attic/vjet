@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.active.dom.html;
 
 import org.ebayopensource.dsf.html.dom.DLink;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
-import org.ebayopensource.dsf.jsnative.CSSStyleSheet;
+import org.ebayopensource.dsf.jsnative.CssStyleSheet;
 import org.ebayopensource.dsf.jsnative.HtmlElementStyle;
 import org.ebayopensource.dsf.jsnative.HtmlLink;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
@@ -105,7 +105,7 @@ public class AHtmlLink extends AHtmlElement implements  HtmlLink {
 		onAttrChange(EHtmlAttr.type, type);
 	}
 	
-	public CSSStyleSheet getStyleSheet() {
+	public CssStyleSheet getStyleSheet() {
 //		return getStyle();
 		//TODO implement
 		return null;

@@ -39,13 +39,13 @@ public interface HtmlStyle extends HtmlElement {
 	 * object's properties and methods
 	 */
 	@BrowserSupport({BrowserType.IE_6P})
-	@Property CSSStyleSheet getStyleSheet();
+	@Property CssStyleSheet getStyleSheet();
 	
 	/**
 	 * Retrieves an interface pointer that provides access to the style sheet 
 	 * object's properties and methods
 	 */
 	@DOMSupport(DomLevel.TWO)
-	@Property CSSStyleSheet getSheet();
+	@Property CssStyleSheet getSheet();
 
 }

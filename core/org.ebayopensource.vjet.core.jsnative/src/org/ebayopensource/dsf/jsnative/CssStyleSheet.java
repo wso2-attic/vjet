@@ -5,8 +5,13 @@ import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsArray;
+import org.ebayopensource.dsf.jsnative.anno.JsVariantArray;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
+import org.w3c.dom.css.CSSCharsetRule;
+import org.w3c.dom.css.CSSFontFaceRule;
+import org.w3c.dom.css.CSSMediaRule;
+import org.w3c.dom.css.CSSStyleRule;
 
 /*
  * Object CSSStyleSheet
@@ -34,13 +39,16 @@ import org.ebayopensource.dsf.jsnative.anno.Property;
 
  */
 @Alias("CSSStyleSheet")
-public interface CSSStyleSheet extends StyleSheet {
+public interface CssStyleSheet extends StyleSheet {
 
 	@Property
-	CSSRule getOwnerRule();
+	CssRule getOwnerRule();
 
 	@Property
-	@JsArray(CSSRule.class)
+	@JsVariantArray({CssRule.class, CssMediaRule.class,
+		CssStyleRule.class, CssFontFaceRule.class, CssCharsetRule.class,
+		CssImportRule.class, CssPageRule.class
+		})
 	CSSRuleList getCssRules();
 
 	@Function

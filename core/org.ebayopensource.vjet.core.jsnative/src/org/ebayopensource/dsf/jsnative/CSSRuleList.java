@@ -23,6 +23,6 @@ import org.mozilla.mod.javascript.IWillBeScriptable;
 public interface CSSRuleList extends IWillBeScriptable {
 
 	@Property int getLength();
-	@Function CSSRule item(int index);
+	@Function CssRule item(int index);
 	
 }

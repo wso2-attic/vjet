@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.active.dom.html;
 
 import org.ebayopensource.dsf.html.dom.DStyle;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
-import org.ebayopensource.dsf.jsnative.CSSStyleSheet;
+import org.ebayopensource.dsf.jsnative.CssStyleSheet;
 import org.ebayopensource.dsf.jsnative.HtmlElementStyle;
 import org.ebayopensource.dsf.jsnative.HtmlStyle;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
@@ -51,7 +51,7 @@ public class AHtmlStyle extends AHtmlElement implements HtmlStyle {
 		onAttrChange(EHtmlAttr.type, type);
 	}
 	
-	public CSSStyleSheet getStyleSheet() {
+	public CssStyleSheet getStyleSheet() {
 		//return getStyle();
 		return null;
 		// TODO implement
@@ -62,7 +62,7 @@ public class AHtmlStyle extends AHtmlElement implements HtmlStyle {
 	}
 
 	@Override
-	public CSSStyleSheet getSheet() {
+	public CssStyleSheet getSheet() {
 		// TODO Auto-generated method stub
 		return null;
 	}

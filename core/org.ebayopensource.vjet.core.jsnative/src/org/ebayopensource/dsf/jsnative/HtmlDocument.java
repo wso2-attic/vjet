@@ -313,7 +313,7 @@ public interface HtmlDocument extends Document, DocumentEvent, DocumentRange {
 	@BrowserSupport({BrowserType.FIREFOX_1P, BrowserType.OPERA_7P, BrowserType.SAFARI_3P})
 	@Property Window getDefaultView();
 	
-	@JsArray(CSSStyleSheet.class)
+	@JsArray(CssStyleSheet.class)
 	@Property StyleSheetList getStyleSheets();
 	
 	

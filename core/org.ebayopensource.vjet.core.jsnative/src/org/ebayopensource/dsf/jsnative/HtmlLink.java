@@ -148,7 +148,7 @@ public interface HtmlLink extends HtmlElement {
 	 * object's properties and methods
 	 */
 	@BrowserSupport({BrowserType.IE_6P})
-	@Property CSSStyleSheet getStyleSheet();
+	@Property CssStyleSheet getStyleSheet();
 	
 	
 	/**

@@ -2,11 +2,12 @@ package org.ebayopensource.dsf.jsnative;
 
 import org.ebayopensource.dsf.javatojs.anno.AJavaOnly;
 import org.ebayopensource.dsf.javatojs.anno.ARename;
+import org.ebayopensource.dsf.jsnative.anno.Alias;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
 
-
-public interface CSSRule extends IWillBeScriptable {
+@Alias("CSSRule")
+public interface CssRule extends IWillBeScriptable {
 
 	/*
 	 * Prototype Object CSSRule
@@ -71,8 +72,8 @@ Object CSSRule
 	
 	@Property int getType();
 	@Property String getCssText();
-	@Property CSSStyleSheet getParentStyleSheet();
-	@Property CSSRule getParentRule();
+	@Property CssStyleSheet getParentStyleSheet();
+	@Property CssRule getParentRule();
 	
 	
 	
