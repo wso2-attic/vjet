@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+   xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.ebayopensource.vjet.extmod</groupId>
+      <artifactId>org.ebayopensource.vjet.extmod-parent</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+   </parent>
+   <groupId>org.ebayopensource.vjet.extmod.dltk</groupId>
+   <artifactId>org.ebayopensource.vjet.extmod.dltk-parent</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+   <packaging>pom</packaging>
+   
+   <modules>
+      <!--  DLTK Core -->
+      <!--  <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk</module> -->
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.console</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.console.ui</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.core</module>
+      <!-- <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.core.doc.isv</module> -->
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.debug</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.debug.ui</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.formatter</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.launching</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.ui</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.validators.core</module>
+      <module>../../../../nexustools/org.eclipse.dltk/core/plugins/org.eclipse.dltk.validators.ui</module>
+      
+      <!--  DLTK Java Script -->
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.core</module> 
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.core.dom.support</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.core.dom.support.sample</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.debug</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.debug.ui</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.jdt.integration</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.jsjdtdebugger</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.launching</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.rhino</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.rhino.dbgp</module>
+      <module>../../../../nexustools/org.eclipse.dltk/javascript/plugins/org.eclipse.dltk.javascript.ui</module>
+   </modules>
+
+</project>
