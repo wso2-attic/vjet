@@ -15,16 +15,16 @@
 
    <modules>
       <!-- Plugins -->
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.core</module> 
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.launching</module> 
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.ui</module>
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.dltk.core.fragment</module>
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.rhino.dbgp</module>
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.debug</module>
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.debug.ui</module>
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.vjetv</module>
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.help</module>
-      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.ui.html</module>
+      <module>org.ebayopensource.vjet.eclipse.core</module> 
+      <module>org.ebayopensource.vjet.eclipse.launching</module> 
+      <module>org.ebayopensource.vjet.eclipse.ui</module>
+      <module>org.ebayopensource.vjet.eclipse.dltk.core.fragment</module>
+      <module>org.ebayopensource.vjet.eclipse.rhino.dbgp</module>
+      <module>org.ebayopensource.vjet.eclipse.debug</module>
+      <module>org.ebayopensource.vjet.eclipse.debug.ui</module>
+      <module>org.ebayopensource.vjet.eclipse.vjetv</module>
+      <module>org.ebayopensource.vjet.eclipse.help</module>
+      <module>org.ebayopensource.vjet.eclipse.ui.html</module>
    </modules>
 
 </project>

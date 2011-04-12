@@ -16,17 +16,18 @@
    <modules>
       <module>org.ebayopensource.vjet.extmod.rhino</module>
       <module>org.ebayopensource.vjet.extmod.jsdt</module>
-      <module>org.ebayopensource.vjet.extmod.dltk.core</module>
+
+      <module>org.ebayopensource.vjet.extmod.dltk.core</module> 
       <!--  <module>org.ebayopensource.vjet.extmod.dltk.core.sdk</module> --> 
       <module>org.ebayopensource.vjet.extmod.dltk.javascript</module>
       
-      <module>org.ebayopensource.vjet.binary</module>
-      
+      <module>org.ebayopensource.vjet.binary</module> 
+
       <module>org.ebayopensource.vjet.core</module>
       <module>org.ebayopensource.vjet.web</module>
       <module>org.ebayopensource.vjet.rt</module>
       <module>org.ebayopensource.vjet.resource</module>
-      
+             
       <module>org.ebayopensource.vjet.eclipse</module>
       
       <module>org.ebayopensource.vjet.all</module>
