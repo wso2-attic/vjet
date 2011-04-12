@@ -1,0 +1,7 @@
+vjo.ctype("vjo.a.b.CTypePropsMethods03")
+.props({
+   //> public final int foo3();
+   foo3: function() {
+      return 0;
+   } 
+})

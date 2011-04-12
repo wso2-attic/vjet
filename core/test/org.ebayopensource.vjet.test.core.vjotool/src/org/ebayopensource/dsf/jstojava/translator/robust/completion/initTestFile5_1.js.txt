@@ -1,0 +1,5 @@
+vjo.ctype('vjo.vjet.Sample2') //< public
+.inits(function(){
+        this.       
+})
+.endType();

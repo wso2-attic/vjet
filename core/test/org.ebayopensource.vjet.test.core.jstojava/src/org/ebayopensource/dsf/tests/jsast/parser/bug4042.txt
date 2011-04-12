@@ -1,0 +1,8 @@
+vjo.ctype('a.b.X')
+.props({
+	//>public void foo(X a)
+	foo : function (a) {
+		
+	}
+})
+.endType();

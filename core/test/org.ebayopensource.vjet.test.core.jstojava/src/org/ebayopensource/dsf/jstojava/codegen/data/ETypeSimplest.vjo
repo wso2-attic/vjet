@@ -1,0 +1,3 @@
+vjo.etype("v4.js.etype.ETypeSimplest")
+.values("MON,TUE, WED,  THU ,FRI , SAT   ,SUN")
+.endType();

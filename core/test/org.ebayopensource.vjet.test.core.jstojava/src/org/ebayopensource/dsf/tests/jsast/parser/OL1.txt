@@ -1,0 +1,12 @@
+vjo.ctype('a.b.c.OL1')
+.protos({
+	a : function () {
+		var o = {
+			func : function () {
+				alert(1);
+			}
+		};
+		
+	}
+})
+.endType();

@@ -1,0 +1,2 @@
+vjo.ctype("mrp.EBaseCapability") //< abstract
+.endType();

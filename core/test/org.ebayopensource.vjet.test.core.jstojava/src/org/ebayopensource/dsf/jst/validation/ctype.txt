@@ -1,0 +1,3 @@
+//vjo.ctype("a.b.c.D")
+//.expects()
+//.endType();

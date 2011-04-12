@@ -1,0 +1,13 @@
+vjo.ctype('a.b.C')
+.protos({
+	a:function(){//<public void a
+		this.b();
+	}
+})
+.props({
+	b:function(){//<public void b
+		this.vj$.C.a();
+	}
+})
+.inits(function(){})
+.endType();

@@ -1,0 +1,6 @@
+-bp    
+
+testFiles
+   
+testFiles\access\inherits\*.js
+

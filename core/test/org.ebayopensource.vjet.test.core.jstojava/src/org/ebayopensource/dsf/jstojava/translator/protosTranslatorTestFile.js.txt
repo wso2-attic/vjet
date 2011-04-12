@@ -1,0 +1,10 @@
+vjo.protos({
+
+ propOne:"Default",
+
+ propTwo:23,
+ 
+ constructs:function(arg1){
+	 alert("contructing");
+ }
+});

@@ -1,0 +1,11 @@
+vjo.ctype("vjo.a.b.CTypePropsVars02")
+.props({
+   //2
+   //>public short count2 
+   count2: 0
+})
+
+
+
+
+

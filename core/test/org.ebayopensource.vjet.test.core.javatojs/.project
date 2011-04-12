@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- @generated-ignore. Generated file, do not add to source control! -->
+<projectDescription>
+	<name>org.ebayopensource.vjet.test.core.javatojs</name>
+	<comment>gened by V3 build!</comment>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments/>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+</projectDescription>

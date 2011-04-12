@@ -1,0 +1,16 @@
+vjo.ctype('samples.closures.Closure3') //< public
+.props({
+        //> private void bar()
+        bar: function() {
+        }
+})
+.inits( function() {
+        var myA = this;//<Closure3
+        return {
+                foo: function() {
+			        myA.
+                }
+        }
+})
+.endType();
+

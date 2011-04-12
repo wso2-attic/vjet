@@ -1,0 +1,9 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.simplevjo")
+.protos({
+	constructs:function(arg1){
+	 	while (k < 5)
+		{
+    		alert("jst");
+		}
+	}
+});

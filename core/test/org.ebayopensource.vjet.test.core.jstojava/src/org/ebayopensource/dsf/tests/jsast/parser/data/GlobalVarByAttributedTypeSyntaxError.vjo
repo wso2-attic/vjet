@@ -1,0 +1,9 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.data.GlobalVarByAttributedTypeSyntaxError")
+.globals({
+	badIntGlobal : null//<type::LocalVarAsFunction::intAttribute
+	,
+	badAttributedArrGlobal : null //<LocalVarAsFunction::genericAttribute<int>
+})
+.endType();
+
+

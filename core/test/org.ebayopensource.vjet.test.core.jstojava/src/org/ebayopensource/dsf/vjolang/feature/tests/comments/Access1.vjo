@@ -1,0 +1,7 @@
+vjo.ctype('a.b.C')
+.props({
+	//>abstract public()
+	foo:function(){
+	
+	}
+})

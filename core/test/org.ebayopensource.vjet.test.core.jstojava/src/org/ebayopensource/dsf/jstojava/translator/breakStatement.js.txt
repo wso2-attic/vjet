@@ -1,0 +1,9 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.simplevjo")
+.protos({
+ 	//> public String constructs();
+	constructs:function(arg1){
+		do {
+			break;
+		} while(true);
+	}
+});

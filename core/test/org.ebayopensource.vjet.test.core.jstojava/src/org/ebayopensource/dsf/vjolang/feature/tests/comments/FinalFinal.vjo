@@ -1,0 +1,2 @@
+vjo.ctype("a.b.C") //< public final final
+.endType();

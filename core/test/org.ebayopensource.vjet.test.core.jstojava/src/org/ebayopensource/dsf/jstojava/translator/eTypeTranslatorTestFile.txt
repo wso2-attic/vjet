@@ -1,0 +1,1 @@
+vjo.etype("mrp.EBaseCapability");

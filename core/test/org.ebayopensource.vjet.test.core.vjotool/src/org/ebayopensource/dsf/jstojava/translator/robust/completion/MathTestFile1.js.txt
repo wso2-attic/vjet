@@ -1,0 +1,8 @@
+vjo.ctype('com.ebay.test.validation.TestMe') //< public 
+.protos({
+
+        main : function(){ //<public void main(String...)
+                var arr = Math.random().
+        }
+})
+.endType();

@@ -1,0 +1,2 @@
+vjo.ftype("mrp.FBaseCapability")
+.endType();

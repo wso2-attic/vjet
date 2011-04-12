@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.active"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jsnative"/>
+	<classpathentry kind="lib" path="D:/ccviews/pwang_vjet_module/v4darwin/VJET/test/lib/JUnitNexGen.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jst"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.prebuild.ant"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
+	<classpathentry kind="lib" path="D:/ccviews/pwang_vjet_module/v4darwin/VJET/test/lib/ant.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.javatojs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jstojava"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/uKernelCore"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

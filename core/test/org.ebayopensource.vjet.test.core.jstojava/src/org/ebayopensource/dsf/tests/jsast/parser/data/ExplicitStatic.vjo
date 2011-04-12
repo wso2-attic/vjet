@@ -1,0 +1,14 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.data.ExplicitStatic")
+.props({
+
+	//> public static final int foo
+	foo : 0,
+	
+	//> public static void bar()
+	bar: function() {
+	}
+
+})
+.endType();
+
+

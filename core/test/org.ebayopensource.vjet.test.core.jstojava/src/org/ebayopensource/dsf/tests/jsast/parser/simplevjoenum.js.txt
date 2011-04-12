@@ -1,0 +1,4 @@
+vjo.etype("common.MyCars")
+.values({
+	jeep:"", nissan: "", toyota : ""
+})

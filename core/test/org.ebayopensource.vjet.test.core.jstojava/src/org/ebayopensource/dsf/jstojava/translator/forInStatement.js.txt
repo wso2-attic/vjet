@@ -1,0 +1,8 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.simplevjo")
+.protos({
+	constructs:function(arg1){
+		for (            var x in mycars) {
+			alert();
+		}
+	}
+});

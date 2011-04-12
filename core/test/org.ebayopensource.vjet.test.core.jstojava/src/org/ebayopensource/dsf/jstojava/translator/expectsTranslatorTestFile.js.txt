@@ -1,0 +1,2 @@
+vjo.mtype("com.ebay.vjet.M")
+.expects("com.ebay.vjet.I");

@@ -1,0 +1,5 @@
+vjo.ctype("test")//      <    private
+.protos({
+
+})
+.endType();

@@ -1,0 +1,5 @@
+vjo.ctype('a.b.c.D')\
+.protos({
+	//> int a (String arg)
+	a:vjo.NEEDS_IMPL
+})

@@ -1,0 +1,7 @@
+<handler>
+
+	<case position='1' status='pass'>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcParameterHintAdvisor</advisor>
+	</case>
+	
+</handler>

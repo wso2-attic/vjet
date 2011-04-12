@@ -1,0 +1,10 @@
+vjo.etype('com.ebay.EType1') //< public
+.values({
+    TUE:["Monday"]
+})
+.protos( {
+    constructs : function (val, displayName) { //< private void contructs(String)
+    }
+  }  
+)
+.endType();

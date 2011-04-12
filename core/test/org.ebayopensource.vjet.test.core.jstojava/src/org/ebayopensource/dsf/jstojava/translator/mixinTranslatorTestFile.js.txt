@@ -1,0 +1,3 @@
+vjo.ctype("com.ebay.vjet.A")
+.mixin(["com.ebay.vjet.fld.B","com.ebay.vjet.fld.C"])
+.endType();

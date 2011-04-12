@@ -1,0 +1,8 @@
+vjo.ctype("vjo.a.b.CTypePropsMethods07")
+.props({
+   //7
+   //> final private Float foo7()    
+   foo7: function() {
+      return 0.0f;
+   } 
+})

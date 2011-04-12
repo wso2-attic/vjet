@@ -1,0 +1,5 @@
+vjo.ctype()
+.satisfies()
+.props()
+.protos()
+.endType();

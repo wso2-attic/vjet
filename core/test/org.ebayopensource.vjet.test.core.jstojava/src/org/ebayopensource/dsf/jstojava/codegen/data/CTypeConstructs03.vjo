@@ -1,0 +1,7 @@
+vjo.ctype("vjo.a.b.CTypeConstructs03")
+.protos({
+   //3
+   //> public constructs(int... vargs)
+   constructs: function(vargs) {
+   }
+})

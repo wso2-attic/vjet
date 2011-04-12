@@ -1,0 +1,79 @@
+/*******************************************************************************
+ * Copyright (c) 2005-2011 eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+package org.ebayopensource.dsf.tests.jsast.parser;
+import static com.ebay.junitnexgen.category.Category.Groups.FAST;
+import static com.ebay.junitnexgen.category.Category.Groups.P2;
+import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+import static org.junit.Assert.assertEquals;
+
+import java.io.IOException;
+import java.net.URL;
+
+import org.junit.Test;
+
+import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
+import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
+import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import com.ebay.junitnexgen.category.Category;
+import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
+import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.vjo.lib.LibManager;
+
+@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+public class JsFormattingTests {
+	@Test
+	@org.junit.Ignore
+	@Category({P2,UNIT,FAST})
+	@Description("Test generated js matches gold file.")
+	public void testFormatting() throws IOException{
+//		File jsFile = new File(
+//				ResourceUtil.getResource(this.getClass(), "FormattingTest1.js.txt").getFile());
+		
+//		FileInputStream fis = new FileInputStream(jsFile);
+//		String goldString = FileUtils.readStream(fis);
+		URL jsFile = ResourceUtil.getResource(this.getClass(), "FormattingTest1.js.txt");
+		String goldString = JsPreGenHelper.url2String(jsFile);
+		IJstType type = (IJstType)new VjoParser().addLib(
+				LibManager.getInstance().getJsNativeGlobalLib()).parse(null, jsFile);
+		
+		GeneratorCtx ctx = new GeneratorCtx(CodeStyle.PRETTY);
+		ctx.getConfig().setAddCodeGenAnnotation(false);
+		VjoGenerator writer = new VjoGenerator(ctx);
+        writer.writeVjo(type);
+        String generatedVjo = writer.getGeneratedText();
+        
+		assertEquals(goldString, generatedVjo);	
+	  }
+	
+	@Test
+	@Category({P2,UNIT,FAST})
+	@Description("Test generated js matches gold file.")
+	public void testFormattingComments() throws IOException{
+//		File jsFile = new File(
+//				ResourceUtil.getResource(this.getClass(), "FormattingTest2.js.txt").getFile());
+//		
+//		FileInputStream fis = new FileInputStream(jsFile);
+//		String goldString = FileUtils.readStream(fis);
+		URL jsFile = ResourceUtil.getResource(this.getClass(), "FormattingTest2.js.txt");
+		String goldString = JsPreGenHelper.url2String(jsFile);
+		IJstType type = new VjoParser().addLib(
+				LibManager.getInstance().getJsNativeGlobalLib()).parse(null, jsFile).getType();
+		
+		GeneratorCtx ctx = new GeneratorCtx(CodeStyle.PRETTY);
+		ctx.getConfig().setAddCodeGenAnnotation(true);
+		VjoGenerator writer = new VjoGenerator(ctx);
+        writer.writeVjo(type);
+        String generatedVjo = writer.getGeneratedText();
+        
+		assertEquals(goldString, generatedVjo);	
+	  }
+}

@@ -1,0 +1,6 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.simplevjo")
+.protos({
+	doIt:function(){
+		var re = new RegExp("\w+");
+	}
+});

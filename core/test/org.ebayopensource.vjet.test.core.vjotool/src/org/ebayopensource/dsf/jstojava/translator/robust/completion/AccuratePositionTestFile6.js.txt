@@ -1,0 +1,7 @@
+vjo.ctype('javaone.dlc.Test') //< public
+.props({
+  //>public Test doIt() 
+  doIt : vjo.ctype().
+       
+})
+.endType();

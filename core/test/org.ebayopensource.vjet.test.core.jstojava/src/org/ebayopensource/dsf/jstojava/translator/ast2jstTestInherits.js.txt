@@ -1,0 +1,1 @@
+vjo.ctype("p1.Test").inherits("p2.Base")

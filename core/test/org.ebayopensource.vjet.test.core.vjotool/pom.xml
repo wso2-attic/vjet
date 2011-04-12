@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2006-2011 eBay Inc. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); 
+    you may not use this file except in compliance with the License. 
+    You may obtain a copy of the License at 
+   
+       http://www.apache.org/licenses/LICENSE-2.0
+       
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>org.ebayopensource.vjet.test</groupId>
+      <artifactId>test-parent</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+   </parent>
+
+   <groupId>org.ebayopensource.vjet.test</groupId>
+   <artifactId>test-core-vjotool</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+   <packaging>jar</packaging>
+   <name>VJET: VjoTool Tests</name>
+   
+   <dependencies>
+   		<dependency>
+   			<groupId>org.ebayopensource.vjet.test</groupId>
+   			<artifactId>test-utils</artifactId>
+   			<version>1.0.0-SNAPSHOT</version>
+   		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.vjet.resource</groupId>
+			<artifactId>org.ebayopensource.vjet.resource.jsnativetypes</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.vjet.resource</groupId>
+			<artifactId>org.ebayopensource.vjet.resource.vjolib</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.vjet.core</groupId>
+   			<artifactId>org.ebayopensource.vjet.core.vjotool</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+   </dependencies>
+
+   <properties>
+   		<java.source.path>${basedir}/target/test-classes;${basedir}/artifact;${basedir}/artifact/engine;${basedir}/artifact/freeform;${basedir}/artifact/handler;${basedir}/artifact/innertypes</java.source.path>
+   </properties>
+
+   <build>
+   		<plugins>
+   			<plugin>
+	   			<groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-resources-plugin</artifactId>
+		        <executions>
+		          <execution>
+		            <id>copy-resources-1</id>
+		            <!-- here the phase you need -->
+		            <phase>validate</phase>
+		            <goals>
+		              <goal>copy-resources</goal>
+		            </goals>
+		            <configuration>
+		              <outputDirectory>${basedir}/target/test-classes</outputDirectory>
+		              <resources>          
+		                <resource>
+		                  <directory>${basedir}/src</directory>
+		                  <filtering>false</filtering>
+		                  <excludes>
+					          <exclude>**/*.java</exclude>
+					      </excludes>
+		                </resource>
+		                <resource>
+		                  <directory>${basedir}/artifact</directory>
+		                  <filtering>false</filtering>
+		                </resource>
+		              </resources>              
+		            </configuration>            
+		          </execution>
+		        </executions>
+	        </plugin>
+	        <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<systemPropertyVariables>
+			            <java.source.path>${java.source.path}</java.source.path>
+			        </systemPropertyVariables>
+			        <enableAssertions>false</enableAssertions>
+					<testFailureIgnore>false</testFailureIgnore>
+					<includes>
+						<include>**/*Test.java</include>
+						<include>**/*Tests.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/All*Tests.java</exclude>
+						<exclude>**/*Base*.java</exclude>
+						<exclude>**/*ForTest.java</exclude> 
+					</excludes>
+				</configuration>
+			</plugin>
+   		</plugins>
+   </build>
+</project>

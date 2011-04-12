@@ -1,0 +1,12 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.data.VoidParameter")
+.protos({
+
+	//> public int foo(void arg)
+	foo: function(arg) {
+	   return 0;
+	}
+
+})
+.endType();
+
+

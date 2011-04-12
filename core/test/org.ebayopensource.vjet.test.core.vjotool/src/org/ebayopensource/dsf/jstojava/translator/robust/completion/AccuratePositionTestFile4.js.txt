@@ -1,0 +1,11 @@
+vjo.ctype('a.b.c.MyVjoType2') //< public
+.props({
+	
+	fss:this.vj$.MyVjoType2
+	
+
+})
+.protos({
+  abc
+})
+.endType();

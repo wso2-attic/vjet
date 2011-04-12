@@ -1,0 +1,13 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.data.IncompleteFunction")
+.protos({
+	
+	f1: function(){}//<int
+	,
+	main: function(){
+		var f2 = function(){};//<int
+		
+		var o = {
+			f3:function(){}//<int
+		};
+	}
+}).endType();

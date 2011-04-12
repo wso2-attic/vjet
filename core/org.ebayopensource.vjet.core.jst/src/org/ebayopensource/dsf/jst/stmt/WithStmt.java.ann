@@ -1,0 +1,76 @@
+D:\Views\jearly_v4_zam\v4darwin\DSFJst\src\com\ebay\dsf\jst\stmt\WithStmt.java
+---------------
+2009-05-27 ccadmin    \main\2 (E677_CABOOSE_BASE, E675_RELEASE_BASE, E675_DEV_BASE, ...)
+User=spottavathini Branch=m_v4_yoda SCM=dlau Session=1243469266 Ver=20090223.1900 
+Project(V4 Infrastructure Q1 09 (aka Yoda))Merger(spottavathini)
+--------
+2009-02-05 ccadmin    \main\1 (E619_RELEASE_BASE, E619_DEV_BASE, E619_CABOOSE_BASE, ...)
+User=rbhogi,gchoi,dsemenov Branch=m_v4_gort SCM=qcong Session=1233868327 Ver=20090108.1600 
+--------
+2008-12-11 rbhogi     \main\0 
+--------
+-------------------------------------------------
+-------------------------------------------------
+      2009-02-05 ccadmin  \main\1              | package com.ebay.dsf.jst.stmt;
+                        .                      | 
+                        .                      | import com.ebay.dsf.jst.expr.BoolExpr;
+                        .                      | import com.ebay.dsf.jst.token.IStmt;
+      2009-05-27 ccadmin  \main\2              | import com.ebay.dsf.jst.traversal.IJstNodeVisitor;
+      2009-02-05 ccadmin  \main\1              | 
+                        .                      | public class WithStmt extends BlockStmt implements IStmt {
+                        .                      | 
+                        .                      |         private static final long serialVersionUID = 1L;
+                        .                      |         
+                        .                      |         private BoolExpr m_condition;
+                        .                      |         
+                        .                      |         //
+                        .                      |         // Constructor
+                        .                      |         //
+                        .                      |         public WithStmt(){
+                        .                      |         }
+                        .                      |         
+                        .                      |         //
+                        .                      |         // API
+                        .                      |         //
+                        .                      |         public WithStmt setCondition(final BoolExpr condition){
+                        .                      |                 assert condition != null : "condition cannot be null";
+                        .                      |                 removeChild(m_condition);
+                        .                      |                 addChild(condition);
+                        .                      |                 m_condition = condition;
+                        .                      |                 return this;
+                        .                      |         }
+                        .                      |         
+                        .                      |         public BoolExpr getCondition(){
+                        .                      |                 return m_condition;
+                        .                      |         }
+                        .                      |         
+                        .                      |         public WithStmt addStmt(final IStmt stmt){
+                        .                      |                 assert stmt != null : "stmt cannot be null";
+                        .                      |                 getBody().addStmt(stmt);
+                        .                      |                 return this;
+                        .                      |         }
+                        .                      |         
+                        .                      |         // 
+                        .                      |         // Satisfy IStmt
+                        .                      |         //
+                        .                      |         public String toStmtText(){
+                        .                      |                 StringBuilder sb = new StringBuilder("with (");
+                        .                      |                 if (m_condition!= null){
+                        .                      |                         sb.append(m_condition.toBoolExprText());
+                        .                      |                 }
+                        .                      |                 sb.append(")");
+                        .                      |                 sb.append(getBody().toBlockText());
+                        .                      |                 
+                        .                      |                 return sb.toString();
+      2009-05-27 ccadmin  \main\2              |         }
+                        .                      | 
+                        .                      |         @Override
+                        .                      |         public void accept(IJstNodeVisitor visitor){
+                        .                      |                 visitor.visit(this);
+      2009-02-05 ccadmin  \main\1              |         }
+                        .                      |         
+                        .                      |         @Override
+                        .                      |         public String toString(){
+                        .                      |                 return toStmtText();
+                        .                      |         }
+                        .                      | }

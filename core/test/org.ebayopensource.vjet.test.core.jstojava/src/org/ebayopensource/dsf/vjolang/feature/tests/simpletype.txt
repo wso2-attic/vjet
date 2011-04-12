@@ -1,0 +1,8 @@
+vjo.ctype('a.b.c.D')
+.props({
+	a:function(){
+		var x= arguments[0];
+	
+	}
+})
+.endType();

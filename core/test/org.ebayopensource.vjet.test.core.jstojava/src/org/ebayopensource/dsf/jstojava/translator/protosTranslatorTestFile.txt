@@ -1,0 +1,11 @@
+vjo.ctype("org.ebayopensource.dsf.tests.jsast.parser.simplevjo")
+.protos({
+
+ propOne:"Default",
+
+ propTwo:23,
+ 
+ constructs:function(arg1){
+	 alert("contructing");
+ }
+});

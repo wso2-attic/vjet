@@ -1,0 +1,8 @@
+vjo.ctype("org.ebayopensource.dsf.jstojava.codegen.data.NeedsMulti")
+.needs(["org.ebayopensource.dsf.jstojava.codegen.data.AType","org.ebayopensource.dsf.jstojava.codegen.data.CType"])
+.props({
+	main : function (args) {
+		//this.vjo.A.doA();
+		//this.vjo.B.doB();
+	}
+})

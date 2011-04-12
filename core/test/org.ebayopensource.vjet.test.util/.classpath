@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.ext"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.javatojs"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jsgenshared"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jsnative"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jst"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jstojava"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjotool"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/uKernelCore"/>
+	<classpathentry kind="lib" path="lib/JUnitNexGen.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.jdt.core_3.5.2.v_981_R35x.jar"/>
+	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,10 @@
+vjo.ctype("vjo.vjet.Sample")
+.protos({
+        //>public void foo() 
+        foo : function(){
+                var o = this;
+
+        }       
+}).inits(abc
+)
+.endType();

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="D:/ccviews/pwang_vjet_module/v4darwin/VJET/test/lib/JUnitNexGen.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jsnative"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.web.kernel"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.web.html"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/uKernelCore"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.util"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.vjoruntime"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.extmod.rhino"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.active"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

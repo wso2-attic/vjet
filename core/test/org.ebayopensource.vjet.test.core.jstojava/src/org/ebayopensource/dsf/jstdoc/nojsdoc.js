@@ -1,0 +1,10 @@
+vjo.ctype("nojsdoc")
+.props({
+	doIt:function(){},
+	myprop:10
+})
+.protos({
+	doIt:function(){},
+	myprop:10
+})
+.endType();
