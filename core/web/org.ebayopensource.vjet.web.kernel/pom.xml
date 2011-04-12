@@ -16,7 +16,6 @@
       <groupId>org.ebayopensource.vjet.web</groupId>
       <artifactId>org.ebayopensource.vjet.web-parent</artifactId>
       <version>1.0.0-SNAPSHOT</version>
-      <relativePath>../VJET/web/pom.xml</relativePath>
    </parent>
 
    <groupId>org.ebayopensource.vjet.web</groupId>

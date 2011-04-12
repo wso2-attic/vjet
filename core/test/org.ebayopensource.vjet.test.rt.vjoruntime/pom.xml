@@ -16,7 +16,6 @@
       <groupId>org.ebayopensource.vjet.test</groupId>
       <artifactId>test-parent</artifactId>
       <version>1.0.0-SNAPSHOT</version>
-      <relativePath>../VJET/test/pom.xml</relativePath>
    </parent>
 
    <groupId>org.ebayopensource.vjet.test</groupId>
