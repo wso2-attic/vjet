@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+   xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <modelVersion>4.0.0</modelVersion>
+   <parent>
+      <groupId>org.ebayopensource.vjet.eclipse</groupId>
+      <artifactId>eclipse-parent</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+   </parent>
+   <groupId>org.ebayopensource.vjet.eclipse.plugins</groupId>
+   <artifactId>plugins-parent</artifactId>
+   <version>1.0.0-SNAPSHOT</version>
+   <packaging>pom</packaging>
+
+   <modules>
+      <!-- Plugins -->
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.core</module> 
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.launching</module> 
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.ui</module>
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.dltk.core.fragment</module>
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.rhino.dbgp</module>
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.debug</module>
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.debug.ui</module>
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.vjetv</module>
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.help</module>
+      <module>../../../../nexustools/com.ebay.tools/com.ebay.tools.vjet2/plugins/org.ebayopensource.vjet.eclipse.ui.html</module>
+   </modules>
+
+</project>
