@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!--
+commented out to see why this not working
+
+ Schema file written by PDE 
+<schema targetNamespace="com.ebay.tools.vjet2.core">
+<annotation>
+      <appInfo>
+         <meta.schema plugin="com.ebay.tools.vjet2.core" id="com.ebay.tools.vjet2.core" name="validators"/>
+      </appInfo>
+      <documentation>
+         &lt;pre&gt;
+Copyright (c) 2009 Vjet Developers
+&lt;/pre&gt;
+      </documentation>
+   </annotation>
+
+   <element name="extension">
+      <complexType>
+         <sequence>
+            <element ref="validator" minOccurs="0" maxOccurs="unbounded"/>
+         </sequence>
+         <attribute name="point" type="string" use="required">
+            <annotation>
+               <documentation>
+                  the full-qualified name of the extension point (that is &lt;samp&gt;org.springframework.ide.eclipse.core.validators&lt;/samp&gt;)
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string">
+            <annotation>
+               <documentation>
+                  an optional id
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string">
+            <annotation>
+               <documentation>
+                  an optional name
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="validator">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  the full-qualified name of a class which implements 
+&lt;samp&gt;com.ebay.tools.vjet2.core.validation.IValidator&lt;/samp&gt;
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  an id
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="name" type="string" use="required">
+            <annotation>
+               <documentation>
+                  a name
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="description" type="string">
+            <annotation>
+               <documentation>
+                  an optional description
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="enabledByDefault" type="boolean">
+            <annotation>
+               <documentation>
+                  specifies if the validator is enabled by default
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="icon" type="string">
+            <annotation>
+               <documentation>
+                  an optional icon of this validator
+               </documentation>
+            </annotation>
+         </attribute>
+         <attribute name="order" type="string">
+            <annotation>
+               <documentation>
+                  this attribute value determines the order the validator appreas in the list of validators and is executed. A lower number appreas first.
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+</schema>
+-->
