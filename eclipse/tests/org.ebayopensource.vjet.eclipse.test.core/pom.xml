@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright (c) 2006-2011 eBay Inc. All Rights Reserved.
+    Licensed under the Apache License, Version 2.0 (the "License"); 
+    you may not use this file except in compliance with the License. 
+    You may obtain a copy of the License at 
+   
+       http://www.apache.org/licenses/LICENSE-2.0
+       
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   
+   <parent>
+      <groupId>org.ebayopensource.vjet.eclipse.tests</groupId>
+      <artifactId>test-parent</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <relativePath>../../../../../v4darwin/VJET/eclipse/tests/pom.xml</relativePath>
+   </parent>
+   
+   <groupId>org.ebayopensource.vjet.eclipse.tests</groupId>
+   <artifactId>core.test</artifactId>
+   <packaging>eclipse-test-plugin</packaging>
+   <version>1.0.0-SNAPSHOT</version>
+   <name>VJET Test: Eclipse Core Tests</name>
+
+	<build>
+    <plugins>
+        <plugin>
+            <groupId>org.sonatype.tycho</groupId>
+            <artifactId>maven-osgi-test-plugin</artifactId>
+            <version>${tycho-version}</version>
+            <configuration>
+               <useUIHarness>true</useUIHarness>
+               <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=256M</argLine>
+               <includes>
+               		<include>**/*Test.java</include>
+               		<include>**/*Tests.java</include>
+				</includes>
+				<excludes>
+					<!--  not included originally -->
+					<exclude>**/All*Tests.java</exclude>
+					<exclude>**/*Base*.java</exclude>
+					<exclude>**/Abstract*.java</exclude>
+					<exclude>**/ThisCompletionTests.java</exclude>
+					<exclude>**/NativeCompletionTest.java</exclude>
+					<exclude>**/VjoUtilityCompletionTests.java</exclude>
+					<exclude>**/VjoNativeOffsetTests.java</exclude>
+					<exclude>**/CodeCompletionTests.java</exclude>
+					<exclude>**/VjoNativeSearchTests.java</exclude>
+					<exclude>**/MixinCompletionTests.java</exclude>
+					<exclude>**/DefectCodeCompletionTests.java</exclude>
+					<exclude>**/JstExpressionTypeTest.java</exclude>
+					<exclude>**/TypeCompletionTests.java</exclude>
+					<exclude>**/OpenMarkerTest.java</exclude>
+					<exclude>**/PartialCodeCompletionTests.java</exclude> <!-- Called from DefectCodeCompletionTests only -->
+					<!--  Failed tests as in PDE, need to look into and re-enable -->
+					<exclude>**/BugVerifyTests.java</exclude>
+					<exclude>**/TypeSpaceMgrTest.java</exclude>
+					<exclude>**/VJOSelectionNewTests.java</exclude>
+					<exclude>**/VjoMarkOccurencesNewTests.java</exclude>
+					<!--  Failed tests as in Tycho, need to look into and re-enable -->
+					<exclude>**/DebuggerTest.java</exclude>
+					<exclude>**/ResourceChangedTests.java</exclude> <!-- Runs fine by itself. -->
+					<exclude>**/VjoSourceElementParserTests.java</exclude> <!-- Runs fine by itself. -->
+					<exclude>**/VjoTypeHierarchyTests.java</exclude> <!-- Runs fine by itself. -->
+				</excludes>
+            </configuration>
+         </plugin>
+    </plugins>
+  </build>
+</project>

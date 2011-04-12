@@ -1,0 +1,1 @@
+vjo.ctype("pkg2.CB");

@@ -1,0 +1,11 @@
+vjo.type("ts.A").protos({
+
+  //> private ts.B b
+  b : 5,
+  //>public  void gh()
+  gh : function() {
+  	
+  	
+  }
+ 
+});

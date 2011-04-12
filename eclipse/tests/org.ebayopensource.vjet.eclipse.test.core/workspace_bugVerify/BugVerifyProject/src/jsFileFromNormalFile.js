@@ -1,0 +1,1 @@
+vjo.ctype('jsFileFromNormalFile').endType();

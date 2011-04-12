@@ -1,0 +1,12 @@
+vjo.etype('E') //< public
+
+.values(
+	''
+)
+.props({
+	
+})
+.protos({
+	
+})
+.endType();

@@ -1,0 +1,14 @@
+vjo.ctype('foo') //< public
+
+.props({
+	
+})
+.protos({
+	
+ 	//> public constructs() 
+	constructs : function(){
+		
+	}
+
+})
+.endType();

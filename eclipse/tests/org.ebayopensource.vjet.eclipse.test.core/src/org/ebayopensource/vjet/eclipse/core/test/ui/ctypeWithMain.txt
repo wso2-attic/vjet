@@ -1,0 +1,18 @@
+vjo.ctype('foo') //< public
+
+.props({
+	
+	//> public void main(String... args)
+	main: function(args) {
+		
+	}
+})
+.protos({
+	
+ 	//> public constructs() 
+	constructs : function(){
+		
+	}
+
+})
+.endType();

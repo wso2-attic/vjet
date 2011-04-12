@@ -1,0 +1,1 @@
+vjo.type("test1.Root")

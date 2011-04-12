@@ -1,0 +1,9 @@
+vjo.mtype('M') //< public
+
+.props({
+	
+})
+.protos({
+	
+})
+.endType();

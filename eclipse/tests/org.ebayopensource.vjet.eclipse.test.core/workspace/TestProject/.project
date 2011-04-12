@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>SourceElementParser</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<natures>
+<!--		<nature>org.eclipse.dltk.javascript.core.nature</nature> -->
+		<nature>org.ebayopensource.vjet.core.nature</nature>
+	</natures>
+</projectDescription>

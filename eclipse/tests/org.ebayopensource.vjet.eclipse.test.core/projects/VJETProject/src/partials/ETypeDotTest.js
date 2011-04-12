@@ -1,0 +1,1 @@
+vjo.etype('partials.ETypeDotTest').

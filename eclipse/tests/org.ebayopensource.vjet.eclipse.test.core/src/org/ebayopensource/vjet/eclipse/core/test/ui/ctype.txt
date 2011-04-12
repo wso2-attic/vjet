@@ -1,0 +1,10 @@
+vjo.ctype('foo') //< public
+.inherits('MyFoo')
+
+.props({
+	
+})
+.protos({
+	
+})
+.endType();
