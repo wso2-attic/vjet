@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+
+
+   <feature url="features/org.ebayopensource.vjet.all_1.0.0.201104120922.jar" id="org.ebayopensource.vjet.all" version="1.0.0.201104120922">
+      <category name="VJET_CATEGORY"/>
+   </feature>
+
+   <category-def name="VJET_CATEGORY" label="VJET"/>
+</site>
