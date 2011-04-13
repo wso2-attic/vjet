@@ -7,10 +7,10 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.web.kernel"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.web.html"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/uKernelCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.util"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.vjoruntime"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.extmod.rhino"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.active"/>
+	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/uKernelCore_1.7.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -5,14 +5,14 @@
 	<classpathentry kind="lib" path="D:/ccviews/pwang_vjet_module/v4darwin/VJET/test/lib/JUnitNexGen.jar"/>
 	<classpathentry kind="lib" path="D:/ccviews/pwang_vjet_module/v4darwin/VJET/test/lib/ant.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjotool"/>
-	<classpathentry kind="lib" path="D:/ccviews/pwang_vjet_module/v4darwin/VJET/test/lib/org.eclipse.equinox.common_3.2.0.v20060603.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.extmod.jsdt"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jsgenshared"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/uKernelCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jsnative"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jst"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jstojava"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.util"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
+	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/org.eclipse.equinox.common_3.6.0.v20100503.jar"/>
+	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/uKernelCore_1.7.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

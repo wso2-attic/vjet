@@ -8,12 +8,12 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jstojava"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jst"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/uKernelCore"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.prebuild.ant"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.vjojavalib"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.javatojs"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.active"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.active.javatojs"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/JUnitNexGen.jar"/>
+	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/uKernelCore_1.7.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

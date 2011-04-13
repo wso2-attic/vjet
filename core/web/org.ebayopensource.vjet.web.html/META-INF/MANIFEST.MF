@@ -11,7 +11,6 @@ Require-Bundle:
   org.ebayopensource.vjet.web.kernel;visibility:=reexport,
   org.ebayopensource.vjet.web.cssparser;visibility:=reexport
 Export-Package: 
-  org.ebayopensource.dsf.deprecated,
   org.ebayopensource.dsf.html,
   org.ebayopensource.dsf.service,
   org.ebayopensource.dsf.services,
