@@ -47,7 +47,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.vjet.binary</groupId>
-			<artifactId>org.ebayopensource.vjet.binary.ukernelcore</artifactId>
+			<artifactId>ukernelcore</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
