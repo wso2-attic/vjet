@@ -122,27 +122,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 			return handleJstCompletionOnQualifiedNameReference(ctx);
 		} else if (completion instanceof JstCompletionOnSingleNameReference) {
 			// this completion also returned when cursor is out of function.
-			if (!completion.inScope(ScopeIds.METHOD)) {
-				if (completion.inScope(ScopeIds.INITS)) {
-					
-					return new String[] { VjoCcPackageProposalAdvisor.ID,
-							VjoCcCTypeProposalAdvisor.ID,
-							VjoCcThisProposalAdvisor.ID,
-							VjoCcNeedsItemProposalAdvisor.ID,
-							VjoCcGlobalAdvisor.ID,
-							VjoCcAliasProposalAdvisor.ID,
-							VjoCCVjoUtilityAdvisor.ID,
-							VjoCcStaticPropMethodProposalAdvisor.ID,
-							VjoCcVariableProposalAdvisor.ID};
-
-				}else if (ctx.isInStatic()) {
-					return new String[] { VjoCcGlobalAdvisor.ID,
-							VjoCCVjoUtilityAdvisor.ID };
-				} else {
-					return new String[] { VjoCcGlobalAdvisor.ID,
-							VjoCCVjoUtilityAdvisor.ID };
-				}
-			} else if (ctx.isInMtdCall()) {
+			if (ctx.isInMtdCall()) {
 				final String completionToken = completion.getToken();
 				if("".equals(completionToken)){
 					// xxx(<cursor>a)
@@ -188,6 +168,28 @@ public class VjoCcHandler implements IVjoCcHandler {
 							}
 						}
 					}
+				}
+			}
+			else if (!completion.inScope(ScopeIds.METHOD)) {
+				if (completion.inScope(ScopeIds.INITS)) {
+					
+					return new String[] { VjoCcPackageProposalAdvisor.ID,
+							VjoCcCTypeProposalAdvisor.ID,
+							VjoCcThisProposalAdvisor.ID,
+							VjoCcNeedsItemProposalAdvisor.ID,
+							VjoCcGlobalAdvisor.ID,
+							VjoCcAliasProposalAdvisor.ID,
+							VjoCCVjoUtilityAdvisor.ID,
+							VjoCcStaticPropMethodProposalAdvisor.ID,
+							VjoCcKeywordInMethodProposalAdvisor.ID,
+							VjoCcVariableProposalAdvisor.ID};
+
+				}else if (ctx.isInStatic()) {
+					return new String[] { VjoCcGlobalAdvisor.ID,
+							VjoCCVjoUtilityAdvisor.ID };
+				} else {
+					return new String[] { VjoCcGlobalAdvisor.ID,
+							VjoCCVjoUtilityAdvisor.ID };
 				}
 			}
 			if (ctx.isInObjectCreateExpr()) {

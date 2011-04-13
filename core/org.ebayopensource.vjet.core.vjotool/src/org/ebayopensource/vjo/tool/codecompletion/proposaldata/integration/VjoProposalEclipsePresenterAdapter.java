@@ -224,12 +224,10 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 	public IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO> genFunctionArgumentProposal(
 			IVjoCcProposalData data) {
 		Object node = data.getData();
-//		String displayString = null;
-		String name = null;
-//		String externalInfo = "";
 
 		if (node instanceof IJstMethod) {
 			final IJstMethod method = (IJstMethod)node;
+			String displayString = CodeCompletionUtils.getFullMethodString(method, method.getOwnerType());
 			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloadingOrNaming(method);
 			replaceString = replaceString.replaceAll(CodeCompletionUtils.SEPERATE_TOKEN, getLineSeperator());
 			replaceString = m_labelUtil.evaluateIndent(replaceString, m_document, m_replaceOffset);
@@ -239,7 +237,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 					m_replaceOffset, m_replaceLength, cursorPosition,
 					m_labelProvider
 							.getMethodImage(m_labelUtil
-									.translateModifers(method.getModifiers().getFlags())), name,
+									.translateModifers(method.getModifiers().getFlags())), displayString,
 					null, null);
 		}
 		return null;

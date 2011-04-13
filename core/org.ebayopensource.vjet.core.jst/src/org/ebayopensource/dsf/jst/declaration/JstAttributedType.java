@@ -13,7 +13,7 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
 
 /**
- * A JstProxyType inferring a given JstType
+ * An IJstType representing an attributed type from another IJstType as an attributor
  */
 public class JstAttributedType extends JstProxyType {
 
@@ -77,5 +77,19 @@ public class JstAttributedType extends JstProxyType {
 	@Override
 	public void accept(IJstNodeVisitor visitor) {
 		return;
+	}
+	
+	@Override
+	public String getName() {
+		return super.getName()
+			+ (m_staticAttribute ? "::" : ":") 
+			+ m_attributeName;
+	}
+	
+	@Override
+	public String getSimpleName() {
+		return super.getSimpleName()
+			+ (m_staticAttribute ? "::" : ":") 
+			+ m_attributeName;
 	}
 }

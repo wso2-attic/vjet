@@ -33,6 +33,7 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCCVjoUtilityAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcStaticPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcKeywordInMethodProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcVariableProposalAdvisor</advisor>
 	</case>
 
@@ -61,6 +62,7 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcNeedsItemProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcStaticPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcKeywordInMethodProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcVariableProposalAdvisor</advisor>
 	</case>
 
@@ -205,6 +207,7 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcNeedsItemProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcStaticPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcKeywordInMethodProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcVariableProposalAdvisor</advisor>
 	</case>
 	
@@ -239,6 +242,7 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcNeedsItemProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcStaticPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcKeywordInMethodProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcVariableProposalAdvisor</advisor>
 	</case>
 	
