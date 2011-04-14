@@ -27,6 +27,8 @@
       <module>core/org.eclipse.dltk.ui</module>
       <module>core/org.eclipse.dltk.validators.core</module>
       <module>core/org.eclipse.dltk.validators.ui</module>
+
+	<module>core/tests/org.eclipse.dltk.core.tests</module>
       
       <!--  DLTK Java Script -->
       <module>javascript/org.eclipse.dltk.javascript.core</module> 
