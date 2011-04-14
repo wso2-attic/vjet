@@ -1,11 +1,12 @@
 vjo.otype('org.dojotoolkit.DojoAuxiliary') //< public
 .defs({
 	animArgs : {
-		easing : null, //<(boolean easing(int index))?
-		duration : 0, //<Number
-		node : null, //<Node?
-		onEnd : null, //<(void onEnd(Node node))?
-		properties : null //<Object
+		node : null, //<Node
+		properties : null, //<Object
+		duration : 0, //<Number?
+		easing : null, //<(boolean easing(int index))?		
+		onEnd : null //<(void onEnd(Node node))?
+		
 	},
 
 	xhrArgs : {
@@ -42,6 +43,13 @@ vjo.otype('org.dojotoolkit.DojoAuxiliary') //< public
 		t : 0, //<int?
 		w : 0, //<int?
 		h : 0 //<int?	
+	},
+	
+	position : {
+		w : 0, //<int
+		h : 0, //<int
+		x : 0, //<int
+		y : 0  //<int
 	},
 	
 	CSS2Properties : {
