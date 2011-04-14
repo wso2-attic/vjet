@@ -1,11 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2005-2011 eBay Inc.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.controller;
 
 import java.util.ArrayList;
@@ -278,13 +270,14 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	}
 
 	private void visitJstMethod(final JstMethod method) {
-		final IJstType rtnType = method.getRtnType();
-		if(rtnType instanceof JstAttributedType){
-			final IJstNode rtnBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, rtnType, m_groupInfo);
-			if(rtnBinding instanceof IJstOType && rtnBinding != rtnType){
-				method.setRtnType((IJstOType)rtnBinding);
-			}
-		}
+//		removed by huzhou@ebay.com, moved to JstExpressionTypeLinkerHelper#fixMethodTypeRef
+//		final IJstType rtnType = method.getRtnType();
+//		if(rtnType instanceof JstAttributedType){
+//			final IJstNode rtnBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, rtnType, m_groupInfo);
+//			if(rtnBinding instanceof IJstOType && rtnBinding != rtnType){
+//				method.setRtnType((IJstOType)rtnBinding);
+//			}
+//		}
 	}
 
 	private void visitSimpleLiteral(final SimpleLiteral literal) {
@@ -937,12 +930,32 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	 * post visit {@link ArrayAccessExpr} and set the result type as Array's component type
 	 * @param aae
 	 */
-	private void postVisitArrayAccessExpr(ArrayAccessExpr aae) {
+	private void postVisitArrayAccessExpr(final ArrayAccessExpr aae) {
 		IJstType qualifierType = JstExpressionTypeLinkerHelper.getQualifierType(m_resolver, aae);
 		if (qualifierType != null) {
 			if (qualifierType instanceof JstArray) {
 				JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
 					this, aae, ((JstArray) qualifierType).getComponentType(), m_groupInfo);
+			}
+			
+			//enhancement by huzhou@ebay.com to support type properties' accessing using array accessing style
+			final IExpr indexExpr = aae.getIndex();
+			if(indexExpr instanceof SimpleLiteral){
+				final SimpleLiteral indexLiteral = ((SimpleLiteral)indexExpr);
+				if("String".equals(indexLiteral.getResultType().getName())){
+					final String indexValue = indexLiteral.getValue();
+					final boolean isStatic = JstExpressionTypeLinkerHelper.isStaticRef(qualifierType);
+					IJstProperty pty = JstExpressionTypeLinkerHelper.getProperty(qualifierType, indexValue, isStatic);
+					if (pty == null){
+						pty = JstExpressionTypeLinkerHelper.getProperty(qualifierType, '"' + indexValue + '"', isStatic);
+					}
+					if (pty == null){
+						pty = JstExpressionTypeLinkerHelper.getProperty(qualifierType, "'" + indexValue + "'", isStatic);
+					}
+					if (pty != null) {
+						aae.setType(pty.getType());
+					}
+				}
 			}
 		}
 	}
@@ -1597,25 +1610,26 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	}
 	
 	private void postVisitJstArg(JstArg parameter) {
-		final List<IJstType> parameterTypes = parameter.getTypes();
-		final List<IJstType> updatedParameterTypes = new ArrayList<IJstType>(parameterTypes.size());
-		
-		boolean updated = false;
-		for(IJstType parameterType : parameterTypes){
-			final IJstNode parameterBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, parameterType, m_groupInfo);
-			if(parameterBinding instanceof IJstOType && parameterType != parameterBinding){
-				updatedParameterTypes.add((IJstOType)parameterBinding); updated = true;
-			}
-			else{
-				updatedParameterTypes.add(parameterType);
-			}
-		}
-		
-		if(updated){
-			parameter.clearTypes();
-			parameter.addTypes(updatedParameterTypes);
-		}
-		
+//		removed by huzhou@ebay.com, moved to JstExpressionTypeLinkerHelper#fixMethodTypeRef
+//		final List<IJstType> parameterTypes = parameter.getTypes();
+//		final List<IJstType> updatedParameterTypes = new ArrayList<IJstType>(parameterTypes.size());
+//		
+//		boolean updated = false;
+//		for(IJstType parameterType : parameterTypes){
+//			final IJstNode parameterBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, parameterType, m_groupInfo);
+//			if(parameterBinding instanceof IJstOType && parameterType != parameterBinding){
+//				updatedParameterTypes.add((IJstOType)parameterBinding); updated = true;
+//			}
+//			else{
+//				updatedParameterTypes.add(parameterType);
+//			}
+//		}
+//		
+//		if(updated){
+//			parameter.clearTypes();
+//			parameter.addTypes(updatedParameterTypes);
+//		}
+//		
 		final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(parameter);
 		if(varTable != null){
 			if(varTable.getVarNode(parameter.getName()) == null){
@@ -1780,7 +1794,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 	/**
 	 * frame stack struct
-	 * 
+	 * @author huzhou
 	 *
 	 */
 	static class ScopeFrame {
@@ -1855,7 +1869,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 	/**
 	 * scope search util
-	 * 
+	 * @author huzhou
 	 *
 	 */
 	static class HierarcheQualifierSearcher {

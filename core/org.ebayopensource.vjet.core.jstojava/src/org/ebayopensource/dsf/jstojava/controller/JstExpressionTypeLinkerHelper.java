@@ -1,11 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2005-2011 eBay Inc.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.controller;
 
 import java.lang.reflect.Field;
@@ -935,6 +927,12 @@ public class JstExpressionTypeLinkerHelper {
 				rtnCorrectType = resolvedOtype;
 			}
 		}
+		else if(rtnType instanceof JstAttributedType){
+			final IJstNode rtnBinding = look4ActualBinding(resolver, rtnType, groupInfo);
+			if(rtnBinding instanceof IJstOType && rtnBinding != rtnType){
+				rtnCorrectType = (IJstOType)rtnBinding;
+			}
+		}
 		
 		rtnCorrectType = getCorrectType(resolver, rtnType, groupInfo);
 		if (rtnCorrectType != rtnType) {
@@ -955,6 +953,12 @@ public class JstExpressionTypeLinkerHelper {
 						}
 						if(resolvedOtype != null){
 							parameterCorrectType = resolvedOtype;
+						}
+					}
+					else if(parameterType instanceof JstAttributedType){
+						final IJstNode parameterBinding = look4ActualBinding(resolver, parameterType, groupInfo);
+						if(parameterBinding instanceof IJstOType && parameterType != parameterBinding){
+							parameterCorrectType = (IJstOType)parameterBinding;
 						}
 					}
 					parameterCorrectType = getCorrectType(resolver, parameterCorrectType, groupInfo);
@@ -2602,7 +2606,7 @@ public class JstExpressionTypeLinkerHelper {
 
 	/**
 	 * TODO this is incomplete to inject the _invoke_ method in all possible places yet
-	 * 
+	 * @author huzhou
 	 *
 	 */
 	public static class OverwritableFType extends JstProxyType{
@@ -2824,7 +2828,7 @@ public class JstExpressionTypeLinkerHelper {
 	}
 	
 	public static IJstType getExtendedType(final IJstType targetType, final GroupInfo groupInfo) {
-		if (targetType == null || targetType instanceof JstExtendedType || targetType instanceof JstVariantType) {
+		if (targetType == null || targetType instanceof JstExtendedType) {
 			return targetType;
 		}
 		if (targetType instanceof JstArray) {
