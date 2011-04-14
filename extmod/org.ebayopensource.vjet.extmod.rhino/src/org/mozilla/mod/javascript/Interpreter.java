@@ -31,6 +31,8 @@
  *   Roger Lawrence
  *   Milen Nankov
  *   Hannes Wallnoefer
+ *   
+ * Modification by eBay are Copyright (c) 2005-2011 eBay Inc. All rights reserved.
  *
  * Alternatively, the contents of this file may be used under the terms of
  * the GNU General Public License Version 2 or later (the "GPL"), in which

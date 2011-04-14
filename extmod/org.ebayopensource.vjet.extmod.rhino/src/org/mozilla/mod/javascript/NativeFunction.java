@@ -28,6 +28,8 @@
  *   Roger Lawrence
  *   Mike McCabe
  *
+ * Modification by eBay are Copyright (c) 2005-2011 eBay Inc. All rights reserved.
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * the GNU General Public License Version 2 or later (the "GPL"), in which
  * case the provisions of the GPL are applicable instead of those above. If
