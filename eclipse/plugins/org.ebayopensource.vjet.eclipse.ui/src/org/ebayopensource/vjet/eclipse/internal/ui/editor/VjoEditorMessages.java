@@ -24,7 +24,7 @@ public final class VjoEditorMessages extends NLS {
 
     public static String VjoEditor_13;
 
-    public static String VjoEditor_14;
+//    public static String VjoEditor_14;
 
     public static String VjoEditor_15;
 
@@ -36,7 +36,7 @@ public final class VjoEditorMessages extends NLS {
 
 	public static String SelectionListenerWithJSTManager_job_title;
 
-	public static String ToggleMarkOccurrencesAction;
+//	public static String ToggleMarkOccurrencesAction;
 
 	public static String StructuredTextEditor_0;
 	public static String UnknownContentTypeDialog_0;
