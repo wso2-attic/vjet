@@ -1,10 +1,14 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
-   Copyright (c) 2005-2011 eBay Inc.
-   All rights reserved. This program and the accompanying materials
-   are made available under the terms of the Eclipse Public License v1.0
-   which accompanies this distribution, and is available at
-   http://www.eclipse.org/legal/epl-v10.html  
+Copyright (c) 2000, 2011 IBM Corporation, eBay Inc and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+    IBM Corporation - initial API and implementation
+    eBay Inc - 
  -->
 <feature
       id="org.ebayopensource.vjet.extmod.jsdt"
@@ -17,7 +21,15 @@
    </description>
 
    <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+Copyright (c) 2000, 2011 IBM Corporation, eBay Inc and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+
+Contributors:
+    IBM Corporation - initial API and implementation
+    eBay Inc - 
    </copyright>
 
    <license url="http://www.example.com/license">
@@ -197,7 +209,7 @@ Contributor would have to defend claims against the other
 Contributors related to those performance claims and 
 warranties, and if a court requires any other Contributor 
 to pay any damages as a result, the Commercial Contributor 
-must pay those damages.
+must pay those damages.
 
 5. NO WARRANTY
 
@@ -280,7 +292,7 @@ otherwise. All rights in the Program not expressly granted
 under this Agreement are reserved.
 
 This Agreement is governed by the laws of the State of 
-New York and the intellectual property laws of the United 
+New York and the intellectual property laws of the Unite  
 States of America. No party to this Agreement will bring a 
 legal action under this Agreement more than one year after 
 the cause of action arose. Each party waives its rights to 
