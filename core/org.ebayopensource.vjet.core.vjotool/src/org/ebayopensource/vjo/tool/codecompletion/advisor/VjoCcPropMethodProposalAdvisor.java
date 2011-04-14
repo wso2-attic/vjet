@@ -35,7 +35,7 @@ import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
  * 
  * ProposalData.data IJstProperty and IjstMethod. <b4>
  * 
- * 
+ * @author jianliu
  * 
  */
 public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
@@ -77,15 +77,6 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 			}
 			if (exactMatch || basicMatch) {
 				addMethod(method, levels, isNative, ctx, tempString, exactMatch);
-//				List<IJstMethod> overloads = method.getOverloaded();
-//				if (overloads != null) {
-//					Iterator<IJstMethod> it1 = overloads.iterator();
-//					while (it1.hasNext()) {
-//						addMethod(it1.next(), levels, isNative, ctx,
-//								tempString, (exactMatch && basicMatch));
-//					}
-//				}
-
 			}
 		}
 		List<IJstProperty> properties = calledType.getAllPossibleProperties(false, true);
@@ -93,12 +84,10 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 		while (it1.hasNext()) {
 			
 			IJstProperty property = it1.next();
-			
-			if(!isReferenceByDot(property)){
-				continue;
-			}
-			
-			
+//			removed by huzhou@ebay.com, will handle from presenter
+//			if(!isReferenceByDot(property)){
+//				continue;
+//			}
 			if (tempCalledType != property.getOwnerType()) {
 				tempCalledType = property.getOwnerType();
 				levels = getCallLevel(callingType, tempCalledType);
@@ -116,27 +105,6 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 				appendData(ctx, property, (exactMatch && basicMatch));
 			}
 		}
-		//Inner types
-//		List<? extends IJstType> types = calledType.getInstanceEmbededTypes();
-//		if (types != null && !types.isEmpty()) {
-//			Iterator<? extends IJstType> it2 = types.iterator();
-//			while (it2.hasNext()) {
-//				IJstType type = it2.next();
-//				levels = getCallLevel(callingType, type);
-//				boolean exactMatch = exactMatch(type.getSimpleName(), token);
-//				boolean basicMatch = exactMatch;
-//				if (!exactMatch) {
-//					basicMatch = basicMatch(type.getSimpleName(), token);
-//				}
-//				if (levelCheck(type.getModifiers(), levels)
-//						&& (exactMatch || basicMatch)
-//						&& (!isNative || !type.getSimpleName().startsWith(
-//								"_"))) {
-//					appendData(ctx, type, (exactMatch && basicMatch));
-//				}
-//			}
-//		}
-		
 	}
 
 	private boolean isReferenceByDot(IJstMethod method) {
@@ -151,18 +119,6 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 		return true;
 	}
 	
-	private boolean isReferenceByDot(IJstProperty property) {
-		if(property.getName()!=null){
-			if(property.getName().getName().startsWith("\'" )){
-				return false;
-			}else if(property.getName().getName().startsWith("\"" )){
-				return false;
-			}
-		}
-				
-		return true;
-	}
-
 	private void addMethod(IJstMethod method, int[] levels, boolean isNative,
 			VjoCcCtx ctx, List<String> tempString, boolean exactMatch) {
 		if (!method.isConstructor()
@@ -177,23 +133,6 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 
 	}
 
-	/**
-	 * This check is used to check native object, such as window, document, it
-	 * is inner object, default should not the method and property from the
-	 * parent (Global and Object)
-	 * 
-	 * @param method
-	 * @return
-	 */
-	// protected boolean nativeCheck(VjoCcCtx ctx, IJstType type) {
-	// if (type.equals(ctx.getGlobalType())
-	// // || type.equals(ctx.getObjectType())
-	// ) {
-	// return false;
-	// } else {
-	// return true;
-	// }
-	// }
 	/**
 	 * the level should be public, protected, and private. current type (this.),
 	 * should show all the method and propertyes. superType: public, and

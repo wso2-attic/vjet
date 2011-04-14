@@ -64,7 +64,7 @@ import org.ebayopensource.vjo.tool.codecompletion.proposaldata.AbstractVjoPropos
 import org.ebayopensource.vjo.tool.codecompletion.proposaldata.VjoCcAliasProposalData;
 
 /**
- * 
+ * @author huzhou
  * 
  * This adapter keeps the proposal control in DSFVjoTool, the actual eclipse presenter should composite this adapter
  * and satisifies the generics and DI, which handles eclipse proposal specifics.
@@ -224,10 +224,12 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 	public IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO> genFunctionArgumentProposal(
 			IVjoCcProposalData data) {
 		Object node = data.getData();
+//		String displayString = null;
+		String name = null;
+//		String externalInfo = "";
 
 		if (node instanceof IJstMethod) {
 			final IJstMethod method = (IJstMethod)node;
-			String displayString = CodeCompletionUtils.getFullMethodString(method, method.getOwnerType());
 			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloadingOrNaming(method);
 			replaceString = replaceString.replaceAll(CodeCompletionUtils.SEPERATE_TOKEN, getLineSeperator());
 			replaceString = m_labelUtil.evaluateIndent(replaceString, m_document, m_replaceOffset);
@@ -237,7 +239,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 					m_replaceOffset, m_replaceLength, cursorPosition,
 					m_labelProvider
 							.getMethodImage(m_labelUtil
-									.translateModifers(method.getModifiers().getFlags())), displayString,
+									.translateModifers(method.getModifiers().getFlags())), name,
 					null, null);
 		}
 		return null;
@@ -712,6 +714,10 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 			int kcursorPostion = replaceString.length();
 			if (replaceString.endsWith("})") || replaceString.endsWith("'')")) {
 				kcursorPostion = kcursorPostion - 2;
+			}
+			else if(replaceString.endsWith("]")){
+				m_replaceOffset -= 1;
+				m_replaceLength += 1;
 			}
 			IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO> proposal = new VjoEclipseCompletionProposalAdapter<IMAGE, CONTEXT_INFO>(replaceString,
 					m_replaceOffset, m_replaceLength, kcursorPostion,

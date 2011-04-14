@@ -652,14 +652,12 @@ public class CodeCompletionUtils {
 
 	public static String getPropertyProposalReplaceStr(boolean isGlobal,
 			IJstProperty property, VjoCcCtx vjoCcCtx) {
-		String replaceString = property.getName().getName();
-		if (isGlobal
+		final String ptyName = property.getName().getName();
+		String replaceString = ptyName;
+		if (!(isGlobal
 				|| vjoCcCtx.getPositionType() == VjoCcCtx.POSITION_AFTER_THIS
-				|| vjoCcCtx.getPositionType() == VjoCcCtx.POSITION_AFTER_THISVJO
-				|| vjoCcCtx.getPositionType() == VjoCcCtx.POSITION_AFTER_THISVJOTYPE
-		// || vjoCcCtx.callFromDifferentType(property)
-		) {
-		} else {
+				|| vjoCcCtx.getPositionType() == VjoCcCtx.POSITION_AFTER_THISVJO || vjoCcCtx
+				.getPositionType() == VjoCcCtx.POSITION_AFTER_THISVJOTYPE)) {
 			if (vjoCcCtx.hasNoPrefix()) {
 				if (property.isStatic()
 						&& (property.getOwnerType() != vjoCcCtx.getActingType() || !vjoCcCtx
@@ -673,8 +671,22 @@ public class CodeCompletionUtils {
 							+ CompletionConstants.DOT + replaceString;
 				}
 			}
-		}
+			if(isPropertyNameQuoted(ptyName)){
+				replaceString = new StringBuilder(ptyName.length() + 2).append('[').append(ptyName).append(']').toString();
+			}
+		} 
 		return replaceString;
+	}
+
+	private static boolean isPropertyNameQuoted(final String ptyName) {
+		if(ptyName == null){
+			return false;
+		}
+		
+		final int ptyNameLen = ptyName.length();
+		return ptyNameLen > 0 && 
+				((ptyName.indexOf('\'') == 0 && ptyName.lastIndexOf('\'') == ptyNameLen - 1)
+						|| (ptyName.indexOf('"') == 0 && ptyName.indexOf('"') == ptyNameLen - 1));
 	}
 
 	public static String getOuterMethodProposalReplaceStr(IJstMethod method) {
