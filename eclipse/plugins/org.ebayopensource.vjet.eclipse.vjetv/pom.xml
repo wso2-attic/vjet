@@ -17,7 +17,7 @@
    </parent>
 
    <groupId>org.ebayopensource.vjet.eclipse.plugins</groupId>
-   <artifactId>com.ebay.tools.vjet2.vjetv</artifactId>
+   <artifactId>vjetv</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    <packaging>eclipse-plugin</packaging>
    <name>VJET: Eclipse Headless Validation</name>
