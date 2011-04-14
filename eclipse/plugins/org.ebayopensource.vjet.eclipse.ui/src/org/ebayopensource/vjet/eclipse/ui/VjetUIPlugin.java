@@ -10,6 +10,7 @@ package org.ebayopensource.vjet.eclipse.ui;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.content.IContentType;
@@ -36,6 +37,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.templates.ContributionContextTypeRegistry;
 import org.eclipse.ui.editors.text.templates.ContributionTemplateStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.ui.progress.WorkbenchJob;
 import org.osgi.framework.BundleContext;
 
 import org.ebayopensource.vjet.eclipse.internal.ui.editor.NativeElementFileAdvisor;
@@ -131,16 +133,30 @@ public class VjetUIPlugin extends AbstractUIPlugin implements IStartup {
         //End of added
 		setPluginInstance(this);
 
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
+		new WorkbenchJob("Starting VJET UI plugin") {
+			
+			@Override
+			public IStatus runInUIThread(IProgressMonitor arg0) {
 				IWorkbenchWindow window = PlatformUI.getWorkbench()
-						.getActiveWorkbenchWindow();
+				.getActiveWorkbenchWindow();
 				window.getPartService().addPartListener(partListener);
-				// window.addPerspectiveListener(perspectiveListener);
 				registryAdvisor();
 				reloadFont();
+				return new Status(IStatus.OK, PLUGIN_ID, IStatus.OK, "Finished creating part", null);
+	
 			}
-		});
+		}.schedule();
+		
+//		Display.getDefault().asyncExec(new Runnable() {
+//			public void run() {
+//				IWorkbenchWindow window = PlatformUI.getWorkbench()
+//						.getActiveWorkbenchWindow();
+//				window.getPartService().addPartListener(partListener);
+//				// window.addPerspectiveListener(perspectiveListener);
+//				registryAdvisor();
+//				reloadFont();
+//			}
+//		});
 		
         
         // add by patrick
