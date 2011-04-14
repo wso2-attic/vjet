@@ -1,14 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
-
- *             (report 36180: Callers/Callees view)
- *   Michael Fraenkel (fraenkel@us.ibm.com) - patch
- *             (report 60714: Call Hierarchy: display search scope in view title)
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.ui.callhierarchy;
 
@@ -718,8 +717,8 @@ public class CallHierarchyViewPart extends ViewPart implements
 			} else {
 				IEditorPart editorPart = CallHierarchyUI.isOpenInEditor(elem);
 				getSite().getPage().bringToTop(editorPart);
-				EditorUtility.revealInEditor(editorPart, ((MethodWrapper) elem)
-						.getMember());
+				EditorUtility.revealInEditor(editorPart,
+						((MethodWrapper) elem).getMember());
 			}
 		} else if (elem instanceof IModelElement) {
 			IEditorPart editorPart = EditorUtility.isOpenInEditor(elem);
@@ -1005,8 +1004,7 @@ public class CallHierarchyViewPart extends ViewPart implements
 			fCallHierarchyViewer.setInput(null);
 			if (fCurrentCallMode == CallHierarchyViewPart.CALL_MODE_CALLERS) {
 				setContentDescription(Messages
-						.format(
-								CallHierarchyMessages.CallHierarchyViewPart_callsToMethod,
+						.format(CallHierarchyMessages.CallHierarchyViewPart_callsToMethod,
 								args));
 				fCallHierarchyViewer.setSorter(new ViewerSorter()); // bug
 				// 111423:
@@ -1017,8 +1015,7 @@ public class CallHierarchyViewPart extends ViewPart implements
 				fCallHierarchyViewer.setMethodWrapper(getCallerRoot());
 			} else {
 				setContentDescription(Messages
-						.format(
-								CallHierarchyMessages.CallHierarchyViewPart_callsFromMethod,
+						.format(CallHierarchyMessages.CallHierarchyViewPart_callsFromMethod,
 								args));
 				fCallHierarchyViewer.setSorter(null);
 				fCallHierarchyViewer.setMethodWrapper(getCalleeRoot());

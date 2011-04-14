@@ -1,5 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     eBay Inc - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import org.ebayopensource.vjet.eclipse.core.IJSMethod;
+import org.ebayopensource.vjet.eclipse.core.IJSType;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.compiler.CharOperation;
 import org.eclipse.dltk.mod.core.Flags;
@@ -7,9 +19,6 @@ import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.internal.core.util.Util;
-
-import org.ebayopensource.vjet.eclipse.core.IJSMethod;
-import org.ebayopensource.vjet.eclipse.core.IJSType;
 
 public class JSSourceMethod extends SourceMethod implements IJSMethod {
 
@@ -46,8 +55,8 @@ public class JSSourceMethod extends SourceMethod implements IJSMethod {
 	public int hashCode() {
 		int hash = super.hashCode();
 		for (int i = 0, length = this.m_parameterTypes.length; i < length; i++) {
-			hash = Util.combineHashCodes(hash, this.m_parameterTypes[i]
-					.hashCode());
+			hash = Util.combineHashCodes(hash,
+					this.m_parameterTypes[i].hashCode());
 		}
 
 		return hash;

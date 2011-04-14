@@ -1,10 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2006 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.ui.wizards;
 
@@ -124,8 +127,8 @@ public class BuildpathDetector {
 			if (cpEntries.size() == 1) {
 				IBuildpathEntry entry = (IBuildpathEntry) cpEntries.get(0);
 				if (entry.getEntryKind() == IBuildpathEntry.BPE_CONTAINER) {
-					cpEntries.add(0, DLTKCore.newSourceEntry(fProject
-							.getFullPath()));
+					cpEntries.add(0,
+							DLTKCore.newSourceEntry(fProject.getFullPath()));
 				}
 
 			}
@@ -231,8 +234,9 @@ public class BuildpathDetector {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.core.resources.IResourceProxyVisitor#visit(org.eclipse.core
-	 *      .resources.IResourceProxy)
+	 * @see
+	 * org.eclipse.core.resources.IResourceProxyVisitor#visit(org.eclipse.core
+	 * .resources.IResourceProxy)
 	 */
 	public boolean visit(IResourceProxy proxy, List files) {
 		if (fMonitor.isCanceled()) {
@@ -244,11 +248,11 @@ public class BuildpathDetector {
 			if (visitSourceModule((IFile) res)) {
 				files.add(res);
 			} else if (res.getType() == IResource.FILE
-						//eBay Mode start
-//					&& hasExtension(name, ".zip")) { //$NON-NLS-1$
+			// eBay Mode start
+			//					&& hasExtension(name, ".zip")) { //$NON-NLS-1$
 					&& (hasExtension(name, ".zip") || hasExtension(name, ".jar"))) { //$NON-NLS-1$
 				fZIPFiles.add(proxy.requestFullPath());
-				//eBay Mode end
+				// eBay Mode end
 			}
 			return false;
 		}

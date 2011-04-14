@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -8,6 +8,7 @@
  * Contributors:
  *     xored software, Inc. - initial API and implementation
  *     xored software, Inc. - fix tab handling (Bug# 200024) (Alex Panchenko) 
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.ui.editor;
 
@@ -225,9 +226,10 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		}
 
 		/*
-		 * @see org.eclipse.jdt.internal.ui.text.link.LinkedPositionUI.ExitPolicy
-		 *      #doExit(org.eclipse.jdt.internal.ui.text.link.LinkedPositionManager,
-		 *      org.eclipse.swt.events.VerifyEvent, int, int)
+		 * @see
+		 * org.eclipse.jdt.internal.ui.text.link.LinkedPositionUI.ExitPolicy
+		 * #doExit(org.eclipse.jdt.internal.ui.text.link.LinkedPositionManager,
+		 * org.eclipse.swt.events.VerifyEvent, int, int)
 		 */
 		public ExitFlags doExit(LinkedModeModel model, VerifyEvent event,
 				int offset, int length) {
@@ -290,8 +292,9 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		}
 
 		/*
-		 * @see org.eclipse.jface.text.IPositionUpdater#update(org.eclipse.jface.
-		 *      text.DocumentEvent)
+		 * @see
+		 * org.eclipse.jface.text.IPositionUpdater#update(org.eclipse.jface.
+		 * text.DocumentEvent)
 		 */
 		public void update(DocumentEvent event) {
 
@@ -497,8 +500,9 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		}
 
 		/*
-		 * @see IWidgetTokenOwnerExtension#requestWidgetToken(IWidgetTokenKeeper,
-		 *      int)
+		 * @see
+		 * IWidgetTokenOwnerExtension#requestWidgetToken(IWidgetTokenKeeper,
+		 * int)
 		 */
 		public boolean requestWidgetToken(IWidgetTokenKeeper requester,
 				int priority) {
@@ -671,8 +675,8 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 				if (Display.getCurrent() == null) {
 					Display.getDefault().asyncExec(new Runnable() {
 						public void run() {
-							firePropertyChangeEvent(event.getKey(), event
-									.getOldValue(), event.getNewValue());
+							firePropertyChangeEvent(event.getKey(),
+									event.getOldValue(), event.getNewValue());
 						}
 					});
 				} else {
@@ -958,8 +962,9 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	private class EditorSelectionChangedListener extends
 			AbstractSelectionChangedListener {
 		/*
-		 * @see org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged
-		 *      (org.eclipse.jface.viewers.SelectionChangedEvent)
+		 * @see
+		 * org.eclipse.jface.viewers.ISelectionChangedListener#selectionChanged
+		 * (org.eclipse.jface.viewers.SelectionChangedEvent)
 		 */
 		public void selectionChanged(SelectionChangedEvent event) {
 			// XXX: see https://bugs.eclipse.org/bugs/show_bug.cgi?id=56161
@@ -1057,8 +1062,9 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 				.getPluginPreferences()));
 		stores.add(EditorsUI.getPreferenceStore());
 		stores.add(PlatformUI.getPreferenceStore());
-		return new ChainedPreferenceStore((IPreferenceStore[]) stores
-				.toArray(new IPreferenceStore[stores.size()]));
+		return new ChainedPreferenceStore(
+				(IPreferenceStore[]) stores.toArray(new IPreferenceStore[stores
+						.size()]));
 	}
 
 	protected abstract IPreferenceStore getScriptPreferenceStore();
@@ -1172,34 +1178,37 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		}
 
 		/*
-		 * @see org.eclipse.jface.text.information.IInformationProvider#getSubject
-		 *      (org.eclipse.jface.text.ITextViewer, int)
+		 * @see
+		 * org.eclipse.jface.text.information.IInformationProvider#getSubject
+		 * (org.eclipse.jface.text.ITextViewer, int)
 		 */
 		public IRegion getSubject(ITextViewer textViewer, int invocationOffset) {
 			return fHoverRegion;
 		}
 
 		/*
-		 * @see org.eclipse.jface.text.information.IInformationProvider#getInformation
-		 *      (org.eclipse.jface.text.ITextViewer,
-		 *      org.eclipse.jface.text.IRegion)
+		 * @see
+		 * org.eclipse.jface.text.information.IInformationProvider#getInformation
+		 * (org.eclipse.jface.text.ITextViewer, org.eclipse.jface.text.IRegion)
 		 */
 		public String getInformation(ITextViewer textViewer, IRegion subject) {
 			return fHoverInfo.toString();
 		}
 
 		/*
-		 * @see org.eclipse.jface.text.information.IInformationProviderExtension#
-		 *      getInformation2(org.eclipse.jface.text.ITextViewer,
-		 *      org.eclipse.jface.text.IRegion)
+		 * @see
+		 * org.eclipse.jface.text.information.IInformationProviderExtension#
+		 * getInformation2(org.eclipse.jface.text.ITextViewer,
+		 * org.eclipse.jface.text.IRegion)
 		 */
 		public Object getInformation2(ITextViewer textViewer, IRegion subject) {
 			return fHoverInfo;
 		}
 
 		/*
-		 * @see org.eclipse.jface.text.information.IInformationProviderExtension2
-		 *      #getInformationPresenterControlCreator()
+		 * @see
+		 * org.eclipse.jface.text.information.IInformationProviderExtension2
+		 * #getInformationPresenterControlCreator()
 		 */
 		public IInformationControlCreator getInformationPresenterControlCreator() {
 			return fControlCreator;
@@ -1281,8 +1290,7 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		 *            the source viewer to display the hover over
 		 * @param textHover
 		 *            the hover to make focusable
-		 * @return <code>true</code> if successful, <code>false</code>
-		 *         otherwise
+		 * @return <code>true</code> if successful, <code>false</code> otherwise
 		 * 
 		 */
 		private boolean makeTextHoverFocusable(ISourceViewer sourceViewer,
@@ -1386,29 +1394,28 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		// setAction("ShowDocumentation", resAction);
 
 		Action action = new GotoMatchingBracketAction(this);
-		action
-				.setActionDefinitionId(IScriptEditorActionDefinitionIds.GOTO_MATCHING_BRACKET);
+		action.setActionDefinitionId(IScriptEditorActionDefinitionIds.GOTO_MATCHING_BRACKET);
 		setAction(GotoMatchingBracketAction.GOTO_MATCHING_BRACKET, action);
 
-		Action outlineAction = new TextOperationAction(DLTKEditorMessages
-				.getBundleForConstructedKeys(), "ShowOutline.", this, //$NON-NLS-1$
+		Action outlineAction = new TextOperationAction(
+				DLTKEditorMessages.getBundleForConstructedKeys(),
+				"ShowOutline.", this, //$NON-NLS-1$
 				ScriptSourceViewer.SHOW_OUTLINE, true);
 		outlineAction
 				.setActionDefinitionId(IScriptEditorActionDefinitionIds.SHOW_OUTLINE);
 		setAction(IScriptEditorActionDefinitionIds.SHOW_OUTLINE, outlineAction);
 
-		action = new TextOperationAction(DLTKEditorMessages
-				.getBundleForConstructedKeys(),
+		action = new TextOperationAction(
+				DLTKEditorMessages.getBundleForConstructedKeys(),
 				"OpenHierarchy.", this, ScriptSourceViewer.SHOW_HIERARCHY, true); //$NON-NLS-1$
-		action
-				.setActionDefinitionId(IScriptEditorActionDefinitionIds.OPEN_HIERARCHY);
+		action.setActionDefinitionId(IScriptEditorActionDefinitionIds.OPEN_HIERARCHY);
 		setAction(IScriptEditorActionDefinitionIds.OPEN_HIERARCHY, action);
 
 		// ContentAssistProposal
-		action = new ContentAssistAction(DLTKEditorMessages
-				.getBundleForConstructedKeys(), "ContentAssistProposal.", this); //$NON-NLS-1$
-		action
-				.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
+		action = new ContentAssistAction(
+				DLTKEditorMessages.getBundleForConstructedKeys(),
+				"ContentAssistProposal.", this); //$NON-NLS-1$
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
 		setAction("ContentAssistProposal", action); //$NON-NLS-1$
 		markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
 
@@ -1416,8 +1423,7 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		action = new TextOperationAction(
 				DLTKEditorMessages.getBundleForConstructedKeys(),
 				"ContentAssistContextInformation.", this, ISourceViewer.CONTENTASSIST_CONTEXT_INFORMATION); //$NON-NLS-1$
-		action
-				.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_CONTEXT_INFORMATION);
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_CONTEXT_INFORMATION);
 		setAction("ContentAssistContextInformation", action); //$NON-NLS-1$
 		markAsStateDependentAction("ContentAssistContextInformation", true); //$NON-NLS-1$
 
@@ -1430,36 +1436,33 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 
 		// GoToNextMember
 		action = GoToNextPreviousMemberAction.newGoToNextMemberAction(this);
-		action
-				.setActionDefinitionId(IScriptEditorActionDefinitionIds.GOTO_NEXT_MEMBER);
+		action.setActionDefinitionId(IScriptEditorActionDefinitionIds.GOTO_NEXT_MEMBER);
 		setAction(GoToNextPreviousMemberAction.NEXT_MEMBER, action);
 
 		// GoToPreviousMember
 		action = GoToNextPreviousMemberAction.newGoToPreviousMemberAction(this);
-		action
-				.setActionDefinitionId(IScriptEditorActionDefinitionIds.GOTO_PREVIOUS_MEMBER);
+		action.setActionDefinitionId(IScriptEditorActionDefinitionIds.GOTO_PREVIOUS_MEMBER);
 		setAction(GoToNextPreviousMemberAction.PREVIOUS_MEMBER, action);
 
 		// Source menu actions
-		action = new TextOperationAction(DLTKEditorMessages
-				.getBundleForConstructedKeys(),
+		action = new TextOperationAction(
+				DLTKEditorMessages.getBundleForConstructedKeys(),
 				"Comment.", this, ITextOperationTarget.PREFIX); //$NON-NLS-1$
 		action.setActionDefinitionId(IScriptEditorActionDefinitionIds.COMMENT);
 		setAction(DLTKActionConstants.COMMENT, action);
 		markAsStateDependentAction(DLTKActionConstants.COMMENT, true);
 
-		action = new TextOperationAction(DLTKEditorMessages
-				.getBundleForConstructedKeys(),
+		action = new TextOperationAction(
+				DLTKEditorMessages.getBundleForConstructedKeys(),
 				"Uncomment.", this, ITextOperationTarget.STRIP_PREFIX); //$NON-NLS-1$
-		action
-				.setActionDefinitionId(IScriptEditorActionDefinitionIds.UNCOMMENT);
+		action.setActionDefinitionId(IScriptEditorActionDefinitionIds.UNCOMMENT);
 		setAction(DLTKActionConstants.UNCOMMENT, action);
 		markAsStateDependentAction(DLTKActionConstants.UNCOMMENT, true);
 
-		action = new ToggleCommentAction(DLTKEditorMessages
-				.getBundleForConstructedKeys(), "ToggleComment.", this); //$NON-NLS-1$
-		action
-				.setActionDefinitionId(IScriptEditorActionDefinitionIds.TOGGLE_COMMENT);
+		action = new ToggleCommentAction(
+				DLTKEditorMessages.getBundleForConstructedKeys(),
+				"ToggleComment.", this); //$NON-NLS-1$
+		action.setActionDefinitionId(IScriptEditorActionDefinitionIds.TOGGLE_COMMENT);
 		setAction(DLTKActionConstants.TOGGLE_COMMENT, action);
 		markAsStateDependentAction(DLTKActionConstants.TOGGLE_COMMENT, true);
 
@@ -1475,8 +1478,9 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 			setActionActivationCode("IndentOnTab", '\t', -1, SWT.NONE); //$NON-NLS-1$
 		}
 
-		action = new IndentAction(DLTKEditorMessages
-				.getBundleForConstructedKeys(), "Indent.", this, true); //$NON-NLS-1$
+		action = new IndentAction(
+				DLTKEditorMessages.getBundleForConstructedKeys(),
+				"Indent.", this, true); //$NON-NLS-1$
 		setAction("IndentOnTab", action); //$NON-NLS-1$
 		markAsStateDependentAction("IndentOnTab", true); //$NON-NLS-1$
 		markAsSelectionDependentAction("IndentOnTab", true); //$NON-NLS-1$
@@ -1503,8 +1507,7 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 						fContextMenuGroup.addGroup((ActionGroup) actionGroup);
 					} else {
 						DLTKUIPlugin.logErrorMessage(actionGroup.getClass()
-								.getName()
-								+ " should extend ActionGroup"); //$NON-NLS-1$
+								.getName() + " should extend ActionGroup"); //$NON-NLS-1$
 					}
 				} catch (CoreException e) {
 					DLTKUIPlugin.log(e);
@@ -1563,8 +1566,7 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	}
 
 	/**
-	 * Returns the folding action group, or <code>null</code> if there is
-	 * none.
+	 * Returns the folding action group, or <code>null</code> if there is none.
 	 * 
 	 * @return the folding action group, or <code>null</code> if there is none
 	 * 
@@ -1855,8 +1857,8 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	 * @param element
 	 *            thescriptelement to select
 	 * @param checkIfOutlinePageActive
-	 *            <code>true</code> if check for active outline page needs to
-	 *            be done
+	 *            <code>true</code> if check for active outline page needs to be
+	 *            done
 	 */
 	protected void synchronizeOutlinePage(ISourceReference element,
 			boolean checkIfOutlinePageActive) {
@@ -2011,8 +2013,9 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	}
 
 	/*
-	 * @see org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#gotoAnnotation(
-	 *      boolean)
+	 * @see
+	 * org.eclipse.ui.texteditor.AbstractDecoratedTextEditor#gotoAnnotation(
+	 * boolean)
 	 * 
 	 * @since 3.2
 	 */
@@ -2119,8 +2122,8 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	protected void updateStatusLine() {
 		ITextSelection selection = (ITextSelection) getSelectionProvider()
 				.getSelection();
-		Annotation annotation = getAnnotation(selection.getOffset(), selection
-				.getLength());
+		Annotation annotation = getAnnotation(selection.getOffset(),
+				selection.getLength());
 		setStatusLineErrorMessage(null);
 		setStatusLineMessage(null);
 		if (annotation != null) {
@@ -2166,10 +2169,10 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 
 	/**
 	 * Returns the most narrow element including the given offset. If
-	 * <code>reconcile</code> is <code>true</code> the editor's input
-	 * element is reconciled in advance. If it is <code>false</code> this
-	 * method only returns a result if the editor's input element does not need
-	 * to be reconciled.
+	 * <code>reconcile</code> is <code>true</code> the editor's input element is
+	 * reconciled in advance. If it is <code>false</code> this method only
+	 * returns a result if the editor's input element does not need to be
+	 * reconciled.
 	 * 
 	 * @param offset
 	 *            the offset included by the retrieved element
@@ -2387,8 +2390,8 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 							ITextViewerExtension2.DEFAULT_HOVER_STATE_MASK);
 				}
 			} else
-				sourceViewer.setTextHover(configuration.getTextHover(
-						sourceViewer, t), t);
+				sourceViewer.setTextHover(
+						configuration.getTextHover(sourceViewer, t), t);
 		}
 	}
 
@@ -2826,14 +2829,14 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	}
 
 	/*
-	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#createNavigationActions()
+	 * @see
+	 * org.eclipse.ui.texteditor.AbstractTextEditor#createNavigationActions()
 	 */
 	protected void createNavigationActions() {
 		super.createNavigationActions();
 		final StyledText textWidget = getSourceViewer().getTextWidget();
 		IAction action = new NavigatePreviousSubWordAction();
-		action
-				.setActionDefinitionId(ITextEditorActionDefinitionIds.WORD_PREVIOUS);
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.WORD_PREVIOUS);
 		setAction(ITextEditorActionDefinitionIds.WORD_PREVIOUS, action);
 		textWidget.setKeyBinding(SWT.CTRL | SWT.ARROW_LEFT, SWT.NULL);
 		action = new NavigateNextSubWordAction();
@@ -2841,14 +2844,12 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		setAction(ITextEditorActionDefinitionIds.WORD_NEXT, action);
 		textWidget.setKeyBinding(SWT.CTRL | SWT.ARROW_RIGHT, SWT.NULL);
 		action = new SelectPreviousSubWordAction();
-		action
-				.setActionDefinitionId(ITextEditorActionDefinitionIds.SELECT_WORD_PREVIOUS);
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.SELECT_WORD_PREVIOUS);
 		setAction(ITextEditorActionDefinitionIds.SELECT_WORD_PREVIOUS, action);
 		textWidget.setKeyBinding(SWT.CTRL | SWT.SHIFT | SWT.ARROW_LEFT,
 				SWT.NULL);
 		action = new SelectNextSubWordAction();
-		action
-				.setActionDefinitionId(ITextEditorActionDefinitionIds.SELECT_WORD_NEXT);
+		action.setActionDefinitionId(ITextEditorActionDefinitionIds.SELECT_WORD_NEXT);
 		setAction(ITextEditorActionDefinitionIds.SELECT_WORD_NEXT, action);
 		textWidget.setKeyBinding(SWT.CTRL | SWT.SHIFT | SWT.ARROW_RIGHT,
 				SWT.NULL);
@@ -2970,16 +2971,15 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	}
 
 	/*
-	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#rulerContextMenuAboutToShow
-	 *      (org.eclipse.jface.action.IMenuManager)
+	 * @see
+	 * org.eclipse.ui.texteditor.AbstractTextEditor#rulerContextMenuAboutToShow
+	 * (org.eclipse.jface.action.IMenuManager)
 	 */
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
 		super.rulerContextMenuAboutToShow(menu);
 		IMenuManager foldingMenu = new MenuManager(
 				DLTKEditorMessages.Editor_FoldingMenu_name, "projection"); //$NON-NLS-1$
-		menu
-				.appendToGroup(ITextEditorActionConstants.GROUP_RULERS,
-						foldingMenu);
+		menu.appendToGroup(ITextEditorActionConstants.GROUP_RULERS, foldingMenu);
 
 		IAction action = getAction("FoldingToggle"); //$NON-NLS-1$
 		if (action != null) {
@@ -3049,7 +3049,7 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 
 	/*
 	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#performSave(boolean,
-	 *      org.eclipse.core.runtime.IProgressMonitor)
+	 * org.eclipse.core.runtime.IProgressMonitor)
 	 */
 	protected void performSave(boolean overwrite,
 			IProgressMonitor progressMonitor) {
@@ -3209,8 +3209,9 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 	}
 
 	/*
-	 * @see org.eclipse.jdt.internal.ui.text.java.IJavaReconcilingListener#reconciled
-	 *      (CompilationUnit, boolean, IProgressMonitor)
+	 * @see
+	 * org.eclipse.jdt.internal.ui.text.java.IJavaReconcilingListener#reconciled
+	 * (CompilationUnit, boolean, IProgressMonitor)
 	 * 
 	 * @since 3.0
 	 */
@@ -3221,7 +3222,7 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		// JavaPlugin javaPlugin= JavaPlugin.getDefault();
 		// if (javaPlugin == null)
 		// return;
-		//		
+		//
 		// // Always notify AST provider
 		// javaPlugin.getASTProvider().reconciled(ast, getInputJavaElement(),
 		// progressMonitor);
@@ -3268,8 +3269,8 @@ public abstract class ScriptEditor extends AbstractDecoratedTextEditor
 		if (fSemanticManager == null && textTools != null) {
 			fSemanticManager = new SemanticHighlightingManager();
 			fSemanticManager.install(this,
-					(ScriptSourceViewer) getSourceViewer(), textTools
-							.getColorManager(), getPreferenceStore());
+					(ScriptSourceViewer) getSourceViewer(),
+					textTools.getColorManager(), getPreferenceStore());
 		}
 	}
 

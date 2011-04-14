@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
@@ -48,8 +50,8 @@ public class ExternalScriptFolder extends ScriptFolder {
 			for (int i = 0; i < max; i++) {
 				IPath resPath = ((IPath) resNames.get(i));
 				if (!Util.isValidSourceModule(getScriptProject(), resPath)) {
-					res[index++] = new ExternalEntryFile(EnvironmentPathUtils
-							.getFile(resPath));
+					res[index++] = new ExternalEntryFile(
+							EnvironmentPathUtils.getFile(resPath));
 				}
 			}
 			if (index != max) {
@@ -144,8 +146,8 @@ public class ExternalScriptFolder extends ScriptFolder {
 
 	// EBAY - START MOD
 	private ISourceModule createExternalSourceModule(String name) {
-		ExternalEntryFile storage = new ExternalEntryFile(EnvironmentPathUtils
-				.getFile(getPath().append(name)));
+		ExternalEntryFile storage = new ExternalEntryFile(
+				EnvironmentPathUtils.getFile(getPath().append(name)));
 		ISourceModuleFactory factory = getSourceModuleFactory(name);
 
 		ISourceModule sourceModule;

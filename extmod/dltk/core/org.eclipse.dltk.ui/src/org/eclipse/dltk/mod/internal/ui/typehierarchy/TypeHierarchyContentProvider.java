@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.ui.typehierarchy;
 
@@ -141,8 +143,8 @@ public abstract class TypeHierarchyContentProvider implements
 	}
 
 	/**
-	 * Sets a filter representing a working set or <code>null</code> if
-	 * working sets are disabled.
+	 * Sets a filter representing a working set or <code>null</code> if working
+	 * sets are disabled.
 	 */
 	public void setWorkingSetFilter(ViewerFilter filter) {
 		fWorkingSetFilter = filter;

@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
-
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.ui.scriptview;
 
@@ -342,8 +344,8 @@ public class ScriptExplorerPart extends ViewPart implements
 			IStructuredSelection is = (IStructuredSelection) invalidSelection;
 			List ns = null;
 			if (newSelection instanceof IStructuredSelection) {
-				ns = new ArrayList(((IStructuredSelection) newSelection)
-						.toList());
+				ns = new ArrayList(
+						((IStructuredSelection) newSelection).toList());
 			} else {
 				ns = new ArrayList();
 			}
@@ -448,9 +450,10 @@ public class ScriptExplorerPart extends ViewPart implements
 					}
 				}
 			}
-			getTree().setSelection(
-					(TreeItem[]) toSelect
-							.toArray(new TreeItem[toSelect.size()]));
+			getTree()
+					.setSelection(
+							(TreeItem[]) toSelect.toArray(new TreeItem[toSelect
+									.size()]));
 		}
 
 		private Widget internalFindChild(Widget parent, Object element) {
@@ -1332,8 +1335,7 @@ public class ScriptExplorerPart extends ViewPart implements
 				fViewer.reveal(element);
 			} else {
 				try {
-					fViewer
-							.removePostSelectionChangedListener(fPostSelectionListener);
+					fViewer.removePostSelectionChangedListener(fPostSelectionListener);
 					fViewer.setSelection(newSelection, true);
 
 					while (element != null && fViewer.getSelection().isEmpty()) {
@@ -1345,8 +1347,7 @@ public class ScriptExplorerPart extends ViewPart implements
 						}
 					}
 				} finally {
-					fViewer
-							.addPostSelectionChangedListener(fPostSelectionListener);
+					fViewer.addPostSelectionChangedListener(fPostSelectionListener);
 				}
 			}
 			return true;
@@ -1488,9 +1489,10 @@ public class ScriptExplorerPart extends ViewPart implements
 				.getProperty())) {
 			fActionSet.updateActionBars(getViewSite().getActionBars());
 
-			boolean showCUChildren = DLTKUIPlugin.getDefault()
-					.getPreferenceStore().getBoolean(
-							PreferenceConstants.SHOW_SOURCE_MODULE_CHILDREN);
+			boolean showCUChildren = DLTKUIPlugin
+					.getDefault()
+					.getPreferenceStore()
+					.getBoolean(PreferenceConstants.SHOW_SOURCE_MODULE_CHILDREN);
 			((StandardModelElementContentProvider) fViewer.getContentProvider())
 					.setProvideMembers(showCUChildren);
 
@@ -1638,8 +1640,8 @@ public class ScriptExplorerPart extends ViewPart implements
 											workingSet.getLabel() });
 				} else {
 					message = Messages.format(
-							ScriptMessages.PackageExplorer_notFound, workingSet
-									.getLabel());
+							ScriptMessages.PackageExplorer_notFound,
+							workingSet.getLabel());
 				}
 				if (MessageDialog.openQuestion(getSite().getShell(),
 						ScriptMessages.PackageExplorer_filteredDialog_title,
@@ -1690,8 +1692,8 @@ public class ScriptExplorerPart extends ViewPart implements
 		while (action.getFrameList().getCurrentIndex() > 0) {
 			// only try to go up if there is a parent frame
 			// fix for bug# 63769 Endless loop after Show in Package Explorer
-			if (action.getFrameList().getSource().getFrame(
-					IFrameSource.PARENT_FRAME, 0) == null) {
+			if (action.getFrameList().getSource()
+					.getFrame(IFrameSource.PARENT_FRAME, 0) == null) {
 				break;
 			}
 			action.run();

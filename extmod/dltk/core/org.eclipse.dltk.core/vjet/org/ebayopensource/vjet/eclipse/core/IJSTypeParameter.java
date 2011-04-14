@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2006 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core;
 
@@ -66,15 +67,15 @@ public interface IJSTypeParameter extends IModelElement, ISourceReference {
 
 	/**
 	 * Returns the source range of this type parameter's name, or
-	 * <code>null</code> if this type parameter does not have associated
-	 * source code (for example, in a binary type).
+	 * <code>null</code> if this type parameter does not have associated source
+	 * code (for example, in a binary type).
 	 * 
 	 * @exception JavaModelException
 	 *                if this element does not exist or if an exception occurs
 	 *                while accessing its corresponding resource.
 	 * @return the source range of this type parameter's name, or
-	 *         <code>null</code> if this type parameter does not have
-	 *         associated source code (for example, in a binary type)
+	 *         <code>null</code> if this type parameter does not have associated
+	 *         source code (for example, in a binary type)
 	 */
 	ISourceRange getNameRange() throws ModelException;
 }

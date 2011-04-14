@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 
 package org.eclipse.dltk.mod.ui.preferences;
@@ -430,8 +432,8 @@ public abstract class AbstractScriptEditorColoringConfigurationBlock extends
 		final String colorKey = h.getPreferenceKey();
 		return new SemanticHighlightingColorListItem(h.getDisplayName(),
 				colorKey, colorKey + BOLD, colorKey + ITALIC, colorKey
-						+ STRIKETHROUGH, colorKey + UNDERLINE, sCoreCategory, h
-						.getEnabledPreferenceKey());
+						+ STRIKETHROUGH, colorKey + UNDERLINE, sCoreCategory,
+				h.getEnabledPreferenceKey());
 	}
 
 	private OverlayPreferenceStore.OverlayKey[] createOverlayStoreKeys() {
@@ -517,8 +519,8 @@ public abstract class AbstractScriptEditorColoringConfigurationBlock extends
 			fUnderlineCheckBox.setEnabled(false);
 			return;
 		}
-		RGB rgb = PreferenceConverter.getColor(getPreferenceStore(), item
-				.getColorKey());
+		RGB rgb = PreferenceConverter.getColor(getPreferenceStore(),
+				item.getColorKey());
 		fSyntaxForegroundColorEditor.setColorValue(rgb);
 		fBoldCheckBox.setSelection(getPreferenceStore().getBoolean(
 				item.getBoldKey()));
@@ -560,8 +562,7 @@ public abstract class AbstractScriptEditorColoringConfigurationBlock extends
 		colorComposite.setLayout(layout);
 
 		Link link = new Link(colorComposite, SWT.NONE);
-		link
-				.setText(PreferencesMessages.DLTKEditorColoringConfigurationBlock_link);
+		link.setText(PreferencesMessages.DLTKEditorColoringConfigurationBlock_link);
 		link.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				PreferencesUtil.createPreferenceDialogOn(parent.getShell(),
@@ -583,8 +584,7 @@ public abstract class AbstractScriptEditorColoringConfigurationBlock extends
 
 		Label label;
 		label = new Label(colorComposite, SWT.LEFT);
-		label
-				.setText(PreferencesMessages.DLTKEditorPreferencePage_coloring_element);
+		label.setText(PreferencesMessages.DLTKEditorPreferencePage_coloring_element);
 		label.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Composite editorComposite = new Composite(colorComposite, SWT.NONE);
@@ -720,9 +720,9 @@ public abstract class AbstractScriptEditorColoringConfigurationBlock extends
 
 			public void widgetSelected(SelectionEvent e) {
 				HighlightingColorListItem item = getHighlightingColorListItem();
-				PreferenceConverter.setValue(getPreferenceStore(), item
-						.getColorKey(), fSyntaxForegroundColorEditor
-						.getColorValue());
+				PreferenceConverter.setValue(getPreferenceStore(),
+						item.getColorKey(),
+						fSyntaxForegroundColorEditor.getColorValue());
 			}
 		});
 

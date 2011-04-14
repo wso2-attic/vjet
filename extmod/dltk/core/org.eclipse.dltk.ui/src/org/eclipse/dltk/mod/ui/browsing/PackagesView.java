@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.browsing;
 
@@ -244,11 +245,11 @@ public class PackagesView extends ScriptBrowsingPart {
 	 */
 	protected IContentProvider createContentProvider() {
 		if (isInListState())
-			return new PackagesViewFlatContentProvider(fWrappedViewer
-					.getViewer());
+			return new PackagesViewFlatContentProvider(
+					fWrappedViewer.getViewer());
 		else
-			return new PackagesViewHierarchicalContentProvider(fWrappedViewer
-					.getViewer());
+			return new PackagesViewHierarchicalContentProvider(
+					fWrappedViewer.getViewer());
 	}
 
 	protected ScriptUILabelProvider createLabelProvider() {
@@ -558,8 +559,8 @@ public class PackagesView extends ScriptBrowsingPart {
 	private void createSelectAllAction() {
 		IActionBars actionBars = getViewSite().getActionBars();
 		if (isInListState()) {
-			fSelectAllAction = new SelectAllAction((TableViewer) fWrappedViewer
-					.getViewer());
+			fSelectAllAction = new SelectAllAction(
+					(TableViewer) fWrappedViewer.getViewer());
 			actionBars.setGlobalActionHandler(ActionFactory.SELECT_ALL.getId(),
 					fSelectAllAction);
 		} else {

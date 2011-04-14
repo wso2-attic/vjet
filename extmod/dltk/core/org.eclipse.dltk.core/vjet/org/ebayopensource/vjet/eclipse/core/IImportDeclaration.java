@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2006 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,7 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
- *     IBM Corporation - added J2SE 1.5 support
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core;
 
@@ -34,8 +34,8 @@ public interface IImportDeclaration extends IModelElement, ISourceReference,
 
 	/**
 	 * Returns the name that has been imported. For an on-demand import, this
-	 * includes the trailing <code>".*"</code>. For example, for the
-	 * statement <code>"import java.util.*"</code>, this returns
+	 * includes the trailing <code>".*"</code>. For example, for the statement
+	 * <code>"import java.util.*"</code>, this returns
 	 * <code>"java.util.*"</code>. For the statement
 	 * <code>"import java.util.Hashtable"</code>, this returns
 	 * <code>"java.util.Hashtable"</code>.

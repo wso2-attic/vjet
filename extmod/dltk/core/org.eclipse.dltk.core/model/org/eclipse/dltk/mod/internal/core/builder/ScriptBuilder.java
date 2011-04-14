@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core.builder;
 
@@ -467,8 +469,8 @@ public class ScriptBuilder extends IncrementalProjectBuilder {
 		IScriptBuilder[] builders = null;
 		try {
 			monitor.setTaskName(NLS.bind(
-					Messages.ScriptBuilder_buildingScriptsIn, currentProject
-							.getName()));
+					Messages.ScriptBuilder_buildingScriptsIn,
+					currentProject.getName()));
 			monitor.beginTask(NONAME, WORK_RESOURCES + WORK_EXTERNAL
 					+ WORK_SOURCES + WORK_BUILD);
 			Set resources = getResourcesFrom(currentProject, monitor,
@@ -637,8 +639,8 @@ public class ScriptBuilder extends IncrementalProjectBuilder {
 		IScriptBuilder[] builders = null;
 		try {
 			monitor.setTaskName(NLS.bind(
-					Messages.ScriptBuilder_buildingScriptsIn, currentProject
-							.getName()));
+					Messages.ScriptBuilder_buildingScriptsIn,
+					currentProject.getName()));
 			monitor.beginTask(NONAME, WORK_RESOURCES + WORK_EXTERNAL
 					+ WORK_SOURCES + WORK_BUILD);
 
@@ -751,8 +753,8 @@ public class ScriptBuilder extends IncrementalProjectBuilder {
 			}
 			IResource res = (IResource) iterator.next();
 			sub.subTask(NLS.bind(
-					Messages.ScriptBuilder_Locating_source_modules, String
-							.valueOf(remainingWork), res.getName()));
+					Messages.ScriptBuilder_Locating_source_modules,
+					String.valueOf(remainingWork), res.getName()));
 			sub.worked(1);
 			if (sub.isCanceled()) {
 				return;
@@ -841,8 +843,8 @@ public class ScriptBuilder extends IncrementalProjectBuilder {
 				final int step = buildElementsList.size() * ticks / total;
 				builderWork -= step;
 				monitor.subTask(NLS.bind(
-						Messages.ScriptBuilder_building_N_localModules, Integer
-								.toString(buildElementsList.size())));
+						Messages.ScriptBuilder_building_N_localModules,
+						Integer.toString(buildElementsList.size())));
 				builder.buildModelElements(scriptProject, buildElementsList,
 						new SubProgressMonitor(monitor, step), buildTypes[k]);
 			}

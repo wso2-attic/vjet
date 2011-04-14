@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     eBay Inc - initial API and implementation
+ *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core;
 
 import org.eclipse.dltk.mod.core.IProjectFragment;
@@ -83,17 +93,19 @@ public interface IJSType extends IType {
 	 * @return true if this type represents an interface, false otherwise
 	 */
 	boolean isInterface() throws ModelException;
-	
+
 	/**
 	 * Returns whether this type represents an enumeration class.
 	 * <p>
-	 * Note that an enumeration class can neither be a class, an interface, nor an annotation type.
+	 * Note that an enumeration class can neither be a class, an interface, nor
+	 * an annotation type.
 	 * </p>
 	 * 
-	 * @exception ModelException if this element does not exist or if an
-	 *		exception occurs while accessing its corresponding resource.
-	 * @return true if this type represents an enumeration class,
-	 * false otherwise
+	 * @exception ModelException
+	 *                if this element does not exist or if an exception occurs
+	 *                while accessing its corresponding resource.
+	 * @return true if this type represents an enumeration class, false
+	 *         otherwise
 	 */
 	boolean isEnum() throws ModelException;
 }

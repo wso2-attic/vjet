@@ -1,5 +1,16 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     eBay Inc - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import org.ebayopensource.vjet.eclipse.core.IJSType;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.core.Flags;
 import org.eclipse.dltk.mod.core.IMember;
@@ -10,8 +21,6 @@ import org.eclipse.dltk.mod.core.ISourceRange;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.internal.core.util.Util;
 import org.eclipse.dltk.mod.utils.CorePrinter;
-
-import org.ebayopensource.vjet.eclipse.core.IJSType;
 
 /**
  * @see IJSInitializer
@@ -135,8 +144,7 @@ public class JSInitializer extends Member implements IJSInitializer {
 				buffer.append(this.occurrenceCount);
 				buffer.append(">"); //$NON-NLS-1$
 			} catch (ModelException e) {
-				buffer
-						.append("<ModelException in toString of " + getElementName()); //$NON-NLS-1$
+				buffer.append("<ModelException in toString of " + getElementName()); //$NON-NLS-1$
 			}
 		}
 	}

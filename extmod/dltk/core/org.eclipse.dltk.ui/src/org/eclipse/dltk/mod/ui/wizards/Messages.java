@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
+ *******************************************************************************/
 package org.eclipse.dltk.mod.ui.wizards;
 
 import org.eclipse.osgi.util.NLS;
@@ -17,7 +28,7 @@ public class Messages extends NLS {
 	// EBAY MOD
 	public static String WorkingSetConfigurationBlock_WorkingSetText_name;
 	public static String WorkingSetConfigurationBlock_SelectWorkingSet_button;
-	
+
 	public static String SimpleWorkingSetSelectionDialog_SimpleSelectWorkingSetDialog_title;
 	public static String SimpleWorkingSetSelectionDialog_SelectAll_button;
 	public static String SimpleWorkingSetSelectionDialog_DeselectAll_button;

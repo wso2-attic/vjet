@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
+ *******************************************************************************/
 package org.eclipse.dltk.mod.ui.preferences;
 
 import org.eclipse.core.resources.IProject;
@@ -83,8 +94,8 @@ public abstract class AbstractOptionsBlock extends OptionsConfigurationBlock
 	 * Default implementation returns null. Clients should override to return
 	 * context approprite title. Clients must also override
 	 * <code>getFullBuildDialogMessage()</code> and
-	 * <code>getProjectBuildDialogMessage()</code> in order to trigger the
-	 * popup box.
+	 * <code>getProjectBuildDialogMessage()</code> in order to trigger the popup
+	 * box.
 	 * </p>
 	 */
 	protected String getBuildDialogTitle() {
@@ -99,8 +110,8 @@ public abstract class AbstractOptionsBlock extends OptionsConfigurationBlock
 	 * Default implementation returns null. Clients should override to return
 	 * context approprite message. Clients must also override
 	 * <code>getBuildDialogTitle()</code> and
-	 * <code>getProjectBuildDialogMessage()</code> in order to trigger the
-	 * popup box.
+	 * <code>getProjectBuildDialogMessage()</code> in order to trigger the popup
+	 * box.
 	 * </p>
 	 */
 	protected String getFullBuildDialogMessage() {
@@ -128,8 +139,8 @@ public abstract class AbstractOptionsBlock extends OptionsConfigurationBlock
 	}
 
 	/*
-	 * @seeorg.eclipse.dltk.mod.internal.ui.preferences.OptionsConfigurationBlock#
-	 * performDefaults()
+	 * @seeorg.eclipse.dltk.mod.internal.ui.preferences.OptionsConfigurationBlock
+	 * # performDefaults()
 	 */
 	public void performDefaults() {
 		super.performDefaults();
@@ -137,32 +148,36 @@ public abstract class AbstractOptionsBlock extends OptionsConfigurationBlock
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#getBoolean(java.lang
-	 *      .Object)
+	 * @see
+	 * org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#getBoolean(java
+	 * .lang .Object)
 	 */
 	public final boolean getBoolean(Object key) {
 		return getBooleanValue((PreferenceKey) key);
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#getString(java.lang
-	 *      .Object)
+	 * @see
+	 * org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#getString(java
+	 * .lang .Object)
 	 */
 	public final String getString(Object key) {
 		return getValue((PreferenceKey) key);
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#setBoolean(java.lang
-	 *      .Object, boolean)
+	 * @see
+	 * org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#setBoolean(java
+	 * .lang .Object, boolean)
 	 */
 	public final void setBoolean(Object key, boolean value) {
 		super.setValue((PreferenceKey) key, value);
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#setString(java.lang
-	 *      .Object, java.lang.String)
+	 * @see
+	 * org.eclipse.dltk.mod.ui.preferences.IPreferenceDelegate#setString(java
+	 * .lang .Object, java.lang.String)
 	 */
 	public final void setString(Object key, String value) {
 		setValue((PreferenceKey) key, value);

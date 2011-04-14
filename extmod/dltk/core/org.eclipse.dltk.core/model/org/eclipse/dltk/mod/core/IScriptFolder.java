@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.core;
 
@@ -77,10 +79,10 @@ public interface IScriptFolder extends IOpenable, IParent, IModelElement,
 	 * in this package fragment. The value of the <code>force</code> parameter
 	 * effects the resolution of such a conflict:
 	 * <ul>
-	 * <li> <code>true</code> - in this case the compilation is created with
-	 * the new contents</li>
-	 * <li> <code>false</code> - in this case a <code>ModelException</code>
-	 * is thrown</li>
+	 * <li> <code>true</code> - in this case the compilation is created with the
+	 * new contents</li>
+	 * <li> <code>false</code> - in this case a <code>ModelException</code> is
+	 * thrown</li>
 	 * </ul>
 	 * 
 	 * @param contents
@@ -95,12 +97,10 @@ public interface IScriptFolder extends IOpenable, IParent, IModelElement,
 	 *                if the element could not be created. Reasons include:
 	 *                <ul>
 	 *                <li> This script element does not exist
-	 *                (ELEMENT_DOES_NOT_EXIST)</li>
-	 *                <li> A <code>CoreException</code> occurred while
-	 *                creating an underlying resource
+	 *                (ELEMENT_DOES_NOT_EXIST)</li> <li> A <code>CoreException
+	 *                </code> occurred while creating an underlying resource 
 	 *                <li> The name is not a valid compilation unit name
-	 *                (INVALID_NAME)
-	 *                <li> The contents are <code>null</code>
+	 *                (INVALID_NAME) <li> The contents are <code>null</code>
 	 *                (INVALID_CONTENTS)
 	 *                </ul>
 	 * @return a compilation unit in this package fragment with the specified

@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.core;
 
@@ -31,13 +33,15 @@ public class ScriptModelUtil {
 	 * @param unit
 	 */
 	public static void reconcile(ISourceModule unit) throws ModelException {
-		unit
-				.reconcile(false /* don't force problem detection */, null /*
-																		 * use
-																		 * primary
-																		 * owner
-																		 */,
-						null /* no progress monitor */);
+		unit.reconcile(false /* don't force problem detection */, null /*
+																	 * use
+																	 * primary
+																	 * owner
+																	 */, null /*
+																			 * no
+																			 * progress
+																			 * monitor
+																			 */);
 	}
 
 	public static boolean isPrimary(ISourceModule unit) {
@@ -79,13 +83,13 @@ public class ScriptModelUtil {
 		IDLTKSearchScope scope = SearchEngine.createSearchScope(project);
 		try {
 			SearchEngine engine = new SearchEngine();
-			engine
-					.searchAllTypeNames(null, 0, patternString.toCharArray(),
-							SearchPattern.R_EXACT_MATCH
-									| SearchPattern.R_PATTERN_MATCH,
-							IDLTKSearchConstants.TYPE, scope, requestor,
-							IDLTKSearchConstants.WAIT_UNTIL_READY_TO_SEARCH,
-							null);
+			engine.searchAllTypeNames(
+					null,
+					0,
+					patternString.toCharArray(),
+					SearchPattern.R_EXACT_MATCH | SearchPattern.R_PATTERN_MATCH,
+					IDLTKSearchConstants.TYPE, scope, requestor,
+					IDLTKSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, null);
 		} catch (CoreException e) {
 			if (DLTKCore.DEBUG)
 				e.printStackTrace();
@@ -102,8 +106,8 @@ public class ScriptModelUtil {
 			SearchPattern pattern = SearchPattern.createPattern(patternString,
 					IDLTKSearchConstants.METHOD,
 					IDLTKSearchConstants.DECLARATIONS,
-					SearchPattern.R_PATTERN_MATCH, DLTKLanguageManager
-							.getLanguageToolkit(project));
+					SearchPattern.R_PATTERN_MATCH,
+					DLTKLanguageManager.getLanguageToolkit(project));
 			engine.search(pattern, new SearchParticipant[] { SearchEngine
 					.getDefaultSearchParticipant() }, scope, requestor, null);
 		} catch (CoreException e) {

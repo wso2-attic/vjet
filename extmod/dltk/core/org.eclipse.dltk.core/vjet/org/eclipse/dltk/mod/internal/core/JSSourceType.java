@@ -1,17 +1,26 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     eBay Inc - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
 import java.util.ArrayList;
 
+import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
+import org.ebayopensource.vjet.eclipse.core.IJSMethod;
+import org.ebayopensource.vjet.eclipse.core.IJSType;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.core.IField;
 import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.eclipse.dltk.mod.core.ModelException;
-
-import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
-import org.ebayopensource.vjet.eclipse.core.IJSMethod;
-import org.ebayopensource.vjet.eclipse.core.IJSType;
 
 public class JSSourceType extends SourceType implements IJSType {
 	// Type decl kinds

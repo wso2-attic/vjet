@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
@@ -106,9 +108,9 @@ public class CopyResourceElementsOperation extends MultiOperation {
 	// }
 	/**
 	 * Returns the children of <code>source</code> which are affected by this
-	 * operation. If <code>source</code> is a <code>K_SOURCE</code>, these
-	 * are the <code>.java</code> files, if it is a <code>K_BINARY</code>,
-	 * they are the <code>.class</code> files.
+	 * operation. If <code>source</code> is a <code>K_SOURCE</code>, these are
+	 * the <code>.java</code> files, if it is a <code>K_BINARY</code>, they are
+	 * the <code>.class</code> files.
 	 */
 	private IResource[] collectResourcesOfInterest(IScriptFolder source)
 			throws ModelException {
@@ -415,8 +417,8 @@ public class CopyResourceElementsOperation extends MultiOperation {
 	/**
 	 * @see MultiOperation This method delegates to
 	 *      <code>processSourceModuleResource</code> or
-	 *      <code>processScriptFolderResource</code>, depending on the type
-	 *      of <code>element</code>.
+	 *      <code>processScriptFolderResource</code>, depending on the type of
+	 *      <code>element</code>.
 	 */
 	protected void processElement(IModelElement element) throws ModelException {
 		IModelElement dest = getDestinationParent(element);
@@ -455,8 +457,8 @@ public class CopyResourceElementsOperation extends MultiOperation {
 	}
 
 	/**
-	 * Copies/moves a package fragment with the name <code>newName</code> to
-	 * the destination package.<br>
+	 * Copies/moves a package fragment with the name <code>newName</code> to the
+	 * destination package.<br>
 	 * 
 	 * @exception ScriptModelException
 	 *                if the operation is unable to complete
@@ -529,7 +531,9 @@ public class CopyResourceElementsOperation extends MultiOperation {
 						// wants to override existing resources
 						for (int i = 0, max = resources.length; i < max; i++) {
 							IResource destinationResource = ResourcesPlugin
-									.getWorkspace().getRoot().findMember(
+									.getWorkspace()
+									.getRoot()
+									.findMember(
 											destPath.append(resources[i]
 													.getName()));
 							if (destinationResource != null) {
@@ -540,12 +544,11 @@ public class CopyResourceElementsOperation extends MultiOperation {
 									throw new ModelException(
 											new ModelStatus(
 													IModelStatusConstants.NAME_COLLISION,
-													Messages
-															.bind(
-																	Messages.status_nameCollision,
-																	destinationResource
-																			.getFullPath()
-																			.toString())));
+													Messages.bind(
+															Messages.status_nameCollision,
+															destinationResource
+																	.getFullPath()
+																	.toString())));
 								}
 							}
 						}
@@ -555,7 +558,9 @@ public class CopyResourceElementsOperation extends MultiOperation {
 						// wants to override existing resources
 						for (int i = 0, max = resources.length; i < max; i++) {
 							IResource destinationResource = ResourcesPlugin
-									.getWorkspace().getRoot().findMember(
+									.getWorkspace()
+									.getRoot()
+									.findMember(
 											destPath.append(resources[i]
 													.getName()));
 							if (destinationResource != null) {
@@ -569,12 +574,11 @@ public class CopyResourceElementsOperation extends MultiOperation {
 									throw new ModelException(
 											new ModelStatus(
 													IModelStatusConstants.NAME_COLLISION,
-													Messages
-															.bind(
-																	Messages.status_nameCollision,
-																	destinationResource
-																			.getFullPath()
-																			.toString())));
+													Messages.bind(
+															Messages.status_nameCollision,
+															destinationResource
+																	.getFullPath()
+																	.toString())));
 								}
 							}
 						}
@@ -602,8 +606,8 @@ public class CopyResourceElementsOperation extends MultiOperation {
 								.getSourceModule(resourceName);
 						if (Util.isExcluded(cu.getPath(), inclusionPatterns,
 								exclusionPatterns, false/*
-						 * not a folder
-						 */))
+														 * not a folder
+														 */))
 							continue;
 						if (DLTKCore.DEBUG) {
 							System.err
@@ -717,7 +721,7 @@ public class CopyResourceElementsOperation extends MultiOperation {
 	 * Possible failures:
 	 * <ul>
 	 * <li>NO_ELEMENTS_TO_PROCESS - no elements supplied to the operation
-	 * <li> INDEX_OUT_OF_BOUNDS - the number of renamings supplied to the
+	 * <li>INDEX_OUT_OF_BOUNDS - the number of renamings supplied to the
 	 * operation does not match the number of elements that were supplied.
 	 * </ul>
 	 */

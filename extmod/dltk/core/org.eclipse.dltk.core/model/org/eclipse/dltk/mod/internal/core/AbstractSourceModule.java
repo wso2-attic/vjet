@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
+ *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
 import java.util.ArrayList;
@@ -115,7 +126,8 @@ public abstract class AbstractSourceModule extends Openable implements
 	// ~ Methods
 
 	/*
-	 * @see org.eclipse.dltk.mod.internal.core.ModelElement#equals(java.lang.Object)
+	 * @see
+	 * org.eclipse.dltk.mod.internal.core.ModelElement#equals(java.lang.Object)
 	 */
 	public boolean equals(Object obj) {
 		if (obj instanceof AbstractSourceModule) {
@@ -332,7 +344,8 @@ public abstract class AbstractSourceModule extends Openable implements
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.compiler.env.ISourceModule#getContentsAsCharArray()
+	 * @see
+	 * org.eclipse.dltk.mod.compiler.env.ISourceModule#getContentsAsCharArray()
 	 */
 	public char[] getContentsAsCharArray() {
 		try {
@@ -588,8 +601,8 @@ public abstract class AbstractSourceModule extends Openable implements
 
 	/*
 	 * @see
-	 * org.eclipse.dltk.mod.internal.core.Openable#openBuffer(org.eclipse.core.runtime
-	 * .IProgressMonitor, java.lang.Object)
+	 * org.eclipse.dltk.mod.internal.core.Openable#openBuffer(org.eclipse.core
+	 * .runtime .IProgressMonitor, java.lang.Object)
 	 */
 	protected IBuffer openBuffer(IProgressMonitor pm, Object info)
 			throws ModelException {

@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.preferences;
 
@@ -22,8 +24,8 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.DLTKLanguageManager;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
-import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.internal.ui.actions.WorkbenchRunnableAdapter;
 import org.eclipse.dltk.mod.internal.ui.dialogs.StatusUtil;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
@@ -84,7 +86,9 @@ public abstract class BuildPathsPropertyPage extends PropertyPage implements
 	}
 
 	/*
-	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
+	 * @see
+	 * org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets
+	 * .Composite)
 	 */
 	public void createControl(Composite parent) {
 		super.createControl(parent);
@@ -167,8 +171,7 @@ public abstract class BuildPathsPropertyPage extends PropertyPage implements
 	 */
 	private Control createWithoutScript(Composite parent) {
 		Label label = new Label(parent, SWT.LEFT);
-		label
-				.setText(PreferencesMessages.BuildPathsPropertyPage_no_script_project_message);
+		label.setText(PreferencesMessages.BuildPathsPropertyPage_no_script_project_message);
 
 		fBuildPathsBlock = null;
 		setValid(true);
@@ -180,8 +183,7 @@ public abstract class BuildPathsPropertyPage extends PropertyPage implements
 	 */
 	private Control createForClosedProject(Composite parent) {
 		Label label = new Label(parent, SWT.LEFT);
-		label
-				.setText(PreferencesMessages.BuildPathsPropertyPage_closed_project_message);
+		label.setText(PreferencesMessages.BuildPathsPropertyPage_closed_project_message);
 
 		fBuildPathsBlock = null;
 		setValid(true);
@@ -228,8 +230,7 @@ public abstract class BuildPathsPropertyPage extends PropertyPage implements
 								op);
 					} catch (InvocationTargetException e) {
 						ExceptionHandler
-								.handle(
-										e,
+								.handle(e,
 										getShell(),
 										PreferencesMessages.BuildPathsPropertyPage_error_title,
 										PreferencesMessages.BuildPathsPropertyPage_error_message);
@@ -238,10 +239,9 @@ public abstract class BuildPathsPropertyPage extends PropertyPage implements
 						return false;
 					}
 				} else {
-					op
-							.runAsUserJob(
-									PreferencesMessages.BuildPathsPropertyPage_job_title,
-									null);
+					op.runAsUserJob(
+							PreferencesMessages.BuildPathsPropertyPage_job_title,
+							null);
 				}
 			}
 		}
@@ -261,7 +261,8 @@ public abstract class BuildPathsPropertyPage extends PropertyPage implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.jface.preference.PreferencePage#applyData(java.lang.Object)
+	 * @see
+	 * org.eclipse.jface.preference.PreferencePage#applyData(java.lang.Object)
 	 */
 	public void applyData(Object data) {
 		if (data instanceof Map) {

@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.ui.editor;
 
@@ -330,9 +332,8 @@ public class SourceModuleDocumentProvider extends TextFileDocumentProvider
 					if (ar.startsWith(IProblem.DESCRIPTION_ARGUMENT_PREFIX)) {
 						return fProblem.getMessage()
 								+ '\n'
-								+ ar
-										.substring(IProblem.DESCRIPTION_ARGUMENT_PREFIX
-												.length());
+								+ ar.substring(IProblem.DESCRIPTION_ARGUMENT_PREFIX
+										.length());
 					}
 				}
 			}
@@ -1752,8 +1753,8 @@ public class SourceModuleDocumentProvider extends TextFileDocumentProvider
 			if (setContents) {
 				int READER_CHUNK_SIZE = 2048;
 				int BUFFER_SIZE = 8 * READER_CHUNK_SIZE;
-				Reader in = new BufferedReader(new InputStreamReader(storage
-						.getContents()));
+				Reader in = new BufferedReader(new InputStreamReader(
+						storage.getContents()));
 				StringBuffer buffer = new StringBuffer(BUFFER_SIZE);
 				char[] readBuffer = new char[READER_CHUNK_SIZE];
 				int n;

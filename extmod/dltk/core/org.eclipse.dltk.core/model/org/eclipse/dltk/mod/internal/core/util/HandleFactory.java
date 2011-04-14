@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core.util;
 
@@ -237,8 +239,8 @@ public class HandleFactory {
 			int index = 0;
 			for (int i = 0; i < length; i++) {
 				IPath path = enclosingProjectsAndArchives[i];
-				if (!org.eclipse.dltk.mod.compiler.util.Util.isArchiveFileName(path
-						.lastSegment())) {
+				if (!org.eclipse.dltk.mod.compiler.util.Util
+						.isArchiveFileName(path.lastSegment())) {
 					projects[index++] = this.model.getScriptProject(path
 							.segment(0));
 				}
@@ -363,9 +365,9 @@ public class HandleFactory {
 					IPath rootPath = EnvironmentPathUtils.getLocalPath(root
 							.getPath());
 					if (rootPath.isPrefixOf(path)
-							&& !Util.isExcluded(path, root
-									.fullInclusionPatternChars(), root
-									.fullExclusionPatternChars(), false)) {
+							&& !Util.isExcluded(path,
+									root.fullInclusionPatternChars(),
+									root.fullExclusionPatternChars(), false)) {
 						// EBAY MOD END
 						return root;
 					}

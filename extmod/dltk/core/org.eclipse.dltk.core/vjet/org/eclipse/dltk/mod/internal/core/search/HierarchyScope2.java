@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2006 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core.search;
 
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.ebayopensource.vjet.eclipse.core.IJSType;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -41,8 +43,6 @@ import org.eclipse.dltk.mod.internal.core.ModelManager;
 import org.eclipse.dltk.mod.internal.core.ScriptProject;
 import org.eclipse.dltk.mod.internal.core.SuffixConstants;
 import org.eclipse.dltk.mod.internal.core.hierarchy.TypeHierarchy;
-
-import org.ebayopensource.vjet.eclipse.core.IJSType;
 
 /**
  * Scope limited to the subtype and supertype hierarchy of a given type.
@@ -217,11 +217,13 @@ public class HierarchyScope2 extends AbstractSearchScope implements
 			for (int i = 0; i < projects.length; i++) {
 				ScriptProject project = (ScriptProject) projects[i];
 				IBuildpathEntry[] classpath = project.getResolvedBuildpath(
-						true/* ignoreUnresolvedEntry */,
-						false/* don't generateMarkerOnError */, false/*
-				 * don't
-				 * returnResolutionInProgress
-				 */);
+						true/* ignoreUnresolvedEntry */, false/*
+															 * don't
+															 * generateMarkerOnError
+															 */, false/*
+																	 * don't
+																	 * returnResolutionInProgress
+																	 */);
 				for (int j = 0; j < classpath.length; j++) {
 					if (rootPath.equals(classpath[j].getPath())) {
 						// add the project and its binary pkg fragment roots
@@ -355,6 +357,7 @@ public class HierarchyScope2 extends AbstractSearchScope implements
 	 * (non-Javadoc)
 	 * 
 	 * @see IJavaSearchScope#enclosingProjectsAndJars()
+	 * 
 	 * @deprecated
 	 */
 	public IPath[] enclosingProjectsAndZips() {

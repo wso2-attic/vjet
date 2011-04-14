@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.text.completion;
 
@@ -41,8 +43,8 @@ import org.eclipse.swt.graphics.Image;
  * {@link IJavaCompletionProposal}s from the proposal descriptors received via
  * the <code>CompletionRequestor</code> interface.
  * <p>
- * The lifecycle of a <code>CompletionProposalCollector</code> instance is
- * very simple:
+ * The lifecycle of a <code>CompletionProposalCollector</code> instance is very
+ * simple:
  * 
  * <pre>
  *    ISourceModule unit= ...
@@ -118,8 +120,8 @@ public abstract class ScriptCompletionProposalCollector extends
 
 	/**
 	 * Creates a new instance ready to collect proposals. If the passed
-	 * <code>ISourceModule</code> is not contained in an
-	 * {@link IScriptProject}, no javadoc will be available as
+	 * <code>ISourceModule</code> is not contained in an {@link IScriptProject},
+	 * no javadoc will be available as
 	 * {@link org.eclipse.jface.text.contentassist.ICompletionProposal#getAdditionalProposalInfo()
 	 * additional info} on the created proposals.
 	 * 
@@ -214,7 +216,8 @@ public abstract class ScriptCompletionProposalCollector extends
 	 * {@inheritDoc}
 	 * <p>
 	 * Subclasses may replace, but usually should not need to. Consider
-	 * replacing {@linkplain #createScriptCompletionProposal(CompletionProposal)
+	 * replacing
+	 * {@linkplain #createScriptCompletionProposal(CompletionProposal)
 	 * createJavaCompletionProposal} instead.
 	 * </p>
 	 */
@@ -425,8 +428,8 @@ public abstract class ScriptCompletionProposalCollector extends
 	 * <em>applying</em> a proposal should not be computed yet.
 	 * </p>
 	 * <p>
-	 * Implementations may return <code>null</code> if a proposal should not
-	 * be included in the list presented to the user.
+	 * Implementations may return <code>null</code> if a proposal should not be
+	 * included in the list presented to the user.
 	 * </p>
 	 * <p>
 	 * Subclasses may extend or replace this method.
@@ -478,7 +481,8 @@ public abstract class ScriptCompletionProposalCollector extends
 
 	/**
 	 * Creates the context information for a given method reference proposal.
-	 * The passed proposal must be of kind {@link CompletionProposal#METHOD_REF} .
+	 * The passed proposal must be of kind {@link CompletionProposal#METHOD_REF}
+	 * .
 	 * 
 	 * @param methodProposal
 	 *            the method proposal for which to create context information
@@ -486,15 +490,14 @@ public abstract class ScriptCompletionProposalCollector extends
 	 */
 	protected final IContextInformation createMethodContextInformation(
 			CompletionProposal methodProposal) {
-		Assert
-				.isTrue(methodProposal.getKind() == CompletionProposal.METHOD_REF);
+		Assert.isTrue(methodProposal.getKind() == CompletionProposal.METHOD_REF);
 		return new ProposalContextInformation(methodProposal);
 	}
 
 	/**
 	 * Returns the compilation unit that the receiver operates on, or
-	 * <code>null</code> if the <code>IScriptProject</code> constructor was
-	 * used to create the receiver.
+	 * <code>null</code> if the <code>IScriptProject</code> constructor was used
+	 * to create the receiver.
 	 * 
 	 * @return the compilation unit that the receiver operates on, or
 	 *         <code>null</code>
@@ -504,11 +507,9 @@ public abstract class ScriptCompletionProposalCollector extends
 	}
 
 	/**
-	 * Returns the <code>CompletionContext</code> for this completion
-	 * operation.
+	 * Returns the <code>CompletionContext</code> for this completion operation.
 	 * 
-	 * @return the <code>CompletionContext</code> for this completion
-	 *         operation
+	 * @return the <code>CompletionContext</code> for this completion operation
 	 * @see CompletionRequestor#acceptContext(CompletionContext)
 	 */
 	protected final CompletionContext getContext() {
@@ -653,9 +654,10 @@ public abstract class ScriptCompletionProposalCollector extends
 		// CompletionContext context = getContext();
 		ScriptCompletionProposal scriptProposal = createScriptCompletionProposal(
 				completion, start, length, image, label, relevance, /*
-				 * context
-				 * .isInDoc ()
-				 */false);
+																	 * context
+																	 * .isInDoc
+																	 * ()
+																	 */false);
 		if (fScriptProject != null)
 			scriptProposal.setProposalInfo(new FieldProposalInfo(
 					fScriptProject, proposal));
@@ -811,7 +813,8 @@ public abstract class ScriptCompletionProposalCollector extends
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.dltk.mod.core.CompletionRequestor#isContextInformationMode()
+	 * @see
+	 * org.eclipse.dltk.mod.core.CompletionRequestor#isContextInformationMode()
 	 */
 	public boolean isContextInformationMode() {
 		return fInvocationContext != null

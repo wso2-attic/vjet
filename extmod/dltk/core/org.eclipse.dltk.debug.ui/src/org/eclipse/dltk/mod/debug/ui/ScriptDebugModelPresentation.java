@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.debug.ui;
 
@@ -244,8 +246,7 @@ public abstract class ScriptDebugModelPresentation extends LabelProvider
 						.getScheme())) {
 					final IPath path = getStackFrameRelativePath(stackFrame);
 					return NLS
-							.bind(
-									Messages.ScriptDebugModelPresentation_stackFrameText2,
+							.bind(Messages.ScriptDebugModelPresentation_stackFrameText2,
 									new Object[] {
 											sourceLine,
 											path.toString(),
@@ -253,10 +254,9 @@ public abstract class ScriptDebugModelPresentation extends LabelProvider
 													.getLineNumber()) });
 				} else {
 					return NLS
-							.bind(
-									Messages.ScriptDebugModelPresentation_stackFrameText3,
-									sourceLine, new Integer(stackFrame
-											.getLineNumber()));
+							.bind(Messages.ScriptDebugModelPresentation_stackFrameText3,
+									sourceLine,
+									new Integer(stackFrame.getLineNumber()));
 				}
 			} else {
 				return sourceLine;
@@ -480,19 +480,14 @@ public abstract class ScriptDebugModelPresentation extends LabelProvider
 				final int lineNumber = w.getLineNumber();
 				final String fieldName = w.getFieldName();
 				if (lineNumber >= 0 && file != null) {
-					sb
-							.append(NLS
-									.bind(
-											Messages.ScriptDebugModelPresentation_breakpointText,
-											new Object[] { language, file,
-													new Integer(lineNumber),
-													fieldName }));
+					sb.append(NLS
+							.bind(Messages.ScriptDebugModelPresentation_breakpointText,
+									new Object[] { language, file,
+											new Integer(lineNumber), fieldName }));
 				} else {
-					sb
-							.append(NLS
-									.bind(
-											Messages.ScriptDebugModelPresentation_breakpointNoResourceText,
-											language, fieldName));
+					sb.append(NLS
+							.bind(Messages.ScriptDebugModelPresentation_breakpointNoResourceText,
+									language, fieldName));
 				}
 			} else if (breakpoint instanceof IScriptLineBreakpoint) { // IScriptLineBreakpoint
 				IScriptLineBreakpoint b = (IScriptLineBreakpoint) breakpoint;
@@ -500,12 +495,10 @@ public abstract class ScriptDebugModelPresentation extends LabelProvider
 				final String file = b.getResourceName();
 				final int lineNumber = b.getLineNumber();
 
-				sb
-						.append(NLS
-								.bind(
-										Messages.ScriptDebugModelPresentation_breakpointText2,
-										new Object[] { language, file,
-												new Integer(lineNumber) }));
+				sb.append(NLS
+						.bind(Messages.ScriptDebugModelPresentation_breakpointText2,
+								new Object[] { language, file,
+										new Integer(lineNumber) }));
 			} else if (breakpoint instanceof IScriptExceptionBreakpoint) {
 				IScriptExceptionBreakpoint b = (IScriptExceptionBreakpoint) breakpoint;
 				String typeName = b.getTypeName();

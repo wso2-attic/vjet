@@ -1,23 +1,22 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2006 IBM Corporation and others.
+ * Copyright (c) 2000-2011 eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     IBM Corporation - initial API and implementation
+ *     eBay Inc - initial API and implementation
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
+import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.utils.CorePrinter;
-
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
 
 /**
  * Handle for an import declaration. Info object is a

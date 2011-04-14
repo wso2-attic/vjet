@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.javascript.ui;
 
@@ -54,36 +56,23 @@ public class JavascriptPerspective implements IPerspectiveFactory {
 		layout.addShowViewShortcut(navigator);
 		layout.addShowViewShortcut(IPageLayout.ID_TASK_LIST);
 		layout.addShowViewShortcut(IProgressConstants.PROGRESS_VIEW_ID);
-		layout
-				.addShowViewShortcut("org.ebayopensource.vjet.eclipse.ui.view.scriptUnit");
-		layout
-				.addShowViewShortcut("org.ebayopensource.vjet.eclipse.ui.view.typeSpace");
-		layout
-				.addShowViewShortcut("org.ebayopensource.vjet.eclipse.ui.view.AST");
+		layout.addShowViewShortcut("org.ebayopensource.vjet.eclipse.ui.view.scriptUnit");
+		layout.addShowViewShortcut("org.ebayopensource.vjet.eclipse.ui.view.typeSpace");
+		layout.addShowViewShortcut("org.ebayopensource.vjet.eclipse.ui.view.AST");
 
 		// new actions - Javascript project creation wizard
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VJETProjectWizard"); //$NON-NLS-1$
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.JsFileCreation"); //$NON-NLS-1$
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoPackageCreationWizard"); //$NON-NLS-1$
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoClassCreationWizard"); //$NON-NLS-1$
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoInterfaceCreationWizard"); //$NON-NLS-1$
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoEnumCreationWizard");
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoMixinCreationWizard");
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoOTypeCreationWizard");
-		layout
-				.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.NewSourceFolderCreationWizard");
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VJETProjectWizard"); //$NON-NLS-1$
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.JsFileCreation"); //$NON-NLS-1$
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoPackageCreationWizard"); //$NON-NLS-1$
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoClassCreationWizard"); //$NON-NLS-1$
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoInterfaceCreationWizard"); //$NON-NLS-1$
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoEnumCreationWizard");
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoMixinCreationWizard");
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.VjoOTypeCreationWizard");
+		layout.addNewWizardShortcut("org.ebayopensource.vjet.eclipse.ui.NewSourceFolderCreationWizard");
 
 		layout.addNewWizardShortcut("org.eclipse.ui.wizards.new.folder");//$NON-NLS-1$
 		layout.addNewWizardShortcut("org.eclipse.ui.wizards.new.file");//$NON-NLS-1$
-		layout
-				.addNewWizardShortcut("org.eclipse.ui.editors.wizards.UntitledTextFileWizard");//$NON-NLS-1$
+		layout.addNewWizardShortcut("org.eclipse.ui.editors.wizards.UntitledTextFileWizard");//$NON-NLS-1$
 	}
 }

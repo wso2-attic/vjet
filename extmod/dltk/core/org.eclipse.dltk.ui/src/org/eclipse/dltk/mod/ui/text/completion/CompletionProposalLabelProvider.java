@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.text.completion;
 
@@ -21,8 +23,9 @@ import org.eclipse.jface.resource.ImageDescriptor;
 
 /**
  * Provides labels forscriptcontent assist proposals. The functionality is
- * similar to the one provided by {@link org.eclipse.dltk.mod.ui.ModelElementLabels},
- * but based on signatures and {@link CompletionProposal}s.
+ * similar to the one provided by
+ * {@link org.eclipse.dltk.mod.ui.ModelElementLabels}, but based on signatures
+ * and {@link CompletionProposal}s.
  * 
  */
 public class CompletionProposalLabelProvider {
@@ -57,8 +60,7 @@ public class CompletionProposalLabelProvider {
 	 * @return the list of comma-separated parameters suitable for display
 	 */
 	public String createParameterList(CompletionProposal methodProposal) {
-		Assert
-				.isTrue(methodProposal.getKind() == CompletionProposal.METHOD_REF);
+		Assert.isTrue(methodProposal.getKind() == CompletionProposal.METHOD_REF);
 		return appendUnboundedParameterList(new StringBuffer(), methodProposal)
 				.toString();
 	}
@@ -285,8 +287,8 @@ public class CompletionProposalLabelProvider {
 	 * 
 	 * @param proposal
 	 *            the proposal for which to create an image descriptor
-	 * @return the created image descriptor, or <code>null</code> if no image
-	 *         is available
+	 * @return the created image descriptor, or <code>null</code> if no image is
+	 *         available
 	 */
 	public ImageDescriptor createImageDescriptor(CompletionProposal proposal) {
 		ImageDescriptor descriptor;
@@ -339,8 +341,9 @@ public class CompletionProposalLabelProvider {
 	public ImageDescriptor createMethodImageDescriptor(
 			CompletionProposal proposal) {
 		final int flags = proposal.getFlags();
-		return decorateImageDescriptor(ScriptElementImageProvider
-				.getMethodImageDescriptor(flags), proposal);
+		return decorateImageDescriptor(
+				ScriptElementImageProvider.getMethodImageDescriptor(flags),
+				proposal);
 	}
 
 	protected ImageDescriptor createTypeImageDescriptor(
@@ -348,8 +351,9 @@ public class CompletionProposalLabelProvider {
 		final int flags = proposal.getFlags();
 		// boolean isInterfaceOrAnnotation= Flags.isInterface(flags) ||
 		// Flags.isAnnotation(flags);
-		return decorateImageDescriptor(ScriptElementImageProvider
-				.getTypeImageDescriptor(flags, false), proposal);
+		return decorateImageDescriptor(
+				ScriptElementImageProvider.getTypeImageDescriptor(flags, false),
+				proposal);
 	}
 
 	// eBay mod start
@@ -359,8 +363,9 @@ public class CompletionProposalLabelProvider {
 			CompletionProposal proposal) {
 		// eBay mod end
 		final int flags = proposal.getFlags();
-		return decorateImageDescriptor(ScriptElementImageProvider
-				.getFieldImageDescriptor(flags), proposal);
+		return decorateImageDescriptor(
+				ScriptElementImageProvider.getFieldImageDescriptor(flags),
+				proposal);
 	}
 
 	protected ImageDescriptor createLocalImageDescriptor(

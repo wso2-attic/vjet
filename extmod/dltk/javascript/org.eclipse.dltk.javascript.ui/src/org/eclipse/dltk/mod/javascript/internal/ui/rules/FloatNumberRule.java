@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.javascript.internal.ui.rules;
 
@@ -60,9 +62,8 @@ public class FloatNumberRule implements IRule {
 					scanner.unread();
 				} else {
 					/**
-					 * Begin<Jack@eBay: xxx\r\n.endType(). The 'e' will be
-					 * lost, because this rule considers the 'e' as part of
-					 * float.
+					 * Begin<Jack@eBay: xxx\r\n.endType(). The 'e' will be lost,
+					 * because this rule considers the 'e' as part of float.
 					 */
 					c = scanner.read();
 					if (Character.isDigit((char) c)) {

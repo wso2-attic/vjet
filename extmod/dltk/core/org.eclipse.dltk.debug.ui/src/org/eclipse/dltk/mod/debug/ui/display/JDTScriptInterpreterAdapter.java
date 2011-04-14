@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     eBay Inc - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.dltk.mod.debug.ui.display;
 
 import java.io.ByteArrayInputStream;
@@ -28,9 +38,6 @@ import org.eclipse.jdt.internal.debug.core.JDIDebugPlugin;
 
 /**
  * EBAY MOD ADD Adapter for evaluating java objects in debug console.
- * 
- * @author Patrick Ouyang
- * 
  */
 public class JDTScriptInterpreterAdapter implements IScriptInterpreter,
 		IEvaluationListener {
@@ -52,7 +59,8 @@ public class JDTScriptInterpreterAdapter implements IScriptInterpreter,
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.dltk.mod.console.IScriptInterpreter#getInitialOutputStream()
+	 * @see
+	 * org.eclipse.dltk.mod.console.IScriptInterpreter#getInitialOutputStream()
 	 */
 	public InputStream getInitialOutputStream() {
 		return new ByteArrayInputStream(new byte[0]);
@@ -106,7 +114,8 @@ public class JDTScriptInterpreterAdapter implements IScriptInterpreter,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.eclipse.dltk.mod.console.IScriptConsoleShell#getNames(java.lang.String)
+	 * org.eclipse.dltk.mod.console.IScriptConsoleShell#getNames(java.lang.String
+	 * )
 	 */
 	public String[] getNames(String type) throws IOException {
 		// do nothing
@@ -117,7 +126,8 @@ public class JDTScriptInterpreterAdapter implements IScriptInterpreter,
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.eclipse.dltk.mod.console.IScriptConsoleInterpreter#exec(java.lang.String)
+	 * org.eclipse.dltk.mod.console.IScriptConsoleInterpreter#exec(java.lang
+	 * .String)
 	 */
 	public IScriptExecResult exec(String command) throws IOException {
 		IProject project = LaunchConfigurationUtils.getProject(m_javaStackFrame
@@ -168,8 +178,7 @@ public class JDTScriptInterpreterAdapter implements IScriptInterpreter,
 			buffer.append(Util.LINE_SEPARATOR);
 		}
 		if (errors.length == 0) {
-			buffer
-					.append(Messages.DebugScriptInterpreter_unknownEvaluationError);
+			buffer.append(Messages.DebugScriptInterpreter_unknownEvaluationError);
 			buffer.append(Util.LINE_SEPARATOR);
 		}
 		return new ScriptExecResult(buffer.toString(), true);

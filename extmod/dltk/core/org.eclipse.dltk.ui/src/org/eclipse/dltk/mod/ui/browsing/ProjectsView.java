@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.browsing;
 
@@ -123,8 +124,8 @@ public class ProjectsView extends ScriptBrowsingPart {
 				Object element = ((IStructuredSelection) event.getSelection())
 						.getFirstElement();
 				if (viewer.isExpandable(element))
-					viewer.setExpandedState(element, !viewer
-							.getExpandedState(element));
+					viewer.setExpandedState(element,
+							!viewer.getExpandedState(element));
 			}
 		});
 	}

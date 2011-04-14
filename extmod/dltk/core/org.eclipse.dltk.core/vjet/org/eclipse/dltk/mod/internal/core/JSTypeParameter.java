@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2004, 2006 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,19 +7,19 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
 import java.util.HashMap;
 
+import org.ebayopensource.vjet.eclipse.core.IJSTypeParameter;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.compiler.CharOperation;
 import org.eclipse.dltk.mod.core.IMember;
 import org.eclipse.dltk.mod.core.ISourceRange;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.utils.CorePrinter;
-
-import org.ebayopensource.vjet.eclipse.core.IJSTypeParameter;
 
 public class JSTypeParameter extends SourceRefElement implements
 		IJSTypeParameter {

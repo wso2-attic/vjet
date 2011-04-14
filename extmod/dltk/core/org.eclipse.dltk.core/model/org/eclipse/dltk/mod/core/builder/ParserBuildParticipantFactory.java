@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 xored software, Inc.
+ * Copyright (c) 2005-2011 xored software, Inc, and eBay Inc.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,6 +8,7 @@
  *
  * Contributors:
  *     xored software, Inc. - initial API and Implementation (Alex Panchenko)
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.core.builder;
 
@@ -20,8 +21,8 @@ import org.eclipse.dltk.mod.ast.parser.ISourceParserConstants;
 import org.eclipse.dltk.mod.compiler.problem.ProblemCollector;
 import org.eclipse.dltk.mod.core.DLTKLanguageManager;
 import org.eclipse.dltk.mod.core.IScriptProject;
-import org.eclipse.dltk.mod.core.SourceParserUtil;
 import org.eclipse.dltk.mod.core.ISourceModuleInfoCache.ISourceModuleInfo;
+import org.eclipse.dltk.mod.core.SourceParserUtil;
 import org.eclipse.dltk.mod.internal.core.ModelManager;
 
 public class ParserBuildParticipantFactory extends AbstractBuildParticipantType
@@ -66,8 +67,8 @@ public class ParserBuildParticipantFactory extends AbstractBuildParticipantType
 					.getSourceModuleInfoCache().get(context.getSourceModule());
 			// check if there is cached AST
 			moduleDeclaration = SourceParserUtil.getModuleFromCache(cacheEntry,
-					ISourceParserConstants.DEFAULT, context
-							.getProblemReporter());
+					ISourceParserConstants.DEFAULT,
+					context.getProblemReporter());
 			if (moduleDeclaration != null) {
 				// use AST from cache
 				context.set(IBuildContext.ATTR_MODULE_DECLARATION,

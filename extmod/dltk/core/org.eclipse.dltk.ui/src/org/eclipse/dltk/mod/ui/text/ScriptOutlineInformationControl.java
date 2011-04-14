@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.text;
 
@@ -259,7 +261,10 @@ public abstract class ScriptOutlineInformationControl extends
 				Item i = (Item) node;
 				if (i.getData() instanceof IModelElement) {
 					IModelElement je = (IModelElement) i.getData();
-					if (/* je.getElementType() == IModelElement.IMPORT_CONTAINER || */isInnerType(je)) {
+					if (/*
+						 * je.getElementType() == IModelElement.IMPORT_CONTAINER
+						 * ||
+						 */isInnerType(je)) {
 						setExpanded(i, false);
 						return;
 					}
@@ -578,8 +583,8 @@ public abstract class ScriptOutlineInformationControl extends
 		// PlatformUI.getWorkbench().getDecoratorManager();
 		/*
 		 * if
-		 * (decoratorMgr.getEnabled("org.eclipse.dltk.mod.ui.override.decorator"))
-		 * //$NON-NLS-1$ fInnerLabelProvider.addLabelDecorator(new
+		 * (decoratorMgr.getEnabled("org.eclipse.dltk.mod.ui.override.decorator"
+		 * )) //$NON-NLS-1$ fInnerLabelProvider.addLabelDecorator(new
 		 * OverrideIndicatorLabelDecorator(null));
 		 */
 
@@ -624,19 +629,17 @@ public abstract class ScriptOutlineInformationControl extends
 
 		if (fOutlineContentProvider.isShowingInheritedMembers())
 			return Messages
-					.format(
-							TextMessages.ScriptOutlineInformationControl_pressToHideInheritedMembers,
+					.format(TextMessages.ScriptOutlineInformationControl_pressToHideInheritedMembers,
 							keySequence);
 		else
 			return Messages
-					.format(
-							TextMessages.ScriptOutlineInformationControl_pressToShowInheritedMembers,
+					.format(TextMessages.ScriptOutlineInformationControl_pressToShowInheritedMembers,
 							keySequence);
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.internal.ui.text.AbstractInformationControl#getId()
-	 * 
+	 * @see
+	 * org.eclipse.dltk.mod.internal.ui.text.AbstractInformationControl#getId()
 	 */
 	protected String getId() {
 		return "org.eclipse.dltk.mod.internal.ui.text.QuickOutline"; //$NON-NLS-1$
@@ -703,7 +706,9 @@ public abstract class ScriptOutlineInformationControl extends
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.internal.ui.text.AbstractInformationControl#fillViewMenu(org.eclipse.jface.action.IMenuManager)
+	 * @see
+	 * org.eclipse.dltk.mod.internal.ui.text.AbstractInformationControl#fillViewMenu
+	 * (org.eclipse.jface.action.IMenuManager)
 	 */
 	protected void fillViewMenu(IMenuManager viewMenu) {
 		super.fillViewMenu(viewMenu);
@@ -719,9 +724,8 @@ public abstract class ScriptOutlineInformationControl extends
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.internal.ui.text.AbstractInformationControl#setMatcherString(java.lang.String,
-	 *      boolean)
-	 * 
+	 * @see org.eclipse.dltk.mod.internal.ui.text.AbstractInformationControl#
+	 * setMatcherString(java.lang.String, boolean)
 	 */
 	protected void setMatcherString(String pattern, boolean update) {
 		fPattern = pattern;
@@ -742,8 +746,8 @@ public abstract class ScriptOutlineInformationControl extends
 
 	protected ITypeHierarchy getSuperTypeHierarchy(IType type) {
 		/*
-		 * ITypeHierarchy th= (ITypeHierarchy)fTypeHierarchies.get(type); if (th ==
-		 * null) { try { th= SuperTypeHierarchyCache.getTypeHierarchy(type,
+		 * ITypeHierarchy th= (ITypeHierarchy)fTypeHierarchies.get(type); if (th
+		 * == null) { try { th= SuperTypeHierarchyCache.getTypeHierarchy(type,
 		 * getProgressMonitor()); } catch (ModelException e) { return null; }
 		 * catch (OperationCanceledException e) { return null; }
 		 * fTypeHierarchies.put(type, th); } return th;

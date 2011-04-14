@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2006 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.browsing;
 
@@ -300,9 +301,10 @@ public class ScriptBrowsingContentProvider extends
 					// if (getProvideWorkingCopy())
 					postRefresh(null);
 				} else if (parent instanceof ISourceModule /*
-				 * &&
-				 * getProvideWorkingCopy()
-				 */
+															 * &&
+															 * getProvideWorkingCopy
+															 * ()
+															 */
 						&& !((ISourceModule) parent).isWorkingCopy()) {
 					if (element instanceof ISourceModule
 							&& ((ISourceModule) element).isWorkingCopy()) {

@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
@@ -123,8 +125,8 @@ public class ArchiveFolder extends ScriptFolder {
 	// EBAY - START MOD
 	private ISourceModule createExternalSourceModule(
 			ArchiveProjectFragment fragment, String name) {
-		ArchiveEntryFile storage = new ArchiveEntryFile(name, fragment
-				.getZipName(), this.path, fragment.getResource());
+		ArchiveEntryFile storage = new ArchiveEntryFile(name,
+				fragment.getZipName(), this.path, fragment.getResource());
 		ISourceModuleFactory factory = getSourceModuleFactory(name);
 
 		ISourceModule sourceModule;

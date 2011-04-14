@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2005 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,9 +7,12 @@
  *
  * Contributors:
  *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
+import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.ISourceRange;
 import org.eclipse.dltk.mod.core.ISourceReference;
@@ -17,9 +20,6 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.WorkingCopyOwner;
 import org.eclipse.dltk.mod.internal.core.util.MementoTokenizer;
 import org.eclipse.dltk.mod.utils.CorePrinter;
-
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
 
 /**
  * @see IImportContainer
@@ -109,9 +109,9 @@ public class ImportContainer extends SourceRefElement implements
 				.getSourceRange();
 		ISourceRange lastRange = ((ISourceReference) imports[imports.length - 1])
 				.getSourceRange();
-		SourceRange range = new SourceRange(firstRange.getOffset(), lastRange
-				.getOffset()
-				+ lastRange.getLength() - firstRange.getOffset());
+		SourceRange range = new SourceRange(firstRange.getOffset(),
+				lastRange.getOffset() + lastRange.getLength()
+						- firstRange.getOffset());
 		return range;
 	}
 

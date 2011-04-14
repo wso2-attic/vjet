@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.wizards;
 
@@ -139,8 +141,7 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 			group.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 			group.setLayout(initGridLayout(new GridLayout(numColumns, false),
 					true));
-			group
-					.setText(NewWizardMessages.ScriptProjectWizardFirstPage_LocationGroup_title);
+			group.setText(NewWizardMessages.ScriptProjectWizardFirstPage_LocationGroup_title);
 			fWorkspaceRadio = new SelectionButtonDialogField(SWT.RADIO);
 			fWorkspaceRadio.setDialogFieldListener(this);
 			fWorkspaceRadio
@@ -221,7 +222,7 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 		 * (non-Javadoc)
 		 * 
 		 * @see java.util.Observer#update(java.util.Observable,
-		 *      java.lang.Object)
+		 * java.lang.Object)
 		 */
 		public void update(Observable o, Object arg) {
 			if (isInWorkspace()) {
@@ -259,8 +260,11 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 
 				if (selectedDirectory != null) {
 					fLocation.setText(selectedDirectory);
-					DLTKUIPlugin.getDefault().getDialogSettings().put(
-							DIALOGSTORE_LAST_EXTERNAL_LOC, selectedDirectory);
+					DLTKUIPlugin
+							.getDefault()
+							.getDialogSettings()
+							.put(DIALOGSTORE_LAST_EXTERNAL_LOC,
+									selectedDirectory);
 				}
 			}
 		}
@@ -306,8 +310,7 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 			fGroup.setFont(composite.getFont());
 			fGroup.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 			fGroup.setLayout(initGridLayout(new GridLayout(3, false), true));
-			fGroup
-					.setText(NewWizardMessages.ScriptProjectWizardFirstPage_InterpreterEnvironmentGroup_title);
+			fGroup.setText(NewWizardMessages.ScriptProjectWizardFirstPage_InterpreterEnvironmentGroup_title);
 
 			fUseDefaultInterpreterEnvironment = new SelectionButtonDialogField(
 					SWT.RADIO);
@@ -333,7 +336,8 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 
 			// Add by Oliver. 2009-07-30. Before the default interpreter is no
 			// specific, so the build path has error--"Build path entry is
-			// missing: org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER". See
+			// missing: org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER".
+			// See
 			// bug:6134
 			fUseProjectInterpreterEnvironment.setSelection(true);
 
@@ -352,7 +356,8 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 
 			// Add by Oliver. 2009-07-30. Before the default interpreter is no
 			// specific, so the build path has error--"Build path entry is
-			// missing: org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER". See
+			// missing: org.eclipse.dltk.mod.launching.INTERPRETER_CONTAINER".
+			// See
 			// bug:6134
 			if (comboControl.getItemCount() > 0) {
 				comboControl.select(0);
@@ -429,8 +434,7 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 
 		private String getDefaultInterpreterLabel() {
 			return Messages
-					.format(
-							NewWizardMessages.ScriptProjectWizardFirstPage_InterpreterEnvironmentGroup_default_compliance,
+					.format(NewWizardMessages.ScriptProjectWizardFirstPage_InterpreterEnvironmentGroup_default_compliance,
 							getDefaultInterpreterName());
 		}
 
@@ -454,8 +458,9 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse
-		 *      .swt.events.SelectionEvent)
+		 * @see
+		 * org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse
+		 * .swt.events.SelectionEvent)
 		 */
 		public void widgetSelected(SelectionEvent e) {
 			widgetDefaultSelected(e);
@@ -481,8 +486,9 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org
-		 *      .eclipse.swt.events.SelectionEvent)
+		 * @see
+		 * org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org
+		 * .eclipse.swt.events.SelectionEvent)
 		 */
 		public void widgetDefaultSelected(SelectionEvent e) {
 			showInterpreterPreferencePage();
@@ -619,8 +625,9 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse
-		 *      .swt.events.SelectionEvent)
+		 * @see
+		 * org.eclipse.swt.events.SelectionListener#widgetSelected(org.eclipse
+		 * .swt.events.SelectionEvent)
 		 */
 		public void widgetSelected(SelectionEvent e) {
 			widgetDefaultSelected(e);
@@ -629,8 +636,9 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 		/*
 		 * (non-Javadoc)
 		 * 
-		 * @see org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org
-		 *      .eclipse.swt.events.SelectionEvent)
+		 * @see
+		 * org.eclipse.swt.events.SelectionListener#widgetDefaultSelected(org
+		 * .eclipse.swt.events.SelectionEvent)
 		 */
 		public void widgetDefaultSelected(SelectionEvent e) {
 			if (DLTKCore.DEBUG) {
@@ -923,8 +931,8 @@ public abstract class ProjectWizardFirstPage extends WizardPage {
 	 * @return the new project resource handle
 	 */
 	public IProject getProjectHandle() {
-		return ResourcesPlugin.getWorkspace().getRoot().getProject(
-				fNameGroup.getName());
+		return ResourcesPlugin.getWorkspace().getRoot()
+				.getProject(fNameGroup.getName());
 	}
 
 	public boolean isInWorkspace() {

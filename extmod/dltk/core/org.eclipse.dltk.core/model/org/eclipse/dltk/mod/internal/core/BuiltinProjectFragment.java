@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2005, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
@@ -146,8 +148,8 @@ public class BuiltinProjectFragment extends ProjectFragment {
 		}
 		try {
 			BuiltinScriptFolderInfo fragInfo = new BuiltinScriptFolderInfo();
-			fldr.computeChildren(fragInfo, this.builtinProvider
-					.getBuiltinModules());
+			fldr.computeChildren(fragInfo,
+					this.builtinProvider.getBuiltinModules());
 			fldr.computeForeignResources(fragInfo);
 			newElements.put(fldr, fragInfo);
 		} catch (IllegalArgumentException e) {
@@ -293,9 +295,10 @@ public class BuiltinProjectFragment extends ProjectFragment {
 		IBuildpathEntry rawEntry = null;
 		ScriptProject project = (ScriptProject) this.getScriptProject();
 		project.getResolvedBuildpath(true/* ignoreUnresolvedEntry */, false/*
-																			 * don't
-																			 * generateMarkerOnError
-																			 */, false/*
+																		 * don't
+																		 * generateMarkerOnError
+																		 */,
+				false/*
 					 * don't returnResolutionInProgress
 					 */); // force
 		// the

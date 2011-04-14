@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2000-2011 eBay Inc.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     eBay Inc - initial API and implementation
+ *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core;
 
 import org.eclipse.dltk.mod.core.IMethod;
@@ -38,8 +48,8 @@ public interface IJSMethod extends IMethod {
 	 * constructors, this returns the signature for void.
 	 * <p>
 	 * For example, a source method declared as
-	 * <code>public String getName()</code> would return
-	 * <code>"QString;"</code>.
+	 * <code>public String getName()</code> would return <code>"QString;"</code>
+	 * .
 	 * </p>
 	 * <p>
 	 * The type signature may be either unresolved (for source types) or

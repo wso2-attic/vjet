@@ -1,11 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2000, 2007 IBM Corporation and others.
+ * Copyright (c) 2000-2011 IBM Corporation and others, eBay Inc.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *     eBay Inc - modification
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.ui.search;
 
@@ -349,8 +351,11 @@ public class DLTKSearchResultPage extends AbstractTextSearchViewPage implements
 
 		// Add by Oliver. 2009-11-02. add the F1 help for vjet search result
 		// view.
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(parent,
-				"org.ebayopensource.vjet.eclipse.ui.search_view_context");
+		PlatformUI
+				.getWorkbench()
+				.getHelpSystem()
+				.setHelp(parent,
+						"org.ebayopensource.vjet.eclipse.ui.search_view_context");
 	}
 
 	private void addDragAdapters(StructuredViewer viewer) {
@@ -378,9 +383,7 @@ public class DLTKSearchResultPage extends AbstractTextSearchViewPage implements
 						.getDecoratorManager().getLabelDecorator()));
 		fContentProvider = new DLTKSearchTableContentProvider(this);
 		viewer.setContentProvider(fContentProvider);
-		viewer
-				.setSorter(new DecoratorIgnoringViewerSorter(
-						sortingLabelProvider));
+		viewer.setSorter(new DecoratorIgnoringViewerSorter(sortingLabelProvider));
 		setSortOrder(fCurrentSortOrder);
 		addDragAdapters(viewer);
 	}
@@ -389,9 +392,7 @@ public class DLTKSearchResultPage extends AbstractTextSearchViewPage implements
 		PostfixLabelProvider postfixLabelProvider = new PostfixLabelProvider(
 				this);
 		viewer.setUseHashlookup(true);
-		viewer
-				.setSorter(new DecoratorIgnoringViewerSorter(
-						postfixLabelProvider));
+		viewer.setSorter(new DecoratorIgnoringViewerSorter(postfixLabelProvider));
 		viewer.setLabelProvider(new ColorDecoratingLabelProvider(
 				postfixLabelProvider, PlatformUI.getWorkbench()
 						.getDecoratorManager().getLabelDecorator()));
@@ -886,8 +887,7 @@ public class DLTKSearchResultPage extends AbstractTextSearchViewPage implements
 					fEditorOpener.openElement(firstElement);
 				} catch (CoreException e) {
 					ExceptionHandler
-							.handle(
-									e,
+							.handle(e,
 									getSite().getShell(),
 									SearchMessages.DLTKSearchResultPage_open_editor_error_title,
 									SearchMessages.DLTKSearchResultPage_open_editor_error_message);
