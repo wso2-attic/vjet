@@ -6,14 +6,15 @@
     <meta http-equiv="Content-Style-Type" content="text/css">
     <link rel="stylesheet" href="../../book.css" charset="ISO-8859-1" type="text/css">
     <script language="JavaScript" src="PLUGINS_ROOT/org.eclipse.help/livehelp.js"> </script>
-    <title>VJET JavaScript Authoring Features</title>
+    <title>VJET JavaScript Code Assistance</title>
   </head>
   
   <body>
-  	 <p class="nav_footer">Previous Section: <a href="create_js.htm">Create a JavaScript File</a></p>
-    <h1>VJET JS Authoring Features </h1>
-    <p>Based on metadata provided by VJET Type Libraries, the authoring assistance features help developers to code efficiently and 
-    	accurately. </p>
+  	 <p class="nav_footer">Previous Section: <a href="vjet_type_libraries.htm">VJET JS Type Libraries</a></p>
+    <h1>VJET JS Code Assistance </h1>
+    <p>Based on metadata provided by VJET JS Type Libraries, the code assistance features help developers to code efficiently and 
+    	accurately.  These features are similar to those available in the Eclipse Java plugin; you can refer to Eclipse Help for more 
+    	information. </p>
     <ul>
     	<li>Code Assist</li>
     	<li>Validation</li>
@@ -40,44 +41,44 @@
 		    		properties are optional.</p>
 		    	<p><img src="../images/bTutorial/code_assist_ol.gif" alt="Code Assist OL"></p>
 		    	<p>Property requirements are enforced.  In the example,  <code>duration</code> is required, so VJET displays an error 
-		    		error.   </p>
+		    		marker.   </p>
 		    	<p><img src="../images/bTutorial/code_assist_required.gif" alt="Code Assist Required Prop "></p>
 		    	<p>Once the required property is added, the error marker disappears.</p>
 		    		<p><img src="../images/bTutorial/code_assist_required_met.gif" alt="Code Assist Required Prop Met"></p>
 	    	<h3>Callbacks</h3>
-	    		<p>Our example includes a callback within the object literal.  Code assist recognizes that <code>node</code> is a 
+	    		<p>The example includes a callback within the object literal.  Code assist recognizes that <code>node</code> is a 
 	    			Node type, and proposes the appropriate code options.</p>
 	    		<p><img src="../images/bTutorial/code_assist_callback.gif" alt="Callback"></p>
-	    		<p>Code assist also recognizes that the function definition should not return a value, and displays an error marker.</p>
+	    		<p>Code assist also recognizes when the function definition should not return a value, and displays an error marker when 
+	    			a return is added.</p>
 	    		<p><img src="../images/bTutorial/code_assist_callback_return_err.gif" alt="Callback Return Error"></p>
 	    		<p>Hover over the error marker to display the error message.</p>
 	    		<p><img src="../images/bTutorial/code_assist_callback_return_errMsg.gif" alt="Callback Return Error Msg"></p>
 
 	
 	<h2>Code Validation Errors </h2>
-		<p>VJET JS detects validation errors and marks incorrect code with an error icon.  Hover over the icon 
-			for the error message, or go to the Problems View for detailed information.</p>
+		<p>VJET JS detects validation errors and marks incorrect code.  Hover over the error marker for the error message, or go to 
+			the Problems View for detailed information.</p>
 			
 			<p><img src="../images/bTutorial/validation.gif" alt="Code Validation"></p>
 	    	<p><img src="../images/bTutorial/validation_hover.gif" alt="Validation Hover Help"></p>
-	    	<p>Details of the validation failure appear in the Problems View.</p>
+	    	<p>Details of validation errors appear in the Problems View.</p>
 	    	<p><img src="../images/bTutorial/validation_problemsView.gif" alt="Validation Message in Problems View"></p>
 
 	<h2>Semantic Checking</h2>
-		<p>VJET JS detects semantic errors and marks the incorrect code with a error icon.  Hover over the icon for the 
-			error message.</p>
+		<p>VJET JS detects semantic errors and marks the incorrect code.  Hover over the error marker for the error message.</p>
 			<p><img src="../images/bTutorial/code_assist_semantic.gif" alt="Semantic Error"></p>
-	    	<p><img src="../images/bTutorial/code_assist_semantic_msg.gif" alt="Semantic Error Hover Help"></p>		
+	    	<p><img src="../images/bTutorial/code_assist_semantic_msg2.gif" alt="Semantic Error Hover Help"></p>		
 	<h2> Syntax  Checking</h2>
-		<p>VJET JS detects syntax errors and marks the incorrect code with a error icon.  Hover over the icon for the 
+		<p>VJET JS detects syntax errors and marks the incorrect code.  Hover over the error marker for the 
 			error message.</p>
 			<p><img src="../images/bTutorial/syntax.gif" alt="Syntax Error"></p>
 	    	<p><img src="../images/bTutorial/syntax2.gif" alt="Syntax Error Hover Help"></p>	
 	    	
 	 <h2>Hover Help</h2>	
-	 	<p>Placing the cursor over an entity is another way to display Help.  Some help content is large, 
+	 	<p>Placing the cursor over an entity is another way to display Help.  Some help content is large and will be truncated; 
 	 		press the <b>F2</b> key to display the full help content.</p>
-	 		<p><img src="../images/bTutorial/help_hover.gif" alt="Hover Help"></p>
+	 		<p><img src="../images/bTutorial/help_hover4.gif" alt="Hover Help"></p>
 <!-- 
 	<ol>	
 	  <li>

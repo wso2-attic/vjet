@@ -11,59 +11,61 @@
   
   <body>
   	<p class="nav_footer">Previous Section: <a href="development_assistance.htm">VJET JS Development Assistance</a></p>
-	<h1>Using VJET JS Type Library Projects</h1>
+	<h1>3rd Party VJET JS Type Library Projects</h1>
 
-		<p>Most developers will want to use some of the popular JavaScript libraries available on the market. VJET JS has 
-		created type libraries for a few of the popular libraries, which are available on the VJET JS download 
-			site. VJET JS Type Libraries exist as Eclipse projects and can be imported into your workspace. </p>
+		<p>Most developers will want to use some of the popular third party JavaScript libraries with VJET JS.  At this time, VJET JS 
+			publishes type libraries for a few of the popular libraries, which are available on the VJET JS download site.</p>
 			
-		<p>Before you can import these libraries into Eclipse, download them to an accessible location.  </p>
+		<p> VJET JS Type Libraries exist as Eclipse projects and once downloaded, can be imported into your workspace. The following 
+			type libraries are available: </p>
 		<ul>
 			<li>Node.js</li>
 			<li>jQuery</li>
 			<li>Dojo</li>
 			<li>JSON</li>
 		</ul>
+		<!-- 
 		<p>To use a third party or custom library, you must:</p>
 		<ol>
 			<li>Have access to the type library project</li>
 			<li>Import the type library into Eclipse</li>
 			<li>Add the type library to your project's build path.</li>
 		</ol>
-		<h2>Importing VJET JS Type Libraries</h2>
+		 -->
+		<h2>Importing VJET JS Type Libraries Projects</h2>
 			<ol>
-				<li><p>VJET JS Type Libraries exist as Eclipse projects, so the libraries must be imported into your Eclipse 
-				workspace.  <b>Select File > Import</b>.</p>
+				<li><p><b>Select File > Import</b>.</p>
 				<p><img src="../images/bTutorial/typelib_import.gif" alt="Import Type Library"></p>
 					</li>
 				<li><p>Select <b>General > Existing Projects into Workspace > Next</b>.</p>
 					<p><img src="../images/bTutorial/typelib_projects.gif" alt="Import Existing TypeLib Project"></p>
 					</li>		
-				<li><p>If you are importing one of the VJET JS libraries select <b>Select archive file:</b>, then <b>Browse</b>. </p>
+				<li><p>Select <b>Select archive file:</b>, then <b>Browse</b>. </p>
 					<p><img src="../images/bTutorial/typelib_archive.gif" alt="Select TypeLib Archive"></p>
-					<p>Select the type library .zip file you want to import, then select <b>Open</b>.</p>
+					<p>Select the downloaded project .zip file you want to import, then select <b>Open</b>.</p>
 					<p><img src="../images/bTutorial/typelib_select.gif" alt="Select TypeLib Archive"></p>
 					</li>
-				<li><p>Select the library project you want to import and Finish.</p>
+				<li><p>Check the imported project and <b>Finish</b>.</p>
 					<p><img src="../images/bTutorial/typelib_selectLib.gif" alt="Select TypeLib Archive"></p>
 					</li>
-				<li><p>The imported type library is imported into your workspace and shows up in the Script Explorer.</p>
+				<li><p>The type library project is imported into your workspace and shows up in the Script Explorer.  To reference the 
+					type library in your project,  add the type library to your project's build path.</p>
 					<p><img src="../images/bTutorial/typelib_imported.gif" alt="Select TypeLib Archive"></p>
 					</li>			
 			</ol>
-		<h2>Add the Type Library to the Project Build Path</h2>
-			<p>In order to reference the libraries in your project, you must add the type library to your project's build path.</p>
+		<h2>Add the Type Library to Your Project's Build Path</h2>
+			<p>To reference the libraries in your project, add the type library to your project's build path.</p>
 			<ol>
 				<li>Right click on your project and select <b>Build Path > Configure Build Path</b>
 					<p><img src="../images/bTutorial/build_path_configure.gif" alt="Configure Build Path"></p>
 					</li>
-				<li>Select the <b>Projects</b> tab to view the list of projects you can add to your build path.  Press <b>Add</b> and 
-					select the projects you want to add.
+				<li>Select the <b>Projects</b> tab, which lists the VJET Projects already included in the build path.  
+					Press <b>Add</b> to select the VJET Project you want to add.  
 					<p><img src="../images/bTutorial/build_path_projects.gif" alt="Select Projects Tab"></p></li>
 				<li>Select <b>OK > Finish</b>.
 					<p><img src="../images/bTutorial/build_path_select.gif" alt="Select Projects"></p>
 					</li>
-				<li>The library is added to your project's build path.
+				<li>The type library project is added to your project's build path.
 					<p><img src="../images/bTutorial/build_path_verify.gif" alt="Project Added to Build Path"></p>
 					</li>
 				<li> Now your project can reference the types in the library using code assist and other authoring features.
