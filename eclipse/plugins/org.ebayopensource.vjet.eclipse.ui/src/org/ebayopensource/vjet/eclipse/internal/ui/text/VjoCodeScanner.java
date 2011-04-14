@@ -43,6 +43,7 @@ import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.reserved.JsCoreKeywords;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
@@ -283,8 +284,13 @@ public class VjoCodeScanner extends JavascriptCodeScanner {
 		String typeName = null;
 		if(m_module instanceof VjoSourceModule){
 			VjoSourceModule module = ((VjoSourceModule) m_module);
-			groupName = module.getJstType().getPackage().getGroupName();
-			typeName =  module.getJstType().getName();
+			IJstType jstType = module.getJstType();
+			JstPackage package1 = jstType.getPackage();
+			if(jstType==null || package1==null){
+				return;
+			}			
+			groupName = package1.getGroupName();
+			typeName =  jstType.getName();
 		}else{
 			
 			return;
