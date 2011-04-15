@@ -13,7 +13,7 @@ import org.ebayopensource.dsf.jst.JstProblemId;
 
 /**
  * 
- * 
+ * @author huzhou
  * <p>
  * semantic rule is defined to be associated with some problem
  * and will allow validators to fire them when conditions are met
@@ -29,14 +29,15 @@ public interface IVjoSemanticRule <T extends IVjoSemanticRuleCtx> {
 	JstProblemId getProblemId();
 	String getErrMsg();
 	VjoSemanticRulePolicy getGlobalRulePolicy();
-	
+	void setGlobalPolicy(VjoSemanticRulePolicy policy);
+	VjoSemanticRulePolicy getDefaultPolicy();
+	VjoSemanticRulePolicy getGroupRulePolicy(String groupId);
+	void setGroupRulePolicy(String groupId, VjoSemanticRulePolicy policy);
 	void setRuleName(String ruleName);
 	void setRuleDescription(String ruleDesc);
 	void setProblemId(JstProblemId problemId);
 	void setErrMsg(String msg);
 	
-	void setGlobalPolicy(VjoSemanticRulePolicy policy);
-
 	//for grouping rules based on different user perspectives
 	//for example
 	//java developer will have certain rules active

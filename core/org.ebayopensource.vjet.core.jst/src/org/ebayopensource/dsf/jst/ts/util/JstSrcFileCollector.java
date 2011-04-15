@@ -14,12 +14,18 @@ import java.util.List;
 
 public class JstSrcFileCollector {
 	
+	private File m_srcRoot;
+
 	public List<File> getJsSrcFiles(String srcFolder) {
 		
 		return getJsSrcFiles(new File(srcFolder));
 	}
 	
 	public List<File> getJsSrcFiles(File srcFolder) {
+		
+		if(m_srcRoot==null && srcFolder.isDirectory()){
+			m_srcRoot = srcFolder;
+		}
 		
 		ArrayList<File> fileList = new ArrayList<File>();
 				
@@ -31,12 +37,20 @@ public class JstSrcFileCollector {
 				File file = files[i];
 				
 				if (file.isFile()) {
+					
 					String fileName = file.getName();
 					if (fileName.matches(".*\\.js") || fileName.matches(".*\\.vjo")) {
 						fileList.add(file);
 					}
 				}
 				else if (file.isDirectory()) {
+					
+		
+					if(file.getAbsolutePath().substring((int) m_srcRoot.length()).contains(".")){
+						continue;
+					}
+					
+					
 					fileList.addAll(getJsSrcFiles(file));
 				}
 			}

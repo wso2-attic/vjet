@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jsgen.shared.validation.vjo;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.ebayopensource.dsf.jst.JstProblemId;
 
 public abstract class VjoSemanticRule<T extends IVjoSemanticRuleCtx> implements
@@ -24,10 +27,16 @@ public abstract class VjoSemanticRule<T extends IVjoSemanticRuleCtx> implements
     private VjoSemanticRulePolicy m_globalPolicy = VjoSemanticRulePolicy.GLOBAL_ERROR_POLICY;
     
     private boolean m_active = true;
+
+	private VjoSemanticRulePolicy m_defaultPolicy;
+
+	private Map<String, VjoSemanticRulePolicy> m_groupSeverity;
     
     public void setProblemId(JstProblemId problemId) {
         m_problemId = problemId;
     }
+    
+
 
     public JstProblemId getProblemId() {
         return m_problemId;
@@ -56,13 +65,39 @@ public abstract class VjoSemanticRule<T extends IVjoSemanticRuleCtx> implements
     public void setRuleDescription(String desc) {
         m_desc = desc;
     }
-
+    
     public VjoSemanticRulePolicy getGlobalRulePolicy() {
         return m_globalPolicy;
     }
-
+    
     public void setGlobalPolicy(VjoSemanticRulePolicy policy) {
         m_globalPolicy = policy;
+    }
+    
+
+    public VjoSemanticRulePolicy getGroupRulePolicy(String groupId) {
+    	if(m_groupSeverity!=null){
+	    	VjoSemanticRulePolicy vjoSemanticRulePolicy = m_groupSeverity.get(groupId);
+			if(vjoSemanticRulePolicy!=null){
+	    		return vjoSemanticRulePolicy;
+	    	}
+    	}
+    	return m_globalPolicy;
+    }
+    
+   
+    public void setGroupRulePolicy(String groupName, VjoSemanticRulePolicy policy) {
+    	if(m_groupSeverity==null){
+    		m_groupSeverity = new LinkedHashMap<String, VjoSemanticRulePolicy>();
+    	}
+    	m_groupSeverity.put(groupName, policy);
+    }
+    
+    public VjoSemanticRulePolicy getDefaultPolicy() {
+    	if(m_defaultPolicy==null){
+    		return m_globalPolicy;
+    	}
+    	return m_defaultPolicy;
     }
     
     public boolean isActive(){
