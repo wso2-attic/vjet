@@ -128,10 +128,13 @@ public class DefaultValidator {
 					continue;
 				}
 				VjoSemanticRulePolicy policy = getRulePolicy(propertyValue);
-				if (!policy.equals(rule.getDefaultPolicy())) {
-					rule.setGroupRulePolicy(groupName, policy);
+				if (policy ==null ) {
+					rule.setGroupRulePolicy(groupName, rule.getDefaultPolicy());
 					//m_projectRulesCache.addGroupPolicy(groupName, rule, policy);
+				}else{
+					rule.setGroupRulePolicy(groupName, policy);
 				}
+					
 			}
 		}
 	}
@@ -165,7 +168,7 @@ public class DefaultValidator {
 		} else if ("ignore".equalsIgnoreCase(severity)) {
 			return VjoSemanticRulePolicy.GLOBAL_IGNORE_POLICY;
 		}
-		return VjoSemanticRulePolicy.GLOBAL_ERROR_POLICY;
+		return null;
 	}
 
 	public void ruleChanged(String groupName) {
