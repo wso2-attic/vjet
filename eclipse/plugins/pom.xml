@@ -25,6 +25,7 @@
       <module>org.ebayopensource.vjet.eclipse.vjetv</module>
       <module>org.ebayopensource.vjet.eclipse.help</module>
       <module>org.ebayopensource.vjet.eclipse.ui.html</module>
+      <module>org.ebayopensource.vjet.eclipse.welcome</module>
    </modules>
 
 </project>
