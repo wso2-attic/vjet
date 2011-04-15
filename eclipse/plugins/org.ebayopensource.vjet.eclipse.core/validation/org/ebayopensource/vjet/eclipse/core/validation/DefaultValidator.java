@@ -121,16 +121,16 @@ public class DefaultValidator {
 		String propertyValue = null;
 		for (IVjoSemanticRuleSet ruleSet : ruleRepo.getRuleSets()) {
 			ruleSetName = ruleSet.getRuleSetName();
+			propertyValue = prefs.get(ruleSetName, null);
 
 			for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
-				propertyValue = prefs.get(ruleSetName + "."
-						+ rule.getRuleName(), null);
 				if (propertyValue == null) {
 					continue;
 				}
 				VjoSemanticRulePolicy policy = getRulePolicy(propertyValue);
-				if (!policy.equals(rule.getGlobalRulePolicy())) {
-					m_projectRulesCache.addGroupPolicy(groupName, rule, policy);
+				if (!policy.equals(rule.getDefaultPolicy())) {
+					rule.setGroupRulePolicy(groupName, policy);
+					//m_projectRulesCache.addGroupPolicy(groupName, rule, policy);
 				}
 			}
 		}
@@ -144,11 +144,15 @@ public class DefaultValidator {
 		String propertyValue = null;
 		for (IVjoSemanticRuleSet ruleSet : ruleRepo.getRuleSets()) {
 			ruleSetName = ruleSet.getRuleSetName();
-
-			for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
-				propertyValue = preferenceStore.getString(ruleSetName + "."
-						+ rule.getRuleName());
-				rule.setGlobalPolicy(getRulePolicy(propertyValue));
+			propertyValue = preferenceStore.getString(ruleSetName);
+			if(propertyValue.equalsIgnoreCase("default")){
+				for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
+					rule.setGlobalPolicy(rule.getDefaultPolicy());
+				}
+			}else{
+				for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
+					rule.setGlobalPolicy(getRulePolicy(propertyValue));
+				}
 			}
 		}
 	}

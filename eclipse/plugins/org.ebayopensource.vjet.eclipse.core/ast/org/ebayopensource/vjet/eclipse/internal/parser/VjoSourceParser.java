@@ -6,9 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/**
- * 
- */
 package org.ebayopensource.vjet.eclipse.internal.parser;
 
 import java.io.File;
@@ -30,13 +27,19 @@ import org.eclipse.dltk.mod.ast.references.VariableKind;
 import org.eclipse.dltk.mod.ast.references.VariableReference;
 import org.eclipse.dltk.mod.ast.references.VjoTypeReference;
 import org.eclipse.dltk.mod.compiler.problem.IProblemReporter;
+import org.eclipse.dltk.mod.compiler.problem.ProblemSeverities;
 import org.eclipse.dltk.mod.core.DLTKCore;
 
+import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
+import org.ebayopensource.dsf.jsgen.shared.jstvalidator.DefaultJstProblem;
+import org.ebayopensource.dsf.jsgen.shared.validation.common.IJstProblem;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.JstProblemId;
 import org.ebayopensource.dsf.jst.JstSource;
+import org.ebayopensource.dsf.jst.ProblemSeverity;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstVar;
@@ -77,13 +80,14 @@ import org.ebayopensource.vjet.eclipse.ast.references.VjoQualifiedNameReference;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
+import org.ebayopensource.vjet.eclipse.core.validation.utils.ProblemUtility;
 import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
- * 
+ * @author MPeleshchyshyn
  * 
  */
 public class VjoSourceParser extends AbstractSourceParser {
@@ -102,11 +106,20 @@ public class VjoSourceParser extends AbstractSourceParser {
 			IProblemReporter reporter) {
 		ModuleDeclaration moduleDeclaration = new ModuleDeclaration(
 				source.length);
-		String strPath = new String(fileName).replace(File.separatorChar, '/');
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		String strPath = new String(fileName).replace(File.separatorChar, '/');
 		IPath path = workspaceRoot.getFullPath().append(strPath);
 		IFile file = workspaceRoot.getFile(path);
 		String groupName = file.getProject().getName();
+		// TODO doesn't check src directories
+		String substring = strPath.substring(strPath.indexOf(groupName)+groupName.length(), strPath.lastIndexOf('/'));
+		if(substring.contains(".")){
+//			System.out.println("file path contains unsupported character \".\" dot : "+ strPath);
+			String[] str ={};
+			reporter.reportProblem(ProblemUtility.reportProblem(new DefaultJstProblem(str,VjoSyntaxProbIds.TypeHasIllegalToken, "file path contains unsupported character \".\" dot : "+ substring ,fileName, 0,0, 0, 0, ProblemSeverity.error), ProblemSeverities.Error));  // );
+			return moduleDeclaration;
+			
+		}
 		String typeName = CodeassistUtils.getClassName(file);
 
 		VjoParserToJstAndIType parser = new VjoParserToJstAndIType(reporter);

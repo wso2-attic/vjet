@@ -43,14 +43,10 @@ public class VJetValidationPreferenceInitilizer extends AbstractPreferenceInitia
         VjoSemanticRuleRepo ruleRepo = VjoSemanticRuleRepo.getInstance();
         ruleRepo.restoreDefaultPolicies();
         String keyName = "";
-        for (IVjoSemanticRuleSet ruleSet : ruleRepo.getRuleSets()) {
-            for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
-                
+        for (IVjoSemanticRuleSet ruleSet : ruleRepo.getRuleSets()) {     
                 //Set default value
-                keyName = ruleSet.getRuleSetName() + "." + rule.getRuleName();
-                corePreference.setDefault(keyName, rule.getGlobalRulePolicy()
-                        .getProblemSeverity(null).toString());
-            }
+                keyName = ruleSet.getRuleSetName();
+                corePreference.setDefault(keyName, "default");
         }
     }
 }

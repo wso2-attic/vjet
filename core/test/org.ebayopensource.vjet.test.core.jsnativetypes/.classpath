@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/uKernelCore_1.7.3.jar"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/ant.jar"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/JUnitNexGen.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.jsnativetypes"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.vjolib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

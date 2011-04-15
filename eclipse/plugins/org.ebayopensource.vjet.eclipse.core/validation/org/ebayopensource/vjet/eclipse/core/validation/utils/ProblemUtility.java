@@ -68,13 +68,13 @@ public class ProblemUtility {
 				problemServerity);
 	}
 
-	private static DefaultProblem reportProblem(IScriptProblem problem,
+	public static DefaultProblem reportProblem(IScriptProblem problem,
 			int problemServerity) {
 		String message = problem.getMessage();
 		if (message == null) {
 			message = problem.getID().toString();
 		}
-	
+
 		return reportProblem("", problem.getSourceStart(), problem
 				.getSourceEnd() + 1, problem.getSourceLineNumber(), problem
 				.getColumn(), message, problemServerity);

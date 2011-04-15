@@ -611,7 +611,7 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 			return;
 		}
 		String jsdoc = cleanUpDoc(javadoc.toString());
-		JstDoc jstDoc = new JstDoc(javadoc.toString());
+		JstDoc jstDoc = new JstDoc(jsdoc);
 		pty.setDoc(jstDoc);
 	}
 	
