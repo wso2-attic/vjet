@@ -46,7 +46,7 @@ public class JstSrcFileCollector {
 				else if (file.isDirectory()) {
 					
 		
-					if(file.getAbsolutePath().substring((int) m_srcRoot.length()).contains(".")){
+					if(file.getAbsolutePath().substring((int) m_srcRoot.getAbsolutePath().length()).contains(".")){
 						continue;
 					}
 					
