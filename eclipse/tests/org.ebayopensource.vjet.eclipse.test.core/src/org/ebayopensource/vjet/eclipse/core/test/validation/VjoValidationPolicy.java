@@ -13,6 +13,13 @@
  * This software program and documentation are copyrighted by Ebay 
  * Technologies.
  */
+/* 
+ * $Id: VjoValidationExport.java, Mar 16, 2010, 10:49:53 PM, liama. Exp$
+ *
+ * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
+ * This software program and documentation are copyrighted by Ebay 
+ * Technologies.
+ */
 package org.ebayopensource.vjet.eclipse.core.test.validation;
 
 import java.io.File;
@@ -76,14 +83,15 @@ public class VjoValidationPolicy extends AbstractVjoModelTests {
     }
     
     
-    public void testExportProjectFunction(){
+    public void oldtestExportProjectFunction(){
         IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
         String path = project.getLocation()+File.separator+"test.pref";
         VjetProblemSeveritiesConfigurationBlock.exportPolicy2File(Display.getCurrent().getActiveShell(), project, path);
         Assert.assertEquals(true, new File(path).exists());
     }
     
-    public void testModifyProjectValue(){
+   
+    public void oldtestModifyProjectValue(){
         IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
         VjoGroupRulesCache.getInstance().addGroupPolicy(PROJECT_NAME,
                 VjoSemanticRuleRepo.getInstance().PROPERTY_SHOULD_BE_DEFINED,
@@ -104,14 +112,14 @@ public class VjoValidationPolicy extends AbstractVjoModelTests {
 		}
     }
     
-    public void testExportGlobalFunction(){
+    public void oldtestExportGlobalFunction(){
         IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
         String path = project.getLocation()+File.separator+"test.pref";
         VjetProblemSeveritiesConfigurationBlock.exportPolicy2File(Display.getCurrent().getActiveShell(), null, path);
         Assert.assertEquals(true, new File(path).exists());
     }
     
-    public void testImportFunction(){
+    public void oldtestImportFunction(){
         IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
         VjetProblemSeveritiesConfigurationBlock block = new VjetProblemSeveritiesConfigurationBlock(null,project,null);
         String path = project.getLocation()+File.separator+"test.pref";

@@ -23,7 +23,6 @@ import org.eclipse.dltk.mod.ui.preferences.AbstractOptionsBlock;
 import org.eclipse.dltk.mod.ui.preferences.PreferenceKey;
 import org.eclipse.dltk.mod.ui.util.IStatusChangeListener;
 import org.eclipse.dltk.mod.ui.util.PixelConverter;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.ui.preferences.ScrolledPageContent;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -56,12 +55,21 @@ public class VjetProblemSeveritiesConfigurationBlock extends
 
     public final static String VJETVALIDATION = VjetPlugin.VJETVALIDATION;
 
+	private static final String ERROR = "error";
+
+	private static final String IGNORE = "ignore";
+
+	private static final String WARNING = "warning";
+	
+	private static final String DEFAULT = "default";
+
     private PixelConverter fPixelConverter;
 
     String[] errorWarningIgnoreLabels = new String[] {
             VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_error,
             VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_warning,
-            VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_ignore };
+            VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_ignore,
+            "Default"};
 
     private HashMap<PreferenceKey, Combo> comboPool = new HashMap<PreferenceKey, Combo>();
 
@@ -83,10 +91,10 @@ public class VjetProblemSeveritiesConfigurationBlock extends
         String keyName = ""; //$NON-NLS-1$
         List<PreferenceKey> list = new ArrayList<PreferenceKey>();
         for (IVjoSemanticRuleSet ruleSet : ruleRepo.getRuleSets()) {
-            for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
-                keyName = ruleSet.getRuleSetName() + "." + rule.getRuleName(); //$NON-NLS-1$
-                list.add(new PreferenceKey(VjetPlugin.PLUGIN_ID, keyName));
-            }
+        	keyName = ruleSet.getRuleSetName(); //$NON-NLS-1$
+        	list.add(new PreferenceKey(VjetPlugin.PLUGIN_ID, keyName));
+//            for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
+//            }
         }
         list.add(new PreferenceKey(VjetPlugin.PLUGIN_ID, VJETVALIDATION));
         PreferenceKey[] keys = new PreferenceKey[list.size()];
@@ -108,12 +116,12 @@ public class VjetProblemSeveritiesConfigurationBlock extends
     }
 
     private Composite createStyleTabContent(Composite folder) {
-        String[] errorWarningIgnore = new String[] { JavaCore.ERROR,
-                JavaCore.WARNING, JavaCore.IGNORE };
-        String[] errorWarningIgnoreLabels = new String[] {
-                VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_error,
-                VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_warning,
-                VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_ignore };
+        String[] errorWarningIgnore = new String[] { ERROR,
+                WARNING, IGNORE };
+//        String[] errorWarningIgnoreLabels = new String[] {
+//                VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_error,
+//                VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_warning,
+//                VjetPreferenceMessages.ProblemSeveritiesConfigurationBlock_ignore };
 
         int nColumns = 3;
         final Composite buttonComposite = new Composite(folder, SWT.NONE);
@@ -130,6 +138,9 @@ public class VjetProblemSeveritiesConfigurationBlock extends
         Dialog.applyDialogFont(importButton);
         exportButton.setText("&Export Policy"); //$NON-NLS-1$
         importButton.setText("&Import Policy"); //$NON-NLS-1$
+        importButton.setVisible(false);
+        exportButton.setVisible(false);
+        
         GridData data = new GridData(GridData.HORIZONTAL_ALIGN_FILL);
         data.widthHint = 20;
         data.heightHint = 12;
@@ -166,7 +177,8 @@ public class VjetProblemSeveritiesConfigurationBlock extends
         layout.marginHeight = 0;
         layout.marginWidth = 0;
         composite.setLayout(layout);
-
+//        composite.setVisible(false);
+        
         Label description = new Label(composite, SWT.LEFT | SWT.WRAP);
         description.setFont(description.getFont());
         description
@@ -180,7 +192,7 @@ public class VjetProblemSeveritiesConfigurationBlock extends
         int extraIndent = indentStep * 2;
 
         String label;
-        ExpandableComposite excomposite;
+//        ExpandableComposite excomposite;
         Composite inner;
 
         // --- style
@@ -193,31 +205,36 @@ public class VjetProblemSeveritiesConfigurationBlock extends
         String keyName = VjetPreferenceMessages.VjetProblemSeveritiesConfigurationBlock_11;
         PreferenceKey key = null;
         comboPool.clear();
+        
         for (IVjoSemanticRuleSet ruleSet : ruleRepo.getRuleSets()) {
             label = ruleSet.getRuleSetDescription();
-            excomposite = createStyleSection(composite, label, nColumns);
-
-            inner = new Composite(excomposite, SWT.NONE);
-            inner.setFont(composite.getFont());
-            inner.setLayout(new GridLayout(nColumns, false));
-            excomposite.setClient(inner);
-
-            for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
-                label = rule.getRuleDescription();
-                keyName = ruleSet.getRuleSetName() + VjetPreferenceMessages.VjetProblemSeveritiesConfigurationBlock_12 + rule.getRuleName();
+//            excomposite = createStyleSection(composite, label, nColumns);
+      
+            
+//            inner = new Composite(composite, SWT.NONE);
+//            inner.setFont(composite.getFont());
+//            inner.setLayout(new GridLayout(nColumns, false));
+//            excomposite.setClient(inner);
+            
+//            for (IVjoSemanticRule<?> rule : ruleSet.getRules()) {
+//                label = rule.getRuleDescription();
+             label = ruleSet.getRuleSetDescription();
+            	keyName = ruleSet.getRuleSetName();// + VjetPreferenceMessages.VjetProblemSeveritiesConfigurationBlock_12 + rule.getRuleName();
                 key = getKey(keyName);
                 if (key != null) {
                     String value = getValue(key);
                     if (value == null) {
-                        setValue(key, getSeverity(rule.getGlobalRulePolicy()));
+                    	// TODO come back here
+                        setValue(key, getSeverity(ruleSet));
                     }
-                    Combo combo = addComboBox(inner, label, key,
+                    Combo combo = addComboBox(composite, label, key,
                             errorWarningIgnore, errorWarningIgnoreLabels,
                             defaultIndent);
+                   
                     bindControl(combo, key);
                     comboPool.put(key, combo);
                 }
-            }
+//            }
         }
         return sc1;
     }
@@ -264,15 +281,27 @@ public class VjetProblemSeveritiesConfigurationBlock extends
         return new String[] { title, message };
     }
 
+    private String getSeverity(IVjoSemanticRuleSet ruleSet) {
+//    	if (VjoSemanticRulePolicy.GLOBAL_ERROR_POLICY.equals(policy)) {
+//    		return ERROR;
+//    	} else if (VjoSemanticRulePolicy.GLOBAL_WARNING_POLICY.equals(policy)) {
+//    		return WARNING;
+//    	} else if (VjoSemanticRulePolicy.GLOBAL_IGNORE_POLICY.equals(policy)) {
+//    		return IGNORE;
+//    	} 
+    	return DEFAULT;
+    }
+    
+    
     private String getSeverity(VjoSemanticRulePolicy policy) {
         if (VjoSemanticRulePolicy.GLOBAL_ERROR_POLICY.equals(policy)) {
-            return JavaCore.ERROR;
+            return ERROR;
         } else if (VjoSemanticRulePolicy.GLOBAL_WARNING_POLICY.equals(policy)) {
-            return JavaCore.WARNING;
+            return WARNING;
         } else if (VjoSemanticRulePolicy.GLOBAL_IGNORE_POLICY.equals(policy)) {
-            return JavaCore.IGNORE;
-        }
-        return JavaCore.ERROR;
+            return IGNORE;
+	    } 
+        return DEFAULT;
     }
 
     @Override

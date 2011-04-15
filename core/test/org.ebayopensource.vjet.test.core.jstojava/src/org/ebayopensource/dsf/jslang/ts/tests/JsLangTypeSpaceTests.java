@@ -67,14 +67,14 @@ public class JsLangTypeSpaceTests {
 		String groupPath = groupFullPath.substring(0, lastSlashIdx+1);
 		String srcPath = groupFullPath.substring(lastSlashIdx+1);
 		System.out.println("srcPath = " + srcPath);
-		ts.processEvent(new AddGroupEvent("test", groupPath, srcPath, null));
+		ts.processEvent(new AddGroupEvent("org.ebayopensource.vjet.test.core.jstojava", groupPath, srcPath, null));
 		
 		
 //		TypeName typeName = new TypeName(JstTypeSpaceMgr.JS_NATIVE_GRP, "Array");
 //		IJstType type = ts.getQueryExecutor().findType(typeName);
 //		assertNotNull(type);
 		
-		TypeName typeName = new TypeName("test", "dsf.jslang.feature.tests.EcmaArrayTests");
+		TypeName typeName = new TypeName("org.ebayopensource.vjet.test.core.jstojava", "dsf.jslang.feature.tests.EcmaArrayTests");
 		IJstType type = ts.getQueryExecutor().findType(typeName);
 		printTypes(ts);
 		assertNotNull(type);
