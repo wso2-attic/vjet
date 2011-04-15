@@ -713,12 +713,10 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 			if (replaceString.endsWith("})") || replaceString.endsWith("'')")) {
 				kcursorPostion = kcursorPostion - 2;
 			}
-			else if(replaceString.endsWith("]")){
-				m_replaceOffset -= 1;
-				m_replaceLength += 1;
-			}
+			final boolean noneIdentifierPropertyAccess = replaceString.endsWith("]");
 			IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO> proposal = new VjoEclipseCompletionProposalAdapter<IMAGE, CONTEXT_INFO>(replaceString,
-					m_replaceOffset, m_replaceLength, kcursorPostion,
+					noneIdentifierPropertyAccess ? m_replaceOffset - 1 : m_replaceOffset, 
+					noneIdentifierPropertyAccess ? m_replaceLength + 1 : m_replaceLength, kcursorPostion,
 					m_labelProvider.getScriptImage(property),
 					displayString, null, externalInfo, property);
 			return proposal;
