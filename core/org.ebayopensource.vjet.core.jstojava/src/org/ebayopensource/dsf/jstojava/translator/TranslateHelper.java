@@ -439,9 +439,7 @@ public class TranslateHelper {
 	private static IJstType findType(final IFindTypeSupport findSupport, final JsVariantType typing) {
 		List<IJstType> types = new ArrayList<IJstType>(3);
 		for (JsTypingMeta t : ((JsVariantType)typing).getTypes()) {
-			if (t instanceof JsType) {
-				types.add(findType(findSupport, (JsType)t));
-			}			
+			types.add(findType(findSupport, t, null));		
 		}
 		return new JstVariantType(types);
 	}
