@@ -1,7 +1,4 @@
 /* -*- Mode: java; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 4 -*-
- *
- * Copyright (c) 2005-2011 eBay Inc. All rights reserved.
- * 
  * ***** BEGIN LICENSE BLOCK *****
  * Version: MPL 1.1/GPL 2.0
  *
@@ -15,6 +12,12 @@
  * for the specific language governing rights and limitations under the
  * License.
  *
+ * Portions created by eBay are Copyright (c) 2005-2011 eBay Inc. All rights reserved.
+ * 
+ * Contributor(s):
+ *   Yitao Yao
+ *   Justin Early
+ *
  * Alternatively, the contents of this file may be used under the terms of
  * the GNU General Public License Version 2 or later (the "GPL"), in which
  * case the provisions of the GPL are applicable instead of those above. If
@@ -24,7 +27,6 @@
  * them with the notice and other provisions required by the GPL. If you do
  * not delete the provisions above, a recipient may use your version of this
  * file under either the MPL or the GPL.
- *
  * ***** END LICENSE BLOCK ***** */
 package org.mozilla.mod.javascript;
 
