@@ -12,7 +12,23 @@
    </description>
 
    <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+ The contents of this feature are subject to the Mozilla Public License Version
+ 1.1 (the "License"); you may not use this feature except in compliance with
+ the License. You may obtain a copy of the License at
+ http://www.mozilla.org/MPL/
+ 
+ Software distributed under the License is distributed on an "AS IS" basis,
+ WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+ for the specific language governing rights and limitations under the License.
+
+ The Initial Developer of the Original Code is Netscape Communications Corporation.
+ Portions created by the Initial Developer are Copyright (C) 1997-2000
+ the Initial Developer. All Rights Reserved.
+
+ Portions created by eBay are Copyright (c) 2005-2011 eBay Inc. All rights reserved.
+
+ Source Code version of the Covered Code is avaiable under the terms of this License.
+ The source code is available at http://www.ebayopensource.org/svn/vjet/trunk/extmod/org.ebayopensource.vjet.extmod.rhino/
    </copyright>
 
    <license url="http://www.example.com/license">
