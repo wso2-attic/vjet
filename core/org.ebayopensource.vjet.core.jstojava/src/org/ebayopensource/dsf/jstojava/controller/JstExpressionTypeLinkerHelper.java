@@ -2831,7 +2831,7 @@ public class JstExpressionTypeLinkerHelper {
 		if (targetType == null || targetType instanceof JstExtendedType) {
 			return targetType;
 		}
-		if (targetType instanceof JstArray) {
+		if (targetType instanceof JstArray || targetType instanceof JstVariantType) {
 			return targetType; //TODO
 		}
 		String typeName = targetType.getName();
