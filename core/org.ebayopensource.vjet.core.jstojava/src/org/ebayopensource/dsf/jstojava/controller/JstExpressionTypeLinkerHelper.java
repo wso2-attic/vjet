@@ -927,14 +927,14 @@ public class JstExpressionTypeLinkerHelper {
 				rtnCorrectType = resolvedOtype;
 			}
 		}
-		else if(rtnType instanceof JstAttributedType){
+		rtnCorrectType = getCorrectType(resolver, rtnType, groupInfo);
+		if(rtnType instanceof JstAttributedType){
 			final IJstNode rtnBinding = look4ActualBinding(resolver, rtnType, groupInfo);
 			if(rtnBinding instanceof IJstOType && rtnBinding != rtnType){
 				rtnCorrectType = (IJstOType)rtnBinding;
 			}
 		}
 		
-		rtnCorrectType = getCorrectType(resolver, rtnType, groupInfo);
 		if (rtnCorrectType != rtnType) {
 			method.setRtnType(rtnCorrectType);
 		}
