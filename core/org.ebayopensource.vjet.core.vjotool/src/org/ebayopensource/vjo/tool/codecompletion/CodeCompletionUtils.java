@@ -157,6 +157,8 @@ public class CodeCompletionUtils {
 		final StringBuilder strBldr = new StringBuilder();
 		String name = method.getName().getName();
 		
+		name = renameInvoke(method, name);
+		
 		if(method instanceof JstConstructor){
 			JstConstructor c = (JstConstructor)method;
 			name = c.getOwnerType().getName();
@@ -182,6 +184,13 @@ public class CodeCompletionUtils {
 		strBldr.append(oname);
 		return strBldr.toString();
 
+	}
+
+	private static String renameInvoke(IJstMethod method, String name) {
+		if(name.equals("_invoke_") && method.getOwnerType().isFType()){
+			name = method.getOwnerType().getSimpleName();
+		}
+		return name;
 	}
 
 	public static String getJstArgsStringForReplace(IJstMethod method) {
@@ -743,13 +752,17 @@ public class CodeCompletionUtils {
 
 	public static String getMethodProposalReplaceStr(boolean isGlobal,
 			IJstMethod method, VjoCcCtx vjoCcCtx) {
-		String replaceString = method.getName().getName() + "("
+		
+		
+		String name = renameInvoke(method, method.getName().getName());
+		
+		String replaceString = name + "("
 				+ getJstArgsStringForReplace(method) + ")";
 		if (vjoCcCtx.isVjoMethod(method)) {
 			String temp = getKeywordReplaceString(method, vjoCcCtx
 					.isInSciptUnitArea() ? vjoCcCtx.getTypeName() : "",
 					vjoCcCtx.isInSciptUnitArea());
-			if (!method.getName().getName().equals(temp)) {
+			if (!name.equals(temp)) {
 				replaceString = temp;
 			}
 		} else if (isGlobal

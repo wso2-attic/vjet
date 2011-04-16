@@ -16,10 +16,14 @@ import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
+import org.ebayopensource.vjo.tool.codecompletion.proposaldata.VjoCcProposalData;
 
 /**
  * Have effect inside of method
@@ -89,7 +93,7 @@ public class VjoCcGlobalAdvisor extends AbstractVjoCcAdvisor implements
 			if (node instanceof IJstMethod) {
 				IJstMethod method = (IJstMethod) node;
 				if (method.getName().getName().startsWith(token)) {
-					appendMethod(ctx, method);
+					appendMethod(ctx, method, method.getName().getName());
 				}				
 			}
 			
@@ -103,7 +107,28 @@ public class VjoCcGlobalAdvisor extends AbstractVjoCcAdvisor implements
 			if (node instanceof IJstGlobalVar) {
 				IJstGlobalVar jsvar = (IJstGlobalVar) node;
 				if (jsvar.getScopeForGlobal() == null) {
-					if (jsvar.getName().getName().startsWith(token)) {
+					String name = jsvar.getName().getName();
+					if (name.startsWith(token)) {
+						
+						if(jsvar.getTypeRef() instanceof JstTypeReference){
+							JstTypeReference tref = (JstTypeReference)jsvar.getTypeRef();
+							if(tref.getReferencedType().isFType()){
+								IJstMethod m = tref.getReferencedType().getMethod("_invoke_");
+								appendMethod(ctx, m, name);
+							}
+							tref.getOwnerType();
+						}
+						
+						
+						if(jsvar.getType() instanceof JstAttributedType){
+							JstAttributedType attrType = (JstAttributedType)jsvar.getType();
+							if(attrType.getJstBinding() instanceof IJstMethod){
+								IJstMethod method = (IJstMethod)attrType.getJstBinding();
+								appendMethod(ctx, method, name);
+							}
+						}
+						
+						
 						if(jsvar.isFunc()){
 							appendData(ctx, jsvar.getFunction());
 						} else {
@@ -115,11 +140,16 @@ public class VjoCcGlobalAdvisor extends AbstractVjoCcAdvisor implements
 		}		
 	}
 
-	private void appendMethod(VjoCcCtx ctx, IJstMethod method) {
+	private void appendMethod(VjoCcCtx ctx, IJstMethod method, final String name) {
 		List<? extends IJstMethod> smethods = JstTypeHelper.getSignatureMethods(method);
 		Iterator<? extends IJstMethod> it = smethods.iterator();
 		while (it.hasNext()) {
-			appendData(ctx, it.next());
+			ctx.getReporter().addPropsal(new VjoCcProposalData(it.next(), ctx, getId()){
+				@Override
+				public String getName() {
+					return name;
+				}
+			});
 		}
 	}
 
