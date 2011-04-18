@@ -50,6 +50,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.ebayopensource.vjet.core</groupId>
+			<artifactId>org.ebayopensource.vjet.core.jsnative</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.vjet.core</groupId>
 			<artifactId>org.ebayopensource.vjet.core.util</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
