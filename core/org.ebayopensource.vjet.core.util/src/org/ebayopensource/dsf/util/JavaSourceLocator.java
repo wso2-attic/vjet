@@ -116,7 +116,7 @@ public class JavaSourceLocator {
 		StringBuilder sb = new StringBuilder();
 		if (sourcePath != null && sourcePath.length() != 0) {
 			sb.append(sourcePath);
-			sb.append(";");
+			sb.append(File.pathSeparator);
 
 		}
 
@@ -126,7 +126,7 @@ public class JavaSourceLocator {
 			String[] projList = projectList.split(",");
 			for (String project : projList) {
 				sb.append(projectRoot + File.separatorChar + project);
-				sb.append(";");
+				sb.append(File.pathSeparator);
 			}
 		}
 
@@ -135,7 +135,7 @@ public class JavaSourceLocator {
 			String[] libList = jarList.split(",");
 			for (String lib : libList) {
 				sb.append(jarRoot + lib);
-				sb.append(";");
+				sb.append(File.pathSeparator);
 			}
 		}
 
