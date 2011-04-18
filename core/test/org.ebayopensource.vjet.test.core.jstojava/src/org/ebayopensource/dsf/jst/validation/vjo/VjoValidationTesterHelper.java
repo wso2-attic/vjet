@@ -169,6 +169,8 @@ public class VjoValidationTesterHelper {
         	System.out.println(">>>>> pacakgeName = " + pacakgeName);
         	System.out.println(">>>>> currentClass = " + currentClass.getName());
         	System.out.println(">>>>> checkedFileName = " + checkedFileName);
+        	System.out.println(">>>>> java.source.path = " + System.getProperty("java.source.path"));
+			System.out.println(">>>>> java.class.path = " + System.getProperty("java.class.path"));
         	throw new RuntimeException("testFile is null");
         }
 
