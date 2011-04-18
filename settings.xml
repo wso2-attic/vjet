@@ -10,8 +10,8 @@
   <servers>
     <server>
       <id>ebayopensource-repo</id>
-      <username>pwang</username>
-      <password>***</password>
+      <username>username</username>
+      	<password>password</password>
     </server>
   </servers>
     -->
