@@ -4,8 +4,8 @@ vjo.otype('org.dojotoolkit.DojoAuxiliary') //< public
 		node : null, //<Node
 		properties : null, //<Object
 		duration : 0, //<Number?
-		easing : null, //<(boolean easing(int index))?		
-		onEnd : null //<(void onEnd(Node node))?
+		easing : null, //<(boolean fn(int index))?		
+		onEnd : null //<(void fn(Node node))?
 		
 	},
 

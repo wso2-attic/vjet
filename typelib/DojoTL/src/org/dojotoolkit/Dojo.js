@@ -75,7 +75,7 @@ vjo.ctype('org.dojotoolkit.Dojo') //< public
 	 * The dojo.Animation object returned from dojo.anim will be already playing when it is returned
 	 * from this function, so calling play() on it again is (usually) a no-op.
 	 */
-	//>public void anim({String|Node} node, Object properties, int? duration, (boolean fn(int))? easing, (void fn(Node))? onEnd, int? delay)
+	//>public void anim({String|Node} node, Object properties, int? duration, (boolean fn(int index))? easing, (void onEnd(Node node))? onEnd, int? delay)
 	anim : vjo.NEEDS_IMPL,
 	
 	/**
