@@ -46,7 +46,7 @@
    </dependencies>
 
    <properties>
-   		<java.source.path>${basedir}/target/test-classes;${basedir}/artifact;${basedir}/artifact/engine;${basedir}/artifact/freeform;${basedir}/artifact/handler;${basedir}/artifact/innertypes</java.source.path>
+   		<java.source.path>${basedir}/target/test-classes</java.source.path>
    </properties>
 
    <build>

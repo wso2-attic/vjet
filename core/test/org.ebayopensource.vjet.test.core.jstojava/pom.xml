@@ -23,7 +23,7 @@
    <name>VJET: JsToJava Tests</name>
    
    <properties>
-   		<java.source.path>${basedir}/src;${basedir}/target/test-classes</java.source.path>
+   		<java.source.path>${basedir}/src</java.source.path>
    </properties>
 
    <dependencies>

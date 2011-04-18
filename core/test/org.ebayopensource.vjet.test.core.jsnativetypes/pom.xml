@@ -61,7 +61,7 @@
    </dependencies>
    
    <properties>
-   		<java.source.path>${basedir}/target/test-classes;${basedir}/../../org.ebayopensource.vjet.core.jsnative/src</java.source.path>
+   		<java.source.path>${basedir}/../../org.ebayopensource.vjet.core.jsnative/src</java.source.path>
    </properties>
-   
+
 </project>
