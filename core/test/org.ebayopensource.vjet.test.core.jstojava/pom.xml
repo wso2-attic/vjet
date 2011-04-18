@@ -111,6 +111,7 @@
 						<exclude>**/JsFormattingTests.java</exclude>
 						<exclude>**/ParsingTests.java</exclude>
 						<exclude>**/VjoCommentTest.java</exclude>
+						<exclude>**/VjetvBugFixTests.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
