@@ -58,11 +58,95 @@ vjo.otype('org.dojotoolkit.DojoAuxiliary') //< public
 		'background-color': null, //<Object?
 		'background-image': null, //<Object?
 		'background-position': null, //<Object?
-		'background-repeat': null, //<{boolean|String}?
+		'background-repeat': null, //<{boolean|String}?		
 		border: null, //<Object?
+		'border-bottom': null, //<Object?
+		'border-bottom-color': null, //<Object?
+		'border-bottom-style': null, //<Object?
+		'border-bottom-width': null, //<Object?		
+		'border-collapse': null, //<Object?
+		'border-color': null, //<Object?
+		'border-left': null, //<Object?
+		'border-left-color': null, //<Object?
+		'border-left-style': null, //<Object?
+		'border-left-width': null, //<Object?
+		'border-right': null, //<Object?
+		'border-right-color': null, //<Object?
+		'border-right-style': null, //<Object?
+		'border-right-width': null, //<Object?
+		'border-spacing': null, //<Object?
+		'border-style': null, //<Object?
+		'border-top': null, //<Object?
+		'border-top-color': null, //<Object?
+		'border-top-style': null, //<Object?
+		'border-top-width': null, //<Object?
+		'border-width': null, //<Object?
+		bottom : null, //<Object?
+		'caption-side': null, //<Object?
+		clear: null, //<Object?
+		clip: null, //<Object?
+		color: null, //<Object?
+		content: null, //<Object?
+		'counter-increment': null, //<Object?
+		'counter-reset': null, //<Object?
+		cursor: null, //<Object?
+		direction: null, //<Object?
+		display: null, //<Object?
+		'empty-cells': null, //<Object?
+		float: null, //<Object?
+		font: null, //<Object?
+		'font-family': null, //<Object?
+		'font-size': null, //<Object?
+		'font-size-adjust': null, //<Object?
+		'font-stretch': null, //<Object?
+		'font-style': null, //<Object?
+		'font-variant': null, //<Object?
+		'font-weight': null, //<Object?		
+		height : 0, //<{int|String}?
+		left: null, //<Object?
+		'letter-spacing': null, //<Object?
+		'line-height': null, //<Object?
+		'list-style': null, //<Object?
+		'list-style-image': null, //<Object?
+		'list-style-position': null, //<Object?
+		'list-style-type': null, //<Object?
+		margin: null, //<Object?
+		'margin-bottom': null, //<Object?
+		'margin-left': null, //<Object?
+		'margin-right': null, //<Object?
+		'margin-top': null, //<Object?
+		'marker-offset': null, //<Object?		
+		'max-height': null, //<Object?
+		'max-width': null, //<Object?
+		'min-height': null, //<Object?
+		'min-width': null, //<Object?
+		outline: null, //<Object?
+		'outline-color': null, //<Object?
+		'outline-stype': null, //<Object?
+		'outline-width': null, //<Object?
+		overflow: null, //<Object?
+		padding: null, //<Object?
+		'padding-bottom': null, //<Object?
+		'padding-left': null, //<Object?
+		'padding-right': null, //<Object?
+		'padding-top': null, //<Object?
+		position: null, //<Object?
+		quotes: null, //<Object?
+		right: null, //<Object?
+		'table-layout': null, //<Object?
+		'text-align': null, //<Object?
+		'text-decoration': null, //<Object?
+		'text-indent': null, //<Object?
+		'text-shadow': null, //<Object?
+		'text-transform': null, //<Object?
+		top: null, //<Object?
+		'unicode-bidi': null, //<Object?
+		'vertical-align': null, //<Object?
+		visibility: null, //<Object?
+		'white-space': null, //<Object?
 		width : 0, //<{int|String}?
-		height : 0 //<{int|String}?
-		//more ...		
+		'word-spacing': null, //<Object?
+		'z-index': null //<Object?		
 	}
 })
 .endType();

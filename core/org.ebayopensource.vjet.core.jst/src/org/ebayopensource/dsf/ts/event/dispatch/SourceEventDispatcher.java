@@ -13,38 +13,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.ts.TypeSpaceConfig;
-import org.ebayopensource.dsf.jst.ts.TypeSpaceLocker;
 import org.ebayopensource.dsf.ts.event.ISourceEvent;
 import org.ebayopensource.dsf.ts.event.ISourceEventCallback;
 import org.ebayopensource.dsf.ts.event.ISourceEventListener;
 
-/**
- * TODO:
- * 1. Synchronization logic
- * 2. Thread Pool (leverage CommandRunner)
- */
 public class SourceEventDispatcher implements 
 	IEventDispatcher<ISourceEvent<IEventListenerHandle>,ISourceEventListener,IEventListenerHandle,ISourceEventCallback> {
 	
 	private List<ISourceEventListener> m_srcEventListeners = new ArrayList<ISourceEventListener>();
-	private final TypeSpaceLocker m_locker;
 	private boolean m_synchronous_events = false;
 	
-	//
-	// Constructor
-	//
-	/**
-	 * Constructor
-	 * Type space operation will be synchronized using given locker
-	 * @param locker TypeSpaceLocker
-	 */
-	public SourceEventDispatcher(TypeSpaceLocker locker){
-		if (locker == null){
-			m_locker = new TypeSpaceLocker();
-		}
-		else {
-			m_locker = locker;
-		}
+	public SourceEventDispatcher(){
 	}
 	
 	//
@@ -61,22 +40,11 @@ public class SourceEventDispatcher implements
 	/**
 	 * @see IEventDispatcher#dispatch(Object)
 	 */
-	public void dispatch(final ISourceEvent event){
-		
-		boolean lock = event.shouldLock();
-		try {
-			if (lock) {
-				m_locker.lockExclusive();
-			}
-			for (ISourceEventListener listener: getListeners(true)){
-				if (event.isAppropriateListener(listener)){
-					event.dispatch(listener);
-				}
-			}
-		}
-		finally {
-			if (lock) {
-				m_locker.releaseExclusive();
+	public void dispatch(final ISourceEvent event){		
+		//boolean lock = event.shouldLock();
+		for (ISourceEventListener listener: getListeners(true)){
+			if (event.isAppropriateListener(listener)){
+				event.dispatch(listener);
 			}
 		}
 	}
@@ -111,23 +79,15 @@ public class SourceEventDispatcher implements
 			final ISourceEventCallback callback){
 		
 		final IEventListenerHandle handle = new IEventListenerHandle.Default();
-		final boolean lock = event.shouldLock();
+		//final boolean lock = event.shouldLock();
 		
 		Runnable r = new Runnable(){
 			public void run(){
 				try {
-					if (lock) {
-						m_locker.lockExclusive();
-					}
 					event.dispatch(listener, handle, callback);
 				}
 				catch(Throwable e){
 					e.printStackTrace();
-				}
-				finally{
-					if (lock) {
-						m_locker.releaseExclusive();
-					}
 				}
 			}
 		};

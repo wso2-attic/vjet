@@ -74,7 +74,7 @@ public final class JstTypeSpaceMgr {
 		m_typeDependencyMgr = new TypeDependencyMgr(this);		
 		m_resourceMgr = new JstResourceMgr(this);
 		
-		m_srcEventDispatcher = new SourceEventDispatcher(m_ts.getLocker());
+		m_srcEventDispatcher = new SourceEventDispatcher();
 		m_srcEventDispatcher.addListener(new JstEventListener(this));
 		m_queryExecutor = new JstQueryExecutor(m_ts);
 		
