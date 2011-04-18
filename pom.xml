@@ -36,6 +36,11 @@
         <url>http://m2eclipse.sonatype.org/sites/m2e</url>
         <layout>p2</layout>
      </repository>
+     <repository>
+        <id>dependency</id>
+        <url>http://www.ebayopensource.org/svn/vjet/trunk/dependency</url>
+        <layout>p2</layout>
+     </repository>
 
     <repository>
       <id>ebayopensource-releases</id>
@@ -405,7 +410,7 @@
       <email>pwang@ebay.com</email>
     </developer>
   </developers>
-  <!--  
+
   <distributionManagement>
     <repository>
       <uniqueVersion>false</uniqueVersion>
@@ -422,7 +427,7 @@
       <layout>default</layout>
     </snapshotRepository>
   </distributionManagement>
-  -->
+
   <profiles>
     <profile>
   	    <id>extmod</id>

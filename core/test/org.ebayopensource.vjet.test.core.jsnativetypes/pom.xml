@@ -23,10 +23,10 @@
    <name>VJET: JsNativeTypes Tests</name>
    
    <dependencies>
-   		<dependency>
-			<groupId>org.ebayopensource.vjet.binary</groupId>
-			<artifactId>ukernelcore</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
+		<dependency>
+			<groupId>com.ebay.kernel</groupId>
+			<artifactId>uKernelCore</artifactId>
+			<version>1.73</version>
 		</dependency>
    		<dependency>
    			<groupId>org.ebayopensource.vjet.test</groupId>
