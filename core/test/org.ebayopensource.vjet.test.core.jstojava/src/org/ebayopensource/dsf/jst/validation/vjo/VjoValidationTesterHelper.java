@@ -164,6 +164,13 @@ public class VjoValidationTesterHelper {
             pacakgeName = pacakgeName.replace('.', '/');
             testFile = this.getClass().getClassLoader().getResource(pacakgeName+checkedFileName);
         }
+        
+        if (testFile == null){
+        	System.out.println(">>>>> pacakgeName = " + pacakgeName);
+        	System.out.println(">>>>> currentClass = " + currentClass.getName());
+        	System.out.println(">>>>> checkedFileName = " + checkedFileName);
+        	throw new RuntimeException("testFile is null");
+        }
 
         // bugfix by roy, parse without resolve cause unit's syntax root to be
         // unresolved

@@ -76,6 +76,11 @@ public class ParsingTests {
 		
 		String name = "primitiveAsProps.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
+		if (file == null){
+			System.out.println(">>>>> java.source.path = " + System.getProperty("java.source.path"));
+			System.out.println(">>>>> java.class.path = " + System.getProperty("java.class.path"));
+        	throw new RuntimeException("primitiveAsProps.txt is not found");
+		}
 		
 		VjoParser p = new VjoParser();
 		IJstParseController c = new JstParseController(p);
