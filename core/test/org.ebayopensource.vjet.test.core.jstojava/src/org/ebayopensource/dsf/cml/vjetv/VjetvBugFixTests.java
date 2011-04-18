@@ -53,7 +53,7 @@ public class VjetvBugFixTests extends TestCase {
     @Category( { P1, FAST, UNIT })
     @Description("Test line is null")
     public void testBug11711() {
-        String command = "@testBp\\ArgFile1.txt";
+        String command = "@testBp" + File.separator + "ArgFile1.txt";
         m_conf = new HeadlessParserConfigure();
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
