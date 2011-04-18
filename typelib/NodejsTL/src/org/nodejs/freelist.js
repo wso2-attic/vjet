@@ -28,11 +28,6 @@ vjo.ctype('org.nodejs.freelist')
 			//> public int
 			max: 0,				
 			
-			/**
-			 * 
-			 */
-			//> Function
-			constructor: null, 	
 			
 			/**
 			 * 
