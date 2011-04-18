@@ -123,7 +123,7 @@ public class FileOperatorTester {
         ArrayList<File> lists = new ArrayList<File>();
         lists.add(new File(currentPath + "/testBp/testJS.jar"));
         Assert.assertEquals(true, FileOperator.isJarJsPathValid(
-                "access\\inherits", lists, false));
+                "access" + File.separator + "inherits", lists, false));
     }
 
     @Test

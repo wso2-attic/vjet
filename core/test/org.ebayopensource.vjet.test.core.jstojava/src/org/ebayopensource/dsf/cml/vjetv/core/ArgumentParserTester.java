@@ -55,7 +55,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test1() {
-        String command = "testFiles\\access";
+        String command = "testFiles" + File.separator + "access";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -63,7 +63,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test2() {
-        String command = "testFiles\\access\\*.js";
+        String command = "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -71,7 +71,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test3() {
-        String command = "testFiles\\access\\dollar\\*.js";
+        String command = "testFiles" + File.separator + "access" + File.separator + "dollar" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(2, m_conf.getValidatedJSFiles().size());
@@ -79,7 +79,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test4() {
-        String command = "" + CURRENTPATH + "\\testFiles\\access\\dollar\\*.js";
+        String command = "" + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "dollar" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(2, m_conf.getValidatedJSFiles().size());
@@ -87,7 +87,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test5() {
-        String command = "" + CURRENTPATH + "\\testFiles\\access\\*.js";
+        String command = "" + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -95,8 +95,8 @@ public class ArgumentParserTester {
 
     @Test
     public void test6() {
-        String command = "" + CURRENTPATH + "\\testFiles\\access\\*.js "
-                + CURRENTPATH + "\\testFiles\\access\\dollar\\*.js";
+        String command = "" + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js "
+                + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "dollar" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -104,8 +104,8 @@ public class ArgumentParserTester {
 
     @Test
     public void test7() {
-        String command = "" + CURRENTPATH + "\\testFiles\\access\\*.js;"
-                + CURRENTPATH + "\\testFiles\\access\\dollar\\*.js";
+        String command = "" + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js;"
+                + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "dollar" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -113,7 +113,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test8() {
-        String command = "testFiles\\access\\*.js;testFiles\\access\\dollar\\*.js";
+        String command = "testFiles" + File.separator + "access" + File.separator + "*.js;testFiles" + File.separator + "access" + File.separator + "dollar" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -121,7 +121,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test9() {
-        String command = "testFiles\\access\\*.js testFiles\\access\\dollar\\*.js";
+        String command = "testFiles" + File.separator + "access" + File.separator + "*.js testFiles" + File.separator + "access" + File.separator + "dollar" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -129,7 +129,7 @@ public class ArgumentParserTester {
 
     @Test
     public void test10() {
-        String command = "testFiles\\access     testFiles\\access\\dollar ";
+        String command = "testFiles" + File.separator + "access     testFiles" + File.separator + "access" + File.separator + "dollar ";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -138,7 +138,7 @@ public class ArgumentParserTester {
     @Test
     public void testBP1() {
         String command = "-bp testFiles " + CURRENTPATH
-                + "\\testFiles\\access\\*.js";
+                + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -152,8 +152,8 @@ public class ArgumentParserTester {
 
     @Test
     public void testBP2() {
-        String command = "-bp " + CURRENTPATH + "\\testFiles " + CURRENTPATH
-                + "\\testFiles\\access\\*.js";
+        String command = "-bp " + CURRENTPATH + "" + File.separator + "testFiles " + CURRENTPATH
+                + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -162,8 +162,8 @@ public class ArgumentParserTester {
 
     @Test
     public void testBP3() {
-        String command = "-bp testFiles;testFiles\\access " + CURRENTPATH
-                + "\\testFiles\\access\\*.js";
+        String command = "-bp testFiles;testFiles" + File.separator + "access " + CURRENTPATH
+                + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -172,9 +172,9 @@ public class ArgumentParserTester {
 
     @Test
     public void testBP4() {
-        String command = "-bp " + CURRENTPATH + "\\testFiles;" + CURRENTPATH
-                + "\\testFiles\\access " + CURRENTPATH
-                + "\\testFiles\\access\\*.js";
+        String command = "-bp " + CURRENTPATH + "" + File.separator + "testFiles;" + CURRENTPATH
+                + "" + File.separator + "testFiles" + File.separator + "access " + CURRENTPATH
+                + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -188,9 +188,9 @@ public class ArgumentParserTester {
 
     @Test
     public void testBP5() {
-        String command = "-bp " + CURRENTPATH + "\\testBp\\*.jar;"
-                + CURRENTPATH + "\\testFiles\\access " + CURRENTPATH
-                + "\\testFiles\\access\\*.js";
+        String command = "-bp " + CURRENTPATH + "" + File.separator + "testBp" + File.separator + "*.jar;"
+                + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access " + CURRENTPATH
+                + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -203,9 +203,9 @@ public class ArgumentParserTester {
     }
 
     public void testBP6() {
-        String command = "-bp " + CURRENTPATH + "\\testBp\\*.JAR;"
-                + CURRENTPATH + "\\testFiles\\access " + CURRENTPATH
-                + "\\testFiles\\access\\*.js";
+        String command = "-bp " + CURRENTPATH + "" + File.separator + "testBp" + File.separator + "*.JAR;"
+                + CURRENTPATH + "" + File.separator + "testFiles" + File.separator + "access " + CURRENTPATH
+                + "" + File.separator + "testFiles" + File.separator + "access" + File.separator + "*.js";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(83, m_conf.getValidatedJSFiles().size());
@@ -219,7 +219,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile1() {
-        String command = "@testBp\\ArgFile1.txt";
+        String command = "@testBp" + File.separator + "ArgFile1.txt";
         m_parser.parser(command.split(BLANK), m_conf);
         m_parser.initEnv(m_conf);
         Assert.assertEquals(2, m_conf.getValidatedJSFiles().size());
@@ -227,7 +227,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile2() {
-        File f = new File("testBp\\ArgFile2.txt");
+        File f = new File("testBp" + File.separator + "ArgFile2.txt");
         String s = m_parser.readArgFile(f);
         String[] ss = s.split(BLANK);
         Assert.assertEquals(3, ss.length);
@@ -235,7 +235,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile3() {
-        File f = new File("testBp\\ArgFile3.txt");
+        File f = new File("testBp" + File.separator + "ArgFile3.txt");
         String s = m_parser.readArgFile(f);
         String[] ss = s.split(BLANK);
         Assert.assertEquals(3, ss.length);
@@ -246,7 +246,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile3A() {
-        String command = "@testBp\\ArgFile3.txt";
+        String command = "@testBp" + File.separator + "ArgFile3.txt";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
@@ -254,7 +254,7 @@ public class ArgumentParserTester {
     }
 
     public void testArgFile4() {
-        File f = new File("testBp\\ArgFile4.txt");
+        File f = new File("testBp" + File.separator + "ArgFile4.txt");
         String s = m_parser.readArgFile(f);
         String[] ss = s.split(BLANK);
         Assert.assertEquals(3, ss.length);
@@ -264,7 +264,7 @@ public class ArgumentParserTester {
     }
 
     public void testArgFile4A() {
-        String command = "@testBp\\ArgFile4.txt";
+        String command = "@testBp" + File.separator + "ArgFile4.txt";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
@@ -272,7 +272,7 @@ public class ArgumentParserTester {
     }
 
     public void testArgFile5() {
-        String command = "@testBp\\ArgFile4.txt @testBp\\ArgFile3.txt";
+        String command = "@testBp" + File.separator + "ArgFile4.txt @testBp" + File.separator + "ArgFile3.txt";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
@@ -281,7 +281,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile5A() {
-        String command = "@testBp\\ArgFile2.txt  ";
+        String command = "@testBp" + File.separator + "ArgFile2.txt  ";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
@@ -290,7 +290,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile5B() {
-        String command = " @testBp\\ArgFile5.txt";
+        String command = " @testBp" + File.separator + "ArgFile5.txt";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
@@ -299,7 +299,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile5C() {
-        String command = "@testBp\\ArgFile2.txt @testBp\\ArgFile5.txt";
+        String command = "@testBp" + File.separator + "ArgFile2.txt @testBp" + File.separator + "ArgFile5.txt";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
@@ -309,7 +309,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile5D() {
-        String command = "@testBp\\ArgFile2.txt @testBp\\ArgFile6.txt";
+        String command = "@testBp" + File.separator + "ArgFile2.txt @testBp" + File.separator + "ArgFile6.txt";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
@@ -319,7 +319,7 @@ public class ArgumentParserTester {
 
     @Test
     public void testArgFile6() {
-        String command = "@testBp\\ArgFile2.txt @testBp\\ArgFile6.txt -nw";
+        String command = "@testBp" + File.separator + "ArgFile2.txt @testBp" + File.separator + "ArgFile6.txt -nw";
         String[] ss = command.split(BLANK);
         m_parser.parser(ss, m_conf);
         m_parser.initEnv(m_conf);
