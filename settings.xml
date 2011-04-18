@@ -11,7 +11,7 @@
     <server>
       <id>ebayopensource-repo</id>
       <username>username</username>
-      	<password>password</password>
+      <password>password</password>
     </server>
   </servers>
     -->
