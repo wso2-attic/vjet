@@ -4,7 +4,7 @@
 	<target name="prebuild" depends="init,clean,createJsNative" />
 	
     <property name="sourceDirs" value="src"/>
-	<property name="outputDirectory" location="${basedir}/src/org/ebayopensource/jsnative/generated"/>
+	<property name="outputDirectory" location="${basedir}/target/classes/org/ebayopensource/jsnative/generated"/>
 	<property name="jsNativePkgNames" value="org.ebayopensource.dsf.jsnative.global,org.ebayopensource.dsf.jsnative"/>
 	<property name="excludePkgName" value="org.ebayopensource.dsf.jsnative.anno"/>
 	<property name="enableParallel" value="false"/>
