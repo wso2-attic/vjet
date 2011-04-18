@@ -227,7 +227,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		
 		if (node instanceof IJstMethod) {
 			final IJstMethod method = (IJstMethod)node;
-			String displayString = CodeCompletionUtils.getFullMethodString(method, method.getOwnerType());
+			String displayString = CodeCompletionUtils.getFullMethodString(method, method.getOwnerType(), false);
 			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloadingOrNaming(method);
 			replaceString = replaceString.replaceAll(CodeCompletionUtils.SEPERATE_TOKEN, getLineSeperator());
 			replaceString = m_labelUtil.evaluateIndent(replaceString, m_document, m_replaceOffset);
@@ -553,7 +553,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 			
 			final IJstType ptyType = pty.getType();
 			if(ptyType instanceof JstFuncType){
-				displayString = CodeCompletionUtils.getFullMethodString(((JstFuncType)ptyType).getFunction(), pty.getOwnerType());
+				displayString = CodeCompletionUtils.getFullMethodString(((JstFuncType)ptyType).getFunction(), pty.getOwnerType(), displayString.contains("?"));
 			}
 			return new VjoEclipseCompletionProposalAdapter<IMAGE, CONTEXT_INFO>(ptyName,
 					getReplacementOffset(data), getReplacementLength(data), ptyName.length(),

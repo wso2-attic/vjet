@@ -148,12 +148,14 @@ public class CodeCompletionUtils {
 		return getFullMethodString(method, method.getOwnerType());
 	}
 	
-	/**
-	 * @param method
-	 * @return xx(arg) rtype - otype
-	 */
 	public static String getFullMethodString(IJstMethod method, 
-			final IJstType ownerType) {
+			final IJstType ownerType){
+		return  getFullMethodString(method, ownerType, false);
+	}
+	
+	public static String getFullMethodString(IJstMethod method, 
+			final IJstType ownerType,
+			final boolean optional) {
 		final StringBuilder strBldr = new StringBuilder();
 		String name = method.getName().getName();
 		
@@ -176,6 +178,9 @@ public class CodeCompletionUtils {
 			strBldr.append(aname);
 		}
 		strBldr.append(")");
+		if(optional){
+			strBldr.append(" ? ");
+		}
 		if (ref != null) {
 			final String rname = ref.getName();
 			strBldr.append(" ").append(rname);
