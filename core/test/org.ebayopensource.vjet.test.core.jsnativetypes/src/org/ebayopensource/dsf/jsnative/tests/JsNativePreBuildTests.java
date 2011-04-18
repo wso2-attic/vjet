@@ -143,7 +143,12 @@ public class JsNativePreBuildTests  extends TestCase {
 		Class anchor = Window.class;
 		URL url = JavaSourceLocator.getInstance().getSourceUrl(anchor);
 		if (url == null) {
+			System.out.println(">>>>> java.source.path = " + System.getProperty("java.source.path"));
+			System.out.println(">>>>> java.class.path = " + System.getProperty("java.class.path"));
 			fail("Could not locate source URL for " + anchor.getName());
+		}
+		else {
+			System.out.println(">>>>> url = " + url.toExternalForm());
 		}
 		String path = null;
 		// Check if we found the Window.class in a source jar
