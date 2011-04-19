@@ -544,7 +544,7 @@ public class VjoGenerator extends BaseGenerator {
 					if (i>0) {
 						sb.append(",");
 						if (i%2 == 0) {
-							sb.append(NEWLINE).append(Indenter.TAB);
+							sb.append(getNewline()).append(Indenter.TAB);
 						}
 						first = null;
 					} else {
@@ -663,7 +663,7 @@ public class VjoGenerator extends BaseGenerator {
 			if (i>0) {
 				sb.append(",");
 				if (i%2 == 0) {
-					sb.append(NEWLINE).append(Indenter.TAB);
+					sb.append(getNewline()).append(Indenter.TAB);
 				}
 			}
 			sb.append("'").append(need.getName()).append("'");

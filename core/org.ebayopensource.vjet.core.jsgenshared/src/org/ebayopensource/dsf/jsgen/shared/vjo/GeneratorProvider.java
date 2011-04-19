@@ -43,6 +43,12 @@ public class GeneratorProvider {
 		}
 	}
 	
+	public void setNewline(String newline) {
+		for (SourceGenerator generator: m_generators.values()){
+			generator.setNewline(newline);
+		}
+	}
+	
 	public SourceGenerator getGenerator(final Class srcType){
 		assert srcType != null : "srcType cannot be null";
 		return m_generators.get(srcType);

@@ -65,6 +65,7 @@ public class TestHelper {
 	
 	private static String vjoFileExt = ".vjo";
 	private static String jsrFileExt = ".jsr";
+	private static final String NEWLINE = "\r\n";
 	
 	private static final File CODEGENDIR = new File("CODEGEN");
 	static{
@@ -82,6 +83,7 @@ public class TestHelper {
 		m_initializer = initializer;
 		m_javaCls = javaClass;
 		m_generatorCtx = new GeneratorCtx(CodeStyle.PRETTY);
+		m_generatorCtx.setNewline(NEWLINE);
 	}
 	
 	public static void main(String[] args) {
@@ -374,6 +376,7 @@ public class TestHelper {
 	protected JsrGenerator getJsrGenerator(final StringWriter buffer, final CodeStyle style) {
 
 		JsrGenerator writer = new JsrGenerator(new PrintWriter(buffer), style);
+		writer.setNewline(NEWLINE);
 //		writer.addListener(new DapJsrGenListener());
 //		writer.writeJsr(type, true);
 //		logTime("Gen Jsr");

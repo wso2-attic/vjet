@@ -38,6 +38,7 @@ public class SourceGenerator {
 	private CodeStyle m_style;
 	private PrintWriter m_writer;
 	private final Indenter m_indenter;
+	private String m_newline = NEWLINE;
 	
 	//
 	// Constructor
@@ -67,6 +68,14 @@ public class SourceGenerator {
 	 */
 	public CodeStyle getStyle(){
 		return m_style;
+	}
+	
+	public void setNewline(String newline){
+		m_newline = newline;
+	}
+
+	public String getNewline(){
+		return m_newline;
 	}
 	
 	/**
@@ -102,7 +111,7 @@ public class SourceGenerator {
 	 */
 	public SourceGenerator writeNewline(){
 		if (m_style == CodeStyle.PRETTY){
-			m_writer.append(NEWLINE);
+			m_writer.append(m_newline);
 		}
 		return this;
 	}
@@ -112,7 +121,7 @@ public class SourceGenerator {
 	 * @return
 	 */
 	public SourceGenerator forceNewline(){
-		m_writer.append(NEWLINE);
+		m_writer.append(m_newline);
 		return this;
 	}
 	

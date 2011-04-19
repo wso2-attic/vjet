@@ -57,6 +57,9 @@ public class GeneratorCtx {
 			m_provider.setStyle(style);
 		}
 	}
+	public void setNewline(String newline) {
+		m_provider.setNewline(newline);
+	}
 	public PrintWriter getWriter() {
 		return m_printer;
 	}

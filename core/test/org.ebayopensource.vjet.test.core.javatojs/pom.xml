@@ -110,12 +110,6 @@
 						<exclude>**/aexclude/*.java</exclude>
 						<!-- Not included in AllJavaToJsTests -->
 						<exclude>**/Js2JsRoundTripTests.java</exclude> 
-						<!-- temp disable tests that failed in Linux -->
-						<exclude>**/DependencyTests.java</exclude>
-						<exclude>**/FilterTests.java</exclude>
-						<exclude>**/JsrGeneratorTests.java</exclude>
-						<exclude>**/StructureSyntaxTests.java</exclude>
-						<exclude>**/VjoDataTypeTests.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
