@@ -1342,9 +1342,9 @@ public class JsrGenerator extends SourceGenerator {
 		PrintWriter writer = getWriter();
 		if (method.getDoc() != null) {
 			// TODO Add formatter here
-			writer.append("/**\n");
+			writer.append("/**").append(getNewline());
 			writer.append(method.getDoc().getComment());
-			writer.append("\n*/\n");
+			writer.append(getNewline()).append("*/").append(getNewline());
 			writeNewline();
 		}
 		writer.append(methodDeclBegin);

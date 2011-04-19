@@ -76,7 +76,9 @@ public class DependencyTests{
 		Class srcType = Dependency.class;
 		TranslationController controller = TestHelper.getTranslationController(getInitializer());
 		JstType jstType = controller.targetedTranslation(srcType);
-		String actual = JavaToJsHelper.toVjo(jstType, new GeneratorCtx(CodeStyle.PRETTY));
+		GeneratorCtx generatorCtx = new GeneratorCtx(CodeStyle.PRETTY);
+		generatorCtx.setNewline(TestHelper.NEWLINE);
+		String actual = JavaToJsHelper.toVjo(jstType, generatorCtx);
 		TestHelper helper = new TestHelper(srcType, getInitializer());
 		assertEquals(helper.getExpectedVjo(), actual);
 		getTracer().endGroup(ID);
