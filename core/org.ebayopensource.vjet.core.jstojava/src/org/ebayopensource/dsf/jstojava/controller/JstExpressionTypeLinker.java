@@ -937,6 +937,29 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
 					this, aae, ((JstArray) qualifierType).getComponentType(), m_groupInfo);
 			}
+			else if(qualifierType instanceof JstVariantType){
+				final JstVariantType variantQualifierType = (JstVariantType)qualifierType;
+				final List<IJstType> variantTypes = variantQualifierType.getVariantTypes();
+				final List<JstArray> arrayTypes = new ArrayList<JstArray>(variantTypes.size());
+				for(IJstType variantType : variantTypes){
+					if(variantType instanceof JstArray){
+						arrayTypes.add((JstArray)variantType);
+					}
+				}
+				if(arrayTypes.size() == 1){
+					JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
+							this, aae, arrayTypes.get(0).getComponentType(), m_groupInfo);
+				}
+				else if(arrayTypes.size() > 1){
+					final List<IJstType> componentTypes = new ArrayList<IJstType>(arrayTypes.size());
+					for(JstArray arrayType : arrayTypes){
+						componentTypes.add(arrayType.getComponentType());
+					}
+					final JstVariantType variantComponentType = new JstVariantType(componentTypes);
+					JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
+							this, aae, variantComponentType, m_groupInfo);
+				}
+			}
 			
 			//enhancement by huzhou@ebay.com to support type properties' accessing using array accessing style
 			final IExpr indexExpr = aae.getIndex();

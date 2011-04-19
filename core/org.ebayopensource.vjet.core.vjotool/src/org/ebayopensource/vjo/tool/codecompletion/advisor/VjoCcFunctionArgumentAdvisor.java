@@ -18,6 +18,7 @@ import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 
@@ -71,10 +72,19 @@ public class VjoCcFunctionArgumentAdvisor extends AbstractVjoCcAdvisor implement
 		final JstArg parameterAtPos = parameters.get(position);
 		final IJstType parameterType = parameterAtPos.getType();
 		if(parameterType instanceof JstFuncType){
-			appendData(ctx, ((JstFuncType)parameterType).getFunction(), true);
+			appendData(ctx, getParamNamedMethodProposal(parameterAtPos, ((JstFuncType)parameterType).getFunction()), true);
 		}
 		else if(parameterType instanceof JstFunctionRefType){
-			appendData(ctx, ((JstFunctionRefType)parameterType).getMethodRef(), true);
+			appendData(ctx, getParamNamedMethodProposal(parameterAtPos, ((JstFunctionRefType)parameterType).getMethodRef()), true);
 		}
+	}
+
+	private IJstMethod getParamNamedMethodProposal(
+			final JstArg parameterAtPos, final IJstMethod method) {
+		if(parameterAtPos == null || parameterAtPos.getName() == null){
+			return method;
+		}
+		
+		return new RenameableSynthJstProxyMethod(method, parameterAtPos.getName());
 	}
 }
