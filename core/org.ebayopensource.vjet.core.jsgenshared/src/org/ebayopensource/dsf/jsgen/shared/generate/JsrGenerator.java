@@ -237,6 +237,7 @@ public class JsrGenerator extends SourceGenerator {
 					writeNewline();
 					JsrGenerator sibJsr = new JsrGenerator(getWriter(),
 							getStyle(), m_config.getFilters());
+					sibJsr.setNewline(getNewline());
 					sibJsr.setInitialIndent(m_initialIndent + 1);
 					sibJsr.writeJsr(embededType, this);
 				}

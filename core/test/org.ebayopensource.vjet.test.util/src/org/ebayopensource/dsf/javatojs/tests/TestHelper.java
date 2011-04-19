@@ -65,7 +65,7 @@ public class TestHelper {
 	
 	private static String vjoFileExt = ".vjo";
 	private static String jsrFileExt = ".jsr";
-	public static final String NEWLINE = "\r\n";
+	private static final String NEWLINE = "\r\n";
 	
 	private static final File CODEGENDIR = new File("CODEGEN");
 	static{
