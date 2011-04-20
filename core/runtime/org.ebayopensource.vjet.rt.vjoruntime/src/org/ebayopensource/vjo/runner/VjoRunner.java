@@ -15,6 +15,7 @@ import java.util.List;
 import org.ebayopensource.dsf.dap.rt.BodyOnloadAdapter;
 import org.ebayopensource.dsf.dap.rt.DapCtx;
 import org.ebayopensource.dsf.dap.rt.DapCtx.ExeMode;
+import org.ebayopensource.dsf.jsrunner.BrowserRemoteLauncher;
 import org.ebayopensource.dsf.jsrunner.IBrowserLauncher;
 import org.ebayopensource.dsf.jsrunner.JsRunner;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
@@ -37,7 +38,12 @@ public class VjoRunner extends JsRunner {
 			if (A_MODE_VALUE.equals(info.getOption(DAP_MODE_KEY))) {
 				DapCtx.ctx().setExeMode(ExeMode.ACTIVE);
 			}
-			VjoRunner runner = new VjoRunner(info, needDebug());
+			IBrowserLauncher browserLauncher = null;
+			String browserServiceUrl = info.getBrowserServiceUrl();
+			if (browserServiceUrl != null) {
+				browserLauncher = new BrowserRemoteLauncher(browserServiceUrl);
+			}
+			VjoRunner runner = new VjoRunner(info, needDebug(), browserLauncher);
 			if (runner.m_activeWeb != null) {
 				runner.m_activeWeb.waitForWindowLoaded();
 				runner.m_activeWeb.waitForExit();

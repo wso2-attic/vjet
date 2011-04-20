@@ -23,6 +23,8 @@ Require-Bundle: org.ebayopensource.vjet.eclipse.core,
  org.eclipse.core.filesystem,
  org.eclipse.jdt.debug,
  org.eclipse.dltk.mod.ui,
+ org.mortbay.jetty.server,
+ org.mortbay.jetty.util,
  org.ebayopensource.vjet.core.wrapper;visibility:=reexport,
  org.ebayopensource.vjet.rt.wrapper;visibility:=reexport,
  org.ebayopensource.vjet.web.wrapper;visibility:=reexport

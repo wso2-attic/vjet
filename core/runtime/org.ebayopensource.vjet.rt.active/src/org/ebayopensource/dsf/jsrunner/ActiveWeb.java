@@ -203,7 +203,7 @@ public class ActiveWeb {
 				os.close();
 				exit();
 			} else {
-				response.sendError(404);
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			}
 		}
 	}

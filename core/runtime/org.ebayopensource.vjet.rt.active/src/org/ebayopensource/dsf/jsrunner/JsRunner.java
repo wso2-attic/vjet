@@ -28,8 +28,8 @@ import org.ebayopensource.dsf.active.util.ScriptingSessionClassLoader;
 import org.ebayopensource.dsf.active.util.VJContextFactory;
 import org.ebayopensource.dsf.dap.proxy.ScriptEngineCtx;
 import org.ebayopensource.dsf.dap.rt.DapCtx;
-import org.ebayopensource.dsf.dap.rt.IBrowserEmulatorListener;
 import org.ebayopensource.dsf.dap.rt.DapCtx.ExeMode;
+import org.ebayopensource.dsf.dap.rt.IBrowserEmulatorListener;
 import org.ebayopensource.dsf.html.js.ActiveJsExecutionControlCtx;
 import org.ebayopensource.dsf.jsdebugger.DebuggerAdapter;
 import org.ebayopensource.dsf.jsdebugger.JsDebuggerEnabler;
@@ -58,6 +58,7 @@ public class JsRunner {
 	public static final String LOAD_JS_KEY = "loadJs";
 	public static final String LOAD_HTML_KEY = "loadHtml";
 	public static final String BROWSER_DISPLAY_KEY = "browserDisplay";
+	public static final String BROWSER_SERVICE_URL_KEY = "browserServiceUrl";
 	
 	public static final String FILE_TYPE_KEY = "type";	
 	public static final String HTML_FILE_TYPE = "html";
@@ -86,6 +87,8 @@ public class JsRunner {
 	 * 
 	 * -VloadHtml option enables the preloading of a HTML document, for example
 	 * 		-VloadHtml=d:/a/b/c/doc.html
+	 * 
+	 * -VbrowserServiceUrl open enables remotely launching of browser via BrowserService
 	 */
 	public static void main(String[] args) {
 		
@@ -94,7 +97,12 @@ public class JsRunner {
 			if (A_MODE_VALUE.equals(info.getOption(DAP_MODE_KEY))) {
 				DapCtx.ctx().setExeMode(ExeMode.ACTIVE);
 			}
-			JsRunner runner = new JsRunner(info, needDebug(), null);
+			IBrowserLauncher browserLauncher = null;
+			String browserServiceUrl = info.getBrowserServiceUrl();
+			if (browserServiceUrl != null) {
+				browserLauncher = new BrowserRemoteLauncher(browserServiceUrl);
+			}
+			JsRunner runner = new JsRunner(info, needDebug(), browserLauncher);
 			if (runner.m_activeWeb != null) {
 				runner.m_activeWeb.waitForWindowLoaded();
 				runner.m_activeWeb.waitForExit();
@@ -414,6 +422,10 @@ public class JsRunner {
 		
 		public boolean needBrowserDisplay() {
 			return "true".equalsIgnoreCase(getOption(BROWSER_DISPLAY_KEY));
+		}
+		
+		public String getBrowserServiceUrl() {
+			return getOption(BROWSER_SERVICE_URL_KEY);
 		}
 	}
 	
