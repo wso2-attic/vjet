@@ -1075,6 +1075,13 @@ public class JstExpressionTypeLinkerHelper {
 	public static void fixPropertyTypeRef(
 			final JstExpressionBindingResolver resolver, JstProperty pty, GroupInfo groupInfo) {
 		IJstType ptyType = pty.getType();
+		if(ptyType instanceof JstAttributedType){
+			final IJstNode rtnBinding = look4ActualBinding(resolver, ptyType, groupInfo);
+			if(rtnBinding instanceof IJstOType && rtnBinding != ptyType){
+				ptyType = (IJstOType)rtnBinding;
+			}
+		}
+		
 		IJstType correctType = getCorrectType(resolver, ptyType, groupInfo);
 
 		if (correctType != ptyType) {
