@@ -1079,6 +1079,7 @@ public class JstExpressionTypeLinkerHelper {
 			final IJstNode rtnBinding = look4ActualBinding(resolver, ptyType, groupInfo);
 			if(rtnBinding instanceof IJstOType && rtnBinding != ptyType){
 				ptyType = (IJstOType)rtnBinding;
+				pty.setType(ptyType);
 			}
 		}
 		
