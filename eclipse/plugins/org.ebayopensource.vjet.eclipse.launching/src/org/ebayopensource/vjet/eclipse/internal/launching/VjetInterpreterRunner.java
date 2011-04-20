@@ -56,6 +56,7 @@ import org.eclipse.jdt.launching.IVMRunner;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.VMRunnerConfiguration;
 
+import org.ebayopensource.dsf.jsrunner.JsRunner;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.launching.VjetLaunchingPlugin;
 import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
@@ -429,6 +430,10 @@ public class VjetInterpreterRunner extends AbstractInterpreterRunner {
 				String key = (String) optionKey;
 				String value = (String) options.get(optionKey);
 				pArgs.add("-V" + key + "=" + value);
+				if(key.equals(JsRunner.BROWSER_DISPLAY_KEY) && "true".equalsIgnoreCase(value)){
+					BrowserService s = BrowserService.getInstance();
+					pArgs.add("-V" + JsRunner.BROWSER_SERVICE_URL_KEY + "=http://localhost:" + s.getPort());					
+				}				
 			}
 		}
 	}

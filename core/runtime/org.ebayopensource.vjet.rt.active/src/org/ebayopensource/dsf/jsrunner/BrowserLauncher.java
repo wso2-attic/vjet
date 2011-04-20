@@ -37,7 +37,9 @@ public class BrowserLauncher implements IBrowserLauncher {
 	}
 	
 	public Process launch(String url, BrowserType type) {
-		if (type.isIE()) {
+		if(type==null){
+			return displayUrlInDefault(url);
+		}else if (type.isIE()) {
 			return displayUrlInInternetExplorer(url);
 		} else if (type.isFireFox()) {
 			return displayUrlInFirefox(url);

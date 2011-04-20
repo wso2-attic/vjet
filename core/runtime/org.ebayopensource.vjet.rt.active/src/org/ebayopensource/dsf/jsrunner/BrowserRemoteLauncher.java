@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jsrunner;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -29,9 +32,13 @@ public class BrowserRemoteLauncher implements IBrowserLauncher {
 	
 	@Override
 	public Process launch(String webUrl, BrowserType type) {
+		
+		InputStream inputStream = null;
 		try {
 			String bType = IE;
-			if (type.isFireFox()) {
+			if(type==null){
+				// do nothing just error on null
+			}else if (type.isFireFox()) {
 				bType = FIREFOX;
 			} else if (type.isOpera()) {
 				bType = OPERA;
@@ -41,13 +48,31 @@ public class BrowserRemoteLauncher implements IBrowserLauncher {
 				bType = CHROME;
 			}
 			StringBuilder sb = new StringBuilder(m_remoteLauncherUrl);
-			sb.append("?webUrl=").append(URLEncoder.encode(webUrl, "UTF8"))
+			sb.append("/?webUrl=").append(URLEncoder.encode(webUrl, "UTF-8"))
 				.append("&bType=").append(bType);
-			URL url = new URL(webUrl);
-			URLConnection conn = url.openConnection();
-			conn.connect();
+			URL url = new URL(sb.toString());
+			URLConnection connection = url.openConnection();
+			
+			
+			if(connection instanceof HttpURLConnection){
+				HttpURLConnection httpC = (HttpURLConnection)connection;
+				httpC.setRequestMethod("GET");
+				httpC.addRequestProperty("Accept-Charset", "UTF-8");
+				inputStream = httpC.getInputStream();
+			}
+			
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException();
+		}finally{
+			if(inputStream!=null){
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					// do nothing
+				}
+			}
 		}
 		
 		return null;

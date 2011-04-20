@@ -11,6 +11,7 @@ package org.ebayopensource.vjet.eclipse.internal.launching;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -94,7 +95,8 @@ public class BrowserService {
 			
 			request.setCharacterEncoding("UTF8");
 			String webUrl = request.getParameter(PARM_WEB_URL);
-			String bType = request.getParameter(PARM_BROWSER_TYPE); //TODO use later
+			// TODO use the browser location and name to let ADOM to know which dom to emulate
+			String bType = request.getParameter(PARM_BROWSER_TYPE); 
 			if (webUrl == null || webUrl.isEmpty()) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			}
@@ -108,8 +110,10 @@ public class BrowserService {
 			} catch (PartInitException e) {
 				e.printStackTrace();
 			}
-			
 			response.setStatus(HttpServletResponse.SC_OK);
+			ServletOutputStream outputStream = response.getOutputStream();
+			outputStream.write(1);
+			outputStream.close();
 		}
 	}
 }
