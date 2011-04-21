@@ -97,6 +97,7 @@ import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtension;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
+import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.FunctionExpressionTranslator;
 import org.ebayopensource.dsf.ts.ITypeSpace;
 import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.type.TypeName;
@@ -2145,7 +2146,7 @@ public class JstExpressionTypeLinkerHelper {
 			return false;
 		}
 		
-		return "$anonymous$".equals(func.getName().getName());
+		return FunctionExpressionTranslator.DUMMY_METHOD_NAME.equals(func.getName().getName());
 	}
 	
 	/**

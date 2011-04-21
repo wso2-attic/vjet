@@ -3,7 +3,7 @@
 	<testcase number='1'>
 		<file>astjst.DataGrid</file>
 		<jxpath>
-			<pathname>JstType/JstMethod[@Name='addRow']/JstBlock/IfStmt[@Position='2']/JstBlock/IfStmt/JstBlock/MtdInvocationExpr[@Position='3']/FuncExpr/JstMethod[@Name='$anonymous$']/JstBlock/RtnStmt/MtdInvocationExpr/FieldAccessExpr/JstIdentifier[@Name='poMsg']</pathname>
+			<pathname>JstType/JstMethod[@Name='addRow']/JstBlock/IfStmt[@Position='2']/JstBlock/IfStmt/JstBlock/MtdInvocationExpr[@Position='3']/FuncExpr/JstMethod[@Name='anonymous_function']/JstBlock/RtnStmt/MtdInvocationExpr/FieldAccessExpr/JstIdentifier[@Name='poMsg']</pathname>
 			<nodecount>1</nodecount>
 			<node position='1' status='pass'>
 				<bindingnode>poMsg</bindingnode>

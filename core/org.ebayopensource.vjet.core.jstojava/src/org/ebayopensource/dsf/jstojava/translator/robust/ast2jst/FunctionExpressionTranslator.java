@@ -35,7 +35,7 @@ public class FunctionExpressionTranslator extends
 
 	private static final String EMPTY = "";
 
-	public static final String DUMMY_METHOD_NAME = "$anonymous$";
+	public static final String DUMMY_METHOD_NAME = "anonymous_function";
 
 	@Override
 	protected FuncExpr doTranslate(FunctionExpression astFunctionExpression) {
@@ -68,9 +68,7 @@ public class FunctionExpressionTranslator extends
 		final FuncExpr expr = new FuncExpr(jstMethod);
 		expr.setType(TranslateHelper.createJstFuncType(m_ctx, jstMethod));
 
-		//bugfix by huzhou@ebay.com
-		//check Linker which should gets the real method and overwrites what's defined here
-		if("$anonymous$".equals(jstMethod.getName().getName())
+		if(DUMMY_METHOD_NAME.equals(jstMethod.getName().getName())
 				&& metaArr.size() > 0){
 			final IJsCommentMeta originalMeta = metaArr.get(0);
 			//check if meta is attributed or otype function ref
