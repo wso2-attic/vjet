@@ -106,13 +106,6 @@
 					<excludes>
 						<exclude>**/All*Tests.java</exclude>
 						<exclude>**/*Base*.java</exclude>
-						<!-- temp disable tests that failed in Linux -->
-						<exclude>**/VjoMtdInvocationTest.java</exclude>
-						<exclude>**/JsFormattingTests.java</exclude>
-						<exclude>**/ParsingTests.java</exclude>
-						<exclude>**/VjoCommentTest.java</exclude>
-						<exclude>**/VjetvBugFixTests.java</exclude>
-						<exclude>**/Js13ScriptTests.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
