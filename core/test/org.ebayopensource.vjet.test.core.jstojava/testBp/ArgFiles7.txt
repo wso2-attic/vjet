@@ -2,5 +2,5 @@
 
 testFiles
    
-testFiles\access\inherits\*.js
+testFiles//access//inherits//*.js
 

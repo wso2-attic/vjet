@@ -1,2 +1,2 @@
-testFiles\access\inherits
+testFiles//access//inherits
 

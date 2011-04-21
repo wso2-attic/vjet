@@ -1,4 +1,4 @@
-testFiles\access\dollar
+testFiles//access//dollar
 
 -bp    
 
