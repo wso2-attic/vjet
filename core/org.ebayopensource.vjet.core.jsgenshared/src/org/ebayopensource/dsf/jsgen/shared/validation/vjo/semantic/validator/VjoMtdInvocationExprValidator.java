@@ -293,10 +293,9 @@ public class VjoMtdInvocationExprValidator
 		if (resultType instanceof JstFunctionRefType) {
 			return true;
 		}
-		//End of added
-		if (
-		    resultType == JstCache.getInstance().getType("Function") ||
-			resultType == JstCache.getInstance().getType("Object")) {
+		//End of added, bugfix by huzhou as JstExtendedType could be from Function/Object
+		if (resultType != null &&
+				("Function".equals(resultType.getName()) || "Object".equals(resultType.getName()))){
 			return true;
 		}
 		
