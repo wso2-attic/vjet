@@ -19,6 +19,7 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import org.ebayopensource.dsf.javatojs.tests.TestHelper;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
@@ -172,6 +173,7 @@ public class VjoCommentTest {
 		GeneratorCtx ctx = new GeneratorCtx(CodeStyle.PRETTY);
 		ctx.getConfig().setAddCodeGenAnnotation(false);
 		VjoGenerator gen = new VjoGenerator(ctx);
+		gen.setNewline(TestHelper.NEWLINE);
 		gen.writeVjo(type);
 		//System.out.println(gen.getGeneratedText());
 		assertEquals("[Expected result is in " + fileName + "]", file.trim(),
