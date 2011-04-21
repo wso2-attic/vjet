@@ -928,12 +928,6 @@ public class JstExpressionTypeLinkerHelper {
 			}
 		}
 		rtnCorrectType = getCorrectType(resolver, rtnType, groupInfo);
-		if(rtnType instanceof JstAttributedType){
-			final IJstNode rtnBinding = look4ActualBinding(resolver, rtnType, groupInfo);
-			if(rtnBinding instanceof IJstOType && rtnBinding != rtnType){
-				rtnCorrectType = (IJstOType)rtnBinding;
-			}
-		}
 		
 		if (rtnCorrectType != rtnType) {
 			method.setRtnType(rtnCorrectType);
@@ -953,12 +947,6 @@ public class JstExpressionTypeLinkerHelper {
 						}
 						if(resolvedOtype != null){
 							parameterCorrectType = resolvedOtype;
-						}
-					}
-					else if(parameterType instanceof JstAttributedType){
-						final IJstNode parameterBinding = look4ActualBinding(resolver, parameterType, groupInfo);
-						if(parameterBinding instanceof IJstOType && parameterType != parameterBinding){
-							parameterCorrectType = (IJstOType)parameterBinding;
 						}
 					}
 					parameterCorrectType = getCorrectType(resolver, parameterCorrectType, groupInfo);
@@ -1074,16 +1062,8 @@ public class JstExpressionTypeLinkerHelper {
 	
 	public static void fixPropertyTypeRef(
 			final JstExpressionBindingResolver resolver, JstProperty pty, GroupInfo groupInfo) {
-		IJstType ptyType = pty.getType();
-		if(ptyType instanceof JstAttributedType){
-			final IJstNode rtnBinding = look4ActualBinding(resolver, ptyType, groupInfo);
-			if(rtnBinding instanceof IJstOType && rtnBinding != ptyType){
-				ptyType = (IJstOType)rtnBinding;
-				pty.setType(ptyType);
-			}
-		}
-		
-		IJstType correctType = getCorrectType(resolver, ptyType, groupInfo);
+		final IJstType ptyType = pty.getType();
+		final IJstType correctType = getCorrectType(resolver, ptyType, groupInfo);
 
 		if (correctType != ptyType) {
 			pty.setType(correctType);
@@ -2790,23 +2770,32 @@ public class JstExpressionTypeLinkerHelper {
 
 	// find the real type in JstCache
 	public static IJstType getCorrectType(final JstExpressionBindingResolver resolver, final IJstType type, final GroupInfo groupInfo) {
-		if (type == null || !(type instanceof JstType)) {
-			if (type instanceof JstTypeRefType) {
-				IJstType target = ((JstTypeRefType)type).getReferencedNode();
-				IJstType extended = getExtendedType(target, groupInfo);
-				if (extended != target) {
-					return new JstTypeRefType(extended);
-				}
+		if(type == null){
+			return null;
+		}
+		// bugfix for otype using attributed presentation
+		else if(type instanceof JstAttributedType){
+			final IJstNode rtnBinding = look4ActualBinding(resolver, type, groupInfo);
+			if(rtnBinding instanceof IJstOType && rtnBinding != type){
+				return (IJstOType)rtnBinding;
 			}
-			else if(type instanceof JstFuncType){
-				updateFunctionType((JstFuncType)type, groupInfo);
+		}
+		else if(type instanceof JstTypeRefType) {
+			IJstType target = ((JstTypeRefType)type).getReferencedNode();
+			IJstType extended = getExtendedType(target, groupInfo);
+			if (extended != target) {
+				return new JstTypeRefType(extended);
 			}
-			
+		}
+		else if(type instanceof JstFuncType){
+			updateFunctionType((JstFuncType)type, groupInfo);
+		}
+		
+		if(!(type instanceof JstType)){
 			return type;
 		}
-
+		
 		JstType jstType = (JstType) type;
-
 		if (!jstType.getStatus().isPhantom()) {
 			if(jstType instanceof JstArray){
 				updateArrayType((JstArray)jstType, groupInfo);
@@ -2819,9 +2808,7 @@ public class JstExpressionTypeLinkerHelper {
 
 		// only check for phantom JstTypes which are replaced by OType in
 		// JstCache
-
 		JstType typeInCache = JstCache.getInstance().getType(jstType.getName());
-
 		if (typeInCache != null) {
 			if(typeInCache instanceof JstArray){
 				updateArrayType((JstArray)typeInCache, groupInfo);
