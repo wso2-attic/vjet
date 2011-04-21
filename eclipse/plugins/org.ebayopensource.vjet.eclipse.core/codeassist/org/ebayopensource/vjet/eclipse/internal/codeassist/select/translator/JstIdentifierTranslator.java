@@ -13,9 +13,13 @@ package org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator;
 
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstBlock;
+import org.ebayopensource.dsf.jst.declaration.JstProperty;
+import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKElementResolver;
+import org.eclipse.dltk.mod.core.IModelElement;
 
 /**
  * the ton unit jst node is JstIdentifier, this is the key translator based on
@@ -41,6 +45,19 @@ public class JstIdentifierTranslator extends DefaultNodeTranslator {
 			return null;
 		}
 		IJstNode binding = identifier.getJstBinding();
+		
+		if(binding instanceof JstProperty){
+			if(((JstProperty)binding).getParentNode() instanceof SynthOlType){
+				binding = identifier.getParentNode();
+				//CodeassistUtils.findDeclaringBlock(binding);
+				
+				JstBlock declaringBlock = CodeassistUtils.findDeclaringBlock(binding);
+				return declaringBlock;
+			
+			}
+			
+		}
+		
 
 		//check the identifer in local variable declarion site.
 		if((binding == null || binding instanceof IJstType) && CodeassistUtils.isLocalVarDeclaration(identifier)){

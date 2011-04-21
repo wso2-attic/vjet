@@ -47,7 +47,7 @@ public class JstAttributedTypeTranslator extends DefaultNodeTranslator {
 			if(resolver != null){
 				final IJstNode attributedBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(resolver, attributed);
 				if(attributedBinding != null && attributedBinding != jstNode){
-					return JstNodeTranslatorManager.getNodeTranslator(attributedBinding).convert(attributedBinding);
+					return JstToDLTKNodeTranslator.getNodeTranslator(attributedBinding).convert(attributedBinding);
 				}
 			}
 		}

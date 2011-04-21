@@ -12,24 +12,27 @@
 package org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator;
 
 import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.declaration.JstTypeRefType;
+import org.ebayopensource.dsf.jst.declaration.JstSynthesizedProperty;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKElementResolver;
 
 /**
- * JstRefType translator
+ * New translator for JstSynthesizedProperty type, like sysout/syserr
  * 
  * 
- *
+ * 
  */
-public class JstTypeRefTypeTranslator extends DefaultNodeTranslator {
+public class JstSynthesizedPropertyToDLTKTranslator extends DefaultNodeTranslator {
 
-	/* (non-Javadoc)
-	 * @see org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator.DefaultNodeTranslator#resolveBinding(org.ebayopensource.dsf.jst.IJstNode)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator.DefaultNodeTranslator#lookupBinding(org.ebayopensource.dsf.jst.IJstNode)
 	 */
 	@Override
 	public IJstNode lookupBinding(IJstNode jstNode) {
-		JstTypeRefType jstTypeRefType = (JstTypeRefType)jstNode;
-		return JstNodeDLTKElementResolver.lookupBinding(jstTypeRefType.getType());
+		JstSynthesizedProperty synthesizedProperty = (JstSynthesizedProperty) jstNode;
+		return JstNodeDLTKElementResolver.lookupBinding(synthesizedProperty
+				.getTypeRef());
 	}
 
 }

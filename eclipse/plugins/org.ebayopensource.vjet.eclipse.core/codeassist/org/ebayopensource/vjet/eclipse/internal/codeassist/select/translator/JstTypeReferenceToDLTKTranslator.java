@@ -19,7 +19,7 @@ import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKEle
  * 
  * 
  */
-public class JstTypeReferenceTranslator extends DefaultNodeTranslator {
+public class JstTypeReferenceToDLTKTranslator extends DefaultNodeTranslator {
 
 	/*
 	 * (non-Javadoc)

@@ -28,6 +28,8 @@ import org.eclipse.dltk.mod.core.ISourceReference;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.corext.SourceRange;
+import org.eclipse.dltk.mod.internal.core.IJSInitializer;
+import org.eclipse.dltk.mod.internal.core.JSInitializer;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.JavascriptPartitionScanner;
 import org.eclipse.dltk.mod.javascript.scriptdoc.IScanner;
 import org.eclipse.dltk.mod.javascript.scriptdoc.PublicScanner;
@@ -491,6 +493,10 @@ public class VjoFoldingStructureProvider extends
 			break;
 		case IModelElement.METHOD:
 		case IModelElement.FIELD:
+			// case IModelElement.INITIALIZER:
+			collapse = ctx.allowCollapsing() && m_CollapseMembers;
+			break;
+		case IJSInitializer.ELEMENT_TYPE:
 			// case IModelElement.INITIALIZER:
 			collapse = ctx.allowCollapsing() && m_CollapseMembers;
 			break;

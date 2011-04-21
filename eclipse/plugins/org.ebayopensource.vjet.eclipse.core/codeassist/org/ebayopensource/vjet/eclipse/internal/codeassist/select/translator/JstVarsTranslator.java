@@ -51,7 +51,7 @@ public class JstVarsTranslator extends DefaultNodeTranslator {
 		}
 		
 		IModelElement element =null;
-		IModelElement[] elementFromAry = JstNodeDLTKElementResolver.convert(module, declaringBlock);
+		IModelElement[] elementFromAry = JstNodeDLTKElementResolver.lookupAndConvert(declaringBlock);
 		if(elementFromAry!=null && elementFromAry.length==1){
 			element = elementFromAry[0];
 		}

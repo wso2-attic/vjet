@@ -16,7 +16,7 @@ import org.eclipse.dltk.mod.core.IModelElement;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator.IJstNodeTranslator;
-import org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator.JstNodeTranslatorManager;
+import org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator.JstToDLTKNodeTranslator;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class JstNodeDLTKElementResolver {
 	 * @return
 	 */
 	public static IModelElement[] convert(IVjoSourceModule module, IJstNode node) {
-		IJstNodeTranslator nodeTranslator = JstNodeTranslatorManager
+		IJstNodeTranslator nodeTranslator = JstToDLTKNodeTranslator
 				.getNodeTranslator(node);
 		if (nodeTranslator == null)
 			return null;
@@ -53,7 +53,7 @@ public class JstNodeDLTKElementResolver {
 	 * @return
 	 */
 	public static IModelElement[] convert(IJstNode node) {
-		IJstNodeTranslator nodeTranslator = JstNodeTranslatorManager
+		IJstNodeTranslator nodeTranslator = JstToDLTKNodeTranslator
 		.getNodeTranslator(node);
 		if (nodeTranslator == null)
 			return null;
@@ -67,7 +67,7 @@ public class JstNodeDLTKElementResolver {
 	 * @return
 	 */
 	public static IJstNode lookupBinding(IJstNode jstNode) {
-		IJstNodeTranslator nodeTranslator = JstNodeTranslatorManager
+		IJstNodeTranslator nodeTranslator = JstToDLTKNodeTranslator
 				.getNodeTranslator(jstNode);
 		if (nodeTranslator == null)
 			return null;

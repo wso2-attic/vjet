@@ -11,19 +11,17 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator;
 
-import org.eclipse.dltk.mod.core.Flags;
-import org.eclipse.dltk.mod.core.IField;
-import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.ModelException;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKElementResolver;
+import org.eclipse.dltk.mod.core.IField;
+import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.internal.core.JSSourceField;
 
 /**
  * 
@@ -41,6 +39,20 @@ public class JstPropertyTranslator extends DefaultNodeTranslator {
 		IJstProperty jstProperty = (IJstProperty) node;
 		IJstType ownerType = jstProperty.getOwnerType();
 		IModelElement[] elements = JstNodeDLTKElementResolver.convert(module, ownerType);
+		
+		if(elements.length==0 & ownerType instanceof SynthOlType){
+			
+			CodeassistUtils.findDeclaringBlock(node);
+			
+			elements = JstNodeDLTKElementResolver.convert(module, module.getJstType());
+			IType dltkType = (IType)elements[0];
+			String name = jstProperty.getName().getName();
+			IField field = dltkType.getField(name);
+//			IField field = 	return new JSSourceField(dltkType, name);
+			return field != null ? new IModelElement[] { field }
+			: new IModelElement[0];
+		}
+		
 		if(elements.length==0 || !(elements[0] instanceof IType)){
 			return new IModelElement[0];
 		}

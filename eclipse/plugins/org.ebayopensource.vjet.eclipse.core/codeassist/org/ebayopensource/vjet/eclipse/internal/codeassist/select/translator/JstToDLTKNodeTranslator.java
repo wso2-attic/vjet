@@ -35,6 +35,7 @@ import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.JstTypeWithArgs;
 import org.ebayopensource.dsf.jst.declaration.JstVar;
 import org.ebayopensource.dsf.jst.declaration.JstVars;
+import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
@@ -45,7 +46,7 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
  * 
  * 
  */
-public class JstNodeTranslatorManager {
+public class JstToDLTKNodeTranslator {
 	private static HashMap<Class<? extends IJstNode>, IJstNodeTranslator>	s_translators	= new HashMap<Class<? extends IJstNode>, IJstNodeTranslator>();
 
 	static {
@@ -62,7 +63,7 @@ public class JstNodeTranslatorManager {
 		s_translators.put(JstFunctionRefType.class, new JstFunctionRefTypeTranslator());
 		s_translators.put(JstRefType.class, jstTypeTranslator);
 		s_translators.put(JstTypeReference.class,
-				new JstTypeReferenceTranslator());
+				new JstTypeReferenceToDLTKTranslator());
 		s_translators.put(JstIdentifier.class, new JstIdentifierTranslator());
 		s_translators.put(JstProperty.class, jstPropertyTranslator);
 		s_translators.put(JstGlobalProp.class, jstPropertyTranslator);
@@ -75,23 +76,26 @@ public class JstNodeTranslatorManager {
 		s_translators.put(JstGlobalFunc.class, jstMethodTranslator);
 		s_translators.put(JstBlock.class, new JstBlockTranslator());
 		s_translators.put(JstName.class, new JstNameTranslator());
-		s_translators.put(JstTypeRefType.class, new JstTypeRefTypeTranslator());
+		s_translators.put(JstTypeRefType.class, new JstTypeRefTypeToDLTKTranslator());
 		s_translators.put(JstConstructor.class, jstConstructorTranslator);
 		s_translators
 				.put(JstDefaultConstructor.class, jstConstructorTranslator);
 		s_translators.put(JstSynthesizedProperty.class,
-				new JstSynthesizedPropertyTranslator());
+				new JstSynthesizedPropertyToDLTKTranslator());
 		
 		s_translators.put(JsCommentMetaNode.class,
 				new JsCommentMetaNodeTranslator());
 		s_translators.put(JstArray.class,
 				new JstArrayTranslator());
+		// TODO handle this case JstType translator will not work
+		s_translators.put(SynthOlType.class,
+				new SynthOLTypeToDLTKTranslator());
 	}
 
 	/**
 	 * static factory, not need constructor
 	 */
-	private JstNodeTranslatorManager() {
+	private JstToDLTKNodeTranslator() {
 	}
 
 	/**

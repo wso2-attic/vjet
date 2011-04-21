@@ -17,37 +17,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.dltk.mod.ast.Modifiers;
-import org.eclipse.dltk.mod.compiler.ISourceElementRequestor;
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.compiler.problem.IProblemReporter;
-import org.eclipse.dltk.mod.core.DLTKCore;
-import org.eclipse.dltk.mod.core.IScriptProject;
-import org.eclipse.dltk.mod.core.ISourceElementParser;
-import org.eclipse.dltk.mod.core.ISourceElementParserExtension;
-import org.eclipse.dltk.mod.core.ISourceModuleInfoCache.ISourceModuleInfo;
-import org.eclipse.dltk.mod.core.search.indexing.VjoSourceIndexerRequestor;
-import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
-
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
 import org.ebayopensource.dsf.jst.IJstGlobalProp;
 import org.ebayopensource.dsf.jst.IJstGlobalVar;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstOType;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
-import org.ebayopensource.dsf.jst.declaration.JstFuncType;
-import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
@@ -75,11 +55,13 @@ import org.ebayopensource.dsf.jst.stmt.ForStmt;
 import org.ebayopensource.dsf.jst.stmt.IfStmt;
 import org.ebayopensource.dsf.jst.stmt.RtnStmt;
 import org.ebayopensource.dsf.jst.stmt.SwitchStmt;
+import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.stmt.ThrowStmt;
 import org.ebayopensource.dsf.jst.stmt.TryStmt;
 import org.ebayopensource.dsf.jst.stmt.WhileStmt;
-import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
+import org.ebayopensource.dsf.jst.term.NV;
+import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.IInitializer;
 import org.ebayopensource.dsf.jst.token.ILHS;
@@ -98,6 +80,22 @@ import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.dltk.mod.ast.Modifiers;
+import org.eclipse.dltk.mod.compiler.ISourceElementRequestor;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.compiler.problem.IProblemReporter;
+import org.eclipse.dltk.mod.core.DLTKCore;
+import org.eclipse.dltk.mod.core.IScriptProject;
+import org.eclipse.dltk.mod.core.ISourceElementParser;
+import org.eclipse.dltk.mod.core.ISourceElementParserExtension;
+import org.eclipse.dltk.mod.core.ISourceModuleInfoCache.ISourceModuleInfo;
+import org.eclipse.dltk.mod.core.search.indexing.VjoSourceIndexerRequestor;
+import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 
 /**
  * 
@@ -271,10 +269,10 @@ public class VjoSourceElementParser implements ISourceElementParser,
 	private void processInitializer(IJstType type) {
 		JstBlock block = type.getInitBlock();
 //		List<IStmt> inits = type.getStaticInitializers();
-		if (block != null ) {
+		if (block != null && block.getSource()!=null) {
 			// TODO fix source ref here
-			int start = getInitializersStart();
-			int end = getInitializersEnd();
+			int start = block.getSource().getStartOffSet();
+			int end = block.getSource().getEndOffSet();
 			
 			
 			VarTable vars = block.getVarTable();
@@ -293,56 +291,59 @@ public class VjoSourceElementParser implements ISourceElementParser,
 			
 			fRequestor.enterInitializer(start, Modifiers.AccStatic);
 			
-			for(Map.Entry<String,IJstNode> varz : varMap.entrySet()){
-				String varName = varz.getKey();
-				IJstNode node = varz.getValue();
-				if(node instanceof JstIdentifier){
-				
-					IJstNode jstBinding = ((JstIdentifier) node).getJstBinding();
-					if(jstBinding instanceof JstFuncType){
-						processMethod(((JstFuncType)jstBinding).getFunction(), varName);
-					}else{
-						processIdentifier(((JstIdentifier) node).getType(), (JstIdentifier)node);
-					}
-				}
-				else if(node instanceof JstMethod){
-					processMethod((JstMethod)node, varName);
-				}
-//				processLocalVarDecl(jstVars);
-			}
+//			for(Map.Entry<String,IJstNode> varz : varMap.entrySet()){
+//				String varName = varz.getKey();
+//				IJstNode node = varz.getValue();
+//				if(node instanceof JstIdentifier){
+//				
+//					IJstNode jstBinding = ((JstIdentifier) node).getJstBinding();
+//					if(jstBinding instanceof JstFuncType){
+//						processMethod(((JstFuncType)jstBinding).getFunction(), varName);
+//					}else{
+//						processIdentifier(((JstIdentifier) node).getType(), (JstIdentifier)node);
+//					}
+//				}
+//				else if(node instanceof JstMethod){
+//					processMethod((JstMethod)node, varName);
+//				}
+////				processLocalVarDecl(jstVars);
+//			}
+			
+			processStatements(block);
+			
 			
 			
 			fRequestor.exitInitializer(end);
 		}
 	}
 
-	private int getInitializersEnd() {
-		int start = 0;
+//	private int getInitializersEnd() {
+//		int start = 0;
+//
+//		if (sourceModule != null) {
+//			String s = String.valueOf(sourceModule.getContentsAsCharArray());
+//			start = s.indexOf("inits");
+//			if (start != -1) {
+//				start = s.indexOf("}", start);
+//				if (start != -1) {
+//					start = s.indexOf(")", start);
+//				}
+//			}
+//		}
+//
+//		return start;
+//	}
 
-		if (sourceModule != null) {
-			String s = String.valueOf(sourceModule.getContentsAsCharArray());
-			start = s.indexOf("inits");
-			if (start != -1) {
-				start = s.indexOf("}", start);
-				if (start != -1) {
-					start = s.indexOf(")", start);
-				}
-			}
-		}
-
-		return start;
-	}
-
-	private int getInitializersStart() {
-		int start = 0;
-
-		if (sourceModule != null) {
-			String s = String.valueOf(sourceModule.getContentsAsCharArray());
-			start = s.indexOf("inits");
-		}
-
-		return start;
-	}
+//	private int getInitializersStart() {
+//		int start = 0;
+//
+//		if (sourceModule != null) {
+//			String s = String.valueOf(sourceModule.getContentsAsCharArray());
+//			start = s.indexOf("inits");
+//		}
+//
+//		return start;
+//	}
 
 	/**
 	 * @param type
@@ -1105,9 +1106,25 @@ public class VjoSourceElementParser implements ISourceElementParser,
 	private void processLocalVarDecl(JstVars jstVars) {
 		List<AssignExpr> inits = jstVars.getAssignments();
 		for (int i = 0; i < inits.size(); i++) {
-			JstIdentifier localVar = (JstIdentifier) inits.get(i).getLHS();
+			AssignExpr assignExpr = inits.get(i);
+			JstIdentifier localVar = (JstIdentifier) assignExpr.getLHS();
 			IJstType type = jstVars.getType();
-			processIdentifier(type, localVar);
+			JstSource source = localVar.getSource();
+			IJSSourceElementRequestor.JSFieldInfo fieldInfo = new IJSSourceElementRequestor.JSFieldInfo();
+			fieldInfo.name = localVar.getName();
+			fieldInfo.declarationStart = source.getStartOffSet();
+			fieldInfo.nameSourceStart = source.getStartOffSet();
+			fieldInfo.nameSourceEnd = source.getEndOffSet();
+			String typeName = "Object";
+			if (type != null) {
+				typeName = type.getName();
+			}
+			fieldInfo.m_type = typeName;
+			fRequestor.enterField(fieldInfo);
+			processExpression(assignExpr.getExpr());
+			fRequestor.exitField(assignExpr.getSource().getEndOffSet());
+			
+			
 		}
 	}
 
@@ -1150,6 +1167,23 @@ public class VjoSourceElementParser implements ISourceElementParser,
 				return;
 			}
 			JstSource source = identifier.getSource();
+			
+//			IJSSourceElementRequestor.JSFieldInfo fieldInfo = new IJSSourceElementRequestor.JSFieldInfo();
+//			fieldInfo.name = identifier.getName();
+//			fieldInfo.declarationStart = source.getStartOffSet();
+//			fieldInfo.nameSourceStart = source.getStartOffSet();
+//			fieldInfo.nameSourceEnd = source.getEndOffSet();
+//			IJstType type = identifier.getType();
+//			String typeName = "Object";
+//			if (type != null) {
+//				typeName = type.getName();
+//			}
+//			fieldInfo.m_type = typeName;
+//			fRequestor.enterField(fieldInfo);
+//			fRequestor.exitField(fieldInfo.nameSourceEnd);
+//			
+			
+//			fRequestor.enterField(fieldInfo);
 			fRequestor.acceptFieldReference(identifier.getName().toCharArray(),
 					source.getStartOffSet());
 		} else if (expression instanceof MtdInvocationExpr) {
@@ -1190,10 +1224,61 @@ public class VjoSourceElementParser implements ISourceElementParser,
 		} else if (expression instanceof ArrayAccessExpr) {
 			processExpression(((ArrayAccessExpr) expression).getExpr());
 			processExpression(((ArrayAccessExpr) expression).getIndex());
+		} else if(expression instanceof ObjLiteral){
+			// TODO handle obj literal expressions
+			processNVs((ObjLiteral)expression);
+			
 		} else if (expression instanceof FuncExpr) {
+			
 			// TODO handl function expressions
 //			processExpression(((FuncExpr) expression).);
 //			processExpression(((FuncExpr) expression));
+		}
+	}
+
+	private void processNVs(ObjLiteral expression) {
+		
+		
+		for(NV nv: ( expression).getNVs()){
+			
+			JstIdentifier identifier = nv.getIdentifier();
+			IJstProperty p = expression.getResultType().getProperty(identifier.getName());
+			IJstMethod m = expression.getResultType().getMethod(identifier.getName());
+			
+			JstSource source = nv.getIdentifier().getSource();
+			IJSSourceElementRequestor.JSFieldInfo fieldInfo = new IJSSourceElementRequestor.JSFieldInfo();
+			fieldInfo.name = identifier.getName();
+			fieldInfo.declarationStart = source.getStartOffSet();
+			fieldInfo.nameSourceStart = identifier.getSource().getStartOffSet();
+			fieldInfo.nameSourceEnd = identifier.getSource().getEndOffSet();
+			
+		
+			IJstType type = null;
+			if(p!=null){
+				 type = p.getType();
+			}
+			else if(m!=null){
+				// TODO we should use method info here not field info
+				type = m.getRtnType();
+				
+			}
+			
+			String typeName = "Object";
+			if (type != null) {
+				typeName = type.getName();
+			}
+			fieldInfo.m_type = typeName;
+			
+			fRequestor.enterField(fieldInfo);
+			if(nv.getValue() instanceof ObjLiteral){
+				processNVs((ObjLiteral)nv.getValue());
+				fRequestor.exitField(fieldInfo.nameSourceEnd);		
+			}else{
+				fRequestor.exitField(fieldInfo.nameSourceEnd);					
+			}
+			
+			
+//				processExpression(nv.getValue());
 		}
 	}
 
@@ -1202,7 +1287,11 @@ public class VjoSourceElementParser implements ISourceElementParser,
 	}
 
 	public void setRequestor(ISourceElementRequestor requestor) {
-		this.fRequestor = (IJSSourceElementRequestor) requestor;
+		
+		if(requestor instanceof IJSSourceElementRequestor){
+			this.fRequestor = (IJSSourceElementRequestor) requestor;
+		}
+		// do nothing without more info
 	}
 
 	private static String[] getTypesNames(List<? extends IJstType> types) {

@@ -91,6 +91,8 @@ public class VjoSourceModuleStructureRequestor implements
 	}
 
 	public void acceptFieldReference(char[] fieldName, int sourcePosition) {
+	
+		
 	}
 
 	/*
@@ -161,6 +163,8 @@ public class VjoSourceModuleStructureRequestor implements
 	}
 
 	public void acceptTypeReference(char[] typeName, int sourcePosition) {
+		
+		
 	}
 
 	// public boolean enterFieldCheckDuplicates(FieldInfo fieldInfo,

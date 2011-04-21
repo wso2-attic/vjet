@@ -94,9 +94,9 @@ public abstract class AbstractASTFoldingStructureProvider implements
 		/**
 		 * Returns <code>true</code> if newly created folding regions may be
 		 * collapsed, <code>false</code> if not. This is usually
-		 * <code>false</code> when updating the folding structure while
-		 * typing; it may be <code>true</code> when computing or restoring the
-		 * initial folding structure.
+		 * <code>false</code> when updating the folding structure while typing;
+		 * it may be <code>true</code> when computing or restoring the initial
+		 * folding structure.
 		 * 
 		 * @return <code>true</code> if newly created folding regions may be
 		 *         collapsed, <code>false</code> if not
@@ -498,8 +498,9 @@ public abstract class AbstractASTFoldingStructureProvider implements
 
 	private class ElementChangedListener implements IElementChangedListener {
 		/*
-		 * @see org.eclipse.dltk.mod.core.IElementChangedListener#elementChanged(org.
-		 *      eclipse.dltk.core.ElementChangedEvent)
+		 * @see
+		 * org.eclipse.dltk.mod.core.IElementChangedListener#elementChanged(org.
+		 * eclipse.dltk.core.ElementChangedEvent)
 		 */
 		public void elementChanged(ElementChangedEvent e) {
 			IModelElementDelta delta = findElement(fInput, e.getDelta());
@@ -645,7 +646,9 @@ public abstract class AbstractASTFoldingStructureProvider implements
 	}
 
 	/*
-	 * @see org.eclipse.dltk.mod.ui.text.folding.IScriptFoldingStructureProvider#initialize ()
+	 * @see
+	 * org.eclipse.dltk.mod.ui.text.folding.IScriptFoldingStructureProvider#
+	 * initialize ()
 	 */
 	public final void initialize() {
 		update(createInitialContext());
@@ -785,10 +788,13 @@ public abstract class AbstractASTFoldingStructureProvider implements
 							element = res.getElementByCommentPosition(
 									(ISourceModule) fInput, position.offset, 0);
 						}
-						ctx.addProjectionRange(new ScriptProjectionAnnotation(
-								initiallyCollapseComments(normalized, ctx),
-								true, new SourceRangeStamp(hash, normalized
-										.getLength()), element), position);
+						ctx.addProjectionRange(
+								new ScriptProjectionAnnotation(
+										initiallyCollapseComments(normalized,
+												ctx), true,
+										new SourceRangeStamp(hash, normalized
+												.getLength()), element),
+								position);
 					}
 				}
 			}
@@ -831,8 +837,8 @@ public abstract class AbstractASTFoldingStructureProvider implements
 									&& codeBlock.statement instanceof MethodDeclaration) {
 								MethodDeclaration meth = (MethodDeclaration) codeBlock.statement;
 
-								MethodVisitor vis = new MethodVisitor(meth
-										.getPositionInformation().nameStart,
+								MethodVisitor vis = new MethodVisitor(
+										meth.getPositionInformation().nameStart,
 										meth.getPositionInformation().nameEnd);
 
 								try {
@@ -937,25 +943,25 @@ public abstract class AbstractASTFoldingStructureProvider implements
 	 * @return a folding position corresponding to <code>aligned</code>
 	 */
 	protected final Position createMemberPosition(IRegion aligned) {
-		return new ScriptElementPosition(aligned.getOffset(), aligned
-				.getLength());
+		return new ScriptElementPosition(aligned.getOffset(),
+				aligned.getLength());
 	}
 
 	/**
 	 * Aligns <code>region</code> to start and end at a line offset. The
 	 * region's start is decreased to the next line offset, and the end offset
 	 * increased to the next line start or the end of the document.
-	 * <code>null</code> is returned if <code>region</code> is
-	 * <code>null</code> itself or does not comprise at least one line
-	 * delimiter, as a single line cannot be folded.
+	 * <code>null</code> is returned if <code>region</code> is <code>null</code>
+	 * itself or does not comprise at least one line delimiter, as a single line
+	 * cannot be folded.
 	 * 
 	 * @param region
 	 *            the region to align, may be <code>null</code>
 	 * @param ctx
 	 *            the folding context
 	 * @return a region equal or greater than <code>region</code> that is
-	 *         aligned with line offsets, <code>null</code> if the region is
-	 *         too small to be foldable (e.g. covers only one line)
+	 *         aligned with line offsets, <code>null</code> if the region is too
+	 *         small to be foldable (e.g. covers only one line)
 	 */
 	protected final IRegion alignRegion(IRegion region,
 			FoldingStructureComputationContext ctx) {
@@ -963,9 +969,16 @@ public abstract class AbstractASTFoldingStructureProvider implements
 			return null;
 		IDocument document = ctx.getDocument();
 		try {
+
 			int start = document.getLineOfOffset(region.getOffset());
-			int end = document.getLineOfOffset(region.getOffset()
-					+ region.getLength());
+
+			int endLocation = region.getOffset() + region.getLength();
+			if (endLocation > document.getLength()) {
+				endLocation = document.getLength();
+			}
+
+			int end = document.getLineOfOffset(endLocation);
+
 			if (start >= end)
 				return null;
 			int offset = document.getLineOffset(start);
@@ -1171,10 +1184,7 @@ public abstract class AbstractASTFoldingStructureProvider implements
 	 * @return
 	 * @deprecated will be removed
 	 * @see #initiallyCollapseComments(IRegion,
-	 * 
-	 * 
-	 * 
-	 * org.eclipse.dltk.mod.ui.text.folding.AbstractASTFoldingStructureProvider.FoldingStructureComputationContext)
+	 *      org.eclipse.dltk.mod.ui.text.folding.AbstractASTFoldingStructureProvider.FoldingStructureComputationContext)
 	 */
 	protected boolean initiallyCollapseComments(
 			FoldingStructureComputationContext ctx) {

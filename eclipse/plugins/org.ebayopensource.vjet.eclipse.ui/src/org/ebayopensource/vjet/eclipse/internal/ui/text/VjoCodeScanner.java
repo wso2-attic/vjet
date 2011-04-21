@@ -285,8 +285,11 @@ public class VjoCodeScanner extends JavascriptCodeScanner {
 		if(m_module instanceof VjoSourceModule){
 			VjoSourceModule module = ((VjoSourceModule) m_module);
 			IJstType jstType = module.getJstType();
+			if(jstType==null){
+				return;
+			}
 			JstPackage package1 = jstType.getPackage();
-			if(jstType==null || package1==null){
+			if(package1==null){
 				return;
 			}			
 			groupName = package1.getGroupName();
