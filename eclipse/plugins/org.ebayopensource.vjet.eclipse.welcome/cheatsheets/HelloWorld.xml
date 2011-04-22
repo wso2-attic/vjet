@@ -44,7 +44,7 @@ Then <b>save</b> your changes; the Js file will automatically validate upon savi
    </item>
    <item title="Run your VJET JS application" dialog="false" skip="false" href="/com.ebay.tools.vjet2.help/gettingStarted/basicTutorial/run_js.htm">
       <description>
-         To <b>run</b> your application, right-click on your js file in the Script Explorer and select <b>Run As</b> &gt; <b>VJET Application</b>. The <b>Console</b> view should appear at the bottom and display the &quot;Hello, world!&quot; output.<br/>
+         To <b>run</b> your application, right-click on your js file in the Script Explorer and select <b>Run As</b> &gt; <b>VJET JS Application</b>. The <b>Console</b> view should appear at the bottom and display the &quot;Hello, world!&quot; output.<br/>
 <br/>
 Congratulations! You have successfully created a Hello World
 application!

@@ -74,7 +74,7 @@
             class="org.ebayopensource.vjet.eclipse.internal.debug.ui.launcher.VjetLaunchShortcut"
             icon="icons/javascript.gif"
             id="org.ebayopensource.vjet.eclipse.debug.ui.launchShortcut"
-            label="VJET application"
+            label="VJET JS application"
             modes="run, debug">
 				<contextualLaunch>
 					<enablement>
@@ -99,12 +99,12 @@
             id="org.ebayopensource.vjet.eclipse.debug.ui.launchConfigurations.TclTabGroup"
             type="org.ebayopensource.vjet.eclipse.launching.VjetLaunchConfigurationType">
          <launchMode
-               description="Debug VJET application"
+               description="Debug VJET JS application"
                mode="debug"
                perspective="org.eclipse.debug.ui.DebugPerspective">
          </launchMode>
          <launchMode
-               description="Run a VJET application"
+               description="Run a VJET JS application"
                mode="run">
          </launchMode>
       </launchConfigurationTabGroup>
@@ -113,7 +113,7 @@
             id="org.ebayopensource.vjet.eclipse.debug.ui.launchConfigurations.HTMLTabGroup"
             type="org.ebayopensource.vjet.eclipse.launching.HTMLLaunchConfigurationType">
          <launchMode
-               description="Run a VJET application from html"
+               description="Run a VJET JS application from html"
                mode="run">
          </launchMode>
          <launchMode

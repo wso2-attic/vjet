@@ -26,8 +26,8 @@
 	  <topic label="Navigate to a VJET element's declaration" href="gettingStarted/basicTutorial/navigate.htm"/>
 	  <topic label="Viewing the type Hierarchy" href="gettingStarted/basicTutorial/viewing_type_hierarchy.htm"/>
 	  <topic label="Searching the workbench" href="gettingStarted/basicTutorial/search.htm"/>
-	  <topic label="Running VJET application" href="gettingStarted/basicTutorial/run.htm"/>
-	  <topic label="Debugging VJET application" href="gettingStarted/basicTutorial/debug.htm"/>
+	  <topic label="Running VJET JS application" href="gettingStarted/basicTutorial/run.htm"/>
+	  <topic label="Debugging VJET JS application" href="gettingStarted/basicTutorial/debug.htm"/>
 	  <topic label="Using the VJET browsing perspective" href="gettingStarted/basicTutorial/using_vjo_browsing_perspective.htm"/>
     </topic>
    
