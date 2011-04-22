@@ -182,7 +182,7 @@ public class CodeCompletionUtils {
 			strBldr.append(" ? ");
 		}
 		if (ref != null) {
-			final String rname = ref.getName();
+			final String rname = ref.getSimpleName();
 			strBldr.append(" ").append(rname);
 		}
 		strBldr.append(" - ");
