@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf;
 
+import java.io.File;
 import java.net.URL;
 
 import org.junit.BeforeClass;
@@ -55,7 +56,7 @@ public class AllJsToJavaTests {
 				path = path.substring("file:/".length());
 			}
 			String jarPath = path.substring(0, path.indexOf(".jar")+".jar".length());
-			System.setProperty("java.source.path", System.getProperty("java.source.path")+";"+jarPath);
+			System.setProperty("java.source.path", System.getProperty("java.source.path")+File.pathSeparator+jarPath);
 		}
 	}
 }
