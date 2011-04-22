@@ -82,7 +82,7 @@ public class VjoValidationTesterHelper {
         String userDir = System.getProperty("user.dir");
         String testFiles = userDir + File.separatorChar + "testFiles";
         String vjLib = userDir + File.separatorChar + "vjLibTestFiles";
-        System.setProperty("java.source.path", testFiles + ";" + vjLib);
+        System.setProperty("java.source.path", testFiles + File.pathSeparator + vjLib);
     }
 
     /**
