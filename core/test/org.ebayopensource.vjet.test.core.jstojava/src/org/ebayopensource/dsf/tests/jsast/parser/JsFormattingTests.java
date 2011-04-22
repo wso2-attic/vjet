@@ -17,6 +17,7 @@ import java.net.URL;
 
 import org.junit.Test;
 
+import org.ebayopensource.dsf.javatojs.tests.TestHelper;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
@@ -69,8 +70,10 @@ public class JsFormattingTests {
 				LibManager.getInstance().getJsNativeGlobalLib()).parse(null, jsFile).getType();
 		
 		GeneratorCtx ctx = new GeneratorCtx(CodeStyle.PRETTY);
+		ctx.setNewline(TestHelper.NEWLINE);
 		ctx.getConfig().setAddCodeGenAnnotation(true);
 		VjoGenerator writer = new VjoGenerator(ctx);
+		writer.setNewline(TestHelper.NEWLINE);
         writer.writeVjo(type);
         String generatedVjo = writer.getGeneratedText();
         

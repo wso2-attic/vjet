@@ -171,6 +171,7 @@ public class VjoCommentTest {
 	private static void assertValidText(String fileName, String file,
 			IJstType type) {
 		GeneratorCtx ctx = new GeneratorCtx(CodeStyle.PRETTY);
+		ctx.setNewline(TestHelper.NEWLINE);
 		ctx.getConfig().setAddCodeGenAnnotation(false);
 		VjoGenerator gen = new VjoGenerator(ctx);
 		gen.setNewline(TestHelper.NEWLINE);
