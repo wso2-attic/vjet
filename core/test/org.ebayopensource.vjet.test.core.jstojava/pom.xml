@@ -98,15 +98,15 @@
 						<version>5.12.1</version>
 					</dependency>
 				</dependencies>
-		        <configuration>
+		        	<configuration>
 					<systemPropertyVariables>
-			            <java.source.path>${java.source.path}</java.source.path>
-			        </systemPropertyVariables>
-			        <enableAssertions>false</enableAssertions>
+			            	<java.source.path>${java.source.path}</java.source.path>
+					</systemPropertyVariables>
+					<enableAssertions>false</enableAssertions>
 					<forkMode>always</forkMode>
-          			<trimStackTrace>false</trimStackTrace>
-          			<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-          			<testFailureIgnore>true</testFailureIgnore>
+          				<trimStackTrace>false</trimStackTrace>
+          				<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+          				<testFailureIgnore>false</testFailureIgnore>
 					<excludes>
 						<exclude>**/All*Tests.java</exclude>
 						<exclude>**/*Base*.java</exclude>
