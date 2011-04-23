@@ -7,9 +7,6 @@ vjo.ctype('org.dojotoolkit.ext.Colors') //< public
 	//>public Dojo.Color makeGrey(Number g, Number? a)
 	makeGrey : vjo.NEEDS_IMPL
 })
-.inits(function(){
-	dojo.require("dojo.colors");
-})
 .options({
 	metatype:true
 })

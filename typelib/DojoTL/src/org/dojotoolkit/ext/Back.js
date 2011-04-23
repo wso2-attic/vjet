@@ -17,9 +17,6 @@ vjo.ctype('org.dojotoolkit.ext.Back') //< public
 	//>public void setInitialState(Object args) 
 	setInitialState : vjo.NEEDS_IMPL	
 })
-.inits(function(){
-	dojo.require("dojo.back");
-})
 .options({
 	metatype:true
 })

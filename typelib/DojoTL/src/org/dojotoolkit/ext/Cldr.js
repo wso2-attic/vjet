@@ -17,10 +17,6 @@ vjo.ctype('org.dojotoolkit.ext.Cldr') //< public
 	}).endType()
 	
 })
-.inits(function(){
-	dojo.require("dojo.cldr.monetary");
-	dojo.require("dojo.cldr.supplemental");
-})
 .options({
 	metatype:true
 })
