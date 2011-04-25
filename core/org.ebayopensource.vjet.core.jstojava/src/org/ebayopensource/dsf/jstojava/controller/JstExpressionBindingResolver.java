@@ -21,13 +21,16 @@ import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstRefResolver;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
+import org.ebayopensource.dsf.jst.JstSource.IBinding;
 import org.ebayopensource.dsf.jst.ProblemSeverity;
 import org.ebayopensource.dsf.jst.ResolutionResult;
-import org.ebayopensource.dsf.jst.JstSource.IBinding;
+import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
+import org.ebayopensource.dsf.jst.declaration.JstGlobalProp;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jstojava.report.DefaultErrorReporter;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
+import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
 import org.ebayopensource.dsf.ts.ITypeSpace;
 
 public class JstExpressionBindingResolver implements IJstRefResolver {
@@ -82,8 +85,19 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 					if (!error) {
 						for (IJstGlobalVar gvar : type.getGlobalVars()) {
 							final String groupName = type.getPackage().getGroupName();
+							final IJstNode globalBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(this, gvar.getType(), new GroupInfo(groupName, null));
 							
-							JstExpressionTypeLinkerHelper.look4ActualBinding(this, gvar.getType(), new GroupInfo(groupName, null));
+							if(gvar.getType() instanceof JstAttributedType){
+								if(!gvar.isFunc()){
+									final IJstGlobalProp globalPty = gvar.getProperty();
+									if(globalBinding instanceof IJstProperty
+											&& globalPty instanceof JstGlobalProp){
+										((JstGlobalProp)globalPty)
+											.setProperty(new RenameableSynthJstProxyProp((IJstProperty)globalBinding, globalPty.getName().getName()));
+									}
+								}
+							}
+							
 							
 							//TODO replace gvar symbol with attributed type bound updates
 							typeSpace.addToGlobalSymbolMap(groupName,
