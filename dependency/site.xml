@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/com.ebay.kernel.binary_1.0.0.201104151541.jar" id="com.ebay.kernel.binary" version="1.0.0.201104151541">
-      <category name="EBAY_BINARY_PLUGINS"/>
+   <feature url="features/com.ebay.kernel.binary_1.0.0.201104251451.jar" id="com.ebay.kernel.binary" version="1.0.0.201104251451">
+      <category name="VJET_BUILD_DEPENDENCY"/>
    </feature>
    
-   <feature url="features/com.ebay.tools.binary_1.0.0.201104151541.jar" id="com.ebay.tools.binary" version="1.0.0.201104151541">
-      <category name="EBAY_BINARY_PLUGINS"/>
+   <feature url="features/com.ebay.tools.binary_1.0.0.201104251451.jar" id="com.ebay.tools.binary" version="1.0.0.201104251451">
+      <category name="VJET_BUILD_DEPENDENCY"/>
    </feature>
 
-   <category-def name="eBay Binary Plugins" label="eBayBinaryPlugins"/>
+   <category-def name="VJET_BUILD_DEPENDENCY" label="VJET Build Dependent Plugins"/>
 </site>
