@@ -52,10 +52,10 @@ public class Ecma3OperatorsTests extends VjoValidationBaseTester {
                 .add(createNewProblem(FieldProbIds.UndefinedField, 195, 0));
         expectProblems
                 .add(createNewProblem(FieldProbIds.UndefinedField, 200, 0));
-        expectProblems
-        		.add(createNewProblem(FieldProbIds.UndefinedField, 296, 0));
-        expectProblems
-        		.add(createNewProblem(FieldProbIds.UndefinedField, 297, 0));
+//        expectProblems
+//        		.add(createNewProblem(FieldProbIds.UndefinedField, 296, 0));
+//        expectProblems
+//        		.add(createNewProblem(FieldProbIds.UndefinedField, 297, 0));
         // bugfix by roy, redeclared local with same type, tolerated
         // expectProblems.add(createNewProblem(VarProbIds.RedefinedLocal, 205,
         // 0));

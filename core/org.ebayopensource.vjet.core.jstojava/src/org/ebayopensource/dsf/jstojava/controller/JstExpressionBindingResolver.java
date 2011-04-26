@@ -25,7 +25,9 @@ import org.ebayopensource.dsf.jst.JstSource.IBinding;
 import org.ebayopensource.dsf.jst.ProblemSeverity;
 import org.ebayopensource.dsf.jst.ResolutionResult;
 import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
+import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalProp;
+import org.ebayopensource.dsf.jst.declaration.JstSynthesizedProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jstojava.report.DefaultErrorReporter;
@@ -90,10 +92,15 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 							if(gvar.getType() instanceof JstAttributedType){
 								if(!gvar.isFunc()){
 									final IJstGlobalProp globalPty = gvar.getProperty();
-									if(globalBinding instanceof IJstProperty
-											&& globalPty instanceof JstGlobalProp){
-										((JstGlobalProp)globalPty)
-											.setProperty(new RenameableSynthJstProxyProp((IJstProperty)globalBinding, globalPty.getName().getName()));
+									if(globalPty instanceof JstGlobalProp){
+										if(globalBinding instanceof IJstProperty){
+											((JstGlobalProp)globalPty)
+												.setProperty(new RenameableSynthJstProxyProp((IJstProperty)globalBinding, globalPty.getName().getName()));
+										}
+										else if(globalBinding instanceof IJstMethod){
+											((JstGlobalProp)globalPty)
+												.setProperty(new JstSynthesizedProperty(new JstFuncType((IJstMethod)globalBinding), globalPty.getName().getName(), null, null));
+										}
 									}
 								}
 							}

@@ -148,7 +148,8 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		else if (type instanceof JstFuncType) {
 			final IJstMethod func = ((JstFuncType) type).getFunction();
-			return bindAttributedType(resolver, func, groupInfo);
+			bindAttributedType(resolver, func, groupInfo);
+			return null;//bugfix by huzhou, defer the actual binding till mtdinvocationvisit
 		} 
 		else if (type instanceof JstAttributedType) {
 			return doAttributedTypeBindings(resolver, (JstAttributedType) type, groupInfo);
