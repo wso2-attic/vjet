@@ -33,6 +33,7 @@ public class OnDemandValidationTestLoader implements IJstTypeLoader {
 	private String m_group = ONDEMAND;
 	private List<SourceType> m_sources;
 	private Map<String,String> m_lookedup = new HashMap<String, String>();
+	private boolean s_debug;
 
 	
 	public OnDemandValidationTestLoader(IJstType type) {
@@ -90,7 +91,9 @@ public class OnDemandValidationTestLoader implements IJstTypeLoader {
 			TranslateConfig cfg = new TranslateConfig();
 			cfg.setSkiptImplementation(true);
 			VjoParser p = new VjoParser(cfg);
-			System.out.println("url: "+url);
+			if(s_debug){
+				System.out.println("url = " + url);
+			}
 			IJstType type = p.parse(m_group, url).getType();
 			if (type!=null) {
 				findSources(type);
@@ -111,7 +114,9 @@ public class OnDemandValidationTestLoader implements IJstTypeLoader {
 	protected void addSource(IJstType ineed) {
 		URL url = this.getClass().getClassLoader().getResource(
 				ineed.getName().replace(".", "/")+JS);
-		System.out.println("Lax : url = " + url);
+		if(s_debug){
+			System.out.println("url = " + url);
+		}
 		if(url==null && ineed.getSource()!=null && ineed.getSource().getBinding()!=null && ineed.getSource().getBinding() instanceof SimpleBinding){
 			try {
 				File f = new File(((SimpleBinding)ineed.getSource().getBinding()).getName());
@@ -123,13 +128,17 @@ public class OnDemandValidationTestLoader implements IJstTypeLoader {
 		}
 		if (url!=null) {
 			String src = VjoParser.getContent(url);
-			System.out.println("Lax : src = " + src);
+			if(s_debug){
+				System.out.println("src = " + src);
+			}
 			m_sources.add(new SourceType(m_group,ineed.getName(),src,new File(url.getFile())));
 		}
 	}
 	
 	protected void addSource(IJstType ineed, URL url) {
-		System.out.println("Lax : url = " + url);
+		if(s_debug){
+			System.out.println("url = " + url);
+		}
 		if(url==null && ineed.getSource()!=null && ineed.getSource().getBinding()!=null && ineed.getSource().getBinding() instanceof SimpleBinding){
 			try {
 				File f = new File(((SimpleBinding)ineed.getSource().getBinding()).getName());
@@ -141,7 +150,9 @@ public class OnDemandValidationTestLoader implements IJstTypeLoader {
 		}
 		if (url!=null) {
 			String src = VjoParser.getContent(url);
-			System.out.println("Lax : src = " + src);
+			if(s_debug){
+				System.out.println("src = " + src);
+			}
 			m_sources.add(new SourceType(m_group,ineed.getName(),src,new File(url.getFile())));
 		}
 	}
