@@ -118,18 +118,27 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 
 	private boolean validateGlobal(IJstType type, JstTypeSpaceMgr mgr,
 			ResolutionResult rr, boolean error) {
-		for (IJstGlobalVar vars : type.getGlobalVars()) {
-			String name = vars.getName().getName();
-
+		for (IJstGlobalVar var : type.getGlobalVars()) {
 			
+			String glbScope = var.getScopeForGlobal();
+			if (glbScope != null) {
+				//TODO validate conflict under given global scope
+				continue;
+			}
+			
+			String name = var.getName().getName();
 			String groupName = type.getPackage().getGroupName();
-			IJstNode findGlobal = mgr.getQueryExecutor().findGlobal(groupName, name);
+			IJstNode findGlobal = mgr.getQueryExecutor().findGlobalVar(groupName, name, true);
+			
+			if (findGlobal == null) {
+				continue;
+			}
 			
 			// determine if global conflicts with global type or type without
 			// package
 			List<IJstType> list = mgr.getTypeSpace().getType(name);
 			if (!list.isEmpty()) {
-				IScriptProblem prblm = reportError(type, vars, name,
+				IScriptProblem prblm = reportError(type, var, name,
 						findGlobal, "global " + name
 								+ " has already been defined in type: " + list.get(0).getName());
 				rr.addProblem(prblm);
@@ -139,10 +148,10 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 			
 			
 			// determine if global property or method exists
-			if (findGlobal != null && (findGlobal instanceof IJstGlobalProp  || 
+			if ((findGlobal instanceof IJstGlobalProp  || 
 					findGlobal instanceof IJstGlobalFunc) && !findGlobal.getOwnerType().equals(type)) {
 
-				IScriptProblem prblm = reportError(type, vars, name,
+				IScriptProblem prblm = reportError(type, var, name,
 						findGlobal, "global " + name
 								+ " has already been defined in type: "
 								+ type.getName());
@@ -152,37 +161,6 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 				error =  true;
 				continue;
 			}
-
-
-
-//			 determine if global conflicts with any window type instance
-//			 properties or methods
-
-			
-			 List<IJstType> windowTypeList =mgr.getTypeSpace().getVisibleType("Window", getController().getJstTypeSpaceMgr().getTypeSpace().getGroup(groupName));
-			 if(windowTypeList.size()==0){
-				 continue;
-			 }
-			 IJstType window = windowTypeList.get(0);
-			 IJstMethod method = window.getMethod(name, false);
-			 if(method!=null){
-				 IScriptProblem prblm = reportError(type, vars, name, method,
-				 "global " + name + " has already been defined in window");
-				 rr.addProblem(prblm);
-				 error = true;
-				 continue;
-			 }
-						
-			 IJstProperty property = window.getProperty(name);
-			 if(property!=null){
-				 IScriptProblem prblm = reportError(type, vars, name, property,
-				 "global " + name + " has already been defined in window");
-				 rr.addProblem(prblm);
-				error= true;
-				continue;
-			 }
-						
-
 		}
 		return error;
 	}

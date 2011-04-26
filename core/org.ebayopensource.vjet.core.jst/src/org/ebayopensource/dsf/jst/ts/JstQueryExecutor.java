@@ -172,8 +172,22 @@ public class JstQueryExecutor {
 		return m_ts.getGlobalType(groupName, typeName);		
 	}
 	
-	public IJstNode findGlobalVar(final String groupName, final String ptyName) {
-		return m_ts.getGlobalVar(groupName, ptyName);
+	public IJstNode findGlobalVar(final String groupName, final String ptyName, final boolean recursive) {
+		IJstNode var = m_ts.getGlobalVar(groupName, ptyName);
+		if (var != null) {
+			return var;
+		}
+		if (!recursive) {
+			return null;
+		}
+		IGroup<IJstType> group = m_ts.getGroup(groupName);
+		for (IGroup<IJstType> depGrp : group.getGroupDependency()) {
+			var = m_ts.getGlobalVar(depGrp.getName(), ptyName);
+			if (var != null) {
+				return var;
+			}
+		}
+		return null;
 	}
 	
 	public List<IJstNode> getAllGlobalVars() {
@@ -721,10 +735,6 @@ public class JstQueryExecutor {
 				l.addAll(entry.getValue());
 			}
 		}
-	}
-
-	public IJstNode findGlobal(String groupName, String name) {
-		return m_ts.getGlobalVar(groupName, name);
 	}
 	
 	public boolean hasGlobalExtension(String globalVarName) {
