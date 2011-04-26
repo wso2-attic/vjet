@@ -22,6 +22,31 @@
    <version>1.0.0-SNAPSHOT</version>
    <name>VJET Test: Eclipse Core Tests</name>
 
+   <profiles>
+	<profile>
+		<id>mac-family</id>
+		<activation>
+      		<os>
+        			<family>mac</family>
+      		</os>
+    		</activation>
+		<properties>
+			<eclipse.test.argline>-Xms512m -Xmx1024m -XX:MaxPermSize=256M -XstartOnFirstThread</eclipse.test.argline>
+   		</properties>
+	</profile>
+	<profile>
+		<id>non-mac-families</id>
+		<activation>
+      		<os>
+        			<family>!mac</family>
+      		</os>
+    		</activation>
+		<properties>
+			<eclipse.test.argline>-Xms512m -Xmx1024m -XX:MaxPermSize=256M</eclipse.test.argline>
+   		</properties>
+	</profile>
+   </profiles>
+
 	<build>
     <plugins>
         <plugin>
@@ -30,7 +55,7 @@
             <version>${tycho-version}</version>
             <configuration>
                <useUIHarness>true</useUIHarness>
-               <argLine>-Xms512m -Xmx1024m -XX:MaxPermSize=256M -XstartOnFirstThread</argLine>
+               <argLine>${eclipse.test.argline}</argLine>
                <includes>
                		<include>**/*Test.java</include>
                		<include>**/*Tests.java</include>
