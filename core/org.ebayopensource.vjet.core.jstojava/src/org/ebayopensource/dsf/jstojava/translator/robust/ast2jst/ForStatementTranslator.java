@@ -52,21 +52,29 @@ public class ForStatementTranslator extends
 			Statement[] inits = statement.initializations;
 			List<AssignExpr> list = new ArrayList<AssignExpr>();
 			boolean isLocalDeclaration = false;
+			JstVars jstVars = null;
 			for (Statement initializer : inits) {
 				if (initializer.getASTType() == IASTNode.LOCAL_DECLARATION) {
 					isLocalDeclaration = true;
 				}
-				Object jstVar = getTranslatorAndTranslate(initializer, forStmt);
-				if (jstVar instanceof JstVars) {
-					List<AssignExpr> initializers = ((JstVars) jstVar)
+				final Object translated = getTranslatorAndTranslate(initializer, forStmt);
+				if (translated instanceof JstVars) {
+					List<AssignExpr> initializers = ((JstVars) translated)
 							.getAssignments();
 					for (AssignExpr jstInitializer : initializers) {
 						list.add(jstInitializer);
 					}
-					// } else if (jstVar instanceof JstInitializer) {
-					// list.add(jstVar);
-				} else if (jstVar instanceof AssignExpr) {
-					AssignExpr assignExpr = (AssignExpr) jstVar;
+					
+					if(jstVars == null){
+						jstVars = (JstVars)translated;
+					}
+					else{
+						for(AssignExpr assignExpr: ((JstVars)translated).getAssignments()){
+							jstVars.addAssignment(assignExpr);
+						}
+					}
+				} else if (translated instanceof AssignExpr) {
+					AssignExpr assignExpr = (AssignExpr) translated;
 					// JstInitializer init = new JstInitializer(assignExpr
 					// .getLHS(), assignExpr.getExpr());
 					list.add(assignExpr);
@@ -78,17 +86,22 @@ public class ForStatementTranslator extends
 
 			}
 			if (isLocalDeclaration) { // initializer is a local declaration: for (var i = 0;;;)
-				JstType obj =JstCache.getInstance().getType("Object");
-				if(obj==null){
-					obj = JstFactory.getInstance().createJstType(
-							"Object", true);
+				if(jstVars == null){
+					JstType obj =JstCache.getInstance().getType("Object");
+					if(obj==null){
+						obj = JstFactory.getInstance().createJstType(
+								"Object", true);
+					}
+					final JstVars vars = 
+						new JstVars(obj);
+					for (AssignExpr assignExpr : list) {
+						vars.addAssignment(assignExpr);
+					}
+					
+					jstVars = vars;
 				}
-				JstVars vars = 
-					new JstVars(obj);
-				for (AssignExpr assignExpr : list) {
-					vars.addAssignment(assignExpr);
-				}
-				forStmt.setInitializer(vars);
+				
+				forStmt.setInitializer(jstVars);
 			} else { // initializer is assignment: for (i = 0;;;)
 				JstInitializer jstInitializer = null;
 				for (AssignExpr assignExpr : list) {

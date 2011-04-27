@@ -67,6 +67,9 @@ public class VjoJstArrayInitializerValidator
 				&& !(arrayElemExpectType instanceof IInferred)){
 				if(arrayInit.getExprs() != null){
 					for(IExpr arrayElem : arrayInit.getExprs()){
+						if(arrayElem == null){
+							continue;
+						}
 						final IJstType arrayElemActualType = arrayElem.getResultType();
 						if(arrayElemActualType != null
 								&& !TypeCheckUtil.isAssignable(arrayElemExpectType, arrayElemActualType)){
