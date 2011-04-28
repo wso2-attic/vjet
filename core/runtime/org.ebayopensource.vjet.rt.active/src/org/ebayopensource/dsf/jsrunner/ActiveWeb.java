@@ -9,23 +9,27 @@
 package org.ebayopensource.dsf.jsrunner;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.net.URL;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ebayopensource.dsf.active.client.AWindow;
+import org.ebayopensource.dsf.dap.rt.DapCtx;
+import org.ebayopensource.dsf.dap.rt.DapCtx.ExeMode;
+import org.ebayopensource.dsf.dap.rt.DapIntercepter;
+import org.ebayopensource.dsf.dap.rt.IBrowserEmulatorListener;
+import org.ebayopensource.dsf.html.dom.DHtmlDocument;
+import org.ebayopensource.dsf.html.dom.DHtmlDocumentBuilder;
+import org.ebayopensource.dsf.html.dom.DScript;
+import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.handler.AbstractHandler;
 
-import org.ebayopensource.dsf.active.client.AWindow;
-import org.ebayopensource.dsf.dap.rt.DapCtx;
-import org.ebayopensource.dsf.dap.rt.DapIntercepter;
-import org.ebayopensource.dsf.dap.rt.IBrowserEmulatorListener;
-import org.ebayopensource.dsf.dap.rt.DapCtx.ExeMode;
-import org.ebayopensource.dsf.html.dom.DHtmlDocument;
-import org.ebayopensource.dsf.html.dom.DHtmlDocumentBuilder;
-import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import com.ebay.kernel.util.xml.IIndenter;
 
 public class ActiveWeb {
@@ -36,21 +40,25 @@ public class ActiveWeb {
 	
 	private int m_port = 8090;
 	private Server m_webServer = null;
-	private DHtmlDocument m_doc = null;
-	private DapIntercepter m_intercepter = null;
+	private final DHtmlDocument m_doc;
+	private final DapIntercepter m_intercepter;
 	private boolean m_windowLoaded = false;
 	private boolean m_exit = false;
 	private Process m_displayProc = null;
-	private IBrowserLauncher m_browserLauncher;
+	private final IBrowserLauncher m_browserLauncher;
+	private final ExeMode m_mode;
 	
-	public ActiveWeb(URL url, IBrowserLauncher browserLauncher) throws IOException {
-		m_doc = DHtmlDocumentBuilder.getDocument(url.openConnection().getInputStream());
-		m_intercepter = new DapIntercepter(WEB_HOST, ExeMode.TRANSLATE);
+	public ActiveWeb(InputStream is, IBrowserLauncher browserLauncher, ExeMode mode) throws IOException {
+		m_mode = mode;
+		m_doc = DHtmlDocumentBuilder.getDocument(is);
+		m_intercepter = new DapIntercepter(WEB_HOST, m_mode);
 		m_browserLauncher = (browserLauncher != null)? browserLauncher: BrowserLauncher.getInstance();
 	}
 	
 	public static void main(String[] args) throws Exception {
-		ActiveWeb aWeb = new ActiveWeb(new URL("http://localhost/Html5Tests.html"), null);
+		ActiveWeb aWeb = new ActiveWeb(
+			new URL("http://localhost/Html5Tests.html").openConnection().getInputStream(),
+			null, ExeMode.TRANSLATE);
 		aWeb.startWebServer();
 		aWeb.addListener(new IBrowserEmulatorListener() {			
 			@Override
@@ -118,7 +126,9 @@ public class ActiveWeb {
 	
 	public void destroy() {
 		stopWebServer();
-		m_intercepter.getEmulator().shutdown();
+		if (m_mode != ExeMode.WEB) {
+			m_intercepter.getEmulator().shutdown();
+		}
 		if (m_displayProc != null) {
 			m_displayProc.destroy();
 		}
@@ -184,6 +194,40 @@ public class ActiveWeb {
 		return "http://" + WEB_HOST + ":" + m_port + WEB_EXIT_COMMAND;
 	}
 	
+	public boolean isWebMode() {
+		return m_mode == ExeMode.WEB;
+	}
+	
+	public void loadJs(URL url) {
+		DScript script = new DScript().setHtmlType("text/javascript");
+		String urlStr = url.toExternalForm();
+		if (urlStr.startsWith("http")) {
+			script.setHtmlSrc(urlStr);			
+		} else {
+			script.add(getContent(url));
+		}
+		m_doc.getBody().add(script);
+	}
+	
+	private String getContent(URL url) {
+		try {
+			Reader r = new InputStreamReader(url.openStream());
+			StringBuilder sb = new StringBuilder(100);
+			char[] buffer = new char[100];
+			int i = 0;
+			while (i != -1) {
+				i = r.read(buffer);
+				if (i > 0) {
+					sb.append(buffer, 0, i);
+				}
+			}
+			return sb.toString();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	private class WebHandler extends AbstractHandler {
 		public void handle(String target,
 			HttpServletRequest request,
@@ -193,6 +237,10 @@ public class ActiveWeb {
 			if (DISPLAY_COMMAND.equalsIgnoreCase(request.getPathInfo())) {
 				m_intercepter.handleRequest(request, null);
 				m_intercepter.handleResponse(request, response, m_doc, IIndenter.COMPACT);
+				if (m_mode == ExeMode.WEB) {
+					windowLoaded();
+					exit();
+				}
 			}
 			else if (WEB_EXIT_COMMAND.equalsIgnoreCase(request.getPathInfo())) {
 				String content = "<html><body>exit</body><html>";	

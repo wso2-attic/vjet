@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jsrunner;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
@@ -52,6 +55,7 @@ public class JsRunner {
 	protected Scriptable m_scope;
 	protected ActiveWeb m_activeWeb;
 	protected ProgramInfo m_info;
+	protected ExeMode m_mode = ExeMode.TRANSLATE;
 	
 	public static final String JS_OPTION_TOKEN = "-V";
 	public static final String BROWSER_KEY = "browser";
@@ -66,9 +70,12 @@ public class JsRunner {
 	public static final String DAP_MODE_KEY = "dapMode";
 	public static final String WAIT_TIMEOUT_KEY = "waitTimeout";
 	public static final String A_MODE_VALUE = "A";
+	public static final String W_MODE_VALUE = "W";
 	
 	public static final String LIST_SEPERATOR = ";";
 	public static final String HTTP = "http://";
+	
+	private static final String TEST_HTML_PAGE = "<html><head><title>VJET TEST PAGE</title></head><body></body></html>";
 	
 	/**
 	 * the args should follow the following pattern:
@@ -121,12 +128,33 @@ public class JsRunner {
 	
 	public JsRunner(ProgramInfo info, boolean debug, IBrowserLauncher launcher) {
 		m_info = info;
-		BrowserType type = m_info.getBrowserType();
-		
+		String modeValue = m_info.getOption(DAP_MODE_KEY);
+		if (A_MODE_VALUE.equals(modeValue)) {
+			m_mode = ExeMode.ACTIVE;
+		} else if (W_MODE_VALUE.equals(modeValue)) {
+			m_mode = ExeMode.WEB;
+		}
+		BrowserType type = m_info.getBrowserType();		
 		String htmlFile = m_info.getPreloadHtml();
-		if (htmlFile != null && m_info.needBrowserDisplay()) {
-			loadActiveWeb(toUrl(htmlFile), launcher);
-			m_activeWeb.addListener(createWebHandler(debug));
+		InputStream htmlInputStream = null;
+		if (htmlFile != null) {
+			try {
+				htmlInputStream = toUrl(htmlFile).openConnection().getInputStream();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else if (htmlFile == null && (m_info.needBrowserDisplay()||m_mode == ExeMode.WEB)) {
+			htmlInputStream = new ByteArrayInputStream(TEST_HTML_PAGE.getBytes());
+		}
+		if (htmlInputStream != null && (m_info.needBrowserDisplay()||m_mode == ExeMode.WEB)) {
+			loadActiveWeb(htmlInputStream, launcher);
+			if (m_mode == ExeMode.WEB) {
+				preloadJs();
+				m_activeWeb.loadJs(m_info.getFileName());
+			} else {
+				m_activeWeb.addListener(createWebListener(debug));
+			}
 			m_activeWeb.displayUrlInBrowser(type);
 			return;
 		}
@@ -211,7 +239,11 @@ public class JsRunner {
 			return;
 		}
 		for (String jsFileName : ls) {
-			runScript(toUrl(jsFileName));
+			if (m_mode == ExeMode.WEB) {
+				m_activeWeb.loadJs(toUrl(jsFileName));
+			} else {
+				runScript(toUrl(jsFileName));
+			}
 		}
 	}
 	
@@ -234,9 +266,9 @@ public class JsRunner {
 		AHtmlParser.parse(htmlSrc, null, m_window);
 	}
 	
-	public void loadActiveWeb(URL url, IBrowserLauncher launcher) {
-		try {
-			m_activeWeb = new ActiveWeb(url, launcher);
+	public void loadActiveWeb(InputStream is, IBrowserLauncher launcher) {
+		try {			
+			m_activeWeb = new ActiveWeb(is, launcher, m_mode);
 			m_activeWeb.startWebServer();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -530,7 +562,7 @@ public class JsRunner {
 		}
 	}
 	
-	protected ActiveWebListener createWebHandler(boolean debugEnabled) {
+	protected ActiveWebListener createWebListener(boolean debugEnabled) {
 		return new ActiveWebListener(debugEnabled);
 	}
 	

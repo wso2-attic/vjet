@@ -123,7 +123,7 @@ public class VjoRunner extends JsRunner {
 	}
 	
 	@Override
-	protected ActiveWebListener createWebHandler(boolean debugEnabled) {
+	protected ActiveWebListener createWebListener(boolean debugEnabled) {
 		return new VjoActiveWebListener(debugEnabled);
 	}
 	
