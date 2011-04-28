@@ -10,6 +10,7 @@ package org.ebayopensource.dsf.jsgen.shared.validation.vjo;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jsgen.shared.util.JstDisplayUtils;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.VjoConstants;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.VjoSemanticRuleRepo;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.rulectx.BaseVjoSemanticRuleCtx;
@@ -691,8 +692,8 @@ public abstract class VjoSemanticValidator implements
 		else if(type instanceof JstFuncType){
 			final JstFuncType jstFuncType = (JstFuncType)type;
 			final IJstMethod func = jstFuncType.getFunction();
-			if(func != null){
-				return displayType(func.getRtnType());
+			if(func != null && !func.isDispatcher()){
+				return JstDisplayUtils.getFullMethodString(func, null, false);
 			}
 			else{
 				return "FUNCTION";

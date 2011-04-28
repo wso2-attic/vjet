@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.ebayopensource.dsf.jsgen.shared.util.JstDisplayUtils;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
@@ -20,7 +21,6 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ISynthesized;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
-import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstInferredType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
@@ -150,52 +150,12 @@ public class CodeCompletionUtils {
 	
 	public static String getFullMethodString(IJstMethod method, 
 			final IJstType ownerType){
-		return  getFullMethodString(method, ownerType, false);
+		return getFullMethodString(method, ownerType, false);
 	}
 	
 	public static String getFullMethodString(IJstMethod method, 
-			final IJstType ownerType,
-			final boolean optional) {
-		final StringBuilder strBldr = new StringBuilder();
-		String name = method.getName().getName();
-		
-		name = renameInvoke(method, name);
-		
-		if(method instanceof JstConstructor){
-			JstConstructor c = (JstConstructor)method;
-			name = c.getOwnerType().getName();
-		}
-		
-		strBldr.append(name);
-		strBldr.append("(");
-		IJstType ref = method.getRtnType();
-		String oname = "";
-		if (ownerType != null) {
-			oname = ownerType.getSimpleName();
-		}
-		String aname = getJstArgsString(method);
-		if (aname.length() > 0) {
-			strBldr.append(aname);
-		}
-		strBldr.append(")");
-		if(optional){
-			strBldr.append(" ? ");
-		}
-		if (ref != null) {
-			final String rname = ref.getSimpleName();
-			strBldr.append(" ").append(rname);
-		}
-		strBldr.append(" - ");
-		strBldr.append(oname);
-		return strBldr.toString();
-
-	}
-
-	private static String renameInvoke(IJstMethod method, String name) {
-		if(name.equals("_invoke_") && method.getOwnerType().isFType()){
-			name = method.getOwnerType().getSimpleName();
-		}
-		return name;
+			final IJstType ownerType, final boolean optional){
+		return JstDisplayUtils.getFullMethodString(method, ownerType, false);
 	}
 
 	public static String getJstArgsStringForReplace(IJstMethod method) {
@@ -217,29 +177,6 @@ public class CodeCompletionUtils {
 
 	}
 
-	public static String getJstArgsString(IJstMethod method) {
-		StringBuffer buffer = new StringBuffer();
-		List<JstArg> args = method.getArgs();
-		if (args != null && !args.isEmpty()) {
-			Iterator<JstArg> it = args.iterator();
-			while (it.hasNext()) {
-				JstArg arg = it.next();
-				IJstType type = arg.getType();
-				if (type != null) {
-					buffer.append(type.getSimpleName());
-				} else {
-					buffer.append("Object");
-				}
-				buffer.append(" " + arg.getName());
-				buffer.append(", ");
-			}
-		}
-		String result = buffer.toString();
-		if (result.length() > 2) {
-			result = result.substring(0, result.length() - 2);
-		}
-		return result;
-	}
 
 	public static String getMethodStringForOverrideProposal(IJstMethod method) {
 		StringBuffer buffer = new StringBuffer();
@@ -251,7 +188,7 @@ public class CodeCompletionUtils {
 		buffer.append(name);
 		buffer.append("(");
 		IJstType ref = method.getRtnType();
-		String aname = getJstArgsString(method);
+		String aname = JstDisplayUtils.getJstArgsString(method);
 		if (aname.length() > 0) {
 			buffer.append(aname);
 		}
@@ -339,7 +276,7 @@ public class CodeCompletionUtils {
 		}
 		buffer.append(name);
 		buffer.append("(");
-		String aname = getJstArgsString(method);
+		String aname = JstDisplayUtils.getJstArgsString(method);
 		if (aname.length() > 0) {
 			buffer.append(aname);
 		}
@@ -759,7 +696,7 @@ public class CodeCompletionUtils {
 			IJstMethod method, VjoCcCtx vjoCcCtx) {
 		
 		
-		String name = renameInvoke(method, method.getName().getName());
+		String name = JstDisplayUtils.renameInvoke(method, method.getName().getName());
 		
 		String replaceString = name + "("
 				+ getJstArgsStringForReplace(method) + ")";
@@ -1020,5 +957,9 @@ public class CodeCompletionUtils {
 			}
 		}
 		return jstType;
+	}
+
+	public static String getJstArgsString(IJstMethod method) {
+		return JstDisplayUtils.getJstArgsString(method);
 	}
 }

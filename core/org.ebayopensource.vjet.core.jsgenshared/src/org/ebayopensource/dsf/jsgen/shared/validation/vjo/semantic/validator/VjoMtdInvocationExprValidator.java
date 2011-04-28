@@ -18,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jsgen.shared.util.JstDisplayUtils;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticValidator;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoValidationCtx;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoValidationRuntimeException;
@@ -44,6 +45,7 @@ import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
+import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
@@ -794,7 +796,7 @@ public class VjoMtdInvocationExprValidator
 					//report error immediately
 					final String[] ruleCtxArgs = {
 							String.valueOf(argIt+1),
-							argumentType != null ? argumentType.getName() : "NULL",
+							getSemanticTypeName(argumentType),
 							buildParameterTypes(badEntries.values())
 					};
 					BaseVjoSemanticRuleCtx ruleCtx = new BaseVjoSemanticRuleCtx(argAtIt, ctx.getGroupId(), ruleCtxArgs);
@@ -814,15 +816,35 @@ public class VjoMtdInvocationExprValidator
 	
 	private String buildParameterTypes(final Collection<IJstType> parameterTypes){
 		final StringBuilder sb = new StringBuilder();
-		sb.append('{');
+		if(parameterTypes.size() > 1){sb.append('{');}
 		for(Iterator<IJstType> it = parameterTypes.iterator(); it.hasNext();){
-			sb.append(it.next().getName());
+			final IJstType parameterType = it.next();
+			sb.append(getSemanticTypeName(parameterType));
 			if(it.hasNext()){
 				sb.append(',');
 			}
 		}
-		sb.append('}');
+		if(parameterTypes.size() > 1){sb.append('}');}
 		return sb.toString();
+	}
+
+	private String getSemanticTypeName(final IJstType parameterType) {
+		if(parameterType == null){
+			return "NULL";
+		}
+		
+		if(parameterType instanceof JstFuncType){
+			final IJstMethod function = ((JstFuncType)parameterType).getFunction();
+			if(!function.isDispatcher()){
+				return JstDisplayUtils.getFullMethodString(function, function.getOwnerType(), false);
+			}
+			else{
+				return parameterType.getName();
+			}
+		}
+		else{
+			return parameterType.getName();
+		}
 	}
 
 	public static void initOverloadsWithCorrectParamSize(
