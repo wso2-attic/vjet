@@ -424,13 +424,14 @@ public class VjetInterpreterRunner extends AbstractInterpreterRunner {
 		}
 	}
 
-	private void addEnvOptions(Map options, List<String> pArgs) {
+	private void addEnvOptions(Map<?, ?> options, List<String> pArgs) {
 		if (options != null) {
 			for (Object optionKey : options.keySet()) {
 				String key = (String) optionKey;
 				String value = (String) options.get(optionKey);
 				pArgs.add("-V" + key + "=" + value);
-				if(key.equals(JsRunner.BROWSER_DISPLAY_KEY) && "true".equalsIgnoreCase(value)){
+				if ((key.equals(JsRunner.BROWSER_DISPLAY_KEY) && "true".equalsIgnoreCase(value)) ||
+					(key.equals(JsRunner.DAP_MODE_KEY) && "W".equalsIgnoreCase(value))){
 					BrowserService s = BrowserService.getInstance();
 					pArgs.add("-V" + JsRunner.BROWSER_SERVICE_URL_KEY + "=http://localhost:" + s.getPort());					
 				}				
