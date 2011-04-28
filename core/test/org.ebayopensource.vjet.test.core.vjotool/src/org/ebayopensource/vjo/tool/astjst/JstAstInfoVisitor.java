@@ -24,6 +24,7 @@ import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalFunc;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalProp;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalVar;
+import org.ebayopensource.dsf.jst.declaration.JstInferredType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstName;
@@ -77,6 +78,7 @@ import org.ebayopensource.dsf.jst.stmt.LabeledStmt;
 import org.ebayopensource.dsf.jst.stmt.PtySetter;
 import org.ebayopensource.dsf.jst.stmt.RtnStmt;
 import org.ebayopensource.dsf.jst.stmt.SwitchStmt;
+import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.stmt.TextStmt;
 import org.ebayopensource.dsf.jst.stmt.ThisStmt;
 import org.ebayopensource.dsf.jst.stmt.ThrowStmt;
@@ -84,7 +86,6 @@ import org.ebayopensource.dsf.jst.stmt.TryStmt;
 import org.ebayopensource.dsf.jst.stmt.TypeDeclStmt;
 import org.ebayopensource.dsf.jst.stmt.WhileStmt;
 import org.ebayopensource.dsf.jst.stmt.WithStmt;
-import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.term.ArrayLiteral;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.term.JstLiteral;
@@ -557,5 +558,9 @@ public class JstAstInfoVisitor implements IJstNodeVisitor {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void visit(JstInferredType node) {
+		// TODO Auto-generated method stub
+		
+	}
 }
