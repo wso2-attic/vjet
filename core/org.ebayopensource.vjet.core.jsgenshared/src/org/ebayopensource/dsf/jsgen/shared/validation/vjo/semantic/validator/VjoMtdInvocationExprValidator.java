@@ -839,7 +839,7 @@ public class VjoMtdInvocationExprValidator
 				return JstDisplayUtils.getFullMethodString(function, function.getOwnerType(), false);
 			}
 			else{
-				return parameterType.getName();
+				return "expected function signature";
 			}
 		}
 		else{
