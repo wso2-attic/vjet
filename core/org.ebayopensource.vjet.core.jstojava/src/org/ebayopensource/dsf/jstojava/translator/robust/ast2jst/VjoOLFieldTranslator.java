@@ -758,13 +758,16 @@ public class VjoOLFieldTranslator extends
 	private void addFuncRef(JstType type,
 			ObjectLiteralField astObjectliteralField,
 			List<IJsCommentMeta> metaArr) {
-		final JstMethod meth = TranslateHelper.MethodTranslateHelper.createJstMethod(astObjectliteralField.initializer,
+		final JstMethod mtd = TranslateHelper.MethodTranslateHelper.createJstMethod(astObjectliteralField.initializer,
 				metaArr, m_ctx, getSimpleName(astObjectliteralField));
-		meth.getName().setSource(TranslateHelper.getSource(astObjectliteralField.fieldName, m_ctx.getSourceUtil()));
+		final JstSource mtdNameSource = TranslateHelper.getSource(astObjectliteralField.fieldName, m_ctx.getSourceUtil());
+		if(mtd.getName() != null){
+			mtd.getName().setSource(mtdNameSource);
+		}
 
-		type.addMethod(meth);
-		if(meth != null){
-			JstFunctionRefType ref = new JstFunctionRefType(meth);
+		type.addMethod(mtd);
+		if(mtd != null){
+			JstFunctionRefType ref = new JstFunctionRefType(mtd);
 			if (m_parent instanceof IJstType) {
 				ref.setPackage(new JstPackage(((IJstType) m_parent).getName()));
 			}
