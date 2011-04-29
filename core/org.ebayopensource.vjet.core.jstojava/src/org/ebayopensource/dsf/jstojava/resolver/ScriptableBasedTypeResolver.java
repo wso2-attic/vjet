@@ -23,16 +23,6 @@ public class ScriptableBasedTypeResolver implements ITypeResolver {
 	private final Function m_func;
 	private final Map<String,String> m_cache = new HashMap<String, String>();
 	
-	// to help with multiple threads calling this resolver we are caching the result on the first pass.
-	/**
-	 * 
-	 * 
-	 * 
-	 * @param groupId
-	 * @param cx
-	 * @param scope
-	 * @param func
-	 */
 	public ScriptableBasedTypeResolver(
 		String groupId,
 		Context cx,
@@ -58,7 +48,10 @@ public class ScriptableBasedTypeResolver implements ITypeResolver {
 			return result;
 		}
 		
-		Object val = m_func.call(m_cx, m_scope, null, (Object[])args);
+		Runner runner = new Runner((Object[])args);
+		SingleThreadExecutor.getInstance().execute(runner);
+		
+		Object val = runner.m_result;
 		
 		if(val!=null){
 			result = val.toString();
@@ -75,8 +68,19 @@ public class ScriptableBasedTypeResolver implements ITypeResolver {
 			b.append(",");
 		}
 		return b.toString();
-
 	}
 	
-	
+	private class Runner implements Runnable {
+		private Object m_result;
+		private Object[] m_args;
+		
+		private Runner(Object[] args) {
+			m_args = args;
+		}
+		
+		@Override
+		public void run() {
+			m_result = m_func.call(m_cx, m_scope, null, m_args);			
+		}
+	}
 }

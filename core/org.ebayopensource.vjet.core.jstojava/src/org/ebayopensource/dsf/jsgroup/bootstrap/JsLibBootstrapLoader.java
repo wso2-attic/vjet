@@ -17,6 +17,7 @@ import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.MapBasedTypeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.ScriptableBasedTypeResolver;
+import org.ebayopensource.dsf.jstojava.resolver.SingleThreadExecutor;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.mozilla.mod.javascript.Context;
 import org.mozilla.mod.javascript.ContextFactory;
@@ -34,35 +35,51 @@ public class JsLibBootstrapLoader {
 	public static final String typeExtensions = "typeExtensions";
 	
 	public static void load(String bootstrapJS, String groupId) {
-		Context cx;
-		Scriptable scope;
-		try {
-			cx = ContextFactory.getGlobal().enterContext();
-			cx.setLanguageVersion(Context.VERSION_1_5);
-			scope = cx.initStandardObjects();
-			cx.evaluateString(scope, bootstrapJS, "TypeLibBoostrapJS", 1, null);
-		} catch (Exception e) {
-			e.printStackTrace(); //TODO report error
-			return;
+		SingleThreadExecutor executor = SingleThreadExecutor.getInstance();
+		executor.execute(new Runner(bootstrapJS, groupId));
+	}
+	
+	private static class Runner implements Runnable {
+		private String m_bootstrapJS;
+		private String m_groupId;
+		private Runner(String bootstrapJS, String groupId) {
+			m_bootstrapJS = bootstrapJS;
+			m_groupId = groupId;
 		}
 		
-		try {
-			loadMethodReturnTypeResolvers(cx, scope, groupId);
-		} catch (Exception e) {
-			e.printStackTrace(); //TODO report error
+		@Override
+		public void run() {
+			Context cx;
+			Scriptable scope;
+			try {
+				cx = ContextFactory.getGlobal().enterContext();
+				cx.setLanguageVersion(Context.VERSION_1_5);
+				scope = cx.initStandardObjects();
+				cx.evaluateString(scope, m_bootstrapJS, "TypeLibBoostrapJS", 1, null);
+			} catch (Exception e) {
+				e.printStackTrace(); //TODO report error
+				return;
+			}
+			
+			try {
+				loadMethodReturnTypeResolvers(cx, scope, m_groupId);
+			} catch (Exception e) {
+				e.printStackTrace(); //TODO report error
+			}
+			
+			try {
+				loadFunctionArgMetaExtension(cx, scope, m_groupId);
+			} catch (Exception e) {
+				e.printStackTrace(); //TODO report error
+			}
+			
+			try {
+				loadTypeExtensions(cx, scope, m_groupId);
+			} catch (Exception e) {
+				e.printStackTrace(); //TODO report error
+			}			
 		}
 		
-		try {
-			loadFunctionArgMetaExtension(cx, scope, groupId);
-		} catch (Exception e) {
-			e.printStackTrace(); //TODO report error
-		}
-		
-		try {
-			loadTypeExtensions(cx, scope, groupId);
-		} catch (Exception e) {
-			e.printStackTrace(); //TODO report error
-		}
 	}
 	
 	private static void loadMethodReturnTypeResolvers(Context cx, Scriptable scope, String groupId) {
