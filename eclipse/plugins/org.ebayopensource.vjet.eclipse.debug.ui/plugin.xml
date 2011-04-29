@@ -90,13 +90,40 @@
 					</enablement>
       			</contextualLaunch>
 	</shortcut>
+      <shortcut
+            class="org.ebayopensource.vjet.eclipse.internal.debug.ui.launcher.VjetWebLaunchShortcut"
+            icon="icons/javascript.gif"
+            id="org.ebayopensource.vjet.eclipse.debug.ui.launchShortcut"
+            label="VJET Web application"
+            modes="run">
+         <contextualLaunch>
+            <enablement>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate>
+                     <or>
+                        <test
+                              property="org.ebayopensource.vjet.eclipse.debug.launchJS">
+                        </test>
+                        <test
+                              property="org.ebayopensource.vjet.eclipse.debug.launchHTML">
+                        </test>
+                     </or>
+                  </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+      </shortcut>
    </extension>
    
   <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             class="org.ebayopensource.vjet.eclipse.internal.debug.ui.launchConf.VjetTabGroup"
-            id="org.ebayopensource.vjet.eclipse.debug.ui.launchConfigurations.TclTabGroup"
+            id="org.ebayopensource.vjet.eclipse.debug.ui.launchConfigurations.VjetJsGroup"
             type="org.ebayopensource.vjet.eclipse.launching.VjetLaunchConfigurationType">
          <launchMode
                description="Debug VJET JS application"
@@ -105,6 +132,20 @@
          </launchMode>
          <launchMode
                description="Run a VJET JS application"
+               mode="run">
+         </launchMode>
+      </launchConfigurationTabGroup>
+      <launchConfigurationTabGroup
+            class="org.ebayopensource.vjet.eclipse.internal.debug.ui.launchConf.VjetTabGroup"
+            id="org.ebayopensource.vjet.eclipse.debug.ui.launchConfigurations.VjetWebAppGroup"
+            type="org.ebayopensource.vjet.eclipse.launching.VjetWebLaunchConfigurationType">
+         <!--<launchMode
+               description="Debug VJET Web application"
+               mode="debug"
+               perspective="org.eclipse.debug.ui.DebugPerspective">
+         </launchMode>-->
+         <launchMode
+               description="Run a VJET Web application"
                mode="run">
          </launchMode>
       </launchConfigurationTabGroup>

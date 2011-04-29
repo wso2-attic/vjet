@@ -11,5 +11,6 @@ package org.ebayopensource.vjet.eclipse.launching;
 public interface VjetLaunchConfigurationConstants {
 
 	public static final String ID_VJET_CONF_TYPE = "org.ebayopensource.vjet.eclipse.launching.VjetLaunchConfigurationType";
+	public static final String ID_VJET_WEB_CONF_TYPE = "org.ebayopensource.vjet.eclipse.launching.VjetWebLaunchConfigurationType";
 	
 }
