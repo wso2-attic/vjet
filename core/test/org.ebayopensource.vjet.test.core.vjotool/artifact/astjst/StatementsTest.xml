@@ -6,9 +6,9 @@
 			<pathname>JstType/JstMethod[@Name='method1']/JstBlock/ForStmt[@Position='2']/JstVars/AssignExpr/JstIdentifier[@Name='j']</pathname>
 			<nodecount>1</nodecount>
 			<node position='1' status='pass'>
-				<bindingnode>Object</bindingnode>
-				<bindingtype>Object</bindingtype>
-				<bindingclass>JstType</bindingclass>
+				<bindingnode></bindingnode>
+				<bindingtype></bindingtype>
+				<bindingclass>JstInferredType</bindingclass>
 				<bindingparent></bindingparent>
 			</node>
 		</jxpath>
