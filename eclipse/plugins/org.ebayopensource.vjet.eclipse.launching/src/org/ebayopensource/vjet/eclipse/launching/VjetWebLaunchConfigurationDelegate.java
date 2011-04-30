@@ -57,11 +57,13 @@ public class VjetWebLaunchConfigurationDelegate extends
 		IScriptProject script = ScriptRuntime.getScriptProject(configuration);
 		
 		ILaunchConfigurationWorkingCopy wc =configuration.getWorkingCopy();
-		Map env2 = wc.getAttribute(
+		Map envvars = wc.getAttribute(
 				ILaunchManager.ATTR_ENVIRONMENT_VARIABLES, (Map) new HashMap());
-		env2.put("dapMode", "W");
-		wc.setAttribute(ILaunchManager.ATTR_ENVIRONMENT_VARIABLES, env2);
-		wc.doSave();
+		if(!envvars.containsKey("dapMode")){
+			envvars.put("dapMode", "W");
+			wc.setAttribute(ILaunchManager.ATTR_ENVIRONMENT_VARIABLES, envvars);
+			wc.doSave();
+		}
 
 		
 		IEnvironment env = EnvironmentManager.getEnvironment(script);
