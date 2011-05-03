@@ -12,20 +12,22 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.junit.Test;
-
+import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta.DIRECTION;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncArgAttributedType;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncScopeAttributedType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncType;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsMixinType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType.WildCardType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta.DIRECTION;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType.WildCardType;
+import org.junit.Test;
 
 public class VjCommentParserTest {
 	
@@ -326,6 +328,34 @@ public class VjCommentParserTest {
 		TestCase.assertEquals("String", ((JsFuncType)typing).getReturnType().getType());
 		TestCase.assertTrue(((JsFuncType)typing).isTypeFactoryEnabled());
 		TestCase.assertTrue(((JsFuncType)typing).isFuncArgMetaExtensionEnabled());
+	}
+	
+	@Test
+	public void testFunctionReturnScopeAttributed() throws ParseException {
+		JsCommentMeta meta = VjComment.parse("//>public this foo(String, Function)");
+		JsTypingMeta typing = meta.getTyping();
+		TestCase.assertTrue(typing instanceof JsFuncType);
+		TestCase.assertTrue(((JsFuncType)typing).getReturnType() instanceof JsFuncScopeAttributedType);
+	}
+	
+	@Test
+	public void testFunctionReturnArgAttributed() throws ParseException {
+		JsCommentMeta meta = VjComment.parse("//>public %2 foo(String, Object)");
+		JsTypingMeta typing = meta.getTyping();
+		TestCase.assertTrue(typing instanceof JsFuncType);
+		TestCase.assertTrue(((JsFuncType)typing).getReturnType() instanceof JsFuncArgAttributedType);
+		TestCase.assertEquals(2, ((JsFuncArgAttributedType)((JsFuncType)typing).getReturnType()).getArgIndex());
+	}
+	
+	@Test
+	public void testFunctionReturnCombined() throws ParseException {
+		JsCommentMeta meta = VjComment.parse("//>public [this + %2] foo(String, Object)");
+		JsTypingMeta typing = meta.getTyping();
+		TestCase.assertTrue(typing instanceof JsFuncType);
+		TestCase.assertTrue(((JsFuncType)typing).getReturnType() instanceof JsMixinType);
+		JsMixinType combType = (JsMixinType)((JsFuncType)typing).getReturnType();
+		TestCase.assertTrue(combType.getTypes().get(0) instanceof JsFuncScopeAttributedType);
+		TestCase.assertTrue(combType.getTypes().get(1) instanceof JsFuncArgAttributedType);
 	}
 	
 	@Test
