@@ -67,6 +67,9 @@ PARSER_END(VjComment)
 |	<DOUBLE_COLON: "::" >
 |	<SEMICOLON: ";">
 |	<CARET: "^">
+|	<PLUS: "+">
+|	<FUNCTION_ARG: <PERCENT><DIGIT>>
+|	<THIS: "this">
 |	<TYPE: <LITERAL> (<PERIOD> <LITERAL>)*>
 |	<LITERAL : <LETTER> (<DIGIT> | <LETTER>)*>
 |	<DOTDOTDOT  : <PERIOD><PERIOD><PERIOD>>
@@ -101,6 +104,7 @@ PARSER_END(VjComment)
 		"\u0ed0"-"\u0ed9",
 		"\u1040"-"\u1049"]>
 |	<#PERIOD : ".">
+|	<#PERCENT : "%">
 }
 
 private void parse(JsCommentMeta meta) :
@@ -194,6 +198,10 @@ private void addTyping(JsCommentMeta meta) :
 	{
 		meta.setTyping(typing);
 	}
+|	<LB>typing = MixinType(meta)<RB>
+	{
+		meta.setTyping(typing);
+	}
 |	typing = Typing(meta)
 	{
 		meta.setTyping(typing);
@@ -203,7 +211,11 @@ private void addTyping(JsCommentMeta meta) :
 private JsTypingMeta Typing(JsCommentMeta meta) :
 {JsTypingMeta typing; int dim=0;}
 {
-	typing = BasicTyping(meta) (dim = ArrayDimensions())?
+	typing = DynamicTypingInFuncReturn()
+	{
+		return typing;
+	}
+|	typing = BasicTyping(meta) (dim = ArrayDimensions())?
 	{
 		typing.setDimension(dim);
 		return typing;
@@ -251,6 +263,20 @@ private JsTypingMeta BasicTyping(JsCommentMeta meta) :
 	{
 		typing = new JsType(token);
 		return typing;
+	}
+}
+
+private JsTypingMeta DynamicTypingInFuncReturn() :
+{	Token token;
+}
+{
+	(token = <THIS>)
+	{
+		return new JsFuncScopeAttributedType(token);
+	}
+|	(token = <FUNCTION_ARG>)
+	{
+		return new JsFuncArgAttributedType(token);
 	}
 }
 
@@ -389,6 +415,24 @@ private JsVariantType MultiTypes(JsCommentMeta meta) :
 }
 
 private void collectTyping(JsVariantType typing, JsCommentMeta meta) :
+{JsTypingMeta typingMeta = null;}
+{
+	typingMeta = Typing(meta)
+	{
+		typing.add(typingMeta);
+	}
+}
+
+private JsMixinType MixinType(JsCommentMeta meta) :
+{JsMixinType typing = new JsMixinType();}
+{	
+	mixinTyping(typing, null) (<PLUS> mixinTyping(typing, null))*
+	{
+		return typing;
+	}
+}
+
+private void mixinTyping(JsMixinType typing, JsCommentMeta meta) :
 {JsTypingMeta typingMeta = null;}
 {
 	typingMeta = Typing(meta)
