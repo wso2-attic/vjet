@@ -33,13 +33,13 @@ public class SynthOlType extends JstType implements ISynthesized {
 	
 	public SynthOlType(ObjLiteral ol) {
 		m_ol = ol;
-		this.addExtend(JstCache.getInstance().getType("Object"));
+		this.addExtend(JstCache.getInstance().getType("ObjLiteral"));
 	}
 	
 	private synchronized void init() {
 		if (!m_init) {
 			m_init = true;
-			IJstType defaultType = JstCache.getInstance().getType("Object");
+			IJstType defaultType = JstCache.getInstance().getType("ObjLiteral");
 			for (NV nv: m_ol.getNVs()) {
 				JstIdentifier id = nv.getIdentifier();
 				IJstNode binding = id.getJstBinding();

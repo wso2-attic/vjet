@@ -820,8 +820,7 @@ public class TypeCheckUtil {
 	public static boolean isArbitary(IJstType exprValue){
 		return exprValue != null
 			&& (VjoConstants.ARBITARY.equals(exprValue)
-			|| "Object".equals(exprValue.getName())
-			|| SynthOlType.TYPE_NAME.equals(exprValue.getName()));
+			|| "Object".equals(exprValue.getName()));
 	}
 	
 	public static boolean isBoolean(IJstType exprValue){

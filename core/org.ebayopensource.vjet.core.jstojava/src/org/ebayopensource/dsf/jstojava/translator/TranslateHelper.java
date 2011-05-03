@@ -1171,6 +1171,17 @@ public class TranslateHelper {
 			}
 			return super.getName();
 		}
+		
+		@Override
+		//bugfix by huzhou@ebay.com, renamed methods must be applied to its overloading methods names as well
+		public List<IJstMethod> getOverloaded(){
+			final List<IJstMethod> overloadedMtds = super.getOverloaded();
+			final List<IJstMethod> renamedMtds = new ArrayList<IJstMethod>(overloadedMtds.size());
+			for(IJstMethod overloaded : overloadedMtds){
+				renamedMtds.add(new RenameableSynthJstProxyMethod(overloaded, jstRename != null ? jstRename.getName() : null));
+			}
+			return renamedMtds;
+		}
 	}
 
 	public static JstFuncType replaceSynthesizedMethodBinding(

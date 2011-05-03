@@ -155,7 +155,7 @@ public class CodeCompletionUtils {
 	
 	public static String getFullMethodString(IJstMethod method, 
 			final IJstType ownerType, final boolean optional){
-		return JstDisplayUtils.getFullMethodString(method, ownerType, false);
+		return JstDisplayUtils.getFullMethodString(method, ownerType, optional);
 	}
 
 	public static String getJstArgsStringForReplace(IJstMethod method) {
