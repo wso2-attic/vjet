@@ -12,49 +12,49 @@ import java.util.List;
 
 import org.ebayopensource.dsf.jst.IJstType;
 
-public class JstVariantType extends JstTypeMixer {
+public class JstMixedType extends JstTypeMixer {
 
 	private static final long serialVersionUID = 1L;
 	
-	public JstVariantType(List<IJstType> types) {
+	public JstMixedType(List<IJstType> types) {
 		super("_object_");
 		this.addExtend(JstCache.getInstance().getType("Object"));
 		m_types = types;
 	}
 	
-	public List<IJstType> getVariantTypes() {
+	public List<IJstType> getMixedTypes() {
 		return m_types;
 	}
 	
 	@Override
 	public String getSimpleName(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("{");
+		sb.append("[");
 		boolean isFirst = true;
 		for (IJstType t : m_types) {
 			if (!isFirst) {
-				sb.append("|");
+				sb.append("+");
 			}
 			sb.append(t.getSimpleName());
 			isFirst = false;
 		}
-		sb.append("}");
+		sb.append("]");
 		return sb.toString();
 	}
 	
 	@Override
 	public String getName(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("{");
+		sb.append("[");
 		boolean isFirst = true;
 		for (IJstType t : m_types) {
 			if (!isFirst) {
-				sb.append("|");
+				sb.append("+");
 			}
 			sb.append(t.getName());
 			isFirst = false;
 		}
-		sb.append("}");
+		sb.append("]");
 		return sb.toString();
 	}
 }
