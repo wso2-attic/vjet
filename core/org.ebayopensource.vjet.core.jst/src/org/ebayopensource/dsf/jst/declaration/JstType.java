@@ -1997,7 +1997,7 @@ public class JstType extends BaseJstNode implements IJstType {
 	
 	public void clearOptions() {
 		synchronized(this){
-			m_options = null;
+			m_options =  new LinkedHashMap<String, Object>();
 			m_isMetaType = false;
 		}
 	}
