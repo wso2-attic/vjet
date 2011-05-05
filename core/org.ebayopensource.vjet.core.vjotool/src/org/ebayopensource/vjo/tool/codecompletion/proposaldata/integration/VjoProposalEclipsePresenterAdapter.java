@@ -355,7 +355,8 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 
 	public List<IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO>> genFunctionProposal(
 			IVjoCcProposalData data) {
-		boolean isInterface = m_vjoCcCtx.getActingType().isInterface();
+		IJstType type = m_vjoCcCtx.getActingType();
+		boolean isInterface = type.isInterface()|| type.isMetaType() ;
 		String token = m_vjoCcCtx.getActingToken();
 		if (CompletionConstants.FUNCTION_NAME_MAIN.equals(token)
 				&& !isInterface && m_vjoCcCtx.isInStatic()) {

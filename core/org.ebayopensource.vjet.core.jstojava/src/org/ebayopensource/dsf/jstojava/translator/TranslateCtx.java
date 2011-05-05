@@ -64,6 +64,7 @@ public class TranslateCtx implements IFindTypeSupport{
 	private ISectionTranslatorProvider m_sectionTranslatorProvider;
 	private String m_scopeForGlobals = null;
 	private JstSourceUtil m_lineProvider;
+	private List<JstCompletion> m_getBlockCompletions;
 
 	public TranslateCtx() {
 		m_config = new TranslateConfig();
@@ -430,7 +431,18 @@ public class TranslateCtx implements IFindTypeSupport{
 		}
 		return null;
 	}
+	public void addBlockCompletion(JstCompletion cmp) {
+		getBlockCompletions().add(cmp);
+	}
 	
+	
+	public List<JstCompletion> getBlockCompletions() {
+		if (m_getBlockCompletions == null) {
+			m_getBlockCompletions = new ArrayList<JstCompletion>();
+		}
+		return m_getBlockCompletions;
+	}
+
 	
 	
 }

@@ -10,6 +10,8 @@ package org.ebayopensource.dsf.comment.parser;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Collection;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -31,10 +33,17 @@ public class BootstrapCommentTest {
 //	 @Test
 	 public void testSimpleCommentParse() throws Exception {
 
-		 File bapi =new File(ResourceUtil.getResource(BootstrapCommentTest.class, "testapi.js").getFile());
-		 
-		 Map<String, ? extends IJstType> types = BootstrapParser.createJstType("vjo", bapi,
-				 TestDefs.CTYPE, bapi);
+	
+			URL f = VjBootstrapJsr.getJsAsUrl();
+			URL bapi = VjBootstrapJsr.getVjoApIAsUrl();
+		
+			Map<String, ? extends IJstType> types = BootstrapParser.createJstType("vjo", f,
+					VjBootStrapDef.SCHEMA, bapi, 
+					VjBootstrapJsr.getVjoConsoleAsUrl(), 
+					VjBootstrapJsr.getVjoClassAsUrl(), 
+					VjBootstrapJsr.getVjoEnumAsUrl(), 
+					VjBootstrapJsr.getVjoOptionsOLUrl(), 
+					VjBootstrapJsr.getVjoObjectAsUrl());
 		 
 		 
 		 IJstType[] typesAry  = new IJstType[types.size()];
@@ -76,9 +85,16 @@ public class BootstrapCommentTest {
 	 @Test
 	 public void testVjoEtype() throws Exception {
 		 
-		 Map<String, ? extends IJstType> types = BootstrapParser.createJstType("vjo", VjBootstrapJsr.getJsAsUrl(),
-				 VjBootStrapDef.ETYPE, VjBootstrapJsr.getVjoApIAsUrl());
-		 
+			URL f = VjBootstrapJsr.getJsAsUrl();
+			URL bapi = VjBootstrapJsr.getVjoApIAsUrl();
+		
+			Map<String, ? extends IJstType> types = BootstrapParser.createJstType("vjo", f,
+					VjBootStrapDef.SCHEMA, bapi, 
+					VjBootstrapJsr.getVjoConsoleAsUrl(), 
+					VjBootstrapJsr.getVjoClassAsUrl(), 
+					VjBootstrapJsr.getVjoEnumAsUrl(), 
+					VjBootstrapJsr.getVjoOptionsOLUrl(), 
+					VjBootstrapJsr.getVjoObjectAsUrl());
 		 IJstType[] typesAry  = new IJstType[types.size()];
 		 
 		 types.values().toArray(typesAry);

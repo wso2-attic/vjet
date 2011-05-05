@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
+import org.ebayopensource.dsf.jsgen.shared.validation.common.ScopeId;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
 import org.ebayopensource.dsf.jst.IJstGlobalProp;
@@ -100,7 +101,8 @@ public class VjoCcHandler implements IVjoCcHandler {
 		} else if (completion instanceof JstFieldOrMethodCompletion) {
 			IJstType type = ctx.getActingType();
 			List<String> list = new ArrayList<String>();
-			if(completion.inScope(ScopeIds.METHOD) || completion.inScope(ScopeIds.INITS)) {
+			if(completion.inScope(ScopeIds.METHOD) || completion.inScope(ScopeIds.INITS)
+					|| completion.inScope(ScopeIds.METHOD_CALL)) {
 				list.add(VjoCcObjLiteralAdvisor.ID);
 			}
 			else{

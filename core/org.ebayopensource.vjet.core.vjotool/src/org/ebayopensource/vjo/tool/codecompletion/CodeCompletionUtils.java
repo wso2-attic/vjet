@@ -21,6 +21,7 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ISynthesized;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
+import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
@@ -162,11 +163,32 @@ public class CodeCompletionUtils {
 		StringBuffer buffer = new StringBuffer();
 		List<JstArg> args = method.getArgs();
 		if (args != null && !args.isEmpty()) {
+			int counter=0;
 			Iterator<JstArg> it = args.iterator();
 			while (it.hasNext()) {
+				
 				JstArg arg = it.next();
-				buffer.append(arg.getName());
+				if(arg.getType() instanceof JstObjectLiteralType || arg.getType().getName().equals("ObjLiteral")){
+//					if(counter==1){
+					// TODO get correct indent level here
+						buffer.append("{"+CURSOR_POSITION_TOKEN+"}");
+//					}else{
+//						buffer.append("{\n\n}");
+//					}
+				// TODO replacement string could have function stub
+				}else if(arg.getType().getName().equals("Function")&& !(arg.getType() instanceof JstFuncType)){
+//					if(counter==1){
+						// TODO get correct indent level here
+						
+						buffer.append("function(){"+CURSOR_POSITION_TOKEN+"}");
+//					}else{
+//						buffer.append("{\n\n}");
+//					}
+					}else{
+					buffer.append(arg.getName());
+				}
 				buffer.append(", ");
+				counter++;
 			}
 		}
 		String result = buffer.toString();
@@ -475,7 +497,7 @@ public class CodeCompletionUtils {
 				|| VjoKeywords.DEFS.equals(name)
 				|| VjoKeywords.OPTIONS.equals(name)
 				|| VjoKeywords.PROTOS.equals(name)
-				|| VjoKeywords.GLOBALS.equals(name)) {
+				) {
 			return name + "({" + SEPERATE_TOKEN + "\t" + CURSOR_POSITION_TOKEN
 					+ SEPERATE_TOKEN + "})";
 		} else if (VjoKeywords.NEEDS.equals(name)
@@ -483,6 +505,7 @@ public class CodeCompletionUtils {
 				|| VjoKeywords.SATISFIES.equals(name)
 				|| VjoKeywords.MIXIN.equals(name)
 				|| VjoKeywords.EXPECTS.equals(name)
+				|| VjoKeywords.GLOBALS.equals(name)
 				|| VjoKeywords.VALUES.equals(name)) {
 			List<JstArg> args = method.getArgs();
 			if (args.size() == 2) {
@@ -700,14 +723,16 @@ public class CodeCompletionUtils {
 		
 		String replaceString = name + "("
 				+ getJstArgsStringForReplace(method) + ")";
-		if (vjoCcCtx.isVjoMethod(method)) {
-			String temp = getKeywordReplaceString(method, vjoCcCtx
-					.isInSciptUnitArea() ? vjoCcCtx.getTypeName() : "",
-					vjoCcCtx.isInSciptUnitArea());
-			if (!name.equals(temp)) {
-				replaceString = temp;
-			}
-		} else if (isGlobal
+//		if (vjoCcCtx.isVjoMethod(method)) {
+//			String temp = getKeywordReplaceString(method, vjoCcCtx
+//					.isInSciptUnitArea() ? vjoCcCtx.getTypeName() : "",
+//					vjoCcCtx.isInSciptUnitArea());
+//			if (!name.equals(temp)) {
+//				replaceString = temp;
+//			}
+//		} else 
+			
+			if (isGlobal
 				|| vjoCcCtx.getPositionType() == VjoCcCtx.POSITION_AFTER_THIS
 				|| vjoCcCtx.getPositionType() == VjoCcCtx.POSITION_AFTER_THISVJO
 				|| vjoCcCtx.getPositionType() == VjoCcCtx.POSITION_AFTER_THISVJOTYPE

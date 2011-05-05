@@ -189,6 +189,7 @@ public class Scanner implements TerminalTokens {
 	protected boolean pushedBack=false;
 	
 	FakeIdentifierProvider m_fakeIdentifierProvider = null; //EBAY MOD
+	private boolean s_debug;
 
 	public static final int RoundBracket = 0;
 	public static final int SquareBracket = 1;
@@ -1076,7 +1077,9 @@ public int getNextToken() throws InvalidInputException {
 			if (m_fakeIdentifierProvider.hasNextToken()) {
 				m_enableFakeIdentifier = true;
 				int temp = m_fakeIdentifierProvider.getNextToken();
-				System.out.println("INJECTED: >>> " + new String(BalanceUtil.getTokenSource(temp)) + " <<< at " + startPosition);
+				if(s_debug){
+					System.out.println("INJECTED: >>> " + new String(BalanceUtil.getTokenSource(temp)) + " <<< at " + startPosition);
+				}
 				return temp;
 			} else {
 				m_enableFakeIdentifier = false;

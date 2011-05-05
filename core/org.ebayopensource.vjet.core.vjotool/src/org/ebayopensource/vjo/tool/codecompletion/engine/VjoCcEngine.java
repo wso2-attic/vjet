@@ -183,8 +183,19 @@ public class VjoCcEngine implements IVjoCcEngine {
 	private JstCompletion getJstCompletion(TranslateCtx ctx, int position) {
 
 		List<JstCompletion> jstErrors = ctx.getJstErrors();
+		
+		List<JstCompletion> jstBlockCompletions = ctx.getBlockCompletions();
+		
+	
 		int size = jstErrors.size();
-		if (size > 0) {
+		if(size==0 && jstBlockCompletions.size()>0){
+			for (JstCompletion c : jstBlockCompletions) {
+				JstSource source = c.getSource();
+				if (source != null) {
+					return c;
+				}
+			}
+		}else if (size > 0) {
 			for (JstCompletion c : jstErrors) {
 				if (c instanceof JstKeywordCompletion
 						&& c.getScopeStack().size() > 0) {

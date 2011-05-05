@@ -26,7 +26,9 @@ import java.util.Set;
 import org.ebayopensource.af.common.error.ErrorList;
 import org.ebayopensource.af.common.error.ErrorObject;
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
+import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jsgen.shared.jstvalidator.DefaultJstProblem;
+import org.ebayopensource.dsf.jsgen.shared.validation.common.ScopeId;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.FileBinding;
 import org.ebayopensource.dsf.jst.IJstLib;
@@ -47,6 +49,7 @@ import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
 import org.ebayopensource.dsf.jstojava.translator.BlockTranslator;
 import org.ebayopensource.dsf.jstojava.translator.TranslateConfig;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.eclipse.mod.wst.jsdt.core.ast.IProgramElement;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.FieldReference;
@@ -269,10 +272,16 @@ public class VjoParser implements IJstParser {
 				cfg.setSkiptImplementation(true);
 				cfg.setSkipJsExtSyntaxArgs(true);
 				TranslateCtx ctx2 = new TranslateCtx(cfg);
-				ctx2.setCreatedCompletion(true);
+//				ctx2.setCreatedCompletion(true);
 				ctx2.setCompletionPos(ctx.getCompletionPos());
 				ctx2.setAST(ctx.getAST());
 				blocks.add(BlockTranslator.createJstBlock(ctx2, elem));
+				for(JstCompletion cmp : ctx2.getJstErrors()){
+					if(cmp.inScope(ScopeIds.METHOD_CALL)){
+						ctx.addBlockCompletion(cmp);
+					}
+//					ctx.addSyntaxError(cmp);
+				}
 			}
 		}
 		return blocks;

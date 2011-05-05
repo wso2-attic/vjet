@@ -140,7 +140,7 @@ public class EditorConfigurationBlock extends AbstractConfigurationBlock {
 
 		if ((flags & FLAG_TAB_POLICY) != 0) {
 			final String[] tabPolicyValues = new String[] {
-					CodeFormatterConstants.TAB, CodeFormatterConstants.SPACE
+					CodeFormatterConstants.SPACE, CodeFormatterConstants.TAB
 			// CodeFormatterConstants.MIXED
 			};
 			final String[] tabPolicyLabels = new String[] {

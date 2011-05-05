@@ -138,6 +138,15 @@ public class VjoOLTranslator extends
 	protected JstCompletion createCompletion(ObjectLiteral astNode,
 			boolean isAfterSource) {
 
+		
+		ScopeId scopeId = m_ctx.getCurrentScope();
+		if (scopeId == ScopeIds.OPTIONS){
+//				|| scopeId == ScopeIds.PROTOS
+//				|| scopeId == ScopeIds.VALUES
+//				|| scopeId == ScopeIds.DEFS) {
+			return null;
+		}
+		
 		JstCompletion completion = null;
 
 		CategorizedProblem problem = findProblem();

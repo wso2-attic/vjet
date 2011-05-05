@@ -1597,7 +1597,7 @@ function init(vjo, global) {
 		    _Type.needs.apply(this._type,arguments);
 			return this;
 		},
-		//> final public T options(Object opts)
+		//> final public T options(vjo.optionsOL::opts opts)
 		options : function(opts) {
 			if (opts) {
 				for (var k in opts) {
@@ -1623,7 +1623,7 @@ function init(vjo, global) {
 			},this);
             return this;
 		},
-		 //> public final T props(Object objLiteral) 
+		 //> public final T props(ObjLiteral objLiteral) 
 		props : function (props) {
 			this._canDelayInit = false;
 			if (this._props) throw "multiple props blocks are not allowed";
@@ -1631,7 +1631,7 @@ function init(vjo, global) {
 			_Type.props.apply(this._type,arguments);
 			return this;
 		},
-		//> final public T protos(Object objLiteral)
+		//> final public T protos(ObjLiteral objLiteral)
 		protos : function (protos) {
 		    if (this._protos) throw "multiple protos blocks are not allowed";
 			this._protos = protos;
@@ -1670,8 +1670,8 @@ function init(vjo, global) {
 			this._inits = fn;
 			return this;
 		},				
-		//> final public T globals(Object obj)
-		//> final public T globals(Object obj, Object scopeForGlobals)
+		//> final public T globals(ObjLiteral obj)
+		//> final public T globals(ObjLiteral obj, Object scopeForGlobals)
 		globals : function (obj, scopeForGlobals) {
 			this._canDelayInit = false;
 			this._globals = obj;
@@ -2031,7 +2031,7 @@ function init(vjo, global) {
 				throw "Invalid type definition. etype cannot be inheritted from another type";
 			},
 			//> final public T values(String type)
-		    //> final public T values(Object objLiteral)
+		    //> final public T values(ObjLiteral objLiteral)
 			values : function (vals) {
 				this._eVals = vals;
 				return this;
@@ -2125,7 +2125,7 @@ function init(vjo, global) {
     //> final public vjo.otype otype(String type)
 	vjo.otype = function (clz) {
 		return {
-			//> final public T defs(Object objLiteral)
+			//> final public T defs(ObjLiteral objLiteral)
 			defs : function (defs) {
 				return this;
 			},

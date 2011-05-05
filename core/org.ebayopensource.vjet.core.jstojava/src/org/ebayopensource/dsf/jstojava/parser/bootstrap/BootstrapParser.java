@@ -39,8 +39,10 @@ import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.parser.bootstrap.BootstrapParser.StateInfo.OrderedState;
 import org.ebayopensource.dsf.jstojava.parser.comments.CommentCollector;
 import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.report.DefaultErrorReporter;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
@@ -132,7 +134,6 @@ public class BootstrapParser {
 
 			mapOfTypes.put(unit.getType().getName(), unit.getType());
 		}
-		
 		
 		
 		return mapOfTypes;
@@ -991,17 +992,41 @@ public class BootstrapParser {
 
 	}
 
-	private static JstType getType(final String type) {
-		
-		JstType typeFromCache = JstCache.getInstance().getType(type);
-
-		if (typeFromCache != null) {
-			return typeFromCache;
+	private static JstType getType(final List<JsTypingMeta> list) {
+		JstType t=null;
+		for(JsTypingMeta m: list){
+			JstType typeFromCache = JstCache.getInstance().getType(m.getType());
+			
+			if(typeFromCache==null && m instanceof JsAttributed){
+				JsAttributed jsa = (JsAttributed)m;
+				
+				typeFromCache = JstCache.getInstance().getType(jsa.getAttributor().getType() +"." + jsa.getName());
+			}
+			
+	
+			if (typeFromCache != null) {
+				return typeFromCache;
+			}
+			
+			
+			
+			System.out.println("creating empty type =" + list); //KEEPME
+			t = JstFactory.getInstance().createJstType(m.getType(), true);
 		}
-		
-		System.out.println("creating empty type =" + type); //KEEPME
 
-		return JstFactory.getInstance().createJstType(type, true);
+		return t;
+	}
+	private static JstType getType(final String type) {
+	
+			JstType typeFromCache = JstCache.getInstance().getType(type);
+			
+			if (typeFromCache != null) {
+				return typeFromCache;
+			}
+			
+			System.out.println("creating empty type =" + type); //KEEPME
+			return JstFactory.getInstance().createJstType(type, true);
+
 	}
 
 	private static void addMethod(JstType t, JstType rtnType,
@@ -1152,7 +1177,7 @@ public class BootstrapParser {
 
 	private static void processArgs(IJsCommentMeta meta, JstMethod mtd) {
 		for (JsParam param : ((JsFuncType)meta.getTyping()).getParams()) {
-			JstType type = getType(param.getType());
+			JstType type = getType(param.getTypes());
 			JstArg arg = new JstArg(type, param.getName(), param.isVariable(),
 					param.isOptional());
 			mtd.addArg(arg);

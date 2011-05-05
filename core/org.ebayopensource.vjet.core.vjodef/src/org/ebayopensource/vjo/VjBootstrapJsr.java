@@ -71,6 +71,15 @@ public class VjBootstrapJsr {
 		}
 	}
 	// DO NOT LOAD THIS ON SITE
+	public static URL getVjoOptionsOLUrl() {
+		try {
+			return ResourceUtil.getResource(VjBootstrapJsr.class, "VJOOptionsOL.jsspec");
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	// DO NOT LOAD THIS ON SITE
 	public static URL getVjoConsoleAsUrl() {
 		try {
 			return ResourceUtil.getResource(VjBootstrapJsr.class, "VjConsole.jsspec");

@@ -44,6 +44,7 @@ public class VjoBootstrapGen {
 					VjBootstrapJsr.getVjoConsoleAsUrl(), 
 					VjBootstrapJsr.getVjoClassAsUrl(), 
 					VjBootstrapJsr.getVjoEnumAsUrl(), 
+					VjBootstrapJsr.getVjoOptionsOLUrl(), 
 					VjBootstrapJsr.getVjoObjectAsUrl()).values();
 			IJstType[] typeAry = new IJstType[types.size()];
 			types.toArray(typeAry);
