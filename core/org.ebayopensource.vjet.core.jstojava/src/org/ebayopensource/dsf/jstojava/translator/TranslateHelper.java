@@ -35,6 +35,8 @@ import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstFactory;
+import org.ebayopensource.dsf.jst.declaration.JstFuncArgAttributedType;
+import org.ebayopensource.dsf.jst.declaration.JstFuncScopeAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
@@ -69,6 +71,8 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsAnnotation.JsAnnotation
 import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncArgAttributedType;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncScopeAttributedType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsMixinType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
@@ -403,10 +407,14 @@ public class TranslateHelper {
 		// handling simple jsType and generics
 		if (jsTypingMeta instanceof JsType) {
 			jstType = findType(findSupport, (JsType)jsTypingMeta);
-		} else if (jsTypingMeta instanceof JsVariantType) {
-			jstType = findType(findSupport, (JsVariantType)jsTypingMeta);
-		} else if (jsTypingMeta instanceof JsMixinType) {
-			jstType = findType(findSupport, (JsMixinType)jsTypingMeta);
+		}
+		// handling floating function types
+		else if (jsTypingMeta instanceof JsFuncType) {
+			final JsFuncType jsFuncType = (JsFuncType) jsTypingMeta;
+			final IJstMethod synthesizedFunction = MethodTranslateHelper
+					.createJstSynthesizedMethod(jsFuncType, findSupport,
+							jsFuncType.getFuncName());
+			jstType = createJstFuncType(findSupport, synthesizedFunction);
 		}
 		// handling attributed type
 		else if (jsTypingMeta instanceof JsAttributed) {
@@ -447,13 +455,17 @@ public class TranslateHelper {
 						isStatic);
 			}
 		}
-		// handling floating function types
-		else if (jsTypingMeta instanceof JsFuncType) {
-			final JsFuncType jsFuncType = (JsFuncType) jsTypingMeta;
-			final IJstMethod synthesizedFunction = MethodTranslateHelper
-					.createJstSynthesizedMethod(jsFuncType, findSupport,
-							jsFuncType.getFuncName());
-			jstType = createJstFuncType(findSupport, synthesizedFunction);
+		else if (jsTypingMeta instanceof JsVariantType) {
+			jstType = findType(findSupport, (JsVariantType)jsTypingMeta);
+		}
+		else if (jsTypingMeta instanceof JsMixinType) {
+			jstType = findType(findSupport, (JsMixinType)jsTypingMeta);
+		}
+		else if (jsTypingMeta instanceof JsFuncScopeAttributedType) {
+			jstType = findType(findSupport, (JsFuncScopeAttributedType)jsTypingMeta);
+		}
+		else if (jsTypingMeta instanceof JsFuncArgAttributedType) {
+			jstType = findType(findSupport, (JsFuncArgAttributedType)jsTypingMeta);
 		}
 
 		// handling error case
@@ -505,6 +517,16 @@ public class TranslateHelper {
 			types.add(findType(findSupport, t, null));
 		}
 		return new JstMixedType(types);
+	}
+	
+	private static IJstType findType(final IFindTypeSupport findSupport,
+		final JsFuncScopeAttributedType typing) {
+		return new JstFuncScopeAttributedType();
+	}
+	
+	private static IJstType findType(final IFindTypeSupport findSupport,
+		final JsFuncArgAttributedType typing) {
+		return new JstFuncArgAttributedType(typing.getArgIndex());
 	}
 
 	public static JstFuncType createJstFuncType(IFindTypeSupport ctx,
