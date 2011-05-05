@@ -52,7 +52,6 @@ import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
-@Ignore()
 public class Java2VjoTests {
 
 	private PrintStream sysout = System.out;
@@ -413,6 +412,9 @@ public class Java2VjoTests {
 			} else {
 				assertFalse(output.indexOf("Write " + jsFile.toURI().toURL()) > -1);
 			}
+			
+			jsFile.deleteOnExit();
+			
 			if (jsrGen) {
 				String jsrPath = file.getAbsolutePath();
 				if (jsrPath.endsWith(".java")){
@@ -430,6 +432,9 @@ public class Java2VjoTests {
 					assertFalse(output.indexOf("Write "
 							+ jsrFile.toURI().toURL()) > -1);
 				}
+				
+				jsrFile.deleteOnExit();
+				
 			} else {
 				String jsrPath = file.toURI().toURL().toString();
 				if (jsrPath.endsWith(".java")){
@@ -437,9 +442,13 @@ public class Java2VjoTests {
 				}
 				File jsrFile = new File(jsrPath);
 				assertFalse(dateInMillis <= jsrFile.lastModified());
+				jsrFile.deleteOnExit();
 			}
 		}
 
+		
+	
+		
 		//validate trace file was created after test run.
 		File traceFile = new File("v4trace.xml");
 //		if (trace) {
@@ -448,6 +457,8 @@ public class Java2VjoTests {
 //			assertFalse(dateInMillis <= traceFile.lastModified());
 //		}
 
+		
+		
 		//Validate number of files written out is as expected in logs
 		//also check to ensure no other possible files created.
 //		int occurs = countOccurrences(output, "Write");
