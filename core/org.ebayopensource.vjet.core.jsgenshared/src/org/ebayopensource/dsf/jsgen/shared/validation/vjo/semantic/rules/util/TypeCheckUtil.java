@@ -29,6 +29,7 @@ import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.declaration.JstParamType;
@@ -36,7 +37,6 @@ import org.ebayopensource.dsf.jst.declaration.JstTypeWithArgs;
 import org.ebayopensource.dsf.jst.declaration.JstVariantType;
 import org.ebayopensource.dsf.jst.declaration.JstWildcardType;
 import org.ebayopensource.dsf.jst.declaration.SynthOlType;
-//import org.ebayopensource.vjo.lib.LibManager;
 
 public class TypeCheckUtil {
 	
@@ -517,6 +517,24 @@ public class TypeCheckUtil {
 			return false;
 		}
 		
+		if (assignTo instanceof JstMixedType) {
+			for (IJstType mType : ((JstMixedType)assignTo).getMixedTypes()) {
+				if (!isAssignable(mType, assignFrom)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		
+		if (assignFrom instanceof JstMixedType) {
+			for (IJstType mType : ((JstMixedType)assignFrom).getMixedTypes()) {
+				if (isAssignable(assignTo, mType)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		IJstType fromType = assignFrom;
 		IJstType toType = assignTo;
 		if (assignTo instanceof IJstRefType) {
@@ -832,6 +850,14 @@ public class TypeCheckUtil {
 			}
 			return false;
 		}
+		if (exprValue instanceof JstMixedType) {
+			for (IJstType type : ((JstMixedType)exprValue).getMixedTypes()) {
+				if (isBoolean(type)) {
+					return true;
+				}
+			}
+			return false;
+		}
 		if(isArbitary(exprValue)){
 			return true;
 		}
@@ -876,6 +902,14 @@ public class TypeCheckUtil {
 	public static boolean isNumber(IJstType exprValue){
 		if (exprValue instanceof JstVariantType) {
 			for (IJstType type : ((JstVariantType)exprValue).getVariantTypes()) {
+				if (isNumber(type)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		if (exprValue instanceof JstMixedType) {
+			for (IJstType type : ((JstMixedType)exprValue).getMixedTypes()) {
 				if (isNumber(type)) {
 					return true;
 				}
@@ -934,6 +968,14 @@ public class TypeCheckUtil {
 	public static boolean isString(IJstType exprValue){
 		if (exprValue instanceof JstVariantType) {
 			for (IJstType type : ((JstVariantType)exprValue).getVariantTypes()) {
+				if (isString(type)) {
+					return true;
+				}
+			}
+			return false;
+		}
+		if (exprValue instanceof JstMixedType) {
+			for (IJstType type : ((JstMixedType)exprValue).getMixedTypes()) {
 				if (isString(type)) {
 					return true;
 				}

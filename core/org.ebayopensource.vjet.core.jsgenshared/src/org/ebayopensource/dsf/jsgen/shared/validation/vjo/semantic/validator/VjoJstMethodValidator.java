@@ -28,6 +28,7 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstName;
 import org.ebayopensource.dsf.jst.declaration.JstParamType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeWithArgs;
@@ -275,6 +276,9 @@ public class VjoJstMethodValidator
 		if (rtnType instanceof JstVariantType) {
 			validateReturnType(ctx, jstMethod, (JstVariantType)rtnType);
 		}
+		else if (rtnType instanceof JstMixedType) {
+			validateReturnType(ctx, jstMethod, (JstMixedType)rtnType);
+		}
 		else {
 			validateReturnType(ctx, jstMethod, rtnType);
 		}
@@ -282,6 +286,12 @@ public class VjoJstMethodValidator
 	
 	private void validateReturnType(final VjoValidationCtx ctx, final IJstMethod jstMethod, JstVariantType rtnType) {
 		for (IJstType type: rtnType.getVariantTypes()) {
+			validateReturnType(ctx, jstMethod, type);
+		}
+	}
+	
+	private void validateReturnType(final VjoValidationCtx ctx, final IJstMethod jstMethod, JstMixedType rtnType) {
+		for (IJstType type: rtnType.getMixedTypes()) {
 			validateReturnType(ctx, jstMethod, type);
 		}
 	}

@@ -34,6 +34,7 @@ import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.declaration.JstParamType;
@@ -321,6 +322,9 @@ public abstract class VjoSemanticValidator implements
 		else if (type instanceof JstVariantType) {
 			validateVariantType(ctx, jstNode, display, (JstVariantType)type);
 		}
+		else if (type instanceof JstMixedType) {
+			validateMixedType(ctx, jstNode, display, (JstMixedType)type);
+		}
 		else if(type instanceof JstTypeWithArgs){
 			validateJstWithArgs(jstNode.getOwnerType(), jstNode, display, ctx, (JstTypeWithArgs)type);
 		}
@@ -484,6 +488,15 @@ public abstract class VjoSemanticValidator implements
 		final String display, 
 		JstVariantType declaredType) {
 		for (IJstType type : declaredType.getVariantTypes()) {
+			validateComplexType(ctx, jstNode, display, type);
+		}		
+	}
+	
+	protected void validateMixedType(final VjoValidationCtx ctx,
+		final IJstNode jstNode,
+		final String display, 
+		JstMixedType declaredType) {
+		for (IJstType type : declaredType.getMixedTypes()) {
 			validateComplexType(ctx, jstNode, display, type);
 		}		
 	}

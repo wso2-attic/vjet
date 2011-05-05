@@ -38,6 +38,7 @@ import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstName;
 import org.ebayopensource.dsf.jst.declaration.JstParamType;
@@ -69,6 +70,7 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncType;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsMixinType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
@@ -400,9 +402,11 @@ public class TranslateHelper {
 		IJstType jstType = null;
 		// handling simple jsType and generics
 		if (jsTypingMeta instanceof JsType) {
-			jstType = findType(findSupport, (JsType) jsTypingMeta);
+			jstType = findType(findSupport, (JsType)jsTypingMeta);
 		} else if (jsTypingMeta instanceof JsVariantType) {
-			jstType = findType(findSupport, (JsVariantType) jsTypingMeta);
+			jstType = findType(findSupport, (JsVariantType)jsTypingMeta);
+		} else if (jsTypingMeta instanceof JsMixinType) {
+			jstType = findType(findSupport, (JsMixinType)jsTypingMeta);
 		}
 		// handling attributed type
 		else if (jsTypingMeta instanceof JsAttributed) {
@@ -492,6 +496,15 @@ public class TranslateHelper {
 			types.add(findType(findSupport, t, null));
 		}
 		return new JstVariantType(types);
+	}
+	
+	private static IJstType findType(final IFindTypeSupport findSupport,
+			final JsMixinType typing) {
+		List<IJstType> types = new ArrayList<IJstType>(3);
+		for (JsTypingMeta t : ((JsMixinType) typing).getTypes()) {
+			types.add(findType(findSupport, t, null));
+		}
+		return new JstMixedType(types);
 	}
 
 	public static JstFuncType createJstFuncType(IFindTypeSupport ctx,
