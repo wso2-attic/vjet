@@ -34,11 +34,14 @@ import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
 import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
+import org.ebayopensource.dsf.jst.declaration.JstFuncArgAttributedType;
+import org.ebayopensource.dsf.jst.declaration.JstFuncScopeAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
@@ -92,9 +95,9 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
+import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtension;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
-import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtension;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.FunctionExpressionTranslator;
@@ -1396,7 +1399,47 @@ public class JstExpressionTypeLinkerHelper {
 			}
 		}
 		returnType = mtd.getRtnType();
+		
+		return resolvingFuncReturnType(mie, returnType);
+	}
+	
+	private static IJstType resolvingFuncReturnType(MtdInvocationExpr mie, IJstType returnType) {
+		if (returnType instanceof JstFuncArgAttributedType) {
+			int argIndex = ((JstFuncArgAttributedType)returnType).getArgPosition() - 1;
+			List<IExpr> args = mie.getArgs();
+			if (args.size() > argIndex) {
+				returnType = args.get(argIndex).getResultType();
+			}
+		}
+		else if (returnType instanceof JstFuncScopeAttributedType) {
+			IExpr scope = mie.getQualifyExpr();
+			if (scope != null) {
+				returnType = scope.getResultType();
+			}
+		}
+		else if (returnType instanceof JstMixedType) {
+			returnType = resolve(mie, (JstMixedType)returnType);
+		}
 		return returnType;
+	}
+	
+	private static IJstType resolve(MtdInvocationExpr mie, JstMixedType mixedType) {
+		List<IJstType> mTypes = mixedType.getMixedTypes();
+		List<IJstType> resolvedTypes = new ArrayList<IJstType>(mTypes.size());
+		boolean needResolve = false;
+		for (IJstType mType : mixedType.getMixedTypes()) {
+			if (mType instanceof JstFuncArgAttributedType || mType instanceof JstFuncScopeAttributedType) {
+				needResolve = true;
+			}
+			IJstType resolved = resolvingFuncReturnType(mie, mType);
+			if (resolved != null) {
+				resolvedTypes.add(resolved);
+			}
+		}
+		if (needResolve && resolvedTypes.size() > 0) {
+			mixedType = new JstMixedType(resolvedTypes);
+		}
+		return mixedType;
 	}
 	
 	/**
