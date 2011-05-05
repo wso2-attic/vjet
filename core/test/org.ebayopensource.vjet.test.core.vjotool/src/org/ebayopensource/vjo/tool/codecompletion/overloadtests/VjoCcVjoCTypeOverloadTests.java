@@ -28,6 +28,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.eclipse.core.runtime.AssertionFailedException;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -51,8 +52,10 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcVjoCTypeOverloadTests extends VjoCcBaseTest{
 	
-	private VjoCcOverloadUtil overloadUtil = new VjoCcOverloadUtil();
-	public VjoCcCtx ctx = getEmptyContext();
+	private VjoCcOverloadUtil overloadUtil;
+	
+	
+	public VjoCcCtx ctx;
 	private TypeName calledName;
 	private IJstType calledType;
 	private String typeStr;
@@ -64,6 +67,16 @@ public class VjoCcVjoCTypeOverloadTests extends VjoCcBaseTest{
 	private String testJs = "engine.overload.CBase";
 	public String xmlFile = "engine/overload/Overload_Proposals.xml";
 	private VjoCcEngine engine;
+	
+	
+
+	
+	@BeforeClass
+	protected void setUp() throws Exception {
+		ctx = getEmptyContext();
+		overloadUtil = new VjoCcOverloadUtil();
+	}
+	
 	
 	@Test
 	public void testCcProposals(){

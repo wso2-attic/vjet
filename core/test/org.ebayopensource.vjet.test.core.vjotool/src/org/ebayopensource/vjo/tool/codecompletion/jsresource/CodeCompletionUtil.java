@@ -44,7 +44,7 @@ import org.ebayopensource.vjo.lib.TsLibLoader;
 
 public class CodeCompletionUtil {
 	public static Boolean fullyLoaded = true;
-	public static final String ARTIFACT_FOLDER = "";
+	public static String ARTIFACT_FOLDER = "";
 	public static final String GROUP_NAME = "test";
 	private static IJstParseController controller;
 
@@ -53,6 +53,11 @@ public class CodeCompletionUtil {
 			loadJsToTypeSpace();
 		}
 		return controller;
+	}
+	
+	public static void setFolder(String folder){
+		System.out.println("updating ARTIFACT_FOLDER=" + ARTIFACT_FOLDER);
+		ARTIFACT_FOLDER = folder;
 	}
 	
 	private static void promoteGlobals(JstTypeSpaceMgr jstTypeSpaceMgr) {
@@ -71,6 +76,7 @@ public class CodeCompletionUtil {
 	 */
 	public static JstTypeSpaceMgr loadJsToTypeSpace() {
 		JstTypeSpaceMgr ts = getInitailTypeSpace();
+		System.out.println("ARTIFACT_FOLDER=" + ARTIFACT_FOLDER);
 		addAllToTypeSpace(ARTIFACT_FOLDER,ts);
 		return ts;
 	}
@@ -270,11 +276,15 @@ public class CodeCompletionUtil {
 				srcPath = artifactDir.getName();
 			}
 			
-//			System.out.println("LAX : u : " + u + " u1 = " + u1);
-//			String fileLoc = u.getFile().substring(0, u.getFile().indexOf("src/"));
-//			System.out.println("LAX : fileLoc : " + fileLoc);
-//			File file = new File(fileLoc + ARTIFACT_FOLDER + "/");
-//			System.out.println("LAX : file : " + file);
+			System.out.println("LAX : u : " + u + " u1 = " + u);
+			
+			String fileLoc = u.getFile();
+			if( u.getFile().indexOf("src/")!=-1){
+				fileLoc = u.getFile().substring(0, u.getFile().indexOf("src/"));
+			}
+			System.out.println("LAX : fileLoc : " + fileLoc);
+			File file = new File(fileLoc + ARTIFACT_FOLDER + "/");
+			System.out.println("LAX : file : " + file);
 			
 			ts.processEvent(new AddGroupEvent(GROUP_NAME, grpPath, srcPath,
 					null, getDefaultLibList()), new ISourceEventCallback<IJstType>() {

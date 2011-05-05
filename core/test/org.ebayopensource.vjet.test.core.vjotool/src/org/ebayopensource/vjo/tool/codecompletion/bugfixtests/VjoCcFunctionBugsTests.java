@@ -17,6 +17,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -39,9 +40,12 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcFunctionBugsTests extends VjoCcBaseTest {
-	private VjoCcEngine engine = 
-		new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	private VjoCcEngine engine;
 	
+	@BeforeClass
+	public void setUp() throws Exception {
+		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	}
 	@Test
 	@Description("Bug 2192 : Only arguments defined in actual function should proposed.")
 	public void testActualArugmentProposals() {

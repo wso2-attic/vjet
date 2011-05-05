@@ -17,6 +17,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
@@ -38,8 +39,12 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcInnerTypesBugsTests extends VjoCcBaseTest {
-	private VjoCcEngine engine = 
-		new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	private VjoCcEngine engine;
+	
+	@BeforeClass
+	public void setUp() throws Exception {
+		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	}
 	
 	@Test //Bug4704
 	public void testInnerType() {

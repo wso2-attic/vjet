@@ -51,6 +51,7 @@ import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcJsNativeTypeTests;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcMemberAccessTests;
 import org.ebayopensource.vjo.tool.codecompletion.engine.innertypes.VjoCcInnerTypeTests;
 import org.ebayopensource.vjo.tool.codecompletion.handler.VjoCcHandlerTest;
+import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.ebayopensource.vjo.tool.codecompletion.overloadtests.VjoCcVjoATypeOverloadTests;
 import org.ebayopensource.vjo.tool.codecompletion.overloadtests.VjoCcVjoCTypeOverloadTests;
 import org.ebayopensource.vjo.tool.codecompletion.overloadtests.VjoCcVjoETypeOverloadTests;
@@ -61,6 +62,7 @@ import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcFunctionStringT
 import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcKeywordStringTests;
 import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcMethodPropReplaceStrTests;
 import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcPresenterTests;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -129,8 +131,17 @@ import org.junit.runners.Suite.SuiteClasses;
 	
 })
 public class AllVjoCcTestSuite {
+	
+	
+static{
+		CodeCompletionUtil.setFolder("artifact");
+	}
+
+	
 	@BeforeClass
 	public static void appendSourcePath(){
+		
+		
 		URL url = AllVjoCcTestSuite.class.getClassLoader().getResource(
 				AllVjoCcTestSuite.class.getName().replace('.', '/')+".class");
 		if(url.getFile().contains(".jar")){

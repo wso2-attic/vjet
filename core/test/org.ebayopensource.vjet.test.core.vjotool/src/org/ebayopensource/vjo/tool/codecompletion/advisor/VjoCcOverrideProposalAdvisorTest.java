@@ -48,6 +48,7 @@ public class VjoCcOverrideProposalAdvisorTest extends VjoCcBaseTest {
 	}
 
 	@Test
+	@Ignore("converted to advisor test")
 	public void testAdviseWithTokenS() {
 
 		VjoCcCtx ctx = createBaseVjoCcCtx();

@@ -31,10 +31,6 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.javatojs.cli.Java2Vjo;
 import org.ebayopensource.dsf.javatojs.tests.cli.data.Boo;
 import org.ebayopensource.dsf.javatojs.tests.cli.data.Goo;
@@ -46,11 +42,17 @@ import org.ebayopensource.dsf.javatojs.tests.data.build.subdirma.H;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.javatojs.util.JavaToJsHelper;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+@Ignore()
 public class Java2VjoTests {
 
 	private PrintStream sysout = System.out;

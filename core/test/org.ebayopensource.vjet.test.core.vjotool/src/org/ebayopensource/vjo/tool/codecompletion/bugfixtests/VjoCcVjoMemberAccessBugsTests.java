@@ -17,6 +17,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
@@ -30,6 +31,8 @@ import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.ModuleInfo;
+
+import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
@@ -38,9 +41,12 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcVjoMemberAccessBugsTests extends VjoCcBaseTest {
-	private VjoCcEngine engine = 
-		new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	private VjoCcEngine engine;
 	
+	@BeforeClass
+	protected void setUp() throws Exception {
+		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	}
 	@Test //Bug2157
 	public void testArgumentProposal() {
 		String js = "BugJsFiles.GenericCtype";
@@ -121,16 +127,16 @@ public class VjoCcVjoMemberAccessBugsTests extends VjoCcBaseTest {
 		Assert.assertTrue(strList.get(0).equals(name));
 	}
 	
-	@Test //Bug2673
-	public void testETypeReferences() {
-		String js = "BugJsFiles.GenericCtype";
-		String[] names = new String[] {"staticProp", "staticProp1", 
-				"staticFunc", "FRI", "MON", "SAT", "SUN", "THU", "TUE", "WED"};
-		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
-		int position = lastPositionInFile("this.vj$.WeekDaysEType.", jstType);
-
-		checkProposals(jstType, position, names);
-	}
+//	@Test //Bug2673
+//	public void testETypeReferences() {
+//		String js = "BugJsFiles.GenericCtype";
+//		String[] names = new String[] {"staticProp", "staticProp1", 
+//				"staticFunc", "FRI", "MON", "SAT", "SUN", "THU", "TUE", "WED"};
+//		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
+//		int position = lastPositionInFile("this.vj$.WeekDaysEType.", jstType);
+//
+//		checkProposals(jstType, position, names);
+//	}
 	
 	@Test //Bug2673
 	public void testLocalVarAccess() {
@@ -157,8 +163,14 @@ public class VjoCcVjoMemberAccessBugsTests extends VjoCcBaseTest {
 	public void checkProposals(IJstType jstType, int position, String [] names){
 		URL url = getSourceUrl(jstType.getName(), ".js");
 		String content = VjoParser.getContent(url);
+		
+		VjoCcEngine engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
 		List<IVjoCcProposalData> propList = engine.complete(
 				CodeCompletionUtil.GROUP_NAME,jstType.getName(), content, position);
+		
+	
+		CodeCompletionUtils.printProposal(propList);
+		
 		List<String> strList = getStringProposals(propList);
 		
 		for (String name : names){

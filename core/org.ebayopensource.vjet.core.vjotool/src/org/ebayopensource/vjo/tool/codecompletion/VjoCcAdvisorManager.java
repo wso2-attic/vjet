@@ -55,6 +55,7 @@ import org.ebayopensource.vjo.tool.codecompletion.handler.VjoCcHandler;
  */
 public class VjoCcAdvisorManager {
 
+	private static final boolean DEBUG = false;
 	private static Map<String, IVjoCcAdvisor> s_advisorMap = new HashMap<String, IVjoCcAdvisor>();
 	private IVjoCcHandler m_handler;
 	private IVjoCcHandler m_commentHandler;
@@ -131,6 +132,10 @@ public class VjoCcAdvisorManager {
 		}
 		for (String id : advisorIds) {
 			IVjoCcAdvisor advisor = getAdvisor(id);
+			
+			if(DEBUG){
+				System.out.println("using advisor: " + advisor.getId());
+			}
 			if (advisor != null) {
 				advisor.advise(ctx);
 			}

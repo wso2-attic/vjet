@@ -16,6 +16,7 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstType;
@@ -27,8 +28,12 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcVjoMTypeOverloadTests extends VjoCcBaseTest{
 	
-	private VjoCcOverloadUtil overloadUtil = new VjoCcOverloadUtil();
+	private VjoCcOverloadUtil overloadUtil;
 	
+	@BeforeClass
+	protected void setUp() throws Exception {
+		overloadUtil = new VjoCcOverloadUtil();
+	}
 	@Test
 	public void testBaseNonStatOverloadProposal(){
 		// JS Type name

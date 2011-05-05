@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstProperty;
@@ -28,11 +29,23 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 
 public class VjoCcOverloadUtil {
 	
-	private VjoCcEngine engine = 
-		new VjoCcEngine(CodeCompletionUtil.getJstParseController());
-		
+	private VjoCcEngine engine;
+	
+	
+	public VjoCcOverloadUtil() {
+		initEngine();
+	}
+	
+	private final void initEngine(){
+		if(engine==null){
+			engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());			
+		}
+	}
+	
+	
 	// Get actual proposal list from engine
 	public List<String> getActMethParamList(Proposals prop){
+		initEngine();
 		URL url = getSourceUrl(prop.jstType.getName(), ".js");
 		String content = VjoParser.getContent(url);
 		List<IVjoCcProposalData> propList = engine.complete(
@@ -75,7 +88,7 @@ public class VjoCcOverloadUtil {
 	}
 	
 	public void checkProposals(List<String> expectedList, List<String> actualList){
-			
+		initEngine();
 		Assert.assertTrue("actual proposals "+actualList+
 				" does not match with expected proposals "+expectedList,
 				(expectedList.containsAll(actualList)) && actualList.containsAll(expectedList));

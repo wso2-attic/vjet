@@ -14,6 +14,7 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 import java.net.URL;
 import java.util.List;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstType;
@@ -28,9 +29,12 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcIndentationTest extends VjoCcBaseTest{
 	
-	private VjoCcEngine engine = 
-		new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	private VjoCcEngine engine;
 	
+	@BeforeClass
+	protected void setUp() throws Exception {
+		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
+	}
 	@Test //Bug 5676
 	public void testCaseInsensitive(){
 		String js = "BugJsFiles.Bug5676";

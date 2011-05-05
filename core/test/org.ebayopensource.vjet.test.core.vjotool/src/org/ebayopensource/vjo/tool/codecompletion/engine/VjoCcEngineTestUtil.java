@@ -63,7 +63,9 @@ public class VjoCcEngineTestUtil extends VjoCcBaseTest {
 	public String testTag = "proposal";
 	
 	public void testCcProposals(){
-		initialize();
+		if(!testJs.equals("")){
+			initialize();
+		}
 		URL url = this.getClass().getClassLoader().getResource(sampleJs);
 		String contents = VjoParser.getContent(url);
 		contents = contents.replace(sampleJs.substring(sampleJs.lastIndexOf("/")+1, 
@@ -90,6 +92,7 @@ public class VjoCcEngineTestUtil extends VjoCcBaseTest {
 		Iterator<Integer> iter = map.keySet().iterator();
 		while (iter.hasNext()) {
 			Integer position = iter.next();
+			System.out.println("processing position: " + position);
 			List<String> list = map.get(position);
 			for (String content : list) {
 				Matcher m = p.matcher(content);
