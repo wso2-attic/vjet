@@ -4,7 +4,7 @@ vjo.ftype('org.dojotoolkit.ext.Cookie') //< public
 }, dojo)
 .props({
 	//>public String cookie(String name)
-	//>public void cookie(String name, String value, Cookie.__options.cookieProps? props)
+	//>public void cookie(String name, String value, Cookie.__options::cookieProps? props)
 	_invoke_ : vjo.NEEDS_IMPL,
 	
 	//>public boolean isSupported()
