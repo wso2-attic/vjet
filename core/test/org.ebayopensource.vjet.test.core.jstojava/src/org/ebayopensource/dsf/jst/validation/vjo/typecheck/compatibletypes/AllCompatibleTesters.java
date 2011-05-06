@@ -32,7 +32,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	//enhancement by huzhou for compatibility check between 2 functions
 	TypecheckCompartibleFunctionsTester.class,
 	//strict comparison between object and ObjLiteral
-	TypecheckObjLiteralTester.class
+	TypecheckObjLiteralTester.class,
+	//mixed type assignments checks
+	TypecheckMixedTypeTester.class
 })
 
 /**
