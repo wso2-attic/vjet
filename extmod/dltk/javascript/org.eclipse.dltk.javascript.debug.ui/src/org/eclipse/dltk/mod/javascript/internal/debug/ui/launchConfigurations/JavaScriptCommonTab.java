@@ -178,13 +178,19 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse.swt.widgets.Composite)
+	 * @see
+	 * org.eclipse.debug.ui.ILaunchConfigurationTab#createControl(org.eclipse
+	 * .swt.widgets.Composite)
 	 */
 	public void createControl(Composite parent) {
 		Composite comp = new Composite(parent, SWT.NONE);
 		setControl(comp);
-		PlatformUI.getWorkbench().getHelpSystem().setHelp(getControl(),
-				IDebugHelpContextIds.LAUNCH_CONFIGURATION_DIALOG_COMMON_TAB);
+		PlatformUI
+				.getWorkbench()
+				.getHelpSystem()
+				.setHelp(
+						getControl(),
+						IDebugHelpContextIds.LAUNCH_CONFIGURATION_DIALOG_COMMON_TAB);
 		comp.setLayout(new GridLayout(2, true));
 		comp.setFont(parent.getFont());
 
@@ -550,7 +556,9 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse.debug.core.ILaunchConfiguration)
+	 * @see
+	 * org.eclipse.debug.ui.ILaunchConfigurationTab#initializeFrom(org.eclipse
+	 * .debug.core.ILaunchConfiguration)
 	 */
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		boolean isShared = !configuration.isLocal();
@@ -590,9 +598,10 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 		boolean dltkOutput = false;
 
 		try {
-			dltkOutput = configuration.getAttribute(
-					ScriptLaunchConfigurationConstants.ATTR_USE_INTERACTIVE_CONSOLE,
-					false);
+			dltkOutput = configuration
+					.getAttribute(
+							ScriptLaunchConfigurationConstants.ATTR_USE_INTERACTIVE_CONSOLE,
+							false);
 
 			outputToConsole = configuration.getAttribute(
 					IDebugUIConstants.ATTR_CAPTURE_IN_CONSOLE, true);
@@ -808,7 +817,9 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#isValid(org.eclipse.debug.core.ILaunchConfiguration)
+	 * @see
+	 * org.eclipse.debug.ui.ILaunchConfigurationTab#isValid(org.eclipse.debug
+	 * .core.ILaunchConfiguration)
 	 */
 	public boolean isValid(ILaunchConfiguration config) {
 		setMessage(null);
@@ -826,7 +837,7 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	private boolean validateEncoding() {
 		if (fAltEncodingButton.getSelection()) {
 			if (fEncodingCombo.getSelectionIndex() == -1) {
-				setErrorMessage(LaunchConfigurationsMessages.CommonTab_No_Encoding_Selected);
+				setErrorMessage("Console encoding not selected");
 				return false;
 			}
 		}
@@ -875,7 +886,9 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
+	 * @see
+	 * org.eclipse.debug.ui.ILaunchConfigurationTab#setDefaults(org.eclipse.
+	 * debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void setDefaults(ILaunchConfigurationWorkingCopy config) {
 		config.setContainer(null);
@@ -885,7 +898,9 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
+	 * @see
+	 * org.eclipse.debug.ui.ILaunchConfigurationTab#performApply(org.eclipse
+	 * .debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		updateConfigFromLocalShared(configuration);
@@ -896,8 +911,7 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 		if (fAltEncodingButton.getSelection()) {
 			encoding = fEncodingCombo.getText();
 		}
-		configuration.setAttribute(DebugPlugin.ATTR_CONSOLE_ENCODING,
-				encoding);
+		configuration.setAttribute(DebugPlugin.ATTR_CONSOLE_ENCODING, encoding);
 
 		boolean captureOutput = false;
 
@@ -944,8 +958,8 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 						.getConsoleProxy(exeEnv);
 				configuration.setAttribute("environmentId", proxyFile
 						.getEnvironment().getId());
-				configuration.setAttribute("proxy_path", proxyFile
-						.toOSString());
+				configuration
+						.setAttribute("proxy_path", proxyFile.toOSString());
 			} catch (IOException e) {
 				if (DLTKCore.DEBUG) {
 					e.printStackTrace();
@@ -956,9 +970,10 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 			useDltk = true;
 		}
 
-		configuration.setAttribute(
-				ScriptLaunchConfigurationConstants.ATTR_USE_INTERACTIVE_CONSOLE,
-				useDltk);
+		configuration
+				.setAttribute(
+						ScriptLaunchConfigurationConstants.ATTR_USE_INTERACTIVE_CONSOLE,
+						useDltk);
 
 		// Last option
 		if (captureOutput) {
@@ -1000,7 +1015,9 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#activated(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
+	 * @see
+	 * org.eclipse.debug.ui.ILaunchConfigurationTab#activated(org.eclipse.debug
+	 * .core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void activated(ILaunchConfigurationWorkingCopy workingCopy) {
 	}
@@ -1008,7 +1025,9 @@ public class JavaScriptCommonTab extends AbstractLaunchConfigurationTab {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.debug.ui.ILaunchConfigurationTab#deactivated(org.eclipse.debug.core.ILaunchConfigurationWorkingCopy)
+	 * @see
+	 * org.eclipse.debug.ui.ILaunchConfigurationTab#deactivated(org.eclipse.
+	 * debug.core.ILaunchConfigurationWorkingCopy)
 	 */
 	public void deactivated(ILaunchConfigurationWorkingCopy workingCopy) {
 	}
