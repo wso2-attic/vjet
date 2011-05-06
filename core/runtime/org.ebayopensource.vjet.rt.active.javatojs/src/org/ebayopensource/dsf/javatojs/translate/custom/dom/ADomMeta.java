@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.jdt.core.dom.ASTNode;
-
 import org.ebayopensource.dsf.common.event.DsfEvent;
 import org.ebayopensource.dsf.javatojs.anno.ARename;
 import org.ebayopensource.dsf.javatojs.translate.TranslateHelper;
@@ -34,6 +32,7 @@ import org.ebayopensource.dsf.jsnative.anno.Alias;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.Constructor;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.GlobalProperty;
 import org.ebayopensource.dsf.jsnative.anno.JsNativeMeta;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
@@ -42,6 +41,7 @@ import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.expr.TextExpr;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.eclipse.jdt.core.dom.ASTNode;
 import org.mozilla.mod.javascript.Scriptable;
 
 public class ADomMeta extends BaseCustomMetaProvider implements ICustomMetaProvider {
@@ -325,7 +325,8 @@ public class ADomMeta extends BaseCustomMetaProvider implements ICustomMetaProvi
 			boolean isProperty = false;
 			Annotation[] annotations = m.getAnnotations();
 			for (Annotation annot : annotations) {
-				if (annot.annotationType().equals(Property.class)) {
+				if (annot.annotationType().equals(Property.class)||
+						annot.annotationType().equals(GlobalProperty.class)) {
 					isProperty = true;
 				}
 				else if (annot.annotationType().equals(ARename.class)) {

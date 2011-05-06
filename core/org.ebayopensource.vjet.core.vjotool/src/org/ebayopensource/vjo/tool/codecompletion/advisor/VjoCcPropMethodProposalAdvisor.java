@@ -47,6 +47,9 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 		String token = ctx.getActingToken();
 		IJstType callingType = ctx.getActingType();
 		IJstType calledType = ctx.getCalledType();
+		if(calledType==null && callingType == null){
+			return;
+		}
 		if (calledType == null) {
 			calledType = callingType;
 		}

@@ -8,9 +8,13 @@
  *******************************************************************************/
 package org.ebayopensource.vjo.lib;
 
+import org.ebayopensource.dsf.jst.IJstGlobalVar;
 import org.ebayopensource.dsf.jst.IJstLib;
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
+import org.ebayopensource.dsf.ts.ITypeSpace;
 import org.ebayopensource.dsf.ts.type.TypeName;
 
 /**
@@ -48,8 +52,23 @@ public class TsLibLoader {
 	
 	
 	private static void promoteGlobals(JstTypeSpaceMgr jstTypeSpaceMgr) {
-		jstTypeSpaceMgr.getTypeSpace().addAllGlobalTypeMembers(new TypeName(JstTypeSpaceMgr.JS_NATIVE_GRP,"Global"));
-		jstTypeSpaceMgr.getTypeSpace().addAllGlobalTypeMembers(new TypeName(JstTypeSpaceMgr.JS_BROWSER_GRP,"Window"));
+		ITypeSpace<IJstType, IJstNode> typeSpace = jstTypeSpaceMgr.getTypeSpace();
+		typeSpace.addAllGlobalTypeMembers(new TypeName(JstTypeSpaceMgr.JS_NATIVE_GRP,"Global"));
+		typeSpace.addAllGlobalTypeMembers(new TypeName(JstTypeSpaceMgr.JS_BROWSER_GRP,"Window"));
+		
+		
+		IJstType window = typeSpace.getType(new TypeName(JstTypeSpaceMgr.JS_BROWSER_GRP,"Window"));
+		
+//		if(!window.hasGlobalVars()){
+//			continue;
+//		}
+		for (IJstGlobalVar gvar : window.getGlobalVars()) {
+			final String groupName = window.getPackage().getGroupName();
+			
+			//TODO replace gvar symbol with attributed type bound updates
+			typeSpace.addToGlobalSymbolMap(groupName,
+					gvar.getName().getName(), gvar.getOwnerType().getName(), gvar);
+		}
 		
 	}
 

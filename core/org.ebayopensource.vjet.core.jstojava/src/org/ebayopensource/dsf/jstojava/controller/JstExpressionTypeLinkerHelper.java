@@ -555,7 +555,7 @@ public class JstExpressionTypeLinkerHelper {
 		ITypeSpace<IJstType, IJstNode> typeSpace = resolver.getController().getJstTypeSpaceMgr().getTypeSpace();
 		IGroup<IJstType> currentGroup = typeSpace.getGroup(groupInfo != null ? groupInfo.getGroupName() : null);
 		bound = typeSpace.getVisibleGlobal(name, currentGroup);
-		bound = findGlobalVarBinding(resolver, bound, groupInfo);
+		bound = findGlobalVarBinding(resolver, bound, groupInfo);		
 		
 		if(bound==null && name.indexOf('.')==-1){
 			List<IJstType> types = resolver.getController().getJstTypeSpaceMgr().getTypeSpace()
@@ -3286,20 +3286,12 @@ public class JstExpressionTypeLinkerHelper {
 
 	public static IJstType getNativeElementType(
 			final JstExpressionBindingResolver resolver, final String lastExpr) {
-
 		// by default
 		IJstType type = null;
-
-		if (JstExpressionTypeLinker.WINDOW_VAR.endsWith(lastExpr)) {
-			type = getNativeTypeFromTS(resolver, JstExpressionTypeLinker.WINDOW);
-		} else {
-			type = getNativeTypeFromTS(resolver, lastExpr);
-		}
-
+		type = getNativeTypeFromTS(resolver, lastExpr);
 		if (type != null) {
 			type = JstTypeHelper.getJstTypeRefType(type); // wrap in TypeRefType
 		}
-
 		return type;
 	}
 

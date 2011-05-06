@@ -15,6 +15,7 @@ import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Dynamic;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.GlobalProperty;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JsSupport;
 import org.ebayopensource.dsf.jsnative.anno.JsVersion;
@@ -219,7 +220,7 @@ public interface Window extends IWillBeScriptable {
 	 * 
 	 * @return Window
 	 */
-	@Property
+	@GlobalProperty
 	Window getWindow();
 
 	/**

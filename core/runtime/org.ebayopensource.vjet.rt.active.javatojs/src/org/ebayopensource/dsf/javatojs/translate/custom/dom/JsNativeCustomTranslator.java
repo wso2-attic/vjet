@@ -36,6 +36,7 @@ import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Dynamic;
 import org.ebayopensource.dsf.jsnative.anno.FactoryFunc;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.GlobalProperty;
 import org.ebayopensource.dsf.jsnative.anno.IType;
 import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
@@ -57,6 +58,8 @@ import org.ebayopensource.dsf.jst.declaration.JstArray;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstDoc;
+import org.ebayopensource.dsf.jst.declaration.JstGlobalProp;
+import org.ebayopensource.dsf.jst.declaration.JstGlobalVar;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
@@ -305,7 +308,10 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 		for (IExtendedModifier em : extModifiers) {
 			if (em.isAnnotation()) {
 				Annotation ma = (Annotation) em;
-				if (Property.class.getName().equals(ma.getTypeName().toString()) ||
+				if(GlobalProperty.class.getName().equals(ma.getTypeName().toString())||
+					GlobalProperty.class.getSimpleName().equals(ma.getTypeName().toString())){
+					processGlobalProperty(astMtd, jstType, toType);
+				} else if (Property.class.getName().equals(ma.getTypeName().toString()) ||
 						Property.class.getSimpleName().equals(ma.getTypeName().toString()) ||
 						OverrideProp.class.getName().equals(ma.getTypeName().toString()) ||
 						OverrideProp.class.getSimpleName().equals(ma.getTypeName().toString())) {
@@ -325,6 +331,61 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 				}  
 			}
 		}
+	}
+
+	private void processGlobalProperty(MethodDeclaration astMtd,
+			JstType jstType, CustomType toType) {
+		String mtdName = astMtd.getName().toString();
+		// Must be a getter method with no arguments to be property
+		if (!mtdName.startsWith("get") || !astMtd.parameters().isEmpty()) {
+			return;
+		} 
+		
+		CustomMethod mtd = getCustomMethod(toType, astMtd);
+		if (mtd == null){
+			getLogger().logError(TranslateMsgId.EXCLUDED_MTD, 
+					"Method '" + astMtd.getName().toString() +
+					"' not found in custom type " + toType.getJstName(), 
+					this, astMtd, jstType);
+			return;
+		}
+		
+		// Return Type indicates property type
+		Type rtnType = astMtd.getReturnType2();
+		if (rtnType == null){
+			getLogger().logError(TranslateMsgId.EXCLUDED_MTD, 
+					"Method '" + astMtd.getName().toString() +
+					"' is annotated as Property but has no return type", 
+					this, astMtd, jstType);
+			return;
+		}
+		IJstType propType = getDataTypeTranslator().processType(rtnType, jstType);
+		
+		propType = setUpArray(propType, astMtd);
+		
+		if (propType == null){
+			getLogger().logError(TranslateMsgId.NULL_RESULT, "failed translation for property type " +
+				rtnType.toString(), 
+				this, astMtd, jstType);
+			return;
+		}
+		boolean isStatic =  isStatic(astMtd);
+		JstProperty pty = new JstProperty(propType, 
+				normalizeName(mtd, astMtd), 
+				new JstModifiers().setPublic().setStatic(isStatic));
+		
+		JstGlobalProp prop = new JstGlobalProp(pty);
+		JstGlobalVar var = new JstGlobalVar(prop);
+//		jstType.addProperty(pty);
+		jstType.addGlobalVar(var);
+		
+		processFieldJavadoc(astMtd, pty);
+		for (Object m: astMtd.modifiers()){
+			if (m instanceof Annotation) {
+				processAnnotation(pty, m);
+			}
+		}
+		
 	}
 
 	private void processConstructor(MethodDeclaration astMtd, JstType jstType, CustomType toType) {

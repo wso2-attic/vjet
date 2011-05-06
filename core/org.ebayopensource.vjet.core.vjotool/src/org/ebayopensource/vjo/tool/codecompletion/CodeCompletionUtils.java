@@ -42,6 +42,9 @@ public class CodeCompletionUtils {
 	public final static String CURSOR_POSITION_TOKEN = "<<CURSOR_POSITION>>";
 
 	public static boolean isNativeType(IJstType jstType) {
+		if(jstType==null){
+			return false;
+		}
 		JstPackage pkg = jstType.getPackage();
 		if (pkg == null) {
 			return true;
