@@ -581,6 +581,10 @@
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
+      <properties>
+	<eclipse-site>http://download.eclipse.org/releases/helios/</eclipse-site>
+	  <platform-version>[3.6,3.7)</platform-version>
+        </properties>
 	<modules>
 		<module>extmod</module>
 		<module>core</module>
