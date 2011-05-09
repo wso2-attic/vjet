@@ -49,9 +49,10 @@ public class DefsRobustTranslator extends TypeRobustTranslator{
 		// TODO change it in the future
 		// check if this keyword has already been processed
 		// if true put it into error chunk
-		weakTranslator.getProvider().getDefsTranslator().process(
-				((MessageSend) current).arguments[0], jst);
-
+		if(((MessageSend) current).arguments!=null){
+			weakTranslator.getProvider().getDefsTranslator().process(
+					((MessageSend) current).arguments[0], jst);
+		}
 		// lookup possible empty completions
 		lookupEmptyCompletion();
 
