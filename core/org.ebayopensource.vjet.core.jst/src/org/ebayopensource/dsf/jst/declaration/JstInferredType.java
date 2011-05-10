@@ -28,7 +28,7 @@ public class JstInferredType extends JstProxyType implements IInferred {
 	private static final long serialVersionUID = 1L;
 	
 	private transient List<TypeMeta> m_modifiedTypes = null;
-	private transient final TypeMeta m_defaultMeta;
+	private transient TypeMeta m_defaultMeta;
 	private boolean m_modified = false;
 
 	public JstInferredType(IJstType targetType) {
@@ -66,6 +66,9 @@ public class JstInferredType extends JstProxyType implements IInferred {
 	
 	private TypeMeta getMeta(int pos, Set<?> scopes) {
 		if (m_modifiedTypes == null) {
+			if (m_defaultMeta == null) {//after deserialization
+				m_defaultMeta = new TypeMeta(getType(), 0, null);
+			}
 			return m_defaultMeta;
 		}
 		int candidate = -1;
