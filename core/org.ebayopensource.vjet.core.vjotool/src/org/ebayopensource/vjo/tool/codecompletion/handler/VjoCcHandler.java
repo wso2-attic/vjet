@@ -50,6 +50,7 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCCVjoUtilityAdvisor
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcCTypeProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcConstructorGenProposalAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcEnumElementAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionArgumentAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionGenProposalAdvisor;
@@ -236,6 +237,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 			}
 			if (!ctx.isInStaticMethod()) {
 				result.add(VjoCcPropMethodProposalAdvisor.ID);
+				result.add(VjoCcDerivedPropMethodAdvisor.ID);
 			}
 			String[] temp = new String[result.size()];
 
@@ -245,7 +247,8 @@ public class VjoCcHandler implements IVjoCcHandler {
 			if (node != null && node instanceof IJstType) {
 				IJstType type = (IJstType) node;
 				ctx.setCalledType(type);
-				return new String[] { VjoCcPropMethodProposalAdvisor.ID };
+				return new String[] { VjoCcPropMethodProposalAdvisor.ID,
+						VjoCcDerivedPropMethodAdvisor.ID};
 			} else {
 				return new String[] {};
 			}
@@ -438,6 +441,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 				ctx.putInfo(VjoCcCtx.INFO_KEY_IN_TYPE_SCOPE, true);
 				ctx.setCalledType(tempType);
 				return new String[] { VjoCcPropMethodProposalAdvisor.ID,
+						VjoCcDerivedPropMethodAdvisor.ID,
 						VjoCcStaticPropMethodProposalAdvisor.ID };
 			}
 		} else {
@@ -486,6 +490,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 			}
 			ctx.setCalledType(type);
 			return new String[] { VjoCcPropMethodProposalAdvisor.ID,
+					VjoCcDerivedPropMethodAdvisor.ID,
 					VjoCcStaticPropMethodProposalAdvisor.ID };
 		}
 
@@ -544,6 +549,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 			ctx.setCalledType(method.getRtnType());
 			ctx.setActingToken(token);
 			return new String[] { VjoCcPropMethodProposalAdvisor.ID,
+					VjoCcDerivedPropMethodAdvisor.ID,
 					VjoCcStaticPropMethodProposalAdvisor.ID };
 		}
 	}
@@ -665,6 +671,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 			result.add(VjoCcStaticPropMethodProposalAdvisor.ID);
 		} else {
 			result.add(VjoCcPropMethodProposalAdvisor.ID);
+			result.add(VjoCcDerivedPropMethodAdvisor.ID);
 		}
 		ctx.setCalledType(type);
 		ctx.setActingToken(token);
@@ -683,7 +690,8 @@ public class VjoCcHandler implements IVjoCcHandler {
 		} else {
 			return new String[] { VjoCcThisProposalAdvisor.ID,
 					VjoCcStaticPropMethodProposalAdvisor.ID,
-					VjoCcPropMethodProposalAdvisor.ID, VjoCcGlobalAdvisor.ID };
+					VjoCcPropMethodProposalAdvisor.ID, VjoCcDerivedPropMethodAdvisor.ID,
+					VjoCcGlobalAdvisor.ID };
 		}
 	}
 
