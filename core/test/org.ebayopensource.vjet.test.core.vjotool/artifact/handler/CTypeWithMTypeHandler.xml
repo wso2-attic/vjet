@@ -38,6 +38,7 @@
 
 	<case position='7' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 
 	<case position='8' status='pass'>
@@ -46,11 +47,14 @@
 	</case>
 
 	<case position='9' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
+		
 	</case>
 
 	<case position='10' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 
 	<case position='11' status='pass'>
@@ -83,12 +87,14 @@
 
 	<case position='14' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 	 	<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 
 	<case position='15' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 
 	<case position='16' status='pass'>
@@ -100,11 +106,13 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOwnerTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOuterPropMethodProposalAdvisor</advisor>
 	</case>
 
 	<case position='17' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 	</case>
@@ -118,11 +126,13 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOwnerTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOuterPropMethodProposalAdvisor</advisor>
 	</case>
 
 	<case position='19' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 
 	<!-- Jack: Do not support call outer type in nested mtype
@@ -131,7 +141,8 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcEnumElementAdvisor</advisor>
 	</case>
 	<case position='21' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	-->
 	<case position='22' status='pass'>
@@ -140,17 +151,20 @@
 	</case>
 	
 	<case position='23' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='24' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='25' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='26' status='pass'>
@@ -162,17 +176,20 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOwnerTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOuterPropMethodProposalAdvisor</advisor>
 	</case>
 	
 	<case position='27' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 	 	<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='28' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='30' status='pass'>
@@ -184,6 +201,7 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOwnerTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='31' status='pass'>
@@ -195,6 +213,7 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOwnerTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='32' status='pass'>
@@ -205,12 +224,14 @@
 	
 	<case position='33' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='34' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='35' status='pass'>
@@ -223,6 +244,7 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='37' status='pass'>
@@ -234,10 +256,12 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOwnerTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='38' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 	 	<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
@@ -298,20 +322,24 @@
 	</case>
 	
 	<case position='46' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	<case position='47' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	 -->
 	<case position='48' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 	 	<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='49' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='50' status='pass'>
@@ -323,17 +351,20 @@
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOwnerTypeProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOuterPropMethodProposalAdvisor</advisor>
 	</case>
 	
 	<case position='51' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='52' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	<!-- Jack: Do not support call outer type in nested mtype
 	<case position='53' status='pass'>
@@ -342,23 +373,27 @@
 	</case>
 	
 	<case position='54' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	-->
 	<case position='55' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='56' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='57' status='pass'>
 		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
@@ -369,17 +404,20 @@
 	</case>
 	
 	<case position='59' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='60' status='pass'>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPackageProposalAdvisor</advisor>
 	 	<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor</advisor>
 	</case>
 	
 	<case position='61' status='pass'>
-		<advisor description='' type='JstType'>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor</advisor>
+		<advisor description=''>org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor</advisor>
 	</case>
 	
 	<case position='64' status='pass'>
