@@ -646,6 +646,25 @@ public class JstType extends BaseJstNode implements IJstType {
 		}
 		return list;
 	}
+	
+	public List<IJstType> getAllDerivedTypes(){
+		List<IJstType> types = new ArrayList<IJstType>();
+		for(IJstType mixin: getMixins()){
+			if(mixin instanceof JstProxyType){
+				JstProxyType pt = (JstProxyType)mixin;
+				types.add(pt.getType());
+			}else if (mixin instanceof JstType){
+				types.add(mixin);
+			}
+				
+			
+			//types.addAll(getMixins());
+		}
+		gatherExtendTypes(types, this);
+		gatherSatisfiesTypes(types,this);
+		return types;
+	}
+	
 
 	/**
 	 * @see IJstType#getEnumValue(String)

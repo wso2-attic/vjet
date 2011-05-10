@@ -244,6 +244,14 @@ public interface IJstType extends IJstNode {
 	 * @return List<? extends IJstType>
 	 */
 	List<? extends IJstTypeReference> getExpectsRef();
+	
+	/**
+	 * 
+	 * Get all derived types for a specific type
+	 * 
+	 * @return
+	 */
+	List<IJstType> getAllDerivedTypes();
 
 	/**
 	 * Answer the modifiers of the type
