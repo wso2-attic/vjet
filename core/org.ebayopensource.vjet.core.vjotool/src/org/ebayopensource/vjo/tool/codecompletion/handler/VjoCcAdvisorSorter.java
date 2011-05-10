@@ -21,6 +21,7 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCCVjoUtilityAdvisor
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcCTypeProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcConstructorGenProposalAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcEnumElementAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionGenProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcGlobalAdvisor;
@@ -59,7 +60,9 @@ public class VjoCcAdvisorSorter implements Comparator<IVjoCcProposalData>, Seria
 		SORT_MAP.put(VjoCcObjLiteralAdvisor.ID, i++);
 
 		// prop and method
-		SORT_MAP.put(VjoCcPropMethodProposalAdvisor.ID, ++i);
+		SORT_MAP.put(VjoCcPropMethodProposalAdvisor.ID, i);
+	
+		
 		SORT_MAP.put(VjoCcParameterHintAdvisor.ID, ++i);
 		SORT_MAP.put(VjoCcStaticPropMethodProposalAdvisor.ID, ++i);
 		++i;
@@ -69,6 +72,7 @@ public class VjoCcAdvisorSorter implements Comparator<IVjoCcProposalData>, Seria
 		++i;
 		++i;
 		++i;
+		SORT_MAP.put(VjoCcDerivedPropMethodAdvisor.ID, ++i);
 		SORT_MAP.put(VjoCcEnumElementAdvisor.ID, ++i);
 		
 		SORT_MAP.put(VjoCcKeywordInCommentProposalAdvisor.ID, ++i);
@@ -152,10 +156,19 @@ public class VjoCcAdvisorSorter implements Comparator<IVjoCcProposalData>, Seria
 		}
 		if (i2 != i1) {
 			return i1 - i2;
-		} else {
+		} else{
 			String name1 = o1.getName();
 			String name2 = o2.getName();
-			return name1.compareTo(name2);
+			int val  =  name1.compareTo(name2);
+//			System.out.println(name1 + ":" +name2 +"val=" + val);
+			if(!name1.startsWith("_") && name2.startsWith("_")){
+				return -100;
+			}
+			if(name1.startsWith("_") && !name2.startsWith("_")){
+				return 10;
+			}
+			
+			return val;
 		}
 		
 	}

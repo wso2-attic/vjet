@@ -38,16 +38,16 @@ import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
  * @author jianliu
  * 
  */
-public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
+public class VjoCcDerivedPropMethodAdvisor extends AbstractVjoCcAdvisor
 		implements IVjoCcAdvisor {
-	public static final String ID = VjoCcPropMethodProposalAdvisor.class
+	public static final String ID = VjoCcDerivedPropMethodAdvisor.class
 			.getName();
 
 	public void advise(VjoCcCtx ctx) {
 		String token = ctx.getActingToken();
 		IJstType callingType = ctx.getActingType();
 		IJstType calledType = ctx.getCalledType();
-		if(calledType==null && callingType == null){
+		if (calledType == null && callingType == null) {
 			return;
 		}
 		if (calledType == null) {
@@ -57,14 +57,22 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 		IJstType tempCalledType = calledType;
 		int[] levels = getCallLevel(callingType, calledType);
 		List<String> tempString = new ArrayList<String>();
-		List<? extends IJstMethod> methods = JstTypeHelper.getSignatureMethods(calledType, false, false);
+		List<IJstMethod> methods = new ArrayList<IJstMethod>();
+		
+		List<? extends IJstType> derivedTypes = calledType.getAllDerivedTypes();
+		for(IJstType t : derivedTypes){
+			methods.addAll(JstTypeHelper.getSignatureMethods(t, false, false));
+		}
+		
+		
+		
 		Iterator<? extends IJstMethod> it = methods.iterator();
 		while (it.hasNext()) {
 			IJstMethod method = it.next();
-			if(!isReferenceByDot(method)){
+			if (!isReferenceByDot(method)) {
 				continue;
 			}
-			
+
 			if (tempCalledType != method.getOwnerType()) {
 				tempCalledType = method.getOwnerType();
 				if (tempCalledType == null) {
@@ -82,15 +90,23 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 				addMethod(method, levels, isNative, ctx, tempString, exactMatch);
 			}
 		}
-		List<IJstProperty> properties = calledType.getAllPossibleProperties(false, false);
+		
+		
+		List<IJstProperty> properties = new ArrayList<IJstProperty>();
+		
+		for(IJstType t : derivedTypes){
+			properties.addAll(t.getAllPossibleProperties(
+					false, false));
+		}
 		Iterator<IJstProperty> it1 = properties.iterator();
+		
 		while (it1.hasNext()) {
-			
+
 			IJstProperty property = it1.next();
-//			removed by huzhou@ebay.com, will handle from presenter
-//			if(!isReferenceByDot(property)){
-//				continue;
-//			}
+			// removed by huzhou@ebay.com, will handle from presenter
+			// if(!isReferenceByDot(property)){
+			// continue;
+			// }
 			if (tempCalledType != property.getOwnerType()) {
 				tempCalledType = property.getOwnerType();
 				levels = getCallLevel(callingType, tempCalledType);
@@ -109,17 +125,17 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 	}
 
 	private boolean isReferenceByDot(IJstMethod method) {
-		if(method.getName()!=null){
-			if(method.getName().getName().startsWith("\'" )){
+		if (method.getName() != null) {
+			if (method.getName().getName().startsWith("\'")) {
 				return false;
-			}else if(method.getName().getName().startsWith("\"" )){
+			} else if (method.getName().getName().startsWith("\"")) {
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	private void addMethod(IJstMethod method, int[] levels, boolean isNative,
 			VjoCcCtx ctx, List<String> tempString, boolean exactMatch) {
 		if (!method.isConstructor()
