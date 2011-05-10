@@ -34,6 +34,7 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAdvisorConstances
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcCTypeProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcConstructorGenProposalAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcEnumElementAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionArgumentAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionGenProposalAdvisor;
@@ -186,6 +187,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 				|| VjoCcInterfaceProposalAdvisor.ID.equals(advisor)) {
 			return genTypeProposal(data);
 		} else if (VjoCcPropMethodProposalAdvisor.ID.equals(advisor)
+				|| VjoCcDerivedPropMethodAdvisor.ID.equals(advisor)
 				|| VjoCcStaticPropMethodProposalAdvisor.ID.equals(advisor)
 				|| VjoCcEnumElementAdvisor.ID.equals(advisor)
 				|| VjoCcGlobalAdvisor.ID.equals(advisor)) {
