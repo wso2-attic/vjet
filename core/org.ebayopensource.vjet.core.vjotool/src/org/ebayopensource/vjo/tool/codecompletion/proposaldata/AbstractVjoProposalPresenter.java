@@ -115,8 +115,13 @@ public abstract class AbstractVjoProposalPresenter {
 	 */
 	protected String getMethodProposalReplaceStr(boolean isGlobal,
 			IJstMethod method, VjoCcCtx vjoCcCtx) {
+		return getMethodProposalReplaceStr(isGlobal, method, method.getName().getName(), vjoCcCtx);
+	}
+	
+	protected String getMethodProposalReplaceStr(boolean isGlobal,
+			IJstMethod method, String name, VjoCcCtx vjoCcCtx) {
 		return replaceSeperatorToken(CodeCompletionUtils
-				.getMethodProposalReplaceStr(isGlobal, method, vjoCcCtx));
+				.getMethodProposalReplaceStr(isGlobal, method, name, vjoCcCtx));
 	}
 
 	/**

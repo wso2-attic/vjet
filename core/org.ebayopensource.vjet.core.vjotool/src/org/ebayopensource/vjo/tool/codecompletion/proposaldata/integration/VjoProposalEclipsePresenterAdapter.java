@@ -651,26 +651,30 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 			boolean isGlobal) {
 		Object node = data.getData();
 		
-		//added by huzhou@ebay.com to handle otype's properties (actually functions)
+		String methodName = null;
 		if (node instanceof IJstProperty){
 			final IJstProperty pty = (IJstProperty)node;
 			final IJstType ptyType = pty.getType();
 			if(ptyType instanceof JstFuncType){
 				node = ((JstFuncType)ptyType).getFunction();
+				methodName = pty.getName().getName();
 			}
 		}
 		
 		if (node instanceof IJstMethod) {
 			IJstMethod method = (IJstMethod) node;
+			if (methodName == null) {
+				methodName = method.getName().getName();
+			}
 			if (m_additionalInfoGenerator.isBrowserNoneNode(method)) {
 				return null;
 			}
 			String displayString = CodeCompletionUtils
-					.getFullMethodString(method);
+					.getFullMethodString(methodName, method, method.getOwnerType(), false);
 			String externalInfo = m_additionalInfoGenerator
 					.getAdditionalPropesalInfo(method);
 			String replaceString = getMethodProposalReplaceStr(isGlobal,
-					method, m_vjoCcCtx);
+					method, methodName, m_vjoCcCtx);
 			int cursorPosition = getCursorPosition(replaceString);
 			if (cursorPosition != replaceString.length()) {
 				replaceString = replaceCursorPositionToken(replaceString);

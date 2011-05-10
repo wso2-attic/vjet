@@ -11,8 +11,12 @@ import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 public class JstDisplayUtils {
 	public static String getFullMethodString(IJstMethod method,
 			final IJstType ownerType, final boolean optional) {
+		return getFullMethodString(method.getName().getName(), method, ownerType, optional);
+	}
+	
+	public static String getFullMethodString(String name, IJstMethod method,
+			final IJstType ownerType, final boolean optional) {
 		final StringBuilder strBldr = new StringBuilder();
-		String name = method.getName().getName();
 
 		name = renameInvoke(method, name);
 
@@ -46,9 +50,12 @@ public class JstDisplayUtils {
 
 	}
 
-	public static String renameInvoke(IJstMethod method, String name) {
-		if(name.equals("_invoke_") && method.getOwnerType().isFType()){
-			name = method.getOwnerType().getSimpleName();
+	public static String renameInvoke(IJstMethod method, String name) {		
+		if("_invoke_".equals(name)) {
+			IJstType ownerType = method.getOwnerType();
+			if (ownerType != null && ownerType.isFType()) {
+				name = ownerType.getSimpleName();
+			}
 		}
 		return name;
 	}

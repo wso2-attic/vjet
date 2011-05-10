@@ -86,7 +86,7 @@ public class ParsingTests {
 		IJstParseController c = new JstParseController(p);
 		IScriptUnit unit = c.parse(name, name, file);
 		IJstType type = unit.getType();
-		ParseUtils.printTree(type);
+		//ParseUtils.printTree(type);
 
 		assertTrue(unit.getProblems().isEmpty());
 		ParseUtils.validateJstSource(type);

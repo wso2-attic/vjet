@@ -56,6 +56,9 @@ public class AccessControlUtil {
 		if (!modifiers.isPublic()) {
 			
 			IJstType fieldOwnerType = ownerType;
+			if (fieldOwnerType instanceof JstInferredType.AugmentedType) {
+				fieldOwnerType = ((JstInferredType.AugmentedType)fieldOwnerType).getExtend();
+			}
 			if (fieldOwnerType instanceof JstInferredType) {
 				fieldOwnerType = ((JstInferredType)fieldOwnerType).getType();
 			}

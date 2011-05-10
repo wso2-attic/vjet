@@ -521,7 +521,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				identifier.setType(varType);
 				JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, varType, m_groupInfo);
 				if (varType != null && varType instanceof JstInferredType
-					&& ((JstInferredType)varType).hasModifiedType()) {
+					&& ((JstInferredType)varType).modified()) {
 					JstInferredType inferredType = (JstInferredType)varType;
 					Set<Object> scopes = new HashSet<Object>();
 					scopes.addAll(m_scopeStack);
@@ -1466,7 +1466,6 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				if (rhsExpr instanceof CastExpr) {
 					identifier.setType(rhsExpr.getResultType());
 				} 
-				//bugfix by huzhou@ebay.com, CastExpr should also handle global var binding situation
 				handleGlobalVarBinding(identifier, assignExpr, rhsExpr, false);
 				if (identifier.getType() == null) {
 					identifier.setType(JstCache.getInstance().getType("Object"));
@@ -1481,7 +1480,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			&& rhsResolveNeeded){
 			//resolved
 			JstExpressionTypeLinkerHelper.doExprTypeResolve(m_resolver, this, rhsExpr, lhsType);
-		} else if (lhsType instanceof JstInferredType && !rhsResolveNeeded && identifier != null && rhsExpr != null) {
+		} else if (lhsType instanceof IInferred && !rhsResolveNeeded && identifier != null && rhsExpr != null) {
 			IJstType rhsType = rhsExpr.getResultType();
 			if (rhsType == null) {
 				rhsType = new JstInferredType(JstCache.getInstance().getType("Object"));
@@ -1497,6 +1496,26 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				if (originalType instanceof JstInferredType) {
 					int pos = lhs.getSource().getStartOffSet();
 					((JstInferredType)originalType).setCurrentType(rhsType, pos, m_scopeStack.peek());
+				}
+			}
+		} else if (lhsType == null && lhs instanceof FieldAccessExpr && rhsExpr != null) {
+			IExpr qualifier = ((FieldAccessExpr)lhs).getExpr();
+			if (qualifier instanceof JstIdentifier) {
+				IJstNode binding = ((JstIdentifier)qualifier).getJstBinding();
+				IJstType qualifierType = null;
+				if (binding instanceof JstIdentifier) {
+					qualifierType = ((JstIdentifier)binding).getType();
+				}
+				if (qualifierType instanceof JstInferredType) {
+					IJstType rhsType = rhsExpr.getResultType();
+					if (rhsType == null) {
+						rhsType = new JstInferredType(JstCache.getInstance().getType("Object"));
+					}	
+					int pos = lhs.getSource().getStartOffSet();
+					Set<Object> scopes = new HashSet<Object>();
+					scopes.addAll(m_scopeStack);
+					((JstInferredType)qualifierType).addNewProperty(
+						((FieldAccessExpr)lhs).getName().getName(), rhsType, pos, scopes);
 				}
 			}
 		}

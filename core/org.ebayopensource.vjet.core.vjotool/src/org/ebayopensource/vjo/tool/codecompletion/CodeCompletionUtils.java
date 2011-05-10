@@ -159,7 +159,12 @@ public class CodeCompletionUtils {
 	
 	public static String getFullMethodString(IJstMethod method, 
 			final IJstType ownerType, final boolean optional){
-		return JstDisplayUtils.getFullMethodString(method, ownerType, optional);
+		return getFullMethodString(method.getName().getName(), method, ownerType, false);
+	}
+	
+	public static String getFullMethodString(String name, IJstMethod method, 
+			final IJstType ownerType, final boolean optional){
+		return JstDisplayUtils.getFullMethodString(name, method, ownerType, optional);
 	}
 
 	public static String getJstArgsStringForReplace(IJstMethod method) {
@@ -719,10 +724,9 @@ public class CodeCompletionUtils {
 	}
 
 	public static String getMethodProposalReplaceStr(boolean isGlobal,
-			IJstMethod method, VjoCcCtx vjoCcCtx) {
-		
-		
-		String name = JstDisplayUtils.renameInvoke(method, method.getName().getName());
+		IJstMethod method, String name, VjoCcCtx vjoCcCtx) {
+				
+		name = JstDisplayUtils.renameInvoke(method, name);
 		
 		String replaceString = name + "("
 				+ getJstArgsStringForReplace(method) + ")";
