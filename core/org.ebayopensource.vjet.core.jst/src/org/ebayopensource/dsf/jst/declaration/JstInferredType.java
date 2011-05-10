@@ -28,7 +28,7 @@ public class JstInferredType extends JstProxyType implements IInferred {
 	private static final long serialVersionUID = 1L;
 	
 	private transient List<TypeMeta> m_modifiedTypes = null;
-	private final TypeMeta m_defaultMeta;
+	private transient final TypeMeta m_defaultMeta;
 	private boolean m_modified = false;
 
 	public JstInferredType(IJstType targetType) {
