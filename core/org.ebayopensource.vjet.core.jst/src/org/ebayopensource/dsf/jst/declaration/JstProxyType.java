@@ -65,6 +65,10 @@ public abstract class JstProxyType implements IJstType {
 	public JstSource getSource(){
 		return m_targetType.getSource();
 	}
+	
+	public List<IJstType> getAllDerivedTypes(){
+		return m_targetType.getAllDerivedTypes();
+	}
 
 	public List<IJstAnnotation> getAnnotations() {
 		return m_targetType.getAnnotations();

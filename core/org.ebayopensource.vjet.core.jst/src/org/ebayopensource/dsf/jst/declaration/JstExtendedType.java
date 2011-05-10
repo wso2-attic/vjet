@@ -616,6 +616,11 @@ public class JstExtendedType implements IJstType {
 		return m_targetType.isSiblingType();
 	}
 	
+	@Override
+	public List<IJstType> getAllDerivedTypes() {
+		return m_targetType.getAllDerivedTypes();
+	}
+	
 	private static void combineProps(
 		List<IJstProperty> props,
 		List<IJstProperty> additions,
@@ -658,4 +663,6 @@ public class JstExtendedType implements IJstType {
 		}
 		return names;
 	}
+	
+
 }
