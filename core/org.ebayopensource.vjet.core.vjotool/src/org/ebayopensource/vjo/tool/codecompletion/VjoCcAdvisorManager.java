@@ -19,6 +19,7 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCCVjoUtilityAdvisor
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcAliasProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcCTypeProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcConstructorGenProposalAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcEnumElementAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionArgumentAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionGenProposalAdvisor;
@@ -81,6 +82,7 @@ public class VjoCcAdvisorManager {
 		registryAdvisor(new VjoCcVariableProposalAdvisor());
 		registryAdvisor(new VjoCcOuterPropMethodProposalAdvisor());
 		registryAdvisor(new VjoCcPropMethodProposalAdvisor());
+		registryAdvisor(new VjoCcDerivedPropMethodAdvisor());
 		registryAdvisor(new VjoCcParameterHintAdvisor());
 		registryAdvisor(new VjoCcParameterProposalAdvisor());
 		registryAdvisor(new VjoCcStaticPropMethodProposalAdvisor());
