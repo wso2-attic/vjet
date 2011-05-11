@@ -13,7 +13,6 @@ import junit.framework.TestSuite;
 
 import org.ebayopensource.vjet.eclipse.core.test.bug.BugVerifyTests;
 import org.ebayopensource.vjet.eclipse.core.test.contentassist.BaseTemplateTests;
-import org.ebayopensource.vjet.eclipse.core.test.contentassist.CodeCompletionUITests;
 import org.ebayopensource.vjet.eclipse.core.test.contentassist.VjoSteppingCodeCompletionTest;
 import org.ebayopensource.vjet.eclipse.core.test.debug.DebuggerTest;
 import org.ebayopensource.vjet.eclipse.core.test.debug.StepFilteringPatternTest;
@@ -96,7 +95,7 @@ public class AllTests extends TestSuite {
 		suite.addTestSuite(VjoMarkOccurencesNewTests.class);
 		// Return the test suite
 
-		suite.addTestSuite(CodeCompletionUITests.class);
+//		suite.addTestSuite(CodeCompletionUITests.class);
 		suite.addTestSuite(DefaultValueTester.class);
 		suite.addTestSuite(VjoValidationPolicy.class);
 		suite.addTestSuite(DebuggerTest.class);
