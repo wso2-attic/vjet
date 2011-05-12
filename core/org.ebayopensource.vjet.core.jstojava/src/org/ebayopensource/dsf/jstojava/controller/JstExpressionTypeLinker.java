@@ -516,7 +516,10 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				if(varType == null){
 					varType = info.getType();
 				}
-				//add identifier to the symbol map with updated var binding and var type
+				
+				if (varType instanceof JstFuncType) {
+					JstExpressionTypeLinkerHelper.updateFunctionType((JstFuncType)varType, m_groupInfo);
+				}
 				identifier.setJstBinding(varBinding);
 				identifier.setType(varType);
 				JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, varType, m_groupInfo);
@@ -1421,30 +1424,37 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	}
 	
 	private void postVisitFuncExpr(FuncExpr funcExpr){
-		final IJstType funcType = funcExpr.getResultType();
+		IJstType funcType = funcExpr.getResultType();
+		
 		if(!(funcType instanceof JstFuncType)){
 			if(funcType instanceof JstAttributedType){
 				final JstAttributedType attributedType = (JstAttributedType)funcType;
 				final IJstMethod attributedFunc = attributedType.getAttributorType().getMethod(attributedType.getAttributeName(), attributedType.isStaticAttribute(), true);
 				if(attributedFunc != null){
 					JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromAssignment(funcExpr, attributedFunc, false, this);
-					funcExpr.setType(new JstFuncType(attributedFunc));
+					funcType = new JstFuncType(attributedFunc);
 				}
 				else{
-					funcExpr.setType(new JstFuncType(funcExpr.getFunc()));
+					funcType = new JstFuncType(funcExpr.getFunc());					
 				}
+				funcExpr.setType(funcType);
 			}
 			else if(funcType instanceof JstFunctionRefType){
 				final JstFunctionRefType otypeFuncType = (JstFunctionRefType)funcType;
 				final IJstMethod otypeFunc = otypeFuncType.getMethodRef();
 				if(otypeFunc != null){
 					JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromAssignment(funcExpr, otypeFunc, false, this);
-					funcExpr.setType(new JstFuncType(otypeFunc));
+					funcType = new JstFuncType(otypeFunc);
 				}
 				else{
-					funcExpr.setType(new JstFuncType(funcExpr.getFunc()));
+					funcType = new JstFuncType(funcExpr.getFunc());
 				}
+				funcExpr.setType(funcType);
 			}
+		}
+		
+		if (funcType instanceof JstFuncType) {
+			JstExpressionTypeLinkerHelper.updateFunctionType((JstFuncType)funcType, m_groupInfo);
 		}
 	}
 
