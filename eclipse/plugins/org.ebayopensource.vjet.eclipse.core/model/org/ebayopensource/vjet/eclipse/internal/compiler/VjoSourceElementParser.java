@@ -28,6 +28,9 @@ import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
+import org.ebayopensource.dsf.jst.declaration.JstConstructor;
+import org.ebayopensource.dsf.jst.declaration.JstFuncType;
+import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
@@ -613,8 +616,15 @@ public class VjoSourceElementParser implements ISourceElementParser,
 		IJSSourceElementRequestor.JSFieldInfo fieldInfo = new IJSSourceElementRequestor.JSFieldInfo();
 		fieldInfo.name = jsPropertyMeta.getName().getName();
 
-		if (jsPropertyMeta.getType() != null) {
-			String fieldType = jsPropertyMeta.getType().getName();
+		final IJstType propertyType = jsPropertyMeta.getType();
+		if (propertyType != null) {
+			String fieldType = null;
+			if(propertyType instanceof JstFuncType){
+				fieldType = getFullMethodString(fieldInfo.name, ((JstFuncType)propertyType).getFunction(), jsPropertyMeta.getOwnerType(), false); 
+			}
+			else{
+				fieldType = jsPropertyMeta.getType().getName();
+			}
 			fieldInfo.m_type = fieldType;
 			// fieldInfo.declarationStart = jsPropertyMeta.getType()
 			// .getLineNo() + 1;
@@ -1117,7 +1127,15 @@ public class VjoSourceElementParser implements ISourceElementParser,
 			fieldInfo.nameSourceEnd = source.getEndOffSet();
 			String typeName = "Object";
 			if (type != null) {
-				typeName = type.getName();
+				if(type instanceof JstFuncType){
+					typeName = getFullMethodString(localVar.getName(), ((JstFuncType)type).getFunction(), jstVars.getOwnerType(), false);
+				}
+				else if(type instanceof JstFunctionRefType){
+					typeName = getFullMethodString(localVar.getName(), ((JstFunctionRefType)type).getMethodRef(), jstVars.getOwnerType(), false);
+				}
+				else{
+					typeName = type.getName();
+				}
 			}
 			fieldInfo.m_type = typeName;
 			fRequestor.enterField(fieldInfo);
@@ -1126,6 +1144,89 @@ public class VjoSourceElementParser implements ISourceElementParser,
 			
 			
 		}
+	}
+	
+	public static String getFullMethodString(IJstMethod method,
+			final IJstType ownerType, final boolean optional) {
+		return getFullMethodString(method.getName().getName(), method, ownerType, optional);
+	}
+	
+	public static String getFullMethodString(String name, IJstMethod method,
+			final IJstType ownerType, final boolean optional) {
+		final StringBuilder strBldr = new StringBuilder();
+
+		name = renameInvoke(method, name);
+
+		if (method instanceof JstConstructor) {
+			JstConstructor c = (JstConstructor) method;
+			name = c.getOwnerType().getName();
+		}
+
+		strBldr.append(name);
+		strBldr.append("(");
+		IJstType ref = method.getRtnType();
+		String oname = "";
+		if (ownerType != null) {
+			oname = ownerType.getSimpleName();
+		}
+		String aname = getJstArgsString(method);
+		if (aname.length() > 0) {
+			strBldr.append(aname);
+		}
+		strBldr.append(")");
+		if (optional) {
+			strBldr.append(" ? ");
+		}
+		if (ref != null) {
+			final String rname = ref.getSimpleName();
+			strBldr.append(" ").append(rname);
+		}
+		strBldr.append(" - ");
+		strBldr.append(oname);
+		return strBldr.toString();
+
+	}
+
+	public static String renameInvoke(IJstMethod method, String name) {		
+		if("_invoke_".equals(name)) {
+			IJstType ownerType = method.getOwnerType();
+			if (ownerType != null && ownerType.isFType()) {
+				name = ownerType.getSimpleName();
+			}
+		}
+		return name;
+	}
+	
+	public static String getJstArgsString(IJstMethod method) {
+		StringBuffer buffer = new StringBuffer();
+		List<JstArg> args = method.getArgs();
+		if (args != null && !args.isEmpty()) {
+			Iterator<JstArg> it = args.iterator();
+			while (it.hasNext()) {
+				JstArg arg = it.next();
+				IJstType type = arg.getType();
+				if (type != null) {
+					if(type instanceof JstFuncType){
+						buffer.append(getFullMethodString(arg.getName(), ((JstFuncType)type).getFunction(), arg.getOwnerType(), false));
+					}
+					else if(type instanceof JstFunctionRefType){
+						buffer.append(getFullMethodString(arg.getName(), ((JstFunctionRefType)type).getMethodRef(), arg.getOwnerType(), false));
+					}
+					else{
+						buffer.append(type.getSimpleName());
+					}
+				} else {
+					buffer.append("Object");
+				}
+				buffer.append(" " + arg.getName());
+				buffer.append(", ");
+			} 
+		}
+		String result = buffer.toString();
+		if (result.length() > 2) {
+			result = result.substring(0, result.length() - 2);
+		}
+		return result;
 	}
 
 	private void processIdentifier(IJstType type, JstIdentifier identifier) {

@@ -49,6 +49,7 @@ import org.ebayopensource.dsf.jst.declaration.JstParamType;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialAttributedMethod;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialOtypeMethod;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
+import org.ebayopensource.dsf.jst.declaration.JstProxyMethod;
 import org.ebayopensource.dsf.jst.declaration.JstProxyType;
 import org.ebayopensource.dsf.jst.declaration.JstSynthesizedMethod;
 import org.ebayopensource.dsf.jst.declaration.JstType;
@@ -2823,6 +2824,9 @@ public class JstExpressionTypeLinkerHelper {
 			final IJstNode rtnBinding = look4ActualBinding(resolver, type, groupInfo);
 			if(rtnBinding instanceof IJstOType && rtnBinding != type){
 				return (IJstOType)rtnBinding;
+			}
+			else if(rtnBinding instanceof JstProxyMethod){
+				return new JstFuncType((JstProxyMethod)rtnBinding);
 			}
 		}
 		else if(type instanceof JstTypeRefType) {
