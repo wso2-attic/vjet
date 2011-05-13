@@ -1,8 +1,6 @@
-// todo make this work
-// navigator.service.
+var contacts = navigator.service.contacts;
 
-
-//var contact = contacts.create({displayName: "justin"});
+var contact = contacts.create({displayName: "justin"});
 
 function onSuccess(contacts) {
     alert("Save Success");
@@ -13,7 +11,7 @@ function onError(contactError) {
 };
 
 // create a new contact object
-var contact = contacts.create(); //<<
+var contact2 = navigator.service.contacts.create(); //<<
 contact.displayName = "Plumber";
 contact.nickname = "Plumber";       //specify both to support all devices
 
@@ -26,7 +24,7 @@ contact.name = name;
 // save to device
 contact.save(onSuccess,onError);
 
-var myContact = contacts.create({"displayName": "Test User" }); //<<
+var myContact = navigator.service.contacts.create({"displayName": "Test User" }); //<<
 
  // Wait for PhoneGap to load
     //
@@ -37,16 +35,16 @@ var myContact = contacts.create({"displayName": "Test User" }); //<<
     // PhoneGap is ready
     //
     function onDeviceReady() {
-        var myContact = contacts.create({"displayName": "Test User"});
+        var myContact = navigator.service.contacts.create({"displayName": "Test User"});
         myContact.gender = "male";
         console.log("The contact, " + myContact.displayName + ", is of the " + myContact.gender + " gender");
     }
 
-    contacts.find(contactFields, contactSuccess, contactError, contactFindOptions);
     
     function onSuccess(contacts) {
     alert('Found ' + contacts.length + ' contacts.');
 };
+
 
 function onError() {
     alert('onError!');
@@ -93,6 +91,7 @@ contacts.find(fields, function(contacts){
             console.log("Display Name = " + contacts[i].displayName);
         }
     }
+    
 
     // onError: Failed to get the contacts
     //
@@ -109,7 +108,7 @@ function onError(contactError) {
 };
 
 // create a new contact object
-var contact = contacts.create();
+var contact = navigator.service.contacts.create();
 contact.displayName = "Plumber";
 contact.nickname = "Plumber";       //specify both to support all devices
 
@@ -144,7 +143,7 @@ contact.remove(onSuccess,onError);
     //
     function onDeviceReady() {
         // create
-        var contact = contacts.create();//<<
+        var contact = navigator.service.contacts.create();//<<
         contact.displayName = "Plumber";
         contact.nickname = "Plumber";       //specify both to support all devices
         var name = new ContactName();
