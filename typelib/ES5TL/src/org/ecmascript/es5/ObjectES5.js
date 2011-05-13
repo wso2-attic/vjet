@@ -8,7 +8,7 @@ vjo.mtype('org.ecmascript.es5.ObjectES5')
 	 * Creates a new object whose prototype is the passed in parent object and 
 	 * whose properties are those specified by props.
 	 */
-	//> public Object create(Function prototype, Object? properties)
+	//> public [%1+%2] create(Object prototype, ObjLiteral? properties)
 	create: vjo.NEEDS_IMPL,
 	
 	/**
