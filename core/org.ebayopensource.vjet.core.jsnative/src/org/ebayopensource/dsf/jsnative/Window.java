@@ -93,6 +93,7 @@ public interface Window extends IWillBeScriptable {
 	 */
 	@JsSupport(JsVersion.MOZILLA_ONE_DOT_ONE)
 	@Property
+	@GlobalProperty
 	History getHistory();
 
 	/**
@@ -101,6 +102,7 @@ public interface Window extends IWillBeScriptable {
 	 * @return Location
 	 */
 	@Property
+	@GlobalProperty
 	Location getLocation();
 
 	/**
@@ -133,6 +135,7 @@ public interface Window extends IWillBeScriptable {
 	 * @return
 	 */
 	@Property
+	@GlobalProperty
 	Navigator getNavigator();
 
 	/**
@@ -213,6 +216,7 @@ public interface Window extends IWillBeScriptable {
 	 * @return Screen
 	 */
 	@Property
+	@GlobalProperty
 	Screen getScreen();
 
 	/**
@@ -221,6 +225,7 @@ public interface Window extends IWillBeScriptable {
 	 * @return Window
 	 */
 	@GlobalProperty
+	@Property
 	Window getWindow();
 
 	/**
