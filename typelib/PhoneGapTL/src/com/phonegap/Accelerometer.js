@@ -3,10 +3,8 @@
  * http://docs.phonegap.com/phonegap_accelerometer_accelerometer.md.html#Acceleration
  */
 vjo.ctype('com.phonegap.Accelerometer') //< public
-.globals({
-	accelerometer:null //< com.phonegap.Accelerometer
-})
 .protos({
+	
 	//>public void getCurrentAcceleration((void onSuccess(com.phonegap.Accelerometer.objects::Acceleration acceleration)) accelerometerSuccess, (void fn()) accelerometerError) 
 	getCurrentAcceleration : vjo.NEEDS_IMPL,
 	//>public void watchAcceleration((void onSuccess(com.phonegap.Accelerometer.objects::Acceleration acceleration)) accelerometerSuccess, (void fn()) accelerometerError, com.phonegap.Accelerometer.objects::options? accelerometerOptions) 

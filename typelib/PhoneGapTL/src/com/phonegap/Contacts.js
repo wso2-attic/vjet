@@ -1,6 +1,5 @@
 vjo.ctype('com.phonegap.Contacts') //< public
 .globals({
-	contacts : null, //< com.phonegap.Contacts
 	ContactFindOptions : null, // type::Contacts.ContactFindOptions
 	ContactName : null //< type::Contacts.ContactName
 })
@@ -14,30 +13,89 @@ vjo.ctype('com.phonegap.Contacts') //< public
 	
 	Contact : vjo.ctype()
 		.protos({	
+			/**
+			 * A globally unique identifier. (DOMString)
+			 */
 			id:null, //< public String
+			/**
+			 * The name of this Contact, suitable for display to end-users. (DOMString)
+			 */
 			displayName : null, //< public String
+			/**
+			 * An object containing all components of a persons name. 
+			 */
 			name : null, //< public Contacts.ContactName
+			/**
+			 * A casual name to address the contact by. (DOMString)
+			 */
 			nickname: null, //< public String
+			/**
+			 * : An array of all the contact's phone numbers.
+			 */
 			phoneNumbers : null, //< public Contacts.ContactField[]
+			/**
+			 * An array of all the contact's email addresses.
+			 */
 			emails : null, //< public Contacts.ContactField[]
+			/**
+			 * An array of all the contact's addresses. 
+			 */
 			addresses : null, //< public Contacts.ContactAddress[]
+			/**
+			 * An array of all the contact's IM addresses.
+			 */
 			ims : null, //< public Contacts.ContactField[]
+			/**
+			 * An array of all the contact's organizations. 
+			 */
 			organizations : null, //< public Contacts.ContactOrganization[]
+			/**
+			 * The last date the contact was revised. (DOMString)
+			 */
 			revision : null, //< public String
+			/**
+			 * The birthday of the contact. 
+			 */
 			birthday : null, //< public Date
+			/**
+			 * The gender of the contact. 
+			 */
 			gender : null, //< public String
+			/**
+			 * A note about the contact.
+			 */
 			note : null, //< public String
+			/**
+			 * An array of the contact's photos.
+			 */
 			photos : null, //< public Contacts.ContactField[]
+			/**
+			 * An array of all the contacts user defined categories.
+			 */
 			categories : null, //< public Contacts.ContactField[]
+			/**
+			 * An array of web pages associated to the contact. 
+			 */
 			urls : null, //< public Contacts.ContactField[]
+			/**
+			 * The timezone of the contact.
+			 */
 			timezone : null, //< public String
 			
+			/**
+			 * Returns a new Contact object that is a deep copy of the calling object, with the id property set to null. 
+			 */
 			//>public com.phonegap.Contacts.Contact clone() 
 			clone : vjo.NEEDS_IMPL,
 		
+			/**
+			 * Saves a new contact to the device contacts database, or updates an existing contact if a contact with the same id already exists.
+			 */
 			//>public void save((void fn(com.phonegap.Contacts.objects::contact[] contacts)) onSuccess, Function onError) 
 			save : vjo.NEEDS_IMPL,
-			
+			/**
+			 * Removes the contact from the device contacts database. An error callback is called with a ContactError object if the removal is unsuccessful.
+			 */
 			//>public void remove( (void fn()) onSuccess, (void fn(Contacts.objects::contactError contactError)) onError) 
 			remove : vjo.NEEDS_IMPL
 		
@@ -67,23 +125,75 @@ vjo.ctype('com.phonegap.Contacts') //< public
 		urls: An array of web pages associated to the contact. (ContactField[])
 		timezone: The timezone of the conact. (DOMString)
 				 */
-				id:null, //< public String?
-				displayName : null, //< public String?
-				name : null, //< public Contacts.ContactName?
-				nickname: null, //< public String?
-				phoneNumbers : null, //< public Contacts.ContactField[]?
-				emails : null, //< public Contacts.ContactField[]?
-				addresses : null, //< public Contacts.ContactAddress[]?
-				ims : null, //< public Contacts.ContactField[]?
-				organizations : null, //< public Contacts.ContactOrganization[]?
-				revision : null, //< public String?
-				birthday : null, //< public Date?
-				gender : null, //< public String?
-				note : null, //< public String?
-				photos : null, //< public Contacts.ContactField[]?
-				categories : null, //< public Contacts.ContactField[]?
-				urls : null, //< public Contacts.ContactField[]?
-				timezone : null //< public String?
+			/**
+			 * A globally unique identifier. (DOMString)
+			 */
+			id:null, //< public String?
+			/**
+			 * The name of this Contact, suitable for display to end-users. (DOMString)
+			 */
+			displayName : null, //< public String?
+			/**
+			 * An object containing all components of a persons name. 
+			 */
+			name : null, //< public Contacts.ContactName?
+			/**
+			 * A casual name to address the contact by. (DOMString)
+			 */
+			nickname: null, //< public String?
+			/**
+			 * : An array of all the contact's phone numbers.
+			 */
+			phoneNumbers : null, //< public Contacts.ContactField[]?
+			/**
+			 * An array of all the contact's email addresses.
+			 */
+			emails : null, //< public Contacts.ContactField[]?
+			/**
+			 * An array of all the contact's addresses. 
+			 */
+			addresses : null, //< public Contacts.ContactAddress[]?
+			/**
+			 * An array of all the contact's IM addresses.
+			 */
+			ims : null, //< public Contacts.ContactField[]?
+			/**
+			 * An array of all the contact's organizations. 
+			 */
+			organizations : null, //< public Contacts.ContactOrganization[]?
+			/**
+			 * The last date the contact was revised. (DOMString)
+			 */
+			revision : null, //< public String?
+			/**
+			 * The birthday of the contact. 
+			 */
+			birthday : null, //< public Date?
+			/**
+			 * The gender of the contact. 
+			 */
+			gender : null, //< public String?
+			/**
+			 * A note about the contact.
+			 */
+			note : null, //< public String?
+			/**
+			 * An array of the contact's photos.
+			 */
+			photos : null, //< public Contacts.ContactField[]?
+			/**
+			 * An array of all the contacts user defined categories.
+			 */
+			categories : null, //< public Contacts.ContactField[]?
+			/**
+			 * An array of web pages associated to the contact. 
+			 */
+			urls : null, //< public Contacts.ContactField[]?
+			/**
+			 * The timezone of the contact.
+			 */
+			timezone : null //< public String?
+			
 				
 		
 		},
