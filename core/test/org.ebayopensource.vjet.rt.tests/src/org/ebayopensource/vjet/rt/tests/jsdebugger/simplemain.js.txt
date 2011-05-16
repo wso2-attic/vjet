@@ -1,0 +1,8 @@
+vjo.ctype("test.CTypeA")
+.props({
+    //> public void main(String[])
+    main:function(arguments){
+        vjo.sysout.println("main");
+    }
+})
+.endType();
