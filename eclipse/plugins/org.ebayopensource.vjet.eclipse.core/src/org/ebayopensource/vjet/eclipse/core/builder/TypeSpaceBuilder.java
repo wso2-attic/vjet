@@ -13,12 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.dltk.mod.core.IBuildpathEntry;
-import org.eclipse.dltk.mod.core.IScriptProject;
-import org.eclipse.dltk.mod.core.ModelException;
-import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
@@ -39,7 +33,11 @@ import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
 import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceTracer;
 import org.ebayopensource.vjo.lib.TsLibLoader;
-import org.ebayopensource.vjo.tool.typespace.GroupInfo;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.dltk.mod.core.IBuildpathEntry;
+import org.eclipse.dltk.mod.core.IScriptProject;
+import org.eclipse.dltk.mod.core.ModelException;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 
 public class TypeSpaceBuilder {
 
@@ -118,6 +116,13 @@ public class TypeSpaceBuilder {
 			if (entry.getEntryKind() == IBuildpathEntry.BPE_PROJECT) {
 				// add first segment of the project entry - project name.
 				list.add(entry.getPath().segment(0));
+				
+			} else if (entry.getEntryKind() == IBuildpathEntry.BPE_LIBRARY){
+				String id = entry.getPath().segment(entry.getPath().segmentCount()-1);
+				list.add(id);
+
+			
+				
 			} else if (entry.getEntryKind() == IBuildpathEntry.BPE_CONTAINER) {
 				String id = entry.getPath().segment(0);
 				

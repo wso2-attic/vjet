@@ -81,7 +81,7 @@
 
 <extension 
 	point="org.eclipse.core.resources.builders" 
-	id="scriptbuilder"
+	id="org.eclipse.dltk.mod.core.scriptbuilder"
 	name="%scriptBuilderName">
 	<builder>
 		<run class="org.eclipse.dltk.mod.internal.core.builder.ScriptBuilder">
