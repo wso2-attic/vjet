@@ -52,6 +52,7 @@ import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.meta.VjoKeywords;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcConstructorGenProposalAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcDerivedPropMethodAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionGenProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcOverrideProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor;
@@ -1261,7 +1262,7 @@ public class VjoCcCtx {
 	public boolean containsFieldAdvisors() {
 		return advisors != null
 				&& (advisors.contains(VjoCcStaticPropMethodProposalAdvisor.ID) || advisors
-						.contains(VjoCcPropMethodProposalAdvisor.ID));
+						.contains(VjoCcPropMethodProposalAdvisor.ID) || advisors.contains(VjoCcDerivedPropMethodAdvisor.ID));
 	}
 
 	public boolean isInSimpeLiteral() {
