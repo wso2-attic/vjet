@@ -36,3 +36,4 @@ Eclipse-LazyStart: true
 Export-Package: org.ebayopensource.vjet.eclipse.debug.ui,
  org.ebayopensource.vjet.eclipse.internal.console.ui,
  org.ebayopensource.vjet.eclipse.internal.debug.ui
+Import-Package: org.eclipse.ui.forms.widgets

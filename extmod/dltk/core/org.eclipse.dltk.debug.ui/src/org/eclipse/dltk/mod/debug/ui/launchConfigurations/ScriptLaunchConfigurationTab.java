@@ -65,7 +65,7 @@ public abstract class ScriptLaunchConfigurationTab extends
 	private Button fProjButton;
 	private Text fProjText;
 
-	private WidgetListener fListener = new WidgetListener();
+	protected WidgetListener fListener = new WidgetListener();
 
 	public ScriptLaunchConfigurationTab(String mode) {
 		this.fMode = mode;
@@ -203,10 +203,9 @@ public abstract class ScriptLaunchConfigurationTab extends
 
 		if (ILaunchManager.DEBUG_MODE.equals(fMode)) {
 			if (breakOnFirstLine != null)
-				config
-						.setAttribute(
-								ScriptLaunchConfigurationConstants.ENABLE_BREAK_ON_FIRST_LINE,
-								breakOnFirstLine.getSelection());
+				config.setAttribute(
+						ScriptLaunchConfigurationConstants.ENABLE_BREAK_ON_FIRST_LINE,
+						breakOnFirstLine.getSelection());
 			if (enableLogging != null)
 				config.setAttribute(
 						ScriptLaunchConfigurationConstants.ENABLE_DBGP_LOGGING,
@@ -400,15 +399,13 @@ public abstract class ScriptLaunchConfigurationTab extends
 				.createLabelProvider(getNatureID());
 		final ElementListSelectionDialog dialog = new ElementListSelectionDialog(
 				getShell(), labelProvider);
-		dialog
-				.setTitle(DLTKLaunchConfigurationsMessages.mainTab_chooseProject_title);
-		dialog
-				.setMessage(DLTKLaunchConfigurationsMessages.mainTab_chooseProject_message);
+		dialog.setTitle(DLTKLaunchConfigurationsMessages.mainTab_chooseProject_title);
+		dialog.setMessage(DLTKLaunchConfigurationsMessages.mainTab_chooseProject_message);
 
 		try {
 			final IScriptProject[] projects = ScriptModelHelper
-					.getOpenedScriptProjects(DLTKCore
-							.create(getWorkspaceRoot()), getNatureID());
+					.getOpenedScriptProjects(
+							DLTKCore.create(getWorkspaceRoot()), getNatureID());
 			dialog.setElements(projects);
 		} catch (ModelException e) {
 			DLTKLaunchingPlugin.log(e);
@@ -467,8 +464,7 @@ public abstract class ScriptLaunchConfigurationTab extends
 		final Composite editParent;
 		if (needGroupForField(FIELD_PROJECT)) {
 			Group group = new Group(parent, SWT.NONE);
-			group
-					.setText(DLTKLaunchConfigurationsMessages.mainTab_projectGroup);
+			group.setText("Load Js File");
 
 			GridData gd = new GridData(GridData.FILL_HORIZONTAL);
 			group.setLayoutData(gd);
@@ -478,8 +474,7 @@ public abstract class ScriptLaunchConfigurationTab extends
 			group.setLayout(layout);
 			editParent = group;
 		} else {
-			createLabelForField(parent, FIELD_PROJECT,
-					DLTKLaunchConfigurationsMessages.mainTab_projectGroup);
+			createLabelForField(parent, FIELD_PROJECT, "Load Js File");
 			editParent = parent;
 		}
 		fProjText = new Text(editParent, SWT.SINGLE | SWT.BORDER);
@@ -612,12 +607,10 @@ public abstract class ScriptLaunchConfigurationTab extends
 
 		if (!validateProject(project)) {
 			String msg = Messages
-					.format(
-							DLTKLaunchConfigurationsMessages.mainTab_errorDlg_notALangProject,
+					.format(DLTKLaunchConfigurationsMessages.mainTab_errorDlg_notALangProject,
 							new String[] { getLanguageName() });
 			String reason = Messages
-					.format(
-							DLTKLaunchConfigurationsMessages.mainTab_errorDlg_reasonNotALangProject,
+					.format(DLTKLaunchConfigurationsMessages.mainTab_errorDlg_reasonNotALangProject,
 							new String[] { getLanguageName() });
 			ErrorDialog
 					.openError(
@@ -717,7 +710,7 @@ public abstract class ScriptLaunchConfigurationTab extends
 	 * A listener which handles widget change events for the controls in this
 	 * tab.
 	 */
-	class WidgetListener implements ModifyListener, SelectionListener {
+	protected class WidgetListener implements ModifyListener, SelectionListener {
 		public void modifyText(ModifyEvent e) {
 			if (initializing) {
 				return;

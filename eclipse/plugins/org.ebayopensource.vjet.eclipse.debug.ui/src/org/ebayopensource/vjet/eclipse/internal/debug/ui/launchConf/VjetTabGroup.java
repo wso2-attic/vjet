@@ -132,6 +132,7 @@ public class VjetTabGroup extends AbstractLaunchConfigurationTabGroup {
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		setTabs(new ILaunchConfigurationTab[] {
 				new VjetMainLaunchConfTab(mode), 
+				new IncludeTab(),
 				new VjetArgumentsTab(),
 				new ScriptBuildTab(),
 				new EnvironmentTab() {

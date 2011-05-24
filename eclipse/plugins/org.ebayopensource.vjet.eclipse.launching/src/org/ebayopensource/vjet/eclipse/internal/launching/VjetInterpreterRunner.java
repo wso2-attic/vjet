@@ -234,7 +234,21 @@ public class VjetInterpreterRunner extends AbstractInterpreterRunner {
 				.trim();
 		Map env = launchConf.getAttribute(
 				ILaunchManager.ATTR_ENVIRONMENT_VARIABLES, (Map) new HashMap());
-
+		
+		List<String> loadJSList = launchConf.getAttribute(org.ebayopensource.vjet.eclipse.launching.ILaunchConstants.ATTR_INCLUDE_PATH, new ArrayList<String>());
+		if(loadJSList.size()>0){
+			StringBuilder loadJSStr = new StringBuilder();
+			for(String js: loadJSList){
+				
+				//int kind = Integer.parseInt(js.substring(0, 1));
+				String path = js.substring(1);
+				
+				loadJSStr.append(path).append(JsRunner.LIST_SEPERATOR);
+			}
+			
+			env.put(JsRunner.LOAD_JS_KEY, loadJSStr.toString());
+		}
+		
 		List<String> pArgs = new ArrayList<String>();
 		if (vjoClz == "" && jsFile.indexOf("htm") != -1) {
 			env.put("type", "html");

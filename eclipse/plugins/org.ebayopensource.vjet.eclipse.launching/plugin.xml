@@ -36,7 +36,7 @@
             delegate="org.ebayopensource.vjet.eclipse.launching.VjetLaunchConfigurationDelegate"
             id="org.ebayopensource.vjet.eclipse.launching.VjetLaunchConfigurationType"
             modes="run,debug"
-            name="VJET"
+            name="VJET Js"
             public="true"
             sourceLocatorId="vjetSourceLocator"
             sourcePathComputerId="vjetSourceComputer">
@@ -55,7 +55,7 @@
             delegate="org.ebayopensource.vjet.eclipse.launching.VjetWebLaunchConfigurationDelegate"
             id="org.ebayopensource.vjet.eclipse.launching.VjetWebLaunchConfigurationType"
             modes="run"
-            name="VJET"
+            name="VJET Web"
             public="true"
             sourceLocatorId="vjetSourceLocator"
             sourcePathComputerId="vjetSourceComputer">
