@@ -29,14 +29,14 @@ public abstract class AbstractVjoProposalPresenter {
 	 * 
 	 * @return
 	 */
-	protected String getKeywordReplaceString(String name, String typeName, boolean inCommentArea) {
+	protected String getKeywordReplaceString(String name, String typeName, boolean inCommentArea, String indent) {
 		String str = "";
 		if (inCommentArea) {
 			str = CodeCompletionUtils.getCommentKeywordReplaceString(name,
-					typeName, true);
+					typeName, true, indent);
 		} else {
 			str = CodeCompletionUtils.getKeywordReplaceString(name,
-					typeName, true);
+					typeName, true, indent);
 		}
 		return replaceSeperatorToken(str);
 	}
@@ -69,13 +69,13 @@ public abstract class AbstractVjoProposalPresenter {
 	 * @return //> public void xxx() xxx:function(){}
 	 */
 	protected String getFunctionString(int identifier, String functionName,
-			boolean isInterface) {
+			boolean isInterface, String indent) {
 		if (isInterface) {
 			return replaceSeperatorToken(CodeCompletionUtils
 					.getInterfaceFunctionString(identifier, functionName));
 		} else {
 			return replaceSeperatorToken(CodeCompletionUtils.getFunctionString(
-					identifier, functionName));
+					identifier, functionName, indent));
 		}
 	}
 
@@ -86,9 +86,9 @@ public abstract class AbstractVjoProposalPresenter {
 	 * @param functionName
 	 * @return //> public void xxx() xxx:function(){}
 	 */
-	protected String getMainFunctionString() {
+	protected String getMainFunctionString(String indent) {
 		return replaceSeperatorToken(CodeCompletionUtils
-				.getMainFunctionString());
+				.getMainFunctionString(indent));
 	}
 
 	/**
@@ -97,9 +97,9 @@ public abstract class AbstractVjoProposalPresenter {
 	 * @param modifier
 	 * @return
 	 */
-	protected String getConstructorString(String modifier) {
+	protected String getConstructorString(String modifier, String indent) {
 		return replaceSeperatorToken(CodeCompletionUtils
-				.getConstructorString(modifier));
+				.getConstructorString(modifier, indent));
 	}
 
 	/**
@@ -185,9 +185,9 @@ public abstract class AbstractVjoProposalPresenter {
 	 * @param method
 	 * @return
 	 */
-	protected String getReplaceStringForOverrideProposal(IJstMethod method) {
+	protected String getReplaceStringForOverrideProposal(IJstMethod method, String indent) {
 		return replaceSeperatorToken(CodeCompletionUtils
-				.getReplaceStringForOverrideProposal(method));
+				.getReplaceStringForOverrideProposal(method, indent));
 	}
 
 	/**

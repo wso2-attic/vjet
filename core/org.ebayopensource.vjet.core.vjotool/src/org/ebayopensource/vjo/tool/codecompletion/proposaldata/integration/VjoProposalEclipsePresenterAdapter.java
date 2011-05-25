@@ -91,6 +91,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 	private IVjoEclipseContextInformationFactory<IMAGE, CONTEXT_INFO> m_contextInfoFactory;
 	private IVjoMethodCompletionProposalFactory<IMAGE, CONTEXT_INFO> m_methodProposalFactory;
 	private IVjoTypeCompletionProposalFactory<IMAGE, CONTEXT_INFO> m_typeProposalFactory;
+	private String m_indent;
 	
 	/**
 	 * TODO replace methodProposalFactory, typeProposalFactory with generics + interface as well
@@ -230,7 +231,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		if (node instanceof IJstMethod) {
 			final IJstMethod method = (IJstMethod)node;
 			String displayString = CodeCompletionUtils.getFullMethodString(method, method.getOwnerType(), false);
-			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloadingOrNaming(method);
+			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloadingOrNaming(method, getIndent());
 			replaceString = replaceString.replaceAll(CodeCompletionUtils.SEPERATE_TOKEN, getLineSeperator());
 			replaceString = m_labelUtil.evaluateIndent(replaceString, m_document, m_replaceOffset);
 			int cursorPosition = getCursorPosition(replaceString);
@@ -374,7 +375,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		List<IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO>> list = new ArrayList<IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO>>();
 		for (int identifier : identifiers) {
 			String replaceString = getFunctionString(identifier, token,
-					isInterface);
+					isInterface, getIndent());
 			String sidentifier = CodeCompletionUtils.getModifierStr(identifier);
 			String name = token + " " + sidentifier + " Function";
 			replaceString = m_labelUtil.evaluateIndent(replaceString,
@@ -392,11 +393,20 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		return list;
 	}
 
+	private String getIndent() {
+		return m_indent;
+	}
+	
+	public void setIndent(String indent){
+		m_indent = indent;
+	}
+	
+
 	public List<IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO>> genMainFunctionProposals(
 			IVjoCcProposalData data) {
 		List<IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO>> list = new ArrayList<IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO>>();
 		int identifier = JstModifiers.PUBLIC;
-		String replaceString = getMainFunctionString();
+		String replaceString = getMainFunctionString( getIndent());
 		String sidentifier = CodeCompletionUtils.getModifierStr(identifier);
 		String name = "main " + sidentifier + " Function";
 		replaceString = m_labelUtil.evaluateIndent(replaceString,
@@ -439,7 +449,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		if (type != null && type.isEnum()) {
 			modifier = "private";
 		}
-		String cString = getConstructorString(modifier);
+		String cString = getConstructorString(modifier, getIndent());
 		String replaceString = m_labelUtil.evaluateIndent(cString,
 				m_document, m_replaceOffset);
 		int cursorPosition = getCursorPosition(replaceString);
@@ -566,7 +576,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		
 		if (node instanceof IJstMethod) {
 			final IJstMethod method = (IJstMethod)node;
-			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloading(method);
+			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloading(method, getIndent());
 			replaceString = replaceString.replaceAll(CodeCompletionUtils.SEPERATE_TOKEN, getLineSeperator());
 			replaceString = m_labelUtil.evaluateIndent(replaceString, m_document, m_replaceOffset);
 			int cursorPosition = getCursorPosition(replaceString);
@@ -750,7 +760,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		IJstMethod method = (IJstMethod) obj;
 		String displayString = CodeCompletionUtils
 				.getMethodStringForOverrideProposal(method);
-		String replaceString = getReplaceStringForOverrideProposal(method);
+		String replaceString = getReplaceStringForOverrideProposal(method, getIndent());
 		replaceString = m_labelUtil.evaluateIndent(replaceString,
 				m_document, m_replaceOffset);
 		int cursorPosition = getCursorPosition(replaceString);
@@ -856,7 +866,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 
 		IVjoKeywordCompletionData keyword = (IVjoKeywordCompletionData) data;
 		String replaceString = getKeywordReplaceString(keyword.getName(),
-				m_vjoCcCtx.getTypeName(), m_vjoCcCtx.isInCommentArea());
+				m_vjoCcCtx.getTypeName(), m_vjoCcCtx.isInCommentArea(), getIndent());
 		int cursorPosition = getCursorPosition(replaceString);
 		replaceString = replaceCursorPositionToken(replaceString);
 		IVjoEclipseCompletionProposal<IMAGE, CONTEXT_INFO> proposal = new VjoEclipseCompletionProposalAdapter<IMAGE, CONTEXT_INFO>(replaceString,

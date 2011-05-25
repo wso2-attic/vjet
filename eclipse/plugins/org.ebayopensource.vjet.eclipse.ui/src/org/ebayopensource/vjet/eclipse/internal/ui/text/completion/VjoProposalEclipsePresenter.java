@@ -11,6 +11,7 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.dltk.mod.javascript.internal.ui.text.JsPreferenceInterpreter;
 import org.eclipse.dltk.mod.ui.templates.IScriptTemplateIndenter;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IDocument;
@@ -25,6 +26,8 @@ import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.VjoIndenter;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 import org.ebayopensource.vjo.tool.codecompletion.proposaldata.AbstractVjoProposalPresenter;
@@ -251,6 +254,12 @@ public class VjoProposalEclipsePresenter extends AbstractVjoProposalPresenter {
 			m_presenterAdapter.setReplacePLength(replacedPToken.length() + temp);
 		}
 		m_presenterAdapter.setReplacePOffset(m_presenterAdapter.getOffset() - replacedPToken.length());
+	
+		JsPreferenceInterpreter prefs = new JsPreferenceInterpreter(
+				VjetUIPlugin.getDefault().getPreferenceStore());
+		
+		m_presenterAdapter.setIndent(prefs.getIndent());
+	
 	}
 	
 	public List<ICompletionProposal> doPresenter(List<IVjoCcProposalData> datas) {

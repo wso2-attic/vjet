@@ -335,21 +335,21 @@ public class VjoAutoEditStrategy extends DefaultIndentLineAutoEditStrategy {
 		// Add by oliver begin. 2009-10-10. Recalculate the offset value, if the
 		// current offset lies at the new line. We will use the nearest line's
 		// indentation as the new line indentation.
-		int offset = c.offset;
-		if (offset < d.getLength()) {
-			try {
-				if (d.get(0, offset).endsWith(LINE_SEPARATOR)
-						|| d.get(0, offset).endsWith("\t")) {
-					String beforeCursor = d.get(0, offset).trim();
-					offset = beforeCursor.length();
-				}
-			} catch (BadLocationException e) {
-				DLTKUIPlugin.log(e);
-			}
-		}
+//		int offset = c.offset;
+//		if (offset < d.getLength()) {
+//			try {
+//				if (d.get(0, offset).endsWith(LINE_SEPARATOR)
+//						|| d.get(0, offset).endsWith("\t")) {
+//					String beforeCursor = d.get(0, offset).trim();
+//					offset = beforeCursor.length();
+//				}
+//			} catch (BadLocationException e) {
+//				DLTKUIPlugin.log(e);
+//			}
+//		}
 		// Add by oliver end.
 
-		StringBuffer indent = indenter.computeIndentation(offset);
+		StringBuffer indent = indenter.computeIndentation(c.offset);
 		if (indent == null)
 			indent = new StringBuffer();
 

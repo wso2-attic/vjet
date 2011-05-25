@@ -22,6 +22,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.ebayopensource.vjo.meta.VjoKeywords;
 
 
@@ -86,7 +87,7 @@ public final class VjoIndenter {
 		 */
 
 		JsPreferenceInterpreter prefs = new JsPreferenceInterpreter(
-				JavaScriptUI.getDefault().getPreferenceStore());
+				VjetUIPlugin.getDefault().getPreferenceStore());
 
 		private String getCoreFormatterOption(String key) {
 			if (this.fProject == null)
@@ -632,29 +633,42 @@ public final class VjoIndenter {
 	 *         <code>offset</code> is located
 	 */
 	private StringBuffer getLeadingWhitespace(int offset) {
+		
 		StringBuffer indent = new StringBuffer();
 		try {
 			IRegion line = fDocument.getLineInformationOfOffset(offset);
 			int lineOffset = line.getOffset();
 			int nonWS = fScanner.findNonWhitespaceForwardInAnyPartition(
 					lineOffset, lineOffset + line.getLength());
-			// The condition is added by Oliver.2009-09-25. If we hit enter after comment that one empty line is above.
-			if (nonWS!=-1){
 			indent.append(fDocument.get(lineOffset, nonWS - lineOffset));
-			}else{
-				indent.append("\t");
-			}
-			
-			//Add by Oliver.2009-09-25.hit enter after comment that follow with props or protos.
-			String currentLine=fDocument.get(lineOffset, offset-lineOffset).trim();
-			if ((currentLine.startsWith("."+VjoKeywords.PROPS)&&currentLine.endsWith(VjoKeywords.PROPS+"({"))
-					|| (currentLine.startsWith("."+VjoKeywords.PROTOS)&&currentLine.endsWith(VjoKeywords.PROTOS+"({"))) {
-				indent.append("\t");
-			}
 			return indent;
 		} catch (BadLocationException e) {
 			return indent;
 		}
+		
+//		StringBuffer indent = new StringBuffer();
+//		try {
+//			IRegion line = fDocument.getLineInformationOfOffset(offset);
+//			int lineOffset = line.getOffset();
+//			int nonWS = fScanner.findNonWhitespaceForwardInAnyPartition(
+//					lineOffset, lineOffset + line.getLength());
+//			// The condition is added by Oliver.2009-09-25. If we hit enter after comment that one empty line is above.
+//			if (nonWS!=-1){
+//			indent.append(fDocument.get(lineOffset, nonWS - lineOffset));
+//			}else{
+//			//	indent.append("\t");
+//			}
+//			
+//			//Add by Oliver.2009-09-25.hit enter after comment that follow with props or protos.
+//			String currentLine=fDocument.get(lineOffset, offset-lineOffset).trim();
+//			if ((currentLine.startsWith("."+VjoKeywords.PROPS)&&currentLine.endsWith(VjoKeywords.PROPS+"({"))
+//					|| (currentLine.startsWith("."+VjoKeywords.PROTOS)&&currentLine.endsWith(VjoKeywords.PROTOS+"({"))) {
+//			//	indent.append("\t");
+//			}
+//			return indent;
+//		} catch (BadLocationException e) {
+//			return indent;
+//		}
 	}
 
 	/**

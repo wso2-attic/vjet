@@ -241,7 +241,7 @@ public class CodeCompletionUtils {
 	 * @param method
 	 * @return
 	 */
-	public static String getReplaceStringForOverrideProposal(IJstMethod method) {
+	public static String getReplaceStringForOverrideProposal(IJstMethod method, String indent) {
 		StringBuffer buffer = new StringBuffer();
 		String commStr = getJstCommentStringR(method);
 		buffer.append("//>" + commStr);
@@ -256,7 +256,7 @@ public class CodeCompletionUtils {
 		buffer.append(")");
 		IJstType rtype = method.getRtnType();
 		String rExpr = getReturnExprStr(rtype, method);
-		buffer.append("{" + SEPERATE_TOKEN + "\t" + CURSOR_POSITION_TOKEN
+		buffer.append("{" + SEPERATE_TOKEN + indent + CURSOR_POSITION_TOKEN
 				+ rExpr + SEPERATE_TOKEN + "}");
 		return buffer.toString();
 	}
@@ -377,12 +377,12 @@ public class CodeCompletionUtils {
 	 * @param modifier
 	 * @return
 	 */
-	public static String getConstructorString(String modifier) {
+	public static String getConstructorString(String modifier, String indent) {
 		if (modifier == null) {
 			modifier = "public";
 		}
 		return "//>" + modifier + " constructs()" + SEPERATE_TOKEN
-				+ "constructs : function(){" + SEPERATE_TOKEN + "\t"
+				+ "constructs : function(){" + SEPERATE_TOKEN + indent
 				+ CURSOR_POSITION_TOKEN + SEPERATE_TOKEN + "}";
 	}
 
@@ -449,16 +449,16 @@ public class CodeCompletionUtils {
 	}
 
 	public static String getCommentKeywordReplaceString(String name,
-			String typeName, boolean inScriptUnit) {
+			String typeName, boolean inScriptUnit, String indent) {
 		if (VjoKeywords.NEEDS.equals(name)) {
 			return name + "(" + CURSOR_POSITION_TOKEN + ")";
 		} else {
-			return getKeywordReplaceString(name, typeName, inScriptUnit);
+			return getKeywordReplaceString(name, typeName, inScriptUnit, indent);
 		}
 	}
 
 	public static String getKeywordReplaceString(String name, String typeName,
-			boolean inSciptUnit) {
+			boolean inSciptUnit, String indent) {
 		if (isTypeDeclare(name)) {
 			if (typeName == null || typeName.trim().equals("")) {
 				return name + "()";
@@ -471,7 +471,7 @@ public class CodeCompletionUtils {
 				|| VjoKeywords.OPTIONS.equals(name)
 				|| VjoKeywords.PROTOS.equals(name)
 				|| VjoKeywords.GLOBALS.equals(name)) {
-			return name + "({" + SEPERATE_TOKEN + "\t" + CURSOR_POSITION_TOKEN
+			return name + "({" + SEPERATE_TOKEN + indent + CURSOR_POSITION_TOKEN
 					+ SEPERATE_TOKEN + "})";
 		} else if (VjoKeywords.NEEDS.equals(name)
 				|| VjoKeywords.INHERITS.equals(name)
@@ -482,7 +482,7 @@ public class CodeCompletionUtils {
 			return name + "('" + CURSOR_POSITION_TOKEN + "')";
 
 		} else if (VjoKeywords.INITS.equals(name)) {
-			return name + "(" + "function(){" + SEPERATE_TOKEN + "\t"
+			return name + "(" + "function(){" + SEPERATE_TOKEN + indent
 					+ CURSOR_POSITION_TOKEN + SEPERATE_TOKEN + "}" + ")";
 		} else if (VjoKeywords.ENDTYPE.equals(name)) {
 			return name + "()" + (inSciptUnit ? ";" : "");
@@ -492,7 +492,7 @@ public class CodeCompletionUtils {
 	}
 
 	public static String getKeywordReplaceString(IJstMethod method,
-			String typeName, boolean inSciptUnit) {
+			String typeName, boolean inSciptUnit, String indent) {
 		String name = method.getName().getName();
 		if (isTypeDeclare(name)) {
 			if (typeName == null || typeName.trim().equals("")) {
@@ -506,7 +506,7 @@ public class CodeCompletionUtils {
 				|| VjoKeywords.OPTIONS.equals(name)
 				|| VjoKeywords.PROTOS.equals(name)
 				) {
-			return name + "({" + SEPERATE_TOKEN + "\t" + CURSOR_POSITION_TOKEN
+			return name + "({" + SEPERATE_TOKEN + indent + CURSOR_POSITION_TOKEN
 					+ SEPERATE_TOKEN + "})";
 		} else if (VjoKeywords.NEEDS.equals(name)
 				|| VjoKeywords.INHERITS.equals(name)
@@ -533,7 +533,7 @@ public class CodeCompletionUtils {
 			return name + "('" + CURSOR_POSITION_TOKEN + "')";
 
 		} else if (VjoKeywords.INITS.equals(name)) {
-			return name + "(" + "function(){" + SEPERATE_TOKEN + "\t"
+			return name + "(" + "function(){" + SEPERATE_TOKEN + indent
 					+ CURSOR_POSITION_TOKEN + SEPERATE_TOKEN + "}" + ")";
 		} else if (VjoKeywords.ENDTYPE.equals(name)) {
 			return name + "()" + (inSciptUnit ? ";" : "");
@@ -548,30 +548,30 @@ public class CodeCompletionUtils {
 	 * @param functionName
 	 * @return //> public void xxx() xxx:function(){}
 	 */
-	public static String getFunctionString(int identifier, String functionName) {
+	public static String getFunctionString(int identifier, String functionName, String indent) {
 		String sidentifier = CodeCompletionUtils.getModifierStr(identifier);
 		String cString = "//>" + sidentifier + " void " + functionName + "() "
 				+ SEPERATE_TOKEN + functionName + " : function(){"
-				+ SEPERATE_TOKEN + "\t" + CURSOR_POSITION_TOKEN
+				+ SEPERATE_TOKEN + indent + CURSOR_POSITION_TOKEN
 				+ SEPERATE_TOKEN + "}";
 		return cString;
 	}
 	
-	public static String getFullFunctionWithoutOverloading(final IJstMethod function){
+	public static String getFullFunctionWithoutOverloading(final IJstMethod function, String indent){
 		return new StringBuilder()
 			.append(function.getName().getName()).append(" : ")
-			.append(getFullFunctionWithoutOverloadingOrNaming(function)).toString();
+			.append(getFullFunctionWithoutOverloadingOrNaming(function, indent)).toString();
 	}
 	
-	public static String getFullFunctionWithoutOverloadingOrNaming(final IJstMethod function){
+	public static String getFullFunctionWithoutOverloadingOrNaming(final IJstMethod function, String indent){
 		return new StringBuilder()
 			.append("function(").append(getFullFunctionParams(function)).append("){")
-			.append(SEPERATE_TOKEN).append("\t").append(CURSOR_POSITION_TOKEN)
-			.append(getReturnStmt(function))
+			.append(SEPERATE_TOKEN).append(indent).append(CURSOR_POSITION_TOKEN)
+			.append(getReturnStmt(function, indent))
 			.append(SEPERATE_TOKEN).append('}').toString();
 	}
 
-	private static String getReturnStmt(IJstMethod function) {
+	private static String getReturnStmt(IJstMethod function, String indent) {
 		final IJstType rtnType = function.getRtnType();
 		if(rtnType == null
 				|| rtnType.getName() == null
@@ -579,7 +579,7 @@ public class CodeCompletionUtils {
 			return "";
 		}
 		final StringBuilder rtnStmt = new StringBuilder();
-		rtnStmt.append(SEPERATE_TOKEN).append("\t").append("return ");
+		rtnStmt.append(SEPERATE_TOKEN).append(indent).append("return ");
 		
 		if(rtnType.equals(JstCache.getInstance().getType("boolean"))){
 			rtnStmt.append("false;");
@@ -609,10 +609,10 @@ public class CodeCompletionUtils {
 	 * @param functionName
 	 * @return //> public void xxx() xxx:function(){}
 	 */
-	public static String getMainFunctionString() {
+	public static String getMainFunctionString(String indent) {
 		String cString = "//>public" + " void main" + "(String... args) "
 				+ SEPERATE_TOKEN + "main" + " : function(args){"
-				+ SEPERATE_TOKEN + "\t" + CURSOR_POSITION_TOKEN
+				+ SEPERATE_TOKEN + indent + CURSOR_POSITION_TOKEN
 				+ SEPERATE_TOKEN + "}";
 		return cString;
 	}
