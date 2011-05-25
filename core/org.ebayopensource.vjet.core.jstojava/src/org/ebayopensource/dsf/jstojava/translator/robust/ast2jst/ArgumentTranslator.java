@@ -34,6 +34,7 @@ public class ArgumentTranslator extends
 
 	@Override
 	protected JstArg doTranslate(IArgument astNode) {
-		throw new DsfRuntimeException("do not use this one");
+		return null;
+		// this shouldn't be used but it may be called in a case such as (function(a){}())
 	}
 }
