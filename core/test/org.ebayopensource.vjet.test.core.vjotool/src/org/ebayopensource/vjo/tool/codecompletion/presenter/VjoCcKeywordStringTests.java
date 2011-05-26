@@ -383,7 +383,7 @@ public class VjoCcKeywordStringTests  extends VjoCcBaseTest {
 		String typeName = "presenter.TestInnerCompletion";
 		String name = "endType";
 		String expected = name + "()";
-		String actual = CodeCompletionUtils.getKeywordReplaceString(name, typeName, false);
+		String actual = CodeCompletionUtils.getKeywordReplaceString(name, typeName, false, "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected + 
 				", Actual: " + actual, expected.equals(actual));
 	}
@@ -397,7 +397,7 @@ public class VjoCcKeywordStringTests  extends VjoCcBaseTest {
 	}
 	
 	private void testKeywordsReplacementString(String name, String expected, String typeName){
-		String replaceString = presenter.getKeywordReplaceString(name, typeName, false);
+		String replaceString = presenter.getKeywordReplaceString(name, typeName, false, "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected + 
 				", Actual: " + replaceString, expected.equals(replaceString));
 	}

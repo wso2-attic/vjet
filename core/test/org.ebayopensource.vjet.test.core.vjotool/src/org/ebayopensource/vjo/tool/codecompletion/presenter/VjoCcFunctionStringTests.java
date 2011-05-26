@@ -78,7 +78,7 @@ public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 		String expected = "//>public constructs()" + getLineSeparator()
 			+ "constructs : function(){" + getLineSeparator() + "\t" + 
 			getCursorPos()+ getLineSeparator() + "}";
-		String replaceString = presenter.getConstructorString(modifier);
+		String replaceString = presenter.getConstructorString(modifier, "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
@@ -89,7 +89,7 @@ public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 		String expected = "//>private constructs()" + getLineSeparator()
 			+ "constructs : function(){" + getLineSeparator() + "\t" + 
 			getCursorPos()+ getLineSeparator() + "}";
-		String replaceString = presenter.getConstructorString(modifier);
+		String replaceString = presenter.getConstructorString(modifier, "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
@@ -293,7 +293,7 @@ public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 		String expected = "//>public void func1() " + getLineSeparator() + 
 				"func1 : vjo.NEEDS_IMPL";
 		String replaceString = presenter.getFunctionString(JstModifiers.PUBLIC,
-				"func1", true);
+				"func1", true, "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
@@ -303,13 +303,13 @@ public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 		IJstType type = getJstType(CodeCompletionUtil.GROUP_NAME, js);
 		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
 		String replaceString = 
-			presenter.getReplaceStringForOverrideProposal(type.getMethod(method));
+			presenter.getReplaceStringForOverrideProposal(type.getMethod(method), "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
 
 	private void testFunctionString(String name, String expected, int identifier){
-		String replaceString = presenter.getFunctionString(identifier, name, false);
+		String replaceString = presenter.getFunctionString(identifier, name, false, "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}

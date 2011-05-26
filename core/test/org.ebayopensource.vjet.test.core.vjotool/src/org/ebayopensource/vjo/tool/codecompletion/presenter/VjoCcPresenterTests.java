@@ -75,7 +75,7 @@ public class VjoCcPresenterTests extends VjoCcBaseTest {
 	public void testReplaceStringForOverrideProposal() {
 		IJstType jstType = getJstType(LibManager.VJO_SELF_DESCRIBED, "vjo.Object");
 		IJstMethod method = jstType.getMethod("equals");
-		String s = presenter.getReplaceStringForOverrideProposal(method);
+		String s = presenter.getReplaceStringForOverrideProposal(method, "\t");
 		assertTrue("Replace string should contains keyword 'return' " , s.contains("return") );
 	}
 	
@@ -88,7 +88,7 @@ public class VjoCcPresenterTests extends VjoCcBaseTest {
 		String typeName = "presenter.FunctionPosition";
 		IJstType type = super.getJstType(CodeCompletionUtil.GROUP_NAME, typeName);
 		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
-		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("staticFunc1"));
+		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("staticFunc1"), "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
@@ -101,7 +101,7 @@ public class VjoCcPresenterTests extends VjoCcBaseTest {
 		String typeName = "presenter.FunctionPosition";
 		IJstType type = super.getJstType(CodeCompletionUtil.GROUP_NAME, typeName);
 		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
-		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("staticFunc2"));
+		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("staticFunc2"), "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
@@ -114,7 +114,7 @@ public class VjoCcPresenterTests extends VjoCcBaseTest {
 		String typeName = "presenter.FunctionPosition";
 		IJstType type = super.getJstType(CodeCompletionUtil.GROUP_NAME, typeName);
 		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
-		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("instanceFunc1"));
+		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("instanceFunc1"), "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
@@ -127,7 +127,7 @@ public class VjoCcPresenterTests extends VjoCcBaseTest {
 		String typeName = "presenter.FunctionPosition";
 		IJstType type = super.getJstType(CodeCompletionUtil.GROUP_NAME, typeName);
 		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
-		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("instanceFunc2"));
+		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("instanceFunc2"), "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected
 				+ ", Actual: " + replaceString, expected.equals(replaceString));
 	}
@@ -140,7 +140,7 @@ public class VjoCcPresenterTests extends VjoCcBaseTest {
 		String typeName = "BugJsFiles.Bug6554";
 		IJstType type = super.getJstType(CodeCompletionUtil.GROUP_NAME, typeName);
 		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
-		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("func1"));
+		String replaceString = presenter.getReplaceStringForOverrideProposal(type.getMethod("func1"), "\t");
 		assertEquals(expected, replaceString);
 	}
 	
@@ -153,7 +153,7 @@ public class VjoCcPresenterTests extends VjoCcBaseTest {
 		IJstType type = super.getJstType(CodeCompletionUtil.GROUP_NAME, typeName);
 		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
 		for (IJstMethod m : JstTypeHelper.getSignatureMethods(type)) {
-			String replaceString = presenter.getReplaceStringForOverrideProposal(m);
+			String replaceString = presenter.getReplaceStringForOverrideProposal(m, "\t");
 			assertEquals(expected, replaceString);
 			break;
 		}

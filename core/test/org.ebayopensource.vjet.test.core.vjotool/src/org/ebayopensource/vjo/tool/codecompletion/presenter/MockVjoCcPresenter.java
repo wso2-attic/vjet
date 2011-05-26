@@ -17,21 +17,21 @@ import org.ebayopensource.vjo.tool.codecompletion.proposaldata.AbstractVjoPropos
 public class MockVjoCcPresenter extends AbstractVjoProposalPresenter {
 
 	@Override
-	public String getConstructorString(String modifier) {
+	public String getConstructorString(String modifier, String indent) {
 		// TODO Auto-generated method stub
-		return super.getConstructorString(modifier);
+		return super.getConstructorString(modifier, indent);
 	}
 
 	@Override
-	public String getFunctionString(int identifier, String functionName, boolean isInterface) {
+	public String getFunctionString(int identifier, String functionName, boolean isInterface, String indent) {
 		// TODO Auto-generated method stub
-		return super.getFunctionString(identifier, functionName, isInterface);
+		return super.getFunctionString(identifier, functionName, isInterface, indent);
 	}
 
 	@Override
-	public String getKeywordReplaceString(String name, String typeName, boolean inCommentArea) {
+	public String getKeywordReplaceString(String name, String typeName, boolean inCommentArea, String indent) {
 		// TODO Auto-generated method stub
-		return super.getKeywordReplaceString(name, typeName, inCommentArea);
+		return super.getKeywordReplaceString(name, typeName, inCommentArea, indent);
 	}
 
 	@Override
@@ -55,9 +55,9 @@ public class MockVjoCcPresenter extends AbstractVjoProposalPresenter {
 	}
 
 	@Override
-	public String getReplaceStringForOverrideProposal(IJstMethod method) {
+	public String getReplaceStringForOverrideProposal(IJstMethod method, String indent) {
 		// TODO Auto-generated method stub
-		return super.getReplaceStringForOverrideProposal(method);
+		return super.getReplaceStringForOverrideProposal(method, indent);
 	}
 
 	@Override
