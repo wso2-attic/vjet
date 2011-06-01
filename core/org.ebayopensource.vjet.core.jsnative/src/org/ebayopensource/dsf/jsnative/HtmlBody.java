@@ -9,10 +9,14 @@
 package org.ebayopensource.dsf.jsnative;
 
 import org.ebayopensource.dsf.jsnative.anno.Alias;
+import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
+import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
+import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.Property;
+import org.ebayopensource.dsf.jsnative.anno.SupportedBy;
 
 /**
  * 
@@ -262,4 +266,14 @@ public interface HtmlBody extends HtmlElement {
 	@DOMSupport(DomLevel.ZERO)
 	@Property(name="onmouseover")
 	void setOnMouseOver(Object functionRef);
+	
+	/**
+	 * Creates a TextRange object for the element.
+	 * IE specific
+	 * @return TextRange
+	 */
+	@BrowserSupport( {BrowserType.IE_6P})
+	@Function TextRange createTextRange();
+	
+	
 }

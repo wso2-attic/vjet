@@ -124,6 +124,7 @@ public class AHtmlDocument extends ADocument implements HtmlDocument,DocumentEve
 		INVALID_EVENTS.add(NativeEvent.unload.toString());
 	}
 
+	
 	public AHtmlDocument() {
 		this(new DHtmlDocument(), BrowserType.IE_6P);
 	}
@@ -1164,5 +1165,17 @@ public class AHtmlDocument extends ADocument implements HtmlDocument,DocumentEve
 	@Override
 	public Node all(String id, int subIndex) {
 		return all(id).item(subIndex);
+	}
+
+	@Override
+	public Event createEventObject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Event createEventObject(Event evt) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

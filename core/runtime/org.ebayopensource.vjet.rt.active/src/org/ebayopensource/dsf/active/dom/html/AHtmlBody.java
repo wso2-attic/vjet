@@ -8,9 +8,11 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.active.dom.html;
 
+import org.ebayopensource.dsf.active.client.ATextRange;
 import org.ebayopensource.dsf.html.dom.DBody;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
 import org.ebayopensource.dsf.jsnative.HtmlBody;
+import org.ebayopensource.dsf.jsnative.TextRange;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 
 public class AHtmlBody extends AHtmlElement implements HtmlBody {
@@ -208,5 +210,12 @@ public class AHtmlBody extends AHtmlElement implements HtmlBody {
 	
 	private DBody getDBody() {
 		return (DBody) getDNode();
+	}
+
+	@Override
+	public TextRange createTextRange() {
+		// TODO implement adom for this
+			return null; 
+		
 	}
 }

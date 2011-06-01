@@ -202,6 +202,7 @@ public class JsNativeMeta {
 		addbt(DocumentFragment.class);
 		addbt(DOMException.class);
 		addbt(XMLHttpRequest.class);
+		addbt(XDomainRequest.class);
 		addbt(ActiveXObject.class);
 		addbt(Option.class);
 		addbt(Image.class);

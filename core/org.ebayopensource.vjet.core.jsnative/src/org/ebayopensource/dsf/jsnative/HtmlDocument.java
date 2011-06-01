@@ -25,6 +25,7 @@ import org.ebayopensource.dsf.jsnative.anno.OverrideProp;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.ebayopensource.dsf.jsnative.anno.ProxyFunc;
 import org.ebayopensource.dsf.jsnative.events.DocumentEvent;
+import org.ebayopensource.dsf.jsnative.events.Event;
 
 /**
  * An <code>HTMLDocument</code> is the root of the HTML hierarchy and holds the entire content. 
@@ -328,6 +329,13 @@ public interface HtmlDocument extends Document, DocumentEvent {
 	@DOMSupport(DomLevel.TWO)
 	@BrowserSupport({BrowserType.IE_6P})
 	@Property String getReadyState();
+	
+	
+	@BrowserSupport({BrowserType.IE_6P})
+	@Property Event createEventObject();
+	
+	@BrowserSupport({BrowserType.IE_6P})
+	@Property Event createEventObject(Event evt);
 	
 	/**
 	 * Returns the onkeydown event handler code on the current element. 

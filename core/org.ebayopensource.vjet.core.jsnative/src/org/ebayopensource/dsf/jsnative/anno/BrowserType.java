@@ -15,6 +15,8 @@ public enum BrowserType {
 	IE_7P ("IE" , 7, true),		// MSIE 7.x and above
 	IE_8 ("IE" , 8),			// MSIE 8.x only
 	IE_8P ("IE" , 8, true),		// MSIE 8.x and above
+	IE_9("IE", 9), // MSIE 9.x
+	IE_9P("IE", 9, true),// MSIE 9.x and above
 	FIREFOX_1 ("FIREFOX" , 1),			// Firefox/1.x only
 	FIREFOX_1P ("FIREFOX" , 1, true),	// Firefox/1.x and above
 	FIREFOX_2 ("FIREFOX" , 2),			// Firefox/2.x only

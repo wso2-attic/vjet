@@ -9,8 +9,12 @@
 package org.ebayopensource.dsf.active.client;
 
 import org.ebayopensource.dsf.active.event.IBrowserBinding;
+import org.ebayopensource.dsf.jsnative.HtmlElement;
 import org.ebayopensource.dsf.jsnative.TextRange;
+import org.ebayopensource.dsf.jsnative.TextRectangle;
+import org.ebayopensource.dsf.jsnative.TextRectangleList;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
+import org.ebayopensource.dsf.jsnative.anno.Function;
 
 public class ATextRange extends ActiveObject implements TextRange {
 
@@ -146,5 +150,234 @@ public class ATextRange extends ActiveObject implements TextRange {
 			return getClass().getName();
 		}
 		return null;
+	}
+
+	@Override
+	public void collapse() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void collapse(boolean start) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int compareEndPoints(String sType, TextRange oRange) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public TextRange duplicate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean execCommand(String sCommand, boolean bUserInterface,
+			Object vValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean execCommand(String sCommand, boolean bUserInterface) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean execCommand(String sCommand) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void execCommandShowHelp(String cmdID, Function pfRet) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean expand(String sUnit) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean findText(String sText, int iSearchScope, int iFlags) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean findText(String sText, int iSearchScope) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean findText(String sText) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getBookmark() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TextRectangle getBoundingClientRect() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TextRectangleList getClientRects() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean inRange(TextRange oRange) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isEqual(TextRange oRange) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int move(String sUnit, int iCount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int move(String sUnit) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int moveEnd(String sUnit, int iCount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int moveEnd(String sUnit) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int moveStart(String sUnit, int iCount) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int moveStart(String sUnit) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean moveToBookmark(String sBookmark) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void moveToElementText(HtmlElement oElement) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void moveToPoint(int iX, int iY) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public HtmlElement parentElement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void pasteHTML(String sHTMLText) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean queryCommandEnabled(String sCmdID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryCommandIndeterm(String sCmdID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryCommandState(String sCmdID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean queryCommandSupported(String sCmdID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String queryCommandText(String cmdID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object queryCommandValue(String sCmdID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void scrollIntoView(boolean bAlignToTop) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void scrollIntoView() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void select() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setEndPoint(String sType, TextRange oTextRange) {
+		// TODO Auto-generated method stub
+		
 	}
 }
