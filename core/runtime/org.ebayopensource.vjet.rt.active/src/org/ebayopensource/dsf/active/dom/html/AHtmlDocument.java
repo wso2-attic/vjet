@@ -671,9 +671,8 @@ public class AHtmlDocument extends ADocument implements HtmlDocument,DocumentEve
 		return null;
 	}
 
-	public Event createEventObject(String eventType) {
-		return DapEventEngine.getInstance().createEvent(eventType);
-	}
+
+	
 	
 	public AWindow getWindow() {
 		return m_window;
@@ -1167,15 +1166,34 @@ public class AHtmlDocument extends ADocument implements HtmlDocument,DocumentEve
 		return all(id).item(subIndex);
 	}
 
-	@Override
 	public Event createEventObject() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Event createEventObject(Event evt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Event createEventObject(String eventType) {
+		return DapEventEngine.getInstance().createEvent(eventType);
+	}
+	
+	@Override
+	public Event __createEventObject(Object arg1, Object arg2, Object arg3, Object arg4,
+			Object arg5) {
+		if(arg1 == null){
+			return createEventObject();
+		}
+		if(arg1 instanceof String){
+			return createEventObject((String)arg1);
+//		} else if(arg2 instanceof Undefined){
+//			createStyleSheet((String)arg1);
+		} else if (arg1 instanceof Event) {
+			return createEventObject((Event)arg1);
+		}
+		return null;
+	}
+	
 }

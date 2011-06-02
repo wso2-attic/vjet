@@ -331,11 +331,7 @@ public interface HtmlDocument extends Document, DocumentEvent {
 	@Property String getReadyState();
 	
 	
-	@BrowserSupport({BrowserType.IE_6P})
-	@OverLoadFunc Event createEventObject();
-	
-	@BrowserSupport({BrowserType.IE_6P})
-	@OverLoadFunc Event createEventObject(Event evt);
+
 	
 	/**
 	 * Returns the onkeydown event handler code on the current element. 
