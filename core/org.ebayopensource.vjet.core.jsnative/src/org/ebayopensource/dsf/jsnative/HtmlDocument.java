@@ -332,10 +332,10 @@ public interface HtmlDocument extends Document, DocumentEvent {
 	
 	
 	@BrowserSupport({BrowserType.IE_6P})
-	@Property Event createEventObject();
+	@OverLoadFunc Event createEventObject();
 	
 	@BrowserSupport({BrowserType.IE_6P})
-	@Property Event createEventObject(Event evt);
+	@OverLoadFunc Event createEventObject(Event evt);
 	
 	/**
 	 * Returns the onkeydown event handler code on the current element. 
