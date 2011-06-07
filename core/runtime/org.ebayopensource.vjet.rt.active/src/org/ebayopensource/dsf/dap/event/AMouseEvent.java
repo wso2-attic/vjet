@@ -227,4 +227,16 @@ public class AMouseEvent extends AUIEvent implements MouseEvent {
 	public void setPageY(int m_pagey) {
 		m_pageY = m_pagey;
 	}
+
+	@Override
+	public int getButtons() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean getModifierState(String keyIdentifierArg) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
