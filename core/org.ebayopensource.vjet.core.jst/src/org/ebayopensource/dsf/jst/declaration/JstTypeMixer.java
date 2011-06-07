@@ -17,6 +17,7 @@ import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstRefType;
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
 
 public abstract class JstTypeMixer extends JstType {
@@ -56,6 +57,53 @@ public abstract class JstTypeMixer extends JstType {
 		return allPtys;
 	}
 
+	
+	@Override
+	public java.util.List<IJstType> getExtends() {
+		List<IJstType> _extends = new ArrayList<IJstType>();
+		
+		for (IJstType type : m_types) {
+			_extends.addAll(type.getExtends());
+		}
+		
+		return _extends;
+	};
+	@Override
+	public List<IJstTypeReference> getExtendsRef() {
+		
+		List<IJstTypeReference> _extends = new ArrayList<IJstTypeReference>();
+		
+		for (IJstType type : m_types) {
+			_extends.addAll(type.getExtendsRef());
+		}
+		
+		return _extends;
+	};
+	
+	@Override
+	public List<IJstType> getAllDerivedTypes(){
+		List<IJstType> types = new ArrayList<IJstType>();
+		
+		for (IJstType type : m_types) {
+			
+			for(IJstType mixin: getMixins()){
+				if(mixin instanceof JstProxyType){
+					JstProxyType pt = (JstProxyType)mixin;
+					types.add(pt.getType());
+				}else if (mixin instanceof JstType){
+					types.add(mixin);
+				}
+					
+				
+				//types.addAll(getMixins());
+			}
+			types.addAll(type.getExtends());
+			types.addAll(type.getMixins());
+		
+		}
+		return types;
+	}
+	
 	@Override
 	public IJstMethod getInstanceMethod(String name) {
 		return getInstanceMethod(name, false);

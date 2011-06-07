@@ -148,7 +148,9 @@ var factoryFunctionMappings = {
 	//	  if(typeof(arg)!="undefined"){  // modify for single quote and double
 			// arg = arg.replace("\'","");
 			// arg = arg.replace("\"","");
-		 var mapping = browserMappings[arg.toLowerCase()] + '[]';
+		 var mapping = browserMappings[arg.toLowerCase()] + '[]'; 
+		 //var mapping = '[' +browserMappings[arg.toLowerCase()] + '[] + NodeList]';
+			
 		 if(mapping!=null){
 				return mapping;
 			}

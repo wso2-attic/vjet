@@ -1,6 +1,6 @@
 // @Package com.ebay.vjo
 /**
-* VJO Bootstrap JST API must be updated in following files
+* VJET VJO Bootstrap JST API must be updated in following files
 *       com.ebay.vjo.VjBootstrapAPI.jsspec
 *       com.ebay.vjo.VjBootstrapDef.java
 * in order for VJET IDE to use new API otherwise API is hidden from tool.

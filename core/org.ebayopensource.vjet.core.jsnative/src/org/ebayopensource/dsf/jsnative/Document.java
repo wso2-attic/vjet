@@ -15,6 +15,7 @@ import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.FactoryFunc;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
 import org.ebayopensource.dsf.jsnative.anno.Property;
@@ -210,11 +211,13 @@ public interface Document extends Node {
 	 *   <code>Elements</code>.
 	 */
 	@FactoryFunc
+    @JsArray(Node.class)
 	@Function NodeList getElementsByTagName(String tagname);
 	
     @BrowserSupport({BrowserType.NONE})
     @ARename(name = "getElementsByTagName")
     @JstExclude
+    @JsArray(Node.class)
     @Function NodeList byTag(String tagName);
 
 	/**
@@ -293,11 +296,13 @@ public interface Document extends Node {
 	 */
 	@DOMSupport(DomLevel.TWO)
     @BrowserSupport({BrowserType.FIREFOX_2P, BrowserType.OPERA_9P})
+    @JsArray(Node.class)
 	@Function NodeList getElementsByTagNameNS(String namespaceURI, String localName);
     
     @BrowserSupport({BrowserType.NONE})
     @ARename(name = "getElementsByTagNameNS")
     @JstExclude
+    @JsArray(Node.class)
     @Function NodeList byTagNS(String namespaceURI, String localName);
     
 	/**

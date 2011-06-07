@@ -20,23 +20,25 @@ import org.ebayopensource.dsf.jsnative.anno.Property;
 @Alias("HTMLAudioElement")
 @DOMSupport(DomLevel.ONE)
 @JsMetatype
-public interface HtmlAudio extends HtmlElement {
+public interface HtmlAudio extends HtmlMedia {
 	
-	@Property String getSrc();
-	@Property void setSrc(String src);
-	
-	@Property boolean getAutoBuffer();
-	@Property void setAutoBuffer(boolean autoBuffer);
-	
-	@Property boolean getAutoPlay();
-	@Property void setAutoPlay(boolean autoPlay);
-	
-	@Property boolean getLoop();
-	@Property void setLoop(boolean loop);
-	
-	@Property boolean getControls();
-	@Property void setControls(boolean controls);
-	
+//	@Property String getSrc();
+//	@Property void setSrc(String src);
+//	
+//	@Property boolean getAutoBuffer();
+//	@Property void setAutoBuffer(boolean autoBuffer);
+//	
+//	@Property boolean getAutoPlay();
+//	@Property void setAutoPlay(boolean autoPlay);
+//	
+//	@Property boolean getLoop();
+//	@Property void setLoop(boolean loop);
+//	
+//	@Property boolean getControls();
+//	@Property void setControls(boolean controls);
+//	
+//	
+//	
 	/**
 	 * Returns the onblur event handler code on the current element. 
 	 * @see http://www.w3schools.com/jsref/jsref_onblur.asp

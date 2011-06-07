@@ -275,5 +275,14 @@ public interface HtmlBody extends HtmlElement {
 	@BrowserSupport( {BrowserType.IE_6P})
 	@Function TextRange createTextRange();
 	
+	/**
+	 * Creates a selection range object for control-based selection rather than text-based selection. 
+	 * IE specific
+	 * @return TextRange
+	 */
+	@BrowserSupport( {BrowserType.IE_6P})
+	@Function TextRange createControlRange();
+	
+
 	
 }

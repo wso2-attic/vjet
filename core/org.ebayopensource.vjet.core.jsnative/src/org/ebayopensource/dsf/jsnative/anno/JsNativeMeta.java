@@ -220,6 +220,31 @@ public class JsNativeMeta {
 		addbt(ElementView.class);
 		addbt(TextRectangle.class);
 		addbt(TextRectangleList.class);
+		
+		addbt(TextTrack.class);
+		addbt(TrackList.class);
+		addbt(TimeRanges.class);
+		addbt(TextTrackCue.class);
+		addbt(BehaviorUrnsCollection.class);
+		addbt(MutableTextTrack.class);
+		addbt(MultipleTrackList.class);
+		addbt(MediaError.class);
+		addbt(MediaController.class);
+		addbt(ExclusiveTrackList.class);
+		
+		addbt(MediaList.class);
+		addbt(StyleSheet.class);
+		addbt(CSSStyleSheet.class);
+		addbt(CSSRule.class);
+		addbt(CSSRuleList.class);
+		
+		addbt(Range.class);
+		addbt(DocumentRange.class);
+		// IE specific
+		addbt(HtmlDlgSafeHelper.class);
+		
+		
+		
 		// HTML Elements
 		loadHtmlElements();
 		
@@ -372,6 +397,7 @@ for (AHtmlType htmlType : iter) {
 		addbt(HtmlIsIndex.class);
 		addbt(HtmlDialog.class);
 		addbt(HtmlTableSection.class);
+		addbt(HtmlMedia.class);
 		addbt(HtmlAudio.class);
 		addbt(HtmlAcronym.class);
 		addbt(HtmlSection.class);
@@ -383,6 +409,7 @@ for (AHtmlType htmlType : iter) {
 		addbt(HtmlPre.class);
 		addbt(HtmlNav.class);
 		addbt(HtmlHtml.class);
+		
 
 	}
 

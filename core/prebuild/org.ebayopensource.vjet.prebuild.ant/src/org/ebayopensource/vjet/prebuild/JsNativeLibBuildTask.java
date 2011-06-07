@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.tools.ant.BuildException;
+import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.javatojs.control.TranslationController;
 import org.ebayopensource.dsf.javatojs.prebuild.BaseBuildTask;
 import org.ebayopensource.dsf.javatojs.translate.config.JsNativeConfigInitializer;
@@ -193,6 +194,10 @@ public class JsNativeLibBuildTask extends BaseBuildTask {
 					
 					List<JstType> jstTypes = getJstTypes(getJsNativeFiles(files));
 					// Fix JstType category
+					if(jstTypes.size()==0){
+						throw new DsfRuntimeException("no types found under files:" + files);
+					}
+					
 					for (JstType t : jstTypes) {
 						fixCategory(t);
 						mixinFunction(t);
@@ -475,7 +480,8 @@ public class JsNativeLibBuildTask extends BaseBuildTask {
 		
 		JsNativeLibBuildTask task = new JsNativeLibBuildTask();
 		
-		String base  = new File("../").getAbsolutePath();
+		String base  = new File("../../../core/resource/").getAbsolutePath();
+		String inputbase  = new File("../../../core/").getAbsolutePath();
 		
 		
 		task.m_enableDebug = true;
@@ -492,13 +498,13 @@ public class JsNativeLibBuildTask extends BaseBuildTask {
 		 */
 		
 		
-		task.m_sourceSearchPath = base+"/DSFJsNativeTypes/src;"+base+"/DsfJsNative/src";
+		task.m_sourceSearchPath = inputbase+"/org.ebayopensource.vjet.core.jsnative/src";
 		task.m_sourceDirs= "src";
-		task.m_projectDir =base+"/DsfJsNative";
+		task.m_projectDir =inputbase+"/org.ebayopensource.vjet.core.jsnative";
 		task.m_jsNativePkgNames = "org.ebayopensource.dsf.jsnative.global,org.ebayopensource.dsf.jsnative";
 		task.m_excludePkgNames = "org.ebayopensource.dsf.jsnative.anno";
-		task.m_outputDirectory = base+"/DSFJsNativeTypes/src/org/ebayopensource/jsnative/generated";
-//		task.m_enableDebug = true;
+		task.m_outputDirectory = base+"/org.ebayopensource.vjet.resource.jsnativetypes/src/org/ebayopensource/jsnative/generated";
+		task.m_enableDebug = true;
 		
 		task.execute();
 	}

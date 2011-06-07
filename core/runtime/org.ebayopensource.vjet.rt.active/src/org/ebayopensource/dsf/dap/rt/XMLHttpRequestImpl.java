@@ -21,6 +21,7 @@ import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.dap.proxy.INativeJsFuncProxy;
 import org.ebayopensource.dsf.dap.proxy.JFunctionX;
 import org.ebayopensource.dsf.dap.rt.IDapHttpClient.IDapCallback;
+import org.ebayopensource.dsf.javatojs.anno.AExclude;
 import org.ebayopensource.dsf.jsnative.Document;
 import org.ebayopensource.dsf.jsnative.HtmlDocument;
 import org.ebayopensource.dsf.jsnative.Location;
@@ -467,5 +468,12 @@ public final class XMLHttpRequestImpl extends ActiveObject
 
 	void setResponseText(String responseText) {
 		m_responseText = responseText;
+	}
+
+	@Override
+	@AExclude
+	public void XMLHttpRequest() {
+		// TODO Auto-generated method stub
+		
 	}
 }

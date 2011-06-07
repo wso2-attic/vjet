@@ -15,6 +15,7 @@ import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
 import org.ebayopensource.dsf.jsnative.anno.Property;
@@ -94,6 +95,7 @@ public interface Node extends IWillBeScriptable {
 	 * there are no children, this is a <code>NodeList</code> containing no 
 	 * nodes.
 	 */
+    @JsArray(Node.class)
     @Property NodeList getChildNodes();
 
 	/**
