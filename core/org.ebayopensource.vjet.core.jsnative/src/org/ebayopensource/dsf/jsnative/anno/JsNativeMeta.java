@@ -235,6 +235,7 @@ public class JsNativeMeta {
 		addbt(MediaList.class);
 		addbt(StyleSheet.class);
 		addbt(CSSStyleSheet.class);
+		addbt(StyleSheetList.class);
 		addbt(CSSRule.class);
 		addbt(CSSRuleList.class);
 		
