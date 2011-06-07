@@ -59,6 +59,9 @@ public interface Image extends HtmlElement {
 	@Property String getName();
 	@Property void setName(String name);
 
+	@Property boolean getComplete();
+	
+	
 	@Property String getAlign();
 	@Property void setAlign(String align);
 
