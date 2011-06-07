@@ -16,6 +16,7 @@ import org.ebayopensource.dsf.jsnative.anno.Alias;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
@@ -265,6 +266,7 @@ public interface HtmlMedia extends HtmlElement {
 	void setControls(boolean controls);
 	
 	@Property MultipleTrackList getAudioTracks();
+	
 	@Property ExclusiveTrackList getVideoTracks();
 	@Property TextTrack[] getTextTracks();
 	

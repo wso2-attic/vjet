@@ -22,7 +22,7 @@ import org.ebayopensource.dsf.jsnative.TextTrack;
 import org.ebayopensource.dsf.jsnative.TimeRanges;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 
-public class AHtmlAudio extends AMediaElement implements HtmlAudio {
+public class AHtmlAudio extends AHtmlElement implements HtmlAudio {
 
 	private static final long serialVersionUID = 1L;
 	

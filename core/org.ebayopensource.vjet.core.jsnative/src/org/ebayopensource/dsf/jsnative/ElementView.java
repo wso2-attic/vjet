@@ -13,6 +13,7 @@ import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.MType;
 import org.ebayopensource.dsf.jsnative.anno.Property;
@@ -27,6 +28,8 @@ import org.mozilla.mod.javascript.IWillBeScriptable;
 public interface ElementView extends IWillBeScriptable {
 
 	@BrowserSupport({BrowserType.IE_6P,BrowserType.FIREFOX_2P})
+	
+	@JsArray(TextRectangle.class)
 	@Function TextRectangleList getClientRects();
 
 	@BrowserSupport({BrowserType.IE_6P,BrowserType.FIREFOX_3P})

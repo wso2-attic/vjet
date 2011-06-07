@@ -217,7 +217,6 @@ public interface Document extends Node {
     @BrowserSupport({BrowserType.NONE})
     @ARename(name = "getElementsByTagName")
     @JstExclude
-    @JsArray(Node.class)
     @Function NodeList byTag(String tagName);
 
 	/**
@@ -297,12 +296,12 @@ public interface Document extends Node {
 	@DOMSupport(DomLevel.TWO)
     @BrowserSupport({BrowserType.FIREFOX_2P, BrowserType.OPERA_9P})
     @JsArray(Node.class)
+    @FactoryFunc
 	@Function NodeList getElementsByTagNameNS(String namespaceURI, String localName);
     
     @BrowserSupport({BrowserType.NONE})
     @ARename(name = "getElementsByTagNameNS")
     @JstExclude
-    @JsArray(Node.class)
     @Function NodeList byTagNS(String namespaceURI, String localName);
     
 	/**

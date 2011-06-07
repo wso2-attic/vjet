@@ -13,6 +13,7 @@ import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.mozilla.mod.javascript.IWillBeScriptable;
 
@@ -42,5 +43,6 @@ public interface DOMImplementationSource extends IWillBeScriptable {
 	 * @return
 	 */
 	@BrowserSupport({BrowserType.UNDEFINED})
+	@JsArray(DOMImplementation.class)
 	@Function DOMImplementationList getDOMImplementationList(String features);
 }

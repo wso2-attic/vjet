@@ -11,6 +11,7 @@ package org.ebayopensource.dsf.jsnative;
 import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
@@ -257,6 +258,7 @@ public interface TextRange extends IWillBeScriptable {
 	 */
 	@BrowserSupport({ BrowserType.IE_6P })
 	@Function
+	@JsArray(TextRectangle.class)
 	TextRectangleList getClientRects();
 
 	/**
