@@ -11,7 +11,6 @@ reader.onload =  function(evt) {
     console.log(evt.target.result);
 };
 
-
 reader.onerror=  function(evt) {
     console.log(evt.target.error.code);
 };
