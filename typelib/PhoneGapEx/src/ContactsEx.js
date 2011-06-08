@@ -10,6 +10,7 @@ function onError(contactError) {
     alert("Error = " + contactError.code);
 };
 
+
 // create a new contact object
 var contact2 = navigator.service.contacts.create(); //<<
 contact.displayName = "Plumber";
@@ -65,6 +66,7 @@ contacts.find(fields, function(contacts){
                 "Prefix: "  + contacts[i].name.honorificSuffix);
     }
 }, function(contactError){
+	
 	
 }, {});
 

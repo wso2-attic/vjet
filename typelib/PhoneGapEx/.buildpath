@@ -6,4 +6,5 @@
 	<buildpathentry kind="con" path="org.ebayopensource.vjet.eclipse.core.BROWSER_CONTAINER/Browser SDK"/>
 	<buildpathentry kind="con" path="org.ebayopensource.vjet.eclipse.core.VJO_CONTAINER/VJO LIB"/>
 	<buildpathentry combineaccessrules="false" kind="prj" path="/PhoneGapTL"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/ConsoleTL"/>
 </buildpath>
