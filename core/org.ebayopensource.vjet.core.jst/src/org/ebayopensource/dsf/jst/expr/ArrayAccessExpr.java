@@ -8,10 +8,14 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.expr;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArray;
 import org.ebayopensource.dsf.jst.declaration.JstInferredType;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.ILHS;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
@@ -77,13 +81,32 @@ public class ArrayAccessExpr extends BaseJstNode implements ILHS, IExpr {
 		if (m_expr != null){
 			IJstType type = m_expr.getResultType();
 			if (type != null){
-				if(type instanceof JstInferredType){
-					type = ((JstInferredType)type).getType();
+				if(type instanceof JstMixedType){
+					JstMixedType mixed = (JstMixedType)type;
+					List<IJstType> mixedComponentType = new ArrayList<IJstType>();
+					
+					for(IJstType mixedType :mixed.getMixedTypes()){
+						IJstType foundJstArray = getComponentType(mixedType);
+						if(foundJstArray!=null){
+							mixedComponentType.add(foundJstArray);
+						}
+					}
+					
+					return new JstMixedType(mixedComponentType);
 				}
-				if(type instanceof JstArray){
-					return ((JstArray)type).getComponentType();
-				}
+				
+				return getComponentType(type);
 			}
+		}
+		return null;
+	}
+
+	private IJstType getComponentType(IJstType type) {
+		if(type instanceof JstInferredType){
+			type = ((JstInferredType)type).getType();
+		}
+		if(type instanceof JstArray){
+			return ((JstArray)type).getComponentType();
 		}
 		return null;
 	}

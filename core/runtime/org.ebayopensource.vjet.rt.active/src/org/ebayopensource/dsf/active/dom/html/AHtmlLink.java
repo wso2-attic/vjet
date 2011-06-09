@@ -10,6 +10,7 @@ package org.ebayopensource.dsf.active.dom.html;
 
 import org.ebayopensource.dsf.html.dom.DLink;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
+import org.ebayopensource.dsf.jsnative.CSSStyleSheet;
 import org.ebayopensource.dsf.jsnative.HtmlElementStyle;
 import org.ebayopensource.dsf.jsnative.HtmlLink;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
@@ -104,8 +105,10 @@ public class AHtmlLink extends AHtmlElement implements  HtmlLink {
 		onAttrChange(EHtmlAttr.type, type);
 	}
 	
-	public HtmlElementStyle getStyleSheet() {
-		return getStyle();
+	public CSSStyleSheet getStyleSheet() {
+//		return getStyle();
+		//TODO implement
+		return null;
 	}
 	
 	// Since property name is 'onkeyup', Rhino invokes this method.
@@ -130,6 +133,12 @@ public class AHtmlLink extends AHtmlElement implements  HtmlLink {
 	
 	private DLink getDLink() {
 		return (DLink) getDNode();
+	}
+
+	@Override
+	public HtmlElementStyle getSheet() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

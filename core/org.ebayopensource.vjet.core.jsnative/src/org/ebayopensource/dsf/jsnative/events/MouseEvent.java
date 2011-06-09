@@ -57,6 +57,9 @@ public interface MouseEvent extends UIEvent, IJsJavaConvertible {
 	@DOMSupport(DomLevel.TWO)
 	@BrowserSupport({BrowserType.IE_6P, BrowserType.FIREFOX_1P, BrowserType.OPERA_9P})
 	@Property int getButton();
+	
+	@DOMSupport(DomLevel.THREE)
+	@Property int getButtons();
 
 	@DOMSupport(DomLevel.TWO)
 	@BrowserSupport({BrowserType.FIREFOX_1P, BrowserType.OPERA_9P})
@@ -113,8 +116,8 @@ public interface MouseEvent extends UIEvent, IJsJavaConvertible {
                                EventTarget relatedTargetArg);
 
 	// DOM Level 3
-//	@DOMSupport(DomLevel.THREE)
-//    @Function boolean getModifierState(String keyIdentifierArg);
+	@DOMSupport(DomLevel.THREE)
+    @Function boolean getModifierState(String keyIdentifierArg);
 //
 //	@DOMSupport(DomLevel.THREE)
 //    @Function void initMouseEventNS(String namespaceURIArg, 

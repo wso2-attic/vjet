@@ -12,7 +12,9 @@ import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
+import org.ebayopensource.dsf.jsnative.anno.FactoryFunc;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
@@ -50,5 +52,20 @@ public interface NodeList extends IWillBeScriptable {
      */
 	@BrowserSupport({BrowserType.RHINO_1P})
     @Function Object valueOf(String type);
+	
+	/**
+	 * Retrieves a collection of objects that have the specified HTML tag name. 
+	 * 
+	 * @param sTag 	Required. Variant of type String that specifies an HTML tag. It can be any one of the objects exposed by the DHTML Object Model.
+	 * @return Returns a collection of element objects if successful, or null otherwise. 
+	 * 
+	 */
+	@BrowserSupport({BrowserType.IE_6P})
+	@FactoryFunc
+	@JsArray(Node.class)
+    @Function NodeList tags(String sTag);
+	
+	
+	
 
 }

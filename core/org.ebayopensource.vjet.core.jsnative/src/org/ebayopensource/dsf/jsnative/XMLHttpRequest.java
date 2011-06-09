@@ -10,6 +10,7 @@ package org.ebayopensource.dsf.jsnative;
 
 import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
+import org.ebayopensource.dsf.jsnative.anno.Constructor;
 import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
@@ -26,6 +27,9 @@ public interface XMLHttpRequest extends IWillBeScriptable {
 	public static final short HEADERS_RECEIVED = 2;
 	public static final short LOADING = 3;
 	public static final short DONE = 4;
+	
+	
+	@Constructor void XMLHttpRequest();
 	
 	/**
 	 * The state of the request

@@ -48,7 +48,9 @@ import org.ebayopensource.dsf.jsnative.HtmlStyle;
 import org.ebayopensource.dsf.jsnative.Location;
 import org.ebayopensource.dsf.jsnative.Node;
 import org.ebayopensource.dsf.jsnative.NodeList;
+import org.ebayopensource.dsf.jsnative.Range;
 import org.ebayopensource.dsf.jsnative.Selection;
+import org.ebayopensource.dsf.jsnative.StyleSheetList;
 import org.ebayopensource.dsf.jsnative.Text;
 import org.ebayopensource.dsf.jsnative.Window;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
@@ -1193,6 +1195,18 @@ public class AHtmlDocument extends ADocument implements HtmlDocument,DocumentEve
 		} else if (arg1 instanceof Event) {
 			return createEventObject((Event)arg1);
 		}
+		return null;
+	}
+
+	@Override
+	public StyleSheetList getStyleSheets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Range createRange() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

@@ -347,4 +347,10 @@ public class AImage extends AHtmlElement implements Image {
 		setWidth(width);
 		setHeight(height);
 	}
+
+	@Override
+	public boolean getComplete() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

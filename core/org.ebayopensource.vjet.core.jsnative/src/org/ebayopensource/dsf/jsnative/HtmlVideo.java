@@ -17,32 +17,44 @@ import org.ebayopensource.dsf.jsnative.anno.Property;
 /**
 <a href='http://www.w3schools.com/tags/html5_video.asp'>W3C schools video</a>
  */
+
+/*
+ *           attribute unsigned long width;
+           attribute unsigned long height;
+  readonly attribute unsigned long videoWidth;
+  readonly attribute unsigned long videoHeight;
+           attribute DOMString poster;
+
+ */
 @Alias("HTMLVideoElement")
 @DOMSupport(DomLevel.ONE)
 @JsMetatype
 public interface HtmlVideo extends HtmlElement {
 	
-	@Property int getHeight();
-	@Property void setHeight(int height);
+	@Property long getHeight();
+	@Property void setHeight(long height);
 	
-	@Property int getWidth();
-	@Property void setWidth(int width);
+	@Property long getWidth();
+	@Property void setWidth(long width);
 	
-	@Property boolean getAutoPlay();
-	@Property void setAutoPlay(boolean autoPlay);
+	@Property long getVideoWidth();
+	@Property long getVideoHeight();
 	
-	@Property boolean getAutoBuffer();
-	@Property void setAutoBuffer(boolean autoBuffer);
-	
-	@Property boolean getLoop();
-	@Property void setLoop(boolean loop);
-	
+//	@Property boolean getAutoPlay();
+//	@Property void setAutoPlay(boolean autoPlay);
+//	
+//	@Property boolean getAutoBuffer();
+//	@Property void setAutoBuffer(boolean autoBuffer);
+//	
+//	@Property boolean getLoop();
+//	@Property void setLoop(boolean loop);
+//	
 	@Property String getPoster();
 	@Property void setPoster(String poster);
-	
-	@Property String getSrc();
-	@Property void setSrc(String src);
-	
+//	
+//	@Property String getSrc();
+//	@Property void setSrc(String src);
+//	
 	/**
 	 * Returns the onblur event handler code on the current element. 
 	 * @see http://www.w3schools.com/jsref/jsref_onblur.asp

@@ -19,6 +19,7 @@ import org.ebayopensource.dsf.jstojava.resolver.MapBasedTypeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.ScriptableBasedTypeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.SingleThreadExecutor;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtension;
 import org.mozilla.mod.javascript.Context;
 import org.mozilla.mod.javascript.ContextFactory;
 import org.mozilla.mod.javascript.Function;
@@ -177,7 +178,7 @@ public class JsLibBootstrapLoader {
 		load("var factoryFunctionMappings = {'x.b.A:f1':{'a':'xxx2', 'b':'yyy2'}, 'x.d.B::f2':function() {if (arguments[0] == '\"default\"') {return 'zzz2'} else return 'uuu2'}}", "g2");
 		load("var typeExtensions = {'y.b.A':'u.w.Y', 'y.d.B':'u.v.W'}", "g1");
 		load("var typeExtensions = {'x.b.A':'u.w.X', 'x.d.B':['u.v.Y', 'u.v.Z']}", "g2");
-		load("var functionArgMetaMappings = {'a.b.A:f1':{'open':'void fn(int)', 'click':['boolean fn(String)', 'Date fn(boolean)'],"
+		load("var functionArgMappings = {'a.b.A:f1':{'open':'void fn(int)', 'click':['boolean fn(String)', 'Date fn(boolean)'],"
 			+ "'close':'Window:alert'}}", "g3");
 		
 		TypeResolverRegistry trs = TypeResolverRegistry.getInstance();
@@ -205,12 +206,12 @@ public class JsLibBootstrapLoader {
 		System.out.println(ter.isNonExtendedType("x.d.C", "g2"));
 		
 		FunctionMetaRegistry fmr = FunctionMetaRegistry.getInstance();
-//		IJstMethod method = fmr.getExtentedArgBinding("a.b.A:f1", "open", "g3", null).getMethod();
-//		System.out.println(method.toString());
-//		method = fmr.getExtentedArgBinding("a.b.A:f1", "click", "g3", null).getMethod();
-//		System.out.println(method.toString());
-//		method = fmr.getExtentedArgBinding("a.b.A:f1", "close", "g3", null).getMethod();
-//		System.out.println(method.toString());
+		MetaExtension method = fmr.getExtentedArgBinding("a.b.A:f1", "open", "g3", null);
+		System.out.println(method.toString());
+		method = fmr.getExtentedArgBinding("a.b.A:f1", "click", "g3", null);
+		System.out.println(method.toString());
+		method = fmr.getExtentedArgBinding("a.b.A:f1", "close", "g3", null);
+		System.out.println(method.toString());
 		System.out.println(fmr.isFuncMetaMappingSupported("a.b.A:f1"));
 		System.out.println(fmr.isFuncMetaMappingSupported("a.b.A:f2"));
 	}

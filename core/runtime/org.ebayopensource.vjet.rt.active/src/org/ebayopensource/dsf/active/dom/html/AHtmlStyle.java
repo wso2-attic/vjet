@@ -10,6 +10,7 @@ package org.ebayopensource.dsf.active.dom.html;
 
 import org.ebayopensource.dsf.html.dom.DStyle;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
+import org.ebayopensource.dsf.jsnative.CSSStyleSheet;
 import org.ebayopensource.dsf.jsnative.HtmlElementStyle;
 import org.ebayopensource.dsf.jsnative.HtmlStyle;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
@@ -50,12 +51,20 @@ public class AHtmlStyle extends AHtmlElement implements HtmlStyle {
 		onAttrChange(EHtmlAttr.type, type);
 	}
 	
-	public HtmlElementStyle getStyleSheet() {
-		return getStyle();
+	public CSSStyleSheet getStyleSheet() {
+		//return getStyle();
+		return null;
+		// TODO implement
 	}
 	
 	private DStyle getDStyle() {
 		return (DStyle) getDNode();
+	}
+
+	@Override
+	public CSSStyleSheet getSheet() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

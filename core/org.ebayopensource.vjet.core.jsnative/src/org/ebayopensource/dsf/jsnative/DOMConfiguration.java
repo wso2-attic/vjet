@@ -13,6 +13,7 @@ import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
@@ -37,6 +38,7 @@ public interface DOMConfiguration extends IWillBeScriptable {
 	 */
 	@DOMSupport(DomLevel.THREE) @BrowserSupport({BrowserType.OPERA_9P})
 	
+	@JsArray(String.class)
 	@Property DOMStringList getParameterNames();
 	
 	/**

@@ -159,4 +159,10 @@ public class ANodeList extends ActiveObject implements NodeList, Collection<ANod
 	public <T> T[] toArray(T[] a) {
 		return m_nodes.toArray(a);
 	}
+
+	@Override
+	public NodeList tags(String sTag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

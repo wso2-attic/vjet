@@ -98,21 +98,22 @@ public class AOption extends AHtmlElement implements Option {
 		setText(text);
 	}
 
-	public void Option(String text, String value) {
+	public void Option(String text, Object value) {
 		setText(text);
-		setValue(value);
+		// TODO convert this correctly
+		setValue((String)value);
 	}
 
-	public void Option(String text, String value, boolean defaultSelected) {
+	public void Option(String text, Object value, boolean defaultSelected) {
 		setText(text);
-		setValue(value);
+		setValue((String)value);
 		setDefaultSelected(defaultSelected);
 	}
 
-	public void Option(String text, String value, boolean defaultSelected,
+	public void Option(String text, Object value, boolean defaultSelected,
 			boolean selected) {
 		setText(text);
-		setValue(value);
+		setValue((String)value);
 		setDefaultSelected(defaultSelected);
 		setSelected(selected);
 	}

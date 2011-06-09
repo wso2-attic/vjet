@@ -17,6 +17,7 @@ import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Dynamic;
 import org.ebayopensource.dsf.jsnative.anno.FactoryFunc;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
@@ -26,6 +27,7 @@ import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.ebayopensource.dsf.jsnative.anno.ProxyFunc;
 import org.ebayopensource.dsf.jsnative.events.DocumentEvent;
 import org.ebayopensource.dsf.jsnative.events.Event;
+import org.w3c.dom.html.HTMLElement;
 
 /**
  * An <code>HTMLDocument</code> is the root of the HTML hierarchy and holds the entire content. 
@@ -37,7 +39,7 @@ import org.ebayopensource.dsf.jsnative.events.Event;
 @DOMSupport(DomLevel.ZERO)
 @Dynamic
 @JsMetatype
-public interface HtmlDocument extends Document, DocumentEvent {
+public interface HtmlDocument extends Document, DocumentEvent, DocumentRange {
 	/**
 	 * Returns all elements in the document
 	 * Examples:
@@ -47,6 +49,8 @@ public interface HtmlDocument extends Document, DocumentEvent {
 	 * document.all['id']
 	 */
 	@BrowserSupport({BrowserType.IE_6P})
+	@JsArray(Node.class)
+	@FactoryFunc
 	@Property NodeList getAll();
 	
 	/**
@@ -109,6 +113,7 @@ public interface HtmlDocument extends Document, DocumentEvent {
      * @return
      */
 	@DOMSupport(DomLevel.ZERO)
+	@JsArray(Image.class)
 	@Property HtmlCollection getImages();
 
     /**
@@ -217,6 +222,8 @@ public interface HtmlDocument extends Document, DocumentEvent {
 	 * Returns all elements in the document with matching id or matching name
 	 */
 	@BrowserSupport({BrowserType.IE_6P})
+	@JsArray(Node.class)
+	@FactoryFunc
 	@OverLoadFunc NodeList all(String id);
 	
 	/**
@@ -270,6 +277,8 @@ public interface HtmlDocument extends Document, DocumentEvent {
      * @return <code>NodeList</code> The matching elements.
      */
 	@DOMSupport(DomLevel.ONE)
+	@JsArray(HTMLElement.class)
+	@FactoryFunc
 	@Function NodeList getElementsByName(String elementName);
 	
 	@BrowserSupport({BrowserType.NONE})
@@ -298,6 +307,10 @@ public interface HtmlDocument extends Document, DocumentEvent {
 	
 	@BrowserSupport({BrowserType.FIREFOX_1P, BrowserType.OPERA_7P, BrowserType.SAFARI_3P})
 	@Property Window getDefaultView();
+	
+	@JsArray(CSSStyleSheet.class)
+	@Property StyleSheetList getStyleSheets();
+	
 	
 	/**
      * Only for Rhino support
@@ -561,6 +574,9 @@ public interface HtmlDocument extends Document, DocumentEvent {
 	@OverLoadFunc void createStyleSheet(String url, int index);
 	
 	@ProxyFunc("createStyleSheet") void __createStyleSheet(Object arg1, Object arg2, Object arg3, Object arg4, Object arg5);
+	
+	@DOMSupport(DomLevel.TWO)
+	@Function Range createRange();
 	
 	/**
 	 * Creates an element of the type specified. Note that the instance 

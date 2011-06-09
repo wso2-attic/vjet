@@ -190,18 +190,20 @@ public class JsNativePreBuildTests  extends TestCase {
 		boolean failed = false;
 		for(JstType t:originalJstTypeList2){
 			for(IJstMethod m : t.getMethods()){
-				if(m.getRtnType().getName().contains("String") && m.getRtnType().getAlias().equals(m.getRtnType().getName())){
+				if(m.getRtnType().getName().equals("String") && m.getRtnType().getAlias().equals(m.getRtnType().getName())){
 					failed=true;
 					System.err.println("type failed has wrong String " + t.getName() + " method :"+ m.getName());
 				}
 			}
 			
 			for(IJstProperty p:t.getProperties()){
-				if(p.getType().getName().contains("String") && p.getType().getAlias().equals(p.getType().getName())){
+				if(p.getType().getName().equals("String") && p.getType().getAlias().equals(p.getType().getName())){
 					failed = true;
 					System.err.println("type failed has wrong String " + t.getName() + " property :"+ p.getName());
 				}
 			}
+			
+			
 			
 		}
 		if(failed){
@@ -416,6 +418,10 @@ public class JsNativePreBuildTests  extends TestCase {
 //			System.out.println();
 //			return;
 //		}
+		
+		if(functionMap==null){
+			return;
+		}
 		
 		List<String> functions = functionMap.get(jstType.getName());	
 		System.out.println("\tFunctions: " + functions);

@@ -14,7 +14,9 @@ import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
+import org.ebayopensource.dsf.jsnative.anno.FactoryFunc;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
@@ -114,6 +116,8 @@ public interface Element extends Node {
 	 *   matches all tags.
 	 * @return A list of matching <code>Element</code> nodes.
 	 */
+	@FactoryFunc
+	@JsArray(Element.class)
 	@Function NodeList getElementsByTagName(String name);
 	
     @BrowserSupport({BrowserType.NONE})
@@ -319,11 +323,14 @@ public interface Element extends Node {
 	 */
 	@DOMSupport(DomLevel.TWO) 
 	@BrowserSupport({BrowserType.FIREFOX_2P, BrowserType.OPERA_9P, BrowserType.SAFARI_3P})
+	@JsArray(Element.class)
+	@FactoryFunc
 	@Function NodeList getElementsByTagNameNS(String namespaceURI, String localName);
 
     @BrowserSupport({BrowserType.NONE})
 	@ARename(name = "getElementsByTagNameNS")
 	@AExclude
+	@JstExclude
 	@Function NodeList byTagNS(String namespaceURI, String localName);
 	/**
 	 * Returns <code>true</code> when an attribute with a given local name and 

@@ -218,4 +218,10 @@ public class AHtmlBody extends AHtmlElement implements HtmlBody {
 			return null; 
 		
 	}
+
+	@Override
+	public TextRange createControlRange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -1157,6 +1157,12 @@ public class AHtmlElement extends AElement
 			return 0;
 		}
 	}
+
+	@Override
+	public String componentFromPoint(int iCoordX, int iCoordY) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 //	@Override
 //	public void put(String name, Scriptable start, Object value) {

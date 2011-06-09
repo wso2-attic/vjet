@@ -266,43 +266,43 @@ public class EventHandlerAttacher {
 	/**
 	 * Name of the Java Script event handler adapter.
 	 */
-	private static final Class<?> Clz = getClz();
+//	private static final Class<?> Clz = getClz();
 
 	/**
 	 * Java Method object point to "viaText" method of Java Script event 
 	 * handler adapter.
 	 */
-	private static final Method Mthd = getMthd(Clz);
+//	private static final Method Mthd = getMthd(Clz);
 
 	/**
 	 * Loads Java Script event handler adapter into memory and return.  
 	 * @return Java Script event handler adapter class. 
 	 */
-	private static Class<?> getClz() {
-		try {
-			Class<?> clz = Class.forName(
-				"org.ebayopensource.dsf.resource.html.event.handler.JsEventHandlerAdapter");
-			return clz;
-		} 
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+//	private static Class<?> getClz() {
+//		try {
+//			Class<?> clz = Class.forName(
+//				"org.ebayopensource.dsf.resource.html.event.handler.JsEventHandlerAdapter");
+//			return clz;
+//		} 
+//		catch (Exception e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
 
 	/**
 	 * Get java Method "viaText" from the given class.
 	 * @param clz java class to look into for the method.
 	 * @return method from the given java class
 	 */
-	private static Method getMthd(Class<?> clz) {
-		try {
-			Method method = clz.getDeclaredMethod("viaText", String.class);
-			return method;
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+//	private static Method getMthd(Class<?> clz) {
+//		try {
+//			Method method = clz.getDeclaredMethod("viaText", String.class);
+//			return method;
+//		}
+//		catch (Exception e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
 
 	/**
 	 * Call viaText method of Java Script event handler adapter.
@@ -315,7 +315,19 @@ public class EventHandlerAttacher {
 			// MrPEvents - yikes, what a hack - need test to make sure we always
 			// can find the class/method
 			Object[] viaTextArgs = { jsText };
-			return (ISimpleJsEventHandler) Mthd.invoke(Clz, viaTextArgs);
+//			return (ISimpleJsEventHandler) Mthd.invoke(Clz, viaTextArgs);
+			return new ISimpleJsEventHandler() {
+				
+				@Override
+				public String asJsHandler() {
+					return jsText;
+				}
+				
+				@Override
+				public String asJsDefinition() {
+					return jsText;
+				}
+			};
 		} 
 		catch (Exception e) {
 			throw new RuntimeException(e);

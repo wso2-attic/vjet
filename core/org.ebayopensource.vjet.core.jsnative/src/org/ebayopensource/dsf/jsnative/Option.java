@@ -36,7 +36,7 @@ public interface Option extends HtmlElement {
 	 * @param text Specifies the text for the option
 	 * @param value Specifies the value for the option
 	 */
-	@Constructor void Option(String text, String value);
+	@Constructor void Option(String text, Object value);
 	
 	/**
 	 * Constructor
@@ -44,7 +44,7 @@ public interface Option extends HtmlElement {
 	 * @param value Specifies the value for the option
 	 * @param defaultSelected A boolean specifying whether this option is initially selected.
 	 */
-	@Constructor void Option(String text, String value, boolean defaultSelected);
+	@Constructor void Option(String text, Object value, boolean defaultSelected);
 	
 	/**
 	 * Constructor
@@ -53,7 +53,7 @@ public interface Option extends HtmlElement {
 	 * @param defaultSelected A boolean specifying whether this option is initially selected
 	 * @param selected boolean that specifies whether this option is currently selected
 	 */
-	@Constructor void Option(String text, String value, boolean defaultSelected, boolean selected);
+	@Constructor void Option(String text, Object value, boolean defaultSelected, boolean selected);
 	
 	@Property  HtmlForm getForm();
 

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.translate.custom.dom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.core.dom.Annotation;
@@ -21,6 +22,7 @@ import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
 import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
 import org.eclipse.jdt.core.dom.Type;
+import org.eclipse.jdt.core.dom.TypeLiteral;
 
 import org.ebayopensource.dsf.javatojs.trace.TranslateMsgId;
 import org.ebayopensource.dsf.javatojs.translate.TranslateHelper;
@@ -53,6 +55,7 @@ import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstAnnotation;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstAnnotation;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstArray;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
@@ -61,6 +64,7 @@ import org.ebayopensource.dsf.jst.declaration.JstDoc;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalProp;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalVar;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
@@ -361,7 +365,16 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 		}
 		IJstType propType = getDataTypeTranslator().processType(rtnType, jstType);
 		
-		propType = setUpArray(propType, astMtd);
+		IJstType arryType = setUpArray(propType, astMtd);
+		
+		
+		if(arryType !=null){
+			List<IJstType> types = new ArrayList<IJstType>();
+			types.add(arryType);
+			types.add(propType);
+			propType = new JstMixedType(types);
+		}
+		
 		
 		if (propType == null){
 			getLogger().logError(TranslateMsgId.NULL_RESULT, "failed translation for property type " +
@@ -627,7 +640,15 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 		}
 		IJstType propType = getDataTypeTranslator().processType(rtnType, jstType);
 		
-		propType = setUpArray(propType, astMtd);
+		IJstType arrayType = setUpArray(propType, astMtd);
+		
+		if(arrayType !=null){
+			List<IJstType> types = new ArrayList<IJstType>();
+			types.add(arrayType);
+			types.add(propType);
+			propType = new JstMixedType(types);
+		}
+		
 		
 		if (propType == null){
 			getLogger().logError(TranslateMsgId.NULL_RESULT, "failed translation for property type " +
@@ -650,11 +671,12 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 	}
 	
 	private IJstType setUpArray(IJstType propType, MethodDeclaration astMtd) {
-		IJstType type = getArrayType(astMtd);
+		IJstType type = getArrayType(astMtd, propType);
 		if(type!=null){
-			return new JstArray(propType);
+			
+			return new JstArray(type);
 		}
-		return propType;
+		return null;
 	}
 
 	private void processMethodJavadoc(MethodDeclaration astMtd, JstMethod jstMtd) {
@@ -701,15 +723,27 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 		}
 		return false;
 	}
-	private IJstType getArrayType(MethodDeclaration astMtd) {
+	private IJstType getArrayType(MethodDeclaration astMtd, IJstType propType) {
 		List<IExtendedModifier> extModifiers = astMtd.modifiers();
 		for (IExtendedModifier em : extModifiers) {
 				if (em.isAnnotation()) {
-					if (em instanceof MarkerAnnotation) {
-						MarkerAnnotation ma = (MarkerAnnotation) em;
-						if (JsArray.class.getSimpleName().equals(ma.getTypeName().toString())) {
+					if (em instanceof SingleMemberAnnotation) {
+						
+						SingleMemberAnnotation sma = (SingleMemberAnnotation) em;
+						if (JsArray.class.getSimpleName().equals(sma.getTypeName().toString())) {
 							// TODO fix this
-							System.out.println(ma.getTypeName());
+							
+							JstAnnotation annotation = new JstAnnotation();
+							annotation.setParent(propType);
+						
+							
+							if(sma.getValue() instanceof TypeLiteral){
+								TypeLiteral tl = (TypeLiteral)sma.getValue();
+								String fullName = tl.getType().toString();
+								IJstType type = JstCache.getInstance().getType("org.ebayopensource.dsf.jsnative." + fullName);
+								return type;
+							}
+							
 							return null;
 						}
 				}

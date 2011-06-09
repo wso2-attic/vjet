@@ -11,6 +11,7 @@ package org.ebayopensource.dsf.jsnative;
 import org.ebayopensource.dsf.jsnative.anno.Alias;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
+import org.ebayopensource.dsf.jsnative.anno.Dynamic;
 import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.Property;
@@ -22,6 +23,7 @@ import org.ebayopensource.dsf.jsnative.anno.Property;
 @Alias("HTMLFormElement")
 @DOMSupport(DomLevel.ZERO)
 @JsMetatype
+@Dynamic
 public interface HtmlForm extends HtmlElement {
 	
 	/** "get" */
