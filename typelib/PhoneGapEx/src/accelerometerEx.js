@@ -1,6 +1,5 @@
 var accelerometer = navigator.accelerometer;
 
-
 accelerometer.getCurrentAcceleration(function(acceleration) {
     alert('Acceleration X: ' + acceleration.x + '\n' +
     'Acceleration Y: ' + acceleration.y + '\n' +
