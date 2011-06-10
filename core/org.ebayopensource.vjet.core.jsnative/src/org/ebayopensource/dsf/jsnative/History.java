@@ -8,10 +8,13 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jsnative;
 
+import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
+import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JsSupport;
 import org.ebayopensource.dsf.jsnative.anno.JsVersion;
+import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
 
@@ -44,6 +47,12 @@ public interface History extends IWillBeScriptable {
 	 * Loads a specific page in the history list
 	 * @param number is an Integer number in history array or a URL to go to. 
 	 */
-	@Function void go(int number);
+	@OverLoadFunc void go(int number);
+	
+	/*
+	 * A string indicates an exact URL in the History list.
+	 */
+	@BrowserSupport(BrowserType.IE_6P)
+	@OverLoadFunc void go(String url);
 
 }
