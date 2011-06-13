@@ -408,7 +408,6 @@ public class CodeGenJsrDiff  {
 		srcPath = "workspaceTS/src/org/ebayopensource/dsf/jstojava/codegen/";
 		// add the folder into typespace
 		s_groupPath = getGroupPath();
-		s_groupPath = getGroupPath();
 		s_controller = new BuildController();
 		FileSuffix[] suffixes = {FileSuffix.vjo};
 		s_controller.setSuffixes(suffixes);

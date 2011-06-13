@@ -1252,27 +1252,28 @@ public class JstExpressionTypeLinkerHelper {
 				for (int i = 0; i < exprs.size(); i++) {
 					args[i] = exprs.get(i).toExprText();
 				}
-				String typeName = trr.resolve(mtdKey, args);
-				
-				if (typeName != null) {
-					boolean isArray = typeName.endsWith("[]");
-					if(isArray){
-						typeName = typeName.substring(0, typeName.length()-2);
-					}
-					
-					boolean isTypeRefType = false;
-					if (typeName.startsWith("type::")) {
-						isTypeRefType = true;
-						typeName = typeName.substring(6);
-					}
-					JstType rtnType = JstCache.getInstance().getType(typeName);
-					if (rtnType != null) {
-						IJstType type = isTypeRefType? new JstTypeRefType(rtnType): rtnType;
-						if(isArray){
-							type = new JstArray(type);	
-						}
-						return type;
-					}
+				//String typeName = trr.resolve(mtdKey, args);
+				IJstType type = trr.resolve(mtdKey, args);
+				if (type != null) {
+					return type;
+//					boolean isArray = typeName.endsWith("[]");
+//					if(isArray){
+//						typeName = typeName.substring(0, typeName.length()-2);
+//					}
+//					
+//					boolean isTypeRefType = false;
+//					if (typeName.startsWith("type::")) {
+//						isTypeRefType = true;
+//						typeName = typeName.substring(6);
+//					}
+//					JstType rtnType = JstCache.getInstance().getType(typeName);
+//					if (rtnType != null) {
+//						IJstType type = isTypeRefType? new JstTypeRefType(rtnType): rtnType;
+//						if(isArray){
+//							type = new JstArray(type);	
+//						}
+//						return type;
+//					}
 				}
 			}
 		}

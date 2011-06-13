@@ -13,6 +13,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
+import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
+import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
+import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
+import org.ebayopensource.dsf.jstojava.translator.IFindTypeSupport;
+import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
+import org.ebayopensource.dsf.jstojava.translator.IFindTypeSupport.ILineInfoProvider;
+
 /**
  * Registry of function-return-type resolvers at Lib/Group level from meta bootstrap.
  */
@@ -35,7 +45,7 @@ public class TypeResolverRegistry {
 		return this;
 	}
 	
-	public String resolve(String key, String[] args) {
+	public IJstType resolve(String key, String[] args) {
 		List<ITypeResolver> resolverList = m_resolvers.get(key);
 		if (resolverList == null) {
 			return null;
@@ -43,9 +53,54 @@ public class TypeResolverRegistry {
 		for (int i = 0; i < resolverList.size(); i++) {
 			ITypeResolver resolver = resolverList.get(i);
 			String typeName = resolver.resolve(args);
-			if (typeName != null) {
-				return typeName;
+			
+			if(typeName.contains("org.mozilla.mod.javascript.Undefined")){
+				return null;
 			}
+			
+			try {
+				final JsCommentMeta commentMeta = VjComment.parse("//>" + typeName);;
+				final JsTypingMeta typingMeta = commentMeta.getTyping();
+				IFindTypeSupport findSupport = new IFindTypeSupport() {
+					
+					@Override
+					public char[] getOriginalSource() {
+						// TODO Auto-generated method stub
+						return null;
+					}
+					
+					@Override
+					public ILineInfoProvider getLineInfoProvider() {
+						// TODO Auto-generated method stub
+						return null;
+					}
+					
+					@Override
+					public ErrorReporter getErrorReporter() {
+						// TODO Auto-generated method stub
+						return null;
+					}
+					
+					@Override
+					public IJstType getCurrentType() {
+						// TODO Auto-generated method stub
+						return null;
+					}
+					
+					@Override
+					public IJstType findTypeByName(String name) {
+						// TODO Auto-generated method stub
+						return null;
+					}
+				};;;
+				return TranslateHelper.findType(findSupport, typingMeta, commentMeta);
+				
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		
 		}
 		return null;
 	}
