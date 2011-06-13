@@ -44,15 +44,16 @@ public class Frame extends VjoValidationBaseTester {
 
     @Before
     public void setUp() {
+    	// removed undefined fields due to document is now dynamic type which means fields have no error/warning
         expectProblems.clear();
-        expectProblems
-                .add(createNewProblem(FieldProbIds.UndefinedField, 17, 0));
+//        expectProblems
+//                .add(createNewProblem(FieldProbIds.UndefinedField, 17, 0));
         expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 14,
                 0));
-        expectProblems
-                .add(createNewProblem(FieldProbIds.UndefinedField, 17, 0));
-        expectProblems
-                .add(createNewProblem(FieldProbIds.UndefinedField, 17, 0));
+//        expectProblems
+//                .add(createNewProblem(FieldProbIds.UndefinedField, 17, 0));
+//        expectProblems
+//                .add(createNewProblem(FieldProbIds.UndefinedField, 17, 0));
         expectProblems
                 .add(createNewProblem(TypeProbIds.UnusedActiveNeeds, 1, 0));
     }

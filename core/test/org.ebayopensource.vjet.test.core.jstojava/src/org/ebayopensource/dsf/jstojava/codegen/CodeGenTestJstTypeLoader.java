@@ -115,6 +115,12 @@ public class CodeGenTestJstTypeLoader extends DefaultJstTypeLoader {
 				groupPath = groupPath.substring(0, groupPath.indexOf("!/"));
 			}
 			File groupFile = new File(groupPath);
+			
+			if(!groupFile.exists()){
+				// try with forward slash in front of path
+				groupFile = new File("/" +groupPath);
+			}
+			
 			if (groupFile.exists()) {
 				if (!groupFile.isDirectory() || srcPath == null) {
 					return groupFile;
