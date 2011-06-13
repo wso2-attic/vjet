@@ -122,4 +122,13 @@ public class AOption extends AHtmlElement implements Option {
 		return (DOption) getDNode();
 	}
 
+	@Override
+	public void Option(String text, Object value, int defaultSelected,
+			int selected) {
+		setText(text);
+		setValue((String)value);
+		setDefaultSelected(defaultSelected!=0);
+		setSelected(selected!=0);
+	}
+
 }
