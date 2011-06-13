@@ -129,8 +129,8 @@ public class TypeCheckUtil {
 			return true;
 		}
 		else if(VjoConstants.NativeTypes.getPrimitiveBooleanJstType().equals(lhs)){
-			return VjoConstants.NativeTypes.getPrimitiveBooleanJstType().equals(rhs);
-//			|| VjoConstants.NativeTypes.getNumberJstType().equals(rhs);
+			return VjoConstants.NativeTypes.getPrimitiveBooleanJstType().equals(rhs)
+			|| VjoConstants.NativeTypes.getNumberJstType().equals(rhs);
 		}
 		else if(VjoConstants.NativeTypes.getNumberJstType().equals(lhs)){
 			return VjoConstants.NativeTypes.getNumberJstType().equals(rhs)
