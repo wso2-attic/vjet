@@ -54,14 +54,6 @@ public interface Option extends HtmlElement {
 	 * @param selected boolean that specifies whether this option is currently selected
 	 */
 	@Constructor void Option(String text, Object value, boolean defaultSelected, boolean selected);
-	/**
-	 * Constructor
-	 * @param text Specifies the text for the option
-	 * @param value Specifies the value for the option
-	 * @param defaultSelected A boolean specifying whether this option is initially selected
-	 * @param selected boolean that specifies whether this option is currently selected
-	 */
-	@Constructor void Option(String text, Object value, int defaultSelected, int selected);
 	
 	@Property  HtmlForm getForm();
 

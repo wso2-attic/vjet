@@ -294,7 +294,7 @@ public interface Document extends Node {
 	 * @since DOM Level 2
 	 */
 	@DOMSupport(DomLevel.TWO)
-    @BrowserSupport({BrowserType.FIREFOX_2P, BrowserType.OPERA_9P})
+    @BrowserSupport({BrowserType.FIREFOX_2P, BrowserType.OPERA_9P, BrowserType.IE_9P})
     @JsArray(Node.class)
     @FactoryFunc
 	@Function NodeList getElementsByTagNameNS(String namespaceURI, String localName);
