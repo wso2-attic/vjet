@@ -43,11 +43,6 @@ public interface CSSStyleSheet extends StyleSheet {
 	@JsArray(CSSRule.class)
 	CSSRuleList getCssRules();
 
-	@Property
-	String getCssText();
-	
-	
-	
 	@Function
 	Number insertRule(String rule, int index);
 

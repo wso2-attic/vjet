@@ -115,6 +115,11 @@ public interface HtmlDocument extends Document, DocumentEvent, DocumentRange {
 	@DOMSupport(DomLevel.ZERO)
 	@JsArray(Image.class)
 	@Property HtmlCollection getImages();
+	
+
+    @Property(name="implementation")
+    HtmlDOMImplementation getHtmlImplementation();
+	
 
     /**
      * Returns a collection of all the <code>OBJECT</code> elements that include applets 
@@ -604,6 +609,8 @@ public interface HtmlDocument extends Document, DocumentEvent, DocumentRange {
 	@FactoryFunc
 	@OverrideFunc HtmlElement createElement(String tagName);
 	
+	
+
 	/**
 	 * Returns the <code>HtmlElement</code> that has an ID attribute with the 
 	 * given value. If no such element exists, this returns <code>null</code>
