@@ -40,6 +40,7 @@ import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.jsnative.Document;
 import org.ebayopensource.dsf.jsnative.HtmlBody;
 import org.ebayopensource.dsf.jsnative.HtmlCollection;
+import org.ebayopensource.dsf.jsnative.HtmlDOMImplementation;
 import org.ebayopensource.dsf.jsnative.HtmlDocument;
 import org.ebayopensource.dsf.jsnative.HtmlElement;
 import org.ebayopensource.dsf.jsnative.HtmlHead;
@@ -1206,6 +1207,12 @@ public class AHtmlDocument extends ADocument implements HtmlDocument,DocumentEve
 
 	@Override
 	public Range createRange() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HtmlDOMImplementation getHtmlImplementation() {
 		// TODO Auto-generated method stub
 		return null;
 	}
