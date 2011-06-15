@@ -39,6 +39,11 @@ public class AHistory extends ActiveObject implements History {
 			m_browserBinding.go(o);
 		}
     }
+    public void go(String o) {
+    	if (m_browserBinding != null) {
+    		m_browserBinding.go(o);
+    	}
+    }
 
 	public int getLength() {
 		if (m_browserBinding != null) {
