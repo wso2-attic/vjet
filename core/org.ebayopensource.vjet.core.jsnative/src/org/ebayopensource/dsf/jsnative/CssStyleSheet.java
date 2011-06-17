@@ -41,6 +41,10 @@ import org.w3c.dom.css.CSSStyleRule;
 @Alias("CSSStyleSheet")
 public interface CssStyleSheet extends StyleSheet {
 
+	
+	@Property 
+	String getCssText();
+	
 	@Property
 	CssRule getOwnerRule();
 
