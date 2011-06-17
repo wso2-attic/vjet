@@ -151,6 +151,10 @@ public class ANode extends ActiveObject implements Node, Cloneable {
 		return getNodeName();
 	}
 	
+	public Node cloneNode() {
+		return internalClone(false);
+	}
+	
 	public Node cloneNode(boolean deep) {
 		return internalClone(deep);
 	}

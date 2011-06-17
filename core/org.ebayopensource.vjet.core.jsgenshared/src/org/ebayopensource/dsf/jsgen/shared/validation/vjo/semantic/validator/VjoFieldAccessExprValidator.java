@@ -26,6 +26,7 @@ import org.ebayopensource.dsf.jst.IJstRefType;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
@@ -80,7 +81,7 @@ public class VjoFieldAccessExprValidator
 		if (fieldType == null) { 
 			if (!"Object".equals(qualifierType.getName()) 
 					&& !"ERROR_UNDEFINED_TYPE".equals(qualifierType.getName())
-					&& !qualifierType.getModifiers().isDynamic()) {
+					&& !isDynamicType(qualifierType)) {
 				
 				if (qualifierType instanceof IJstRefType) {
 					//NONE_STATIC_PROPERTY_SHOULD_NOT_BE_ACCESSED_FROM_STATIC_SCOPE
@@ -197,5 +198,17 @@ public class VjoFieldAccessExprValidator
 				ctx.getMethodInvocationTable().reference(method);
 			}
 		}
+	}
+
+	private boolean isDynamicType(IJstType qualifierType) {
+		if(qualifierType instanceof JstMixedType){
+			JstMixedType mt = (JstMixedType)qualifierType;
+			for(IJstType t: mt.getMixedTypes()){
+				if(t.getModifiers().isDynamic()){
+					return true;
+				}
+			}
+		}
+		return qualifierType.getModifiers().isDynamic();
 	}
 }

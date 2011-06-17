@@ -18,6 +18,7 @@ import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
+import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
 
@@ -387,7 +388,9 @@ public interface Node extends IWillBeScriptable {
 	 *   itself (and its attributes, if it is an <code>Element</code>).
 	 * @return The duplicate node.
 	 */
-    @Function Node cloneNode(boolean deep);
+    @OverLoadFunc Node cloneNode(boolean deep);
+    @OverLoadFunc Node cloneNode();
+    
     
 	/**
 	 * Returns whether this node (if it is an element) has any attributes.
