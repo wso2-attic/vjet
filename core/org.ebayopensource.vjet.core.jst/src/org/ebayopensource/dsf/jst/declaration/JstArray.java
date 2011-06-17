@@ -8,6 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.declaration;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
 import com.ebay.kernel.util.Z;
@@ -42,6 +46,28 @@ public class JstArray extends JstType {
 		return name;
 	}
 
+	@Override
+	public List<IJstMethod> getMethods(boolean isStatic, boolean recursive) {
+		if(m_componentType instanceof JstMixedType){
+			List<IJstMethod> mtds = new ArrayList<IJstMethod>();
+			JstMixedType mt = (JstMixedType)m_componentType;
+			for(IJstType type: mt.m_types){
+				mtds.addAll(type.getMethods(isStatic, recursive));
+			}
+			return mtds;
+			
+		}
+		return super.getMethods(isStatic, recursive);
+	}
+	
+	@Override
+	public IJstMethod getMethod(String name, boolean isStatic, boolean recursive) {
+		if(m_componentType instanceof JstMixedType){
+			
+		}
+		return super.getMethod(name, isStatic, recursive);
+	}
+	
 	@Override
 	public String getName() {
 		String name = getElementType().getName();

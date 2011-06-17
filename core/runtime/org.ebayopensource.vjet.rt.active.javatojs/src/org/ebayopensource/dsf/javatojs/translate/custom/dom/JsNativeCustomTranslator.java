@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.core.dom.Annotation;
+import org.eclipse.jdt.core.dom.ArrayInitializer;
+import org.eclipse.jdt.core.dom.Expression;
 import org.eclipse.jdt.core.dom.IExtendedModifier;
 import org.eclipse.jdt.core.dom.Javadoc;
 import org.eclipse.jdt.core.dom.MarkerAnnotation;
@@ -43,6 +45,7 @@ import org.ebayopensource.dsf.jsnative.anno.IType;
 import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JsSupport;
+import org.ebayopensource.dsf.jsnative.anno.JsVariantArray;
 import org.ebayopensource.dsf.jsnative.anno.JsVersion;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
 import org.ebayopensource.dsf.jsnative.anno.MType;
@@ -70,6 +73,8 @@ import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.JstType.Category;
+import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
+import org.ebayopensource.dsf.jst.term.ArrayLiteral;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
 
@@ -730,12 +735,33 @@ public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 					if (em instanceof SingleMemberAnnotation) {
 						
 						SingleMemberAnnotation sma = (SingleMemberAnnotation) em;
-						if (JsArray.class.getSimpleName().equals(sma.getTypeName().toString())) {
-							// TODO fix this
+						if(JsVariantArray.class.getSimpleName().equals(sma.getTypeName().toString())){
+							
+							List<IJstType> types = new ArrayList<IJstType>();
+							if(sma.getValue() instanceof ArrayInitializer){
+								
+								ArrayInitializer ai = (ArrayInitializer)sma.getValue();
+								for(Object oj:ai.expressions()){
+									
+									if(oj instanceof TypeLiteral){
+										TypeLiteral tl = (TypeLiteral)oj;
+										String fullName = tl.getType().toString();
+										IJstType type = JstCache.getInstance().getType("org.ebayopensource.dsf.jsnative." + fullName);
+										if(type!=null){
+											types.add(type);
+										}
+									}
+								}
+								
+								
+							}
+							
+							
+						 	return new JstMixedType(types);
+						}else if (JsArray.class.getSimpleName().equals(sma.getTypeName().toString())) {
 							
 							JstAnnotation annotation = new JstAnnotation();
 							annotation.setParent(propType);
-						
 							
 							if(sma.getValue() instanceof TypeLiteral){
 								TypeLiteral tl = (TypeLiteral)sma.getValue();
