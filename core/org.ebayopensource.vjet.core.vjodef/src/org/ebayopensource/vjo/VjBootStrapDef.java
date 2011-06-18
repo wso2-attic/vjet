@@ -93,21 +93,22 @@ public class VjBootStrapDef {
 				.mtd(OPTIONS, 0, 1)
 				.mtd(END_TYPE, 1, 1);
 
-		MTYPE = new JsBuilderDef("vjo","mtype")
-				.anyOrder(new JsBuilderDef()
-					.mtd(NEEDS, 0, "*")
-					.mtd(NEEDSLIB, 0, "*")
-					.mtd(SATISFIES, 0, "*")
-				)			
-				.mtd(EXPECTS, 0, "*")
-				.anyOrder(
-						new JsBuilderDef()
-						.mtd(PROPS, 0, 1)
-						.mtd(PROTOS, 0, 1))
-				.mtd(OPTIONS, 0, 1)
-				.mtd(END_TYPE, 1, 1);
+			MTYPE = new JsBuilderDef("vjo","mtype")
+			.anyOrder(new JsBuilderDef()
+				.mtd(NEEDS, 0, "*")
+				.mtd(NEEDSLIB, 0, "*")
+				.mtd(SATISFIES, 0, "*")
+			)			
+			.mtd(EXPECTS, 0, "*")
+			.anyOrder(
+					new JsBuilderDef()
+					.mtd(PROPS, 0, 1)
+					.mtd(PROTOS, 0, 1))
+			.mtd(OPTIONS, 0, 1)
+			.mtd(END_TYPE, 1, 1);
 
 		OTYPE = new JsBuilderDef("vjo","otype")
+				.mtd(GLOBALS, 0, 1)
 				.mtd(DEFS, 0, 1)
 				.mtd(END_TYPE,1, 1);
 		
