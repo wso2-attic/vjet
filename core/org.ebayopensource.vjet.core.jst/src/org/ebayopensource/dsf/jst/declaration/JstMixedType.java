@@ -26,6 +26,14 @@ public class JstMixedType extends JstTypeMixer {
 		return m_types;
 	}
 	
+//	public JstModifiers getModifiers() {
+//		JstModifiers modifiers = new JstModifiers();
+//		for(IJstType t : getMixedTypes()){
+//			modifiers.merge(t.getModifiers().getFlags());
+//		}
+//		return modifiers;
+//	}
+	
 	@Override
 	public String getSimpleName(){
 		StringBuilder sb = new StringBuilder();

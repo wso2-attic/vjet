@@ -946,5 +946,23 @@ public class AHtmlElementStyle extends ActiveObject implements HtmlElementStyle 
 		return m_style.getPropertyValue(name);
 	}
 
+	@Override
+	public Object getAttribute(String sAttrName, int iFlags) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getAttribute(String sAttrName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getExpression(String sPropertyName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

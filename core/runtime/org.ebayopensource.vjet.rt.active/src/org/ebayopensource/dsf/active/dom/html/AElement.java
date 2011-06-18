@@ -49,7 +49,12 @@ public class AElement extends ANode implements Element{
 		return getDElement().getAttribute(name);
 	}
 
+	public String getAttribute(String name, int iFlags) {
+		// TODO iFlags is ignored right now
+		return getDElement().getAttribute(name);
+	}
 
+	
 	public String getAttributeNS(String namespaceURI, String localName) throws DOMException {
 		return getDElement().getAttributeNS(namespaceURI, localName);
 	}

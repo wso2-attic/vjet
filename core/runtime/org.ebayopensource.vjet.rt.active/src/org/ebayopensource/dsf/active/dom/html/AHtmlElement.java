@@ -1163,6 +1163,26 @@ public class AHtmlElement extends AElement
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void doScroll(String sScrollAction) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doScroll() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAdjacentText(String sWhere) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
 	
 //	@Override
 //	public void put(String name, Scriptable start, Object value) {

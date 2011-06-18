@@ -112,6 +112,13 @@ public class AHtmlTable extends AHtmlElement implements HtmlTable {
 
 	}
 
+	public void deleteTBody() {
+		HtmlTableSection old = getTBody();
+		 if ( old != null ) {
+			 removeChild ( old );
+		 }
+	}
+	
 	public void deleteTFoot() {
 		HtmlTableSection old = getTFoot();
 		 if ( old != null ) {

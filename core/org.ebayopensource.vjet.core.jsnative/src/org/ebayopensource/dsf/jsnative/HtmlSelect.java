@@ -13,7 +13,9 @@ import org.ebayopensource.dsf.jsnative.anno.Alias;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Function;
+import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
+import org.ebayopensource.dsf.jsnative.anno.JstExclude;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 
 
@@ -41,6 +43,7 @@ public interface HtmlSelect extends HtmlElement {
 	@Property HtmlForm getForm();
 
 	@DOMSupport(DomLevel.ZERO)
+	@JsArray(HtmlOption.class)
 	@Property HtmlOptionsCollection getOptions();
 
 	@Property boolean getDisabled();

@@ -353,6 +353,10 @@ public interface HtmlTable extends HtmlElement {
 
     @Function void deleteTHead();
 
+    @Function HtmlTableSection createTBody();
+
+    @Function void deleteTBody();
+    
     @Function HtmlTableSection createTFoot();
 
     @Function void deleteTFoot();

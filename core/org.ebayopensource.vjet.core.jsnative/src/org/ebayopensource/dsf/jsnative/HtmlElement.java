@@ -18,6 +18,8 @@ import org.ebayopensource.dsf.jsnative.anno.Dynamic;
 import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
+import org.ebayopensource.dsf.jsnative.anno.JstMultiReturn;
+import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.ebayopensource.dsf.jsnative.events.EventTarget;
 
@@ -360,5 +362,106 @@ public interface HtmlElement extends Element, EventTarget, ElementView {
 	@BrowserSupport({ BrowserType.IE_6P })
 	@Function
 	String componentFromPoint(int iCoordX, int iCoordY);
+	
+	
+	
+	/**
+	 * Optional. A String that specifies how the object scrolls, using one of the following values.
+
+scrollbarDown
+    Default. Down scroll arrow is at the specified location. 
+scrollbarHThumb
+    Horizontal scroll thumb or box is at the specified location.
+scrollbarLeft
+    Left scroll arrow is at the specified location.
+scrollbarPageDown
+    Page-down scroll bar shaft is at the specified location.
+scrollbarPageLeft
+    Page-left scroll bar shaft is at the specified location.
+scrollbarPageRight
+    Page-right scroll bar shaft is at the specified location.
+scrollbarPageUp
+    Page-up scroll bar shaft is at the specified location.
+scrollbarRight
+    Right scroll arrow is at the specified location.
+scrollbarUp
+    Up scroll arrow is at the specified location.
+scrollbarVThumb
+    Vertical scroll thumb or box is at the specified location.
+down
+    Composite reference to scrollbarDown.
+left
+    Composite reference to scrollbarLeft.
+pageDown
+    Composite reference to scrollbarPageDown.
+pageLeft
+    Composite reference to scrollbarPageLeft.
+pageRight
+    Composite reference to scrollbarPageRight.
+pageUp
+    Composite reference to scrollbarPageUp.
+right
+    Composite reference to scrollbarRight.
+up
+    Composite reference to scrollbarUp.
+	 */
+	@BrowserSupport(BrowserType.IE_6P)
+	@OverLoadFunc void doScroll( String sScrollAction);
+	@BrowserSupport(BrowserType.IE_6P)
+	@OverLoadFunc void doScroll();
+	/**
+	 * Returns the adjacent text string.
+
+Syntax
+
+    text = object.getAdjacentText(sWhere)
+
+
+    @param sWhere 	Required. A String that specifies where the text is located by using one of the following values.
+
+    beforeBegin
+        Text is returned immediately before the element.
+    afterBegin
+        Text is returned after the start of the element but before all other content in the element.
+    beforeEnd
+        Text is returned immediately before the end of the element but after all other content in the element.
+    afterEnd
+        Text is returned immediately after the end of the element.
+	 */
+	@Function String getAdjacentText(String sWhere);
+	
+	
+	/**
+	 * Retrieves the value of the specified attribute.
+
+Syntax
+
+    vAttrValue = object.getAttribute(sAttrName [, iFlags])
+
+Parameters
+
+    @param sAttrName 	Required. String that specifies the name of the attribute.
+   @param  iFlags 	Optional. Integer that specifies one or more of the following flags:
+
+    0
+        Default. Performs a property search that is not case-sensitive, and returns an interpolated value if the property is found.
+    1
+        Performs a case-sensitive property search. To find a match, the uppercase and lowercase letters in sAttrName must exactly match those in the attribute name. 
+    2
+        Returns attribute value as a String. This flag does not work for event properties. 
+    4
+        Returns attribute value as a fully expanded URL. Only works for URL attributes. 
+
+Return Value
+
+    Variant that returns a String, Integer, or Boolean value as defined by the attribute. If the attribute is not present, this method returns null.
+
+
+	 */
+	@JstMultiReturn({String.class, int.class, boolean.class})
+	@OverLoadFunc Object getAttribute(String sAttrName, int iFlags);
+	@JstMultiReturn({String.class, int.class, boolean.class})
+	@OverLoadFunc String getAttribute(String sAttrName);
+
 
 }
