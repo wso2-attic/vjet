@@ -83,6 +83,11 @@
 			<artifactId>org.ebayopensource.vjet.rt.active.javatojs</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.vjet.core</groupId>
+			<artifactId>org.ebayopensource.vjet.core.jsgenshared</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
    </dependencies>
 
    <build>
