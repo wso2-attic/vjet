@@ -11,7 +11,7 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.debug.core.model;
 
-import java.net.MalformedURLException;
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -82,12 +82,10 @@ public abstract class AbstractScriptBreakpoint extends Breakpoint implements
 			String path = location.toString();
 			URI uri = null;
 			try {
-				uri = new URI(path);
-				uri.toURL();
+				File f = new File(path);
+				uri = f.toURI();
 				return uri;
-			} catch (URISyntaxException e) {
-				// do nothing
-			} catch (MalformedURLException e) {
+			} catch (Exception e) {
 				// do nothing
 			}
 			if (path.length() != 0 && path.charAt(0) != '/') {
