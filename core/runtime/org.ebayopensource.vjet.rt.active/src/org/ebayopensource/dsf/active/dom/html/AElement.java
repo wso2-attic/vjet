@@ -45,6 +45,18 @@ public class AElement extends ANode implements Element{
 		populateScriptable(AElement.class, doc == null ? BrowserType.IE_6P : doc.getBrowserType());
 	}
 
+	@Override
+	public Object __getAttribute(Object sAttrName, Object iFlags, Object notreq1,
+			Object notreq2, Object notreq3) {
+		if(sAttrName instanceof String && iFlags instanceof Integer){
+			return getAttribute((String)sAttrName, (Integer)iFlags);
+		}
+		else{
+			return getAttribute((String)sAttrName);
+		}
+		
+	}
+	
 	public String getAttribute(String name) {
 		return getDElement().getAttribute(name);
 	}
@@ -466,5 +478,7 @@ public class AElement extends ANode implements Element{
 	private BaseHtmlElement getElement() {
 		return (BaseHtmlElement) getDNode();
 	}
+
+
 
 }

@@ -21,6 +21,7 @@ import org.ebayopensource.dsf.jsnative.anno.JstExclude;
 import org.ebayopensource.dsf.jsnative.anno.JstMultiReturn;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
+import org.ebayopensource.dsf.jsnative.anno.ProxyFunc;
 import org.ebayopensource.dsf.jsnative.events.EventTarget;
 
 /**
@@ -430,38 +431,6 @@ Syntax
 	 */
 	@Function String getAdjacentText(String sWhere);
 	
-	
-	/**
-	 * Retrieves the value of the specified attribute.
-
-Syntax
-
-    vAttrValue = object.getAttribute(sAttrName [, iFlags])
-
-Parameters
-
-    @param sAttrName 	Required. String that specifies the name of the attribute.
-   @param  iFlags 	Optional. Integer that specifies one or more of the following flags:
-
-    0
-        Default. Performs a property search that is not case-sensitive, and returns an interpolated value if the property is found.
-    1
-        Performs a case-sensitive property search. To find a match, the uppercase and lowercase letters in sAttrName must exactly match those in the attribute name. 
-    2
-        Returns attribute value as a String. This flag does not work for event properties. 
-    4
-        Returns attribute value as a fully expanded URL. Only works for URL attributes. 
-
-Return Value
-
-    Variant that returns a String, Integer, or Boolean value as defined by the attribute. If the attribute is not present, this method returns null.
-
-
-	 */
-	@JstMultiReturn({String.class, int.class, boolean.class})
-	@OverLoadFunc Object getAttribute(String sAttrName, int iFlags);
-	@JstMultiReturn({String.class, int.class, boolean.class})
-	@OverLoadFunc String getAttribute(String sAttrName);
 
 
 }

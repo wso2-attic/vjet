@@ -19,6 +19,7 @@ import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsArray;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
+import org.ebayopensource.dsf.jsnative.anno.JstMultiReturn;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.ebayopensource.dsf.jsnative.anno.ProxyFunc;
@@ -48,13 +49,23 @@ public interface Element extends Node {
 	@DOMSupport(DomLevel.THREE) @BrowserSupport({BrowserType.UNDEFINED})
 	@Property TypeInfo getSchemaTypeInfo();
 
+	@ProxyFunc("getAttribute")Object __getAttribute(Object sAttrName, Object iFlags,Object notreq1,Object notreq2, Object notreq3); 
+	
 	/**
 	 * Retrieves an attribute value by name.
 	 * @param name The name of the attribute to retrieve.
 	 * @return The <code>Attr</code> value as a string, or the empty string 
 	 *   if that attribute does not have a specified or default value.
 	 */
-	@Function String getAttribute(String name);
+
+	@JstMultiReturn({String.class, int.class, boolean.class})
+	@OverLoadFunc String getAttribute(String sAttrName);
+
+
+	@JstMultiReturn({String.class, int.class, boolean.class})
+	@OverLoadFunc Object getAttribute(String sAttrName, int iFlags);
+
+
 
 	/**
 	 * Adds a new attribute. If an attribute with that name is already present 
@@ -125,6 +136,8 @@ public interface Element extends Node {
 	@JstExclude
 	@Function NodeList byTag(String name);
 
+    
+    
 	/**
 	 * Retrieves an attribute node by name.
 	 * @param name

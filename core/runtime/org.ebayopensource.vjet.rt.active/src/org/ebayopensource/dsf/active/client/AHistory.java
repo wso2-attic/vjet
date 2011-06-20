@@ -56,4 +56,11 @@ public class AHistory extends ActiveObject implements History {
 		m_browserBinding = binding;
 	}
 
+	@Override
+	public void __go(Object numberOrUrl, Object notreq0, Object notreq1,
+			Object notreq2, Object notreq3) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

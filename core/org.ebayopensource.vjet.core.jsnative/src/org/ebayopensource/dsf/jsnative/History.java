@@ -16,6 +16,7 @@ import org.ebayopensource.dsf.jsnative.anno.JsSupport;
 import org.ebayopensource.dsf.jsnative.anno.JsVersion;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
+import org.ebayopensource.dsf.jsnative.anno.ProxyFunc;
 import org.mozilla.mod.javascript.IWillBeScriptable;
 
 /**
@@ -43,6 +44,8 @@ public interface History extends IWillBeScriptable {
 	 */
 	@Function void forward();
 	
+	@ProxyFunc("go")void __go(Object numberOrUrl, Object notreq0,Object notreq1,Object notreq2, Object notreq3);
+	 
 	/**
 	 * Loads a specific page in the history list
 	 * @param number is an Integer number in history array or a URL to go to. 
