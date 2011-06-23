@@ -23,6 +23,10 @@ public enum BrowserType {
 	FIREFOX_2P ("FIREFOX" , 2, true),	// Firefox/2.x and above
 	FIREFOX_3 ("FIREFOX" , 3),			// Firefox/3.x only
 	FIREFOX_3P ("FIREFOX" , 3, true),	// Firefox/3.x and above
+	FIREFOX_4P("FIREFOX", 4, true),					
+	FIREFIX_4("FIREFOX", 4),
+	FIREFOX_5P("FIREFOX", 5, true),					
+	FIREFIX_5("FIREFOX", 5),
 	OPERA_7 ("OPERA" , 7),				// Opera/7.x only
 	OPERA_7P ("OPERA" , 7, true),		// Opera/7.x and above
 	OPERA_8 ("OPERA" , 8),				// Opera/8.x only
@@ -35,7 +39,9 @@ public enum BrowserType {
 	RHINO_1P ("Rhino", 1, true),		// Mozilla Rhino 1.x and above (not a browser but JS engine)
 	NONE ("None", 0), 
 	CHROME_1P("CHROME", 1, true),       // Chrome browser 1.x and above
-	UNDEFINED("UNDEFINED", 0);					// Not supported by any of the listed browsers
+	UNDEFINED("UNDEFINED", 0); // Not supported by any of the listed browsers
+
+	
 	
 	private String m_name;
 	private int m_version;

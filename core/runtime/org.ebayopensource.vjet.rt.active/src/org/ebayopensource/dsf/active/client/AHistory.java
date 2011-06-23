@@ -56,6 +56,22 @@ public class AHistory extends ActiveObject implements History {
 		m_browserBinding = binding;
 	}
 
+
+
+	@Override
+	public void __pushState(Object numberOrUrl, Object notreq0, Object notreq1,
+			Object notreq2, Object notreq3) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void __replaceState(Object numberOrUrl, Object notreq0, Object notreq1,
+			Object notreq2, Object notreq3) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void __go(Object numberOrUrl, Object notreq0, Object notreq1,
 			Object notreq2, Object notreq3) {
@@ -63,4 +79,40 @@ public class AHistory extends ActiveObject implements History {
 		
 	}
 
+	@Override
+	public void pushState(Object state, String title, String URL) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pushState(Object state, String title) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pushState(Object state) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void replaceState(Object state, String title, String URL) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void replaceState(Object state, String title) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void replaceState(Object state) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
