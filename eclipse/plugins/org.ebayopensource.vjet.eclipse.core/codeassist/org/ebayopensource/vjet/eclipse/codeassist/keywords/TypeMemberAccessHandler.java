@@ -12,12 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionProposal;
 
 public class TypeMemberAccessHandler implements ICompletionHandler {
 

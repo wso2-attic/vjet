@@ -19,8 +19,6 @@ import java.util.StringTokenizer;
 
 import junit.framework.Assert;
 
-import org.eclipse.core.runtime.AssertionFailedException;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstParseController;
@@ -33,12 +31,14 @@ import org.ebayopensource.dsf.jst.term.JstProxyIdentifier;
 import org.ebayopensource.dsf.jst.token.ILHS;
 import org.ebayopensource.dsf.jstojava.translator.JstUtil;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
-import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
-import com.ebay.kernel.util.FileUtils;
 import org.ebayopensource.vjo.tool.astjst.TestInputUtil.BindingInput;
 import org.ebayopensource.vjo.tool.astjst.TestInputUtil.JxPathInput;
 import org.ebayopensource.vjo.tool.astjst.TestInputUtil.TestInputData;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.eclipse.core.runtime.AssertionFailedException;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
+
+import com.ebay.kernel.util.FileUtils;
 
 public class AstJstTestUtil {
 	

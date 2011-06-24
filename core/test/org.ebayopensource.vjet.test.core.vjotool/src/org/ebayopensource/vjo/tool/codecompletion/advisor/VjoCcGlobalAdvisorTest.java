@@ -10,16 +10,10 @@ package org.ebayopensource.vjo.tool.codecompletion.advisor;
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.eclipse.core.runtime.AssertionFailedException;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
@@ -34,12 +28,17 @@ import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.dsf.ts.event.type.AddTypeEvent;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
+import org.eclipse.core.runtime.AssertionFailedException;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.ebay.junitnexgen.category.Category;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")

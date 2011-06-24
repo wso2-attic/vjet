@@ -21,6 +21,13 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstDefaultConstructor;
+import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.dsf.jst.util.JstTypeHelper;
+import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,17 +35,10 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.declaration.JstDefaultConstructor;
-import org.ebayopensource.dsf.jst.declaration.JstModifiers;
-import org.ebayopensource.dsf.jst.util.JstTypeHelper;
-import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.resource.ResourceUtil;
-import org.ebayopensource.vjo.lib.LibManager;
 
 /**
  * Comment (forward, backward) tests for methods with no args, props and protos.

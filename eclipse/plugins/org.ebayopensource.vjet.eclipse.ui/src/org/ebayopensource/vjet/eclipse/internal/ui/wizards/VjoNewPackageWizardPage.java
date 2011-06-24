@@ -13,6 +13,7 @@ package org.ebayopensource.vjet.eclipse.internal.ui.wizards;
 
 import java.net.URI;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IResource;
@@ -31,8 +32,6 @@ import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.internal.corext.util.Messages;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.PlatformUI;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
 
 /**
  * The page for creating a new vjo package.

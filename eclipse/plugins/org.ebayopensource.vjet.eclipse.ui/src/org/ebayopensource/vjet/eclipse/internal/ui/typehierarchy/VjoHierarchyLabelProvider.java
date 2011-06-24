@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.typehierarchy;
 
+import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
 import org.eclipse.dltk.mod.ast.Modifiers;
 import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -31,10 +34,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Display;
-
-import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
 
 public class VjoHierarchyLabelProvider extends AppearanceAwareLabelProvider {
 

@@ -11,22 +11,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.dltk.mod.javascript.internal.ui.text.JsPreferenceInterpreter;
-import org.eclipse.dltk.mod.ui.templates.IScriptTemplateIndenter;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.TextUtilities;
-import org.eclipse.jface.text.contentassist.ContextInformation;
-import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.jface.text.contentassist.IContextInformation;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.VjoIndenter;
 import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
@@ -39,6 +27,16 @@ import org.ebayopensource.vjo.tool.codecompletion.proposaldata.integration.IVjoP
 import org.ebayopensource.vjo.tool.codecompletion.proposaldata.integration.IVjoProposalLabelUtilAdapter;
 import org.ebayopensource.vjo.tool.codecompletion.proposaldata.integration.IVjoTypeCompletionProposalFactory;
 import org.ebayopensource.vjo.tool.codecompletion.proposaldata.integration.VjoProposalEclipsePresenterAdapter;
+import org.eclipse.dltk.mod.javascript.internal.ui.text.JsPreferenceInterpreter;
+import org.eclipse.dltk.mod.ui.templates.IScriptTemplateIndenter;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.TextUtilities;
+import org.eclipse.jface.text.contentassist.ContextInformation;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.text.contentassist.IContextInformation;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 
 /**
  * 

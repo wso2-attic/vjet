@@ -20,6 +20,9 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.sdk.VJetSdkEnvironment;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -46,10 +49,6 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
 import org.osgi.service.prefs.BackingStoreException;
-
-import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.sdk.VJetSdkEnvironment;
 
 public class PiggyBackClassPathUtil {
 	public static final String PREFERENCE_SCRIPTPROJECT_INITIALIZED = "initialized_project_from_v4classpath";

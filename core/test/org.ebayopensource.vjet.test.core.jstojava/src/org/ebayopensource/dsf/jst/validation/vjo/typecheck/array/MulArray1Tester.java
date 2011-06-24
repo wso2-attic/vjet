@@ -18,17 +18,17 @@ package org.ebayopensource.dsf.jst.validation.vjo.typecheck.array;
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
+import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
-import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 /**
  * For mul-dimensional array

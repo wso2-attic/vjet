@@ -11,6 +11,14 @@ package org.ebayopensource.vjet.eclipse.internal.ui.scriptdoc;
 import java.io.Reader;
 import java.io.StringReader;
 
+import org.ebayopensource.dsf.jst.IJstGlobalFunc;
+import org.ebayopensource.dsf.jst.IJstGlobalProp;
+import org.ebayopensource.dsf.jst.IJstGlobalVar;
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstProperty;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.dltk.mod.core.IField;
 import org.eclipse.dltk.mod.core.IMember;
 import org.eclipse.dltk.mod.core.IMethod;
@@ -20,15 +28,6 @@ import org.eclipse.dltk.mod.internal.core.VjoExternalSourceModule;
 import org.eclipse.dltk.mod.internal.core.VjoSourceType;
 import org.eclipse.dltk.mod.javascript.scriptdoc.JavaDoc2HTMLTextReader;
 import org.eclipse.dltk.mod.ui.documentation.IScriptDocumentationProvider;
-
-import org.ebayopensource.dsf.jst.IJstGlobalFunc;
-import org.ebayopensource.dsf.jst.IJstGlobalProp;
-import org.ebayopensource.dsf.jst.IJstGlobalVar;
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstProperty;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class VjetScriptDocProvider implements IScriptDocumentationProvider {
 

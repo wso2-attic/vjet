@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.eclipse.dltk.mod.core.DLTKCore;
-
 import org.ebayopensource.dsf.jsgroup.bootstrap.JsLibBootstrapLoader;
 import org.ebayopensource.dsf.jst.ts.IJstTypeLoader;
 import org.ebayopensource.dsf.jst.ts.util.JstSrcFileCollector;
@@ -29,6 +27,7 @@ import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.dltk.mod.core.DLTKCore;
 
 public class VjoJstTypeLoader implements IJstTypeLoader {
 

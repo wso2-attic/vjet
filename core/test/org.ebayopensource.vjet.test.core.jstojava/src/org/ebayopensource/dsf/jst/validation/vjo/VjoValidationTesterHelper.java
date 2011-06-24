@@ -26,8 +26,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.junit.Assert;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoValidationDriver;
@@ -49,9 +47,11 @@ import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 import org.ebayopensource.dsf.ts.group.Group;
 import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.kernel.resource.ResourceUtil;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.TsLibLoader;
+import org.junit.Assert;
+
+import com.ebay.kernel.resource.ResourceUtil;
 
 /**
  * Vjo Validation tester helper class

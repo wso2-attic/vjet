@@ -28,7 +28,6 @@ import org.eclipse.dltk.mod.ui.text.IColorManager;
 import org.eclipse.dltk.mod.ui.text.rules.CombinedWordRule;
 import org.eclipse.dltk.mod.ui.text.rules.CombinedWordRule.CharacterBuffer;
 import org.eclipse.dltk.mod.ui.text.rules.CombinedWordRule.WordMatcher;
-
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;

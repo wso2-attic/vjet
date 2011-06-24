@@ -10,12 +10,11 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.IMember;
 import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IType;
-
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 
 public class InstanceMemberAccessHandler extends MethodCompletionHandler {
 	@Override

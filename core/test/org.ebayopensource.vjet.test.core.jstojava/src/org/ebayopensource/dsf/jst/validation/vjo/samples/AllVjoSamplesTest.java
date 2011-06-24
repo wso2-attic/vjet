@@ -15,13 +15,12 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.samples;
 
+import org.ebayopensource.dsf.jst.declaration.JstCache;
+import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import org.ebayopensource.dsf.jst.declaration.JstCache;
-import org.ebayopensource.vjo.lib.LibManager;
 
 /**
  * Class/Interface description

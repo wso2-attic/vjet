@@ -11,6 +11,11 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.CompletionContext;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.IVjoCompletionData;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.VjoKeywordFactory;
+import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.IMember;
@@ -32,12 +37,6 @@ import org.eclipse.dltk.mod.ui.text.completion.VjoCompletionProposalLabelProvide
 import org.eclipse.dltk.mod.ui.text.completion.VjoOverrideCompletionProposal;
 import org.eclipse.dltk.mod.ui.text.completion.VjoScriptMethodCompletionProposal;
 import org.eclipse.swt.graphics.Image;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.CompletionContext;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.IVjoCompletionData;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.VjoKeywordFactory;
-import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
 
 /**
  * 

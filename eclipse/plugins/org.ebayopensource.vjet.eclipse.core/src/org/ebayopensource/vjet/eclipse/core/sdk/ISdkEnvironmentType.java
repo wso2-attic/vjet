@@ -10,9 +10,8 @@ package org.ebayopensource.vjet.eclipse.core.sdk;
 
 import java.io.File;
 
-import org.eclipse.core.runtime.IStatus;
-
 import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
+import org.eclipse.core.runtime.IStatus;
 
 public class ISdkEnvironmentType {
 

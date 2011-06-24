@@ -23,6 +23,18 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.JstSource;
+import org.ebayopensource.dsf.jst.declaration.JstBlock;
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstPackage;
+import org.ebayopensource.dsf.jst.reserved.JsCoreKeywords;
+import org.ebayopensource.dsf.jst.term.JstIdentifier;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
+import org.ebayopensource.vjo.meta.VjoKeywords;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.JavascriptCodeScanner;
@@ -36,20 +48,6 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.swt.graphics.Point;
-
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.IScriptUnit;
-import org.ebayopensource.dsf.jst.JstSource;
-import org.ebayopensource.dsf.jst.declaration.JstBlock;
-import org.ebayopensource.dsf.jst.declaration.JstMethod;
-import org.ebayopensource.dsf.jst.declaration.JstPackage;
-import org.ebayopensource.dsf.jst.reserved.JsCoreKeywords;
-import org.ebayopensource.dsf.jst.term.JstIdentifier;
-import org.ebayopensource.dsf.jstojava.controller.JstParseController;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
-import org.ebayopensource.vjo.meta.VjoKeywords;
 
 public class VjoCodeScanner extends JavascriptCodeScanner {
 	private static String fgTokenProperties[] = new String[] {

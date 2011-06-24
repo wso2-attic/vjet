@@ -13,14 +13,6 @@ package org.ebayopensource.vjet.eclipse.core.search;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.core.Flags;
-import org.eclipse.dltk.mod.core.IField;
-import org.eclipse.dltk.mod.core.IMethod;
-import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.ModelException;
-import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
@@ -28,6 +20,13 @@ import org.ebayopensource.dsf.jst.declaration.JstVars;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.traversal.IJstVisitor;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.eclipse.dltk.mod.core.Flags;
+import org.eclipse.dltk.mod.core.IField;
+import org.eclipse.dltk.mod.core.IMethod;
+import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.ModelException;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 
 /**
  * vjo field reference visitor(local var/ method argument/ type property)

@@ -12,7 +12,6 @@ import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.internal.core.ImportContainer;
 import org.eclipse.dltk.mod.internal.core.JSPackageDeclaration;
 import org.eclipse.dltk.mod.ui.viewsupport.SourcePositionSorter;
-
 import org.eclipse.jface.viewers.Viewer;
 
 public class VjoSourcePositionSorter extends SourcePositionSorter {

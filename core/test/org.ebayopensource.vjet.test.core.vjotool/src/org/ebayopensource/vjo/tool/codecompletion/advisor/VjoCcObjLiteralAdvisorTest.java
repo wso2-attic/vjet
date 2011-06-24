@@ -13,9 +13,6 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -23,12 +20,15 @@ import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstFieldOrMethodCompletion;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.Assert;
+import org.junit.Test;
+
+import com.ebay.junitnexgen.category.Category;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")

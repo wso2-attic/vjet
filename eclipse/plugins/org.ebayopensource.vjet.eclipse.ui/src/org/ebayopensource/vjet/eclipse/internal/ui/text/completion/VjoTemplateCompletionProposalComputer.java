@@ -14,12 +14,11 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 import java.util.Collections;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
+import org.ebayopensource.vjet.eclipse.internal.ui.templates.VjoTemplateCompletionProcessor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.ui.text.completion.ScriptContentAssistInvocationContext;
 import org.eclipse.jface.text.templates.TemplateCompletionProcessor;
-
-import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
-import org.ebayopensource.vjet.eclipse.internal.ui.templates.VjoTemplateCompletionProcessor;
 
 /**
  * 

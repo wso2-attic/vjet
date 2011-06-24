@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
+import org.ebayopensource.vjet.eclipse.core.sdk.VjetSdkRuntime;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -30,9 +32,6 @@ import org.eclipse.swt.widgets.Link;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
-
-import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
-import org.ebayopensource.vjet.eclipse.core.sdk.VjetSdkRuntime;
 
 public class VjetSdkPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 							

@@ -10,18 +10,17 @@ package org.ebayopensource.vjet.eclipse.ui.formatter;
 
 import java.util.Map;
 
-import org.eclipse.dltk.mod.ui.formatter.AbstractScriptFormatter;
-import org.eclipse.dltk.mod.ui.formatter.FormatterException;
-import org.eclipse.text.edits.MultiTextEdit;
-import org.eclipse.text.edits.ReplaceEdit;
-import org.eclipse.text.edits.TextEdit;
-
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
+import org.eclipse.dltk.mod.ui.formatter.AbstractScriptFormatter;
+import org.eclipse.dltk.mod.ui.formatter.FormatterException;
+import org.eclipse.text.edits.MultiTextEdit;
+import org.eclipse.text.edits.ReplaceEdit;
+import org.eclipse.text.edits.TextEdit;
 
 public class VjetFormatter extends AbstractScriptFormatter {
 

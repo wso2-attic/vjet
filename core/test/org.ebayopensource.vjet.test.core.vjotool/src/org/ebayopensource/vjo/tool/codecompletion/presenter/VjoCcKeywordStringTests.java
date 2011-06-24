@@ -7,18 +7,16 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.presenter;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
-import static org.junit.Assert.assertTrue;
 
+import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
+import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.junit.Test;
 
 import com.ebay.junitnexgen.category.Category;
-import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
-import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")

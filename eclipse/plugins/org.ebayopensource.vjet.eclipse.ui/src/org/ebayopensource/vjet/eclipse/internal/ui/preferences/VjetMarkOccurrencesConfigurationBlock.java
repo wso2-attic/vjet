@@ -13,13 +13,14 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.dltk.mod.internal.ui.dialogs.StatusInfo;
 import org.eclipse.dltk.mod.ui.preferences.IPreferenceConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore.OverlayKey;
 import org.eclipse.dltk.mod.ui.util.PixelConverter;
-
+import org.eclipse.jface.text.Assert;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -29,10 +30,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
-
-import org.eclipse.jface.text.Assert;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 
 /**
  * Configures Java Editor hover preferences.

@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 
 /**
  * The abstract class for all completion acceptors. Accept or decline keyword

@@ -24,6 +24,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
 import org.eclipse.dltk.mod.ui.viewsupport.ImageDescriptorRegistry;
 import org.eclipse.jdt.core.Flags;
@@ -44,11 +47,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
 
 public class VJOMembersOrderPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 	

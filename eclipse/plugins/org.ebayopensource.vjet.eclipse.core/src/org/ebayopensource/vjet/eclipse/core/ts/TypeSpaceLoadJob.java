@@ -8,19 +8,18 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.ts;
 
-import org.eclipse.core.resources.WorkspaceJob;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.dltk.mod.core.DLTKCore;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.ts.event.EventListenerStatus;
 import org.ebayopensource.dsf.ts.event.ISourceEventCallback;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceLoadEvent;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.core.resources.WorkspaceJob;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.dltk.mod.core.DLTKCore;
 
 /**
  * Job to loading all types of the workspace to type space.

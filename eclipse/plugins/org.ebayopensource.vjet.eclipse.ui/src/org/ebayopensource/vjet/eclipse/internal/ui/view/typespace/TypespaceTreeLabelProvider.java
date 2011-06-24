@@ -14,15 +14,6 @@ package org.ebayopensource.vjet.eclipse.internal.ui.view.typespace;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import org.eclipse.dltk.mod.ui.DLTKPluginImages;
-import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
-import org.eclipse.dltk.mod.ui.viewsupport.ImageDescriptorRegistry;
-
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.ide.IDE;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
@@ -35,6 +26,13 @@ import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.dltk.mod.ui.DLTKPluginImages;
+import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
+import org.eclipse.dltk.mod.ui.viewsupport.ImageDescriptorRegistry;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.ide.IDE;
 
 /**
  * 

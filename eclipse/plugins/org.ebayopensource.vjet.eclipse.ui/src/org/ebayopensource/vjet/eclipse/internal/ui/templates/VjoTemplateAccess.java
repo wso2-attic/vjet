@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.templates;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.ui.templates.ScriptTemplateAccess;
 import org.eclipse.jface.preference.IPreferenceStore;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class VjoTemplateAccess extends ScriptTemplateAccess {
 

@@ -26,7 +26,6 @@ import org.ebayopensource.dsf.jsnative.anno.OverrideProp;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.ebayopensource.dsf.jsnative.anno.ProxyFunc;
 import org.ebayopensource.dsf.jsnative.events.DocumentEvent;
-import org.ebayopensource.dsf.jsnative.events.Event;
 import org.w3c.dom.html.HTMLElement;
 
 /**
@@ -333,6 +332,7 @@ public interface HtmlDocument extends Document, DocumentEvent, DocumentRange {
 	
 	@DOMSupport(DomLevel.TWO)
 	@BrowserSupport({BrowserType.FIREFOX_1P, BrowserType.OPERA_9P})
+	@FactoryFunc
 	@Function void addEventListener(
 			String type, 
 			Object listener, 
@@ -340,6 +340,7 @@ public interface HtmlDocument extends Document, DocumentEvent, DocumentRange {
 
 	@DOMSupport(DomLevel.TWO)
 	@BrowserSupport({BrowserType.IE_6P})
+	@FactoryFunc
 	@Function void attachEvent(
 			String type, 
 			Object listener);

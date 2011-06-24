@@ -62,7 +62,6 @@ import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcFunctionStringT
 import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcKeywordStringTests;
 import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcMethodPropReplaceStrTests;
 import org.ebayopensource.vjo.tool.codecompletion.presenter.VjoCcPresenterTests;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

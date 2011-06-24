@@ -11,6 +11,8 @@
  */
 package org.ebayopensource.vjet.eclipse.ui;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 import org.eclipse.jface.action.ActionContributionItem;
@@ -20,9 +22,6 @@ import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.internal.PartSite;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
 
 /**
  * 

@@ -12,7 +12,6 @@
 package org.ebayopensource.vjet.eclipse.internal.ui.view.ast;
 
 import org.eclipse.jface.viewers.LabelProvider;
-
 import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
 import org.eclipse.mod.wst.jsdt.core.compiler.IProblem;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;

@@ -17,10 +17,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.wizards;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.eclipse.dltk.mod.javascript.ui.JavaScriptImages;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
 
 /**
  * VJET wizard for creating a new vjo file.

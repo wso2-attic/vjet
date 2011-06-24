@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.actions;
 
+import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -21,9 +23,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-
-import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
 
 /**
  * This class update vjet build path from java class path.

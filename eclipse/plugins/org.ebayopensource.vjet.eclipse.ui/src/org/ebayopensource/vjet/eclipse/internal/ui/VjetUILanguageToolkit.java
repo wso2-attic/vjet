@@ -11,17 +11,16 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui;
 
+import org.ebayopensource.vjet.eclipse.core.VjoLanguageToolkit;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementLabels;
 import org.eclipse.dltk.mod.core.IDLTKLanguageToolkit;
 import org.eclipse.dltk.mod.ui.AbstractDLTKUILanguageToolkit;
 import org.eclipse.dltk.mod.ui.ScriptElementLabels;
 import org.eclipse.dltk.mod.ui.text.ScriptSourceViewerConfiguration;
 import org.eclipse.dltk.mod.ui.text.ScriptTextTools;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-
-import org.ebayopensource.vjet.eclipse.core.VjoLanguageToolkit;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementLabels;
 
 /**
  * 

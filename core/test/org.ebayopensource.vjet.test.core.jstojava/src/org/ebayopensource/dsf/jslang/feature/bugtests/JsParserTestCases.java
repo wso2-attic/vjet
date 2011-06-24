@@ -10,10 +10,10 @@ package org.ebayopensource.dsf.jslang.feature.bugtests;
 
 import static org.junit.Assert.assertFalse;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
+import org.junit.Test;
+
 import com.ebay.kernel.util.FileUtils;
 
 public class JsParserTestCases {

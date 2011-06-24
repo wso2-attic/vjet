@@ -18,6 +18,7 @@ import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.Assert;
@@ -26,8 +27,6 @@ import org.eclipse.jface.text.templates.persistence.TemplatePersistenceData;
 import org.eclipse.jface.text.templates.persistence.TemplateReaderWriter;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.ui.preferences.ScopedPreferenceStore;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * 

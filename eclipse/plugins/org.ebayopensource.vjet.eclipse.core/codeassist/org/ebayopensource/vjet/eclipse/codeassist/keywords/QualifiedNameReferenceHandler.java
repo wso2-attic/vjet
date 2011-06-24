@@ -10,15 +10,14 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.expr.ObjCreationExpr;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletionOnQualifiedNameReference;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionProposal;
 
 public class QualifiedNameReferenceHandler implements ICompletionHandler {
 

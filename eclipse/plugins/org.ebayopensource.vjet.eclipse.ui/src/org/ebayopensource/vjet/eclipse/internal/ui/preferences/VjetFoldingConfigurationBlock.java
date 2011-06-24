@@ -17,12 +17,11 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.text.folding.VjetFoldingPreferenceBlock;
 import org.eclipse.dltk.mod.ui.preferences.FoldingConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
 import org.eclipse.dltk.mod.ui.text.folding.IFoldingPreferenceBlock;
 import org.eclipse.jface.preference.PreferencePage;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.text.folding.VjetFoldingPreferenceBlock;
 
 /**
  * Configures VJET Script Editor folding preferences.

@@ -11,13 +11,12 @@ package org.ebayopensource.vjet.eclipse.core.validation;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
 
 public interface IValidator {
 

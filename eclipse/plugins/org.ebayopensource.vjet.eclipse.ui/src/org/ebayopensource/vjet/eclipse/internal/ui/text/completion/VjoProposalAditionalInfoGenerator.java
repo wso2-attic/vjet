@@ -22,16 +22,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.dltk.mod.javascript.scriptdoc.JavaDoc2HTMLTextReader;
-import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
-import org.eclipse.dltk.mod.ui.PreferenceConstants;
-import org.eclipse.dltk.mod.ui.text.completion.HTMLPrinter;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.swt.graphics.FontData;
-import org.osgi.framework.Bundle;
-
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstAnnotation;
 import org.ebayopensource.dsf.jst.IJstMethod;
@@ -46,6 +36,15 @@ import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
+import org.eclipse.dltk.mod.javascript.scriptdoc.JavaDoc2HTMLTextReader;
+import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
+import org.eclipse.dltk.mod.ui.PreferenceConstants;
+import org.eclipse.dltk.mod.ui.text.completion.HTMLPrinter;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.swt.graphics.FontData;
+import org.osgi.framework.Bundle;
 
 /**
  * Generate additial info for vjo cc proposal

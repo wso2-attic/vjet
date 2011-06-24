@@ -24,6 +24,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -51,8 +52,6 @@ import org.eclipse.ltk.core.refactoring.GroupCategory;
 import org.eclipse.ltk.core.refactoring.GroupCategorySet;
 import org.eclipse.text.edits.MalformedTreeException;
 import org.eclipse.text.edits.ReplaceEdit;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
 
 class TextMatchUpdater {
 

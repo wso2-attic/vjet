@@ -7,15 +7,18 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.astjst;
-import com.ebay.junitnexgen.category.Category;
-import static com.ebay.junitnexgen.category.Category.Groups.*;
-import com.ebay.junitnexgen.category.ModuleInfo;
+import static com.ebay.junitnexgen.category.Category.Groups.FAST;
+import static com.ebay.junitnexgen.category.Category.Groups.NOJARRUN;
+import static com.ebay.junitnexgen.category.Category.Groups.P3;
+import static com.ebay.junitnexgen.category.Category.Groups.P5;
+import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
-//import org.junit.Ignore;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class TestTemplateCreationUtilTests {

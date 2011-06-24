@@ -20,9 +20,19 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.ebayopensource.dsf.ts.TypeSpace;
+import org.ebayopensource.dsf.ts.event.group.RemoveGroupEvent;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
+import org.ebayopensource.vjet.eclipse.core.VjoLanguageToolkit;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.core.builder.TypeSpaceBuilder;
+import org.ebayopensource.vjo.tool.typespace.GroupInfo;
+import org.ebayopensource.vjo.tool.typespace.ITypeSpaceLoader;
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.internal.resources.ResourceException;
 import org.eclipse.core.internal.resources.Workspace;
-import org.eclipse.core.internal.resources.WorkspaceRoot;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
@@ -45,19 +55,6 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.internal.core.Model;
 import org.eclipse.dltk.mod.internal.core.ModelManager;
 import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
-import org.ebayopensource.dsf.ts.TypeSpace;
-import org.ebayopensource.dsf.ts.event.group.RemoveGroupEvent;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
-import org.ebayopensource.vjet.eclipse.core.VjoLanguageToolkit;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.core.builder.TypeSpaceBuilder;
-import org.ebayopensource.vjo.lib.TsLibLoader;
-import org.ebayopensource.vjo.tool.typespace.GroupInfo;
-import org.ebayopensource.vjo.tool.typespace.ITypeSpaceLoader;
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * This class load vjo resources to {@link TypeSpace} object. Read all project

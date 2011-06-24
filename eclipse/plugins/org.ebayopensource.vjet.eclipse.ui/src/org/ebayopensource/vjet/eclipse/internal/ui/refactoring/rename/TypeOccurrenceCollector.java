@@ -18,12 +18,11 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.refactoring.rename;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SourceModuleCollectingSearchRequestor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.search.SearchMatch;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SourceModuleCollectingSearchRequestor;
 
 public class TypeOccurrenceCollector extends
 		SourceModuleCollectingSearchRequestor {

@@ -10,6 +10,7 @@ package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
 import java.util.ArrayList;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 import org.eclipse.dltk.mod.ui.PreferenceConstants;
 import org.eclipse.dltk.mod.ui.preferences.CodeAssistConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
@@ -20,8 +21,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 
 public class VjetCodeAssistConfigurationBlock extends CodeAssistConfigurationBlock{
 

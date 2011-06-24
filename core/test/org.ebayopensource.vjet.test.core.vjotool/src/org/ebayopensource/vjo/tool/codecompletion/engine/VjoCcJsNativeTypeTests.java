@@ -21,9 +21,6 @@ import java.util.List;
 
 import junit.framework.AssertionFailedError;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsnative.anno.Alias;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
@@ -34,11 +31,14 @@ import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import com.ebay.junitnexgen.category.Category;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")

@@ -22,13 +22,6 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.generate.JsrGenerator;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -38,10 +31,17 @@ import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jstojava.controller.BuildController;
 import org.ebayopensource.dsf.jstojava.loader.DefaultJstTypeLoader.FileSuffix;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import org.ebayopensource.vjo.lib.LibManager;
 
 @RunWith(value=Parameterized.class)
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")

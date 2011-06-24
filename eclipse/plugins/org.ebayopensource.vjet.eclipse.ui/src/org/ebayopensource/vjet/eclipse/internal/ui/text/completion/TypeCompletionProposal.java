@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -17,8 +18,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.text.edits.InsertEdit;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class TypeCompletionProposal extends CompletionProposal {
 	private int needsPosition;

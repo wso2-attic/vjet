@@ -8,14 +8,13 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
+import org.ebayopensource.vjet.eclipse.core.IJSMethod;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.ui.text.completion.ProposalContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.swt.graphics.Image;
-
-import org.ebayopensource.vjet.eclipse.core.IJSMethod;
 
 public class VjoProposalContextInformation extends ProposalContextInformation {
 

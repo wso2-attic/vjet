@@ -12,10 +12,12 @@
 package org.ebayopensource.vjet.eclipse.internal.ui.wizards;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.internal.ui.preferences.VjetBuildpathBlock;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IResource;
@@ -43,10 +45,6 @@ import org.eclipse.dltk.mod.ui.wizards.BuildpathsBlock;
 import org.eclipse.dltk.mod.ui.wizards.NewElementWizard;
 import org.eclipse.dltk.mod.ui.wizards.ProjectWizardFirstPage;
 import org.eclipse.dltk.mod.ui.wizards.ProjectWizardSecondPage;
-/*
- * modify by patrick for supporting eclipse 3.5,
- * The original import is from org.eclipse.jdt.internal.ui.workingsets.WorkingSetConfigurationBlock 
- */
 import org.eclipse.dltk.mod.ui.wizards.WorkingSetConfigurationBlock;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
@@ -54,11 +52,6 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkingSet;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
-
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.internal.ui.preferences.VjetBuildpathBlock;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * VJET wizard for creating a new vjo project.

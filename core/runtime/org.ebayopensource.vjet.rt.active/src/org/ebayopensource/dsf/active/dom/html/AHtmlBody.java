@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.active.dom.html;
 
-import org.ebayopensource.dsf.active.client.ATextRange;
 import org.ebayopensource.dsf.html.dom.DBody;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
 import org.ebayopensource.dsf.jsnative.HtmlBody;

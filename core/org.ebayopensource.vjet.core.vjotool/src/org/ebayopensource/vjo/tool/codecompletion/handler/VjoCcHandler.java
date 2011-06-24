@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
-import org.ebayopensource.dsf.jsgen.shared.validation.common.ScopeId;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
 import org.ebayopensource.dsf.jst.IJstGlobalProp;
@@ -20,6 +19,7 @@ import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
+import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeRefType;
@@ -162,7 +162,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 								final List<JstArg> parameters = ((IJstMethod)mtdInvocationExpr.getMethod()).getArgs();
 								if(parameters != null && parameters.size() > position){
 									final IJstType parameterType = parameters.get(position).getType();
-									if(parameterType instanceof JstFuncType || parameterType instanceof JstFunctionRefType){
+									if(isExtendedFunc(parameterType) || parameterType instanceof JstFuncType || parameterType instanceof JstFunctionRefType){
 										//part of arguments, register for cc function argument advisor
 										ctx.putInfo(VjoCcCtx.INFO_KEY_ARGUMENT, node);
 										return new String[] { VjoCcFunctionArgumentAdvisor.ID };
@@ -311,6 +311,16 @@ public class VjoCcHandler implements IVjoCcHandler {
 			return new String[] { VjoCcKeywordAdvisor.ID };
 		}
 		return new String[0];
+	}
+
+	private boolean isExtendedFunc(IJstType parameterType) {
+		if(parameterType instanceof JstExtendedType){
+			JstExtendedType ept = (JstExtendedType)parameterType;
+			if(ept.getTargetType().getName().equals("Function")){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private boolean isVjoGetTypeProposal(MtdInvocationExpr mtd) {

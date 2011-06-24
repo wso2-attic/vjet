@@ -11,6 +11,14 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 import java.util.Collections;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
+import org.ebayopensource.vjo.tool.codecompletion.IVjoCcEngine;
+import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
+import org.ebayopensource.vjo.tool.codecompletion.comment.VjoCcCommentUtil;
+import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.dltk.mod.core.ISourceModule;
@@ -32,15 +40,6 @@ import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.templates.TemplateCompletionProcessor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
-import org.ebayopensource.vjo.tool.codecompletion.IVjoCcEngine;
-import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
-import org.ebayopensource.vjo.tool.codecompletion.comment.VjoCcCommentUtil;
-import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class VjoCommentCompletionProposalComputer extends
 		ScriptCompletionProposalComputer {

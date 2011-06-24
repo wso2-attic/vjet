@@ -10,9 +10,6 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
@@ -24,6 +21,8 @@ import org.ebayopensource.dsf.jstojava.translator.JstUtil;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletionOnMemberAccess;
 import org.ebayopensource.vjo.meta.VjoKeywords;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionProposal;
 
 public class MemberAccessHandler implements ICompletionHandler {
 

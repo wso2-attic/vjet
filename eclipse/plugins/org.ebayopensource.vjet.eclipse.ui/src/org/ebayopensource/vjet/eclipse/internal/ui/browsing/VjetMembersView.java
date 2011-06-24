@@ -14,6 +14,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.browsing;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
+import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
+import org.ebayopensource.vjet.eclipse.core.IJSType;
+import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
 import org.eclipse.dltk.mod.core.IField;
 import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -27,11 +31,6 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.IContentProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
-import org.ebayopensource.vjet.eclipse.core.IJSType;
-import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
 
 /**
  * This class in representation of the vjet members view.

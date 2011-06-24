@@ -13,6 +13,13 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
+import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
+import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
+import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
+import org.ebayopensource.vjet.eclipse.core.IJSType;
+import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -25,14 +32,6 @@ import org.eclipse.dltk.mod.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.dltk.mod.internal.core.ModelElementRequestor;
 import org.eclipse.dltk.mod.internal.core.NameLookup;
 import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
-import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
-import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
-import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
-import org.ebayopensource.vjet.eclipse.core.IJSType;
-import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 
 /**
  * Base class for all  package/type completions

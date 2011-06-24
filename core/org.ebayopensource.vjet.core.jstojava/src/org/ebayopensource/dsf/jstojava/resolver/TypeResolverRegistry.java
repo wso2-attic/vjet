@@ -21,7 +21,6 @@ import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
 import org.ebayopensource.dsf.jstojava.translator.IFindTypeSupport;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
-import org.ebayopensource.dsf.jstojava.translator.IFindTypeSupport.ILineInfoProvider;
 
 /**
  * Registry of function-return-type resolvers at Lib/Group level from meta bootstrap.

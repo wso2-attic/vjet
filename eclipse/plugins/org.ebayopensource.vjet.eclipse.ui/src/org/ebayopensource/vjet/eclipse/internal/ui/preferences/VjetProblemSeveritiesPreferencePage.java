@@ -8,13 +8,12 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.dltk.mod.ui.preferences.AbstractConfigurationBlockPropertyAndPreferencePage;
 import org.eclipse.dltk.mod.ui.preferences.AbstractOptionsBlock;
 import org.eclipse.dltk.mod.ui.util.IStatusChangeListener;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class VjetProblemSeveritiesPreferencePage extends
 AbstractConfigurationBlockPropertyAndPreferencePage {

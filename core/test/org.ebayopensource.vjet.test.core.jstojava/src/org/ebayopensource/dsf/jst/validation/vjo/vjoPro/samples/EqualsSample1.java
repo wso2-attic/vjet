@@ -13,14 +13,14 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples;
-import com.ebay.junitnexgen.category.ModuleInfo;
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Before;
+import org.junit.Test;
+
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 /**
  * EqualsSample1.java

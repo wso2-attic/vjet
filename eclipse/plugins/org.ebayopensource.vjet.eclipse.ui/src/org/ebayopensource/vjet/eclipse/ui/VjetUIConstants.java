@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.ui;
 
+import org.eclipse.jdt.ui.IPackagesViewPart;
+
 public class VjetUIConstants {
 
 	/**

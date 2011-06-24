@@ -10,6 +10,8 @@ package org.eclipse.dltk.mod.internal.core;
 
 import java.io.ByteArrayInputStream;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -29,9 +31,6 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 
 public class VjetRenameResourceElementsOperation extends RenameResourceElementsOperation {
 

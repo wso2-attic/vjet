@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.IVjoCompletionData;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.VjoKeywordFactory;
 import org.eclipse.dltk.mod.core.DLTKLanguageManager;
 import org.eclipse.dltk.mod.core.IDLTKLanguageToolkit;
 import org.eclipse.dltk.mod.core.IMethod;
@@ -38,10 +41,6 @@ import org.eclipse.jface.text.templates.TemplateProposal;
 import org.eclipse.jface.window.Window;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.IWorkbenchPartOrientation;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.IVjoCompletionData;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.VjoKeywordFactory;
 
 public class VjoTemplateCompletionProcessor extends
 		ScriptTemplateCompletionProcessor {

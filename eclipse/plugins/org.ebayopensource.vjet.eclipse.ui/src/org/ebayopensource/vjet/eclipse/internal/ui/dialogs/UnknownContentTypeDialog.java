@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.dialogs;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialogWithToggle;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -20,8 +21,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.PreferencesUtil;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
 
 public class UnknownContentTypeDialog extends MessageDialogWithToggle{
 

@@ -7,10 +7,12 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
+import static com.ebay.junitnexgen.category.Category.Groups.P1;
+import static com.ebay.junitnexgen.category.Category.Groups.P2;
+import static com.ebay.junitnexgen.category.Category.Groups.P3;
+import static com.ebay.junitnexgen.category.Category.Groups.P5;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -19,9 +21,6 @@ import java.net.URL;
 import java.util.List;
 
 import junit.framework.Assert;
-
-import org.junit.Ignore;
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
@@ -42,11 +41,15 @@ import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 import org.ebayopensource.dsf.ts.event.group.BatchGroupLoadingEvent;
 import org.ebayopensource.dsf.ts.event.type.AddTypeEvent;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.kernel.util.FileUtils;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.TsLibLoader;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.ebay.junitnexgen.category.Category;
+import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
+import com.ebay.kernel.util.FileUtils;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ParsingTests {

@@ -18,6 +18,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.browsing;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.debug.ui.IDebugUIConstants;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -28,9 +30,6 @@ import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.IPlaceholderFolderLayout;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.progress.IProgressConstants;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class JavascriptBrowsingPerspectiveFactory implements
 		IPerspectiveFactory {

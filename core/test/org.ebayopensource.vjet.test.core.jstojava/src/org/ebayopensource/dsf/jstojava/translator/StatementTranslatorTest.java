@@ -7,8 +7,6 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
@@ -17,8 +15,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -37,17 +33,20 @@ import org.ebayopensource.dsf.jst.stmt.ForStmt;
 import org.ebayopensource.dsf.jst.stmt.IfStmt;
 import org.ebayopensource.dsf.jst.stmt.RtnStmt;
 import org.ebayopensource.dsf.jst.stmt.SwitchStmt;
+import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.stmt.ThrowStmt;
 import org.ebayopensource.dsf.jst.stmt.TryStmt;
 import org.ebayopensource.dsf.jst.stmt.WhileStmt;
-import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category({P1, FAST, UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")

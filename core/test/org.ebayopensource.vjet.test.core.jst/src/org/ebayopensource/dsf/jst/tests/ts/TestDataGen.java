@@ -10,10 +10,7 @@ package org.ebayopensource.dsf.jst.tests.ts;
 
 import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
 import org.ebayopensource.dsf.javatojs.control.TranslationController;
-import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
-import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.vjet.prebuild.JstLibBuildMain;
-import org.ebayopensource.vjo.lib.LibManager;
 
 public class TestDataGen extends JstLibBuildMain{
 	

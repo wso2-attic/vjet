@@ -10,17 +10,16 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-import org.eclipse.dltk.mod.core.DLTKCore;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.ModelException;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstExpectsOnTypeCompletion;
 import org.ebayopensource.vjet.eclipse.core.IJSType;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionProposal;
+import org.eclipse.dltk.mod.core.DLTKCore;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.ModelException;
 
 /**
  * Provides package/type completion proposals inside "expects" block

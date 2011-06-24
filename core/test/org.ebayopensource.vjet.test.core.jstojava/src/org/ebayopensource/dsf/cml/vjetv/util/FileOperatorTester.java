@@ -19,12 +19,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
+import org.ebayopensource.dsf.jstojava.cml.vjetv.util.FileOperator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import org.ebayopensource.dsf.jstojava.cml.vjetv.util.FileOperator;
 
 /**
  * Class/Interface description

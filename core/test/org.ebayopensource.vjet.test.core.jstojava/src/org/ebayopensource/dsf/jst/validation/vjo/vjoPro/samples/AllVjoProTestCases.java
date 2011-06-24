@@ -15,12 +15,11 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples;
 
+import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import org.ebayopensource.dsf.jst.declaration.JstCache;
 
 /**
  * All vjo program vjo sample test cases

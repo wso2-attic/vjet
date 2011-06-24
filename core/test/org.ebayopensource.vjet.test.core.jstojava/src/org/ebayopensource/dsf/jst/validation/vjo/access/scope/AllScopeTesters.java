@@ -15,10 +15,6 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.access.scope;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.validation.vjo.access.needs.AccessNeeds1Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.access.needs.AccessNeeds2Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.access.needs.AccessNeeds3Tester;
@@ -43,6 +39,9 @@ import org.ebayopensource.dsf.jst.validation.vjo.access.scope.samePackage.SameLe
 import org.ebayopensource.dsf.jst.validation.vjo.access.scope.samePackage.SameLevelPackageAccessProtectedTester;
 import org.ebayopensource.dsf.jst.validation.vjo.access.scope.samePackage.SameLevelPackageAccessPublicTester;
 import org.ebayopensource.dsf.jst.validation.vjo.access.scope.thisKeyWord.AllThisKeyTesters;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Class/Interface description

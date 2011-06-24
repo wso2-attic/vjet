@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.declaration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
@@ -60,7 +61,7 @@ public class JstStaticOnlyProxyType extends JstProxyType {
 	@Override
 	public List< IJstProperty> getProperties(boolean isStatic) {
 		if (!isStatic) {
-			return null;
+			return new ArrayList<IJstProperty>();
 		}
 		return getStaticProperties();
 	}
@@ -68,7 +69,7 @@ public class JstStaticOnlyProxyType extends JstProxyType {
 	@Override
 	public List< IJstProperty> getAllPossibleProperties(boolean isStatic, boolean recursive) {
 		if (!isStatic) {
-			return null;
+		   return new ArrayList<IJstProperty>();
 		}
 		return super.getAllPossibleProperties(true, recursive);
 	}
@@ -127,7 +128,7 @@ public class JstStaticOnlyProxyType extends JstProxyType {
 	@Override
 	public List<? extends IJstMethod> getMethods(boolean isStatic) {
 		if (!isStatic) {
-			return null;
+			return new ArrayList<IJstMethod>();
 		}
 		return getStaticMethods();
 	}
@@ -135,7 +136,7 @@ public class JstStaticOnlyProxyType extends JstProxyType {
 	@Override
 	public List<? extends IJstMethod> getMethods(boolean isStatic, boolean recursive) {
 		if (!isStatic) {
-			return null;
+			return new ArrayList<IJstMethod>();
 		}
 		return super.getMethods(true, recursive);
 	}

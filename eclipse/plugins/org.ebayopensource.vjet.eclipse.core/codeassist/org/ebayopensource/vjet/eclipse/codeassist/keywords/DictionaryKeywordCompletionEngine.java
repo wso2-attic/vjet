@@ -13,12 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstTypeCompletion;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 
 /**
  * This keyword completion engine obtain {@link IVjoCompletionData} objects from

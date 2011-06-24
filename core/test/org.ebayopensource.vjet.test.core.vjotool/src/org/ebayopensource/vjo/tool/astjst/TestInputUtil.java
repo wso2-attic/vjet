@@ -22,12 +22,11 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.ebayopensource.dsf.util.JavaSourceLocator;
+import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import org.ebayopensource.dsf.util.JavaSourceLocator;
-import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 
 public class TestInputUtil {
 

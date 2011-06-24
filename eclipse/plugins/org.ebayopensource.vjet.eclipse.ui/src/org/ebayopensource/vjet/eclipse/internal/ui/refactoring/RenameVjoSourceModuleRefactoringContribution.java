@@ -17,15 +17,14 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.refactoring;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.rename.RenameVjoSourceModuleProcessor;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.rename.RenameVjoSourceModuleWizard;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.dltk.mod.internal.corext.refactoring.rename.ScriptRenameRefactoring;
 import org.eclipse.dltk.mod.internal.corext.refactoring.vjet.AbstractVjoRenameRefactoringContribution;
 import org.eclipse.ltk.core.refactoring.Refactoring;
 import org.eclipse.ltk.core.refactoring.RefactoringDescriptor;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizard;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.rename.RenameVjoSourceModuleProcessor;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.rename.RenameVjoSourceModuleWizard;
 
 
 /**

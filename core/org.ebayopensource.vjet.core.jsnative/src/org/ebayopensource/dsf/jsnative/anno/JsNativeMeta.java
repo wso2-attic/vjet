@@ -21,6 +21,8 @@ import org.ebayopensource.dsf.jsnative.events.EventException;
 import org.ebayopensource.dsf.jsnative.events.EventListener;
 import org.ebayopensource.dsf.jsnative.events.EventTarget;
 import org.ebayopensource.dsf.jsnative.events.KeyboardEvent;
+import org.ebayopensource.dsf.jsnative.events.LSLoadEvent;
+import org.ebayopensource.dsf.jsnative.events.LSProgressEvent;
 import org.ebayopensource.dsf.jsnative.events.MouseEvent;
 import org.ebayopensource.dsf.jsnative.events.TextEvent;
 import org.ebayopensource.dsf.jsnative.events.UIEvent;
@@ -164,6 +166,8 @@ public class JsNativeMeta {
 		addbt(EventListener.class);
 		addbt(DocumentEvent.class);
 		addbt(EventException.class);
+		addbt(LSLoadEvent.class);
+		addbt(LSProgressEvent.class);
 		addbt(MouseEvent.class);
 		addbt(KeyboardEvent.class);
 		addbt(TextEvent.class);
@@ -250,8 +254,10 @@ public class JsNativeMeta {
 		addbt(DocumentRange.class);
 		// IE specific
 		addbt(HtmlDlgSafeHelper.class);
-		
-		
+		addbt(DomParser.class);
+		addbt(DomParseFilter.class);
+		addbt(DomInput.class);
+		addbt(DomInputStream.class);
 		
 		// HTML Elements
 		loadHtmlElements();

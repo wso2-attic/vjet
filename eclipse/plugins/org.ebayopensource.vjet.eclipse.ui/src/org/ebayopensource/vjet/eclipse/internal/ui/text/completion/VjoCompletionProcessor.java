@@ -19,6 +19,8 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.completion.JavaScriptCompletionProposalLabelProvider;
 import org.eclipse.dltk.mod.ui.text.completion.CompletionProposalLabelProvider;
@@ -27,9 +29,6 @@ import org.eclipse.dltk.mod.ui.text.completion.ScriptCompletionProcessor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.ui.IEditorPart;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * JavaScript completion processor

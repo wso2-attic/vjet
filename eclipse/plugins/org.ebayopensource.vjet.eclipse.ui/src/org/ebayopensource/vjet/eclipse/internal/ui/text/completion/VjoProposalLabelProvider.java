@@ -8,13 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
-import org.eclipse.dltk.mod.ast.Modifiers;
-import org.eclipse.dltk.mod.core.Flags;
-import org.eclipse.dltk.mod.ui.DLTKPluginImages;
-import org.eclipse.dltk.mod.ui.ScriptElementImageProvider;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.graphics.Image;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
@@ -26,6 +19,12 @@ import org.ebayopensource.dsf.jst.token.ILHS;
 import org.ebayopensource.vjet.eclipse.ui.VjetUIImages;
 import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
 import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
+import org.eclipse.dltk.mod.ast.Modifiers;
+import org.eclipse.dltk.mod.core.Flags;
+import org.eclipse.dltk.mod.ui.DLTKPluginImages;
+import org.eclipse.dltk.mod.ui.ScriptElementImageProvider;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
 
 public class VjoProposalLabelProvider {
 

@@ -16,6 +16,13 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Vector;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.filters.FieldsFilter;
+import org.ebayopensource.vjet.eclipse.internal.ui.filters.LocalTypesFilter;
+import org.ebayopensource.vjet.eclipse.internal.ui.filters.NonPublicFilter;
+import org.ebayopensource.vjet.eclipse.internal.ui.filters.StaticsFilter;
+import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
+import org.ebayopensource.vjet.eclipse.ui.viewsupport.VjoLabelProvider;
+import org.ebayopensource.vjet.eclipse.ui.viewsupport.VjoSourcePositionSorter;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.ListenerList;
@@ -104,14 +111,6 @@ import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.ShowInContext;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.filters.FieldsFilter;
-import org.ebayopensource.vjet.eclipse.internal.ui.filters.LocalTypesFilter;
-import org.ebayopensource.vjet.eclipse.internal.ui.filters.NonPublicFilter;
-import org.ebayopensource.vjet.eclipse.internal.ui.filters.StaticsFilter;
-import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
-import org.ebayopensource.vjet.eclipse.ui.viewsupport.VjoLabelProvider;
-import org.ebayopensource.vjet.eclipse.ui.viewsupport.VjoSourcePositionSorter;
 
 /**
  * The content outline page of the Java editor. The viewer implements a

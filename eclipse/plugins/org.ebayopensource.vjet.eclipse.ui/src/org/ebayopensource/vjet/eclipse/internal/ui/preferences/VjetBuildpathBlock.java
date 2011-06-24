@@ -11,13 +11,12 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.ui.util.IStatusChangeListener;
 import org.eclipse.dltk.mod.ui.wizards.BuildpathsBlock;
 import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * 

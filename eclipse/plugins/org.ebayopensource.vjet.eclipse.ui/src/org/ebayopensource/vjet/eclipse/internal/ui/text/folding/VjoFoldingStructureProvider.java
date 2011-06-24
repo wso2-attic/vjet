@@ -16,6 +16,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
+import org.ebayopensource.vjet.eclipse.core.IJSType;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.dltk.mod.ast.ASTNode;
 import org.eclipse.dltk.mod.core.IMember;
@@ -29,7 +35,6 @@ import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.corext.SourceRange;
 import org.eclipse.dltk.mod.internal.core.IJSInitializer;
-import org.eclipse.dltk.mod.internal.core.JSInitializer;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.JavascriptPartitionScanner;
 import org.eclipse.dltk.mod.javascript.scriptdoc.IScanner;
 import org.eclipse.dltk.mod.javascript.scriptdoc.PublicScanner;
@@ -48,13 +53,6 @@ import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.jface.text.source.projection.IProjectionPosition;
 import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-import org.ebayopensource.vjet.eclipse.core.IJSType;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class VjoFoldingStructureProvider extends
 		AbstractASTFoldingStructureProvider {

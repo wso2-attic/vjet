@@ -11,13 +11,12 @@ package org.ebayopensource.vjet.eclipse.core.validation.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.dltk.mod.core.DLTKCore;
-
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 
 public class ValidatorDefinitionFactory {
 

@@ -11,6 +11,10 @@ package org.ebayopensource.vjet.eclipse.internal.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -20,11 +24,6 @@ import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.search.IDLTKSearchScope;
 import org.eclipse.dltk.mod.core.search.SearchPattern;
-
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 
 /**
  * This class copy of org.eclipse.dltk.mod.javascript.internal.core.codeassist.

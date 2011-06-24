@@ -10,14 +10,13 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-import org.eclipse.dltk.mod.core.IType;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstMixinOnTypeCompletion;
 import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionProposal;
+import org.eclipse.dltk.mod.core.IType;
 
 /**
  * Provides package/type completion proposals inside "mixin" block

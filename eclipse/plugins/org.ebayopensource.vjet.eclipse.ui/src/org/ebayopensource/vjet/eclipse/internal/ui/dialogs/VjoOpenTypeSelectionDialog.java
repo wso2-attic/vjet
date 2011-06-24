@@ -12,6 +12,7 @@ import org.eclipse.dltk.mod.core.search.IDLTKSearchScope;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
 import org.eclipse.dltk.mod.ui.IDLTKUILanguageToolkit;
 import org.eclipse.dltk.mod.ui.dialogs.TypeSelectionExtension;
+import org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog;
 import org.eclipse.jface.dialogs.DialogSettings;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.operation.IRunnableContext;

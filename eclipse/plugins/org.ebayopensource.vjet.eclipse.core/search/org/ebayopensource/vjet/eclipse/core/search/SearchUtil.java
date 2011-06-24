@@ -8,11 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.search;
 
-import org.eclipse.dltk.mod.core.IMember;
-import org.eclipse.dltk.mod.core.ISourceRange;
-import org.eclipse.dltk.mod.core.ModelException;
-import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -22,6 +17,10 @@ import org.ebayopensource.dsf.jstojava.translator.JstUtil;
 import org.ebayopensource.dsf.ts.TypeSpace;
 import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.eclipse.dltk.mod.core.IMember;
+import org.eclipse.dltk.mod.core.ISourceRange;
+import org.eclipse.dltk.mod.core.ModelException;
+import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 
 /**
  * Utility methods for search

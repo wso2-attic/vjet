@@ -13,8 +13,6 @@ package org.ebayopensource.vjet.eclipse.core;
 
 import org.eclipse.dltk.mod.core.ISourceModule;
 
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-
 /**
  * 
  * 

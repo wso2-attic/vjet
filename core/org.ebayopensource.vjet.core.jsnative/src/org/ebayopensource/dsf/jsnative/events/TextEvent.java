@@ -8,14 +8,13 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jsnative.events;
 
-import org.w3c.dom.views.AbstractView;
-
 import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.Property;
+import org.w3c.dom.views.AbstractView;
 
 /**
  * http://www.w3.org/TR/DOM-Level-3-Events/java-binding.html

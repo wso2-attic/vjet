@@ -11,6 +11,11 @@
  */
 package org.ebayopensource.vjet.eclipse.ui;
 
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
+import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
+import org.ebayopensource.vjet.eclipse.core.IJSMethod;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.eclipse.dltk.mod.core.IField;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.IPackageDeclaration;
@@ -25,12 +30,6 @@ import org.eclipse.dltk.mod.internal.core.JSSourceMethodElementInfo;
 import org.eclipse.dltk.mod.internal.core.SourceField;
 import org.eclipse.dltk.mod.internal.core.VjoLocalVariable;
 import org.eclipse.dltk.mod.ui.ScriptElementLabels;
-
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
-import org.ebayopensource.vjet.eclipse.core.IJSMethod;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 
 /**
  * 

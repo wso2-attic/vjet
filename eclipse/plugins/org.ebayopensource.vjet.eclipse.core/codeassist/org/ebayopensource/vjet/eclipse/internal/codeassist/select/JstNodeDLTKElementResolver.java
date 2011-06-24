@@ -11,12 +11,11 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.codeassist.select;
 
-import org.eclipse.dltk.mod.core.IModelElement;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator.IJstNodeTranslator;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator.JstToDLTKNodeTranslator;
+import org.eclipse.dltk.mod.core.IModelElement;
 
 /**
  * 

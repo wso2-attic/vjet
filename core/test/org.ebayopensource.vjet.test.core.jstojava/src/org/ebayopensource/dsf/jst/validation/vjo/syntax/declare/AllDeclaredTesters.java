@@ -15,10 +15,6 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.declare;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.ctype.DeclaredCtype1Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.ctype.DeclaredCtype2Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.ctype.DeclaredCtype3Tester;
@@ -58,6 +54,9 @@ import org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.mtype.DeclaredMt
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.mtype.DeclaredMtypeCorrect1Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.mtype.DeclaredMtypeCorrect2Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.otype.CorrectOtype;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * All declared testers

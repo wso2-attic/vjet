@@ -8,15 +8,11 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.comment.parser;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Collection;
 import java.util.Map;
 
 import junit.framework.TestCase;
-
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
@@ -24,9 +20,9 @@ import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.parser.bootstrap.BootstrapParser;
-import com.ebay.kernel.resource.ResourceUtil;
 import org.ebayopensource.vjo.VjBootStrapDef;
 import org.ebayopensource.vjo.VjBootstrapJsr;
+import org.junit.Test;
 
 public class BootstrapCommentTest {
 

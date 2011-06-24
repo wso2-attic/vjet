@@ -44,7 +44,6 @@ import org.ebayopensource.dsf.javatojs.util.JavaToJsHelper;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.ebay.junitnexgen.category.Category;

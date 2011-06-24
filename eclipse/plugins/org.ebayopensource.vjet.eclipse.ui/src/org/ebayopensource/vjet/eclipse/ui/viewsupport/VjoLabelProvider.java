@@ -11,13 +11,12 @@
  */
 package org.ebayopensource.vjet.eclipse.ui.viewsupport;
 
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementLabels;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.dltk.mod.ui.ScriptElementLabels;
 import org.eclipse.dltk.mod.ui.viewsupport.AppearanceAwareLabelProvider;
 import org.eclipse.jface.preference.IPreferenceStore;
-
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementLabels;
 
 /**
  * 

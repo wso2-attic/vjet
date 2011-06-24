@@ -11,6 +11,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.EditorHighlightingSynchronizer;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -23,11 +27,6 @@ import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.texteditor.link.EditorLinkedModeUI;
-
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.EditorHighlightingSynchronizer;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class MethodCompletionProposal extends CompletionProposal {
 	private IRegion fSelectedRegion = null;

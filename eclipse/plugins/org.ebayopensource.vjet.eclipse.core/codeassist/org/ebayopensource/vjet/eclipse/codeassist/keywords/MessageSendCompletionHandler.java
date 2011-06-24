@@ -12,15 +12,14 @@ import static org.eclipse.dltk.mod.core.CompletionProposal.METHOD_REF;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstComletionOnMessageSend;
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
-
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstComletionOnMessageSend;
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 
 /**
  * Creates object methods completions

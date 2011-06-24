@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl;
 
-import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
 import org.ebayopensource.vjet.eclipse.internal.ui.view.properties.AstNodesPropertySourceAdapter;
+import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
 
 /**
  * Node printer for ast node.

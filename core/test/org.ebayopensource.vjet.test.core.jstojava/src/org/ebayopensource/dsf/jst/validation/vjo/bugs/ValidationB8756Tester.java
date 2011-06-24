@@ -8,22 +8,21 @@
  *******************************************************************************/
 
 package org.ebayopensource.dsf.jst.validation.vjo.bugs;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P3;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category( { P3, FAST, UNIT })
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")

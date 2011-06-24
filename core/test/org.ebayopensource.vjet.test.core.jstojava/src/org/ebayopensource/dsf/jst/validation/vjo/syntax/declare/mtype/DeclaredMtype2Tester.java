@@ -18,18 +18,18 @@ package org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.mtype;
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P3;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 /**
  * Declared ctype correct 1

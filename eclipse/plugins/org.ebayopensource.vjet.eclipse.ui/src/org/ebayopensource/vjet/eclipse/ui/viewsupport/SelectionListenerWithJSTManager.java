@@ -21,6 +21,10 @@ package org.ebayopensource.vjet.eclipse.ui.viewsupport;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor.SelectionListenerWithJST;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.ListenerList;
@@ -38,11 +42,6 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.texteditor.ITextEditor;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor.SelectionListenerWithJST;
 
 /**
  * Infrastructure to share an AST for editor post selection listeners.

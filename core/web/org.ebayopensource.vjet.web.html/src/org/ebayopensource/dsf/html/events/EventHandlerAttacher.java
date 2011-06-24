@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.html.events;
 
-import java.lang.reflect.Method;
-
 import org.ebayopensource.dsf.common.context.DsfCtx;
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.dom.DElement;

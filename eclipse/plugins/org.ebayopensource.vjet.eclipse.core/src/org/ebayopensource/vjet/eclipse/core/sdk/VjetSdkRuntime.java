@@ -8,13 +8,12 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.sdk;
 
+import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
-
-import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 
 public class VjetSdkRuntime {
 

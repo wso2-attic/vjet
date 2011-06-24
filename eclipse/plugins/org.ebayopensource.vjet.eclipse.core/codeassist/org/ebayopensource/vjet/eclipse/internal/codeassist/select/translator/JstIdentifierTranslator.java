@@ -19,7 +19,6 @@ import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKElementResolver;
-import org.eclipse.dltk.mod.core.IModelElement;
 
 /**
  * the ton unit jst node is JstIdentifier, this is the key translator based on

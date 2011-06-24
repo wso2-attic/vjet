@@ -17,6 +17,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.typehierarchy;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoOpenTypeSelectionDialog;
+import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoTypeSelectionDialog;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.search.IDLTKSearchConstants;
 import org.eclipse.dltk.mod.ui.DLTKUILanguageManager;
@@ -24,10 +27,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoOpenTypeSelectionDialog;
-import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoTypeSelectionDialog;
 
 /**
  * Refocuses the type hierarchy on a type selection from a all types dialog.

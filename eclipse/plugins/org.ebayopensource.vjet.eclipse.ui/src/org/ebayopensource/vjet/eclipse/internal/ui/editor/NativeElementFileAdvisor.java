@@ -10,16 +10,15 @@ package org.ebayopensource.vjet.eclipse.internal.ui.editor;
 
 import java.io.File;
 
-import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.internal.core.SourceModule;
-import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
-import org.eclipse.dltk.mod.internal.ui.editor.IModelElementFileAdivsor;
-
 import org.ebayopensource.dsf.jst.FileBinding;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.JstSource.IBinding;
 import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.internal.core.SourceModule;
+import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
+import org.eclipse.dltk.mod.internal.ui.editor.IModelElementFileAdivsor;
 
 public class NativeElementFileAdvisor implements IModelElementFileAdivsor {
 

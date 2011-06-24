@@ -8,6 +8,13 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstProperty;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
+import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
 import org.eclipse.dltk.mod.ast.Modifiers;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.ui.templates.IScriptTemplateIndenter;
@@ -17,14 +24,6 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.TextUtilities;
-
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstProperty;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.declaration.JstModifiers;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
-import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
 
 public class VjoProposalLabelUtil {
 

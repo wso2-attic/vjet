@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore.OverlayKey;
 import org.eclipse.dltk.mod.ui.text.folding.IFoldingPreferenceBlock;
@@ -34,8 +35,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 
 /**
  * VJET default folding preferences.

@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.ts;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-
 import org.ebayopensource.vjo.tool.typespace.TypeLoadMonitor;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * Eclipse implementation of the type load monitor.

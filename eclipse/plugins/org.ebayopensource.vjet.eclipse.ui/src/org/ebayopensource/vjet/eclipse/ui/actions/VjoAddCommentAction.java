@@ -8,14 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.ui.actions;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.dltk.mod.ui.actions.SelectionDispatchAction;
-import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.jface.text.TextUtilities;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IWorkbenchSite;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstProperty;
@@ -26,6 +18,13 @@ import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
 import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoProposalLabelUtil;
 import org.ebayopensource.vjet.eclipse.ui.VjetUIUtils;
 import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.dltk.mod.ui.actions.SelectionDispatchAction;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextSelection;
+import org.eclipse.jface.text.TextUtilities;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IWorkbenchSite;
 
 public class VjoAddCommentAction extends SelectionDispatchAction {
 

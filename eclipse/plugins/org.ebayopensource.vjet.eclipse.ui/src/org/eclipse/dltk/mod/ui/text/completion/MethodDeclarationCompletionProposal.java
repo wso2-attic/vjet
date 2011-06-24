@@ -12,6 +12,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.FieldOrMethodCompletionHandler;
+import org.ebayopensource.vjet.eclipse.core.IJSType;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.dltk.mod.core.IMethod;
@@ -23,12 +28,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
 import org.eclipse.jface.text.contentassist.IContextInformation;
-
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.FieldOrMethodCompletionHandler;
-import org.ebayopensource.vjet.eclipse.core.IJSType;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 
 public class MethodDeclarationCompletionProposal extends
 		ScriptTypeCompletionProposal implements ICompletionProposalExtension4 {

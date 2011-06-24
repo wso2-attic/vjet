@@ -11,9 +11,6 @@ package org.ebayopensource.vjo.tool.codecompletion.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCommentCompletion;
@@ -21,6 +18,8 @@ import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstFieldOrMe
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstKeywordCompletion;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcHandler;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * 

@@ -8,11 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.view.typespace;
 
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 
 public class TypespaceViewFilter extends ViewerFilter {
 	private String m_filterStr = "";

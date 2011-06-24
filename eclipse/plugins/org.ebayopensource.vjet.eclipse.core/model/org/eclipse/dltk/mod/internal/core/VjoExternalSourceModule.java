@@ -11,18 +11,6 @@ package org.eclipse.dltk.mod.internal.core;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IStorage;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.dltk.mod.core.DLTKCore;
-import org.eclipse.dltk.mod.core.ISourceElementParserExtension;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.ModelException;
-import org.eclipse.dltk.mod.core.SourceParserUtil;
-import org.eclipse.dltk.mod.core.WorkingCopyOwner;
-import org.eclipse.dltk.mod.utils.CorePrinter;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
@@ -36,6 +24,17 @@ import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
 import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.dltk.mod.core.DLTKCore;
+import org.eclipse.dltk.mod.core.ISourceElementParserExtension;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.ModelException;
+import org.eclipse.dltk.mod.core.SourceParserUtil;
+import org.eclipse.dltk.mod.core.WorkingCopyOwner;
+import org.eclipse.dltk.mod.utils.CorePrinter;
 
 public class VjoExternalSourceModule extends ExternalJSSourceModule implements
 		IVjoSourceModule {

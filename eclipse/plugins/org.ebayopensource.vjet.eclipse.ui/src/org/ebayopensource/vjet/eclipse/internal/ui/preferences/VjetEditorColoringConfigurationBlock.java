@@ -19,6 +19,13 @@ package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
 import java.io.InputStream;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlighting;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightingManager;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightingManager.HighlightedRange;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightings;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.dltk.mod.internal.ui.editor.ScriptSourceViewer;
 import org.eclipse.dltk.mod.javascript.internal.ui.editor.JavaScriptDocumentSetupParticipant;
@@ -40,14 +47,6 @@ import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.texteditor.ITextEditor;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlighting;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightingManager;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightings;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightingManager.HighlightedRange;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * This class is representation of the vjet/editor/syntax coloring configuration block.

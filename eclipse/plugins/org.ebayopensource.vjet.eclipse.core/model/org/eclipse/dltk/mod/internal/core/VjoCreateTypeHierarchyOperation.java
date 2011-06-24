@@ -10,6 +10,9 @@ package org.eclipse.dltk.mod.internal.core;
 
 import java.util.List;
 
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.IModelStatus;
 import org.eclipse.dltk.mod.core.IModelStatusConstants;
@@ -21,10 +24,6 @@ import org.eclipse.dltk.mod.core.ITypeHierarchy;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.search.IDLTKSearchScope;
 import org.eclipse.dltk.mod.internal.core.hierarchy.VjoTypeHierarchy;
-
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * This operation creates an <code>ITypeHierarchy</code> for a specific type

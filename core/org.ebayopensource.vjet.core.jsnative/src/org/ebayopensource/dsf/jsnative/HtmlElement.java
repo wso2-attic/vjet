@@ -18,10 +18,8 @@ import org.ebayopensource.dsf.jsnative.anno.Dynamic;
 import org.ebayopensource.dsf.jsnative.anno.Function;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.JstExclude;
-import org.ebayopensource.dsf.jsnative.anno.JstMultiReturn;
 import org.ebayopensource.dsf.jsnative.anno.OverLoadFunc;
 import org.ebayopensource.dsf.jsnative.anno.Property;
-import org.ebayopensource.dsf.jsnative.anno.ProxyFunc;
 import org.ebayopensource.dsf.jsnative.events.EventTarget;
 
 /**

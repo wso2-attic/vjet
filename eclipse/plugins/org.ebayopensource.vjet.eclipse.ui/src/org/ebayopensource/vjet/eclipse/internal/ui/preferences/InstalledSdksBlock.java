@@ -16,6 +16,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.sdk.ISdkEnvironmentType;
+import org.ebayopensource.vjet.eclipse.core.sdk.VjetSdkRuntime;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.ListenerList;
@@ -60,11 +64,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
-
-import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.sdk.ISdkEnvironmentType;
-import org.ebayopensource.vjet.eclipse.core.sdk.VjetSdkRuntime;
 
 public class InstalledSdksBlock  implements ISelectionProvider {
 	

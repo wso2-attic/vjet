@@ -10,11 +10,6 @@ package org.ebayopensource.vjet.eclipse.core.parser;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
-import org.eclipse.dltk.mod.compiler.problem.IProblem;
-import org.eclipse.dltk.mod.compiler.problem.IProblemReporter;
-import org.eclipse.dltk.mod.core.DLTKCore;
-
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
@@ -25,6 +20,9 @@ import org.ebayopensource.vjet.eclipse.core.ts.VjoJstTypeLoader;
 import org.ebayopensource.vjet.eclipse.core.validation.ValidationEntry;
 import org.ebayopensource.vjet.eclipse.core.validation.utils.ProblemUtility;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
+import org.eclipse.dltk.mod.compiler.problem.IProblem;
+import org.eclipse.dltk.mod.compiler.problem.IProblemReporter;
 
 /**
  * Changed by Jack at 2009.10.14: Because ScriptUnit has handle all the problems

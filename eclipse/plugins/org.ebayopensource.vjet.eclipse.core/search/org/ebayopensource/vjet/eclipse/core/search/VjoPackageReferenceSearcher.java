@@ -11,6 +11,11 @@ package org.ebayopensource.vjet.eclipse.core.search;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
+import org.ebayopensource.dsf.ts.TypeSpace;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IPackageDeclaration;
 import org.eclipse.dltk.mod.core.IScriptFolder;
@@ -19,12 +24,6 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.search.SearchPattern;
 import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 import org.eclipse.dltk.mod.internal.core.search.matching.PackageReferencePattern;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
-import org.ebayopensource.dsf.ts.TypeSpace;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class VjoPackageReferenceSearcher extends AbstractVjoElementSearcher {
 

@@ -8,6 +8,10 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.text.completion;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.CompletionContext;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoCompletionProposal;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoProposalContextInformation;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -29,11 +33,6 @@ import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.texteditor.link.EditorLinkedModeUI;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.CompletionContext;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoCompletionProposal;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoProposalContextInformation;
 
 public class VjoScriptMethodCompletionProposal extends
 		LazyScriptCompletionProposal implements ICompletionProposalExtension4 {

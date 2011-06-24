@@ -15,11 +15,10 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.mixin;
 
+import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 
 
 @RunWith(Suite.class)

@@ -27,7 +27,6 @@ import org.ebayopensource.dsf.jst.declaration.JstVars;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.IStmt;
-import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl.AstNodePrinter;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl.BeanStyleNodePrinter;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl.DefaultNodePrinter;
@@ -45,6 +44,7 @@ import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl.JstStmtCommo
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl.JstTypeNodePrinter;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl.JstTypeReferenceNodePrinter;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.impl.JstVarsNodePrinter;
+import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
 
 /**
  * INodePrinter static factory

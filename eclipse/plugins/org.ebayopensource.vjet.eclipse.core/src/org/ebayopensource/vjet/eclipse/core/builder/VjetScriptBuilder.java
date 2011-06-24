@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -38,7 +39,6 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -71,8 +71,6 @@ import org.eclipse.dltk.mod.internal.core.ScriptProject;
 import org.eclipse.dltk.mod.internal.core.builder.ScriptBuilder;
 import org.eclipse.dltk.mod.internal.core.builder.State;
 import org.eclipse.osgi.util.NLS;
-
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 
 public class VjetScriptBuilder extends ScriptBuilder {
 	public static final boolean DEBUG = VjetPlugin.DEBUG_SCRIPT_BUILDER;

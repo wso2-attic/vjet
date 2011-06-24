@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.dltk.mod.ui.preferences.TodoTaskAbstractPreferencePage;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class VjetTodoTaskPreferencePage extends TodoTaskAbstractPreferencePage {
 

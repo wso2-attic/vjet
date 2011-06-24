@@ -10,6 +10,8 @@ package org.eclipse.dltk.mod.internal.core;
 
 import java.util.Enumeration;
 
+import org.ebayopensource.dsf.jst.BaseJstNode;
+import org.ebayopensource.vjet.eclipse.internal.core.VjoModelElement;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -30,9 +32,6 @@ import org.eclipse.dltk.mod.core.IModelStatusConstants;
 import org.eclipse.dltk.mod.core.IOpenable;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.WorkingCopyOwner;
-
-import org.ebayopensource.dsf.jst.BaseJstNode;
-import org.ebayopensource.vjet.eclipse.internal.core.VjoModelElement;
 
 public abstract class VjoOpenable extends VjoModelElement implements IOpenable,
 		IBufferChangedListener {

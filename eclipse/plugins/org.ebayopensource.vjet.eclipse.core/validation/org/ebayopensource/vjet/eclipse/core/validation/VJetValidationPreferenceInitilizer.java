@@ -15,13 +15,11 @@
  */
 package org.ebayopensource.vjet.eclipse.core.validation;
 
-import org.eclipse.core.runtime.Preferences;
-import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
-
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRule;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRuleSet;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.VjoSemanticRuleRepo;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.eclipse.core.runtime.Preferences;
+import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 
 /**
  * Class/Interface description

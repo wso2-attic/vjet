@@ -11,14 +11,13 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.text;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightings;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.JavascriptTextTools;
 import org.eclipse.dltk.mod.ui.editor.highlighting.SemanticHighlighting;
 import org.eclipse.dltk.mod.ui.text.ScriptSourceViewerConfiguration;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.rules.IPartitionTokenScanner;
 import org.eclipse.ui.texteditor.ITextEditor;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting.VjoSemanticHighlightings;
 
 /**
  * 

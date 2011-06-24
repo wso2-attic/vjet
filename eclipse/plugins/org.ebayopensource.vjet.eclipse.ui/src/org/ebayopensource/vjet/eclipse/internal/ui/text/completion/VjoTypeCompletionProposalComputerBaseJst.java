@@ -11,6 +11,12 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 import java.util.Collections;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
+import org.ebayopensource.vjo.tool.codecompletion.IVjoCcEngine;
+import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
+import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.ModelException;
@@ -25,13 +31,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.templates.TemplateCompletionProcessor;
 import org.eclipse.swt.widgets.Shell;
-
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
-import org.ebayopensource.vjo.tool.codecompletion.IVjoCcEngine;
-import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
-import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class VjoTypeCompletionProposalComputerBaseJst extends
 		ScriptCompletionProposalComputer {

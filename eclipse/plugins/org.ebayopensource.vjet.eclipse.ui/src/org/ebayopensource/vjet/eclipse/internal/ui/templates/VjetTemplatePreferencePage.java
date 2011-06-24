@@ -15,16 +15,14 @@
  ******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.templates;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.VjoTextTools;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.javascript.ui.text.IJavaScriptPartitions;
 import org.eclipse.dltk.mod.ui.templates.ScriptTemplateAccess;
 import org.eclipse.dltk.mod.ui.templates.ScriptTemplatePreferencePage;
 import org.eclipse.dltk.mod.ui.text.ScriptSourceViewerConfiguration;
 import org.eclipse.jface.text.IDocument;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.templates.VjoTemplateAccess;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.VjoTextTools;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * Javascript templates preference page

@@ -17,11 +17,10 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.ui.preferences.AbstractConfigurationBlockPreferencePage;
 import org.eclipse.dltk.mod.ui.preferences.IPreferenceConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class VjetGlobalPreferencesPage extends
 		AbstractConfigurationBlockPreferencePage {

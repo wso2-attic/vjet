@@ -13,6 +13,7 @@ package org.ebayopensource.vjet.eclipse.core.search;
 
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.dltk.mod.core.ISourceRange;
@@ -20,8 +21,6 @@ import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.search.SearchPattern;
 import org.eclipse.dltk.mod.internal.core.search.matching.TypeDeclarationPattern;
-
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 
 /**
  * 

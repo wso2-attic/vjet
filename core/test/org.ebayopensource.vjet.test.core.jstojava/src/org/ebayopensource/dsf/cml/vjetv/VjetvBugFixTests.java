@@ -24,12 +24,12 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
-import org.junit.Assert;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jstojava.cml.vjetv.core.ArgumentsParser;
 import org.ebayopensource.dsf.jstojava.cml.vjetv.model.impl.HeadlessParserConfigure;
 import org.ebayopensource.dsf.jstojava.cml.vjetv.util.FileOperator;
+import org.junit.Assert;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 

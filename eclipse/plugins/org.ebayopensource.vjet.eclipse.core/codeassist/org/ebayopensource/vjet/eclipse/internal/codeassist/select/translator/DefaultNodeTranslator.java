@@ -11,10 +11,9 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator;
 
-import org.eclipse.dltk.mod.core.IModelElement;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
+import org.eclipse.dltk.mod.core.IModelElement;
 
 /**
  * list common methods for sub classes

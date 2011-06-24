@@ -11,11 +11,11 @@ import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
+import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.junit.Test;
 
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 
 /**
  * Test if the Handler can grab the legal advisors

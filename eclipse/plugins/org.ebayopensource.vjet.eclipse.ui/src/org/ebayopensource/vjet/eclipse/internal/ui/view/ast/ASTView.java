@@ -16,6 +16,13 @@ import java.io.FileReader;
 import java.util.Collections;
 
 import org.apache.tools.ant.util.FileUtils;
+import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
+import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.NodePrinterFactory;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.internal.core.NativeVjoSourceModule;
 import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
@@ -46,6 +53,9 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
+import org.eclipse.mod.wst.jsdt.core.compiler.IProblem;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.dnd.Clipboard;
@@ -67,17 +77,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.editors.text.ILocationProvider;
 import org.eclipse.ui.part.ViewPart;
-
-import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
-import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
-import org.eclipse.mod.wst.jsdt.core.compiler.IProblem;
-import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
-import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
-import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.NodePrinterFactory;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.SimpleVjoSourceViewerConfiguration;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * ast view

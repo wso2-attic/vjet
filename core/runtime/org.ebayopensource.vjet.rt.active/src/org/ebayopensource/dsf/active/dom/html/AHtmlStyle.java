@@ -11,7 +11,6 @@ package org.ebayopensource.dsf.active.dom.html;
 import org.ebayopensource.dsf.html.dom.DStyle;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
 import org.ebayopensource.dsf.jsnative.CssStyleSheet;
-import org.ebayopensource.dsf.jsnative.HtmlElementStyle;
 import org.ebayopensource.dsf.jsnative.HtmlStyle;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 

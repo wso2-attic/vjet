@@ -13,12 +13,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle;
 
 import java.io.File;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
-
 import org.eclipse.jface.text.templates.Template;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * 
