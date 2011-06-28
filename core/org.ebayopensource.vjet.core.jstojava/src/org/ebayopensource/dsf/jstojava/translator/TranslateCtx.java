@@ -196,6 +196,9 @@ public class TranslateCtx implements IFindTypeSupport{
 
 	public ScopeId getCurrentScope() {
 		try {
+			if(blockStack.isEmpty()){
+				return ScopeIds.GLOBAL;
+			}
 			return blockStack.peek();
 		} catch (EmptyStackException e) {
 			return ScopeIds.GLOBAL;
