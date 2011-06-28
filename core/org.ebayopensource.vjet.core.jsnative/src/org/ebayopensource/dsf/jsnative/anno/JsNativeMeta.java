@@ -15,7 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.ebayopensource.dsf.jsnative.*;
+import org.ebayopensource.dsf.jsnative.events.CompositionEvent;
+import org.ebayopensource.dsf.jsnative.events.CustomEvent;
+import org.ebayopensource.dsf.jsnative.events.DataTransfer;
 import org.ebayopensource.dsf.jsnative.events.DocumentEvent;
+import org.ebayopensource.dsf.jsnative.events.DragEvent;
 import org.ebayopensource.dsf.jsnative.events.Event;
 import org.ebayopensource.dsf.jsnative.events.EventException;
 import org.ebayopensource.dsf.jsnative.events.EventListener;
@@ -26,6 +30,9 @@ import org.ebayopensource.dsf.jsnative.events.LSProgressEvent;
 import org.ebayopensource.dsf.jsnative.events.MouseEvent;
 import org.ebayopensource.dsf.jsnative.events.TextEvent;
 import org.ebayopensource.dsf.jsnative.events.UIEvent;
+import org.ebayopensource.dsf.jsnative.file.Blob;
+import org.ebayopensource.dsf.jsnative.file.File;
+import org.ebayopensource.dsf.jsnative.file.FileList;
 
 public class JsNativeMeta {
 	
@@ -172,6 +179,16 @@ public class JsNativeMeta {
 		addbt(KeyboardEvent.class);
 		addbt(TextEvent.class);
 		addbt(UIEvent.class);
+		addbt(CompositionEvent.class);
+		addbt(CustomEvent.class);
+		addbt(DragEvent.class);
+		
+		
+		// file api
+		addbt(DataTransfer.class);
+		addbt(FileList.class);
+		addbt(File.class);
+		addbt(Blob.class);
 	}
 
 	private static void addDomHtmlObjects() {
