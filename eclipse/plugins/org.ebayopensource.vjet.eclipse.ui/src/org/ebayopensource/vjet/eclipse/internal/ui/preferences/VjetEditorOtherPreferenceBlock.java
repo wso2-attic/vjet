@@ -15,6 +15,8 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.ui.preferences.AbstractConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
 import org.eclipse.jface.preference.PreferencePage;
@@ -24,9 +26,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * Class/Interface description

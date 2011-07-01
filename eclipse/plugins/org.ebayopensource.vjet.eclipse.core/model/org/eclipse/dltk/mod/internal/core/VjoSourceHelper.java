@@ -10,6 +10,9 @@ package org.eclipse.dltk.mod.internal.core;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -17,10 +20,6 @@ import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 
 public class VjoSourceHelper {
 

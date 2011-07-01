@@ -14,6 +14,14 @@ package org.ebayopensource.vjet.eclipse.internal.ui.view.typespace;
 import java.net.URI;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
+import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.NodePrinterFactory;
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -48,15 +56,6 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.part.ViewPart;
-
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
-import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.NodePrinterFactory;
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * TypeSpace View

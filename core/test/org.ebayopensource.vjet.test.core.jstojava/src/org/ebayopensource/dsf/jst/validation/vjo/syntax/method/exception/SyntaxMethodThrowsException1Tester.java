@@ -17,14 +17,13 @@ package org.ebayopensource.dsf.jst.validation.vjo.syntax.method.exception;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.TypeProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * Test the abstract method will be impl in sub classes

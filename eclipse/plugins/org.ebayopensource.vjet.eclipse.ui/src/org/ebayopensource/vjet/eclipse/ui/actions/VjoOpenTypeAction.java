@@ -11,6 +11,9 @@
  */
 package org.ebayopensource.vjet.eclipse.ui.actions;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoOpenTypeSelectionDialog;
+import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoTypeSelectionDialog;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.search.IDLTKSearchConstants;
@@ -22,10 +25,6 @@ import org.eclipse.dltk.mod.ui.util.ExceptionHandler;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoOpenTypeSelectionDialog;
-import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoTypeSelectionDialog;
 
 /**
  * This action calls {@link VjoOpenTypeSelectionDialog#open()} method.

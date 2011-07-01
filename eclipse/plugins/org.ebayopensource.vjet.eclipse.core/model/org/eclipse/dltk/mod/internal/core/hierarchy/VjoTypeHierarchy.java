@@ -15,6 +15,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
+import org.ebayopensource.vjet.eclipse.core.IVjoTypeHierarchy;
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.ISafeRunnable;
@@ -37,15 +45,6 @@ import org.eclipse.dltk.mod.internal.core.ScriptProject;
 import org.eclipse.dltk.mod.internal.core.TypeVector;
 import org.eclipse.dltk.mod.internal.core.util.Messages;
 import org.eclipse.dltk.mod.internal.core.util.Util;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.ts.type.TypeName;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
-import org.ebayopensource.vjet.eclipse.core.IVjoTypeHierarchy;
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * Vjo type hierarchy implementation based on type space

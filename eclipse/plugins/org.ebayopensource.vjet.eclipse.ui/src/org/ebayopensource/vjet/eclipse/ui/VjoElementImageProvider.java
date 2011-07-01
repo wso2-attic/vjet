@@ -8,6 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.ui;
 
+import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
+import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
+import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.dltk.mod.ast.Modifiers;
 import org.eclipse.dltk.mod.core.Flags;
@@ -28,11 +32,6 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.ui.model.IWorkbenchAdapter;
-
-import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
-import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 
 /**
  * 

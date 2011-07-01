@@ -15,10 +15,9 @@
  */
 package org.ebayopensource.dsf.cml.vjetv.util;
 
+import org.ebayopensource.dsf.jstojava.cml.vjetv.util.ClassLoaderUtil;
 import org.junit.Assert;
 import org.junit.Test;
-
-import org.ebayopensource.dsf.jstojava.cml.vjetv.util.ClassLoaderUtil;
 
 /**
  * Class/Interface description

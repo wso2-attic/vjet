@@ -11,10 +11,9 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.browsing;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
 import org.eclipse.dltk.mod.ui.browsing.TypesView;
 import org.eclipse.jface.viewers.IContentProvider;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
 
 /**
  * This class in representation of the vjet types view.

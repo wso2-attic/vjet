@@ -13,10 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 import org.eclipse.dltk.mod.core.CompletionProposal;
-
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 
 public class JSTCompletionDictionary {
 

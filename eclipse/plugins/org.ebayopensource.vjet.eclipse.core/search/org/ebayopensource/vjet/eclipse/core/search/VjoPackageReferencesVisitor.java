@@ -13,10 +13,6 @@ package org.ebayopensource.vjet.eclipse.core.search;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.core.IScriptFolder;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IJstTypeReference;
@@ -24,6 +20,9 @@ import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.traversal.IJstVisitor;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.eclipse.dltk.mod.core.IScriptFolder;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 
 /**
  * This class perform search type references in dependent type.

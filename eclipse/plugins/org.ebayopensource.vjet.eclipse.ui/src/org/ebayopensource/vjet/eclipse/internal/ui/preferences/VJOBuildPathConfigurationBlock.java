@@ -14,6 +14,7 @@ package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 import org.eclipse.dltk.mod.ui.preferences.AbstractConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore.OverlayKey;
@@ -31,8 +32,6 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 
 /**
  * 

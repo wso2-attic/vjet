@@ -9,19 +9,16 @@
 package org.ebayopensource.vjet.eclipse.core.validation.utils;
 
 import java.util.ArrayList;
-
 import java.util.Iterator;
 import java.util.List;
-
-import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
-import org.eclipse.dltk.mod.compiler.problem.ProblemSeverities;
 
 import org.ebayopensource.af.common.error.ErrorList;
 import org.ebayopensource.af.common.error.ErrorObject;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.ProblemSeverity;
 import org.ebayopensource.dsf.jstojava.report.DefaultErrorReporter;
-import org.ebayopensource.vjet.eclipse.core.validation.ValidationEntry;
+import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
+import org.eclipse.dltk.mod.compiler.problem.ProblemSeverities;
 
 public class ProblemUtility {
 

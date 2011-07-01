@@ -10,7 +10,6 @@ package org.ebayopensource.dsf.jst.tests.ts;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 

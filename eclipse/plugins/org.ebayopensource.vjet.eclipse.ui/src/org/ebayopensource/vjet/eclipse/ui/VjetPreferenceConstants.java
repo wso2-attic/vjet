@@ -17,6 +17,7 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.ui;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.text.VjetColorConstants;
 import org.eclipse.dltk.mod.ui.CodeFormatterConstants;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
 import org.eclipse.dltk.mod.ui.PreferenceConstants;
@@ -24,8 +25,6 @@ import org.eclipse.dltk.mod.ui.preferences.NewScriptProjectPreferencePage;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.RGB;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.text.VjetColorConstants;
 
 public class VjetPreferenceConstants extends PreferenceConstants {
 

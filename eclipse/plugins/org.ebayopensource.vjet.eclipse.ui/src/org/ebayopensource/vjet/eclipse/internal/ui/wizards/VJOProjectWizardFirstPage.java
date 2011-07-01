@@ -14,6 +14,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.wizards;
 import java.util.Observable;
 import java.util.Observer;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.internal.ui.preferences.VJOBuildPathPreferencePage;
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.internal.ui.wizards.dialogfields.LayoutUtil;
 import org.eclipse.dltk.mod.internal.ui.wizards.dialogfields.SelectionButtonDialogField;
 import org.eclipse.dltk.mod.launching.IInterpreterInstall;
@@ -28,11 +32,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.PreferencesUtil;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.internal.ui.preferences.VJOBuildPathPreferencePage;
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * extract class from VjetProjectCreationWizard support for src library

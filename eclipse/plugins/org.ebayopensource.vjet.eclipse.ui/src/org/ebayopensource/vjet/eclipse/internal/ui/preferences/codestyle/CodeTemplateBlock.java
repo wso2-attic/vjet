@@ -26,6 +26,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.dltk.mod.internal.ui.editor.ScriptSourceViewer;
 import org.eclipse.dltk.mod.internal.ui.preferences.ScriptSourcePreviewerUpdater;
@@ -62,9 +64,6 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * code template block

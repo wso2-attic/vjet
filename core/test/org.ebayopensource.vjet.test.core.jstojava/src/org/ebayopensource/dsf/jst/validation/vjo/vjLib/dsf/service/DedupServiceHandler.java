@@ -19,13 +19,13 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.TypeProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;

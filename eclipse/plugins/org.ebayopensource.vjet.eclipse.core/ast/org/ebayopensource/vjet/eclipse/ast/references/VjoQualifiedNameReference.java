@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.ast.references;
 
-import org.eclipse.dltk.mod.ast.references.SimpleReference;
-
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.eclipse.dltk.mod.ast.references.SimpleReference;
 
 public class VjoQualifiedNameReference extends SimpleReference {
 

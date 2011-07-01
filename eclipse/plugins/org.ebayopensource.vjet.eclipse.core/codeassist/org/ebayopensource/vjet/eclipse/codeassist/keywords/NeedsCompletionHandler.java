@@ -10,12 +10,11 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstNeedsOnTypeCompletion;
 import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.IScriptFolder;
-
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstNeedsOnTypeCompletion;
 
 /**
  * Provides package/type completion proposals inside "needs" block

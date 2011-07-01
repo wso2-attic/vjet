@@ -30,7 +30,9 @@ public class VjoCcOwnerTypeProposalAdvisor extends VjoCcTypeProposalAdvisor {
 		IJstType otype = ctx.getActingType();
 		String token = ctx.getActingToken();
 		if (StringUtils.isBlankOrEmpty(token)) {
-			appendData(ctx, otype, true);
+			if(!otype.isFakeType()){
+				appendData(ctx, otype, true);
+			}
 			appendOuterType(ctx);
 //			appendInnerType(ctx);
 		} else {

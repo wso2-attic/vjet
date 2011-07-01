@@ -14,6 +14,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
+import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
+import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -21,13 +27,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.dltk.mod.core.DLTKCore;
-
-import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
-import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
-import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * Job to generate all JsNative type's js infomation.

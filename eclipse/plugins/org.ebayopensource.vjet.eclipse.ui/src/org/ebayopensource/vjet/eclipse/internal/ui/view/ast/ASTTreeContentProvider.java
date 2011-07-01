@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
-
 import org.eclipse.mod.wst.jsdt.internal.compiler.CompilationResult;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.AllocationExpression;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.Assignment;

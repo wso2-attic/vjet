@@ -8,11 +8,11 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.text;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.internal.ui.text.DocumentCharacterIterator;
-import org.eclipse.dltk.mod.javascript.internal.ui.JavaScriptUI;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.JsPreferenceInterpreter;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.Symbols;
 import org.eclipse.dltk.mod.javascript.scriptdoc.JavaHeuristicScanner;
@@ -21,9 +21,6 @@ import org.eclipse.jdt.core.formatter.DefaultCodeFormatterConstants;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjo.meta.VjoKeywords;
 
 
 public final class VjoIndenter {

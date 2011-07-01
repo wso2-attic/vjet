@@ -13,15 +13,14 @@ package org.ebayopensource.vjet.eclipse.core.search;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.search.SearchPattern;
-import org.eclipse.dltk.mod.internal.core.search.matching.TypeReferencePattern;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
 import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.search.SearchPattern;
+import org.eclipse.dltk.mod.internal.core.search.matching.TypeReferencePattern;
 
 /**
  * 

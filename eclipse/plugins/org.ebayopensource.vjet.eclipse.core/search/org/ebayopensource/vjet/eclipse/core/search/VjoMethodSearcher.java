@@ -11,18 +11,6 @@ package org.ebayopensource.vjet.eclipse.core.search;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.dltk.mod.core.Flags;
-import org.eclipse.dltk.mod.core.IMethod;
-import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.core.ISourceRange;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.ModelException;
-import org.eclipse.dltk.mod.core.search.SearchPattern;
-import org.eclipse.dltk.mod.internal.core.JSSourceMethod;
-import org.eclipse.dltk.mod.internal.core.NativeVjoSourceModule;
-import org.eclipse.dltk.mod.internal.core.ScriptProject;
-import org.eclipse.dltk.mod.internal.core.search.matching.MethodPattern;
-
 import org.ebayopensource.dsf.jst.IJstGlobalVar;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstNode;
@@ -33,6 +21,16 @@ import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.dltk.mod.core.Flags;
+import org.eclipse.dltk.mod.core.IMethod;
+import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.ISourceRange;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.ModelException;
+import org.eclipse.dltk.mod.core.search.SearchPattern;
+import org.eclipse.dltk.mod.internal.core.JSSourceMethod;
+import org.eclipse.dltk.mod.internal.core.NativeVjoSourceModule;
+import org.eclipse.dltk.mod.internal.core.search.matching.MethodPattern;
 
 /**
  * Search declaration and references for method.

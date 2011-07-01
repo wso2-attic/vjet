@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core;
 
-import org.eclipse.dltk.mod.core.ISourceModule;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.ts.type.TypeName;
+import org.eclipse.dltk.mod.core.ISourceModule;
 
 /**
  * Interface to describe VJO related module

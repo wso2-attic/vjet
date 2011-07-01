@@ -16,12 +16,13 @@ import junit.framework.Assert;
 
 import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.kernel.util.FileUtils;
 import org.ebayopensource.vjo.tool.astjst.TypeConstants.StatementSections;
 import org.ebayopensource.vjo.tool.astjst.TypeConstants.TypeSections;
 import org.ebayopensource.vjo.tool.astjst.TypeConstants.Types;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+
+import com.ebay.kernel.util.FileUtils;
 
 
 public class TemplateCreationUtil extends VjoCcBaseTest {

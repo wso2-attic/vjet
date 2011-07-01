@@ -23,16 +23,15 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Stack;
 
+import org.ebayopensource.vjet.eclipse.compiler.IJSSourceElementRequestor;
+import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
+import org.ebayopensource.vjet.eclipse.core.IJSTypeParameter;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.compiler.CharOperation;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.ModelException;
-
-import org.ebayopensource.vjet.eclipse.compiler.IJSSourceElementRequestor;
-import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
-import org.ebayopensource.vjet.eclipse.core.IJSTypeParameter;
 
 public class VjoSourceModuleStructureRequestor implements
 		IJSSourceElementRequestor {

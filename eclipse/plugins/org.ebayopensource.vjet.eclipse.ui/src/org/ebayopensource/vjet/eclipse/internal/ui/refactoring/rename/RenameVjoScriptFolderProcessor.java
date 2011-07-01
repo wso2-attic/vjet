@@ -26,6 +26,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringScopeFactory;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringSearchEngine;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.util.VjoChecks;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
@@ -76,11 +80,6 @@ import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments;
 import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 import org.eclipse.text.edits.ReplaceEdit;
 import org.eclipse.text.edits.TextEdit;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringScopeFactory;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringSearchEngine;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.util.VjoChecks;
 
 
 public class RenameVjoScriptFolderProcessor extends ScriptRenameProcessor implements IReferenceUpdating, ITextUpdating, IQualifiedNameUpdating {

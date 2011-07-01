@@ -14,6 +14,22 @@ package org.ebayopensource.vjet.eclipse.internal.ui.view.scriptunit;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.JstSource;
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstProperty;
+import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.ebayopensource.dsf.jst.term.JstIdentifier;
+import org.ebayopensource.dsf.jst.term.SimpleLiteral;
+import org.ebayopensource.dsf.jstojava.translator.JstUtil;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
+import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.NodePrinterFactory;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.internal.core.NativeVjoSourceModule;
 import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
@@ -50,24 +66,6 @@ import org.eclipse.ui.IViewSite;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
-
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.IScriptUnit;
-import org.ebayopensource.dsf.jst.JstSource;
-import org.ebayopensource.dsf.jst.declaration.JstMethod;
-import org.ebayopensource.dsf.jst.declaration.JstProperty;
-import org.ebayopensource.dsf.jst.declaration.JstType;
-import org.ebayopensource.dsf.jst.term.JstIdentifier;
-import org.ebayopensource.dsf.jst.term.SimpleLiteral;
-import org.ebayopensource.dsf.jstojava.translator.JstUtil;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
-import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
-import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.NodePrinterFactory;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * Script Unit View

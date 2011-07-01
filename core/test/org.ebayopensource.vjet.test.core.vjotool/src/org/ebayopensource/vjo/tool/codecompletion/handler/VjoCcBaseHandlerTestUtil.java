@@ -21,11 +21,6 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.junit.Assert;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
@@ -35,6 +30,10 @@ import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.Assert;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public abstract class VjoCcBaseHandlerTestUtil extends VjoCcBaseTest {
 

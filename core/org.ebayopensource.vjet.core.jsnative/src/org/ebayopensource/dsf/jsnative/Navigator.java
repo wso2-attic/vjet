@@ -11,8 +11,8 @@ package org.ebayopensource.dsf.jsnative;
 import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.Function;
-import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.ebayopensource.dsf.jsnative.anno.JsArray;
+import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
 
 /**

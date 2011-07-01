@@ -12,6 +12,10 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -21,11 +25,6 @@ import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.SourceParserUtil;
 import org.eclipse.dltk.mod.utils.CorePrinter;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 
 public class NativeVjoSourceModule extends VjoSourceModule {
 

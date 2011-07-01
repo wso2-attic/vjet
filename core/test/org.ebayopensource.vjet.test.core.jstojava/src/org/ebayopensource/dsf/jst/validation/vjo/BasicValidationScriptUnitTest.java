@@ -16,11 +16,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoValidationResult;
 import org.ebayopensource.dsf.jst.IJstNode;
@@ -38,9 +33,14 @@ import org.ebayopensource.dsf.jstojava.loader.OnDemandAllTypeLoader;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.kernel.resource.ResourceUtil;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.TsLibLoader;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+
+import com.ebay.kernel.resource.ResourceUtil;
 
 public class BasicValidationScriptUnitTest {
 	

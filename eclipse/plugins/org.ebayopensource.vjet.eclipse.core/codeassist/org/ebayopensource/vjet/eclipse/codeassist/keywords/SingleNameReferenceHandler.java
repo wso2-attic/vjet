@@ -10,12 +10,11 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletionOnSingleNameReference;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionProposal;
 
 public class SingleNameReferenceHandler implements ICompletionHandler {
 

@@ -7,12 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
+import static com.ebay.junitnexgen.category.Category.Groups.P4;
 import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
 
 import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
 import org.ebayopensource.dsf.javatojs.control.ITranslationInitializer;
@@ -21,14 +18,16 @@ import org.ebayopensource.dsf.javatojs.tests.data.datatype.CoinComplexEnum;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.CoinEnum;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.CoinSimpleEnum;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.ObjectAndClass;
-import org.ebayopensource.dsf.javatojs.tests.data.datatype.ObjectMethods;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.PrimitiveSrc;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.TestArray;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.TestCollections;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 @ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class VjoDataTypeTests  {
 

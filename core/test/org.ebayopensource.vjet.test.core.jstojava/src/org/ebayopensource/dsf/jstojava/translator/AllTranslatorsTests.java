@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
 
+import junit.framework.JUnit4TestAdapter;
+import junit.framework.Test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import junit.framework.JUnit4TestAdapter;
-import junit.framework.Test;
 
 @RunWith(Suite.class)
 @SuiteClasses({ 

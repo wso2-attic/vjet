@@ -18,18 +18,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourceAttributes;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.dltk.mod.ast.Modifiers;
-import org.eclipse.dltk.mod.core.DLTKCore;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.environment.EnvironmentPathUtils;
-import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
@@ -42,6 +30,17 @@ import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourceAttributes;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.dltk.mod.ast.Modifiers;
+import org.eclipse.dltk.mod.core.DLTKCore;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.environment.EnvironmentPathUtils;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 
 public class Util {
 	private static final String METAFILE_NAME = "manifest.mf";

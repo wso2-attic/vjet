@@ -3,27 +3,14 @@ package org.ebayopensource.dsf.active.dom.html;
 import java.util.Date;
 
 import org.ebayopensource.dsf.html.dom.BaseHtmlElement;
-import org.ebayopensource.dsf.jsnative.Attr;
-import org.ebayopensource.dsf.jsnative.Document;
 import org.ebayopensource.dsf.jsnative.ExclusiveTrackList;
-import org.ebayopensource.dsf.jsnative.HtmlElement;
-import org.ebayopensource.dsf.jsnative.HtmlElementStyle;
 import org.ebayopensource.dsf.jsnative.HtmlMedia;
 import org.ebayopensource.dsf.jsnative.MediaController;
 import org.ebayopensource.dsf.jsnative.MediaError;
 import org.ebayopensource.dsf.jsnative.MultipleTrackList;
 import org.ebayopensource.dsf.jsnative.MutableTextTrack;
-import org.ebayopensource.dsf.jsnative.NamedNodeMap;
-import org.ebayopensource.dsf.jsnative.Node;
-import org.ebayopensource.dsf.jsnative.NodeList;
-import org.ebayopensource.dsf.jsnative.TextRectangle;
-import org.ebayopensource.dsf.jsnative.TextRectangleList;
 import org.ebayopensource.dsf.jsnative.TextTrack;
 import org.ebayopensource.dsf.jsnative.TimeRanges;
-import org.ebayopensource.dsf.jsnative.TypeInfo;
-import org.ebayopensource.dsf.jsnative.UserDataHandler;
-import org.ebayopensource.dsf.jsnative.events.Event;
-import org.ebayopensource.dsf.jsnative.events.EventException;
 
 public class AMediaElement extends AHtmlElement implements HtmlMedia {
 

@@ -16,11 +16,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
-
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
 
 /**
  * 

@@ -13,6 +13,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.IScriptProblem;
+import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.declaration.JstBlock;
+import org.ebayopensource.dsf.jstojava.translator.JstUtil;
+import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
+import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
+import org.ebayopensource.vjo.tool.typespace.ITypeSpaceRunnable;
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
@@ -31,23 +47,6 @@ import org.eclipse.dltk.mod.core.SourceParserUtil;
 import org.eclipse.dltk.mod.core.WorkingCopyOwner;
 import org.eclipse.dltk.mod.internal.core.builder.StandardScriptBuilder;
 import org.eclipse.dltk.mod.utils.CorePrinter;
-
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.IScriptProblem;
-import org.ebayopensource.dsf.jst.IScriptUnit;
-import org.ebayopensource.dsf.jst.declaration.JstBlock;
-import org.ebayopensource.dsf.jstojava.translator.JstUtil;
-import org.ebayopensource.dsf.ts.type.TypeName;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
-import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
-import org.ebayopensource.vjo.tool.typespace.ITypeSpaceRunnable;
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class VjoSourceModule extends JSSourceModule implements
 		TypeSpaceListener, IVjoSourceModule {

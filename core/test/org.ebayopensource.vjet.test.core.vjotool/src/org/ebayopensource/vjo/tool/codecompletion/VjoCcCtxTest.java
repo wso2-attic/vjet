@@ -7,18 +7,14 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Ignore;
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcCtxTest extends VjoCcBaseTest {

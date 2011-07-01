@@ -11,12 +11,11 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.dltk.mod.internal.ui.preferences.PropertyAndPreferencePage;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * Code Style -> Code Template

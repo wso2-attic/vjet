@@ -24,10 +24,10 @@ import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
+import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.mod.wst.jsdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.mod.wst.jsdt.internal.compiler.env.ICompilationUnit;
-import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 
 public abstract class BaseTest {
 

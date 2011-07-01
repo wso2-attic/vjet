@@ -7,16 +7,11 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
-import static com.ebay.junitnexgen.category.Category.Groups.*;
-import static org.junit.Assert.assertEquals;
+import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
+import static com.ebay.junitnexgen.category.Category.Groups.P1;
 
 import java.util.HashMap;
 import java.util.List;
-
-import org.junit.Ignore;
-import org.junit.Test;
 
 import org.ebayopensource.dsf.common.trace.TraceAttr;
 import org.ebayopensource.dsf.common.trace.event.TraceId;
@@ -34,8 +29,11 @@ import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.logger.LogLevel;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")

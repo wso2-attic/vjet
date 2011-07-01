@@ -11,14 +11,6 @@ package org.ebayopensource.vjet.eclipse.internal.ui.search;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.dltk.mod.codeassist.ISelectionEngine;
-import org.eclipse.dltk.mod.core.DLTKLanguageManager;
-import org.eclipse.dltk.mod.core.IDLTKLanguageToolkit;
-import org.eclipse.dltk.mod.core.ModelException;
-import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.Region;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
@@ -26,6 +18,13 @@ import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.search.VjoMatch;
 import org.ebayopensource.vjet.eclipse.core.search.VjoSearchOccurrenceEngine;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.VjoSelectionEngine;
+import org.eclipse.dltk.mod.codeassist.ISelectionEngine;
+import org.eclipse.dltk.mod.core.DLTKLanguageManager;
+import org.eclipse.dltk.mod.core.IDLTKLanguageToolkit;
+import org.eclipse.dltk.mod.core.ModelException;
+import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.Region;
 
 /**
  * 

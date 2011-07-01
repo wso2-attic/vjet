@@ -7,19 +7,18 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
 import java.net.URL;
 
+import org.ebayopensource.dsf.jstojava.controller.BuildController;
 import org.junit.Test;
 
-import org.ebayopensource.dsf.jstojava.controller.BuildController;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class BuildControllerTests {

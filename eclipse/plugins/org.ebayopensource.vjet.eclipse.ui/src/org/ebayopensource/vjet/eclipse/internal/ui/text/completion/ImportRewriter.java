@@ -11,6 +11,9 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 import java.text.MessageFormat;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
+import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IBuffer;
 import org.eclipse.dltk.mod.core.IType;
@@ -19,10 +22,6 @@ import org.eclipse.dltk.mod.internal.core.VjoExternalSourceModule;
 import org.eclipse.dltk.mod.internal.core.VjoSourceType;
 import org.eclipse.text.edits.InsertEdit;
 import org.eclipse.text.edits.MultiTextEdit;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
-import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 
 /**
  * This class insert "needs('yyy')" string after "xtype('xxxx')" string when

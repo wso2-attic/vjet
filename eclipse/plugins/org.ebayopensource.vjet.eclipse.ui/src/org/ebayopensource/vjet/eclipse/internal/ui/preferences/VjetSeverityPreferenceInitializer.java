@@ -17,13 +17,12 @@ package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.core.runtime.Preferences;
-import org.eclipse.dltk.mod.ui.preferences.PreferenceKey;
-
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRule;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRuleSet;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.VjoSemanticRuleRepo;
 import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.eclipse.core.runtime.Preferences;
+import org.eclipse.dltk.mod.ui.preferences.PreferenceKey;
 
 /**
  * Class/Interface description

@@ -21,6 +21,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -121,8 +122,6 @@ import org.eclipse.ui.part.IShowInSource;
 import org.eclipse.ui.part.IShowInTargetList;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.part.ShowInContext;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.wizards.IHelpContextIds;
 
 /**
  * view showing the super types/sub types of its input.

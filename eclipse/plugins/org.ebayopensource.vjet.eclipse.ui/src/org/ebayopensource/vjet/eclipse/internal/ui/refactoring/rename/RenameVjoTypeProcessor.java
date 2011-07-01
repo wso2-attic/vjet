@@ -18,6 +18,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
+import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
+import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringScopeFactory;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringSearchEngine;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.util.VjoChecks;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
@@ -54,10 +61,6 @@ import org.eclipse.dltk.mod.internal.corext.refactoring.changes.DynamicValidatio
 import org.eclipse.dltk.mod.internal.corext.refactoring.changes.RenameResourceChange;
 import org.eclipse.dltk.mod.internal.corext.refactoring.changes.RenameSourceModuleChange;
 import org.eclipse.dltk.mod.internal.corext.refactoring.changes.TextChangeCompatibility;
-/*
- * modify by patrick for support eclipse 3.5,
- * the original import is from org.eclipse.jdt.internal.corext.refactoring.code.ScriptableRefactoring(eclipse 3.3)
- */
 import org.eclipse.dltk.mod.internal.corext.refactoring.code.ScriptableRefactoring;
 import org.eclipse.dltk.mod.internal.corext.refactoring.participants.RenameTypeArguments;
 import org.eclipse.dltk.mod.internal.corext.refactoring.participants.ScriptProcessors;
@@ -94,14 +97,6 @@ import org.eclipse.ltk.core.refactoring.participants.RefactoringArguments;
 import org.eclipse.ltk.core.refactoring.participants.RefactoringProcessor;
 import org.eclipse.ltk.core.refactoring.participants.RenameArguments;
 import org.eclipse.text.edits.ReplaceEdit;
-
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
-import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
-import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringScopeFactory;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.RefactoringSearchEngine;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.util.VjoChecks;
 
 public class RenameVjoTypeProcessor extends ScriptRenameProcessor implements ITextUpdating, IReferenceUpdating, IQualifiedNameUpdating,
 		ISimilarDeclarationUpdating, IResourceMapper {

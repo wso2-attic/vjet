@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.text;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
 import org.eclipse.jface.text.BadLocationException;
@@ -21,9 +23,6 @@ import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.texteditor.ITextEditorExtension3;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * 

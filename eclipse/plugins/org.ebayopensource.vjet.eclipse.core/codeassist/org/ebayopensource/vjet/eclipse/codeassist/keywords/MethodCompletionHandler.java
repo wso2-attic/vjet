@@ -11,6 +11,19 @@ package org.ebayopensource.vjet.eclipse.codeassist.keywords;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.IJstTypeReference;
+import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
+import org.ebayopensource.dsf.jst.token.IExpr;
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.codeassist.VjoCompletionEngine;
+import org.ebayopensource.vjet.eclipse.core.IJSMethod;
+import org.ebayopensource.vjet.eclipse.core.ts.ExpressionListCreator;
+import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.dltk.mod.ast.Modifiers;
 import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 import org.eclipse.dltk.mod.core.CompletionProposal;
@@ -27,20 +40,6 @@ import org.eclipse.dltk.mod.internal.core.JSSourceType;
 import org.eclipse.dltk.mod.internal.core.ModelElementRequestor;
 import org.eclipse.dltk.mod.internal.core.NativeVjoSourceModule;
 import org.eclipse.dltk.mod.internal.core.SourceModule;
-
-import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.IJstTypeReference;
-import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
-import org.ebayopensource.dsf.jst.token.IExpr;
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.codeassist.VjoCompletionEngine;
-import org.ebayopensource.vjet.eclipse.core.IJSMethod;
-import org.ebayopensource.vjet.eclipse.core.ts.ExpressionListCreator;
-import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * Creates object members completions

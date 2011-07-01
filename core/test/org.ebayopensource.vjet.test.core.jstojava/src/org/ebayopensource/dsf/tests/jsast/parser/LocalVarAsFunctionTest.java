@@ -19,10 +19,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.net.URL;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
@@ -35,6 +31,10 @@ import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;

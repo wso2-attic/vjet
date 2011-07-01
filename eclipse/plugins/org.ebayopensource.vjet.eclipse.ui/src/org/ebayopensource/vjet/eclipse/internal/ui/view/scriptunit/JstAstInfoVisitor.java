@@ -11,8 +11,6 @@ package org.ebayopensource.vjet.eclipse.internal.ui.view.scriptunit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
-
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstRefType;
 import org.ebayopensource.dsf.jst.IJstTypeReference;
@@ -80,6 +78,7 @@ import org.ebayopensource.dsf.jst.stmt.LabeledStmt;
 import org.ebayopensource.dsf.jst.stmt.PtySetter;
 import org.ebayopensource.dsf.jst.stmt.RtnStmt;
 import org.ebayopensource.dsf.jst.stmt.SwitchStmt;
+import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.stmt.TextStmt;
 import org.ebayopensource.dsf.jst.stmt.ThisStmt;
 import org.ebayopensource.dsf.jst.stmt.ThrowStmt;
@@ -87,7 +86,6 @@ import org.ebayopensource.dsf.jst.stmt.TryStmt;
 import org.ebayopensource.dsf.jst.stmt.TypeDeclStmt;
 import org.ebayopensource.dsf.jst.stmt.WhileStmt;
 import org.ebayopensource.dsf.jst.stmt.WithStmt;
-import org.ebayopensource.dsf.jst.stmt.SwitchStmt.CaseStmt;
 import org.ebayopensource.dsf.jst.term.ArrayLiteral;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.term.JstLiteral;
@@ -97,6 +95,7 @@ import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jst.term.RegexpLiteral;
 import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
+import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
 
 public class JstAstInfoVisitor implements IJstNodeVisitor {
 	private String value = "";

@@ -2,8 +2,6 @@ package org.ebayopensource.dsf.jsnative;
 
 import org.ebayopensource.dsf.jsnative.anno.Alias;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
-import org.ebayopensource.dsf.jsnative.anno.JsSupport;
-import org.ebayopensource.dsf.jsnative.anno.JsVersion;
 import org.ebayopensource.dsf.jsnative.anno.Property;
 import org.mozilla.mod.javascript.IWillBeScriptable;
 /*

@@ -8,6 +8,12 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.codeassist.select;
 
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jstojava.translator.JstUtil;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.dltk.mod.codeassist.IAssistParser;
@@ -15,13 +21,6 @@ import org.eclipse.dltk.mod.codeassist.ScriptSelectionEngine;
 import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.ModelException;
-
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jstojava.translator.JstUtil;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * Engine for processing the selection.

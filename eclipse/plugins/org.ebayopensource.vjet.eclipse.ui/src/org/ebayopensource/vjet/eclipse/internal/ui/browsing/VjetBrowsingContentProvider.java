@@ -14,6 +14,7 @@ package org.ebayopensource.vjet.eclipse.internal.ui.browsing;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.ebayopensource.vjet.eclipse.core.IImportContainer;
 import org.eclipse.dltk.mod.core.IDLTKLanguageToolkit;
 import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -23,8 +24,6 @@ import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.ui.browsing.ScriptBrowsingContentProvider;
 import org.eclipse.dltk.mod.ui.browsing.ScriptBrowsingPart;
-
-import org.ebayopensource.vjet.eclipse.core.IImportContainer;
 
 /**
  * A base content provider for VJET elements. It provides access to the VJET

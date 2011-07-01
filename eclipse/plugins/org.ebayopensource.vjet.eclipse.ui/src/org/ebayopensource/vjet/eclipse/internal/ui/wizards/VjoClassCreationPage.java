@@ -16,6 +16,10 @@ import static org.ebayopensource.vjet.eclipse.internal.ui.wizards.VjetWizardMess
 import static org.ebayopensource.vjet.eclipse.internal.ui.wizards.VjetWizardMessages.ClassCreationWizard_superclass;
 import static org.ebayopensource.vjet.eclipse.internal.ui.wizards.VjetWizardMessages.ClassCreationWizard_superclass_selection;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoOpenTypeSelectionDialog;
+import org.ebayopensource.vjet.eclipse.internal.ui.wizards.dialogfields.CheckBoxDialogField;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -47,11 +51,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoOpenTypeSelectionDialog;
-import org.ebayopensource.vjet.eclipse.internal.ui.wizards.dialogfields.CheckBoxDialogField;
 
 /**
  * The page for creating a new vjo class.

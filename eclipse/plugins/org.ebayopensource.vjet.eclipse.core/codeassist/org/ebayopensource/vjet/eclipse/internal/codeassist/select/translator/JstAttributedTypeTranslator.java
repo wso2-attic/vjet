@@ -13,12 +13,6 @@ package org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator;
 
 import java.lang.reflect.Field;
 
-import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.core.IScriptProject;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.ModelException;
-import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
@@ -32,6 +26,11 @@ import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
+import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.IScriptProject;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.ModelException;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 
 /**
  * 

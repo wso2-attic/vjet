@@ -15,13 +15,12 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.method.overload;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.method.overload.construct.ConstructorOverload1Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.method.overload.construct.ConstructorOverloadCorrect1Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.method.overload.construct.ConstructorOverloadCorrect2Tester;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({

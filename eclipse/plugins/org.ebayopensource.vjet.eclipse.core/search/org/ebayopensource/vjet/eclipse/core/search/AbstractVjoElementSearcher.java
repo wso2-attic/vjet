@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -20,10 +23,6 @@ import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.search.IDLTKSearchConstants;
 import org.eclipse.dltk.mod.core.search.IDLTKSearchScope;
 import org.eclipse.dltk.mod.internal.core.search.HierarchyScope;
-
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * Abstract class for all element searchers. Contains support methods.

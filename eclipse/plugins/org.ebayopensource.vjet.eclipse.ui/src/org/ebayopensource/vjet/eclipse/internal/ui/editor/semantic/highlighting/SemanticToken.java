@@ -19,12 +19,11 @@
 
 package org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting;
 
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstName;
 import org.eclipse.dltk.mod.ast.expressions.Expression;
 import org.eclipse.dltk.mod.internal.ui.editor.semantic.highlighting.SemanticHighlightingReconciler;
 import org.eclipse.jdt.core.dom.SimpleName;
-
-import org.ebayopensource.dsf.jst.declaration.JstMethod;
-import org.ebayopensource.dsf.jst.declaration.JstName;
 
 /**
  * Semantic token

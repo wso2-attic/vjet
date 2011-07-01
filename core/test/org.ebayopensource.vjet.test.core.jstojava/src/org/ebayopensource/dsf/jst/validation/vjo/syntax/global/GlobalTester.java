@@ -15,10 +15,6 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.global;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.global.globalMethods.GlobalMethods;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.global.globalType.GlobalError;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.global.globalType.GlobalType;
@@ -26,6 +22,9 @@ import org.ebayopensource.dsf.jst.validation.vjo.syntax.global.vjoType.VjoAssert
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.global.vjoType.VjoForEachTester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.global.vjoType.VjoMixinTester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.global.vjoType.VjoType;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({

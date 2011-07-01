@@ -19,6 +19,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text;
 
 import java.util.regex.Pattern;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjo.meta.VjoKeywords;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -49,11 +53,6 @@ import org.eclipse.jface.text.rules.FastPartitioner;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.texteditor.ITextEditorExtension3;
-
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjo.meta.VjoKeywords;
 
 /**
  * Auto indent strategy sensitive to brackets. Copied from

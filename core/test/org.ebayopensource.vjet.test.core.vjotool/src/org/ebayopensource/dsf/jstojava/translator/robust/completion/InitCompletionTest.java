@@ -13,16 +13,16 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstParseController;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
+import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 
 /**
  * Test case to validate parser for various scenes in "inits" block. The test

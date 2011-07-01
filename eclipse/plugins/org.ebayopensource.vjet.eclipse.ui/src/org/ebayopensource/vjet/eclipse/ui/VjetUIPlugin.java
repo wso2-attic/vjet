@@ -10,6 +10,11 @@ package org.ebayopensource.vjet.eclipse.ui;
 
 import java.io.IOException;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.NativeElementFileAdvisor;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle.CodeTemplateContextType;
+import org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle.CodeTemplates;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.VjoTextTools;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -24,7 +29,6 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
 import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.IPartListener;
@@ -39,12 +43,6 @@ import org.eclipse.ui.editors.text.templates.ContributionTemplateStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.progress.WorkbenchJob;
 import org.osgi.framework.BundleContext;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.NativeElementFileAdvisor;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
-import org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle.CodeTemplateContextType;
-import org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle.CodeTemplates;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.VjoTextTools;
 
 /**
  * The activator class controls the plug-in life cycle

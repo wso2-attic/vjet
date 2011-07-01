@@ -11,22 +11,20 @@ package org.ebayopensource.dsf;
 import java.io.File;
 import java.net.URL;
 
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import org.ebayopensource.dsf.ast.recovery.RecoveryTests;
 import org.ebayopensource.dsf.cml.vjetv.AllHeadLessTests;
 import org.ebayopensource.dsf.comment.parser.BootstrapCommentTest;
 import org.ebayopensource.dsf.comment.parser.VjCommentParserTest;
 import org.ebayopensource.dsf.jst.validation.vjo.AllVjoValidationTests;
 import org.ebayopensource.dsf.jstdoc.AllJsDocTests;
-import org.ebayopensource.dsf.jstdoc.JsDocTests;
 import org.ebayopensource.dsf.jstojava.codegen.CodeGenJsrDiff;
 import org.ebayopensource.dsf.jstojava.translator.AllTranslatorsTests;
 import org.ebayopensource.dsf.tests.jsast.parser.AllJs2JstTests;
 import org.ebayopensource.dsf.tests.jsast.parser.AllJsParsingTests;
 import org.ebayopensource.dsf.vjolang.feature.tests.AllVjoFeatureTests;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

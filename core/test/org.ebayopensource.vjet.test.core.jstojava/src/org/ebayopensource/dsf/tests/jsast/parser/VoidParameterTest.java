@@ -7,8 +7,6 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P3;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
@@ -20,11 +18,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
-
 import org.ebayopensource.af.common.error.ErrorArgsInterface;
 import org.ebayopensource.af.common.error.ErrorList;
 import org.ebayopensource.af.common.error.ErrorObject;
@@ -34,8 +27,14 @@ import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.resource.ResourceUtil;
 
 /**

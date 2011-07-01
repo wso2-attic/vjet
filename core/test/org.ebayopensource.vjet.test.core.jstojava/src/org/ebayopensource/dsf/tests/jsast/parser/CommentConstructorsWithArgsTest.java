@@ -20,25 +20,24 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.resource.ResourceUtil;
-import org.ebayopensource.vjo.lib.LibManager;
 
 /**
  * Comment (forward, backward) tests for constructors

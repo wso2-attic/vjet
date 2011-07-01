@@ -12,14 +12,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.dltk.mod.ast.Modifiers;
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-import org.eclipse.dltk.mod.core.DLTKCore;
-import org.eclipse.dltk.mod.core.IMethod;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.core.ModelException;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -29,6 +21,13 @@ import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstFieldOrMe
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IJSMethod;
 import org.ebayopensource.vjet.eclipse.core.IJSType;
+import org.eclipse.dltk.mod.ast.Modifiers;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionProposal;
+import org.eclipse.dltk.mod.core.DLTKCore;
+import org.eclipse.dltk.mod.core.IMethod;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.core.ModelException;
 
 /**
  * Provides "new method stub" and "method override" completion proposals

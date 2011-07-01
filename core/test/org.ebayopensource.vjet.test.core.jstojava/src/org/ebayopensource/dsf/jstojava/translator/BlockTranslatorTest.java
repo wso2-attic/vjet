@@ -7,15 +7,12 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
-import static com.ebay.junitnexgen.category.Category.Groups.*;
-
+import static com.ebay.junitnexgen.category.Category.Groups.FAST;
+import static com.ebay.junitnexgen.category.Category.Groups.P1;
+import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
 
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
@@ -31,8 +28,11 @@ import org.eclipse.mod.wst.jsdt.internal.compiler.ast.IfStatement;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.MessageSend;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.MethodDeclaration;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ObjectLiteral;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category({P1, FAST, UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")

@@ -22,6 +22,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
+import org.ebayopensource.vjet.eclipse.core.ts.GenericVisitor;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -47,11 +51,6 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartSite;
-
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.declaration.JstMethod;
-import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
-import org.ebayopensource.vjet.eclipse.core.ts.GenericVisitor;
 
 /**
  * Semantic highlighting reconciler - Background thread implementation.

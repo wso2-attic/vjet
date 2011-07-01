@@ -10,11 +10,10 @@ package org.ebayopensource.dsf.jst.validation.vjo.globals.extension;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Test;
 
 public class GlobalsExtensionTest extends VjoValidationBaseTester{
 	

@@ -12,6 +12,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.search.TypeSearcher;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoProposalLabelProvider;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoProposalLabelUtil;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.javascript.internal.ui.text.completion.JavaScriptCompletionProposal;
 import org.eclipse.dltk.mod.ui.text.completion.CompletionProposalComparator;
@@ -23,13 +29,6 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 import org.eclipse.swt.graphics.Image;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.declaration.JstModifiers;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.search.TypeSearcher;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoProposalLabelProvider;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoProposalLabelUtil;
 
 public class VjoSuperTypeCompletionProcessor implements
 		IContentAssistProcessor, ISubjectControlContentAssistProcessor {

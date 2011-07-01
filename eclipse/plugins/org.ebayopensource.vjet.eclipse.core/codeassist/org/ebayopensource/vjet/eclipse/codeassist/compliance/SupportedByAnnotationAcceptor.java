@@ -13,13 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.ProjectScope;
-import org.eclipse.core.runtime.preferences.IEclipsePreferences;
-import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.dltk.mod.core.DLTKCore;
-import org.osgi.service.prefs.BackingStoreException;
-
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.SupportedBy;
 import org.ebayopensource.dsf.jst.BaseJstNode;
@@ -29,6 +22,12 @@ import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.vjet.eclipse.codeassist.compliance.PredefinedBrowsersPreferenceKeys.IBrowserKey;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.dltk.mod.core.DLTKCore;
+import org.osgi.service.prefs.BackingStoreException;
 
 /**
  * Used for filtering methods and properties during code completion.

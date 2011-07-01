@@ -19,8 +19,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.core.resources.IResource;
-
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticRulePolicy;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoValidationDriver;
@@ -29,6 +27,7 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.core.resources.IResource;
 
 /**
  * Basic validation

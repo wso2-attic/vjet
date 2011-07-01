@@ -197,6 +197,7 @@ public class VjoSemanticRuleRepo {
 //	public final IVjoSemanticRuleSet HIERARCHY_AND_STRUCTURE = new VjoSemanticRuleSet();
 //	public final IVjoSemanticRuleSet UNIQUENESS = new VjoSemanticRuleSet();
 	public final IVjoSemanticRuleSet JAVASCRIPT_EXTENSIONS = new VjoSemanticRuleSet();
+	public final IVjoSemanticRuleSet JAVA_COMPAT_TYPE_CHECK = new VjoSemanticRuleSet();
 //	public final IVjoSemanticRuleSet ACCESSIBILITY = new VjoSemanticRuleSet();
 //	public final IVjoSemanticRuleSet MISC = new VjoSemanticRuleSet();
 	public final IVjoSemanticRuleSet VJO_SYNTAX = new VjoSemanticRuleSet();
@@ -444,7 +445,8 @@ public class VjoSemanticRuleRepo {
 		TYPE_CHECK.addRule(OVERLAP_STATIC_AND_NONE_STATIC_METHOD);
 		TYPE_CHECK.addRule(OVERLAP_STATIC_AND_NONE_STATIC_PROPERTY);
 		TYPE_CHECK.addRule(ETYPE_SHOULD_NOT_HAVE_DUP_ENUM_VALUES);
-		TYPE_CHECK.addRule(PROPERTY_SHOULD_NOT_HIDE_PARENT_PROPERTY);
+		
+		JAVA_COMPAT_TYPE_CHECK.addRule(PROPERTY_SHOULD_NOT_HIDE_PARENT_PROPERTY);
 		
 //		ACCESSIBILITY.addRule(PACKAGE_SHOULD_BE_DEFINED);
 		TYPE_CHECK.addRule(PROPERTY_SHOULD_BE_VISIBLE);
@@ -1266,6 +1268,9 @@ public class VjoSemanticRuleRepo {
 		TYPE_CHECK.setRuleSetName("TYPE_CHECK");
 		TYPE_CHECK.setRuleSetDesription("Type Checking");
 		
+		JAVA_COMPAT_TYPE_CHECK.setRuleSetName("JAVA_COMPAT_TYPE_CHECK");
+		JAVA_COMPAT_TYPE_CHECK.setRuleSetDesription("Java Compatible Type Checking");
+		
 //		HIERARCHY_AND_STRUCTURE.setRuleSetName("Hierachy_And_Structure");
 //		HIERARCHY_AND_STRUCTURE.setRuleSetDesription("Hierachical and structural");
 		
@@ -1291,6 +1296,7 @@ public class VjoSemanticRuleRepo {
 		addRuleSet(JAVASCRIPT_EXTENSIONS);
 		addRuleSet(TYPE_CHECK);
 		addRuleSet(GLOBAL_RULES);
+		addRuleSet(JAVA_COMPAT_TYPE_CHECK);
 //		addRuleSet(UNIQUENESS);
 //		addRuleSet(ACCESSIBILITY);
 //		addRuleSet(MISC);

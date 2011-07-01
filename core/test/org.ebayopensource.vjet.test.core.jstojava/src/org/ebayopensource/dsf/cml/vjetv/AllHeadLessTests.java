@@ -15,15 +15,14 @@
  */
 package org.ebayopensource.dsf.cml.vjetv;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.cml.vjetv.core.ArgumentParserTester;
 import org.ebayopensource.dsf.cml.vjetv.util.ClassLoaderUtilTester;
 import org.ebayopensource.dsf.cml.vjetv.util.FileOperatorTester;
 import org.ebayopensource.dsf.jslang.feature.bugtests.JsParserTestCases;
 import org.ebayopensource.dsf.jslang.ts.tests.JsLangTypeSpaceTests;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Class/Interface description

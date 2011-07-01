@@ -8,10 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.validation.vjo.BugFixes.VjoValidationBugFixMoreTests;
 import org.ebayopensource.dsf.jst.validation.vjo.BugFixes.VjoValidationBugFixTests;
 import org.ebayopensource.dsf.jst.validation.vjo.accessbility.VjoAccessbilityTest;
@@ -44,6 +40,9 @@ import org.ebayopensource.dsf.jst.validation.vjo.typecheck.VjoTypeCheckTest;
 import org.ebayopensource.dsf.jst.validation.vjo.unsupported.VjoUnsupportedTest;
 import org.ebayopensource.dsf.jst.validation.vjo.vjNS.VjoVjNsTest;
 import org.ebayopensource.dsf.jst.validation.vjo.with.VjoWithTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({

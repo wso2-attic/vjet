@@ -8,6 +8,11 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.ui.text.completion;
 
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.FieldOrMethodCompletionHandler;
+import org.ebayopensource.vjet.eclipse.codeassist.keywords.FieldOrMethodCompletionHandler.MethodCompletionExtraInfo;
+import org.ebayopensource.vjet.eclipse.core.IJSMethod;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
+import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.Flags;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -15,12 +20,6 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.ui.ScriptElementImageDescriptor;
 import org.eclipse.dltk.mod.ui.ScriptElementImageProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
-
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.FieldOrMethodCompletionHandler;
-import org.ebayopensource.vjet.eclipse.codeassist.keywords.FieldOrMethodCompletionHandler.MethodCompletionExtraInfo;
-import org.ebayopensource.vjet.eclipse.core.IJSMethod;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageDescriptor;
-import org.ebayopensource.vjet.eclipse.ui.VjoElementImageProvider;
 
 public class VjoCompletionProposalLabelProvider extends
 		CompletionProposalLabelProvider {

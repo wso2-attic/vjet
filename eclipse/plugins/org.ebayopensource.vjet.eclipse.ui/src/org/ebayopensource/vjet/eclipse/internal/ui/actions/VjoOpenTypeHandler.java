@@ -8,15 +8,14 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.actions;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIConstants;
+import org.ebayopensource.vjet.eclipse.ui.actions.VjoOpenTypeAction;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.expressions.IEvaluationContext;
 import org.eclipse.jdt.internal.ui.actions.OpenTypeAction;
 import org.eclipse.jdt.ui.JavaUI;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIConstants;
-import org.ebayopensource.vjet.eclipse.ui.actions.VjoOpenTypeAction;
 
 public class VjoOpenTypeHandler extends AbstractHandler {
 

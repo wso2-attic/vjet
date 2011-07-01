@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
 
+import org.ebayopensource.dsf.vjolang.feature.tests.comments.VjoCommentTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-
-import org.ebayopensource.dsf.vjolang.feature.tests.comments.VjoCommentTest;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

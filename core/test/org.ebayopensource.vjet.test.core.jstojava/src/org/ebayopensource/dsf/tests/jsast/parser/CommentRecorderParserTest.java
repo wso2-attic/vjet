@@ -16,13 +16,13 @@ import static org.junit.Assert.assertNotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.ebayopensource.dsf.jstojava.translator.TranslateConfig;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.mod.wst.jsdt.internal.compiler.impl.CompilerOptions;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;

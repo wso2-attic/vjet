@@ -8,13 +8,12 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.ui.preferences.AbstractConfigurationBlockPreferencePage;
 import org.eclipse.dltk.mod.ui.preferences.IPreferenceConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * The page for setting the editor options.

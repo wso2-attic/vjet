@@ -11,6 +11,7 @@
  */
 package org.ebayopensource.vjet.eclipse.core;
 
+import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.ISourceModuleFactory;
@@ -22,8 +23,6 @@ import org.eclipse.dltk.mod.internal.core.ExternalSourceModule;
 import org.eclipse.dltk.mod.internal.core.ScriptFolder;
 import org.eclipse.dltk.mod.internal.core.VjoExternalSourceModule;
 import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
-
-import org.ebayopensource.vjet.eclipse.internal.core.util.Util;
 
 /**
  * 

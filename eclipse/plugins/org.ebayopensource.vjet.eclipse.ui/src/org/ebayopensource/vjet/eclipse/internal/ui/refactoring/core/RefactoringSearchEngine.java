@@ -27,6 +27,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.core.search.SearchQueryParameters;
+import org.ebayopensource.vjet.eclipse.core.search.VjoMatch;
+import org.ebayopensource.vjet.eclipse.core.search.VjoSearchEngine;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -49,10 +52,6 @@ import org.eclipse.dltk.mod.ui.search.QuerySpecification;
 import org.eclipse.ltk.core.refactoring.IRefactoringStatusEntryComparator;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.core.refactoring.RefactoringStatusEntry;
-
-import org.ebayopensource.vjet.eclipse.core.search.SearchQueryParameters;
-import org.ebayopensource.vjet.eclipse.core.search.VjoMatch;
-import org.ebayopensource.vjet.eclipse.core.search.VjoSearchEngine;
 
 /**
  * Convenience wrapper for {@link VjoSearchEngine} - performs searching and

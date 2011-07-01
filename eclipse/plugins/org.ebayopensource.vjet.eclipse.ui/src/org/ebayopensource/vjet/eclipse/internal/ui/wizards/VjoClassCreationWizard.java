@@ -16,6 +16,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstArg;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.internal.ui.wizards.VjoSourceModulePage.InterfaceWrapper;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -26,14 +33,6 @@ import org.eclipse.dltk.mod.javascript.ui.JavaScriptImages;
 import org.eclipse.dltk.mod.ui.CodeFormatterConstants;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
 import org.eclipse.jface.preference.IPreferenceStore;
-
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.declaration.JstArg;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.internal.ui.wizards.VjoSourceModulePage.InterfaceWrapper;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 
 /**
  * VJET wizard for creating a new vjo class.

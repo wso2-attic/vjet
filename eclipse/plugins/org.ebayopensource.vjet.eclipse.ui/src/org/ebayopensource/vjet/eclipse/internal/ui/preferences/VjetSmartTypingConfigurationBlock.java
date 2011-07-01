@@ -20,6 +20,7 @@ package org.ebayopensource.vjet.eclipse.internal.ui.preferences;
 
 import java.util.ArrayList;
 
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 import org.eclipse.dltk.mod.ui.preferences.AbstractConfigurationBlock;
 import org.eclipse.dltk.mod.ui.preferences.OverlayPreferenceStore;
 import org.eclipse.dltk.mod.ui.preferences.PreferencesMessages;
@@ -27,8 +28,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 
 /**
  * Configures Editor typing preferences.

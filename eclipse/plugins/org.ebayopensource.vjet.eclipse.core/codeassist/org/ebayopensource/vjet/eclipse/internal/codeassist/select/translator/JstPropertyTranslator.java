@@ -21,7 +21,6 @@ import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKEle
 import org.eclipse.dltk.mod.core.IField;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.internal.core.JSSourceField;
 
 /**
  * 

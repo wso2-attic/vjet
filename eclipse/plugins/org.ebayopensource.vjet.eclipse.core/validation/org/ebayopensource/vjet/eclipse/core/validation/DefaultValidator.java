@@ -10,6 +10,13 @@ package org.ebayopensource.vjet.eclipse.core.validation;
 
 import java.util.Set;
 
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRule;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRuleSet;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoGroupRulesCache;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticRulePolicy;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.VjoSemanticRuleRepo;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.IResource;
@@ -20,14 +27,6 @@ import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.osgi.service.prefs.BackingStoreException;
-
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRule;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRuleSet;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoGroupRulesCache;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticRulePolicy;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.VjoSemanticRuleRepo;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
 
 public class DefaultValidator {
 

@@ -11,21 +11,6 @@ package org.ebayopensource.dsf.javatojs.translate.custom.dom;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.core.dom.Annotation;
-import org.eclipse.jdt.core.dom.ArrayInitializer;
-import org.eclipse.jdt.core.dom.Expression;
-import org.eclipse.jdt.core.dom.IExtendedModifier;
-import org.eclipse.jdt.core.dom.Javadoc;
-import org.eclipse.jdt.core.dom.MarkerAnnotation;
-import org.eclipse.jdt.core.dom.MethodDeclaration;
-import org.eclipse.jdt.core.dom.Name;
-import org.eclipse.jdt.core.dom.QualifiedName;
-import org.eclipse.jdt.core.dom.SimpleName;
-import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
-import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
-import org.eclipse.jdt.core.dom.Type;
-import org.eclipse.jdt.core.dom.TypeLiteral;
-
 import org.ebayopensource.dsf.javatojs.trace.TranslateMsgId;
 import org.ebayopensource.dsf.javatojs.translate.TranslateHelper;
 import org.ebayopensource.dsf.javatojs.translate.custom.meta.CustomMethod;
@@ -67,7 +52,6 @@ import org.ebayopensource.dsf.jst.declaration.JstArray;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstDoc;
-import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalProp;
 import org.ebayopensource.dsf.jst.declaration.JstGlobalVar;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
@@ -75,13 +59,24 @@ import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.ebayopensource.dsf.jst.declaration.JstType.Category;
 import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.SynthOlType;
-import org.ebayopensource.dsf.jst.declaration.JstType.Category;
-import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
-import org.ebayopensource.dsf.jst.term.ArrayLiteral;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.eclipse.jdt.core.dom.Annotation;
+import org.eclipse.jdt.core.dom.ArrayInitializer;
+import org.eclipse.jdt.core.dom.IExtendedModifier;
+import org.eclipse.jdt.core.dom.Javadoc;
+import org.eclipse.jdt.core.dom.MarkerAnnotation;
+import org.eclipse.jdt.core.dom.MethodDeclaration;
+import org.eclipse.jdt.core.dom.Name;
+import org.eclipse.jdt.core.dom.QualifiedName;
+import org.eclipse.jdt.core.dom.SimpleName;
+import org.eclipse.jdt.core.dom.SingleMemberAnnotation;
+import org.eclipse.jdt.core.dom.SingleVariableDeclaration;
+import org.eclipse.jdt.core.dom.Type;
+import org.eclipse.jdt.core.dom.TypeLiteral;
 
 public class JsNativeCustomTranslator extends MetaDrivenCustomTranslator {
 

@@ -28,7 +28,6 @@ import org.ebayopensource.af.common.error.ErrorObject;
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jsgen.shared.jstvalidator.DefaultJstProblem;
-import org.ebayopensource.dsf.jsgen.shared.validation.common.ScopeId;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.FileBinding;
 import org.ebayopensource.dsf.jst.IJstLib;
@@ -50,12 +49,12 @@ import org.ebayopensource.dsf.jstojava.translator.BlockTranslator;
 import org.ebayopensource.dsf.jstojava.translator.TranslateConfig;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
+import org.ebayopensource.vjo.meta.VjoKeywords;
 import org.eclipse.mod.wst.jsdt.core.ast.IProgramElement;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.FieldReference;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.MessageSend;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.SingleNameReference;
-import org.ebayopensource.vjo.meta.VjoKeywords;
 
 public class VjoParser implements IJstParser {
 

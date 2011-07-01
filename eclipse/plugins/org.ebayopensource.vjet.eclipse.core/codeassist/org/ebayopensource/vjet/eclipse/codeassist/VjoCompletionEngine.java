@@ -16,20 +16,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.dltk.mod.codeassist.IAssistParser;
-import org.eclipse.dltk.mod.codeassist.ScriptCompletionEngine;
-import org.eclipse.dltk.mod.compiler.env.ISourceModule;
-import org.eclipse.dltk.mod.core.CompletionContext;
-import org.eclipse.dltk.mod.core.CompletionProposal;
-import org.eclipse.dltk.mod.core.CompletionRequestor;
-import org.eclipse.dltk.mod.core.DLTKCore;
-import org.eclipse.dltk.mod.core.IField;
-import org.eclipse.dltk.mod.core.IMethod;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.JstSource;
@@ -44,6 +30,19 @@ import org.ebayopensource.vjet.eclipse.codeassist.keywords.VjoKeywordFactory;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.dltk.mod.codeassist.IAssistParser;
+import org.eclipse.dltk.mod.codeassist.ScriptCompletionEngine;
+import org.eclipse.dltk.mod.compiler.env.ISourceModule;
+import org.eclipse.dltk.mod.core.CompletionContext;
+import org.eclipse.dltk.mod.core.CompletionProposal;
+import org.eclipse.dltk.mod.core.CompletionRequestor;
+import org.eclipse.dltk.mod.core.DLTKCore;
+import org.eclipse.dltk.mod.core.IField;
+import org.eclipse.dltk.mod.core.IMethod;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 
 /**
  * Vjo implementation of the completion engine.

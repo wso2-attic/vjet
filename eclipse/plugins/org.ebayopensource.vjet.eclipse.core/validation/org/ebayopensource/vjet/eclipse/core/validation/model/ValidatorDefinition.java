@@ -8,12 +8,11 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.validation.model;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-
 import org.ebayopensource.vjet.eclipse.core.validation.AbstractValidator;
 import org.ebayopensource.vjet.eclipse.core.validation.IValidator;
 import org.ebayopensource.vjet.eclipse.core.validation.PersistablePreferenceObjectSupport;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
 
 public class ValidatorDefinition extends PersistablePreferenceObjectSupport{
 

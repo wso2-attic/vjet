@@ -10,13 +10,12 @@ package org.ebayopensource.vjet.eclipse.core.validation;
 
 import java.util.List;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.vjet.eclipse.core.validation.utils.ProblemUtility;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
 
 public abstract class AbstractValidator implements IValidator {
 

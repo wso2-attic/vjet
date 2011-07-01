@@ -30,6 +30,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.BaseJstNode;
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstProperty;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstArg;
+import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -47,19 +55,6 @@ import org.eclipse.osgi.service.datalocation.Location;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.text.edits.MultiTextEdit;
 import org.eclipse.text.edits.TextEdit;
-
-import org.ebayopensource.dsf.jst.BaseJstNode;
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstProperty;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.declaration.JstAnnotation;
-import org.ebayopensource.dsf.jst.declaration.JstArg;
-import org.ebayopensource.dsf.jst.declaration.JstModifiers;
-import org.ebayopensource.dsf.jst.expr.AssignExpr;
-import org.ebayopensource.dsf.jst.term.JstIdentifier;
-import org.ebayopensource.dsf.jst.token.IExpr;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class VjoCompletionProposal extends ScriptCompletionProposal implements
 		ICompletionProposalExtension4 {

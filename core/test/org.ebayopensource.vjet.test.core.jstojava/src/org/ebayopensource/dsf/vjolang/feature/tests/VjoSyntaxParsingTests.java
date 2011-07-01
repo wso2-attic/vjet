@@ -7,23 +7,22 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.P3;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jst.IJstParseController;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.util.FileUtils;
-import org.ebayopensource.vjo.lib.LibManager;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoSyntaxParsingTests {

@@ -22,14 +22,6 @@ package org.ebayopensource.vjet.eclipse.internal.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
-import org.eclipse.dltk.mod.ast.references.SimpleReference;
-import org.eclipse.dltk.mod.core.IMethod;
-import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.core.ISourceRange;
-import org.eclipse.dltk.mod.core.ModelException;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
@@ -37,6 +29,13 @@ import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.core.ts.GenericVisitor;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.dltk.mod.ast.references.SimpleReference;
+import org.eclipse.dltk.mod.core.IMethod;
+import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.ISourceRange;
+import org.eclipse.dltk.mod.core.ModelException;
 
 class VjoCalleeAnalyzerVisitor extends GenericVisitor {
 	private Map fSearchResults;

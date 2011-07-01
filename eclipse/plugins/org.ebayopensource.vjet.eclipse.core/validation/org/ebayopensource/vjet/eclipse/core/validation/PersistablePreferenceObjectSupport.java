@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.validation;
 
-import org.eclipse.core.resources.IProject;
-
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.eclipse.core.resources.IProject;
 
 public abstract class PersistablePreferenceObjectSupport {
 

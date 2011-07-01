@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.search;
 
+import org.ebayopensource.dsf.jst.IJstNode;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.core.search.SearchPattern;
-
-import org.ebayopensource.dsf.jst.IJstNode;
 
 /**
  * This class contains information about match element : match object, its

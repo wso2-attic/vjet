@@ -8,9 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.actions;
 
-import org.eclipse.jface.action.Action;
-
 import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.eclipse.jface.action.Action;
 
 /**
  * Remove occurrence annotations action.

@@ -8,11 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.search;
 
+import org.ebayopensource.dsf.jst.IJstNode;
 import org.eclipse.dltk.mod.core.IScriptFolder;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.search.SearchPattern;
-
-import org.ebayopensource.dsf.jst.IJstNode;
 
 /**
  * Factory for creation matches.

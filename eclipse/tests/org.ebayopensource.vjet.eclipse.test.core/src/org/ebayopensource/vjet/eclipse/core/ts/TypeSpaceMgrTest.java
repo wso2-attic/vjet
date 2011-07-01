@@ -13,6 +13,24 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
+import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
+import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
+import org.ebayopensource.dsf.ts.event.EventListenerStatus;
+import org.ebayopensource.dsf.ts.event.ISourceEvent;
+import org.ebayopensource.dsf.ts.method.MethodName;
+import org.ebayopensource.dsf.ts.property.PropertyName;
+import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.search.TypeSearcher;
+import org.ebayopensource.vjet.eclipse.core.test.parser.AbstractVjoModelTests;
+import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -24,27 +42,7 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.internal.core.BuildpathEntry;
 import org.eclipse.dltk.mod.internal.core.ModelManager;
 import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
-import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
-import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
-import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
-import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
-import org.ebayopensource.dsf.ts.event.EventListenerStatus;
-import org.ebayopensource.dsf.ts.event.ISourceEvent;
-import org.ebayopensource.dsf.ts.method.MethodName;
-import org.ebayopensource.dsf.ts.property.PropertyName;
-import org.ebayopensource.dsf.ts.type.TypeName;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
-import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
-import org.ebayopensource.vjet.eclipse.core.search.TypeSearcher;
-import org.ebayopensource.vjet.eclipse.core.test.parser.AbstractVjoModelTests;
-import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 
 public class TypeSpaceMgrTest extends AbstractVjoModelTests implements TypeSpaceListener {

@@ -8,14 +8,13 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jsnative;
 
-import org.w3c.dom.TypeInfo;
-
 import org.ebayopensource.dsf.jsnative.anno.BrowserSupport;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import org.ebayopensource.dsf.jsnative.anno.DOMSupport;
 import org.ebayopensource.dsf.jsnative.anno.DomLevel;
 import org.ebayopensource.dsf.jsnative.anno.JsMetatype;
 import org.ebayopensource.dsf.jsnative.anno.Property;
+import org.w3c.dom.TypeInfo;
 
 /**
  * @see http://www.w3.org/TR/DOM-Level-2-Core/core.html#ID-637646024

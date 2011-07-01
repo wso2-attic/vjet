@@ -13,10 +13,6 @@ package org.ebayopensource.vjet.eclipse.core.search;
 
 import java.util.List;
 
-import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.internal.core.ScriptProject;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IJstTypeReference;
@@ -27,6 +23,9 @@ import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.traversal.IJstVisitor;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKElementResolver;
+import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.IType;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 
 /**
  * Re-writen by kevin based on JstBiding

@@ -7,8 +7,6 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.overloadtests;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
@@ -16,13 +14,14 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 import java.util.Arrays;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
+import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import org.ebayopensource.dsf.jst.IJstType;
 import com.ebay.junitnexgen.category.Category;
-import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
-import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import com.ebay.junitnexgen.category.ModuleInfo;
 
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")

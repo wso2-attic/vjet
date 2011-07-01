@@ -10,6 +10,15 @@ package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstProperty;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstArg;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
+import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
+import org.ebayopensource.vjo.tool.codecompletion.proposaldata.integration.IVjoEclipseCompletionProposal;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -42,16 +51,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
-
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstProperty;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jst.declaration.JstArg;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
-import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
-import org.ebayopensource.vjo.tool.codecompletion.proposaldata.integration.IVjoEclipseCompletionProposal;
 
 public class CompletionProposal implements ICompletionProposal,
 		ICompletionProposalExtension, ICompletionProposalExtension2,

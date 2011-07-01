@@ -26,6 +26,17 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstProperty;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstComletionOnMessageSend;
+import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
+import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
+import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtxForTest;
+import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngineTestUtil;
+import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.eclipse.core.runtime.AssertionFailedException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,20 +44,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstProperty;
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jstojava.parser.VjoParser;
-import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstComletionOnMessageSend;
-import org.ebayopensource.dsf.ts.type.TypeName;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
-import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
-import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtxForTest;
-import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
-import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngineTestUtil;
-import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")

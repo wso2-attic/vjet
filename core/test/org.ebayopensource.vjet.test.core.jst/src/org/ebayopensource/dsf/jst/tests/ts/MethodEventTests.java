@@ -16,11 +16,11 @@ import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.ts.JstQueryExecutor;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
-import org.ebayopensource.dsf.ts.event.method.AddMethodEvent;
 import org.ebayopensource.dsf.ts.event.method.RemoveMethodEvent;
 import org.ebayopensource.dsf.ts.event.method.RenameMethodEvent;
 import org.ebayopensource.dsf.ts.method.MethodName;
 import org.ebayopensource.dsf.ts.property.PropertyName;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;

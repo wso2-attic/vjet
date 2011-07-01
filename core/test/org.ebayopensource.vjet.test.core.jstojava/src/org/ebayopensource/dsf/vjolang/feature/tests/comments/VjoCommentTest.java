@@ -7,8 +7,6 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests.comments;
-import com.ebay.junitnexgen.category.ModuleInfo;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P2;
 import static com.ebay.junitnexgen.category.Category.Groups.P5;
@@ -16,8 +14,6 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
-
-import org.junit.Test;
 
 import org.ebayopensource.dsf.javatojs.tests.TestHelper;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
@@ -29,10 +25,13 @@ import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
+import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.util.FileUtils;
-import org.ebayopensource.vjo.lib.LibManager;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoCommentTest {

@@ -10,14 +10,13 @@
 
 package org.ebayopensource.vjet.eclipse.internal.ui.editor.semantic.highlighting;
 
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
 import org.eclipse.dltk.mod.ui.PreferenceConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.RGB;
-
-import org.ebayopensource.dsf.jst.declaration.JstMethod;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
 
 
 

@@ -17,16 +17,15 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui;
 
+import org.ebayopensource.vjet.eclipse.codeassist.compliance.PredefinedBrowsersPreferenceKeys;
+import org.ebayopensource.vjet.eclipse.codeassist.compliance.PredefinedBrowsersPreferenceKeys.IBrowserKey;
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.dltk.mod.compiler.task.TodoTaskPreferences;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.editors.text.EditorsUI;
-
-import org.ebayopensource.vjet.eclipse.codeassist.compliance.PredefinedBrowsersPreferenceKeys;
-import org.ebayopensource.vjet.eclipse.codeassist.compliance.PredefinedBrowsersPreferenceKeys.IBrowserKey;
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class VjetUIPreferenceInitializer extends AbstractPreferenceInitializer {
 

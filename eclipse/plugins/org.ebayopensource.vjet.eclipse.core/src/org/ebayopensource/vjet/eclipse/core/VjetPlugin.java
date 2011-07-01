@@ -8,6 +8,17 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core;
 
+import org.ebayopensource.dsf.jstojava.controller.JstParseController;
+import org.ebayopensource.vjet.eclipse.core.builder.TypeSpaceBuilder;
+import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
+import org.ebayopensource.vjet.eclipse.core.ts.EclipseTypeSpaceLoader;
+import org.ebayopensource.vjet.eclipse.core.ts.JstLibResolver;
+import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceLoadJob;
+import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
+import org.ebayopensource.vjet.eclipse.internal.core.SerBuildPathEntry;
+import org.ebayopensource.vjo.lib.IResourceResolver;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
@@ -21,30 +32,6 @@ import org.eclipse.dltk.mod.core.IBuildpathAttribute;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
 import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.osgi.framework.BundleContext;
-
-import org.ebayopensource.dsf.jst.IJstType;
-import org.ebayopensource.dsf.jstojava.controller.JstParseController;
-import org.ebayopensource.dsf.ts.event.EventListenerStatus;
-import org.ebayopensource.dsf.ts.event.ISourceEventCallback;
-import org.ebayopensource.dsf.ts.event.ISourceEventListener;
-import org.ebayopensource.dsf.ts.event.dispatch.IEventListenerHandle;
-import org.ebayopensource.dsf.ts.event.group.AddGroupDependencyEvent;
-import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
-import org.ebayopensource.dsf.ts.event.group.BatchGroupLoadingEvent;
-import org.ebayopensource.dsf.ts.event.group.IGroupEventListener;
-import org.ebayopensource.dsf.ts.event.group.RemoveGroupDependencyEvent;
-import org.ebayopensource.dsf.ts.event.group.RemoveGroupEvent;
-import org.ebayopensource.vjet.eclipse.core.builder.TypeSpaceBuilder;
-import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
-import org.ebayopensource.vjet.eclipse.core.ts.EclipseTypeSpaceLoader;
-import org.ebayopensource.vjet.eclipse.core.ts.JstLibResolver;
-import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceLoadJob;
-import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceTracer;
-import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
-import org.ebayopensource.vjet.eclipse.internal.core.SerBuildPathEntry;
-import org.ebayopensource.vjo.lib.IResourceResolver;
-import org.ebayopensource.vjo.lib.LibManager;
-import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**
  * The activator class controls the plug-in life cycle

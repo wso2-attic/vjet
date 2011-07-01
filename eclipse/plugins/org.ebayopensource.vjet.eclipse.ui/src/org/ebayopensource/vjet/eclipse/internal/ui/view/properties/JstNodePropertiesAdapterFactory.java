@@ -11,12 +11,11 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.view.properties;
 
-import org.eclipse.core.runtime.IAdapterFactory;
-import org.eclipse.ui.views.properties.IPropertySource;
-
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
 import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.NodePrinterFactory;
+import org.eclipse.core.runtime.IAdapterFactory;
+import org.eclipse.ui.views.properties.IPropertySource;
 
 /**
  * adapter factory regarding for jst node

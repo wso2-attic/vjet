@@ -18,8 +18,6 @@ import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.net.URL;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
@@ -29,11 +27,13 @@ import org.ebayopensource.dsf.jst.expr.FuncExpr;
 import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.resource.ResourceUtil;
-import org.ebayopensource.vjo.lib.LibManager;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoJstTests {

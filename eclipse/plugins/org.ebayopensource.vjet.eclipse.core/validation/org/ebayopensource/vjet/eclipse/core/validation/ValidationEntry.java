@@ -9,13 +9,7 @@
 package org.ebayopensource.vjet.eclipse.core.validation;
 
 import java.util.ArrayList;
-
 import java.util.List;
-
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.Preferences;
-import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
-import org.eclipse.dltk.mod.core.DLTKCore;
 
 import org.ebayopensource.af.common.error.ErrorList;
 import org.ebayopensource.dsf.jst.BaseJstNode;
@@ -25,6 +19,10 @@ import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.core.validation.utils.ProblemUtility;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Preferences;
+import org.eclipse.dltk.mod.compiler.problem.DefaultProblem;
+import org.eclipse.dltk.mod.core.DLTKCore;
 
 public class ValidationEntry {
 

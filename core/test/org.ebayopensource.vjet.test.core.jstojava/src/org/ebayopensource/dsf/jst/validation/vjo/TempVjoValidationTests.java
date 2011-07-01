@@ -15,11 +15,6 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo;
 
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.validation.vjo.access.AllAccessTesters;
 import org.ebayopensource.dsf.jst.validation.vjo.bugs.AllBugsSyntaxTester;
@@ -41,6 +36,10 @@ import org.ebayopensource.dsf.jst.validation.vjo.typecheck.or.OrTypeCheckTester;
 import org.ebayopensource.dsf.jst.validation.vjo.typecheck.returntype.AllReturnTypeTester;
 import org.ebayopensource.dsf.jst.validation.vjo.typecheck.typeName.AllTypeNameTester;
 import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * Temp vjo validation testers

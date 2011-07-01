@@ -8,11 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.syntax;
 
+import org.ebayopensource.dsf.jst.validation.vjo.syntax.continueBreak.AllContinueTests;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import org.ebayopensource.dsf.jst.validation.vjo.syntax.continueBreak.AllContinueTests;
 
 
 @RunWith(Suite.class)

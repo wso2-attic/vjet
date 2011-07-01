@@ -11,10 +11,9 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.text.completion;
 
+import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
 import org.eclipse.dltk.mod.ui.text.completion.ScriptContentAssistInvocationContext;
 import org.eclipse.jface.text.templates.TemplateCompletionProcessor;
-
-import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
 
 /**
  * 

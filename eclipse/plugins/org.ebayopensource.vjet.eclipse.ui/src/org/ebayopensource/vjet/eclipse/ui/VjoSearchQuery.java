@@ -10,6 +10,9 @@ package org.ebayopensource.vjet.eclipse.ui;
 
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.search.SearchQueryParameters;
+import org.ebayopensource.vjet.eclipse.core.search.VjoMatch;
+import org.ebayopensource.vjet.eclipse.core.search.VjoSearchEngine;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -31,10 +34,6 @@ import org.eclipse.dltk.mod.ui.ScriptElementLabels;
 import org.eclipse.dltk.mod.ui.search.ElementQuerySpecification;
 import org.eclipse.dltk.mod.ui.search.PatternQuerySpecification;
 import org.eclipse.dltk.mod.ui.search.QuerySpecification;
-
-import org.ebayopensource.vjet.eclipse.core.search.SearchQueryParameters;
-import org.ebayopensource.vjet.eclipse.core.search.VjoMatch;
-import org.ebayopensource.vjet.eclipse.core.search.VjoSearchEngine;
 
 /**
  * The search query based on {@link VjoSearchEngine} functionality.

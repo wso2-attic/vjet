@@ -19,10 +19,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
@@ -35,11 +31,15 @@ import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.translator.JstUtil;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
 import com.ebay.kernel.resource.ResourceUtil;
-import org.ebayopensource.vjo.lib.LibManager;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoJstUtilTests {

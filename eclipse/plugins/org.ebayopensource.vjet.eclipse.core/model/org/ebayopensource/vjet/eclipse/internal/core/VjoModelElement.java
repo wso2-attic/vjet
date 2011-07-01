@@ -8,6 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.core;
 
+import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstNode;
+import org.ebayopensource.dsf.jst.IJstProperty;
+import org.ebayopensource.dsf.jst.IJstType;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.dltk.mod.core.IModelElement;
 import org.eclipse.dltk.mod.core.IModelElementVisitor;
@@ -18,11 +22,6 @@ import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.internal.core.ModelStatus;
-
-import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jst.IJstProperty;
-import org.ebayopensource.dsf.jst.IJstType;
 
 public abstract class VjoModelElement extends PlatformObject implements
 		IModelElement {

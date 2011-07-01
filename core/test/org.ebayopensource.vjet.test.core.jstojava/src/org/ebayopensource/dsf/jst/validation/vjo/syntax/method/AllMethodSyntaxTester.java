@@ -15,10 +15,6 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.method;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.inits.CorrectInitTest1;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.inits.Init1;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.inits.Init2;
@@ -37,6 +33,9 @@ import org.ebayopensource.dsf.jst.validation.vjo.syntax.method.impl.SyntaxInterf
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.method.impl.SyntaxInterfaceCorrect2Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.method.impl.SyntaxInterfaceCorrect3Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.method.overload.AllMethodOverloadTesters;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 
 @RunWith(Suite.class)

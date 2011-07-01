@@ -22,13 +22,12 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.JstProblemId;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  * Vjo Validation Baser class Include get problem id. judge problem is equals

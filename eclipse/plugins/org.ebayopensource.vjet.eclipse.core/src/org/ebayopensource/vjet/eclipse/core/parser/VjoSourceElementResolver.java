@@ -8,12 +8,11 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.parser;
 
-import org.eclipse.dltk.mod.core.DLTKCore;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ResolutionResult;
 import org.ebayopensource.dsf.jstojava.controller.JstExpressionBindingResolver;
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
+import org.eclipse.dltk.mod.core.DLTKCore;
 
 public class VjoSourceElementResolver extends JstExpressionBindingResolver {
 

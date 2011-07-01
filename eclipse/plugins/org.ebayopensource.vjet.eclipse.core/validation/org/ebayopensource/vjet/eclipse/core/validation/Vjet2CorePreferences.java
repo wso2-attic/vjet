@@ -8,13 +8,12 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.core.validation;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.osgi.service.prefs.BackingStoreException;
-
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 
 public class Vjet2CorePreferences {
 	

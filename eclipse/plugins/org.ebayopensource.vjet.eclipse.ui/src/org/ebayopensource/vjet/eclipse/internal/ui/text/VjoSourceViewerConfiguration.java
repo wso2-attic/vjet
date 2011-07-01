@@ -11,6 +11,11 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.text;
 
+import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
+import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoCompletionProcessor;
+import org.ebayopensource.vjet.eclipse.internal.ui.typehierarchy.VjoHierarchyInformationControl;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjet.eclipse.ui.viewsupport.VjoLabelProvider;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.IType;
@@ -53,12 +58,6 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
-
-import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
-import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoCompletionProcessor;
-import org.ebayopensource.vjet.eclipse.internal.ui.typehierarchy.VjoHierarchyInformationControl;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjet.eclipse.ui.viewsupport.VjoLabelProvider;
 
 /**
  * 

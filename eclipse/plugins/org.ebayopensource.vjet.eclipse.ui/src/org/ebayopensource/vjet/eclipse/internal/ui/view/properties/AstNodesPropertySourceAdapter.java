@@ -10,12 +10,11 @@ package org.ebayopensource.vjet.eclipse.internal.ui.view.properties;
 
 import java.util.Arrays;
 
+import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
+import org.eclipse.mod.wst.jsdt.core.ast.IArgument;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
-
-import org.eclipse.mod.wst.jsdt.core.ast.IASTNode;
-import org.eclipse.mod.wst.jsdt.core.ast.IArgument;
 
 /**
  * {@link IPropertySource} adapter for {@link IArgument}'s 1 dimension array

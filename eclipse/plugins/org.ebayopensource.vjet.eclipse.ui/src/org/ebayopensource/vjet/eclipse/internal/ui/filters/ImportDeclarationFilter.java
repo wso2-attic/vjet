@@ -19,11 +19,10 @@
 package org.ebayopensource.vjet.eclipse.internal.ui.filters;
 
 
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerFilter;
-
 import org.ebayopensource.vjet.eclipse.core.IImportContainer;
 import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 
 
 

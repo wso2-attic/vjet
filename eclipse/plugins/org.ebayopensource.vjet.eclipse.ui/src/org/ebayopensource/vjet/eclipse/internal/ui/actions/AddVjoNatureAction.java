@@ -8,6 +8,11 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.ui.actions;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.VjoNature;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjet.eclipse.ui.actions.nature.AddVjoNaturePolicyManager;
+import org.ebayopensource.vjet.eclipse.ui.actions.nature.IAddVjoNaturePolicy;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -24,12 +29,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.VjoNature;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
-import org.ebayopensource.vjet.eclipse.ui.actions.nature.AddVjoNaturePolicyManager;
-import org.ebayopensource.vjet.eclipse.ui.actions.nature.IAddVjoNaturePolicy;
 
 /**
  * This class add vjo nature to the specified project. 

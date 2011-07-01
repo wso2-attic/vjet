@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstParseController;
 import org.ebayopensource.vjo.tool.astjst.AstJstTestUtil.AstJstBean;
@@ -20,7 +21,6 @@ import org.ebayopensource.vjo.tool.astjst.AstJstTestUtil.AstJstInput;
 import org.ebayopensource.vjo.tool.astjst.TestInputUtil.JxPathInput;
 import org.ebayopensource.vjo.tool.astjst.TestInputUtil.TestInputData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
-//import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 
 public class AstJstTestDelegator {
 	

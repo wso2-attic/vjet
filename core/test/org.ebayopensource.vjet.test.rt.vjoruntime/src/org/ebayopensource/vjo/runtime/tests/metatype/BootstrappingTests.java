@@ -7,19 +7,17 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.runtime.tests.metatype;
-import com.ebay.junitnexgen.category.Module;
-import com.ebay.junitnexgen.category.SubModule;
-
 import static com.ebay.junitnexgen.category.Category.Groups.FF;
 import static com.ebay.junitnexgen.category.Category.Groups.IE;
 import static com.ebay.junitnexgen.category.Category.Groups.P1;
 import static com.ebay.junitnexgen.category.Category.Groups.P2;
 
+import org.ebayopensource.dsf.jsnative.anno.BrowserType;
+import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 import org.junit.Test;
 
-import org.ebayopensource.dsf.jsnative.anno.BrowserType;
 import com.ebay.junitnexgen.category.Category;
-import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
+import com.ebay.junitnexgen.category.Module;
 
 public class BootstrappingTests extends BaseTestClass {
 	private static final String FIELDS_TEST_VJO = "org.ebayopensource.vjo.runtime.tests.metatype.jstests.BootstrappingTests";

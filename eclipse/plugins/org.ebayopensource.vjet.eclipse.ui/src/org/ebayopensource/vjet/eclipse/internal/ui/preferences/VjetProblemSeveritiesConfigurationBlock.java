@@ -18,6 +18,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRule;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRuleSet;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoGroupRulesCache;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticRulePolicy;
+import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.VjoSemanticRuleRepo;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.dltk.mod.ui.preferences.AbstractOptionsBlock;
 import org.eclipse.dltk.mod.ui.preferences.PreferenceKey;
@@ -38,17 +46,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.preferences.IWorkbenchPreferenceContainer;
-
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRule;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRuleSet;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoGroupRulesCache;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticRulePolicy;
-import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.VjoSemanticRuleRepo;
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 public class VjetProblemSeveritiesConfigurationBlock extends
         AbstractOptionsBlock {

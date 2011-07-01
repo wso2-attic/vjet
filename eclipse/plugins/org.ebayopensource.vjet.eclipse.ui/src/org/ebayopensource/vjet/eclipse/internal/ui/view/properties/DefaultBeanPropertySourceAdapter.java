@@ -11,11 +11,10 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.view.properties;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
 import org.eclipse.ui.views.properties.IPropertyDescriptor;
 import org.eclipse.ui.views.properties.IPropertySource;
 import org.eclipse.ui.views.properties.PropertyDescriptor;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.nodeprinter.INodePrinter;
 
 /**
  * bean style property source adapter

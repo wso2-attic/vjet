@@ -15,6 +15,9 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
+import org.ebayopensource.vjet.eclipse.core.sdk.VjetSdkRuntime;
+import org.ebayopensource.vjet.eclipse.ui.actions.nature.DefaultAddVjoNaturePolicy;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -24,10 +27,6 @@ import org.eclipse.dltk.mod.launching.ScriptRuntime;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-
-import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
-import org.ebayopensource.vjet.eclipse.core.sdk.VjetSdkRuntime;
-import org.ebayopensource.vjet.eclipse.ui.actions.nature.DefaultAddVjoNaturePolicy;
 
 /**
  * later, this class will be extract to a new plug-in project

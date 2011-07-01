@@ -13,10 +13,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.junit.Test;
 
 public class ETypeTests extends BaseTest{
 

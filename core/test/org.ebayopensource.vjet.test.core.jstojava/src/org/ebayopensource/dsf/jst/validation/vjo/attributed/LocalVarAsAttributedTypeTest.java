@@ -10,8 +10,6 @@ package org.ebayopensource.dsf.jst.validation.vjo.attributed;
 
 import java.util.List;
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.FieldProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.TypeProbIds;
@@ -19,6 +17,7 @@ import org.ebayopensource.dsf.jsgen.shared.ids.VarProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Test;
 
 public class LocalVarAsAttributedTypeTest extends VjoValidationBaseTester{
 	

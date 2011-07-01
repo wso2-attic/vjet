@@ -12,6 +12,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IModelElement;
@@ -20,8 +21,6 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.internal.corext.refactoring.Checks;
 import org.eclipse.dltk.mod.internal.corext.refactoring.RefactoringCoreMessages;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.refactoring.core.SearchResultGroup;
 
 public class VjoChecks {
 

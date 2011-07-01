@@ -15,10 +15,6 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.access;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.validation.vjo.access.finalcheck.AllAccessFianlTesters;
 import org.ebayopensource.dsf.jst.validation.vjo.access.inherits.Inherits1Tester;
 import org.ebayopensource.dsf.jst.validation.vjo.access.inherits.InheritsCorrect1Tester;
@@ -33,6 +29,9 @@ import org.ebayopensource.dsf.jst.validation.vjo.access.innerclass.InnerClassInO
 import org.ebayopensource.dsf.jst.validation.vjo.access.scope.AllScopeTesters;
 import org.ebayopensource.dsf.jst.validation.vjo.access.scope.var.AllVarAccessTester;
 import org.ebayopensource.dsf.jst.validation.vjo.access.staticMember.AllStaticTesters;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * All static member tester

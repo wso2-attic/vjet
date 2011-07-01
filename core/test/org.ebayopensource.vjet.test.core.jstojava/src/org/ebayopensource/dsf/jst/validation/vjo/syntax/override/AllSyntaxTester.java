@@ -15,12 +15,11 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.override;
 
+import org.ebayopensource.dsf.jst.validation.vjo.syntax.override.construct.SyntaxConstructOverride1Tester;
+import org.ebayopensource.dsf.jst.validation.vjo.syntax.override.construct.SyntaxConstructOverride2Tester;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
-
-import org.ebayopensource.dsf.jst.validation.vjo.syntax.override.construct.SyntaxConstructOverride1Tester;
-import org.ebayopensource.dsf.jst.validation.vjo.syntax.override.construct.SyntaxConstructOverride2Tester;
 
 
 @RunWith(Suite.class)

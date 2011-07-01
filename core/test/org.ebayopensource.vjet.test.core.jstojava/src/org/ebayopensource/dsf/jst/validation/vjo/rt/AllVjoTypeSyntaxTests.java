@@ -8,11 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt;
 
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.validation.vjo.rt.atype.VjoATypeTest;
 import org.ebayopensource.dsf.jst.validation.vjo.rt.ctype.VjoCTypeTest;
@@ -22,6 +17,10 @@ import org.ebayopensource.dsf.jst.validation.vjo.rt.itype.VjoITypeTest;
 import org.ebayopensource.dsf.jst.validation.vjo.rt.mtype.VjoMTypeTest;
 import org.ebayopensource.dsf.jst.validation.vjo.rt.otype.VjoOTypeTest;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.VjoSyntaxTest;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 //@Ignore //till all the following test cases were moved to type space version

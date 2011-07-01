@@ -10,6 +10,10 @@ package org.ebayopensource.vjet.eclipse.internal.ui.actions;
 
 import java.util.ResourceBundle;
 
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
+import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
+import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.eclipse.dltk.mod.ui.DLTKPluginImages;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -18,11 +22,6 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.TextEditorAction;
-
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditorMessages;
-import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
-import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 
 /**
  * A toolbar action which toggles the
