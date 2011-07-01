@@ -93,8 +93,6 @@ import org.ebayopensource.vjo.lib.LibManager;
     org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.Date.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.Form.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.Frame.class,
-    org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.Handlers.class,
-    org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.HistoryManager.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.Html.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.JsLoader.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.Object.class,
@@ -118,7 +116,7 @@ import org.ebayopensource.vjo.lib.LibManager;
 public class AllVjoVjLibTester {
     @BeforeClass
     public static void beforeClass(){
-    	JstCache.getInstance().clear();
-    	LibManager.getInstance().clear();
+//    	JstCache.getInstance().clear();
+//    	LibManager.getInstance().clear();
     }
 }

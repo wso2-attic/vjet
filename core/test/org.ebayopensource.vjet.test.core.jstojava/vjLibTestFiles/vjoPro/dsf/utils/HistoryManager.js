@@ -2,6 +2,7 @@ vjo.ctype("vjoPro.dsf.utils.HistoryManager")
 .needs(["vjoPro.dsf.Enc",
 "vjoPro.dsf.ServiceEngine",
 "vjoPro.dsf.EventDispatcher",
+" vjoPro.dsf.Message",
 "vjoPro.dsf.utils.UriBuilder"])
 /**
 * This class is used to keep the browser's back/forward button avaliable when

@@ -45,8 +45,8 @@ public class FormDropdownAddOptions extends VjoValidationBaseTester {
 
 	 @BeforeClass
      public static void beforeClass(){
-     	JstCache.getInstance().clear();
-     	LibManager.getInstance().clear();
+//     	JstCache.getInstance().clear();
+//     	LibManager.getInstance().clear();
      }
 	
     @Before

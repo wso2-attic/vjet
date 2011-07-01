@@ -23,6 +23,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.FieldProbIds;
+import org.ebayopensource.dsf.jsgen.shared.ids.TypeProbIds;
+import org.ebayopensource.dsf.jsgen.shared.ids.VarProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
@@ -43,14 +45,17 @@ public class ConsoleHandler extends VjoValidationBaseTester {
     @Before
     public void setUp() {
         expectProblems.clear();
+        expectProblems.add(createNewProblem(TypeProbIds.UnusedActiveNeeds,
+        		1, 0));
         expectProblems.add(createNewProblem(VjoSyntaxProbIds.RedundantImport,
                 2, 0));
         expectProblems.add(createNewProblem(
                 VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 3, 0));
-        expectProblems.add(createNewProblem(FieldProbIds.FieldInitializationDependsOnUnintializedTypes,
-                7, 0));
+//        expectProblems.add(createNewProblem(FieldProbIds.FieldInitializationDependsOnUnintializedTypes,
+//                7, 0));
         expectProblems.add(createNewProblem(FieldProbIds.FieldInitializationDependsOnUnintializedTypes,
                 8, 0));
+        expectProblems.add(createNewProblem(VarProbIds.UndefinedName, 8, 0));
         expectProblems
                 .add(createNewProblem(FieldProbIds.UndefinedField, 69, 0));
         expectProblems
@@ -70,7 +75,7 @@ public class ConsoleHandler extends VjoValidationBaseTester {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 VjoValidationBaseTester.VJLIB_FOLDER,
                 "vjoPro.dsf.utils.logging.", "ConsoleHandler.js", this
-                        .getClass());
+                        .getClass(), "ConsoleHandlerGRP", false);
         assertProblemEquals(expectProblems, problems);
     }
 }

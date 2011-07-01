@@ -78,7 +78,7 @@ import org.ebayopensource.vjo.lib.LibManager;
 public class TempVjoValidationTests {
 	 @BeforeClass
      public static void beforeClass(){
-     	JstCache.getInstance().clear();
-     	LibManager.getInstance().clear();
+//     	JstCache.getInstance().clear();
+//     	LibManager.getInstance().clear();
      }
 }

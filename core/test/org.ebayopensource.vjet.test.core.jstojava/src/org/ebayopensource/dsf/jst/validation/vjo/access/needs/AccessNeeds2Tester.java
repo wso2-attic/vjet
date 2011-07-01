@@ -26,6 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
+import org.ebayopensource.dsf.jsgen.shared.ids.VarProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
@@ -47,7 +48,7 @@ public class AccessNeeds2Tester extends VjoValidationBaseTester {
         expectProblems.clear();
         //bugfix by roy, correct error id
         expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 7, 0));
-        expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 10, 0));
+        expectProblems.add(createNewProblem(VarProbIds.UndefinedName, 10, 0));
         expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 2, 0));
     }
 

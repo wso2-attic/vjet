@@ -25,6 +25,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
+import org.ebayopensource.dsf.jsgen.shared.ids.TypeProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VarProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
@@ -54,13 +55,15 @@ public class JsOnlyEx2 extends VjoValidationBaseTester {
         // 19, 0));
         // expectProblems.add(createNewProblem(VarProbIds.UndefinedName,27, 0));
         // expectProblems.add(createNewProblem(VarProbIds.UndefinedName,14, 0));
+        expectProblems.add(createNewProblem(TypeProbIds.UnusedActiveNeeds, 1,0));
+        expectProblems.add(createNewProblem(VarProbIds.UndefinedName, 14,0));
+        expectProblems.add(createNewProblem(VarProbIds.UndefinedName, 27,0));
+        
+        
         expectProblems.add(createNewProblem(
                 VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 2, 0));
         expectProblems.add(createNewProblem(VarProbIds.UndefinedName, 17, 0));
-        expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 15,
-                0));
-        expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 28,
-                0));
+     
     }
 
     @Test
@@ -69,7 +72,7 @@ public class JsOnlyEx2 extends VjoValidationBaseTester {
     public void testJsOnlyEx2() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 VjoValidationBaseTester.VJLIB_FOLDER, "vjoPro.samples.jsonly.",
-                "JsOnlyEx2.js", this.getClass());
+                "JsOnlyEx2.js", this.getClass(), "JSOnlyEx2", false);
         assertProblemEquals(expectProblems, problems);
     }
 }

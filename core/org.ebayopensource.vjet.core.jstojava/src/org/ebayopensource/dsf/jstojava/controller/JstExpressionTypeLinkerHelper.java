@@ -2979,11 +2979,11 @@ public class JstExpressionTypeLinkerHelper {
 		return name;
 	}
 	
-	public static IJstType findFullQualifiedType(final JstExpressionBindingResolver resolver, String fullName) {
+	public static IJstType findFullQualifiedType(final JstExpressionBindingResolver resolver, String fullName, GroupInfo groupInfo) {
 		JstTypeSpaceMgr tsMgr = resolver.getController().getJstTypeSpaceMgr();
 		ITypeSpace<IJstType, IJstNode> ts = tsMgr.getTypeSpace();
 
-		List<IJstType> typeList = ts.getType(fullName);
+		List<IJstType> typeList = ts.getVisibleType(fullName, ts.getGroup(groupInfo.getGroupName()) );
 
 		if (typeList != null && typeList.size() != 0) {
 			IJstType type = typeList.get(0);
@@ -2995,11 +2995,11 @@ public class JstExpressionTypeLinkerHelper {
 
 		// do an extra lookup in JstCache if type is not found in TS
 		//
-		IJstType typeInCache = JstCache.getInstance().getType(fullName);
-
-		if (typeInCache != null) {
-			return typeInCache;
-		}
+//		IJstType typeInCache = JstCache.getInstance().getType(fullName);
+//
+//		if (typeInCache != null) {
+//			return typeInCache;
+//		}
 
 		return null;
 	}

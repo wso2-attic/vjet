@@ -25,6 +25,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import org.ebayopensource.dsf.jsgen.shared.ids.TypeProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VarProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
@@ -45,8 +46,8 @@ public class HTMLandDomEx5 extends VjoValidationBaseTester {
 
 	 @BeforeClass
      public static void beforeClass(){
-     	JstCache.getInstance().clear();
-     	LibManager.getInstance().clear();
+//     	JstCache.getInstance().clear();
+//     	LibManager.getInstance().clear();
      }
 	
     @Before
@@ -60,10 +61,15 @@ public class HTMLandDomEx5 extends VjoValidationBaseTester {
     @Category( { P3, FAST, UNIT })
     @Description("Test VJO Sample project, To validate false positive ")
     public void testHTMLandDomEx5() {
+    	
+    	// error switches depending on if Element is loaded in TS
+    	// if Element is not loaded get undefined name
+    	// if Element is loaded get inactive needs in use
+    	
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 VjoValidationBaseTester.VJLIB_FOLDER,
                 "dox.ebay.vjoPro.vjoPro4javadev.samples.vjlib.",
-                "HTMLandDomEx5.js", this.getClass());
+                "HTMLandDomEx5.js", this.getClass(), "GRP", false);
         assertProblemEquals(expectProblems, problems);
     }
 }

@@ -26,8 +26,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.junit.Assert;
-
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoValidationDriver;
@@ -49,9 +47,12 @@ import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 import org.ebayopensource.dsf.ts.group.Group;
 import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.vjolang.feature.tests.ParseUtils;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.TsLibLoader;
+import org.junit.Assert;
+
+import com.ebay.kernel.resource.ResourceUtil;
 
 /**
  * Vjo Validation tester helper class
@@ -77,6 +78,8 @@ public class VjoValidationTesterHelper {
     };
 
     JstParseController m_c = new JstParseController(m_p);
+
+	private String m_groupName = "DEFAULT";
 
     static {
         String userDir = System.getProperty("user.dir");
@@ -143,8 +146,14 @@ public class VjoValidationTesterHelper {
 
     public List<VjoSemanticProblem> getVjoSemanticProblemOnDemand(
             String testFolderName, String pacakgeName, String checkedFileName,
-            Class<? extends VjoValidationBaseTester> currentClass) {
-
+            Class<? extends VjoValidationBaseTester> currentClass, String groupName, boolean printTree) {
+    	if(groupName==null){
+    		groupName = ONDEMAND;
+    	}
+    	
+    	final String grpName = groupName ;
+    	
+    	
         m_jstType = null;
         m_unit = null;
         m_unitList.clear();
@@ -178,10 +187,11 @@ public class VjoValidationTesterHelper {
         // unresolved
         // jsttype will be resolved in typespace event though
         String typeName = getTypeName(testFile.getFile());
-		IScriptUnit unit = m_c.parse(ONDEMAND, typeName,
+	
+		IScriptUnit unit = m_c.parse(grpName, typeName,
                 VjoParser.getContent(testFile));
         final JstTypeSpaceMgr mgr = new JstTypeSpaceMgr(m_c, new OnDemandValidationTestLoader(
-                ONDEMAND, unit.getType(), testFile));
+                grpName, unit.getType(), testFile));
         //added by huzhou as asynchronous ITypeSpaceEventListener is causing underdetermined test case failures
         mgr.getConfig().setSynchronousEvents(true);
         mgr.initialize();
@@ -206,7 +216,7 @@ public class VjoValidationTesterHelper {
 						final AddGroupEvent addGroupEvt = (AddGroupEvent)trigger;
 						final String groupName = addGroupEvt.getGroupName();
 						final Group<IJstType> group = (Group<IJstType>)mgr.getTypeSpace().getGroup(groupName);
-						if(group != null && ONDEMAND.equals(group.getName())){
+						if(group != null && grpName.equals(group.getName())){
 							final String[] libraries = {JstTypeSpaceMgr.JAVA_PRIMITIVE_GRP, JstTypeSpaceMgr.JS_BROWSER_GRP, JstTypeSpaceMgr.JS_NATIVE_GRP, JstTypeSpaceMgr.VJO_BASE_LIB_NAME, JstTypeSpaceMgr.VJO_SELF_DESCRIBED};
 							for(String lib: libraries){
 								final IGroup<IJstType> libGroup = mgr.getTypeSpace().getGroup(lib);
@@ -232,19 +242,21 @@ public class VjoValidationTesterHelper {
 				
 			}
 		});
-        mgr.processEvent(new AddGroupEvent(ONDEMAND, null,
+        mgr.processEvent(new AddGroupEvent(grpName, null,
                 Collections.EMPTY_LIST, Collections.EMPTY_LIST, libs));
 
-//        ParseUtils.printTree2(unit.getType());
+ 
+        if(printTree)
+        ParseUtils.printTree2(unit.getType());
         
-        unit = m_c.parseAndResolve(ONDEMAND, typeName,
+        unit = m_c.parseAndResolve(grpName, typeName,
                 VjoParser.getContent(testFile));
 
-        
-//        ParseUtils.printTree2(unit.getType());
+        if(printTree)
+        ParseUtils.printTree2(unit.getType());
 
         
-        TestCase.assertNotNull(mgr.getTypeSpace().getGroup(ONDEMAND));
+        TestCase.assertNotNull(mgr.getTypeSpace().getGroup(grpName));
         TestCase.assertNotNull(mgr.getQueryExecutor().findAllTypesInPackage(
                 unit.getType().getPackage().getName()));
 

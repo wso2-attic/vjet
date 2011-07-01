@@ -97,7 +97,7 @@ public abstract class VjoValidationBaseTester {
             String checkedFileName,
             Class<? extends VjoValidationBaseTester> currentClass) {
         if(isOnDemand()){
-        	return new VjoValidationTesterHelper().getVjoSemanticProblemOnDemand(null, null, checkedFileName, currentClass);
+        	return new VjoValidationTesterHelper().getVjoSemanticProblemOnDemand(null, null, checkedFileName, currentClass, null, false);
         }
         
         judgeLoadCustomType();
@@ -115,7 +115,7 @@ public abstract class VjoValidationBaseTester {
             String checkedFilePack,
             String checkedFileName,
             Class<? extends VjoValidationBaseTester> currentClass) {
-         return new VjoValidationTesterHelper().getVjoSemanticProblemOnDemand(null, checkedFilePack, checkedFileName, currentClass);
+         return new VjoValidationTesterHelper().getVjoSemanticProblemOnDemand(null, checkedFilePack, checkedFileName, currentClass, null, false);
     }
     
     /**
@@ -145,12 +145,34 @@ public abstract class VjoValidationBaseTester {
             String checkedFileName,
             Class<? extends VjoValidationBaseTester> currentClass) {
     	 if(isOnDemand()){
-         	return new VjoValidationTesterHelper().getVjoSemanticProblemOnDemand(testFolderName, checkedFilePack, checkedFileName, currentClass);
+         	return new VjoValidationTesterHelper().getVjoSemanticProblemOnDemand(testFolderName, checkedFilePack, checkedFileName, currentClass, null, false);
          }
     	
         judgeLoadCustomType();
         return new VjoValidationTesterHelper().getVjoSemanticProblem(testFolderName, checkedFilePack,checkedFileName,
                 currentClass);
+    }
+    
+    /**
+     * @param testFolderName
+     * @param checkedFilePack
+     * @param checkedFileName
+     * @param currentClass
+     * @return
+     */
+    public List<VjoSemanticProblem> getVjoSemanticProblem(
+    		String testFolderName,
+    		String checkedFilePack,
+    		String checkedFileName,
+    		Class<? extends VjoValidationBaseTester> currentClass,
+    		String groupName, boolean printTree) {
+    	if(isOnDemand()){
+    		return new VjoValidationTesterHelper().getVjoSemanticProblemOnDemand(testFolderName, checkedFilePack, checkedFileName, currentClass, groupName, printTree);
+    	}
+    	
+    	judgeLoadCustomType();
+    	return new VjoValidationTesterHelper().getVjoSemanticProblem(testFolderName, checkedFilePack,checkedFileName,
+    			currentClass);
     }
     
     

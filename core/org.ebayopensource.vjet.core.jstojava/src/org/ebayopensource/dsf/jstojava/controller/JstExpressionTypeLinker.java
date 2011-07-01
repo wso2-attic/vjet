@@ -1722,7 +1722,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	private IJstType checkFullyQualifierTypeAccess(
 			FieldAccessExpr fieldAccessExpr) {
 		final String fullName = fieldAccessExpr.toExprText();
-		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(m_resolver, fullName);
+		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(m_resolver, fullName, m_groupInfo);
 		if (type != null) {
 			final JstTypeRefType typeRef = new JstTypeRefType(type);
 			fieldAccessExpr.getName().setJstBinding(typeRef);
@@ -1739,7 +1739,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	private IJstType checkFullyQualifierTypeInvocation(
 			MtdInvocationExpr mtdInvocationExpr) {
 		final String fullName = JstExpressionTypeLinkerHelper.getFullName(mtdInvocationExpr);
-		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(m_resolver, fullName);
+		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(m_resolver, fullName, m_groupInfo);
 		if (type != null) {
 			JstExpressionTypeLinkerHelper.bindMtdInvocations(m_resolver, this, mtdInvocationExpr, type.getConstructor());
 			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
