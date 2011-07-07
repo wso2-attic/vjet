@@ -21,9 +21,7 @@ import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.FieldProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
-import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
-import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

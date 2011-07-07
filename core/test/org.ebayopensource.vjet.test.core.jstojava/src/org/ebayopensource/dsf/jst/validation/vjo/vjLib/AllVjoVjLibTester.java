@@ -15,8 +15,6 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.vjLib;
 
-import org.ebayopensource.dsf.jst.declaration.JstCache;
-import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

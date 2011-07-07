@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo;
 
-import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.validation.bugfixes.AllVjoBugFixes;
 import org.ebayopensource.dsf.jst.validation.vjo.dsf.AllDsfTestCases;
 import org.ebayopensource.dsf.jst.validation.vjo.rt.AllVjoTypeSyntaxTests;
@@ -16,7 +15,6 @@ import org.ebayopensource.dsf.jst.validation.vjo.samples.AllVjoSamplesTest;
 import org.ebayopensource.dsf.jst.validation.vjo.syntax.AllSyntaxTests;
 import org.ebayopensource.dsf.jst.validation.vjo.vjLib.AllVjoVjLibTester;
 import org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.AllVjoProTestCases;
-import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

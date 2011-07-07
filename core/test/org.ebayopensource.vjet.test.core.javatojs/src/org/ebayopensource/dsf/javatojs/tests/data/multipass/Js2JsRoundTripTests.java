@@ -11,25 +11,25 @@ package org.ebayopensource.dsf.javatojs.tests.data.multipass;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.ebayopensource.dsf.javatojs.tests.BaseRoundTripTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-
-import org.ebayopensource.dsf.javatojs.tests.BaseRoundTripTest;
 
 @RunWith(value=Parameterized.class)
 public class Js2JsRoundTripTests extends BaseRoundTripTest {
 	
 	@Parameters
+	
 	public static Collection data() {
 		
 		return Arrays.asList( new Object[][] {
-				{"Base.vjo"},
-				{"D.vjo"},
-				{"Dependent.vjo"},
-				{"E.vjo"},
-				{"F.vjo"},
-				{"G.vjo"},
+//				{"Base.vjo"},
+//				{"D.vjo"},
+//				{"Dependent.vjo"},
+//				{"E.vjo"},
+//				{"F.vjo"},
+//				{"G.vjo"},
 				
 		});
 	}

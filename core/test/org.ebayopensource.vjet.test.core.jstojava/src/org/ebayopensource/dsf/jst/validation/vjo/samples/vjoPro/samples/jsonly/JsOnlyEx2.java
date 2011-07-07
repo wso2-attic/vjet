@@ -19,7 +19,6 @@ import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
 import java.util.List;
 
-import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.TypeProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VarProbIds;
 import org.ebayopensource.dsf.jsgen.shared.ids.VjoSyntaxProbIds;
