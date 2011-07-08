@@ -75,7 +75,7 @@ public class VjoMtdInvocationTest extends VjoValidationBaseTester {
         
         actualProblems = getVjoSemanticProblem(
                 "org.ebayopensource.dsf.jst.validation.vjo.mtdinvocation.",
-                "OverloadMtdinvocation.js", this.getClass());
+                "OverloadMtdInvocation.js", this.getClass());
         assertProblemEquals(expectProblems, actualProblems);
     }
 }
