@@ -1,4 +1,4 @@
-vjo.ctype('org.ebayopensource.dsf.jst.validation.vjo.mtdinvocation.OverloadMtdinvocation')
+vjo.ctype('org.ebayopensource.dsf.jst.validation.vjo.mtdinvocation.OverloadMtdInvocation')
 .props({
 	//>int foo(int)
 	//>Date foo(Date)
