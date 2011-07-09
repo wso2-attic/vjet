@@ -7,24 +7,22 @@
  *
  *******************************************************************************/
 /* 
- * $Id: RootLogger.java.java, Jun 21, 2009, 12:20:41 AM, liama. Exp$:
+ * $Id: W3cDomLevel1CoreTests.java.java, Jun 21, 2009, 12:20:41 AM, liama. Exp$:
  * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
  * This software program and documentation are copyrighted by Ebay
  * Technologies.
  */
-package org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.utils.logging;
+package org.ebayopensource.dsf.jst.validation.vjo.dsf.dom;
 import static com.ebay.junitnexgen.category.Category.Groups.FAST;
 import static com.ebay.junitnexgen.category.Category.Groups.P3;
 import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jsgen.shared.ids.VarProbIds;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
-import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
-import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.ebay.junitnexgen.category.Category;
@@ -32,33 +30,27 @@ import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
 
 /**
- * RootLogger.java
+ * W3cDomLevel1CoreTests.java
  * 
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
 @Category( { P3, FAST, UNIT })
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-public class RootLogger extends VjoValidationBaseTester {
+public class W3cDomLevel1CoreTests extends VjoValidationBaseTester {
 
-	 @BeforeClass
-     public static void beforeClass(){
-//     	JstCache.getInstance().clear();
-//     	LibManager.getInstance().clear();
-     }
-	
     @Before
     public void setUp() {
         expectProblems.clear();
+        expectProblems.add(createNewProblem(VarProbIds.LooseVarDecl, 35, 0));
     }
 
     @Test
     @Category( { P3, FAST, UNIT })
-    @Description("Test Vjo vj lib project, To validate false positive ")
-    public void testRootLogger() {
-        List<VjoSemanticProblem> problems = getVjoSemanticProblem(
-                VjoValidationBaseTester.VJLIB_FOLDER,
-                "vjoPro.dsf.utils.logging.", "RootLogger.js", this.getClass());
+    @Description("Test DSF project, To validate false positive ")
+    public void testW3cDomLevel1CoreTests() {
+        List<VjoSemanticProblem> problems = getVjoSemanticProblem("dsf.dom.",
+                "W3cDomLevel1CoreTests.js", this.getClass());
         assertProblemEquals(expectProblems, problems);
     }
 }

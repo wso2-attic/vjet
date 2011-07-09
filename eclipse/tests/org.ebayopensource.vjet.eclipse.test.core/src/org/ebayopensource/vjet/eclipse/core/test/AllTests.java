@@ -34,6 +34,7 @@ import org.ebayopensource.vjet.eclipse.core.test.ui.TypeSpaceCleanTester;
 import org.ebayopensource.vjet.eclipse.core.test.ui.VjoAutoEditorStrategyTester;
 import org.ebayopensource.vjet.eclipse.core.test.ui.VjoWizardTests;
 import org.ebayopensource.vjet.eclipse.core.test.validation.DefaultValueTester;
+import org.ebayopensource.vjet.eclipse.core.test.validation.VjoValidationPolicy;
 import org.ebayopensource.vjet.eclipse.core.ts.ExpressionTypeLinkerTests;
 import org.ebayopensource.vjet.eclipse.core.ts.ResourceChangedTests;
 import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceMgrTest;
@@ -96,7 +97,7 @@ public class AllTests extends TestSuite {
 
 //		suite.addTestSuite(CodeCompletionUITests.class);
 		suite.addTestSuite(DefaultValueTester.class);
-//		suite.addTestSuite(VjoValidationPolicy.class);
+		suite.addTestSuite(VjoValidationPolicy.class);
 		suite.addTestSuite(DebuggerTest.class);
 		suite.addTestSuite(StepFilteringPatternTest.class);
 //		suite.addTestSuite(OpenMarkerTest.class);

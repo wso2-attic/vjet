@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo;
 
+import org.ebayopensource.dsf.jst.validation.vjo.BugFixes.VjoValidationBugFixMoreTests;
 import org.ebayopensource.dsf.jst.validation.vjo.BugFixes.VjoValidationBugFixTests;
 import org.ebayopensource.dsf.jst.validation.vjo.accessbility.VjoAccessbilityTest;
 import org.ebayopensource.dsf.jst.validation.vjo.arrayaccess.VjoArrayAccessTest;
@@ -66,7 +67,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	VjoOverrideTest.class,
 	VjoClassTest.class,
 	VjoUnsupportedTest.class,
-//	VjoValidationBugFixMoreTests.class,
+	VjoValidationBugFixMoreTests.class,
 	VjoValidationBugFixTests.class,
 	TempVjoValidationTests.class,
 	LocalVarAsAttributedTypeTest.class,

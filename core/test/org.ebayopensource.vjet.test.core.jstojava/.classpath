@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="typespacesrc"/>
 	<classpathentry kind="src" path="testFiles"/>
 	<classpathentry kind="src" path="vjLibTestFiles"/>
-	<classpathentry exported="true" kind="lib" path="bin/"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jst"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jsgenshared"/>
@@ -21,6 +20,5 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.test.util"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/org.eclipse.jdt.core_3.6.1.v_A68_R36x.jar"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/uKernelCore_1.7.3.jar"/>
-	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -49,32 +49,8 @@
         <version>4.8.1</version>
       </dependency>
   </dependencies>
-  <profiles>
-	<profile>
-		<id>mac-family</id>
-		<activation>
-      		<os>
-        			<family>mac</family>
-      		</os>
-    		</activation>
-		<properties>
-			<eclipse.test.argline>-Xms512m -Xmx1024m -XX:MaxPermSize=256M -XstartOnFirstThread</eclipse.test.argline>
-   		</properties>
-	</profile>
-	<profile>
-		<id>non-mac-families</id>
-		<activation>
-      		<os>
-        			<family>!mac</family>
-      		</os>
-    		</activation>
-		<properties>
-			<eclipse.test.argline>-Xms512m -Xmx1024m -XX:MaxPermSize=256M</eclipse.test.argline>
-   		</properties>
-	</profile>
-   </profiles>
-  <build>
 
+  <build>
     <sourceDirectory>${project.basedir}/none</sourceDirectory> 
     <testSourceDirectory>${project.basedir}/src</testSourceDirectory>
     <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
@@ -282,7 +258,6 @@
 		  </dependencies>
         </plugin>
         -->
-
         <plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-surefire-plugin</artifactId>
@@ -295,7 +270,6 @@
 				</dependency>
 			</dependencies>
 			<configuration>
-                <argLine>${eclipse.test.argline}</argLine>
 				<systemPropertyVariables>
 		            <java.source.path>${java.source.path}</java.source.path>
 		        </systemPropertyVariables>
