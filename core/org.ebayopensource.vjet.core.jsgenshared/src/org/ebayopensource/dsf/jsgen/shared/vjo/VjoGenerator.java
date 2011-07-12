@@ -133,6 +133,16 @@ public class VjoGenerator extends BaseGenerator {
 					}
 				}
 			}
+			
+			// Implements
+			List<? extends IJstType> mixins = type.getMixins();
+			if (mixins != null && !mixins.isEmpty()) {
+				for (IJstType t : mixins) {
+				//	if (!GeneratorHelper.isSkipSatisfies(t)) {
+						writeMixin(t);
+				//	}
+				}
+			}
 
 			// if (type.getModifiers().isFinal()){
 			// writeFinal();
@@ -208,6 +218,18 @@ public class VjoGenerator extends BaseGenerator {
 
 		}
 
+		if(type.isMetaType()){
+			writeNewline();
+			getWriter().append(".options({");
+			indent();
+			writeNewline(); 
+			writeIndent();
+			getWriter().append("metatype:" + true);
+			outdent();
+			writeNewline(); 
+			getWriter().append("})");
+		}
+		
 		writeTypeClosure();
 
 		if (type.getName() != null && !type.isEmbededType()) {
@@ -399,6 +421,7 @@ public class VjoGenerator extends BaseGenerator {
 			writeMtds(mtds);
 			endWriteProtos();
 		}
+		
 		writeTypeClosure();
 	}
 
@@ -644,6 +667,16 @@ public class VjoGenerator extends BaseGenerator {
 		getWriter().append(".").append(VjoKeywords.SATISFIES).append("('")
 				.append(type.getName())
 				.append(GeneratorJstHelper.getArgsDecoration(type))
+				.append("')");
+		return this;
+	}
+
+	public VjoGenerator writeMixin(final IJstType type) {
+		writeNewline();
+		writeIndent();
+		getWriter().append(".").append(VjoKeywords.MIXIN).append("('")
+				.append(type.getName())
+			//	.append(GeneratorJstHelper.getArgsDecoration(type))
 				.append("')");
 		return this;
 	}
