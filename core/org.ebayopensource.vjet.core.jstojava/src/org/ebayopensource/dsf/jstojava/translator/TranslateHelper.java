@@ -1785,7 +1785,7 @@ public class TranslateHelper {
 		JstSource source = null;
 
 		// TODO meta should be retrievable
-		if (meta != null) {
+		if (meta != null && ctx!=null) {
 			int commentOffset = meta.getBeginOffset() + 1;// added 1
 			final int startOffset = commentOffset + param.getBeginColumn();
 			final int endOffset = commentOffset + param.getEndColumn();

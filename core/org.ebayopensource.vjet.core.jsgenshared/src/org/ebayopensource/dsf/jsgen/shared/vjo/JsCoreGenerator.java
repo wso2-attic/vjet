@@ -94,7 +94,7 @@ public class JsCoreGenerator extends BaseGenerator {
 		outdent();
 		writeNewline();
 		writeIndent();
-		getWriter().append("}");
+	
 		if (hasMore){
 			getWriter().append(COMMA);
 		}
