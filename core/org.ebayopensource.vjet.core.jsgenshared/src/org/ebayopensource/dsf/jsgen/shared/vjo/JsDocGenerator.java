@@ -25,6 +25,7 @@ import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstParamType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeWithArgs;
+import org.ebayopensource.dsf.jst.declaration.JstVariantType;
 import org.ebayopensource.dsf.jst.declaration.JstVars;
 import org.ebayopensource.dsf.jst.expr.AssignExpr;
 import org.ebayopensource.dsf.jst.expr.CastExpr;
@@ -336,6 +337,7 @@ public class JsDocGenerator extends BaseGenerator {
 				getWriter().append(TYPE_REF_PREFIX);
 			}
 			getWriter().append(getName(arg.getType(),root));
+		
 			if (arg.getType() instanceof JstTypeWithArgs){
 				appendArguments((JstTypeWithArgs)arg.getType());
 			}
