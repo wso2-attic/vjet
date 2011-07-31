@@ -866,7 +866,7 @@ public class VjoGenerator extends BaseGenerator {
 	}
 
 	private void printjsdoccomment(final IJstProperty pty) {
-		if(pty.getDoc().getComment()!=null ){
+		if(pty.getDoc()!=null && pty.getDoc().getComment()!=null ){
 			getWriter().append("/**").append(pty.getDoc().getComment()).append("*/");
 			writeNewline();
 			writeIndent();

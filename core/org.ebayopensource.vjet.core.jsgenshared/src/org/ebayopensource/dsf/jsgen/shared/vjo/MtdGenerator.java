@@ -88,7 +88,7 @@ public class MtdGenerator extends BaseGenerator {
 			
 			// Body
 			writeBlock(mtd.getBlock());
-			getWriter().append("}");
+		//	getWriter().append("}");
 		}
 	
 		
