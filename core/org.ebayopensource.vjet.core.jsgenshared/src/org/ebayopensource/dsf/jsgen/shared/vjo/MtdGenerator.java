@@ -21,6 +21,7 @@ import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstRawBlock;
 import org.ebayopensource.dsf.jst.reserved.JsCoreKeywords;
 import org.ebayopensource.dsf.jst.token.IStmt;
+import org.ebayopensource.vjo.meta.VjoKeywords;
 
 public class MtdGenerator extends BaseGenerator {
 	
@@ -45,43 +46,55 @@ public class MtdGenerator extends BaseGenerator {
 		// Declaration
 		writeNewline();
 		writeIndent();
+	
+		
 		String mtdName = mtd.getName().getName();
 		if (mtdName != null){
 			writer.append(mtdName).append(COLON);
 		}
-		writer.append(JsCoreKeywords.FUNCTION);
-		List<JstArg> args = mtd.getArgs();
-		if (args.size() > 0){
-			JstArg varArg = null;
-			int fixArgCount = args.size();
-			writer.append("(");
-			for (int i=0; i<args.size(); i++){
-				if (args.get(i).isVariable()){
-					varArg = args.get(i);
-					fixArgCount = i;
-					break;
-				}
-				if (i > 0){
-					writer.append(",");
-				}
-				writer.append(args.get(i).getName());
-			}
-			writer.append("){");
-			if (varArg != null){
-				writeVarArgs(fixArgCount, varArg);
-			}
-		}
-		else {
-			writer.append("(){");
-		}
-		indent();
 		
-		// Body
-		writeBlock(mtd.getBlock());
+		if(mtd.getOwnerType().isMetaType()){
+			writer.append("vjo." +VjoKeywords.NEEDS_IMPL);
+			return;
+		}
+
+			writer.append(JsCoreKeywords.FUNCTION);
+			List<JstArg> args = mtd.getArgs();
+			if (args.size() > 0){
+				JstArg varArg = null;
+				int fixArgCount = args.size();
+				writer.append("(");
+				for (int i=0; i<args.size(); i++){
+					if (args.get(i).isVariable()){
+						varArg = args.get(i);
+						fixArgCount = i;
+						break;
+					}
+					if (i > 0){
+						writer.append(",");
+					}
+					writer.append(args.get(i).getName());
+				}
+				writer.append("){");
+				if (varArg != null){
+					writeVarArgs(fixArgCount, varArg);
+				}
+			}
+			else {
+				writer.append("(){");
+			}
+			
+			indent();
+			
+			// Body
+			writeBlock(mtd.getBlock());
+		//	getWriter().append("}");
+		}
+	
 		
 		// Close
 //		endWriteNameFunc(hasMore);
-	}
+	
 	
 	//
 	// Private

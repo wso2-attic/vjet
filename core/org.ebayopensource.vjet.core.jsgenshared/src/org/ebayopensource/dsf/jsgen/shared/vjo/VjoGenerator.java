@@ -31,6 +31,7 @@ import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstProxyMethod;
 import org.ebayopensource.dsf.jst.declaration.JstProxyProperty;
+import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.JstTypeWithArgs;
 import org.ebayopensource.dsf.jst.expr.ObjCreationExpr;
 import org.ebayopensource.dsf.jst.term.ArrayLiteral;
@@ -133,6 +134,25 @@ public class VjoGenerator extends BaseGenerator {
 					}
 				}
 			}
+			
+			// Implements
+			List<? extends IJstType> mixins = type.getMixins();
+			if (mixins != null && !mixins.isEmpty()) {
+				for (IJstType t : mixins) {
+				//	if (!GeneratorHelper.isSkipSatisfies(t)) {
+						writeMixin(t);
+				//	}
+				}
+			}
+			
+			List<? extends IJstType> expects = type.getExpects();
+			if (expects != null && !expects.isEmpty()) {
+				for (IJstType t : expects) {
+				//	if (!GeneratorHelper.isSkipSatisfies(t)) {
+						writeExpects(t);
+				//	}
+				}
+			}
 
 			// if (type.getModifiers().isFinal()){
 			// writeFinal();
@@ -208,6 +228,18 @@ public class VjoGenerator extends BaseGenerator {
 
 		}
 
+		if(type.isMetaType() && !type.isOType()){
+			writeNewline();
+			getWriter().append(".options({");
+			indent();
+			writeNewline(); 
+			writeIndent();
+			getWriter().append("metatype:" + true);
+			outdent();
+			writeNewline(); 
+			getWriter().append("})");
+		}
+		
 		writeTypeClosure();
 
 		if (type.getName() != null && !type.isEmbededType()) {
@@ -256,26 +288,61 @@ public class VjoGenerator extends BaseGenerator {
 	private void writeOType(JstObjectLiteralType type) {
 		getWriter().append(type.getSimpleName()).append(" : {");
 		List<IJstProperty> props = type.getProperties();
+		
 		// writeNewline();
 		indent();
 		// writeIndent();
+		
+		if(type.hasOptionalFields()){
+			List<IJstProperty> oprops =type.getOptionalFields();
+			processProps(props, oprops);
+		}else{
+			processProps(props, null);
+		}
+		
+		outdent();
+		writeNewline();
+		writeIndent();
+		getWriter().append("}");
+	}
+
+	private void processProps(List<IJstProperty> props, List<IJstProperty> oprops) {
+		int propSize=props.size();
+		if (oprops!=null) {
+			propSize += oprops.size();
+			
+		}
+		writeDefs(props, propSize, false, 0);
+		if(oprops!=null){
+			writeDefs(oprops, propSize, true, props.size());
+		}
+	}
+
+	private void writeDefs(List<IJstProperty> props, int propSize,
+			boolean optional, int count) {
 		for (int i = 0; i < props.size(); i++) {
 			IJstProperty p = props.get(i);
 			writeNewline();
 			writeIndent();
+			if(p.getDoc()!=null){
+				printjsdoccomment(p);
+			}
 			getWriter().append(p.getName().getName()).append(" : ").append(
-					p.getValue().toSimpleTermText());
-			if (i != props.size() - 1) {
+					p.getValue()!=null?p.getValue().toSimpleTermText():"null");
+			if (count != propSize - 1) {
+		//		writeNewline();
 				getWriter().append(",");
 				// writeNewline();
 				// writeIndent();
 			}
 			getCtx().getProvider().getJsDocGenerator().writeJsDoc(p);
+			
+			if(optional){
+				getWriter().append("?");
+			}
+			count++;
+		//	writeNewline();
 		}
-		outdent();
-		writeNewline();
-		writeIndent();
-		getWriter().append("}");
 	}
 
 	private void writeOType(JstFunctionRefType type) {
@@ -399,6 +466,7 @@ public class VjoGenerator extends BaseGenerator {
 			writeMtds(mtds);
 			endWriteProtos();
 		}
+		
 		writeTypeClosure();
 	}
 
@@ -648,7 +716,26 @@ public class VjoGenerator extends BaseGenerator {
 		return this;
 	}
 
-	
+	public VjoGenerator writeMixin(final IJstType type) {
+		writeNewline();
+		writeIndent();
+		getWriter().append(".").append(VjoKeywords.MIXIN).append("('")
+				.append(type.getName())
+			//	.append(GeneratorJstHelper.getArgsDecoration(type))
+				.append("')");
+		return this;
+	}
+
+	public VjoGenerator writeExpects(final IJstType type) {
+		writeNewline();
+		writeIndent();
+		getWriter().append(".").append(VjoKeywords.EXPECTS).append("('")
+				.append(type.getName())
+			//	.append(GeneratorJstHelper.getArgsDecoration(type))
+				.append("')");
+		return this;
+	}
+
 
 	public VjoGenerator writeSatisfies (final List<? extends IJstType> needs) {
 		if (needs==null || needs.size()==0) {
@@ -767,11 +854,23 @@ public class VjoGenerator extends BaseGenerator {
 	public VjoGenerator writePty(final IJstProperty pty, boolean hasMore) {
 		writeNewline();
 		writeIndent();
+		
+		printjsdoccomment(pty);
+		
+		
 		getWriter().append(((JstProperty) pty).toNVText());
 		if (hasMore) {
 			getWriter().append(COMMA);
 		}
 		return this;
+	}
+
+	private void printjsdoccomment(final IJstProperty pty) {
+		if(pty.getDoc()!=null && pty.getDoc().getComment()!=null ){
+			getWriter().append("/**").append(pty.getDoc().getComment()).append("*/");
+			writeNewline();
+			writeIndent();
+		}
 	}
 
 	public VjoGenerator writeEmbeds(final List<? extends IJstType> embeds,
@@ -830,7 +929,17 @@ public class VjoGenerator extends BaseGenerator {
 
 	public VjoGenerator writeNameFunc(final IJstMethod mtd, boolean hasMore) {
 
+
 		writeComments(mtd);
+		
+	
+		
+		if(mtd.getDoc()!=null && mtd.getDoc().getComment()!=null ){
+			writeNewline();
+			getWriter().append("/**").append(mtd.getDoc().getComment()).append("*/");
+		//	writeNewline();
+			writeIndent();
+		}
 		if (mtd.getRtnType() != null || mtd instanceof JstConstructor
 				|| mtd.isConstructor()) {
 			// JsDoc
