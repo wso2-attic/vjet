@@ -350,7 +350,7 @@ public class ExprGenerator extends BaseGenerator {
 		JsCoreGenerator coreGenerator = getJsCoreGenerator();
 		coreGenerator.startWriteFunc(params);
 		writeBlock(method.getBlock());
-		coreGenerator.endWriteFunc(hasMore);
+		coreGenerator.endWriteFunc(hasMore, method.getOwnerType().isMetaType());
 	}
 	
 //	private void write(final JstVars jstVars){

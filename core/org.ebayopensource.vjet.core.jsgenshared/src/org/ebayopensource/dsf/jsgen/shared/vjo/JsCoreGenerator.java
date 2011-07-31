@@ -90,11 +90,13 @@ public class JsCoreGenerator extends BaseGenerator {
 		return this;
 	}
 	
-	public JsCoreGenerator endWriteFunc(boolean hasMore){
+	public JsCoreGenerator endWriteFunc(boolean hasMore, boolean isMetaType){
 		outdent();
 		writeNewline();
 		writeIndent();
-		getWriter().append("}");
+		if(!isMetaType){
+			getWriter().append("}");
+		}
 		if (hasMore){
 			getWriter().append(COMMA);
 		}
