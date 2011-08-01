@@ -949,7 +949,7 @@ public class VjoGenerator extends BaseGenerator {
 		getMtdGenerator().writeMtd(mtd);
 
 		// Close
-		getJsCoreGenerator().endWriteFunc(hasMore);
+		getJsCoreGenerator().endWriteFunc(hasMore, mtd.getOwnerType().isMetaType());
 
 		return this;
 	}
