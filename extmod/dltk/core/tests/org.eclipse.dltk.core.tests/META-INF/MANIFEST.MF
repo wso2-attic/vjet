@@ -10,7 +10,7 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.dltk.mod.launching,
  org.eclipse.dltk.mod.core,
  org.eclipse.dltk.mod.debug,
- org.junit4;bundle-version="4.8.1",
+ org.junit4,
  org.eclipse.core.resources
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.dltk.mod.core.tests,
