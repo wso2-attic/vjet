@@ -7,13 +7,13 @@ Bundle-ClassPath: core.jar
 Bundle-Activator: org.eclipse.dltk.mod.core.tests.model.ModelTestsPlugin
 Bundle-Vendor: %pluginProvider
 Bundle-Localization: plugin
-Require-Bundle: org.eclipse.team.core,
- org.eclipse.dltk.mod.launching,
+Require-Bundle: org.eclipse.dltk.mod.launching,
  org.eclipse.dltk.mod.core,
  org.eclipse.debug.core,
  org.eclipse.dltk.mod.debug,
  org.junit4;bundle-version="4.8.1",
- org.eclipse.core.runtime;bundle-version="3.7.0"
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.eclipse.team.core;bundle-version="3.6.0"
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.dltk.mod.core.tests,
  org.eclipse.dltk.mod.core.tests.buildpath,
