@@ -11,10 +11,7 @@ Require-Bundle: org.eclipse.dltk.mod.launching,
  org.eclipse.dltk.mod.core,
  org.eclipse.dltk.mod.debug,
  org.eclipse.core.resources;bundle-version="3.7.100",
- org.junit;bundle-version="3.8.2",
- org.eclipse.core.runtime;bundle-version="3.7.0",
- org.eclipse.debug.core;bundle-version="3.7.0",
- org.eclipse.team.core;bundle-version="3.6.0"
+ org.junit;bundle-version="3.8.2"
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.dltk.mod.core.tests,
  org.eclipse.dltk.mod.core.tests.buildpath,
@@ -23,3 +20,10 @@ Export-Package: org.eclipse.dltk.mod.core.tests,
  org.eclipse.dltk.mod.core.tests.model,
  org.eclipse.dltk.mod.core.tests.util,
  org.eclipse.dltk.mod.core.tests.xml
+Import-Package: org.eclipse.core.runtime;version="3.4.0",
+ org.eclipse.core.runtime.content,
+ org.eclipse.core.runtime.jobs,
+ org.eclipse.debug.core,
+ org.eclipse.debug.core.model,
+ org.eclipse.team.core,
+ org.w3c.dom
