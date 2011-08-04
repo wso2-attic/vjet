@@ -31,6 +31,8 @@ import org.ebayopensource.dsf.javatojs.translate.config.JsNativeConfigInitialize
 import org.ebayopensource.dsf.javatojs.util.JavaToJsHelper;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
+import org.ebayopensource.dsf.jst.declaration.JstFactory;
+import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.declaration.JstStaticOnlyProxyType;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
@@ -193,20 +195,29 @@ public class JsNativeLibBuildTask extends BaseBuildTask {
 					//System.out.println("FileList: " + fileList);
 					
 					List<JstType> jstTypes = getJstTypes(getJsNativeFiles(files));
+					List<JstType> aliasTypes = new ArrayList<JstType>();
 					// Fix JstType category
 					if(jstTypes.size()==0){
 						throw new DsfRuntimeException("no types found under files:" + files);
 					}
 					
 					for (JstType t : jstTypes) {
+						
+						JstType alias =JstFactory.getInstance().createJstType(new JstPackage("js"), t.getName(), true);
+						alias.addExtend(t);
+						aliasTypes.add(alias);
+						
+						
+						
 						fixCategory(t);
 						mixinFunction(t);
 						JstCache.getInstance().addType(t);
 					}
-					serialize(pkgName, jstTypes);
+					aliasTypes.addAll(jstTypes);
+					serialize(pkgName, aliasTypes);
 					if (m_enableDebug) {
 						addFiles(files);
-						addJstTypes(jstTypes);
+						addJstTypes(aliasTypes);
 					}
 				}
 			}
@@ -236,6 +247,9 @@ public class JsNativeLibBuildTask extends BaseBuildTask {
 	
 	private void mixinFunction(JstType t) {
 		if (contains(s_jsNativeGlobals, t.getName())) {
+			
+			
+			
 			IJstType function = JstCache.getInstance().getType(
 					org.ebayopensource.dsf.jsnative.global.Function.class.getName());
 			if (function != null) { //only mixin static properties and methods

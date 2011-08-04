@@ -165,13 +165,49 @@ public interface VjoConstants {
 			return new IJstType[]{
 					getPrimitiveBooleanJstType(),
 					getBooleanJstType(),
+					getAliasBooleanJstType(),
 					getNumberJstType(),
+					getAliasNumberJstType(),
 					getStringJstType(),
+					getAliasStringJstType(),
 					getObjectJstType(),
+					getAliasObjectJstType(),
 					getRegExpJstType(),
 					getDateJstType(),
-					getArrayJstType()
+					getAliasDateJstType(),
+					getArrayJstType(),
+					getAliasArrayJstType()
 			};
+		}
+
+		public static IJstType getAliasObjectJstType() {
+			return JstCache.getInstance().getType(
+					"js."+org.ebayopensource.dsf.jsnative.global.Object.class.getSimpleName());
+		}
+
+		public static IJstType getAliasDateJstType() {
+			return JstCache.getInstance().getType(
+					"js."+org.ebayopensource.dsf.jsnative.global.Date.class.getSimpleName());
+		}
+
+		public static IJstType getAliasStringJstType() {
+			return JstCache.getInstance().getType(
+					"js."+org.ebayopensource.dsf.jsnative.global.String.class.getSimpleName());
+		}
+
+		public static IJstType getAliasArrayJstType() {
+			return JstCache.getInstance().getType(
+					"js."+org.ebayopensource.dsf.jsnative.global.String.class.getSimpleName());
+		}
+		
+		public static IJstType getAliasNumberJstType() {
+			return JstCache.getInstance().getType(
+					"js."+org.ebayopensource.dsf.jsnative.global.Number.class.getSimpleName());
+		}
+		
+		public static IJstType getAliasBooleanJstType() {
+			return JstCache.getInstance().getType(
+					"js."+org.ebayopensource.dsf.jsnative.global.Boolean.class.getSimpleName());
 		}
 	}
 	
