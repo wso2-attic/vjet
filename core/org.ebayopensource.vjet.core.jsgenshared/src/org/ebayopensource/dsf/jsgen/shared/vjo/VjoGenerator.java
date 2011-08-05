@@ -949,7 +949,9 @@ public class VjoGenerator extends BaseGenerator {
 		getMtdGenerator().writeMtd(mtd);
 
 		// Close
-		getJsCoreGenerator().endWriteFunc(hasMore, mtd.getOwnerType().isMetaType());
+		boolean isMetaType = mtd.getOwnerType()!=null ? mtd.getOwnerType().isMetaType():false;
+			getJsCoreGenerator().endWriteFunc(hasMore, isMetaType);
+		
 
 		return this;
 	}
