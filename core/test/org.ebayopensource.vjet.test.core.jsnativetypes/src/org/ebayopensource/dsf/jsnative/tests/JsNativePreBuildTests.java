@@ -260,6 +260,9 @@ public class JsNativePreBuildTests  extends TestCase {
 		
 		for (JstType jstType : originalJstTypeList) {
 			// verify JsNative JstType don't have package information
+			if(jstType.getPackage()!=null && jstType.getPackage().getName().equals("js")){
+				continue;
+			}
 			assertNull("Package is not null for " + jstType.getName(), jstType.getPackage());
 		}
 		
