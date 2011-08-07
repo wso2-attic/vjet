@@ -1702,17 +1702,21 @@ public class JstExpressionTypeLinkerHelper {
 			methodId.setType(type);
 			
 			final List<JstParamType> paramTypes = type.getParamTypes();
-			int index=0;
-			for (IExpr arg : arguments) {
-				JstArg jstarg=constructor.getArgs().get(index);
-				if (doesExprRequireResolve(arg)) {
-					doExprTypeResolve(resolver, revisitor, arg,
-							jstarg.getType());
-					
+			if (arguments.size()==constructor.getArgs().size()) {
+				int index=0;
+				for (IExpr arg : arguments) {
+					JstArg jstarg=constructor.getArgs().get(index);
+					if (doesExprRequireResolve(arg)) {
+						doExprTypeResolve(resolver, revisitor, arg,
+								jstarg.getType());
+						
+					}
+					index++;
 				}
-				index++;
+				
 			}
 			
+		
 			if(paramTypes.size() > 0){
 				final JstTypeWithArgs withArgs = new JstTypeWithArgs(type.getReferencedNode());
 				final IJstMethod matchingConstructor = look4MatchingConstructor(constructor, paramTypes, arguments);
