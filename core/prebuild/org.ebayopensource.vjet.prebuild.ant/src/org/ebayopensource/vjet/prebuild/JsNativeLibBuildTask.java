@@ -206,6 +206,8 @@ public class JsNativeLibBuildTask extends BaseBuildTask {
 						JstType alias =JstFactory.getInstance().createJstType(new JstPackage("js"), t.getName(), true);
 						alias.addExtend(t);
 						aliasTypes.add(alias);
+						alias.setMetaType(true);
+						
 						
 						
 						
