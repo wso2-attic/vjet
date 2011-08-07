@@ -53,7 +53,7 @@ public class MtdGenerator extends BaseGenerator {
 			writer.append(mtdName).append(COLON);
 		}
 		
-		if(mtd.getOwnerType() !=null && mtd.getOwnerType().isMetaType()){
+		if((mtd.getOwnerType() !=null && mtd.getOwnerType().isMetaType()) || mtd.getAnnotation("metaMethod")!=null){
 			writer.append("vjo." +VjoKeywords.NEEDS_IMPL);
 			return;
 		}

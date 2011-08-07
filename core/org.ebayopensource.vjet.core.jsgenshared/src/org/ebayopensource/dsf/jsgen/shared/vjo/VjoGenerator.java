@@ -949,11 +949,21 @@ public class VjoGenerator extends BaseGenerator {
 		getMtdGenerator().writeMtd(mtd);
 
 		// Close
-		boolean isMetaType = mtd.getOwnerType()!=null ? mtd.getOwnerType().isMetaType():false;
+		boolean isMetaType = isMetaMtd(mtd);
 			getJsCoreGenerator().endWriteFunc(hasMore, isMetaType);
 		
 
 		return this;
+	}
+
+	private boolean isMetaMtd(final IJstMethod mtd) {
+		if( mtd.getAnnotation("metaMethod")!=null){
+			return true;
+		}
+		
+		boolean isMetaType = mtd.getOwnerType()!=null ? mtd.getOwnerType().isMetaType():false;
+	
+		return isMetaType;
 	}
 
 	public VjoGenerator writeJsDoc(final IJstMethod mtd) {
