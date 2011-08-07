@@ -418,7 +418,9 @@ public class JsDocGenerator extends BaseGenerator {
 				//Get name for inner type
 				return getSimpleNameForInner(type);
 			}
-			
+			if(!isN && type.getPackage()!=null){
+				return type.getName();
+			}
 			return name;
 		}
 		if (isInnerType(type)) {
