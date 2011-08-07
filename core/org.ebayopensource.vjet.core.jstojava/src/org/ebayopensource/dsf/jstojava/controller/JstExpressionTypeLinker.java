@@ -1052,7 +1052,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		
 		final IJstType vjoSyntacticType = JstExpressionTypeLinkerHelper.processSyntacticCalls(mie, methodName, m_provider);
 		if (mtdBindingType != null) { // constructor
-			if(JstExpressionTypeLinkerHelper.checkConstructorCalls(mie, methodId, mtdBindingType)){
+			if(JstExpressionTypeLinkerHelper.checkConstructorCalls(m_resolver,this, mie, methodId, mtdBindingType)){
 				return;//constructor handled
 			}
 		}

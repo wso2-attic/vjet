@@ -1614,26 +1614,27 @@ public class JstExpressionTypeLinkerHelper {
 	 * @param mtdBindingType
 	 * @return
 	 */
-	public static boolean checkConstructorCalls(MtdInvocationExpr mie,
+	public static boolean checkConstructorCalls(final JstExpressionBindingResolver resolver, 
+			final IJstVisitor revisitor,MtdInvocationExpr mie,
 			JstIdentifier methodId, IJstType mtdBindingType) {
 		if(mtdBindingType instanceof JstTypeRefType && !mtdBindingType.isFType()){											// invocation
 			final JstTypeRefType type = (JstTypeRefType) mtdBindingType;
 			//bugfix by huzhou to set the constructor binding only when the constructor is available
-			final IJstType boundType = bindConstructor(type, methodId, mie.getArgs());
+			final IJstType boundType = bindConstructor(resolver,revisitor,type, methodId, mie.getArgs());
 			// methodId.setType(null); leave type as is
 			mie.setResultType(boundType);
 			return true;
 		}
 		else if("this".equals(methodId.getName())){
 			final JstTypeRefType type = new JstTypeRefType(mtdBindingType);
-			bindConstructor(type, methodId, mie.getArgs());
+			bindConstructor(resolver,revisitor,type, methodId, mie.getArgs());
 			// methodId.setType(null); leave type as is
 			mie.setResultType(type.getType());
 			return true;
 		}
 		else if(VjoKeywords.BASE.equals(methodId.getName()) && mie.getMethodIdentifier() instanceof FieldAccessExpr){
 			final JstTypeRefType type = new JstTypeRefType(mtdBindingType);
-			bindConstructor(type, methodId, mie.getArgs());
+			bindConstructor(resolver,revisitor,type, methodId, mie.getArgs());
 			// methodId.setType(null); leave type as is
 			((FieldAccessExpr)mie.getMethodIdentifier()).setType(type);
 			mie.setResultType(type.getType());
@@ -1691,7 +1692,8 @@ public class JstExpressionTypeLinkerHelper {
 		}
 	}
 	
-	public static final IJstType bindConstructor(final JstTypeRefType type, 
+	public static final IJstType bindConstructor(final JstExpressionBindingResolver resolver, 
+			final IJstVisitor revisitor,final JstTypeRefType type, 
 			final JstIdentifier methodId,
 			final List<IExpr> arguments){
 		final IJstMethod constructor = type.getConstructor();
@@ -1700,6 +1702,17 @@ public class JstExpressionTypeLinkerHelper {
 			methodId.setType(type);
 			
 			final List<JstParamType> paramTypes = type.getParamTypes();
+			int index=0;
+			for (IExpr arg : arguments) {
+				JstArg jstarg=constructor.getArgs().get(index);
+				if (doesExprRequireResolve(arg)) {
+					doExprTypeResolve(resolver, revisitor, arg,
+							jstarg.getType());
+					
+				}
+				index++;
+			}
+			
 			if(paramTypes.size() > 0){
 				final JstTypeWithArgs withArgs = new JstTypeWithArgs(type.getReferencedNode());
 				final IJstMethod matchingConstructor = look4MatchingConstructor(constructor, paramTypes, arguments);
@@ -1709,7 +1722,14 @@ public class JstExpressionTypeLinkerHelper {
 					if(paramTypes.contains(param.getType())){
 						if(arguments.size() > i){
 							final IExpr arg = arguments.get(i);
+								
+							if (doesExprRequireResolve(arg)) {
+								doExprTypeResolve(resolver, revisitor, arg,
+										matchingParameters.get(i).getType());
+							}
+
 							withArgs.addArgType(arg.getResultType());
+							
 						}
 					}
 				}
