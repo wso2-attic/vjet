@@ -418,7 +418,7 @@ public class JsDocGenerator extends BaseGenerator {
 				//Get name for inner type
 				return getSimpleNameForInner(type);
 			}
-			if(!isN && type.getPackage()!=null){
+			if(!isN && type.getPackage()!=null && !type.getName().startsWith("java.lang")&& !type.getName().startsWith("org.ebayopensource.dsf.jsnative.global")){
 				return type.getName();
 			}
 			return name;
