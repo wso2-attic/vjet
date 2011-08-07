@@ -152,9 +152,17 @@ public class JsDocGenerator extends BaseGenerator {
 		// Params
 		appendParameters(mtd);
 		
+		
 		// Return type
 		IJstType rtnType = mtd.getRtnType();
 		if (rtnType != null && !mtd.isConstructor()){
+			getWriter().append(SPACE);
+			//factory function
+			if(mtd.isTypeFactoryEnabled()){
+				getWriter().append("^");
+			}
+			
+			
 			writeJsDocReturnType(getName(rtnType,root));
 			if (rtnType instanceof JstTypeWithArgs){
 				appendArguments((JstTypeWithArgs)rtnType);
@@ -355,7 +363,8 @@ public class JsDocGenerator extends BaseGenerator {
 	}
 	
 	protected void writeJsDocReturnType(final String type){
-		getWriter().append(SPACE);
+		
+		
 		if ("Void".equals(type)) {
 			getWriter().append("void");
 		}
