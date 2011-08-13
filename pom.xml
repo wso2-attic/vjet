@@ -38,7 +38,7 @@
      </repository>
      <repository>
         <id>dependency</id>
-        <url>http://www.ebayopensource.org/svn/vjet/trunk/dependency</url>
+        <url>https://www.ebayopensource.org/svn/vjet/trunk/dependency</url>
         <layout>p2</layout>
      </repository>
 
