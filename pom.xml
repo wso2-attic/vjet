@@ -257,7 +257,7 @@
               <encoding>UTF-8</encoding>
               <source>1.6</source>
               <target>1.6</target>
-              <compilerArgument>-warn:[+|-]discouraged,forbidden</compilerArgument>
+              <compilerArgument>-err:-discouraged,forbidden</compilerArgument>
            </configuration>
         </plugin>
         <plugin>
