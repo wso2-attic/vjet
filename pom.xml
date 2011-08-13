@@ -22,7 +22,7 @@
 
   <repositories>
      <repository>
-        <id>helios</id>
+        <id>eclipse</id>
         <url>${eclipse-site}</url>
         <layout>p2</layout>
      </repository>
@@ -474,7 +474,7 @@
         </property>
       </activation>
       <properties>
-        <eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
+        <eclipse-site>http://download.eclipse.org/releases/indigo/</eclipse-site>
         <platform-version>[3.7,3.8)</platform-version>
         <swtbot-site>http://download.eclipse.org/technology/swtbot/indigo/dev-build/update-site</swtbot-site>
       </properties>
