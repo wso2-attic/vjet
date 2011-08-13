@@ -1696,27 +1696,26 @@ public class JstExpressionTypeLinkerHelper {
 			final IJstVisitor revisitor,final JstTypeRefType type, 
 			final JstIdentifier methodId,
 			final List<IExpr> arguments){
-		final IJstMethod constructor = type.getConstructor();
-		if(constructor != null){
-			methodId.setJstBinding(constructor);
-			methodId.setType(type);
-			
-			final List<JstParamType> paramTypes = type.getParamTypes();
-			if (arguments.size()==constructor.getArgs().size()) {
-				int index=0;
-				for (IExpr arg : arguments) {
-					JstArg jstarg=constructor.getArgs().get(index);
-					if (doesExprRequireResolve(arg)) {
-						doExprTypeResolve(resolver, revisitor, arg,
-								jstarg.getType());
-						
+		final IJstMethod constructor =  type.getConstructor();
+		if(constructor==null){
+			return null;
+		}
+		methodId.setJstBinding(constructor);
+		final List<JstParamType> paramTypes = type.getParamTypes();
+		final List<IJstMethod> matchingMtds = getMatchingMtdFromOverloads(constructor, arguments);
+		if(matchingMtds.size() == 1){
+			final IJstMethod matchingMtd = matchingMtds.iterator().next(); 
+			final List<JstArg> parameters = matchingMtd.getArgs();
+			for(int i = 0, len = arguments.size(); i < len; i++){
+				final IExpr argExpr = arguments.get(i);
+				if(parameters.size() > i){
+					if(doesExprRequireResolve(argExpr)){
+						doExprTypeResolve(resolver, revisitor, argExpr, parameters.get(i).getType());
 					}
-					index++;
 				}
-				
+				methodId.setJstBinding(matchingMtd);
 			}
 			
-		
 			if(paramTypes.size() > 0){
 				final JstTypeWithArgs withArgs = new JstTypeWithArgs(type.getReferencedNode());
 				final IJstMethod matchingConstructor = look4MatchingConstructor(constructor, paramTypes, arguments);
@@ -1731,7 +1730,7 @@ public class JstExpressionTypeLinkerHelper {
 								doExprTypeResolve(resolver, revisitor, arg,
 										matchingParameters.get(i).getType());
 							}
-
+	
 							withArgs.addArgType(arg.getResultType());
 							
 						}

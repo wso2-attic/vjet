@@ -668,6 +668,9 @@ public class VjoOLFieldTranslator extends
 								value, metaArr, parent);
 						mtdProperty4Otype.setType(new JstFuncType(meth));
 						current.addProperty(mtdProperty4Otype);
+					}else if(meth.isConstructor()){
+						
+						current.setConstructor(meth);
 					}
 					else{
 						current.addMethod(meth);
