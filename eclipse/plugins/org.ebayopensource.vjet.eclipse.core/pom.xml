@@ -17,7 +17,7 @@
    </parent>
 
    <groupId>org.ebayopensource.vjet.eclipse.plugins</groupId>
-   <artifactId>core</artifactId>
+   <artifactId>org.ebayopensource.vjet.eclipse.core</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    <packaging>eclipse-plugin</packaging>
    <name>VJET: Eclipse Plugin Core</name>
