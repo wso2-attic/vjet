@@ -37,7 +37,7 @@
         <layout>p2</layout>
      </repository>
      <repository>
-        <id>dependency</id>
+        <id>vjetdependency</id>
         <url>http://www.ebayopensource.org/p2/vjet/dependency/</url>
         <layout>p2</layout>
      </repository>
