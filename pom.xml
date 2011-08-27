@@ -38,7 +38,7 @@
      </repository>
      <repository>
         <id>vjetdependency</id>
-        <url>http://www.ebayopensource.org/p2/vjet/dependency/</url>
+        <url>http://dl.dropbox.com/u/15417274/vjet_dependencies/</url>
         <layout>p2</layout>
      </repository>
 
