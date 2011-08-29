@@ -110,7 +110,7 @@ public class NativeJsLibProvider implements IJstLibProvider {
 		JstType booleanT = javaPrimitivelib.getType("boolean", false);
 		booleanT.setMetaType(true);
 		booleanT.removeExtend(booleanT.getExtend());
-		booleanT.addExtend(jsGlobals.getType(org.ebayopensource.dsf.jsnative.global.PrimitiveBoolean.class.getSimpleName(), false));
+		booleanT.addExtend(jsGlobals.getType("PrimitiveBoolean", false));
 		
 		IJstType number = jsGlobals.getType("Number", false);		
 		
