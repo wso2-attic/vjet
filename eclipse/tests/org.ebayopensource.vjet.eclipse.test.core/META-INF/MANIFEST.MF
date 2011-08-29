@@ -4,10 +4,10 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.ebayopensource.vjet.eclipse.core.test;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.dltk.mod.core,
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.dltk.mod.core,
  org.eclipse.dltk.mod.core.tests,
  org.eclipse.core.resources,
- org.eclipse.core.runtime,
  org.junit,
  org.ebayopensource.vjet.core.wrapper,
  org.ebayopensource.vjet.rt.wrapper,

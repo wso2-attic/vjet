@@ -50,3 +50,4 @@ target/
 
 # VJET specific gitignore
 core/**/*Jsr.java
+eclipse/tests/org.ebayopensource.vjet.eclipse.test.core/tests.jar

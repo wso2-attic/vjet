@@ -28,75 +28,7 @@
    	</repository>
    </repositories>
 
-   <dependencies>
-   		<dependency>
-			<groupId>org.ebayopensource.vjet.prebuild</groupId>
-			<artifactId>org.ebayopensource.vjet.prebuild.ant</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-			
-		</dependency>
-   		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant-nodeps</artifactId>
-			<version>1.8.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jdt</groupId>
-			<artifactId>core</artifactId>
-			<version>[1.0.0,)</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.extmod</groupId>
-			<artifactId>org.ebayopensource.vjet.extmod.rhino</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ebay.kernel</groupId>
-			<artifactId>uKernelCore</artifactId>
-			<version>1.73</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.util</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.ext</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.jsnative</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.jst</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-			<type>eclipse-plugin</type>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.vjodef</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.javatojs</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-			<artifactId>org.ebayopensource.vjet.rt.active.javatojs</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.jsgenshared</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-   </dependencies>
+
 
    <build>
       <sourceDirectory>src</sourceDirectory>
@@ -112,7 +44,7 @@
                   </goals>
                   <configuration>
                      <tasks>
-                        <property name="runtime-classpath" refid="maven.runtime.classpath"/>
+                        <property name="runtime-classpath" refid="maven.plugin.classpath"/>
 						<property name="projectDir" value="${basedir}/../../org.ebayopensource.vjet.core.jsnative"/>
 						<property name="sourceSearchPath" value="${projectDir}/src"/>
                         <ant antfile="build.xml" />
@@ -126,6 +58,72 @@
                   <artifactId>ant-nodeps</artifactId>
                   <version>1.8.1</version>
                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.prebuild</groupId>
+                    <artifactId>org.ebayopensource.vjet.prebuild.ant</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant-nodeps</artifactId>
+                    <version>1.8.1</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.eclipse.jdt</groupId>
+                    <artifactId>core</artifactId>
+                    <version>[1.0.0,)</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.extmod</groupId>
+                    <artifactId>org.ebayopensource.vjet.extmod.rhino</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.ebay.kernel</groupId>
+                    <artifactId>uKernelCore</artifactId>
+                    <version>1.73</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.core</groupId>
+                    <artifactId>org.ebayopensource.vjet.core.util</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.core</groupId>
+                    <artifactId>org.ebayopensource.vjet.core.ext</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.core</groupId>
+                    <artifactId>org.ebayopensource.vjet.core.jsnative</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.core</groupId>
+                    <artifactId>org.ebayopensource.vjet.core.jst</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                    <type>eclipse-plugin</type>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.core</groupId>
+                    <artifactId>org.ebayopensource.vjet.core.vjodef</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.core</groupId>
+                    <artifactId>org.ebayopensource.vjet.core.javatojs</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.rt</groupId>
+                    <artifactId>org.ebayopensource.vjet.rt.active.javatojs</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
+                <dependency>
+                    <groupId>org.ebayopensource.vjet.core</groupId>
+                    <artifactId>org.ebayopensource.vjet.core.jsgenshared</artifactId>
+                    <version>1.0.0-SNAPSHOT</version>
+                </dependency>
             </dependencies>
          </plugin>
 	  </plugins>

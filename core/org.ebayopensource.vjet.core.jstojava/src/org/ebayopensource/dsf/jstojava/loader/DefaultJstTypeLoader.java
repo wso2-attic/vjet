@@ -148,7 +148,7 @@ public class DefaultJstTypeLoader implements IJstTypeLoader {
 					}
 				}
 				catch (IOException e) {
-					
+					e.printStackTrace();
 				}								
 			}			
 		}
