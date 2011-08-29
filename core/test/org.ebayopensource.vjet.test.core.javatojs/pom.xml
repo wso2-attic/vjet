@@ -85,6 +85,22 @@
 			<artifactId>org.ebayopensource.vjet.core.jsnative</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant-nodeps</artifactId>
+			<version>1.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.vjet.extmod</groupId>
+			<artifactId>org.ebayopensource.vjet.extmod.rhino</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ebayopensource.vjet.core</groupId>
+			<artifactId>org.ebayopensource.vjet.core.vjodef</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+
 	</dependencies>
 
 	<properties>
