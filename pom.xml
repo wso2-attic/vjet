@@ -519,7 +519,7 @@
 	      	<activeByDefault>true</activeByDefault>
 	      </activation>
 	    <properties>
-				<eclipse-site>http://download.eclipse.org/releases/helios/</eclipse-site>
+				<eclipse-site>http://download.eclipse.org/releases/indigo/</eclipse-site>
 				<platform-version>[3.6,3.7)</platform-version>
          </properties>
   		<modules>
@@ -595,7 +595,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-	<eclipse-site>http://download.eclipse.org/releases/helios/</eclipse-site>
+	<eclipse-site>http://download.eclipse.org/releases/indigo/</eclipse-site>
 	  <platform-version>[3.6,3.7)</platform-version>
         </properties>
 	<modules>
