@@ -99,6 +99,7 @@ public class JavaProjectAddVjoNaturePolicy extends DefaultAddVjoNaturePolicy {
 			buildpathEntryList.add(defaultInterpreterEntry);
 			//create default SDK build path entry
 			IBuildpathEntry defaultSdkEntry = VjetSdkRuntime.getDefaultSdkContainerEntry();
+			buildpathEntryList.add(VjetSdkRuntime.getJsSdkContainerEntry());
 			buildpathEntryList.add(defaultSdkEntry);
 			//create build path entry for vjet jar
 			buildpathEntryList.addAll(PiggyBackClassPathUtil.fetchBuildEntryFromJavaProject(javaProject));

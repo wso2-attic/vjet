@@ -39,11 +39,11 @@ public class VjetSdkRuntime {
 	}
 
 	private static IPath newDefaultSdkContainerPath() {
-		return new Path(VjetPlugin.SDK_CONTAINER).append(VjetPlugin.ID_DEFAULT_SDK);
+		return new Path(VjetPlugin.BROWSERSDK_ID).append(VjetPlugin.BROWSERSDK_LABEL);
 	}
 	
 	private static IPath jsSdkContainerPath() {
-		return new Path(VjetPlugin.JSNATIVESDK_ID).append(VjetPlugin.ID_DEFAULT_SDK);
+		return new Path(VjetPlugin.JS_DEFAULT_SDK).append(VjetPlugin.JS_DEFAULT_SDK_LABEL);
 	}
 
 }

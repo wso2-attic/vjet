@@ -3,11 +3,11 @@
 <schema targetNamespace="com.ebay.tools.vjet2.ui">
 <annotation>
       <appInfo>
-         <meta.schema plugin="com.ebay.tools.vjet2.ui" id="addVjoNaturePolicy" name="addVjoNaturePolicy"/>
+         <meta.schema plugin="org.ebayopensource.tools.vjet.ui" id="addVjoNaturePolicy" name="addVjoNaturePolicy"/>
       </appInfo>
       <documentation>
-         Extension point created for adding VJO nature, for certain project type, extension can be contributed to process the adding logic.
-For example, to a java project, create the corresponding extension to process the request, adding a vjo nature to a java project. 
+         Extension point created for adding VJET nature, for certain project type, extension can be contributed to process the adding logic.
+For example, to a java project, create the corresponding extension to process the request, adding a VJET nature to a java project. 
       </documentation>
    </annotation>
 
@@ -58,7 +58,7 @@ For example, to a java project, create the corresponding extension to process th
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":com.ebay.tools.vjet2.ui.actions.nature.IAddVjoNaturePolicy"/>
+                  <meta.attribute kind="java" basedOn=":org.ebayopensource.vjet.eclipse.ui.actions.nature.IAddVjoNaturePolicy"/>
                </appInfo>
             </annotation>
          </attribute>
