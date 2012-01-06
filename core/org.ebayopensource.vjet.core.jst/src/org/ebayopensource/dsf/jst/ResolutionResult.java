@@ -14,7 +14,8 @@ import java.util.List;
 public class ResolutionResult {
 
 	private List<IScriptProblem> m_problems = new ArrayList<IScriptProblem>();
- 
+	private IJstType m_type;
+	
 	public List<IScriptProblem> getProblems(){
 		return m_problems;
 	}
@@ -22,5 +23,13 @@ public class ResolutionResult {
 	public ResolutionResult addProblem(IScriptProblem prob) {
 		m_problems.add(prob);
 		return this;
+	}
+
+	public IJstType getType() {
+		return m_type;
+	}
+
+	public void setType(IJstType type) {
+		m_type = type;
 	}
 }

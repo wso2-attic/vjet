@@ -181,6 +181,9 @@ public class JsLibBootstrapLoader {
 		load("var functionArgMappings = {'a.b.A:f1':{'open':'void fn(int)', 'click':['boolean fn(String)', 'Date fn(boolean)'],"
 			+ "'close':'Window:alert'}}", "g3");
 		
+		// type resolver 
+		//addTypeProcessor()
+		
 		TypeResolverRegistry trs = TypeResolverRegistry.getInstance();
 		System.out.println(trs.resolve("a.b.A:f1", new String[] {"'a'"}));
 		System.out.println(trs.resolve("a.b.A:f1", new String[] {"\"b\""}));

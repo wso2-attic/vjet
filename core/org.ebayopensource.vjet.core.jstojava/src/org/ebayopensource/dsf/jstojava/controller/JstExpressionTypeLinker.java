@@ -28,6 +28,7 @@ import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
+import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredRefType;
@@ -84,6 +85,8 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
+import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructorResolver;
+import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
@@ -1075,6 +1078,67 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				}
 				JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromParam(mie, mtdBinding, this, m_groupInfo);
 				
+				if (mtdBinding instanceof JstMethod) {
+					JstMethod mtd = (JstMethod)mtdBinding;
+					// create type based on java extension
+					// TODO consolidate this CnP from getReturnTypeFormFactoryEnabled
+					String mtdKey = mtd.getOwnerType().getName();
+					mtdKey += mtd.isStatic() ? "::" : ":";
+					mtdKey += mtd.getName().getName();
+					
+					// TODO use only with double caret
+					TypeConstructorRegistry tcr = TypeConstructorRegistry.getInstance();
+					// TODO sepereate this code
+					tcr.addResolver("Ext::define", new ITypeConstructorResolver() {
+						
+						@Override
+						public String resolve(List<IExpr> args) {
+							// TODO change return type
+							// TODO handle missing arg
+							String typeName = args.get(0).toExprText();
+							typeName = typeName.substring(1, typeName.length()-1);
+							JstType t =JstFactory.getInstance().createJstType(typeName, true);
+						//	t.setSource(m_currentType.getSource());
+							// TODO visit ObjLiteral second arg 
+							t.getPackage().setGroupName("ExtSelfDescribe");
+							
+							IExpr ol =args.get(1);
+							if(ol!=null && ol instanceof ObjLiteral){
+								ObjLiteral ol2 = (ObjLiteral)ol;
+								for(NV nvs :ol2.getNVs()){
+									if(nvs.getValue() instanceof FuncExpr){
+										FuncExpr func = (FuncExpr)nvs.getValue();
+ 										JstMethod func2 = func.getFunc();
+ 										func2.setName(nvs.getName());
+ 										func2.setOverloaded(null); 
+										t.addMethod(func2);
+									}
+									
+									
+								}
+							}
+							
+							// TODO how to register this with TS
+							// TODO resetting type here is temp solution for POC
+							m_currentType = t;
+							return null;
+						}
+						
+						@Override
+						public String getGroupId() {
+							// TODO Auto-generated method stub
+							return "ExtSelfDescribe";
+						}
+					});
+					if (tcr.hasResolver(mtdKey)) {
+						List<IExpr> exprs = mie.getArgs();
+						IJstType type = tcr.resolve(mtdKey, exprs);
+						// resolve
+						
+					}
+				}
+			
+				
 				return;
 			} 
 			else {
@@ -1159,6 +1223,10 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					if (rtnType == null) {
 						rtnType = JstExpressionTypeLinkerHelper.getBestRtnTypeFromAllOverloadMtds(mie, mtd);
 					}
+					
+			
+					
+					
 					mie.setResultType(rtnType);
 					JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromParam(mie, mtdBinding, this, m_groupInfo);
 					JstExpressionTypeLinkerHelper.bindMtdInvocations(m_resolver, this, mie, mtdBinding);

@@ -6,19 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.ebayopensource.dsf.jst;
+package org.ebayopensource.dsf.jstojava.resolver;
 
-import java.io.File;
+import java.util.List;
 
+import org.ebayopensource.dsf.jst.token.IExpr;
 
-
-public interface IJstParser {
-
-	
-	IScriptUnit preParse(String groupName, String fileName, String source);
-	IWritableScriptUnit parse(String groupName, String fileName, String source);
-	IScriptUnit parse(String groupName, File file);
-	IScriptUnit postParse(IScriptUnit unit);
-	
-	
+public interface ITypeConstructorResolver {
+	String resolve(List<IExpr> args);
+	String getGroupId();
 }
