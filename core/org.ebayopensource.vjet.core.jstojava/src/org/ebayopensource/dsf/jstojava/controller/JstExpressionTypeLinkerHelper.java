@@ -34,6 +34,7 @@ import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
 import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
+import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstFuncArgAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncScopeAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
@@ -98,6 +99,8 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtension;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructorResolver;
+import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
@@ -1244,6 +1247,7 @@ public class JstExpressionTypeLinkerHelper {
 		String mtdKey = mtd.getOwnerType().getName();
 		mtdKey += mtd.isStatic() ? "::" : ":";
 		mtdKey += mtd.getName().getName();
+		
 		TypeResolverRegistry trr = TypeResolverRegistry.getInstance();
 		if (trr.hasResolver(mtdKey)) {
 			List<IExpr> exprs = mie.getArgs();

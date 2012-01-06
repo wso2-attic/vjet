@@ -158,6 +158,12 @@ var factoryFunctionMappings = {
 		
 	//	  }
 		
+	},
+	'HTMLDocument:createEvent' : function(){
+		var arg = arguments[0].toString(); 
+		if(arg=="CompositionEvent"){
+			return "CompositionEvent";
+		}
 	}
 }
 

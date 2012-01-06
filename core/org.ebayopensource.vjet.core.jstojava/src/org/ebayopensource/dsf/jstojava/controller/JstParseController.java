@@ -19,6 +19,7 @@ import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstRefResolver;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.ResolutionResult;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.lib.IJstLibProvider;
@@ -61,7 +62,7 @@ public class JstParseController implements IJstParseController {
 			throw new DsfRuntimeException("missing source for " + fileName);
 		}
 		
-		IScriptUnit unit = null;
+		IWritableScriptUnit unit = null;
 		ParseResultHolder holder = getCacheHolder(groupName, fileName, source);			
 		if (holder.isLoaded()) {
 			//System.out.println("Using Cache Result");
@@ -88,15 +89,16 @@ public class JstParseController implements IJstParseController {
 		m_resolver.resolve(type);
 	}
 	
-	public void resolve(String groupName, IScriptUnit su) {
+	public void resolve(String groupName, IWritableScriptUnit su) {
 		addResolutionResultToSU(su, m_resolver.resolve(groupName, su.getType()));
 		for (JstBlock block : su.getJstBlockList()) {
 			addResolutionResultToSU(su, m_resolver.resolve(null, block));			
 		}
 	}
 	
-	private void addResolutionResultToSU(IScriptUnit su, ResolutionResult resolve) {
+	private void addResolutionResultToSU(IWritableScriptUnit su, ResolutionResult resolve) {
 		su.getProblems().addAll(resolve.getProblems());
+		su.setType(resolve.getType());
 	}
 
 	public void resolve(String groupName, IJstType type) {
@@ -152,7 +154,7 @@ public class JstParseController implements IJstParseController {
 		private final String m_group;
 		private final String m_fileName;
 		private final String m_source;
-		private IScriptUnit m_result = null;
+		private IWritableScriptUnit m_result = null;
 		private boolean m_loaded = false;
 		
 		ParseResultHolder(String group, String fileName, String source) {
@@ -171,11 +173,11 @@ public class JstParseController implements IJstParseController {
 			return m_loaded;
 		}
 		
-		IScriptUnit getResult() {
+		IWritableScriptUnit getResult() {
 			return m_result;
 		}
 		
-		void setResult(IScriptUnit result) {
+		void setResult(IWritableScriptUnit result) {
 			m_result = result;
 			m_loaded = true;
 		}

@@ -65,9 +65,16 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 		m_typeLinkerVisitor.setCurrentType(type);
 		m_typeLinkerVisitor.setGroupName(type.getPackage().getGroupName());
 		JstExpressionTypeLinkerTraversal.accept(type, m_typeLinkerVisitor);
+		// hijack type with factory created argument
+		if (!type.equals(m_typeLinkerVisitor.getType())) {
+			JstExpressionTypeLinkerTraversal.accept(m_typeLinkerVisitor.getType(), m_typeLinkerVisitor);
+			type = m_typeLinkerVisitor.getType();
+		}
 		if (type instanceof JstType) {
 			JstType type2 = (JstType) type;
 			setResolutionStatus(type2);
+			rr.setType(type2);
+			
 		}
 	}
 

@@ -591,6 +591,11 @@ public class JstMethod extends BaseJstNode implements IJstMethod {
 		return this;
 	}
 	
+	public JstMethod setOverloaded(List<IJstMethod> jstMethods) {
+		m_overloaded = jstMethods;
+		return this;
+	}
+	
 	public String getSurffix() {
 		return m_surffix;
 	}
