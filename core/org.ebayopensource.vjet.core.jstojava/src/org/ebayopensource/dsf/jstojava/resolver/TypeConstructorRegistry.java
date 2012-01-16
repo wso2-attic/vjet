@@ -53,7 +53,11 @@ public class TypeConstructorRegistry {
 		
 		for (int i = 0; i < resolverList.size(); i++) {
 			ITypeConstructorResolver resolver = resolverList.get(i);
-			resolver.resolve(args);
+			IJstType type = resolver.resolve(args);
+			if(type!=null){
+				return type;
+			}
+			
 		}
 		return null;
 	}

@@ -25,6 +25,7 @@ import org.ebayopensource.dsf.jst.IJstParser;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
@@ -284,7 +285,7 @@ public class BaseTest extends TestCase {
 
 	IJstParser getParser(){
 		return new IJstParser(){
-			public IScriptUnit parse(String groupName, String fileName, String source){
+			public IWritableScriptUnit parse(String groupName, String fileName, String source){
 				
 				
 				final JstType type = JstCache.getInstance().getType(fileName);
@@ -296,7 +297,7 @@ public class BaseTest extends TestCase {
 				}
 				type.getPackage().setGroupName(groupName);
 				
-				return new IScriptUnit(){
+				return new IWritableScriptUnit(){
 
 					public IJstNode getNode(int startOffset) {
 						// TODO Auto-generated method stub
@@ -320,6 +321,30 @@ public class BaseTest extends TestCase {
 					public IJstType getType() {
 			
 						return type;
+					}
+
+					@Override
+					public void setType(IJstType type) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void setSyntaxRoot(JstBlock block) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void setJstBlockList(List<JstBlock> blocks) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void setProblems(List<IScriptProblem> probs) {
+						// TODO Auto-generated method stub
+						
 					}
 					
 				};

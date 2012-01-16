@@ -98,7 +98,9 @@ public class JstParseController implements IJstParseController {
 	
 	private void addResolutionResultToSU(IWritableScriptUnit su, ResolutionResult resolve) {
 		su.getProblems().addAll(resolve.getProblems());
-		su.setType(resolve.getType());
+		if(resolve.getType()!=null){
+			su.setType(resolve.getType());
+		}
 	}
 
 	public void resolve(String groupName, IJstType type) {
