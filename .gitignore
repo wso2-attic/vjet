@@ -9,7 +9,7 @@
 
 ## eclipse gitignore
 *.pydevproject
-.project
+##.project
 .metadata
 bin/**
 tmp/**
@@ -19,8 +19,8 @@ tmp/**/*
 *.swp
 *~.nib
 local.properties
-.classpath
-.settings/
+##.classpath
+##.settings/
 .loadpath
 
 ## Mac OSX gitignore
