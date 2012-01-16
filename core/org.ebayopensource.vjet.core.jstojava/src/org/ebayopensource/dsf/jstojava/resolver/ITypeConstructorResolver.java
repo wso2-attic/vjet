@@ -10,9 +10,10 @@ package org.ebayopensource.dsf.jstojava.resolver;
 
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.token.IExpr;
 
 public interface ITypeConstructorResolver {
-	String resolve(List<IExpr> args);
+	IJstType resolve(List<IExpr> args);
 	String getGroupId();
 }
