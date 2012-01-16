@@ -15,5 +15,6 @@ import org.ebayopensource.dsf.jst.token.IExpr;
 
 public interface ITypeConstructorResolver {
 	IJstType resolve(List<IExpr> args);
+
 	String getGroupId();
 }

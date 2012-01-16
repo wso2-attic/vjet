@@ -1088,11 +1088,13 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					
 					// TODO use only with double caret
 					TypeConstructorRegistry tcr = TypeConstructorRegistry.getInstance();
+
 					if (tcr.hasResolver(mtdKey)) {
 						List<IExpr> exprs = mie.getArgs();
 						IJstType type = tcr.resolve(mtdKey, exprs);
 						// resolve
 						setCurrentType(type);
+
 						
 					}
 				}
