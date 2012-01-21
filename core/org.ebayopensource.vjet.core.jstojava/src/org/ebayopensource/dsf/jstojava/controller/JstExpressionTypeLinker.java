@@ -105,6 +105,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	private HierarcheQualifierSearcher m_searcher = new HierarcheQualifierSearcher();
 	
 	private GroupInfo m_groupInfo = null;
+	private boolean m_typeconstructed;
 	
 	JstExpressionTypeLinker(JstExpressionBindingResolver resolver) {
 		m_resolver = resolver;
@@ -1091,6 +1092,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 						List<IExpr> exprs = mie.getArgs();
 						IJstType type = tcr.resolve(mtdKey, exprs);
 						// resolve
+						setTypeconstructed(true);
 						setCurrentType(type);
 
 						
@@ -1821,6 +1823,14 @@ class JstExpressionTypeLinker implements IJstVisitor {
  * inner types helping the scope managements
  * ********************************************************
  */
+
+	public boolean isTypeConstructed() {
+		return m_typeconstructed;
+	}
+
+	private void setTypeconstructed(boolean m_typeconstructed) {
+		this.m_typeconstructed = m_typeconstructed;
+	}
 
 	/**
 	 * symbol struct
