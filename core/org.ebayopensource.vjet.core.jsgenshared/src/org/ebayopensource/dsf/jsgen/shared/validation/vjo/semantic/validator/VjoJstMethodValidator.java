@@ -300,7 +300,7 @@ public class VjoJstMethodValidator
 		if(rtnType != null){
 			if(getKnownType(ctx, jstMethod.getOwnerType(), rtnType) == null){
 				//report problem, type unknown
-				if(rtnType.getPackage() == null && !"void".equals(rtnType.getName())){
+				if(rtnType.getPackage().getName() == "" && !"void".equals(rtnType.getName())){
 					if(!ctx.getMissingImportTypes().contains(rtnType)){
 						ctx.addMissingImportType(rtnType);
 					}
