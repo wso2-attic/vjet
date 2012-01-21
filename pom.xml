@@ -460,7 +460,6 @@
 		    <module>extmod</module>
 		    <module>core</module>
 		    <module>eclipse</module>
-		    <module>extjs.selfdescribe</module>
 		</modules>
     </profile>
 
@@ -483,7 +482,6 @@
 		    <module>extmod</module>
 		    <module>core</module>
 		    <module>eclipse</module>
-                    <module>extjs.selfdescribe</module>
 		</modules>
     </profile>
 
@@ -528,7 +526,6 @@
 		    <module>extmod</module>
 		    <module>core</module>
 		    <module>eclipse</module>
-		    <module>extjs.selfdescribe</module>
 		</modules>
   	</profile>
 
