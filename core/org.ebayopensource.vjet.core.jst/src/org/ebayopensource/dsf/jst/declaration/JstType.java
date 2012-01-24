@@ -119,6 +119,15 @@ public class JstType extends BaseJstNode implements IJstType {
 			return;
 		}
 
+		setName(name);
+	}
+
+	/**
+	 * Sets the given name
+	 * 
+	 * @param name
+	 */
+	public void setName(final String name) {
 		int index = name.lastIndexOf(".");
 		if (index != -1) {
 			setPackage(new JstPackage(name.substring(0, index)));

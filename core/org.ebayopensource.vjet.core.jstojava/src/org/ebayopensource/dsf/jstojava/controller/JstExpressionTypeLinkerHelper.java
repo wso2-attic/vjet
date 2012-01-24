@@ -111,145 +111,157 @@ import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.vjo.meta.VjoKeywords;
 
 public class JstExpressionTypeLinkerHelper {
-	
 
-/**********************************************************************
- * HELPERS FOR: bind attributed types, jsttypewithargs types
- * ********************************************************************
- */
+	/**********************************************************************
+	 * HELPERS FOR: bind attributed types, jsttypewithargs types
+	 * ********************************************************************
+	 */
 
 	/**
 	 * bind attributed type is tricky as attributed type could be nested in
 	 * function type, array type, generics type etc.
 	 * 
-	 * the method here navigates through those variety of types and locate the attributed types to bind
-	 * @see JstExpressionTypeLinkerHelper#doAttributedTypeBindings(JstExpressionBindingResolver, JstAttributedType)
-	 * for the actual binding work
+	 * the method here navigates through those variety of types and locate the
+	 * attributed types to bind
+	 * 
+	 * @see JstExpressionTypeLinkerHelper#doAttributedTypeBindings(JstExpressionBindingResolver,
+	 *      JstAttributedType) for the actual binding work
 	 * 
 	 * @param type
-	 * @return the attributed type bound if and only if it's in 1st level of recursion
+	 * @return the attributed type bound if and only if it's in 1st level of
+	 *         recursion
 	 */
 	public static IJstNode look4ActualBinding(
-			final JstExpressionBindingResolver resolver, final IJstType type ) {
+			final JstExpressionBindingResolver resolver, final IJstType type) {
 		return look4ActualBinding(resolver, type, null);
 	}
-	
+
 	public static IJstNode look4ActualBinding(
-			final JstExpressionBindingResolver resolver, final IJstType type, final GroupInfo groupInfo) {
+			final JstExpressionBindingResolver resolver, final IJstType type,
+			final GroupInfo groupInfo) {
 		if (type == null) {
 			return null;
 		} else if (type instanceof JstArray) {
-			look4ActualBinding(resolver, ((JstArray) type)
-					.getComponentType(), groupInfo);
+			look4ActualBinding(resolver, ((JstArray) type).getComponentType(),
+					groupInfo);
 			return null;
 		} else if (type instanceof JstTypeWithArgs) {
 			for (IJstType argType : ((JstTypeWithArgs) type).getArgTypes()) {
 				look4ActualBinding(resolver, argType);
 			}
 			return null;
-		} 
-		/*bugfix by huzhou, JstWildcardType#boundType could hide attributed type as well*/
-		else if (type instanceof JstWildcardType){
-			look4ActualBinding(resolver, ((JstWildcardType)type).getType(), groupInfo);
-			return null;
 		}
-		else if (type instanceof JstFuncType) {
+		/*
+		 * bugfix by huzhou, JstWildcardType#boundType could hide attributed
+		 * type as well
+		 */
+		else if (type instanceof JstWildcardType) {
+			look4ActualBinding(resolver, ((JstWildcardType) type).getType(),
+					groupInfo);
+			return null;
+		} else if (type instanceof JstFuncType) {
 			final IJstMethod func = ((JstFuncType) type).getFunction();
 			bindAttributedType(resolver, func, groupInfo);
-			return null;//bugfix by huzhou, defer the actual binding till mtdinvocationvisit
-		} 
-		else if (type instanceof JstAttributedType) {
-			return doAttributedTypeBindings(resolver, (JstAttributedType) type, groupInfo);
+			return null;// bugfix by huzhou, defer the actual binding till
+						// mtdinvocationvisit
+		} else if (type instanceof JstAttributedType) {
+			return doAttributedTypeBindings(resolver, (JstAttributedType) type,
+					groupInfo);
 		}
-		//by huzhou@ebay.com, enhancement for inferred type to go on bindings
-		else if(type instanceof JstInferredType){
-			return look4ActualBinding(resolver, ((JstInferredType)type).getType(), groupInfo);
+		// by huzhou@ebay.com, enhancement for inferred type to go on bindings
+		else if (type instanceof JstInferredType) {
+			return look4ActualBinding(resolver,
+					((JstInferredType) type).getType(), groupInfo);
 		}
-		//by huzhou@ebay.com, enhancement for ftype binding
-		else if(type.isFType()){
-			return type;//getFTypeInvokeMethod(resolver, type);
-		}
-		else {
+		// by huzhou@ebay.com, enhancement for ftype binding
+		else if (type.isFType()) {
+			return type;// getFTypeInvokeMethod(resolver, type);
+		} else {
 			return null;
 		}
 	}
 
 	/**
-	 * bind JstParamType with actual resolved type based on the following possibilities
+	 * bind JstParamType with actual resolved type based on the following
+	 * possibilities
 	 * <ol>
-	 * <li> if in a method invocation, and method has param types, match param type with arguments (return type is yet supported)
-	 * </li>
-	 * <li> if in a method invocation, and invocation has a qualifier type, with arg types, try matching with arg type
-	 * </li>
-	 * <li> if type is complex type, as {JstArray, JstTypeWithArgs, JstFuncType, JstAttributedType, JstInferredType, JstWildcardType, FType}
-	 * the bind attempt will be done recursively 
-	 * </li>
-	 * <li> if eventually, no type could be resolved, JstInferredType will be used as an indication that binding wasn't successful
-	 * </li>
+	 * <li>if in a method invocation, and method has param types, match param
+	 * type with arguments (return type is yet supported)</li>
+	 * <li>if in a method invocation, and invocation has a qualifier type, with
+	 * arg types, try matching with arg type</li>
+	 * <li>if type is complex type, as {JstArray, JstTypeWithArgs, JstFuncType,
+	 * JstAttributedType, JstInferredType, JstWildcardType, FType} the bind
+	 * attempt will be done recursively</li>
+	 * <li>if eventually, no type could be resolved, JstInferredType will be
+	 * used as an indication that binding wasn't successful</li>
 	 * </ol>
+	 * 
 	 * @param resolver
 	 * @param mtd
 	 * @param invocation
 	 * @param qualifierType
 	 * @param type
-	 * @return
-	 * <pre> Be noted that, all the resolved types, in all the recursive cases were replicated instead of modifying the original type
+	 * @return <pre>
+	 * Be noted that, all the resolved types, in all the recursive cases were replicated instead of modifying the original type
 	 * including the function if involved, this is to keep clean of the type system while allowing the maximum info of binding for validation and proposal
 	 * </pre>
 	 */
-	protected static IJstType bindParamTypes(final JstExpressionBindingResolver resolver,
-			final IJstNode mtd, 
-			final MtdInvocationExpr invocation,
-			final IJstType qualifierType,
+	protected static IJstType bindParamTypes(
+			final JstExpressionBindingResolver resolver, final IJstNode mtd,
+			final MtdInvocationExpr invocation, final IJstType qualifierType,
 			final IJstType type) {
-		if(type == null){
+		if (type == null) {
 			return null;
-		}
-		else if (type instanceof JstParamType) { // matching condition
+		} else if (type instanceof JstParamType) { // matching condition
 			// type for
 			// parameterized
 			// type
-			return resolveParamType(resolver, (JstParamType)type, mtd, invocation, qualifierType);
-		}
-		else if(type instanceof JstArray){ //further looking
-			return new JstArray(bindParamTypes(resolver, mtd, invocation, qualifierType, ((JstArray)type).getComponentType()));
-		}
-		else if(type instanceof JstTypeWithArgs){
-			final JstTypeWithArgs typeWithArgs = (JstTypeWithArgs)type;
-			final IJstType rtnType = bindParamTypes(resolver, mtd, invocation, qualifierType, typeWithArgs.getType());
-			final JstTypeWithArgs resolvedTypeWithArgs = new JstTypeWithArgs(rtnType);
-			for(IJstType argType: typeWithArgs.getArgTypes()){
-				resolvedTypeWithArgs.addArgType(bindParamTypes(resolver, mtd, invocation, qualifierType, argType));
+			return resolveParamType(resolver, (JstParamType) type, mtd,
+					invocation, qualifierType);
+		} else if (type instanceof JstArray) { // further looking
+			return new JstArray(bindParamTypes(resolver, mtd, invocation,
+					qualifierType, ((JstArray) type).getComponentType()));
+		} else if (type instanceof JstTypeWithArgs) {
+			final JstTypeWithArgs typeWithArgs = (JstTypeWithArgs) type;
+			final IJstType rtnType = bindParamTypes(resolver, mtd, invocation,
+					qualifierType, typeWithArgs.getType());
+			final JstTypeWithArgs resolvedTypeWithArgs = new JstTypeWithArgs(
+					rtnType);
+			for (IJstType argType : typeWithArgs.getArgTypes()) {
+				resolvedTypeWithArgs.addArgType(bindParamTypes(resolver, mtd,
+						invocation, qualifierType, argType));
 			}
-			return resolvedTypeWithArgs; 
-		}
-		else if(type instanceof JstFuncType){
-			final JstFuncType funcType = (JstFuncType)type;
+			return resolvedTypeWithArgs;
+		} else if (type instanceof JstFuncType) {
+			final JstFuncType funcType = (JstFuncType) type;
 			final IJstMethod function = funcType.getFunction();
-			if(function != null){
+			if (function != null) {
 				OverwritableSynthJstProxyMethod resolvedFunction = resolveParamFunction(
 						resolver, mtd, invocation, qualifierType, function);
 				return new JstFuncType(resolvedFunction);
 			}
-		}
-		else if(type instanceof JstAttributedType){
-			final JstAttributedType attributedType = (JstAttributedType)type;
-			final IJstType resolvedAttributorType = bindParamTypes(resolver, mtd, invocation, qualifierType, attributedType.getAttributorType());
-			return new JstAttributedType(resolvedAttributorType, attributedType.getAttributeName(), attributedType.isStaticAttribute());
-		}
-		else if(type instanceof JstWildcardType){
-			final JstWildcardType wildcardType = (JstWildcardType)type;
-			final IJstType resolvedBoundType = bindParamTypes(resolver, mtd, invocation, qualifierType, wildcardType.getType());
-			return new JstWildcardType(resolvedBoundType, wildcardType.isUpperBound());
-		}
-		else if(type instanceof JstInferredType){
-			final JstInferredType inferredType = (JstInferredType)type;
-			final IJstType resolvedInferredType = bindParamTypes(resolver, mtd, invocation, qualifierType, inferredType.getType());
+		} else if (type instanceof JstAttributedType) {
+			final JstAttributedType attributedType = (JstAttributedType) type;
+			final IJstType resolvedAttributorType = bindParamTypes(resolver,
+					mtd, invocation, qualifierType,
+					attributedType.getAttributorType());
+			return new JstAttributedType(resolvedAttributorType,
+					attributedType.getAttributeName(),
+					attributedType.isStaticAttribute());
+		} else if (type instanceof JstWildcardType) {
+			final JstWildcardType wildcardType = (JstWildcardType) type;
+			final IJstType resolvedBoundType = bindParamTypes(resolver, mtd,
+					invocation, qualifierType, wildcardType.getType());
+			return new JstWildcardType(resolvedBoundType,
+					wildcardType.isUpperBound());
+		} else if (type instanceof JstInferredType) {
+			final JstInferredType inferredType = (JstInferredType) type;
+			final IJstType resolvedInferredType = bindParamTypes(resolver, mtd,
+					invocation, qualifierType, inferredType.getType());
 			return new JstInferredType(resolvedInferredType);
-		}
-		else if(type.isFType()){
+		} else if (type.isFType()) {
 			final IJstMethod invoke = getFTypeInvokeMethod(resolver, type);
-			if(invoke != null){
+			if (invoke != null) {
 				OverwritableSynthJstProxyMethod resolvedFunction = resolveParamFunction(
 						resolver, mtd, invocation, qualifierType, invoke);
 				return new OverwritableFType(type, resolvedFunction);
@@ -259,8 +271,9 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	/**
-	 * replicate a function with its overloading functions if any
-	 * resolve all of its parameter types, return types based on the context
+	 * replicate a function with its overloading functions if any resolve all of
+	 * its parameter types, return types based on the context
+	 * 
 	 * @param resolver
 	 * @param mtd
 	 * @param invocation
@@ -270,35 +283,43 @@ public class JstExpressionTypeLinkerHelper {
 	 */
 	private static OverwritableSynthJstProxyMethod resolveParamFunction(
 			final JstExpressionBindingResolver resolver, final IJstNode mtd,
-			final MtdInvocationExpr invocation, 
-			final IJstType qualifierType, 
+			final MtdInvocationExpr invocation, final IJstType qualifierType,
 			final IJstMethod function) {
-		
-		if(function == null){
-			throw new IllegalArgumentException("proxy function could not be null");
+
+		if (function == null) {
+			throw new IllegalArgumentException(
+					"proxy function could not be null");
 		}
-		
-		if(!function.isDispatcher()){
-			final IJstType resolvedRtnType = bindParamTypes(resolver, mtd, invocation, qualifierType, function.getRtnType());
-			final List<JstArg> resolvedJstArgs = new ArrayList<JstArg>(function.getArgs().size());
-			for(JstArg arg: function.getArgs()){
-				final JstArg resolvedArg = new JstArg(arg.getTypes(), arg.getName(), arg.isVariable(), arg.isOptional(), arg.isFinal());
-				for(IJstType argType : arg.getTypes()){
-					resolvedArg.updateType(arg.getName(), bindParamTypes(resolver, mtd, invocation, qualifierType, argType));
+
+		if (!function.isDispatcher()) {
+			final IJstType resolvedRtnType = bindParamTypes(resolver, mtd,
+					invocation, qualifierType, function.getRtnType());
+			final List<JstArg> resolvedJstArgs = new ArrayList<JstArg>(function
+					.getArgs().size());
+			for (JstArg arg : function.getArgs()) {
+				final JstArg resolvedArg = new JstArg(arg.getTypes(),
+						arg.getName(), arg.isVariable(), arg.isOptional(),
+						arg.isFinal());
+				for (IJstType argType : arg.getTypes()) {
+					resolvedArg.updateType(
+							arg.getName(),
+							bindParamTypes(resolver, mtd, invocation,
+									qualifierType, argType));
 				}
 				resolvedJstArgs.add(resolvedArg);
 			}
-			
-			final OverwritableSynthJstProxyMethod resolvedFunction = new OverwritableSynthJstProxyMethod(function);
+
+			final OverwritableSynthJstProxyMethod resolvedFunction = new OverwritableSynthJstProxyMethod(
+					function);
 			resolvedFunction.setRtnType(resolvedRtnType);
 			resolvedFunction.setArgs(resolvedJstArgs);
 			return resolvedFunction;
-		}	
-		else{
+		} else {
 			OverwritableSynthJstProxyMethod host = null;
-			for(IJstMethod overload: function.getOverloaded()){
-				final OverwritableSynthJstProxyMethod resolvedOverload = resolveParamFunction(resolver, mtd, invocation, qualifierType, overload);
-				if(host == null){
+			for (IJstMethod overload : function.getOverloaded()) {
+				final OverwritableSynthJstProxyMethod resolvedOverload = resolveParamFunction(
+						resolver, mtd, invocation, qualifierType, overload);
+				if (host == null) {
 					host = resolvedOverload;
 				}
 				host.addOverloaded(resolvedOverload);
@@ -306,43 +327,43 @@ public class JstExpressionTypeLinkerHelper {
 			return host;
 		}
 	}
-	
-	private static IJstType resolveParamType(final JstExpressionBindingResolver resolver,
-			JstParamType paramType, 
-			IJstNode node,
-			MtdInvocationExpr invocation, 
-			IJstType qualifierType) {
-		if(paramType == null){
-			throw new IllegalArgumentException("param type to be resolved should not be null");
+
+	private static IJstType resolveParamType(
+			final JstExpressionBindingResolver resolver,
+			JstParamType paramType, IJstNode node,
+			MtdInvocationExpr invocation, IJstType qualifierType) {
+		if (paramType == null) {
+			throw new IllegalArgumentException(
+					"param type to be resolved should not be null");
 		}
-		if(node instanceof IJstMethod){
-			final IJstMethod mtd = (IJstMethod)node;
+		if (node instanceof IJstMethod) {
+			final IJstMethod mtd = (IJstMethod) node;
 			final List<JstParamType> methodParamTypes = mtd.getParamTypes();
-			for(JstParamType methodParamType: methodParamTypes){
-				if(paramType.equals(methodParamType)){
-					//look for param type matching in the invocation
-					for(int i = 0, len = mtd.getArgs().size(); i < len; i++){
+			for (JstParamType methodParamType : methodParamTypes) {
+				if (paramType.equals(methodParamType)) {
+					// look for param type matching in the invocation
+					for (int i = 0, len = mtd.getArgs().size(); i < len; i++) {
 						final JstArg param = mtd.getArgs().get(i);
-						if(paramType.equals(param.getType())){
+						if (paramType.equals(param.getType())) {
 							final List<IExpr> args = invocation.getArgs();
-							if(args.size() > i){
+							if (args.size() > i) {
 								return args.get(i).getResultType();
 							}
 						}
 					}
-					//TODO unify this logic with Expect type concept
+					// TODO unify this logic with Expect type concept
 				}
 			}
 		}
-		
-		if(qualifierType instanceof JstTypeWithArgs){
-			final JstTypeWithArgs jstTypeWithArgs = (JstTypeWithArgs)qualifierType;
-			final IJstType resolved = jstTypeWithArgs.getParamArgType(paramType);
+
+		if (qualifierType instanceof JstTypeWithArgs) {
+			final JstTypeWithArgs jstTypeWithArgs = (JstTypeWithArgs) qualifierType;
+			final IJstType resolved = jstTypeWithArgs
+					.getParamArgType(paramType);
 			if (resolved != null) {
 				return resolved;
 			}
-		}
-		else{//qualifierType missing args, using Object type implicitly
+		} else {// qualifierType missing args, using Object type implicitly
 			final IJstType objectType = getNativeTypeFromTS(resolver, "Object");
 			return new JstInferredType(objectType);
 		}
@@ -351,12 +372,14 @@ public class JstExpressionTypeLinkerHelper {
 
 	/**
 	 * AttributedType feature helpers
+	 * 
 	 * @param resolver
 	 * @param method
 	 * @return
 	 */
 	protected static IJstNode bindAttributedType(
-			final JstExpressionBindingResolver resolver, final IJstMethod method, GroupInfo groupInfo){
+			final JstExpressionBindingResolver resolver,
+			final IJstMethod method, GroupInfo groupInfo) {
 		if (method != null) {
 			look4ActualBinding(resolver, method.getRtnType(), groupInfo);
 			for (JstArg arg : method.getArgs()) {
@@ -365,8 +388,7 @@ public class JstExpressionTypeLinkerHelper {
 				}
 			}
 			return method;
-		}
-		else{
+		} else {
 			return null;
 		}
 	}
@@ -379,58 +401,69 @@ public class JstExpressionTypeLinkerHelper {
 	 */
 	protected static IJstNode doAttributedTypeBindings(
 			final JstExpressionBindingResolver resolver,
-			final JstAttributedType attributedType,
-			final GroupInfo groupInfo) {
+			final JstAttributedType attributedType, final GroupInfo groupInfo) {
 		IJstNode bound = null;
 		IJstType attributorType = attributedType.getType();
 
 		final String attributeName = attributedType.getAttributeName();
 		final boolean staticAttribute = attributedType.isStaticAttribute();
-		
+
 		if (attributorType != null && attributeName != null) {
-			//by huzhou@ebay.com, adding the logic of dealing with otype here
-			if(attributorType.isOType()){
-				final IJstType objLiteralOrFunctionRefType = attributorType.getOType(attributeName);
-				if(objLiteralOrFunctionRefType != null){
+			// by huzhou@ebay.com, adding the logic of dealing with otype here
+			if (attributorType.isOType()) {
+				final IJstType objLiteralOrFunctionRefType = attributorType
+						.getOType(attributeName);
+				if (objLiteralOrFunctionRefType != null) {
 					bound = objLiteralOrFunctionRefType;
 				}
-			}
-			else{
-				//NOTE by huzhou@ebay.com, discussed with Mr.P
-				//attributed type reference here doesn't need to check static/none-static reference
-				//as only the attribute's type was concerned, not how it was supposed to be scoped
-				IJstProperty pty = attributorType.getProperty(attributeName, staticAttribute);
-				pty = pty == null ? attributorType.getProperty(attributeName, !staticAttribute) : pty;
-				if(pty != null){
+			} else {
+				// NOTE by huzhou@ebay.com, discussed with Mr.P
+				// attributed type reference here doesn't need to check
+				// static/none-static reference
+				// as only the attribute's type was concerned, not how it was
+				// supposed to be scoped
+				IJstProperty pty = attributorType.getProperty(attributeName,
+						staticAttribute);
+				pty = pty == null ? attributorType.getProperty(attributeName,
+						!staticAttribute) : pty;
+				if (pty != null) {
 					bound = new RenameableSynthJstProxyProp(pty, null);
-				}
-				else {
-					IJstMethod mtd = attributorType.getMethod(attributeName, staticAttribute);
-					mtd = mtd == null ? attributorType.getMethod(attributeName, !staticAttribute) : mtd;
-					if(mtd != null){
+				} else {
+					IJstMethod mtd = attributorType.getMethod(attributeName,
+							staticAttribute);
+					mtd = mtd == null ? attributorType.getMethod(attributeName,
+							!staticAttribute) : mtd;
+					if (mtd != null) {
 						bound = new RenameableSynthJstProxyMethod(mtd, null);
-	
-						look4ActualBinding(resolver, mtd.getRtnType(), groupInfo);
+
+						look4ActualBinding(resolver, mtd.getRtnType(),
+								groupInfo);
 						for (JstArg arg : mtd.getArgs()) {
 							for (IJstType argType : arg.getTypes()) {
 								look4ActualBinding(resolver, argType, groupInfo);
 							}
 						}
 					}
-					// handle global attributor case, where property/method requires
+					// handle global attributor case, where property/method
+					// requires
 					// extra logic for lookups
 					else if ("Global".equals(attributorType.getSimpleName())) {
-						//look under WINDOW & GLOBAL
-						bound = getFromGlobalVarName(resolver, attributeName, true, groupInfo);
+						// look under WINDOW & GLOBAL
+						bound = getFromGlobalVarName(resolver, attributeName,
+								true, groupInfo);
 						if (bound == null) {
-							//look up in TS
-							bound = getFromGlobalTypeName(resolver, attributeName, groupInfo);
-							if(bound != null){
-								if(bound instanceof IJstGlobalFunc){
-									bound = getFurtherGlobalVarBinding(resolver, (IJstGlobalFunc)bound, groupInfo);
-								}
-								else if(bound instanceof IJstGlobalProp){
-									bound = getFurtherGlobalVarBinding(resolver, (IJstGlobalProp)bound, groupInfo);
+							// look up in TS
+							bound = getFromGlobalTypeName(resolver,
+									attributeName, groupInfo);
+							if (bound != null) {
+								if (bound instanceof IJstGlobalFunc) {
+									bound = getFurtherGlobalVarBinding(
+											resolver, (IJstGlobalFunc) bound,
+											groupInfo);
+								} else if (bound instanceof IJstGlobalProp) {
+									bound = getFurtherGlobalVarBinding(
+											resolver, (IJstGlobalProp) bound,
+											groupInfo);
 								}
 							}
 						}
@@ -438,34 +471,31 @@ public class JstExpressionTypeLinkerHelper {
 				}
 			}
 		}
-		//set the bound as jst binding of attributed type eventually
-		if(bound != null){
+		// set the bound as jst binding of attributed type eventually
+		if (bound != null) {
 			attributedType.setJstBinding(bound);
 		}
-		
+
 		return bound;
 	}
 
 	public static IJstType getResolvedAttributedType(
 			final JstExpressionBindingResolver resolver,
-			final JstIdentifier identifier, 
-			final JstAttributedType type, 
+			final JstIdentifier identifier, final JstAttributedType type,
 			final IJstNode bound) {
 		IJstType attributedType = type;
 		if (bound instanceof IJstProperty) {
-			attributedType = ((IJstProperty)bound).getType();
-		}
-		else if (bound instanceof IJstMethod) {
-			attributedType = new JstFuncType((IJstMethod)bound);
+			attributedType = ((IJstProperty) bound).getType();
+		} else if (bound instanceof IJstMethod) {
+			attributedType = new JstFuncType((IJstMethod) bound);
 		}
 		return attributedType;
 	}
-	
 
-/**********************************************************************
- * HELPERS FOR: global var, local var lookups
- * ********************************************************************
- */
+	/**********************************************************************
+	 * HELPERS FOR: global var, local var lookups
+	 * ********************************************************************
+	 */
 	// bugfix by roy, method/property under global/window must be taken into
 	// account
 	public static IJstNode getFromGlobalVarName(
@@ -473,14 +503,17 @@ public class JstExpressionTypeLinkerHelper {
 			final boolean overwiteBindings, GroupInfo groupInfo) {
 		// handle native or global name directly without qualifier,
 		// in this case it's the type name itself, e.g Number
-		IJstNode bound = findIdentifierBinding(getNativeTypeFromTS(resolver, groupInfo != null ? groupInfo.getGroupName() : null,
-				JstExpressionTypeLinker.WINDOW), name);
-		
+		IJstNode bound = findIdentifierBinding(
+				getNativeTypeFromTS(resolver,
+						groupInfo != null ? groupInfo.getGroupName() : null,
+						JstExpressionTypeLinker.WINDOW), name);
+
 		if (bound != null) {
 			return bound;
 		} else {
-			bound = findIdentifierBinding(getNativeTypeFromTS(resolver,
-					JstExpressionTypeLinker.GLOBAL), name);
+			bound = findIdentifierBinding(
+					getNativeTypeFromTS(resolver,
+							JstExpressionTypeLinker.GLOBAL), name);
 		}
 
 		return bound;
@@ -488,9 +521,9 @@ public class JstExpressionTypeLinkerHelper {
 
 	// bugfix by roy, method/property introduced by with statement must be taken
 	// into account
-	public static boolean getFromWithVarName(final JstExpressionBindingResolver resolver,
-			final ScopeFrame scope,
-			final JstIdentifier identifier,
+	public static boolean getFromWithVarName(
+			final JstExpressionBindingResolver resolver,
+			final ScopeFrame scope, final JstIdentifier identifier,
 			final GroupInfo groupInfo) {
 		// handle local variable came through with statement
 		IJstType nodeType = null;
@@ -507,8 +540,8 @@ public class JstExpressionTypeLinkerHelper {
 			final IExpr withExpr = withStmt.getCondition().getLeft();
 			nodeType = withExpr.getResultType();
 
-			if (mapVarToTypeMember(resolver, scope, nodeType, identifier, identifier
-					.getName(), false, groupInfo)) {
+			if (mapVarToTypeMember(resolver, scope, nodeType, identifier,
+					identifier.getName(), false, groupInfo)) {
 				return true;
 			}
 		}
@@ -520,98 +553,122 @@ public class JstExpressionTypeLinkerHelper {
 	// attribute name and identifier are seperated
 	public static boolean getFromGlobalTypeName(
 			final JstExpressionBindingResolver resolver,
-			final ScopeFrame scope, final JstIdentifier identifier, GroupInfo groupInfo) {
-		final IJstNode bound = getFromGlobalTypeName(resolver, identifier
-				.getName(), groupInfo);
+			final ScopeFrame scope, final JstIdentifier identifier,
+			GroupInfo groupInfo) {
+		final IJstNode bound = getFromGlobalTypeName(resolver,
+				identifier.getName(), groupInfo);
 		if (bound != null) {
 			final List<IJstType> symbolTypes = collectBindingTypes(bound);
 			for (int i = 0, len = symbolTypes.size(); i < len; i++) {
-				//from the symbol types, only the 1st one could update the bound
+				// from the symbol types, only the 1st one could update the
+				// bound
 				look4ActualBinding(resolver, symbolTypes.get(i), groupInfo);
 			}
-			if(symbolTypes.size()>0){
-				bindIdentifier(resolver, scope, identifier, identifier.getName(),
-					bound, symbolTypes.get(0), true, groupInfo);
-			}else{
+			if (symbolTypes.size() > 0) {
+				bindIdentifier(resolver, scope, identifier,
+						identifier.getName(), bound, symbolTypes.get(0), true,
+						groupInfo);
+			} else {
 				return false;
 			}
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static IJstNode getFromGlobalTypeName(
-			final JstExpressionBindingResolver resolver, final String name, final GroupInfo groupInfo) {
+			final JstExpressionBindingResolver resolver, final String name,
+			final GroupInfo groupInfo) {
 		// handle native or global name directly without qualifier,
 		// in this case it's the type name itself, e.g Number
-		IJstNode bound ; // getNativeTypeFromTS(resolver,  groupName, name);
-//		if (bound != null) {
-//			return bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
-//		}
-		
-//		final JstTypeSpaceMgr tsMgr = resolver.getController().getJstTypeSpaceMgr();
-//		final JstQueryExecutor queryExecutor = tsMgr.getQueryExecutor();
-//		bound = tsMgr.getTypeSpace().getVisibleGlobal(name,tsMgr.getTypeSpace().getGroup(groupName) );
-//		if (bound != null) {
-//			return bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
-//		}
-		
-		ITypeSpace<IJstType, IJstNode> typeSpace = resolver.getController().getJstTypeSpaceMgr().getTypeSpace();
-		IGroup<IJstType> currentGroup = typeSpace.getGroup(groupInfo != null ? groupInfo.getGroupName() : null);
+		IJstNode bound; // getNativeTypeFromTS(resolver, groupName, name);
+		// if (bound != null) {
+		// return bound instanceof IJstType && !(bound instanceof IJstRefType) ?
+		// JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
+		// }
+
+		// final JstTypeSpaceMgr tsMgr =
+		// resolver.getController().getJstTypeSpaceMgr();
+		// final JstQueryExecutor queryExecutor = tsMgr.getQueryExecutor();
+		// bound =
+		// tsMgr.getTypeSpace().getVisibleGlobal(name,tsMgr.getTypeSpace().getGroup(groupName)
+		// );
+		// if (bound != null) {
+		// return bound instanceof IJstType && !(bound instanceof IJstRefType) ?
+		// JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
+		// }
+
+		ITypeSpace<IJstType, IJstNode> typeSpace = resolver.getController()
+				.getJstTypeSpaceMgr().getTypeSpace();
+		IGroup<IJstType> currentGroup = typeSpace
+				.getGroup(groupInfo != null ? groupInfo.getGroupName() : null);
 		bound = typeSpace.getVisibleGlobal(name, currentGroup);
-		bound = findGlobalVarBinding(resolver, bound, groupInfo);		
-		
-		if(bound==null && name.indexOf('.')==-1){
-			List<IJstType> types = resolver.getController().getJstTypeSpaceMgr().getTypeSpace()
-				.getVisibleType(name, currentGroup);
-			if(types!=null &&  types.size()==1){
+		bound = findGlobalVarBinding(resolver, bound, groupInfo);
+
+		if (bound == null && name.indexOf('.') == -1) {
+			List<IJstType> types = resolver.getController()
+					.getJstTypeSpaceMgr().getTypeSpace()
+					.getVisibleType(name, currentGroup);
+			if (types != null && types.size() == 1) {
 				bound = types.get(0);
 			}
 		}
-		bound = bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
-		
+		bound = bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper
+				.getJstTypeRefType((IJstType) bound) : bound;
+
 		return bound;
 	}
-	
-		
+
 	public static IJstNode getFromGlobalTypeName2(
-			final JstExpressionBindingResolver resolver, final String name, final GroupInfo groupInfo) {
-		
-		
-		
+			final JstExpressionBindingResolver resolver, final String name,
+			final GroupInfo groupInfo) {
+
 		// handle native or global name directly without qualifier,
 		// in this case it's the type name itself, e.g Number
-		IJstNode bound ; // getNativeTypeFromTS(resolver,  groupName, name);
-//		if (bound != null) {
-//			return bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
-//		}
-		
-//		final JstTypeSpaceMgr tsMgr = resolver.getController().getJstTypeSpaceMgr();
-//		final JstQueryExecutor queryExecutor = tsMgr.getQueryExecutor();
-//		bound = tsMgr.getTypeSpace().getVisibleGlobal(name,tsMgr.getTypeSpace().getGroup(groupName) );
-//		if (bound != null) {
-//			return bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
-//		}
-		
-		
-			
-		ITypeSpace<IJstType, IJstNode> typeSpace = resolver.getController().getJstTypeSpaceMgr().getTypeSpace();
-		
-		
-		bound = typeSpace.getVisibleGlobal(name, typeSpace.getGroup(groupInfo.getGroupName()));
+		IJstNode bound; // getNativeTypeFromTS(resolver, groupName, name);
+		// if (bound != null) {
+		// return bound instanceof IJstType && !(bound instanceof IJstRefType) ?
+		// JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
+		// }
+
+		// final JstTypeSpaceMgr tsMgr =
+		// resolver.getController().getJstTypeSpaceMgr();
+		// final JstQueryExecutor queryExecutor = tsMgr.getQueryExecutor();
+		// bound =
+		// tsMgr.getTypeSpace().getVisibleGlobal(name,tsMgr.getTypeSpace().getGroup(groupName)
+		// );
+		// if (bound != null) {
+		// return bound instanceof IJstType && !(bound instanceof IJstRefType) ?
+		// JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
+		// }
+
+		ITypeSpace<IJstType, IJstNode> typeSpace = resolver.getController()
+				.getJstTypeSpaceMgr().getTypeSpace();
+
+		bound = typeSpace.getVisibleGlobal(name,
+				typeSpace.getGroup(groupInfo.getGroupName()));
 		bound = findGlobalVarBinding(resolver, bound, groupInfo);
 		if (bound != null) {
-			bound =  bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
+			bound = bound instanceof IJstType
+					&& !(bound instanceof IJstRefType) ? JstTypeHelper
+					.getJstTypeRefType((IJstType) bound) : bound;
 		}
-		
-		if(bound!=null && name.indexOf('.')==-1){
-			List<IJstType> visibleType = resolver.getController().getJstTypeSpaceMgr().getTypeSpace().getVisibleType( name, typeSpace.getGroup(groupInfo.getGroupName()));
-			if(visibleType.size()==1){
+
+		if (bound != null && name.indexOf('.') == -1) {
+			List<IJstType> visibleType = resolver
+					.getController()
+					.getJstTypeSpaceMgr()
+					.getTypeSpace()
+					.getVisibleType(name,
+							typeSpace.getGroup(groupInfo.getGroupName()));
+			if (visibleType.size() == 1) {
 				bound = JstTypeHelper.getJstTypeRefType((visibleType.get(0)));
 				if (bound != null) {
-					bound = bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper.getJstTypeRefType((IJstType)bound) : bound;
+					bound = bound instanceof IJstType
+							&& !(bound instanceof IJstRefType) ? JstTypeHelper
+							.getJstTypeRefType((IJstType) bound) : bound;
 				}
-				
+
 			}
 		}
 		return bound;
@@ -619,12 +676,12 @@ public class JstExpressionTypeLinkerHelper {
 
 	public static List<IJstType> collectBindingTypes(IJstNode bound) {
 		final List<IJstType> toBindTypes = new ArrayList<IJstType>(2);
-		if (bound instanceof IJstType){
-			if(bound instanceof IJstRefType) {
-				toBindTypes.add((IJstType)bound);
-			}
-			else{
-				toBindTypes.add(JstTypeHelper.getJstTypeRefType((IJstType)bound));
+		if (bound instanceof IJstType) {
+			if (bound instanceof IJstRefType) {
+				toBindTypes.add((IJstType) bound);
+			} else {
+				toBindTypes.add(JstTypeHelper
+						.getJstTypeRefType((IJstType) bound));
 			}
 		} else if (bound instanceof IJstProperty) {
 			toBindTypes.add(((IJstProperty) bound).getType());
@@ -635,7 +692,7 @@ public class JstExpressionTypeLinkerHelper {
 					toBindTypes.add(argType);
 				}
 			}
-		} else if (bound instanceof IExpr){
+		} else if (bound instanceof IExpr) {
 			toBindTypes.add(((IExpr) bound).getResultType());
 		}
 
@@ -643,8 +700,7 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	public static IJstNode findGlobalVarBinding(
-			final JstExpressionBindingResolver resolver,
-			final IJstNode node,
+			final JstExpressionBindingResolver resolver, final IJstNode node,
 			final GroupInfo groupInfo) {
 
 		if (node instanceof IJstGlobalVar) {
@@ -662,32 +718,38 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		return node;
 	}
-	
-	public static String getGlobalVarNameFromBinding(final IJstNode qualifierBinding) {
+
+	public static String getGlobalVarNameFromBinding(
+			final IJstNode qualifierBinding) {
 		String globalVarName = null;
-		if(qualifierBinding instanceof IJstGlobalFunc){
-			globalVarName = ((IJstGlobalFunc)qualifierBinding).getName().getName();
-		}
-		else if(qualifierBinding instanceof IJstGlobalProp){
-			globalVarName = ((IJstGlobalProp)qualifierBinding).getName().getName();
+		if (qualifierBinding instanceof IJstGlobalFunc) {
+			globalVarName = ((IJstGlobalFunc) qualifierBinding).getName()
+					.getName();
+		} else if (qualifierBinding instanceof IJstGlobalProp) {
+			globalVarName = ((IJstGlobalProp) qualifierBinding).getName()
+					.getName();
 		}
 		return globalVarName;
 	}
-	
-	public static boolean isGlobalVarExtended(final JstExpressionBindingResolver resolver,
+
+	public static boolean isGlobalVarExtended(
+			final JstExpressionBindingResolver resolver,
 			final String globalVarName) {
-		return resolver.getController().getJstTypeSpaceMgr().getQueryExecutor().hasGlobalExtension(globalVarName);
+		return resolver.getController().getJstTypeSpaceMgr().getQueryExecutor()
+				.hasGlobalExtension(globalVarName);
 	}
-	
-	public static IJstGlobalVar getGlobalVarExtensionByName(final JstExpressionBindingResolver resolver, 
-			final String extName, 
+
+	public static IJstGlobalVar getGlobalVarExtensionByName(
+			final JstExpressionBindingResolver resolver, final String extName,
 			final String globalVarName) {
-		final List<IJstNode> extensions = resolver.getController().getJstTypeSpaceMgr().getQueryExecutor().getGlobalExtensions(globalVarName);
-		if(extensions != null){
-			for(IJstNode ext: extensions){
-				if(ext instanceof IJstGlobalVar){
-					final IJstGlobalVar extVar = (IJstGlobalVar)ext;
-					if(extName.equals(extVar.getName().getName())){
+		final List<IJstNode> extensions = resolver.getController()
+				.getJstTypeSpaceMgr().getQueryExecutor()
+				.getGlobalExtensions(globalVarName);
+		if (extensions != null) {
+			for (IJstNode ext : extensions) {
+				if (ext instanceof IJstGlobalVar) {
+					final IJstGlobalVar extVar = (IJstGlobalVar) ext;
+					if (extName.equals(extVar.getName().getName())) {
 						return extVar;
 					}
 				}
@@ -695,54 +757,58 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		return null;
 	}
-	
-	public static IJstNode look4ActualGlobalVarBinding(final JstExpressionBindingResolver resolver,
+
+	public static IJstNode look4ActualGlobalVarBinding(
+			final JstExpressionBindingResolver resolver,
 			final IJstGlobalVar extVar, GroupInfo groupInfo) {
 		IJstNode mtdBinding;
-		if(extVar.isFunc()){
+		if (extVar.isFunc()) {
 			final IJstGlobalFunc extFunc = extVar.getFunction();
-			mtdBinding = JstExpressionTypeLinkerHelper.getFurtherGlobalVarBinding(resolver, extFunc, groupInfo);
-		}
-		else{
+			mtdBinding = JstExpressionTypeLinkerHelper
+					.getFurtherGlobalVarBinding(resolver, extFunc, groupInfo);
+		} else {
 			final IJstGlobalProp extProp = extVar.getProperty();
-			mtdBinding = JstExpressionTypeLinkerHelper.getFurtherGlobalVarBinding(resolver, extProp, groupInfo);
+			mtdBinding = JstExpressionTypeLinkerHelper
+					.getFurtherGlobalVarBinding(resolver, extProp, groupInfo);
 		}
 		return mtdBinding;
 	}
-	
-	public static void doMethodBinding(final JstExpressionBindingResolver resolver,
-			final MtdInvocationExpr mie, 
-			final JstIdentifier methodId,
+
+	public static void doMethodBinding(
+			final JstExpressionBindingResolver resolver,
+			final MtdInvocationExpr mie, final JstIdentifier methodId,
 			final IJstNode mtdBinding) {
-		if(mtdBinding != null){
-			if(mtdBinding instanceof IJstMethod){
+		if (mtdBinding != null) {
+			if (mtdBinding instanceof IJstMethod) {
 				methodId.setJstBinding(mtdBinding);
-				mie.setResultType(((IJstMethod)mtdBinding).getRtnType());
-			}
-			else if(mtdBinding instanceof IJstType && ((IJstType)mtdBinding).isFType()){
-				final IJstMethod _invoke_ = JstExpressionTypeLinkerHelper.getFTypeInvokeMethod(resolver, (IJstType)mtdBinding);
+				mie.setResultType(((IJstMethod) mtdBinding).getRtnType());
+			} else if (mtdBinding instanceof IJstType
+					&& ((IJstType) mtdBinding).isFType()) {
+				final IJstMethod _invoke_ = JstExpressionTypeLinkerHelper
+						.getFTypeInvokeMethod(resolver, (IJstType) mtdBinding);
 				methodId.setJstBinding(_invoke_);
 				mie.setResultType(_invoke_.getRtnType());
 			}
 		}
 	}
-	
-	public static IJstNode getFurtherGlobalVarBinding(final JstExpressionBindingResolver resolver,
-			final IJstGlobalFunc method,
-			final GroupInfo groupInfo){
+
+	public static IJstNode getFurtherGlobalVarBinding(
+			final JstExpressionBindingResolver resolver,
+			final IJstGlobalFunc method, final GroupInfo groupInfo) {
 		return bindAttributedType(resolver, method, groupInfo);
 	}
-	
-	public static IJstNode getFurtherGlobalVarBinding(final JstExpressionBindingResolver resolver,
-			final IJstGlobalProp property,
-			final GroupInfo groupInfo){
-		final IJstNode furtherBinding = look4ActualBinding(resolver, property.getType(), groupInfo);
+
+	public static IJstNode getFurtherGlobalVarBinding(
+			final JstExpressionBindingResolver resolver,
+			final IJstGlobalProp property, final GroupInfo groupInfo) {
+		final IJstNode furtherBinding = look4ActualBinding(resolver,
+				property.getType(), groupInfo);
 		return furtherBinding != null ? furtherBinding : property;
 	}
 
 	public static IJstNode findIdentifierBinding(final IJstType nodeType,
 			final String name) {
-		
+
 		if (nodeType != null) {
 			final IJstProperty namedProperty = nodeType.getProperty(name,
 					nodeType instanceof IJstRefType, true);
@@ -758,11 +824,11 @@ public class JstExpressionTypeLinkerHelper {
 		return null;
 	}
 
-	public static boolean mapVarToTypeMember(final JstExpressionBindingResolver resolver,
-			final ScopeFrame scope,
-			final IJstType nodeType, final JstIdentifier identifier,
-			final String name, final boolean overwriteBindings,
-			final GroupInfo groupInfo) {
+	public static boolean mapVarToTypeMember(
+			final JstExpressionBindingResolver resolver,
+			final ScopeFrame scope, final IJstType nodeType,
+			final JstIdentifier identifier, final String name,
+			final boolean overwriteBindings, final GroupInfo groupInfo) {
 		boolean found = false;
 		if (nodeType != null) {
 			final IJstNode bound = findIdentifierBinding(nodeType, name);
@@ -781,62 +847,73 @@ public class JstExpressionTypeLinkerHelper {
 	// and identifier are separated
 	public static boolean getFromGlobalVarName(
 			final JstExpressionBindingResolver resolver,
-			final ScopeFrame scope, final JstIdentifier identifier, GroupInfo groupInfo) {
+			final ScopeFrame scope, final JstIdentifier identifier,
+			GroupInfo groupInfo) {
 		final String name = identifier.getName();
-		final IJstNode bound = getFromGlobalVarName(resolver, name, false, groupInfo);
+		final IJstNode bound = getFromGlobalVarName(resolver, name, false,
+				groupInfo);
 
 		if (bound != null) {
 			final List<IJstType> symbolTypes = collectBindingTypes(bound);
 			// bindAttributedType(symbolType);
-			bindIdentifier(resolver, scope, identifier, name, bound, symbolTypes
-					.get(0), false, groupInfo);
+			bindIdentifier(resolver, scope, identifier, name, bound,
+					symbolTypes.get(0), false, groupInfo);
 			return true;
 		}
 		return false;
 	}
-	
-	public static IJstMethod getFTypeInvokeMethod(final JstExpressionBindingResolver resolver, final IJstType ftype){
-		if(ftype == null || !ftype.isFType()){
-			throw new IllegalArgumentException("the vjo type in this context must be a non-null ftype");
+
+	public static IJstMethod getFTypeInvokeMethod(
+			final JstExpressionBindingResolver resolver, final IJstType ftype) {
+		if (ftype == null || !ftype.isFType()) {
+			throw new IllegalArgumentException(
+					"the vjo type in this context must be a non-null ftype");
 		}
-		//always static reference, fixed _invoke_ naming
+		// always static reference, fixed _invoke_ naming
 		final IJstMethod _invoke_ = ftype.getMethod("_invoke_", true);
-		if(_invoke_ != null){
+		if (_invoke_ != null) {
 			return _invoke_;
-		}
-		else{
-			//fix by huzhou@ebay.com, to ensure the flex method belongs to the ftype
-			final JstSynthesizedMethod flexMtd = createFlexMethod(resolver, "_invoke_");
-			if(ftype instanceof JstType){
-				((JstType)ftype).addMethod(flexMtd);
+		} else {
+			// fix by huzhou@ebay.com, to ensure the flex method belongs to the
+			// ftype
+			final JstSynthesizedMethod flexMtd = createFlexMethod(resolver,
+					"_invoke_");
+			if (ftype instanceof JstType) {
+				((JstType) ftype).addMethod(flexMtd);
 			}
 			return flexMtd;
 		}
 	}
 
-	//it must be created whereever it's referenced
-	public static JstSynthesizedMethod createFlexMethod(final JstExpressionBindingResolver resolver, final String name) {
+	// it must be created whereever it's referenced
+	public static JstSynthesizedMethod createFlexMethod(
+			final JstExpressionBindingResolver resolver, final String name) {
 		final JstModifiers flexModifiers = new JstModifiers();
 		flexModifiers.setPublic();
-		final JstSynthesizedMethod flexMtd = new JstSynthesizedMethod(name != null ? name : "flex", flexModifiers, null);
+		final JstSynthesizedMethod flexMtd = new JstSynthesizedMethod(
+				name != null ? name : "flex", flexModifiers, null);
 		final IJstType objType = getNativeObjectJstType(resolver);
 		flexMtd.setRtnType(objType);
-		final JstArg flexArg = new JstArg(objType, name != null ? name + "Arg" : "flexArg", true);
+		final JstArg flexArg = new JstArg(objType, name != null ? name + "Arg"
+				: "flexArg", true);
 		flexMtd.addArg(flexArg);
 		return flexMtd;
 	}
-	
-	//it must be created whereever it's referenced
-	public static JstConstructor createFlexConstructor(final JstExpressionBindingResolver resolver) {
-		final JstSynthesizedMethod flexMethod = createFlexMethod(resolver, "constructs");
-		return new JstConstructor(flexMethod.getModifiers(), flexMethod.getArgs().toArray(new JstArg[flexMethod.getArgs().size()]));
+
+	// it must be created whereever it's referenced
+	public static JstConstructor createFlexConstructor(
+			final JstExpressionBindingResolver resolver) {
+		final JstSynthesizedMethod flexMethod = createFlexMethod(resolver,
+				"constructs");
+		return new JstConstructor(flexMethod.getModifiers(), flexMethod
+				.getArgs().toArray(new JstArg[flexMethod.getArgs().size()]));
 	}
 
-	public static IJstNode getCorrectMethod(final JstExpressionBindingResolver resolver,
-			final IJstType nodeType, 
-			final String methodName,
+	public static IJstNode getCorrectMethod(
+			final JstExpressionBindingResolver resolver,
+			final IJstType nodeType, final String methodName,
 			final boolean isStatic) {
-		
+
 		IJstNode method = nodeType.getMethod(methodName, isStatic, true);
 		if (method == null) { // lookup property which can be a JstTypeRefType
 			IJstProperty pty = nodeType.getProperty(methodName, isStatic, true);
@@ -846,98 +923,105 @@ public class JstExpressionTypeLinkerHelper {
 
 				if (ptyType instanceof IJstRefType) {
 					method = ptyType.getConstructor();
-				} 
-				else if (ptyType instanceof JstFuncType){
-					method = ((JstFuncType)ptyType).getFunction();
+				} else if (ptyType instanceof JstFuncType) {
+					method = ((JstFuncType) ptyType).getFunction();
 					getMethodMetaFromProperty(method, pty);
-				}
-				else {
+				} else {
 					method = pty; // calls property name in mtd invocation expr
 				}
 			}
 		}
-		
-		//bugfix by huzhou to lookup Array method/properties for JstArray type?
+
+		// bugfix by huzhou to lookup Array method/properties for JstArray type?
 		return method;
 	}
 
 	private static void getMethodMetaFromProperty(final IJstNode mtd,
 			final IJstProperty pty) {
-		if(mtd instanceof JstMethod){
-			final JstMethod mtdNode = (JstMethod)mtd;
+		if (mtd instanceof JstMethod) {
+			final JstMethod mtdNode = (JstMethod) mtd;
 			mtdNode.setParent(pty.getParentNode());
 			mtdNode.getModifiers().merge(pty.getModifiers().getFlags());
 		}
 	}
 
-	public static IJstOType getOtype(final String otypeName){
+	public static IJstOType getOtype(final String otypeName) {
 		final List<String> subs = new LinkedList<String>();
 		final IJstType otype = getOtypeParentType(otypeName, subs);
-		if(otype == null){
+		if (otype == null) {
 			return null;
-		}
-		else{
+		} else {
 			IJstType otypeSubType = otype;
-			for(final Iterator<String> it = subs.iterator(); it.hasNext() && otypeSubType != null;){
+			for (final Iterator<String> it = subs.iterator(); it.hasNext()
+					&& otypeSubType != null;) {
 				final String sub = it.next();
-				if(it.hasNext()){
+				if (it.hasNext()) {
 					otypeSubType = otypeSubType.getEmbededType(sub);
-				}
-				else{
+				} else {
 					otypeSubType = otypeSubType.getOType(sub);
 				}
 			}
-			return otypeSubType instanceof IJstOType ? (IJstOType)otypeSubType : null;
+			return otypeSubType instanceof IJstOType ? (IJstOType) otypeSubType
+					: null;
 		}
 	}
 
-	private static IJstType getOtypeParentType(final String otypeName, final List<String> subs) {
-		//success
-		final IJstType potentialOtypeJstFunctionRefType = JstCache.getInstance().getType(otypeName);
-		if(potentialOtypeJstFunctionRefType instanceof JstType
-				&& ((JstType)potentialOtypeJstFunctionRefType).getStatus().hasResolution()){
+	private static IJstType getOtypeParentType(final String otypeName,
+			final List<String> subs) {
+		// success
+		final IJstType potentialOtypeJstFunctionRefType = JstCache
+				.getInstance().getType(otypeName);
+		if (potentialOtypeJstFunctionRefType instanceof JstType
+				&& ((JstType) potentialOtypeJstFunctionRefType).getStatus()
+						.hasResolution()) {
 			return potentialOtypeJstFunctionRefType;
 		}
-		//fail
-		final int lastDotAt = otypeName != null ? otypeName.lastIndexOf('.') : -1;
-		if(lastDotAt < 0){
+		// fail
+		final int lastDotAt = otypeName != null ? otypeName.lastIndexOf('.')
+				: -1;
+		if (lastDotAt < 0) {
 			return null;
 		}
-		//recursion
+		// recursion
 		final String otypeParentTypeName = otypeName.substring(0, lastDotAt);
-		if(lastDotAt < otypeName.length()){
+		if (lastDotAt < otypeName.length()) {
 			final String sub = otypeName.substring(lastDotAt + 1);
 			subs.add(0, sub);
 		}
 		return getOtypeParentType(otypeParentTypeName, subs);
 	}
-	
+
 	public static String getFullNameIfShortName4InnerType(
 			final IJstType currentType, final IJstType potentialOtypeMemberType) {
-		if(currentType == null || potentialOtypeMemberType == null){
+		if (currentType == null || potentialOtypeMemberType == null) {
 			return "";
 		}
-		return new StringBuilder().append(currentType.getName()).append('.').append(potentialOtypeMemberType.getName()).toString();
+		return new StringBuilder().append(currentType.getName()).append('.')
+				.append(potentialOtypeMemberType.getName()).toString();
 	}
 
 	public static void fixMethodTypeRef(
-			final JstExpressionBindingResolver resolver, final JstMethod method, final IJstType currentType, GroupInfo groupInfo) {
+			final JstExpressionBindingResolver resolver,
+			final JstMethod method, final IJstType currentType,
+			GroupInfo groupInfo) {
 
 		IJstType rtnType = method.getRtnType();
 		IJstType rtnCorrectType = rtnType;
-		if(rtnType instanceof JstType
-				&& !((JstType)rtnType).getStatus().isValid()){
+		if (rtnType instanceof JstType
+				&& !((JstType) rtnType).getStatus().isValid()) {
 			final IJstType potentialOtypeMemberType = rtnType;
-			IJstOType resolvedOtype = getOtype(potentialOtypeMemberType.getName());
-			if(resolvedOtype == null){
-				resolvedOtype = getOtype(getFullNameIfShortName4InnerType(currentType, potentialOtypeMemberType));
+			IJstOType resolvedOtype = getOtype(potentialOtypeMemberType
+					.getName());
+			if (resolvedOtype == null) {
+				resolvedOtype = getOtype(getFullNameIfShortName4InnerType(
+						currentType, potentialOtypeMemberType));
 			}
-			if(resolvedOtype != null){
+			if (resolvedOtype != null) {
 				rtnCorrectType = resolvedOtype;
 			}
 		}
 		rtnCorrectType = getCorrectType(resolver, rtnType, groupInfo);
-		
+
 		if (rtnCorrectType != rtnType) {
 			method.setRtnType(rtnCorrectType);
 		}
@@ -947,20 +1031,24 @@ public class JstExpressionTypeLinkerHelper {
 			for (JstArg arg : args) {
 				for (IJstType parameterType : arg.getTypes()) {
 					IJstType parameterCorrectType = parameterType;
-					if(parameterType instanceof JstType
-							&& !((JstType)parameterType).getStatus().isValid()){
+					if (parameterType instanceof JstType
+							&& !((JstType) parameterType).getStatus().isValid()) {
 						final IJstType potentialOtypeMemberType = parameterType;
-						IJstOType resolvedOtype = getOtype(potentialOtypeMemberType.getName());
-						if(resolvedOtype == null){
-							resolvedOtype = getOtype(getFullNameIfShortName4InnerType(currentType, potentialOtypeMemberType));
+						IJstOType resolvedOtype = getOtype(potentialOtypeMemberType
+								.getName());
+						if (resolvedOtype == null) {
+							resolvedOtype = getOtype(getFullNameIfShortName4InnerType(
+									currentType, potentialOtypeMemberType));
 						}
-						if(resolvedOtype != null){
+						if (resolvedOtype != null) {
 							parameterCorrectType = resolvedOtype;
 						}
 					}
-					parameterCorrectType = getCorrectType(resolver, parameterCorrectType, groupInfo);
+					parameterCorrectType = getCorrectType(resolver,
+							parameterCorrectType, groupInfo);
 					if (parameterCorrectType != parameterType) {
-						arg.updateType(parameterType.getName(), parameterCorrectType);
+						arg.updateType(parameterType.getName(),
+								parameterCorrectType);
 					}
 				}
 			}
@@ -970,17 +1058,22 @@ public class JstExpressionTypeLinkerHelper {
 		if (overloaded != null && !overloaded.isEmpty()) {
 			for (IJstMethod mtd : overloaded) {
 				if (mtd instanceof JstMethod) {
-					fixMethodTypeRef(resolver, (JstMethod) mtd, currentType, groupInfo);
+					fixMethodTypeRef(resolver, (JstMethod) mtd, currentType,
+							groupInfo);
 				}
 			}
 		}
-		
+
 		updateMethodSignature(method);
 	}
-	
+
 	private static void updateMethodSignature(JstMethod method) {
 
-		if (method.hasJsAnnotation()/* || method.isDispatcher()*/) { // only update methods without annotation
+		if (method.hasJsAnnotation()/* || method.isDispatcher() */) { // only
+																		// update
+																		// methods
+																		// without
+																		// annotation
 			return;
 		}
 
@@ -989,16 +1082,18 @@ public class JstExpressionTypeLinkerHelper {
 			return;
 		}
 
-		IJstType ownerType = method.getOwnerType();
-		String mtdName = method.getName().getName();
+		// Parag:Justin - commenting to avoid copying the child method signature
+		// with the one from parent
+		// IJstType ownerType = method.getOwnerType();
+		// String mtdName = method.getName().getName();
 
-		IJstMethod parentMtd = searchParentMethodWithAnnotation(ownerType,
-				mtdName, method.isStatic());
+		// IJstMethod parentMtd = searchParentMethodWithAnnotation(ownerType,
+		// mtdName, method.isStatic());
 
-		if (parentMtd != null && parentMtd != method) {
-			method.getModifiers().copy(parentMtd.getModifiers());
-			JstTypeHelper.populateMethod(method, parentMtd, true);
-		}
+		// if (parentMtd != null && parentMtd != method) {
+		// method.getModifiers().copy(parentMtd.getModifiers());
+		// JstTypeHelper.populateMethod(method, parentMtd, true);
+		// }
 	}
 
 	private static IJstMethod searchParentMethodWithAnnotation(IJstType type,
@@ -1008,7 +1103,7 @@ public class JstExpressionTypeLinkerHelper {
 			IJstMethod method = type.getMethod(mtdName, isStatic);
 
 			if (method != null) {
-				if (method.hasJsAnnotation()/* || method.isDispatcher()*/) {
+				if (method.hasJsAnnotation()/* || method.isDispatcher() */) {
 					return method;
 				}
 			}
@@ -1038,41 +1133,44 @@ public class JstExpressionTypeLinkerHelper {
 			final IJstType resultType) {
 		expr.setType(resultType);
 	}
-	
+
 	public static void updateArrayType(JstArray arrayType, GroupInfo groupInfo) {
 		IJstType nativeArrType = arrayType.getExtend();
-		IJstType extendedType = JstExpressionTypeLinkerHelper
-			.getExtendedType(nativeArrType, groupInfo);
+		IJstType extendedType = JstExpressionTypeLinkerHelper.getExtendedType(
+				nativeArrType, groupInfo);
 		if (extendedType != nativeArrType) {
 			arrayType.clearExtends();
 			arrayType.addExtend(extendedType);
 		}
 	}
-	
+
 	public static void updateFunctionType(JstType ftype, GroupInfo groupInfo) {
 		final IJstType nativeFuncType = ftype.getExtend();
 		final IJstType extendedType = JstExpressionTypeLinkerHelper
-			.getExtendedType(nativeFuncType, groupInfo);
+				.getExtendedType(nativeFuncType, groupInfo);
 		if (extendedType != nativeFuncType) {
 			ftype.clearExtends();
 			ftype.addExtend(extendedType);
 		}
 	}
-	
-	public static void updateFunctionType(JstFuncType funcType, GroupInfo groupInfo) {
+
+	public static void updateFunctionType(JstFuncType funcType,
+			GroupInfo groupInfo) {
 		final IJstType nativeFuncType = funcType.getExtend();
 		final IJstType extendedType = JstExpressionTypeLinkerHelper
-			.getExtendedType(nativeFuncType, groupInfo);
+				.getExtendedType(nativeFuncType, groupInfo);
 		if (extendedType != nativeFuncType) {
 			funcType.clearExtends();
 			funcType.addExtend(extendedType);
 		}
 	}
-	
+
 	public static void fixPropertyTypeRef(
-			final JstExpressionBindingResolver resolver, JstProperty pty, GroupInfo groupInfo) {
+			final JstExpressionBindingResolver resolver, JstProperty pty,
+			GroupInfo groupInfo) {
 		final IJstType ptyType = pty.getType();
-		final IJstType correctType = getCorrectType(resolver, ptyType, groupInfo);
+		final IJstType correctType = getCorrectType(resolver, ptyType,
+				groupInfo);
 
 		if (correctType != ptyType) {
 			pty.setType(correctType);
@@ -1080,7 +1178,8 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	public static void fixVarsTypeRef(
-			final JstExpressionBindingResolver resolver, JstVars var, GroupInfo groupInfo) {
+			final JstExpressionBindingResolver resolver, JstVars var,
+			GroupInfo groupInfo) {
 		IJstType varType = var.getType();
 		IJstType correctType = getCorrectType(resolver, varType, groupInfo);
 
@@ -1091,11 +1190,12 @@ public class JstExpressionTypeLinkerHelper {
 
 	/**
 	 * pure helper methods to deal with types
+	 * 
 	 * @param expr
 	 * @return
 	 */
-	public static IJstType getQualifierType(final JstExpressionBindingResolver resolver,
-			final IExpr expr) {
+	public static IJstType getQualifierType(
+			final JstExpressionBindingResolver resolver, final IExpr expr) {
 		if (expr == null) {
 			return null;
 		}
@@ -1114,21 +1214,23 @@ public class JstExpressionTypeLinkerHelper {
 		}
 
 		if (qualifier != null) {
-			//enhancement by huzhou to handle JstAttributedType as a qualifier type
-			//this is used for field accessing and method invocation expr binding resolutions
+			// enhancement by huzhou to handle JstAttributedType as a qualifier
+			// type
+			// this is used for field accessing and method invocation expr
+			// binding resolutions
 			IJstType qualifierType = qualifier.getResultType();
-			if(qualifierType instanceof JstAttributedType){
-				final IJstNode binding = ((JstAttributedType)qualifierType).getJstBinding();
-				if(binding != null){
-					if(binding instanceof IJstProperty){
-						return ((IJstProperty)binding).getType();
-					}
-					else if(binding instanceof IJstMethod){
-						return new JstFuncType((IJstMethod)binding);
+			if (qualifierType instanceof JstAttributedType) {
+				final IJstNode binding = ((JstAttributedType) qualifierType)
+						.getJstBinding();
+				if (binding != null) {
+					if (binding instanceof IJstProperty) {
+						return ((IJstProperty) binding).getType();
+					} else if (binding instanceof IJstMethod) {
+						return new JstFuncType((IJstMethod) binding);
 					}
 				}
 			}
-			
+
 			return qualifierType;
 		}
 		return null;
@@ -1138,7 +1240,8 @@ public class JstExpressionTypeLinkerHelper {
 
 		String simpleName = null;
 		if (nodeType instanceof IJstRefType) {
-			simpleName = ((IJstRefType) nodeType).getReferencedNode().getSimpleName();
+			simpleName = ((IJstRefType) nodeType).getReferencedNode()
+					.getSimpleName();
 		} else {
 			simpleName = nodeType.getSimpleName();
 		}
@@ -1192,9 +1295,10 @@ public class JstExpressionTypeLinkerHelper {
 		return src;
 	}
 
-	public static IJstType getVarType(final JstExpressionBindingResolver resolver, IJstNode var) {
+	public static IJstType getVarType(
+			final JstExpressionBindingResolver resolver, IJstNode var) {
 		IJstType type = null;
-		
+
 		if (var instanceof JstVar) {
 			type = ((JstVar) var).getType();
 		} else if (var instanceof JstVars) {
@@ -1208,20 +1312,20 @@ public class JstExpressionTypeLinkerHelper {
 				type = arg.getType();
 			}
 		} else if (var instanceof IJstMethod) {// local method
-			type = new JstFuncType((IJstMethod)var);
+			type = new JstFuncType((IJstMethod) var);
 		} else if (var instanceof JstIdentifier) {
 			type = ((JstIdentifier) var).getType();
-		} else if (var instanceof IJstType){
-			type = (IJstType)var;
+		} else if (var instanceof IJstType) {
+			type = (IJstType) var;
 		}
 
-		if(var instanceof ILHS){
+		if (var instanceof ILHS) {
 			final IJstNode parent = var.getParentNode();
-			if(parent instanceof AssignExpr){
+			if (parent instanceof AssignExpr) {
 				final IJstNode grandParent = parent.getParentNode();
-				if(grandParent instanceof JstInitializer){
+				if (grandParent instanceof JstInitializer) {
 					final IJstNode jstVars = grandParent.getParentNode();
-					if(jstVars instanceof JstVars){
+					if (jstVars instanceof JstVars) {
 						type = ((JstVars) jstVars).getType();
 					}
 				}
@@ -1229,25 +1333,27 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		return type;
 	}
-	
-	public static IInferred cloneInferredType(final IInferred type){
-		//ugly fix by huzhou@ebay.com to make sure inferred type are separated in their 1st lookup
-		//the subsequent lookup are from symbol tables, therefore it's ok
-		if(type instanceof JstInferredRefType){
-			return new JstInferredRefType((IJstRefType)((JstInferredRefType)type).getType());
+
+	public static IInferred cloneInferredType(final IInferred type) {
+		// ugly fix by huzhou@ebay.com to make sure inferred type are separated
+		// in their 1st lookup
+		// the subsequent lookup are from symbol tables, therefore it's ok
+		if (type instanceof JstInferredRefType) {
+			return new JstInferredRefType(
+					(IJstRefType) ((JstInferredRefType) type).getType());
+		} else if (type instanceof JstInferredType) {
+			return new JstInferredType(((JstInferredType) type).getType());
 		}
-		else if(type instanceof JstInferredType){
-			return new JstInferredType(((JstInferredType)type).getType());
-		}
-		
+
 		return type;
 	}
-	
-	public static IJstType getReturnTypeFormFactoryEnabled(MtdInvocationExpr mie, IJstMethod mtd) {
+
+	public static IJstType getReturnTypeFormFactoryEnabled(
+			MtdInvocationExpr mie, IJstMethod mtd) {
 		String mtdKey = mtd.getOwnerType().getName();
 		mtdKey += mtd.isStatic() ? "::" : ":";
 		mtdKey += mtd.getName().getName();
-		
+
 		TypeResolverRegistry trr = TypeResolverRegistry.getInstance();
 		if (trr.hasResolver(mtdKey)) {
 			List<IExpr> exprs = mie.getArgs();
@@ -1256,66 +1362,76 @@ public class JstExpressionTypeLinkerHelper {
 				for (int i = 0; i < exprs.size(); i++) {
 					args[i] = exprs.get(i).toExprText();
 				}
-				//String typeName = trr.resolve(mtdKey, args);
+				// String typeName = trr.resolve(mtdKey, args);
 				IJstType type = trr.resolve(mtdKey, args);
 				if (type != null) {
 					return type;
-//					boolean isArray = typeName.endsWith("[]");
-//					if(isArray){
-//						typeName = typeName.substring(0, typeName.length()-2);
-//					}
-//					
-//					boolean isTypeRefType = false;
-//					if (typeName.startsWith("type::")) {
-//						isTypeRefType = true;
-//						typeName = typeName.substring(6);
-//					}
-//					JstType rtnType = JstCache.getInstance().getType(typeName);
-//					if (rtnType != null) {
-//						IJstType type = isTypeRefType? new JstTypeRefType(rtnType): rtnType;
-//						if(isArray){
-//							type = new JstArray(type);	
-//						}
-//						return type;
-//					}
+					// boolean isArray = typeName.endsWith("[]");
+					// if(isArray){
+					// typeName = typeName.substring(0, typeName.length()-2);
+					// }
+					//
+					// boolean isTypeRefType = false;
+					// if (typeName.startsWith("type::")) {
+					// isTypeRefType = true;
+					// typeName = typeName.substring(6);
+					// }
+					// JstType rtnType =
+					// JstCache.getInstance().getType(typeName);
+					// if (rtnType != null) {
+					// IJstType type = isTypeRefType? new
+					// JstTypeRefType(rtnType): rtnType;
+					// if(isArray){
+					// type = new JstArray(type);
+					// }
+					// return type;
+					// }
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	/**
-	 * This util helps to find the best matching return type from all the overloading apis with the arguments in {@link MtdInvocationExpr}
+	 * This util helps to find the best matching return type from all the
+	 * overloading apis with the arguments in {@link MtdInvocationExpr}
+	 * 
 	 * @param mie
 	 * @param mtd
 	 * @return
 	 */
-	public static IJstType getBestRtnTypeFromAllOverloadMtds(MtdInvocationExpr mie,
-			IJstMethod mtd) {
+	public static IJstType getBestRtnTypeFromAllOverloadMtds(
+			MtdInvocationExpr mie, IJstMethod mtd) {
 
 		final IJstType returnType = getRtnTypeFromSingleMtd(mie, mtd);
 		final List<IJstMethod> overloads = mtd.getOverloaded();
-		
-		if (!mtd.isDispatcher() || checkAllOverloadsRtnTypeTheSame(overloads)){
+
+		if (!mtd.isDispatcher() || checkAllOverloadsRtnTypeTheSame(overloads)) {
 			return returnType;
 		}
-		
+
 		final List<IExpr> arguments = mie.getArgs();
 		final int argumentsLength = arguments.size();
-		final Map<IJstMethod, List<JstArg>> overloads2ParamsMap = new HashMap<IJstMethod, List<JstArg>>(overloads.size());
+		final Map<IJstMethod, List<JstArg>> overloads2ParamsMap = new HashMap<IJstMethod, List<JstArg>>(
+				overloads.size());
 
-		//init the overloads, filling in only whose parameter size matched arguments' length
-		//or the next param is a variable lengthed one
-		initOverloadsWithCorrectParamSize(overloads, argumentsLength, overloads2ParamsMap);
-		
-		//filter out overloads whose parameter types are not assignable from the arguments'
-		filterOverloadsWithMismatchingParamTypes(arguments, argumentsLength, overloads2ParamsMap);
-		
-		//find the best overloads from the rest
-		//get it's return type
+		// init the overloads, filling in only whose parameter size matched
+		// arguments' length
+		// or the next param is a variable lengthed one
+		initOverloadsWithCorrectParamSize(overloads, argumentsLength,
+				overloads2ParamsMap);
+
+		// filter out overloads whose parameter types are not assignable from
+		// the arguments'
+		filterOverloadsWithMismatchingParamTypes(arguments, argumentsLength,
+				overloads2ParamsMap);
+
+		// find the best overloads from the rest
+		// get it's return type
 		if (overloads2ParamsMap.keySet().size() > 0) {
-			return getRtnTypeFromSingleMtd(mie, getBestOverloadFromAllValid(overloads2ParamsMap, arguments));
+			return getRtnTypeFromSingleMtd(mie,
+					getBestOverloadFromAllValid(overloads2ParamsMap, arguments));
 		}
 
 		return returnType;
@@ -1324,13 +1440,13 @@ public class JstExpressionTypeLinkerHelper {
 
 	private static boolean checkAllOverloadsRtnTypeTheSame(
 			final List<IJstMethod> allOverloads) {
-		if(allOverloads == null || allOverloads.size() < 1){
+		if (allOverloads == null || allOverloads.size() < 1) {
 			return true;
 		}
-		
+
 		final IJstType prevRtnType = allOverloads.get(0).getRtnType();
-		for(IJstMethod it : allOverloads){
-			if(prevRtnType != it.getRtnType()){
+		for (IJstMethod it : allOverloads) {
+			if (prevRtnType != it.getRtnType()) {
 				return false;
 			}
 		}
@@ -1340,13 +1456,14 @@ public class JstExpressionTypeLinkerHelper {
 	public static void initOverloadsWithCorrectParamSize(
 			final List<IJstMethod> overloads, final int argumentsLength,
 			final Map<IJstMethod, List<JstArg>> overloads2ParamsMap) {
-		for(IJstMethod overload : overloads){
-			//bugfix by huzhou@ebay.com, 
-			//when parameter lengths exceeds argument length
-			//or the param at argument length isn't variable lengthed
-			//the overload will be excluded
-			if(preCheckOverloadParamSize(argumentsLength, overload)){
-				overloads2ParamsMap.put(overload, paddingParams(overload.getArgs(), argumentsLength));
+		for (IJstMethod overload : overloads) {
+			// bugfix by huzhou@ebay.com,
+			// when parameter lengths exceeds argument length
+			// or the param at argument length isn't variable lengthed
+			// the overload will be excluded
+			if (preCheckOverloadParamSize(argumentsLength, overload)) {
+				overloads2ParamsMap.put(overload,
+						paddingParams(overload.getArgs(), argumentsLength));
 			}
 		}
 	}
@@ -1355,42 +1472,52 @@ public class JstExpressionTypeLinkerHelper {
 			IJstMethod overload) {
 		final List<JstArg> parameters = overload.getArgs();
 		return parameters.size() <= argumentsLength
-				|| (parameters.size() == argumentsLength + 1
-					&& parameters.get(parameters.size() - 1).isVariable());
+				|| (parameters.size() == argumentsLength + 1 && parameters.get(
+						parameters.size() - 1).isVariable());
 	}
-	
+
 	/**
-	 * helper for {@link #getBestRtnTypeFromAllOverloadMtds(MtdInvocationExpr, IJstMethod)}
-	 * its responsibilities are to eliminate the map's entries who has a param and argument.getResultType() isn't assignable to param.getType()
+	 * helper for
+	 * {@link #getBestRtnTypeFromAllOverloadMtds(MtdInvocationExpr, IJstMethod)}
+	 * its responsibilities are to eliminate the map's entries who has a param
+	 * and argument.getResultType() isn't assignable to param.getType()
+	 * 
 	 * @param arguments
 	 * @param argumentsLength
 	 * @param overloads2ParamsMap
 	 */
-	private static void filterOverloadsWithMismatchingParamTypes(final List<IExpr> arguments,
-			final int argumentsLength,
+	private static void filterOverloadsWithMismatchingParamTypes(
+			final List<IExpr> arguments, final int argumentsLength,
 			final Map<IJstMethod, List<JstArg>> overloads2ParamsMap) {
 		for (int i = 0; i < argumentsLength; i++) {
 			final IJstType argumentType = arguments.get(i).getResultType();
 			final List<IJstMethod> badOverloads = new LinkedList<IJstMethod>();
-			for (Map.Entry<IJstMethod, List<JstArg>> overloadEntry : overloads2ParamsMap.entrySet()) {
+			for (Map.Entry<IJstMethod, List<JstArg>> overloadEntry : overloads2ParamsMap
+					.entrySet()) {
 				final List<JstArg> overloadParams = overloadEntry.getValue();
-				final IJstType overloadParamType = overloadParams.get(i).getType();
-				//when overloadParamType = argumentType isn't valid, we add it to bad overloads
-				if (!TypeCheckUtil.isAssignable(overloadParamType, argumentType)) {
+				final IJstType overloadParamType = overloadParams.get(i)
+						.getType();
+				// when overloadParamType = argumentType isn't valid, we add it
+				// to bad overloads
+				if (!TypeCheckUtil
+						.isAssignable(overloadParamType, argumentType)) {
 					badOverloads.add(overloadEntry.getKey());
 				}
 			}
-			//filtered bad overloads before checking next argument
-			for(IJstMethod invalidKey : badOverloads){
+			// filtered bad overloads before checking next argument
+			for (IJstMethod invalidKey : badOverloads) {
 				overloads2ParamsMap.remove(invalidKey);
 			}
 		}
 	}
 
 	/**
-	 * Helper for {@link #getBestRtnTypeFromAllOverloadMtds(MtdInvocationExpr, IJstMethod)}
-	 * its responsibilities are to check if method is a factory method and using factory method to generate the return type
-	 * otherwise using the return type directly
+	 * Helper for
+	 * {@link #getBestRtnTypeFromAllOverloadMtds(MtdInvocationExpr, IJstMethod)}
+	 * its responsibilities are to check if method is a factory method and using
+	 * factory method to generate the return type otherwise using the return
+	 * type directly
+	 * 
 	 * @param mie
 	 * @param mtd
 	 * @return
@@ -1405,36 +1532,38 @@ public class JstExpressionTypeLinkerHelper {
 			}
 		}
 		returnType = mtd.getRtnType();
-		
+
 		return resolvingFuncReturnType(mie, returnType);
 	}
-	
-	private static IJstType resolvingFuncReturnType(MtdInvocationExpr mie, IJstType returnType) {
+
+	private static IJstType resolvingFuncReturnType(MtdInvocationExpr mie,
+			IJstType returnType) {
 		if (returnType instanceof JstFuncArgAttributedType) {
-			int argIndex = ((JstFuncArgAttributedType)returnType).getArgPosition() - 1;
+			int argIndex = ((JstFuncArgAttributedType) returnType)
+					.getArgPosition() - 1;
 			List<IExpr> args = mie.getArgs();
 			if (args.size() > argIndex) {
 				returnType = args.get(argIndex).getResultType();
 			}
-		}
-		else if (returnType instanceof JstFuncScopeAttributedType) {
+		} else if (returnType instanceof JstFuncScopeAttributedType) {
 			IExpr scope = mie.getQualifyExpr();
 			if (scope != null) {
 				returnType = scope.getResultType();
 			}
-		}
-		else if (returnType instanceof JstMixedType) {
-			returnType = resolve(mie, (JstMixedType)returnType);
+		} else if (returnType instanceof JstMixedType) {
+			returnType = resolve(mie, (JstMixedType) returnType);
 		}
 		return returnType;
 	}
-	
-	private static IJstType resolve(MtdInvocationExpr mie, JstMixedType mixedType) {
+
+	private static IJstType resolve(MtdInvocationExpr mie,
+			JstMixedType mixedType) {
 		List<IJstType> mTypes = mixedType.getMixedTypes();
 		List<IJstType> resolvedTypes = new ArrayList<IJstType>(mTypes.size());
 		boolean needResolve = false;
 		for (IJstType mType : mixedType.getMixedTypes()) {
-			if (mType instanceof JstFuncArgAttributedType || mType instanceof JstFuncScopeAttributedType) {
+			if (mType instanceof JstFuncArgAttributedType
+					|| mType instanceof JstFuncScopeAttributedType) {
 				needResolve = true;
 			}
 			IJstType resolved = resolvingFuncReturnType(mie, mType);
@@ -1447,165 +1576,175 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		return mixedType;
 	}
-	
+
 	/**
 	 * simple matching results in one of the {@link ParamMatchingArgCase}
+	 * 
 	 * @param arg
 	 * @param param
 	 * @return
 	 */
-	private static ParamMatchingArgCase argMatchingParam(final IExpr arg, final JstArg param){
+	private static ParamMatchingArgCase argMatchingParam(final IExpr arg,
+			final JstArg param) {
 		final IJstType argumentType = arg.getResultType();
 		final IJstType parameterType = param.getType();
-	
-		if(argumentType == parameterType
-				|| argumentType == null
-				|| parameterType == null){
+
+		if (argumentType == parameterType || argumentType == null
+				|| parameterType == null) {
 			return ParamMatchingArgCase.exact;
-		}
-		else if(isSubType(parameterType, argumentType)){
+		} else if (isSubType(parameterType, argumentType)) {
 			return ParamMatchingArgCase.subtype;
 		}
-		//worst case that assignable is due to proxy/object type parameter
-		else if("proxy".equals(param.getName()) || "Object".equals(parameterType.getName())){
+		// worst case that assignable is due to proxy/object type parameter
+		else if ("proxy".equals(param.getName())
+				|| "Object".equals(parameterType.getName())) {
 			return ParamMatchingArgCase.object;
-		}
-		else{// if(TypeCheckUtil.isAssignable(parameterType, argumentType))
+		} else {// if(TypeCheckUtil.isAssignable(parameterType, argumentType))
 			return ParamMatchingArgCase.implicitConversion;
 		}
 	}
-	
+
 	private static IJstMethod getBestOverloadFromAllValid(
 			final Map<IJstMethod, List<JstArg>> validOverloads2ParamsMap,
 			final List<IExpr> arguments) {
 		assert validOverloads2ParamsMap.size() >= 1;
-		assert arguments.size() >= 0;//it's ok for arguments length to be zero
-		
-		//#1 only one candidate
-		if(validOverloads2ParamsMap.size() == 1){
+		assert arguments.size() >= 0;// it's ok for arguments length to be zero
+
+		// #1 only one candidate
+		if (validOverloads2ParamsMap.size() == 1) {
 			return validOverloads2ParamsMap.keySet().iterator().next();
 		}
-		//#2 check same return type
-		//#2 NOTE: check has been upreved to #getBestRtnTypeFromAllOverloads
-		//#2 as this logic needs to be excluded from parameter best matching flow
-		
-		//#3 best matching begins
-		//the best overloads should meet the following
-		//#3.1. Number of parameter matches the number of arguments
-		//#3.2. Higher order parameter type is closer to the argument type than the other methods
+		// #2 check same return type
+		// #2 NOTE: check has been upreved to #getBestRtnTypeFromAllOverloads
+		// #2 as this logic needs to be excluded from parameter best matching
+		// flow
+
+		// #3 best matching begins
+		// the best overloads should meet the following
+		// #3.1. Number of parameter matches the number of arguments
+		// #3.2. Higher order parameter type is closer to the argument type than
+		// the other methods
 		final Set<OverloadBestMatchCandidate> scoreSortedOverloads = new TreeSet<OverloadBestMatchCandidate>();
 		final Set<OverloadBestMatchCandidate> filteredOverloads = new HashSet<OverloadBestMatchCandidate>();
-		for(Map.Entry<IJstMethod, List<JstArg>> scoreEntry : validOverloads2ParamsMap.entrySet()){
+		for (Map.Entry<IJstMethod, List<JstArg>> scoreEntry : validOverloads2ParamsMap
+				.entrySet()) {
 			final IJstMethod key = scoreEntry.getKey();
 			final List<JstArg> value = scoreEntry.getValue();
-			if(key.getArgs().size() < value.size()){//number dosn't match
-				filteredOverloads.add(new OverloadBestMatchCandidate(key, value, arguments));
-			}
-			else{
-				scoreSortedOverloads.add(new OverloadBestMatchCandidate(key, value, arguments));
+			if (key.getArgs().size() < value.size()) {// number dosn't match
+				filteredOverloads.add(new OverloadBestMatchCandidate(key,
+						value, arguments));
+			} else {
+				scoreSortedOverloads.add(new OverloadBestMatchCandidate(key,
+						value, arguments));
 			}
 		}
-		
-		//when no method has matched the number of arguments
-		//we check the type matching instead
-		if(scoreSortedOverloads.size() == 0){
+
+		// when no method has matched the number of arguments
+		// we check the type matching instead
+		if (scoreSortedOverloads.size() == 0) {
 			scoreSortedOverloads.addAll(filteredOverloads);
 		}
-		
+
 		return scoreSortedOverloads.iterator().next().getMethod();
 	}
-	
-	private static List<JstArg> paddingParams(final List<JstArg> params, final int argumentsLength) {
+
+	private static List<JstArg> paddingParams(final List<JstArg> params,
+			final int argumentsLength) {
 		final int paramsLength = params.size();
-		if(paramsLength >= argumentsLength){
+		if (paramsLength >= argumentsLength) {
 			return params;
 		}
-		
-		final JstArg lastParam = paramsLength > 0 ? params.get(paramsLength - 1): null;
-		//it's an arraylist as we know the exact length (arguments length)
-		//and there will be subsequent indexing based accessing to the list
-		final List<JstArg> paddingParams = new ArrayList<JstArg>(argumentsLength);
+
+		final JstArg lastParam = paramsLength > 0 ? params
+				.get(paramsLength - 1) : null;
+		// it's an arraylist as we know the exact length (arguments length)
+		// and there will be subsequent indexing based accessing to the list
+		final List<JstArg> paddingParams = new ArrayList<JstArg>(
+				argumentsLength);
 		paddingParams.addAll(params);
-		
-		final JstArg paddingParam = lastParam != null && lastParam.isVariable() ? new JstArg(lastParam.getType(), "proxy", true) : new JstArg(JstCache.getInstance().getType("Object"), "proxy", false);
-		for(int i = paramsLength; i < argumentsLength; i++){
+
+		final JstArg paddingParam = lastParam != null && lastParam.isVariable() ? new JstArg(
+				lastParam.getType(), "proxy", true) : new JstArg(JstCache
+				.getInstance().getType("Object"), "proxy", false);
+		for (int i = paramsLength; i < argumentsLength; i++) {
 			paddingParams.add(paddingParam);
 		}
 		return paddingParams;
 	}
 
-	public static List<VarTable> getVarTablesBottomUp(final IJstNode scopedVars){
+	public static List<VarTable> getVarTablesBottomUp(final IJstNode scopedVars) {
 		final List<VarTable> varTables = new LinkedList<VarTable>();
-		if(scopedVars instanceof IJstMethod){
-			final JstBlock block = ((IJstMethod)scopedVars).getBlock();
+		if (scopedVars instanceof IJstMethod) {
+			final JstBlock block = ((IJstMethod) scopedVars).getBlock();
+			addVarTableRecursively(varTables, block.getVarTable());
+		} else if (scopedVars instanceof FuncExpr) {
+			final JstBlock block = ((FuncExpr) scopedVars).getFunc().getBlock();
 			addVarTableRecursively(varTables, block.getVarTable());
 		}
-		else if(scopedVars instanceof FuncExpr){
-			final JstBlock block = ((FuncExpr)scopedVars).getFunc().getBlock();
-			addVarTableRecursively(varTables, block.getVarTable());
-		}
-		
-		for(IJstNode parent = scopedVars; parent != null; parent = parent.getParentNode()){
-			if(parent instanceof JstBlock){
+
+		for (IJstNode parent = scopedVars; parent != null; parent = parent
+				.getParentNode()) {
+			if (parent instanceof JstBlock) {
 				final IJstNode grandParent = parent.getParentNode();
-				if(grandParent instanceof IJstMethod
+				if (grandParent instanceof IJstMethod
 						|| grandParent instanceof FuncExpr
-						|| grandParent instanceof JstType){
-					addVarTableRecursively(varTables, ((JstBlock)parent).getVarTable());
+						|| grandParent instanceof JstType) {
+					addVarTableRecursively(varTables,
+							((JstBlock) parent).getVarTable());
 				}
 			}
 		}
 		return varTables;
 	}
-	
-	private static void addVarTableRecursively(final List<VarTable> varTables, final VarTable varTable){
+
+	private static void addVarTableRecursively(final List<VarTable> varTables,
+			final VarTable varTable) {
 		varTables.add(varTable);
-		if(varTable instanceof TopLevelVarTable){
-			final TopLevelVarTable topLevelVarTable = (TopLevelVarTable)varTable;
-			for(VarTable linkedVarTable : topLevelVarTable.getLinkedVarTables()){
+		if (varTable instanceof TopLevelVarTable) {
+			final TopLevelVarTable topLevelVarTable = (TopLevelVarTable) varTable;
+			for (VarTable linkedVarTable : topLevelVarTable
+					.getLinkedVarTables()) {
 				addVarTableRecursively(varTables, linkedVarTable);
 			}
 		}
 	}
-	
-	public static VarTable getVarTable(final IJstNode scopedVars){
-		for(IJstNode parent = scopedVars; parent != null; parent = parent.getParentNode()){
+
+	public static VarTable getVarTable(final IJstNode scopedVars) {
+		for (IJstNode parent = scopedVars; parent != null; parent = parent
+				.getParentNode()) {
 			final IJstNode grandParent = parent.getParentNode();
-			if(parent instanceof JstBlock
+			if (parent instanceof JstBlock
 					&& (grandParent instanceof JstMethod
-						|| grandParent instanceof FuncExpr
-						|| grandParent instanceof JstType)){
-				return ((JstBlock)parent).getVarTable(); 
-			}
-			else if(parent instanceof WithStmt
-					&& grandParent instanceof BlockStmt){
-				return ((BlockStmt)grandParent).getBody().getVarTable();
-			}
-			else if(parent instanceof JstArg
-					&& grandParent instanceof JstMethod){
-				final JstBlock block = ((JstMethod)grandParent).getBlock();
-				if(block != null){
+							|| grandParent instanceof FuncExpr || grandParent instanceof JstType)) {
+				return ((JstBlock) parent).getVarTable();
+			} else if (parent instanceof WithStmt
+					&& grandParent instanceof BlockStmt) {
+				return ((BlockStmt) grandParent).getBody().getVarTable();
+			} else if (parent instanceof JstArg
+					&& grandParent instanceof JstMethod) {
+				final JstBlock block = ((JstMethod) grandParent).getBlock();
+				if (block != null) {
 					return block.getVarTable();
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public static IJstType findType(JsVariantType jsTypingMeta) {
 		List<IJstType> types = new ArrayList<IJstType>(3);
-		for (JsTypingMeta t : ((JsVariantType)jsTypingMeta).getTypes()) {
+		for (JsTypingMeta t : ((JsVariantType) jsTypingMeta).getTypes()) {
 			if (t instanceof JsType) {
-				types.add(findType((JsType)t));
-			}			
+				types.add(findType((JsType) t));
+			}
 		}
 		return new JstVariantType(types);
 	}
-	
+
 	public static IJstType findType(JsType typing) {
 		IJstType jstType = JstCache.getInstance().getType(typing.getType());
-		if(typing.isTypeRef()){
+		if (typing.isTypeRef()) {
 			jstType = JstTypeHelper.getJstTypeRefType(jstType);
 		}
 		return jstType;
@@ -1613,52 +1752,53 @@ public class JstExpressionTypeLinkerHelper {
 
 	/**
 	 * helper for {@link #postVisitMtdInvocationExpr(MtdInvocationExpr)}
+	 * 
 	 * @param mie
 	 * @param methodId
 	 * @param mtdBindingType
 	 * @return
 	 */
-	public static boolean checkConstructorCalls(final JstExpressionBindingResolver resolver, 
-			final IJstVisitor revisitor,MtdInvocationExpr mie,
+	public static boolean checkConstructorCalls(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, MtdInvocationExpr mie,
 			JstIdentifier methodId, IJstType mtdBindingType) {
-		if(mtdBindingType instanceof JstTypeRefType && !mtdBindingType.isFType()){											// invocation
+		if (mtdBindingType instanceof JstTypeRefType
+				&& !mtdBindingType.isFType()) { // invocation
 			final JstTypeRefType type = (JstTypeRefType) mtdBindingType;
-			//bugfix by huzhou to set the constructor binding only when the constructor is available
-			final IJstType boundType = bindConstructor(resolver,revisitor,type, methodId, mie.getArgs());
+			// bugfix by huzhou to set the constructor binding only when the
+			// constructor is available
+			final IJstType boundType = bindConstructor(resolver, revisitor,
+					type, methodId, mie.getArgs());
 			// methodId.setType(null); leave type as is
 			mie.setResultType(boundType);
 			return true;
-		}
-		else if("this".equals(methodId.getName())){
+		} else if ("this".equals(methodId.getName())) {
 			final JstTypeRefType type = new JstTypeRefType(mtdBindingType);
-			bindConstructor(resolver,revisitor,type, methodId, mie.getArgs());
+			bindConstructor(resolver, revisitor, type, methodId, mie.getArgs());
 			// methodId.setType(null); leave type as is
 			mie.setResultType(type.getType());
 			return true;
-		}
-		else if(VjoKeywords.BASE.equals(methodId.getName()) && mie.getMethodIdentifier() instanceof FieldAccessExpr){
+		} else if (VjoKeywords.BASE.equals(methodId.getName())
+				&& mie.getMethodIdentifier() instanceof FieldAccessExpr) {
 			final JstTypeRefType type = new JstTypeRefType(mtdBindingType);
-			bindConstructor(resolver,revisitor,type, methodId, mie.getArgs());
+			bindConstructor(resolver, revisitor, type, methodId, mie.getArgs());
 			// methodId.setType(null); leave type as is
-			((FieldAccessExpr)mie.getMethodIdentifier()).setType(type);
+			((FieldAccessExpr) mie.getMethodIdentifier()).setType(type);
 			mie.setResultType(type.getType());
 			return true;
-		}
-		else if(mie.getParentNode() instanceof ObjCreationExpr){
+		} else if (mie.getParentNode() instanceof ObjCreationExpr) {
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
 	}
 
+	/**********************************************************************
+	 * HELPERS FOR: bind identifier, fieldaccess, mtdinvocation expressions
+	 * ********************************************************************
+	 */
 
-/**********************************************************************
- * HELPERS FOR: bind identifier, fieldaccess, mtdinvocation expressions
- * ********************************************************************
- */
-	
-	/** 
+	/**
 	 * @param resolver
 	 * @param scope
 	 * @param identifier
@@ -1667,11 +1807,11 @@ public class JstExpressionTypeLinkerHelper {
 	 * @param symbolType
 	 * @param override
 	 */
-	public static void bindIdentifier(final JstExpressionBindingResolver resolver,
-			final ScopeFrame scope,
-			final JstIdentifier identifier, final String name, IJstNode bound,
-			final IJstType symbolType, final boolean override,
-			final GroupInfo groupInfo) {
+	public static void bindIdentifier(
+			final JstExpressionBindingResolver resolver,
+			final ScopeFrame scope, final JstIdentifier identifier,
+			final String name, IJstNode bound, final IJstType symbolType,
+			final boolean override, final GroupInfo groupInfo) {
 		if (override || identifier.getJstBinding() == null) {
 			identifier.setJstBinding(bound);
 			setExprType(resolver, identifier, symbolType, groupInfo);
@@ -1682,6 +1822,7 @@ public class JstExpressionTypeLinkerHelper {
 
 	/**
 	 * helper for identifier binding
+	 * 
 	 * @param scope
 	 * @param symbolName
 	 * @param globalNativeType
@@ -1695,48 +1836,53 @@ public class JstExpressionTypeLinkerHelper {
 			scope.addSymbolBinding(symbolName, globalNativeType);
 		}
 	}
-	
-	public static final IJstType bindConstructor(final JstExpressionBindingResolver resolver, 
-			final IJstVisitor revisitor,final JstTypeRefType type, 
-			final JstIdentifier methodId,
-			final List<IExpr> arguments){
-		final IJstMethod constructor =  type.getConstructor();
-		if(constructor==null){
+
+	public static final IJstType bindConstructor(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, final JstTypeRefType type,
+			final JstIdentifier methodId, final List<IExpr> arguments) {
+		final IJstMethod constructor = type.getConstructor();
+		if (constructor == null) {
 			return null;
 		}
 		methodId.setJstBinding(constructor);
 		final List<JstParamType> paramTypes = type.getParamTypes();
-		final List<IJstMethod> matchingMtds = getMatchingMtdFromOverloads(constructor, arguments);
-		if(matchingMtds.size() == 1){
-			final IJstMethod matchingMtd = matchingMtds.iterator().next(); 
+		final List<IJstMethod> matchingMtds = getMatchingMtdFromOverloads(
+				constructor, arguments);
+		if (matchingMtds.size() == 1) {
+			final IJstMethod matchingMtd = matchingMtds.iterator().next();
 			final List<JstArg> parameters = matchingMtd.getArgs();
-			for(int i = 0, len = arguments.size(); i < len; i++){
+			for (int i = 0, len = arguments.size(); i < len; i++) {
 				final IExpr argExpr = arguments.get(i);
-				if(parameters.size() > i){
-					if(doesExprRequireResolve(argExpr)){
-						doExprTypeResolve(resolver, revisitor, argExpr, parameters.get(i).getType());
+				if (parameters.size() > i) {
+					if (doesExprRequireResolve(argExpr)) {
+						doExprTypeResolve(resolver, revisitor, argExpr,
+								parameters.get(i).getType());
 					}
 				}
 				methodId.setJstBinding(matchingMtd);
 			}
-			
-			if(paramTypes.size() > 0){
-				final JstTypeWithArgs withArgs = new JstTypeWithArgs(type.getReferencedNode());
-				final IJstMethod matchingConstructor = look4MatchingConstructor(constructor, paramTypes, arguments);
-				final List<JstArg> matchingParameters = matchingConstructor.getArgs();
-				for(int i = 0, len = matchingParameters.size(); i < len; i++){
+
+			if (paramTypes.size() > 0) {
+				final JstTypeWithArgs withArgs = new JstTypeWithArgs(
+						type.getReferencedNode());
+				final IJstMethod matchingConstructor = look4MatchingConstructor(
+						constructor, paramTypes, arguments);
+				final List<JstArg> matchingParameters = matchingConstructor
+						.getArgs();
+				for (int i = 0, len = matchingParameters.size(); i < len; i++) {
 					final JstArg param = matchingParameters.get(i);
-					if(paramTypes.contains(param.getType())){
-						if(arguments.size() > i){
+					if (paramTypes.contains(param.getType())) {
+						if (arguments.size() > i) {
 							final IExpr arg = arguments.get(i);
-								
+
 							if (doesExprRequireResolve(arg)) {
 								doExprTypeResolve(resolver, revisitor, arg,
 										matchingParameters.get(i).getType());
 							}
-	
+
 							withArgs.addArgType(arg.getResultType());
-							
+
 						}
 					}
 				}
@@ -1746,24 +1892,23 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		return null;
 	}
-	
-	//TODO support overloading
+
+	// TODO support overloading
 	private static IJstMethod look4MatchingConstructor(IJstMethod constructor,
 			List<JstParamType> paramTypes, List<IExpr> arguments) {
 		return constructor;
 	}
 
-	public static void bindFieldAccessExpr(final JstExpressionBindingResolver resolver,
-			final IJstProperty pty,
-			final IJstType qualifierType, 
-			final FieldAccessExpr fae,
-			final GroupInfo groupInfo) {
+	public static void bindFieldAccessExpr(
+			final JstExpressionBindingResolver resolver,
+			final IJstProperty pty, final IJstType qualifierType,
+			final FieldAccessExpr fae, final GroupInfo groupInfo) {
 		IJstType type = pty.getType();
 
 		if (pty.getType() instanceof JstParamType) {
 			type = JstTypeHelper.resolveTypeWithArgs(pty, qualifierType);
 		}
-		
+
 		JstIdentifier fieldId = fae.getName();
 		if (fieldId != null) {
 			fieldId.setJstBinding(pty);
@@ -1772,12 +1917,11 @@ public class JstExpressionTypeLinkerHelper {
 		setExprType(resolver, fae, type, groupInfo);
 		return;
 	}
-	
-	public static boolean bindThisMtdInvocationInConstructs(final JstExpressionBindingResolver resolver,
-			final IJstVisitor revisitor,
-			final MtdInvocationExpr mie, 
-			final IJstType currentType,
-			final GroupInfo groupInfo) {
+
+	public static boolean bindThisMtdInvocationInConstructs(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, final MtdInvocationExpr mie,
+			final IJstType currentType, final GroupInfo groupInfo) {
 
 		IJstNode parent = mie.getParentNode();
 		while (parent != null && !(parent instanceof IJstType)
@@ -1802,7 +1946,8 @@ public class JstExpressionTypeLinkerHelper {
 						resultType = ((JstInferredType) resultType).getType();
 					}
 					if (resultType == currentType) {
-						IJstProperty basepty = resultType.getProperty(VjoKeywords.BASE);
+						IJstProperty basepty = resultType
+								.getProperty(VjoKeywords.BASE);
 						if (basepty != null) {
 							type = basepty.getType();
 						}
@@ -1819,7 +1964,8 @@ public class JstExpressionTypeLinkerHelper {
 			}
 
 			if (type != null) {
-				bindMtdInvocations(resolver, revisitor, mie, type.getConstructor());
+				bindMtdInvocations(resolver, revisitor, mie,
+						type.getConstructor());
 				setExprType(resolver, mie, type, groupInfo);
 				return true;
 			}
@@ -1829,75 +1975,77 @@ public class JstExpressionTypeLinkerHelper {
 
 	}
 
-	public static void bindMtdInvocationExpr(final JstExpressionBindingResolver resolver,
-			final IJstVisitor revisitor,
-			final IJstNode mtd,
-			final IJstType qualifierType, 
-			final MtdInvocationExpr mie,
+	public static void bindMtdInvocationExpr(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, final IJstNode mtd,
+			final IJstType qualifierType, final MtdInvocationExpr mie,
 			final GroupInfo groupInfo) {
 		IJstType type = null;
 
 		if (mtd instanceof JstConstructor) {
 			type = mtd.getOwnerType();
-		} 
-		else if (mtd instanceof IJstMethod) {
+		} else if (mtd instanceof IJstMethod) {
 			type = look4ReturnType(resolver, mtd, qualifierType, mie);
 		}
 
 		bindMtdInvocations(resolver, revisitor, mie, mtd);
 		setExprType(resolver, mie, type, groupInfo);
 	}
-	
+
 	/**
-	 * helper for {@link #bindMtdInvocationExpr(JstExpressionBindingResolver, IJstNode, IJstType, MtdInvocationExpr)}
+	 * helper for
+	 * {@link #bindMtdInvocationExpr(JstExpressionBindingResolver, IJstNode, IJstType, MtdInvocationExpr)}
+	 * 
 	 * @param resolver
 	 * @param mtd
 	 * @param qualifierType
 	 * @param mie
 	 * @return
 	 */
-	private static IJstType look4ReturnType(final JstExpressionBindingResolver resolver,
-			final IJstNode mtd, 
-			final IJstType qualifierType,
-			MtdInvocationExpr mie) {
+	private static IJstType look4ReturnType(
+			final JstExpressionBindingResolver resolver, final IJstNode mtd,
+			final IJstType qualifierType, MtdInvocationExpr mie) {
 		IJstType type;
 		type = getBestRtnTypeFromAllOverloadMtds(mie, (IJstMethod) mtd);
 		type = bindParamTypes(resolver, mtd, mie, qualifierType, type);
 		return type;
 	}
 
-	public static void bindMtdInvocations(final JstExpressionBindingResolver resolver, 
-			final IJstVisitor revisitor,
-			final MtdInvocationExpr mtdExpr, 
+	public static void bindMtdInvocations(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, final MtdInvocationExpr mtdExpr,
 			final IJstNode mtd) {
-		
+
 		IJstNode updateBinding = mtd;
-		//handle argument types
-		if(mtd instanceof IJstMethod){
-			final IJstMethod bindMtd = (IJstMethod)mtd;
-			//TODO enhancement needed to bind based on invocation
-			//when number of arguments and parameters could match unique overloading api, overloading shouldn't be a problem either
-			final List<IJstMethod> matchingMtds = getMatchingMtdFromOverloads(bindMtd, mtdExpr.getArgs());
-			if(matchingMtds.size() == 1){
-				final IJstMethod matchingMtd = matchingMtds.iterator().next(); 
+		// handle argument types
+		if (mtd instanceof IJstMethod) {
+			final IJstMethod bindMtd = (IJstMethod) mtd;
+			// TODO enhancement needed to bind based on invocation
+			// when number of arguments and parameters could match unique
+			// overloading api, overloading shouldn't be a problem either
+			final List<IJstMethod> matchingMtds = getMatchingMtdFromOverloads(
+					bindMtd, mtdExpr.getArgs());
+			if (matchingMtds.size() == 1) {
+				final IJstMethod matchingMtd = matchingMtds.iterator().next();
 				final List<IExpr> arguments = mtdExpr.getArgs();
 				final List<JstArg> parameters = matchingMtd.getArgs();
-				for(int i = 0, len = arguments.size(); i < len; i++){
+				for (int i = 0, len = arguments.size(); i < len; i++) {
 					final IExpr argExpr = arguments.get(i);
-					if(parameters.size() > i){
-						if(doesExprRequireResolve(argExpr)){
-							doExprTypeResolve(resolver, revisitor, argExpr, parameters.get(i).getType());
+					if (parameters.size() > i) {
+						if (doesExprRequireResolve(argExpr)) {
+							doExprTypeResolve(resolver, revisitor, argExpr,
+									parameters.get(i).getType());
 						}
 					}
 				}
 				updateBinding = matchingMtd;
 			}
 		}
-		
+
 		if (mtdExpr.getMethodIdentifier() instanceof JstIdentifier) {
-			((JstIdentifier) mtdExpr.getMethodIdentifier()).setJstBinding(updateBinding);
-		} 
-		else if (mtdExpr.getMethodIdentifier() instanceof FieldAccessExpr) {
+			((JstIdentifier) mtdExpr.getMethodIdentifier())
+					.setJstBinding(updateBinding);
+		} else if (mtdExpr.getMethodIdentifier() instanceof FieldAccessExpr) {
 			FieldAccessExpr expr = (FieldAccessExpr) mtdExpr
 					.getMethodIdentifier();
 			expr.getName().setJstBinding(updateBinding);
@@ -1907,239 +2055,264 @@ public class JstExpressionTypeLinkerHelper {
 	private static List<IJstMethod> getMatchingMtdFromOverloads(
 			IJstMethod bindMtd, List<IExpr> arguments) {
 
-		if(!bindMtd.isDispatcher()){
+		if (!bindMtd.isDispatcher()) {
 			return Arrays.asList(bindMtd);
 		}
-		
+
 		final List<IJstMethod> overloads = bindMtd.getOverloaded();
 		final int argumentsLength = arguments.size();
-		final Map<IJstMethod, List<JstArg>> overloads2ParamsMap = new HashMap<IJstMethod, List<JstArg>>(overloads.size());
+		final Map<IJstMethod, List<JstArg>> overloads2ParamsMap = new HashMap<IJstMethod, List<JstArg>>(
+				overloads.size());
 
-		//init the overloads, filling in only whose parameter size matched arguments' length
-		//or the next param is a variable lengthed one
-		initOverloadsWithCorrectParamSize(overloads, argumentsLength, overloads2ParamsMap);
-		
-		//filter out overloads whose parameter types are not assignable from the arguments
-		//but this version tolerates more errors as:
-		//argument is Object typed
-		//argument is Function (JstFuncType) but not matching paremeter's function api
-		//therefore less accurate, but leaving more chances finding the correct inferencing
-		filterOverloadsWithMismatchingParamTypesToleratingErrors(arguments, argumentsLength, overloads2ParamsMap);
-		if(overloads2ParamsMap.size() > 0){
-			final IJstMethod bestMatch = getBestOverloadFromAllValid(overloads2ParamsMap, arguments);
-			if(bestMatch != null){
+		// init the overloads, filling in only whose parameter size matched
+		// arguments' length
+		// or the next param is a variable lengthed one
+		initOverloadsWithCorrectParamSize(overloads, argumentsLength,
+				overloads2ParamsMap);
+
+		// filter out overloads whose parameter types are not assignable from
+		// the arguments
+		// but this version tolerates more errors as:
+		// argument is Object typed
+		// argument is Function (JstFuncType) but not matching paremeter's
+		// function api
+		// therefore less accurate, but leaving more chances finding the correct
+		// inferencing
+		filterOverloadsWithMismatchingParamTypesToleratingErrors(arguments,
+				argumentsLength, overloads2ParamsMap);
+		if (overloads2ParamsMap.size() > 0) {
+			final IJstMethod bestMatch = getBestOverloadFromAllValid(
+					overloads2ParamsMap, arguments);
+			if (bestMatch != null) {
 				return Arrays.asList(bestMatch);
 			}
 			return new ArrayList<IJstMethod>(overloads2ParamsMap.keySet());
 		}
-		//failed to find the best, matching the number of arguments only
-		else{
-			initOverloadsWithCorrectParamSize(overloads, argumentsLength, overloads2ParamsMap);
-			if(overloads2ParamsMap.size() > 0){
+		// failed to find the best, matching the number of arguments only
+		else {
+			initOverloadsWithCorrectParamSize(overloads, argumentsLength,
+					overloads2ParamsMap);
+			if (overloads2ParamsMap.size() > 0) {
 				return new ArrayList<IJstMethod>(overloads2ParamsMap.keySet());
 			}
-			//failed to find the best, using all
-			else{
+			// failed to find the best, using all
+			else {
 				return Collections.unmodifiableList(overloads);
 			}
 		}
 	}
-	
+
 	/**
-	 * helper for {@link #getMatchingMtdFromOverloads(MtdInvocationExpr, IJstMethod)}
-	 * its responsibilities are to eliminate the map's entries who has a param and argument.getResultType() isn't assignable to param.getType()
+	 * helper for
+	 * {@link #getMatchingMtdFromOverloads(MtdInvocationExpr, IJstMethod)} its
+	 * responsibilities are to eliminate the map's entries who has a param and
+	 * argument.getResultType() isn't assignable to param.getType()
+	 * 
 	 * @param arguments
 	 * @param argumentsLength
 	 * @param overloads2ParamsMap
 	 */
-	private static void filterOverloadsWithMismatchingParamTypesToleratingErrors(final List<IExpr> arguments,
-			final int argumentsLength,
+	private static void filterOverloadsWithMismatchingParamTypesToleratingErrors(
+			final List<IExpr> arguments, final int argumentsLength,
 			final Map<IJstMethod, List<JstArg>> overloads2ParamsMap) {
 		for (int i = 0; i < argumentsLength; i++) {
 			final IJstType argumentType = arguments.get(i).getResultType();
 			final List<IJstMethod> badOverloads = new LinkedList<IJstMethod>();
-			for (Map.Entry<IJstMethod, List<JstArg>> overloadEntry : overloads2ParamsMap.entrySet()) {
+			for (Map.Entry<IJstMethod, List<JstArg>> overloadEntry : overloads2ParamsMap
+					.entrySet()) {
 				final List<JstArg> overloadParams = overloadEntry.getValue();
-				final IJstType overloadParamType = overloadParams.get(i).getType();
-				//loosen type check when either argument or parameter type is null
-				if(argumentType == null
-						|| overloadParamType == null
-						|| "Object".equals(argumentType.getName())){
+				final IJstType overloadParamType = overloadParams.get(i)
+						.getType();
+				// loosen type check when either argument or parameter type is
+				// null
+				if (argumentType == null || overloadParamType == null
+						|| "Object".equals(argumentType.getName())) {
 					continue;
 				}
-				//loosen type check when both argumentType and parameterType are functions
-				else if((argumentType instanceof JstFuncType
-							|| argumentType instanceof JstFunctionRefType
-							|| "Function".equals(argumentType.getName())
-							|| argumentType.isFType())
-							&&(overloadParamType instanceof JstFuncType
-								|| overloadParamType instanceof JstFunctionRefType
-								|| "Function".equals(overloadParamType.getName()))
-								|| overloadParamType.isFType()){
+				// loosen type check when both argumentType and parameterType
+				// are functions
+				else if ((argumentType instanceof JstFuncType
+						|| argumentType instanceof JstFunctionRefType
+						|| "Function".equals(argumentType.getName()) || argumentType
+							.isFType())
+						&& (overloadParamType instanceof JstFuncType
+								|| overloadParamType instanceof JstFunctionRefType || "Function"
+									.equals(overloadParamType.getName()))
+						|| overloadParamType.isFType()) {
 					continue;
 				}
-				//when argumentType is Object, ignore
-				//when argumentType is JstFuncType, check if argument is FuncExpr
-				//if FuncExpr is without Meta, any Function, JstFuncType, JstFunctionRefType as parameterType will be ok
-				else if(TypeCheckUtil.isAssignable(overloadParamType, argumentType)) {
+				// when argumentType is Object, ignore
+				// when argumentType is JstFuncType, check if argument is
+				// FuncExpr
+				// if FuncExpr is without Meta, any Function, JstFuncType,
+				// JstFunctionRefType as parameterType will be ok
+				else if (TypeCheckUtil.isAssignable(overloadParamType,
+						argumentType)) {
 					continue;
 				}
-				
-				//finally excluding the particular overload
+
+				// finally excluding the particular overload
 				badOverloads.add(overloadEntry.getKey());
 			}
-			//filtered bad overloads before checking next argument
-			for(IJstMethod invalidKey : badOverloads){
+			// filtered bad overloads before checking next argument
+			for (IJstMethod invalidKey : badOverloads) {
 				overloads2ParamsMap.remove(invalidKey);
 			}
 		}
 	}
 
-
-	public static void doExprTypeUpdate(final JstExpressionBindingResolver resolver,
-			final IJstVisitor revisitor,
-			final IExpr expr, 
-			final IJstType type,
+	public static void doExprTypeUpdate(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, final IExpr expr, final IJstType type,
 			final GroupInfo groupInfo) {
 		/**
-		 * refactored by huzhou@ebay.com to
-		 * 1. update the expression's result type
-		 * 2. check if the result type is one of {JstDeferredType, SynthOlType} and update their resolved type accordingly
+		 * refactored by huzhou@ebay.com to 1. update the expression's result
+		 * type 2. check if the result type is one of {JstDeferredType,
+		 * SynthOlType} and update their resolved type accordingly
 		 * 
 		 */
-		if(doesExprRequireResolve(expr)){
+		if (doesExprRequireResolve(expr)) {
 			doExprTypeResolve(resolver, revisitor, expr, type);
-		}
-		else{
+		} else {
 			setExprType(resolver, expr, type, groupInfo);
 		}
 	}
-	
-	public static void doJsCommentMetaUpdate(final IJstType resolvedMetaType, final IJstNode srcNode){
+
+	public static void doJsCommentMetaUpdate(final IJstType resolvedMetaType,
+			final IJstNode srcNode) {
 		final JsCommentMetaNode metaNode = getJsCommentMetaNode(srcNode);
-		if(metaNode != null){
+		if (metaNode != null) {
 			metaNode.setResultType(resolvedMetaType);
 		}
 	}
-	
-	public static void doExprTypeResolve(final JstExpressionBindingResolver resolver,
-			final IJstVisitor revisitor,
-			final IExpr expr, 
-			final IJstType type) {
-		if(expr instanceof ConditionalExpr){
-			final ConditionalExpr condExpr = (ConditionalExpr)expr;
+
+	public static void doExprTypeResolve(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, final IExpr expr, final IJstType type) {
+		if (expr instanceof ConditionalExpr) {
+			final ConditionalExpr condExpr = (ConditionalExpr) expr;
 			doExprTypeResolve(resolver, revisitor, condExpr.getThenExpr(), type);
 			doExprTypeResolve(resolver, revisitor, condExpr.getElseExpr(), type);
 		}
-		
+
 		final IJstType exprType = expr.getResultType();
-		if(exprType != null){
-			if(exprType instanceof JstDeferredType){
-				((JstDeferredType)exprType).setResolvedType(type);
-			}
-			else if(expr instanceof ObjLiteral
-					&& exprType instanceof SynthOlType){
-				doObjLiteralAndOTypeBindings((ObjLiteral)expr, (SynthOlType)exprType, type, revisitor);
-			}
-			else if(expr instanceof FuncExpr && exprType instanceof JstFuncType){
-					if(type instanceof JstFuncType){
-						tryDerivingAnonymousFunctionsFromAssignment((FuncExpr)expr, ((JstFuncType)type).getFunction(), true, revisitor);
-					}
-					else if(type instanceof JstFunctionRefType){
-						tryDerivingAnonymousFunctionsFromAssignment((FuncExpr)expr, ((JstFunctionRefType)type).getMethodRef(), true, revisitor);
-					}
-			}
-			else if(expr instanceof JstIdentifier && (type.isFType() && !(type instanceof IJstRefType))){
-				((JstIdentifier)expr).setType(JstTypeHelper.getJstTypeRefType(type));
-			}
-			else if((expr instanceof ObjCreationExpr || expr instanceof MtdInvocationExpr)
+		if (exprType != null) {
+			if (exprType instanceof JstDeferredType) {
+				((JstDeferredType) exprType).setResolvedType(type);
+			} else if (expr instanceof ObjLiteral
+					&& exprType instanceof SynthOlType) {
+				doObjLiteralAndOTypeBindings((ObjLiteral) expr,
+						(SynthOlType) exprType, type, revisitor);
+			} else if (expr instanceof FuncExpr
+					&& exprType instanceof JstFuncType) {
+				if (type instanceof JstFuncType) {
+					tryDerivingAnonymousFunctionsFromAssignment(
+							(FuncExpr) expr,
+							((JstFuncType) type).getFunction(), true, revisitor);
+				} else if (type instanceof JstFunctionRefType) {
+					tryDerivingAnonymousFunctionsFromAssignment(
+							(FuncExpr) expr,
+							((JstFunctionRefType) type).getMethodRef(), true,
+							revisitor);
+				}
+			} else if (expr instanceof JstIdentifier
+					&& (type.isFType() && !(type instanceof IJstRefType))) {
+				((JstIdentifier) expr).setType(JstTypeHelper
+						.getJstTypeRefType(type));
+			} else if ((expr instanceof ObjCreationExpr || expr instanceof MtdInvocationExpr)
 					&& exprType instanceof JstTypeWithArgs
-					&& type instanceof JstTypeWithArgs){
-				//matching the exprType's argtypes with type's
-				final List<IJstType> inferArgTypes = ((JstTypeWithArgs)exprType).getArgTypes();
-				final List<IJstType> targetArgTypes = ((JstTypeWithArgs)type).getArgTypes();
-				for(int i = 0, len = targetArgTypes.size(); i < len; i++){
+					&& type instanceof JstTypeWithArgs) {
+				// matching the exprType's argtypes with type's
+				final List<IJstType> inferArgTypes = ((JstTypeWithArgs) exprType)
+						.getArgTypes();
+				final List<IJstType> targetArgTypes = ((JstTypeWithArgs) type)
+						.getArgTypes();
+				for (int i = 0, len = targetArgTypes.size(); i < len; i++) {
 					final IJstType targetArgType = targetArgTypes.get(i);
-					if(i >= inferArgTypes.size()){
-						((JstTypeWithArgs)exprType).addArgType(targetArgType);
-					}
-					else{
+					if (i >= inferArgTypes.size()) {
+						((JstTypeWithArgs) exprType).addArgType(targetArgType);
+					} else {
 						final IJstType inferArgType = inferArgTypes.get(i);
-						if(isSubType(targetArgType, inferArgType)){
-							//TODO if inferArgType is a sub type of targetArgType, use targetArgType
+						if (isSubType(targetArgType, inferArgType)) {
+							// TODO if inferArgType is a sub type of
+							// targetArgType, use targetArgType
 							try {
-								replaceArgType(((JstTypeWithArgs)exprType), inferArgType, i);
-							} 
-							catch (Exception e) {
-								//do nothing
+								replaceArgType(((JstTypeWithArgs) exprType),
+										inferArgType, i);
+							} catch (Exception e) {
+								// do nothing
 							}
 						}
-						//else remain the arg type as it is
+						// else remain the arg type as it is
 					}
 				}
 			}
-			//resolving JstArrayInitializer
-			else if(expr instanceof JstArrayInitializer 
-					&& exprType instanceof JstArray
-					&& type instanceof JstArray){
-				final JstArray exprArray = (JstArray)exprType;
-				final JstArray trueArray = (JstArray)type;
-				if(exprArray.getComponentType() != trueArray.getComponentType()){
-					((JstArrayInitializer)expr).setType(trueArray);
+			// resolving JstArrayInitializer
+			else if (expr instanceof JstArrayInitializer
+					&& exprType instanceof JstArray && type instanceof JstArray) {
+				final JstArray exprArray = (JstArray) exprType;
+				final JstArray trueArray = (JstArray) type;
+				if (exprArray.getComponentType() != trueArray
+						.getComponentType()) {
+					((JstArrayInitializer) expr).setType(trueArray);
 				}
 			}
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	private static void replaceArgType(JstTypeWithArgs jstTypeWithArgs,
-			IJstType inferArgType, int i) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		final Field argTypesField = JstTypeWithArgs.class.getField("m_argTypes");
+			IJstType inferArgType, int i) throws SecurityException,
+			NoSuchFieldException, IllegalArgumentException,
+			IllegalAccessException {
+		final Field argTypesField = JstTypeWithArgs.class
+				.getField("m_argTypes");
 		argTypesField.setAccessible(true);
-		final List<IJstType> argTypes = (List<IJstType>) argTypesField.get(jstTypeWithArgs);
-		if(i < argTypes.size()){
+		final List<IJstType> argTypes = (List<IJstType>) argTypesField
+				.get(jstTypeWithArgs);
+		if (i < argTypes.size()) {
 			argTypes.remove(i);
 			argTypes.add(i, inferArgType);
 		}
 	}
 
-	//should be instead using isAssignable logic	
+	// should be instead using isAssignable logic
 	private static boolean isSubType(final IJstType candidateSuperType,
-			final IJstType candidateSubType){
-		if(candidateSuperType == candidateSubType){
+			final IJstType candidateSubType) {
+		if (candidateSuperType == candidateSubType) {
 			return true;
 		}
-		//TODO handle proxy type
-		for(IJstType inherit : candidateSubType.getExtends()){
-			if(isSubType(candidateSuperType, inherit)){
+		// TODO handle proxy type
+		for (IJstType inherit : candidateSubType.getExtends()) {
+			if (isSubType(candidateSuperType, inherit)) {
 				return true;
 			}
 		}
-		for(IJstType inherit : candidateSubType.getSatisfies()){
-			if(isSubType(candidateSuperType, inherit)){
+		for (IJstType inherit : candidateSubType.getSatisfies()) {
+			if (isSubType(candidateSuperType, inherit)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private static void doObjLiteralAndOTypeBindings(final ObjLiteral objLiteral,
-			final SynthOlType synthOlType,
-			final IJstType otype,
-			final IJstVisitor revisitor) {
-		if(otype == null || !(otype instanceof JstObjectLiteralType)){
+	private static void doObjLiteralAndOTypeBindings(
+			final ObjLiteral objLiteral, final SynthOlType synthOlType,
+			final IJstType otype, final IJstVisitor revisitor) {
+		if (otype == null || !(otype instanceof JstObjectLiteralType)) {
 			return;
 		}
-		
+
 		synthOlType.setResolvedOType(otype);
-		//now we traverse the object literal to look 4 further bindings like: functions, embedded obj literals etc.
-		for(NV nv: objLiteral.getNVs()){
+		// now we traverse the object literal to look 4 further bindings like:
+		// functions, embedded obj literals etc.
+		for (NV nv : objLiteral.getNVs()) {
 			final JstIdentifier id = nv.getIdentifier();
 			final String name = id.getName();
 			doObjLiteralNameBinding(otype, id, name);
-			
+
 			final IExpr valueExpr = nv.getValue();
-			if(valueExpr != null){ 
+			if (valueExpr != null) {
 				doObjLiteralValueBinding(otype, revisitor, name, valueExpr);
 			}
 		}
@@ -2148,208 +2321,246 @@ public class JstExpressionTypeLinkerHelper {
 	private static void doObjLiteralNameBinding(final IJstType otype,
 			final JstIdentifier id, final String name) {
 		IJstNode oBinding = otype.getProperty(name, false);
-		if(oBinding != null){
+		if (oBinding != null) {
 			id.setJstBinding(oBinding);
-		}
-		else{
+		} else {
 			oBinding = otype.getMethod(name, false);
-			if(oBinding != null){
+			if (oBinding != null) {
 				id.setJstBinding(oBinding);
 			}
 		}
 	}
-	
+
 	private static void doObjLiteralValueBinding(final IJstType otype,
 			final IJstVisitor revisitor, final String name,
 			final IExpr valueExpr) {
-		if(valueExpr instanceof FuncExpr
-			&& isAnonymousFunction(((FuncExpr)valueExpr).getFunc())){
-			final IJstProperty matchingOTypePty = otype.getProperty(name, false, true);
-			final JstMethod func = ((FuncExpr)valueExpr).getFunc();
-			if(matchingOTypePty != null 
-					&& func != null
+		if (valueExpr instanceof FuncExpr
+				&& isAnonymousFunction(((FuncExpr) valueExpr).getFunc())) {
+			final IJstProperty matchingOTypePty = otype.getProperty(name,
+					false, true);
+			final JstMethod func = ((FuncExpr) valueExpr).getFunc();
+			if (matchingOTypePty != null && func != null
 					&& matchingOTypePty.getType() != null
-					&& matchingOTypePty.getType() instanceof JstFuncType){
-				deriveAnonymousFunction(((JstFuncType)matchingOTypePty.getType()).getFunction(), func);
+					&& matchingOTypePty.getType() instanceof JstFuncType) {
+				deriveAnonymousFunction(
+						((JstFuncType) matchingOTypePty.getType())
+								.getFunction(),
+						func);
 				JstExpressionTypeLinkerTraversal.accept(valueExpr, revisitor);
 			}
-		}
-		else if(valueExpr instanceof ObjLiteral
+		} else if (valueExpr instanceof ObjLiteral
 				&& valueExpr.getResultType() != null
-				&& valueExpr.getResultType() instanceof SynthOlType){
-			final IJstProperty matchingProperty = otype.getProperty(name, false, true);
-			if(matchingProperty != null){
+				&& valueExpr.getResultType() instanceof SynthOlType) {
+			final IJstProperty matchingProperty = otype.getProperty(name,
+					false, true);
+			if (matchingProperty != null) {
 				final IJstType propertyType = matchingProperty.getType();
-				doObjLiteralAndOTypeBindings((ObjLiteral)valueExpr, (SynthOlType)valueExpr.getResultType(), propertyType, revisitor);
+				doObjLiteralAndOTypeBindings((ObjLiteral) valueExpr,
+						(SynthOlType) valueExpr.getResultType(), propertyType,
+						revisitor);
 			}
 		}
 	}
 
-	public static boolean isFunctionMetaAvailable(final FuncExpr funcExpr){
-		for(IJstNode child: funcExpr.getChildren()){
-			if(child != null && child instanceof JsCommentMetaNode){
-				final JsCommentMetaNode commentMetaNode = (JsCommentMetaNode)child;
-				if(commentMetaNode.getJsCommentMetas() != null 
-						&& commentMetaNode.getJsCommentMetas().size() > 0){
+	public static boolean isFunctionMetaAvailable(final FuncExpr funcExpr) {
+		for (IJstNode child : funcExpr.getChildren()) {
+			if (child != null && child instanceof JsCommentMetaNode) {
+				final JsCommentMetaNode commentMetaNode = (JsCommentMetaNode) child;
+				if (commentMetaNode.getJsCommentMetas() != null
+						&& commentMetaNode.getJsCommentMetas().size() > 0) {
 					return true;
 				}
 			}
 		}
 		return false;
 	}
-	
-	public static JsCommentMetaNode getJsCommentMetaNode(final IJstNode node){
-		if(node != null){
-			for(IJstNode child: node.getChildren()){
-				if(child != null && child instanceof JsCommentMetaNode){
-					return (JsCommentMetaNode)child;
+
+	public static JsCommentMetaNode getJsCommentMetaNode(final IJstNode node) {
+		if (node != null) {
+			for (IJstNode child : node.getChildren()) {
+				if (child != null && child instanceof JsCommentMetaNode) {
+					return (JsCommentMetaNode) child;
 				}
 			}
 		}
 		return null;
 	}
-	
-	public static List<IJsCommentMeta> getJsCommentMeta(final IJstNode node){
+
+	public static List<IJsCommentMeta> getJsCommentMeta(final IJstNode node) {
 		final JsCommentMetaNode metaNode = getJsCommentMetaNode(node);
 		return metaNode != null ? metaNode.getJsCommentMetas() : null;
 	}
-	
-	public static boolean isAnonymousFunction(final IJstMethod func){
-		if(func == null || func.getName() == null){
+
+	public static boolean isAnonymousFunction(final IJstMethod func) {
+		if (func == null || func.getName() == null) {
 			return false;
 		}
-		
-		return FunctionExpressionTranslator.DUMMY_METHOD_NAME.equals(func.getName().getName());
+
+		return FunctionExpressionTranslator.DUMMY_METHOD_NAME.equals(func
+				.getName().getName());
 	}
-	
+
 	/**
 	 * @see #doExprTypeUpdate(JstExpressionBindingResolver, IExpr, IJstType)
-	 * this method helps to check if the rhs expr could be resolved to some type
-	 * in case of {@see JstDeferredType, @see SynthOlType, etc.}
-	 * the resolved type could be from {MtdInvocationExpr, RtnStmt, Assignment(JstVars)} right now
+	 *      this method helps to check if the rhs expr could be resolved to some
+	 *      type in case of {@see JstDeferredType, @see SynthOlType, etc.} the
+	 *      resolved type could be from {MtdInvocationExpr, RtnStmt,
+	 *      Assignment(JstVars)} right now
 	 * 
 	 * @param rhsExpr
 	 * @return
 	 */
-	public static boolean doesExprRequireResolve(final IExpr rhsExpr){
-		if(rhsExpr != null
-				&& rhsExpr.getResultType() != null){
+	public static boolean doesExprRequireResolve(final IExpr rhsExpr) {
+		if (rhsExpr != null && rhsExpr.getResultType() != null) {
 			final IJstType resultType = rhsExpr.getResultType();
 			return resultType instanceof JstDeferredType
-				|| resultType instanceof SynthOlType
-				|| resultType instanceof JstFuncType
-				|| (resultType.isFType() && !(resultType instanceof IJstRefType)
-				|| resultType instanceof JstTypeWithArgs
-				|| resultType instanceof JstArray);
-		}
-		else{
+					|| resultType instanceof SynthOlType
+					|| resultType instanceof JstFuncType
+					|| (resultType.isFType()
+							&& !(resultType instanceof IJstRefType)
+							|| resultType instanceof JstTypeWithArgs || resultType instanceof JstArray);
+		} else {
 			return false;
 		}
 	}
 
 	public static void tryDerivingAnonymousFunctionsFromAssignment(
-			final FuncExpr funcExpr,
-			final IJstMethod lhsFunc,
-			final boolean checkAnonymous,
-			final IJstVisitor revisitor) {
+			final FuncExpr funcExpr, final IJstMethod lhsFunc,
+			final boolean checkAnonymous, final IJstVisitor revisitor) {
 		final JstMethod func = funcExpr.getFunc();
-		if(func != null 
+		if (func != null
 				&& (!checkAnonymous || (checkAnonymous && isAnonymousFunction(func)))
-				&& func instanceof JstMethod){
-			deriveAnonymousFunction(lhsFunc, (JstMethod)func);
-			//bugfix by huzhou@ebay.com, needs to revisit the func expression
-			//to allow the correct binding inside after the inference
+				&& func instanceof JstMethod) {
+			deriveAnonymousFunction(lhsFunc, (JstMethod) func);
+			// bugfix by huzhou@ebay.com, needs to revisit the func expression
+			// to allow the correct binding inside after the inference
 			JstExpressionTypeLinkerTraversal.accept(func, revisitor);
 		}
 	}
-	
+
 	private static JstFuncType s_fakeFunc;
+
 	private static JstFuncType getFakeFunc() {
 		if (s_fakeFunc == null) {
-			IJstMethod method = new JstMethod(new JstArg(JstCache.getInstance().getType("Object"), "p", true));
+			IJstMethod method = new JstMethod(new JstArg(JstCache.getInstance()
+					.getType("Object"), "p", true));
 			s_fakeFunc = new JstFuncType(method);
 		}
 		return s_fakeFunc;
 	}
-	
+
 	public static void tryDerivingAnonymousFunctionsFromParam(
-			final MtdInvocationExpr mie,
-			final IJstNode mtdBinding,
-			final IJstVisitor revisitor,
-			final GroupInfo groupInfo) {
-		if(mtdBinding != null 
-				&& mie != null
-				&& mtdBinding instanceof IJstMethod){
-			//handle anonymous function argument inference
-			final IJstMethod callingMethod = (IJstMethod)mtdBinding;
+			final MtdInvocationExpr mie, final IJstNode mtdBinding,
+			final IJstVisitor revisitor, final GroupInfo groupInfo) {
+		if (mtdBinding != null && mie != null
+				&& mtdBinding instanceof IJstMethod) {
+			// handle anonymous function argument inference
+			final IJstMethod callingMethod = (IJstMethod) mtdBinding;
 			final List<IExpr> arguments = mie.getArgs();
-			if(callingMethod != null && arguments != null){
-				boolean supportArgTypeExt = callingMethod.isFuncArgMetaExtensionEnabled();
-				final List<JstFuncType> paramTypes = getFilteredParamTypes(callingMethod, arguments.size());
+			if (callingMethod != null && arguments != null) {
+				boolean supportArgTypeExt = callingMethod
+						.isFuncArgMetaExtensionEnabled();
+				final List<JstFuncType> paramTypes = getFilteredParamTypes(
+						callingMethod, arguments.size());
 				int paramLen = paramTypes.size(), argLen = arguments.size();
 				if (supportArgTypeExt && paramLen >= 2 && argLen >= 2) {
-					if (paramTypes.get(1) == null && arguments.get(1) instanceof FuncExpr) {
+					if (paramTypes.get(1) == null
+							&& arguments.get(1) instanceof FuncExpr) {
 						paramTypes.set(1, getFakeFunc());
 					}
 				}
-				for(int paramIdx = 0, argIdx = 0; 
-					paramIdx < paramLen && argIdx < argLen; //parameter list isn't emptied, argument list isn't emptied
-					paramIdx++, argIdx++){
-					
+				for (int paramIdx = 0, argIdx = 0; paramIdx < paramLen
+						&& argIdx < argLen; // parameter list isn't emptied,
+											// argument list isn't emptied
+				paramIdx++, argIdx++) {
+
 					JstFuncType paramType = paramTypes.get(paramIdx);
-					if(paramType != null){
+					if (paramType != null) {
 						final IExpr arg = arguments.get(argIdx);
-						if(arg instanceof FuncExpr){//it actually could be new Function as ObjCreateExpr but it's useless as we won't inspect the string definition
-							final FuncExpr funcArg = (FuncExpr)arg;
+						if (arg instanceof FuncExpr) {// it actually could be
+														// new Function as
+														// ObjCreateExpr but
+														// it's useless as we
+														// won't inspect the
+														// string definition
+							final FuncExpr funcArg = (FuncExpr) arg;
 							final IJstMethod func = funcArg.getFunc();
-							//infer when function has no annotation only
-							//TODO check how to verify function has no annotation
-							if(func != null && isAnonymousFunction(func)
-								&& func instanceof JstMethod) {
-								
+							// infer when function has no annotation only
+							// TODO check how to verify function has no
+							// annotation
+							if (func != null && isAnonymousFunction(func)
+									&& func instanceof JstMethod) {
+
 								if (paramIdx == 1 && supportArgTypeExt) {
 									IExpr keyArg = arguments.get(0);
 									if (keyArg instanceof JstLiteral) {
-										IJstType qualiferType = mie.getQualifyExpr().getResultType();
+										IJstType qualiferType = mie
+												.getQualifyExpr()
+												.getResultType();
 										if (qualiferType != null) {
 											if (qualiferType instanceof IJstRefType) {
-												qualiferType = ((IJstRefType)qualiferType).getReferencedNode();
+												qualiferType = ((IJstRefType) qualiferType)
+														.getReferencedNode();
 											}
-											String targetFunc = qualiferType.getName() +
-												(callingMethod.isStatic()?"::":":") + callingMethod.getName().getName();
-											FunctionMetaRegistry fmr = FunctionMetaRegistry.getInstance();
+											String targetFunc = qualiferType
+													.getName()
+													+ (callingMethod.isStatic() ? "::"
+															: ":")
+													+ callingMethod.getName()
+															.getName();
+											FunctionMetaRegistry fmr = FunctionMetaRegistry
+													.getInstance();
 											if (fmr.isFuncMetaMappingSupported(targetFunc)) {
-												String key = ((JstLiteral)keyArg).toString();
+												String key = ((JstLiteral) keyArg)
+														.toString();
 												key = unquote(key);
-												MetaExtension metaExt = fmr.getExtentedArgBinding(targetFunc,
-													key, groupInfo.getGroupName(), groupInfo.getDependentGroups());
+												MetaExtension metaExt = fmr
+														.getExtentedArgBinding(
+																targetFunc,
+																key,
+																groupInfo
+																		.getGroupName(),
+																groupInfo
+																		.getDependentGroups());
 												if (metaExt != null) {
-													IJstMethod extFunc = metaExt.getMethod();
+													IJstMethod extFunc = metaExt
+															.getMethod();
 													if (extFunc != null) {
-														JstExpressionTypeLinkerTraversal.accept(extFunc, revisitor);
+														JstExpressionTypeLinkerTraversal
+																.accept(extFunc,
+																		revisitor);
 														IJstMethod resolved = unwrapMethod(extFunc);
 														if (resolved != null) {
-															paramType = new JstFuncType(unwrapMethod(extFunc));
+															paramType = new JstFuncType(
+																	unwrapMethod(extFunc));
 														}
 													}
-												}								
+												}
 											}
 										}
 									}
 								}
-								deriveAnonymousFunction(paramType, (JstMethod)func);
-								//bugfix by huzhou@ebay.com, needs to revisit the func expression
-								//to allow the correct binding inside after the inference
-								JstExpressionTypeLinkerTraversal.accept(func, revisitor);
+								deriveAnonymousFunction(paramType,
+										(JstMethod) func);
+								// bugfix by huzhou@ebay.com, needs to revisit
+								// the func expression
+								// to allow the correct binding inside after the
+								// inference
+								JstExpressionTypeLinkerTraversal.accept(func,
+										revisitor);
 							}
 						}
-						//tricks the loop to continue till all arguments are consumed
-//						removed because the trick is moved into the filter param types
-//						the arguments length is used as the length of the list
-//						the gap will be filled with last parameter who is variable lengthed if available
-//						if(paramIdx == paramLen - 1 && param.isVariable()){
-//							paramIdx--;
-//						}
+						// tricks the loop to continue till all arguments are
+						// consumed
+						// removed because the trick is moved into the filter
+						// param types
+						// the arguments length is used as the length of the
+						// list
+						// the gap will be filled with last parameter who is
+						// variable lengthed if available
+						// if(paramIdx == paramLen - 1 && param.isVariable()){
+						// paramIdx--;
+						// }
 					}
 				}
 			}
@@ -2357,96 +2568,103 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	private static IJstMethod unwrapMethod(IJstMethod extFunc) {
-		if(extFunc instanceof JstPotentialOtypeMethod){
-			return ((JstPotentialOtypeMethod)extFunc).getResolvedOtypeMethod();
-		}
-		else if(extFunc instanceof JstPotentialAttributedMethod){
-			return ((JstPotentialAttributedMethod)extFunc).getResolvedAttributedMethod();
+		if (extFunc instanceof JstPotentialOtypeMethod) {
+			return ((JstPotentialOtypeMethod) extFunc).getResolvedOtypeMethod();
+		} else if (extFunc instanceof JstPotentialAttributedMethod) {
+			return ((JstPotentialAttributedMethod) extFunc)
+					.getResolvedAttributedMethod();
 		}
 		return extFunc;
 	}
-	
+
 	private static String unquote(String val) {
-		if ((val.startsWith("\"") && val.endsWith("\"")) ||
-			(val.startsWith("'") && val.endsWith("'"))) {
+		if ((val.startsWith("\"") && val.endsWith("\""))
+				|| (val.startsWith("'") && val.endsWith("'"))) {
 			return val.substring(1, val.length() - 1);
 		}
 		return val;
 	}
 
 	/**
-	 * helper for {@link #tryDerivingAnonymousFunctionsFromParam(MtdInvocationExpr, IJstNode, IJstVisitor)}
-	 * it looks through the method signatures and return the list of JstFuncTypes
-	 * it leaves null in positions where:
-	 * 1. arg type isn't unique
+	 * helper for
+	 * {@link #tryDerivingAnonymousFunctionsFromParam(MtdInvocationExpr, IJstNode, IJstVisitor)}
+	 * it looks through the method signatures and return the list of
+	 * JstFuncTypes it leaves null in positions where: 1. arg type isn't unique
 	 * 2. arg type isn't JstFuncType
+	 * 
 	 * @param callingMethod
-	 * @param argumentsLength for variable lengthed arguments usage
+	 * @param argumentsLength
+	 *            for variable lengthed arguments usage
 	 * @return
 	 */
-	private static List<JstFuncType> getFilteredParamTypes(final IJstMethod callingMethod,
-			final int argumentsLength) {
-		final List<JstFuncType> filteredParamTypes = new ArrayList<JstFuncType>(argumentsLength);
-		//CASE 0: Method is not overloaded at all
-		if(!callingMethod.isDispatcher()){
+	private static List<JstFuncType> getFilteredParamTypes(
+			final IJstMethod callingMethod, final int argumentsLength) {
+		final List<JstFuncType> filteredParamTypes = new ArrayList<JstFuncType>(
+				argumentsLength);
+		// CASE 0: Method is not overloaded at all
+		if (!callingMethod.isDispatcher()) {
 			final List<JstArg> parameters = callingMethod.getArgs();
 			final int paramSize = parameters.size();
-			for(int i = 0, len = paramSize; i < len && i < argumentsLength; i++){
+			for (int i = 0, len = paramSize; i < len && i < argumentsLength; i++) {
 				final JstArg param = parameters.get(i);
-				if(param != null){
-					final JstFuncType funcType = getFilteredFuncType(param.getTypes());
+				if (param != null) {
+					final JstFuncType funcType = getFilteredFuncType(param
+							.getTypes());
 					filteredParamTypes.add(funcType);
 				}
 			}
-			if(argumentsLength > paramSize && paramSize > 0){
+			if (argumentsLength > paramSize && paramSize > 0) {
 				final JstArg lastParam = parameters.get(paramSize - 1);
-				if(lastParam.isVariable()){
-					final JstFuncType lastParamFuncType = getFilteredFuncType(lastParam.getTypes());
-					for(int i = paramSize; i < argumentsLength; i++){
+				if (lastParam.isVariable()) {
+					final JstFuncType lastParamFuncType = getFilteredFuncType(lastParam
+							.getTypes());
+					for (int i = paramSize; i < argumentsLength; i++) {
 						filteredParamTypes.add(lastParamFuncType);
 					}
-				}
-				else{
-					for(int i = paramSize; i < argumentsLength; i++){
+				} else {
+					for (int i = paramSize; i < argumentsLength; i++) {
 						filteredParamTypes.add(null);
 					}
 				}
 			}
 		}
-		//CASE 1: Method is overloaded, we get the info from all the overloading functions signatures
-		else{
+		// CASE 1: Method is overloaded, we get the info from all the
+		// overloading functions signatures
+		else {
 			final List<IJstMethod> overloads = callingMethod.getOverloaded();
-			for(int i = 0; i < argumentsLength; i++){
+			for (int i = 0; i < argumentsLength; i++) {
 				JstFuncType filteredFuncType = null;
-				for(int j = 0, len = overloads.size(); j < len; j++){
+				for (int j = 0, len = overloads.size(); j < len; j++) {
 					final IJstMethod overload = overloads.get(j);
 					final List<JstArg> overloadParams = overload.getArgs();
 					final int overloadParamSize = overloadParams.size();
-					if(overloadParamSize > i){
+					if (overloadParamSize > i) {
 						final JstArg overloadParam = overloadParams.get(i);
-						if(overloadParam != null && overloadParam.getType() instanceof JstFuncType){
-							if(filteredFuncType == null){
-								filteredFuncType = (JstFuncType)overloadParam.getType();
-							}
-							else if(isEqualFuncType(filteredFuncType, (JstFuncType)overloadParam.getType())){
+						if (overloadParam != null
+								&& overloadParam.getType() instanceof JstFuncType) {
+							if (filteredFuncType == null) {
+								filteredFuncType = (JstFuncType) overloadParam
+										.getType();
+							} else if (isEqualFuncType(filteredFuncType,
+									(JstFuncType) overloadParam.getType())) {
 								continue;
-							}
-							else{
+							} else {
 								filteredFuncType = null;
 								break;
 							}
 						}
-					}
-					else if(overloadParamSize > 0){
-						final JstArg lastParam = overloadParams.get(overloadParamSize - 1);
-						if(lastParam != null && lastParam.isVariable() && lastParam.getType() instanceof JstFuncType){
-							if(filteredFuncType == null){
-								filteredFuncType = (JstFuncType)lastParam.getType();
-							}
-							else if(isEqualFuncType(filteredFuncType, (JstFuncType)lastParam.getType())){
+					} else if (overloadParamSize > 0) {
+						final JstArg lastParam = overloadParams
+								.get(overloadParamSize - 1);
+						if (lastParam != null && lastParam.isVariable()
+								&& lastParam.getType() instanceof JstFuncType) {
+							if (filteredFuncType == null) {
+								filteredFuncType = (JstFuncType) lastParam
+										.getType();
+							} else if (isEqualFuncType(filteredFuncType,
+									(JstFuncType) lastParam.getType())) {
 								continue;
-							}
-							else{
+							} else {
 								filteredFuncType = null;
 								break;
 							}
@@ -2458,127 +2676,132 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		return filteredParamTypes;
 	}
-	
-	private static JstFuncType getFilteredFuncType(final List<IJstType> types){
-		if(types == null || types.isEmpty()){
+
+	private static JstFuncType getFilteredFuncType(final List<IJstType> types) {
+		if (types == null || types.isEmpty()) {
 			return null;
 		}
 		JstFuncType funcType = null;
-		for(IJstType type: types){
-			if(type != null && type instanceof JstFuncType){
-				if(funcType == null){
-					funcType = (JstFuncType)type;
-				}
-				else if(isEqualFuncType(funcType, (JstFuncType)type)){
+		for (IJstType type : types) {
+			if (type != null && type instanceof JstFuncType) {
+				if (funcType == null) {
+					funcType = (JstFuncType) type;
+				} else if (isEqualFuncType(funcType, (JstFuncType) type)) {
 					continue;
-				}
-				else{
+				} else {
 					return null;
 				}
 			}
 		}
 		return funcType;
 	}
-	
-	private static boolean isEqualFuncType(final JstFuncType func1, final JstFuncType func2){
-		if(func1 == null || func2 == null){
+
+	private static boolean isEqualFuncType(final JstFuncType func1,
+			final JstFuncType func2) {
+		if (func1 == null || func2 == null) {
 			return false;
 		}
 		final IJstMethod f1 = func1.getFunction();
 		final IJstMethod f2 = func2.getFunction();
-		if(f1 == null || f2 == null){
+		if (f1 == null || f2 == null) {
 			return false;
 		}
-		if(!f1.getRtnType().toString().equals(f2.getRtnType().toString())){
+		if (!f1.getRtnType().toString().equals(f2.getRtnType().toString())) {
 			return false;
 		}
-		if(!f1.getArgs().toString().equals(f2.getArgs().toString())){
+		if (!f1.getArgs().toString().equals(f2.getArgs().toString())) {
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	public static void tryDerivingAnonymousFunctionsFromReturn(
-			final RtnStmt rtnStmt,
-			final IJstNode mtdBinding,
+			final RtnStmt rtnStmt, final IJstNode mtdBinding,
 			final IJstVisitor revisitor) {
-		if(mtdBinding != null 
-				&& rtnStmt != null
-				&& mtdBinding instanceof IJstMethod){
-			final Set<IJstType> returnTypes = getDedupedReturnTypes((IJstMethod)mtdBinding);
-			if(returnTypes.size() == 1){//single return type
-				//handle anonymous function argument inference
+		if (mtdBinding != null && rtnStmt != null
+				&& mtdBinding instanceof IJstMethod) {
+			final Set<IJstType> returnTypes = getDedupedReturnTypes((IJstMethod) mtdBinding);
+			if (returnTypes.size() == 1) {// single return type
+				// handle anonymous function argument inference
 				final IExpr rtnExpr = rtnStmt.getExpression();
 				final IJstType rtnType = returnTypes.iterator().next();
-				if(rtnType instanceof JstFuncType
-						&& rtnExpr instanceof FuncExpr){
-					final FuncExpr funcArg = (FuncExpr)rtnExpr;
+				if (rtnType instanceof JstFuncType
+						&& rtnExpr instanceof FuncExpr) {
+					final FuncExpr funcArg = (FuncExpr) rtnExpr;
 					final IJstMethod func = funcArg.getFunc();
-					if(func != null 
-							&& isAnonymousFunction(func)
-							&& func instanceof JstMethod){
-						deriveAnonymousFunction((JstFuncType)rtnType, (JstMethod)func);
-						JstExpressionTypeLinkerTraversal.accept(func, revisitor);
+					if (func != null && isAnonymousFunction(func)
+							&& func instanceof JstMethod) {
+						deriveAnonymousFunction((JstFuncType) rtnType,
+								(JstMethod) func);
+						JstExpressionTypeLinkerTraversal
+								.accept(func, revisitor);
 					}
 				}
 			}
 		}
 	}
-	
-	private static Set<IJstType> getDedupedReturnTypes(final IJstMethod mtd){
+
+	private static Set<IJstType> getDedupedReturnTypes(final IJstMethod mtd) {
 		final Set<IJstType> returnTypes = new HashSet<IJstType>(8);
-		if(mtd.isDispatcher()){
-			for(IJstMethod overload : mtd.getOverloaded()){
+		if (mtd.isDispatcher()) {
+			for (IJstMethod overload : mtd.getOverloaded()) {
 				returnTypes.add(overload.getRtnType());
 			}
-		}
-		else{
+		} else {
 			returnTypes.add(mtd.getRtnType());
 		}
 		return returnTypes;
 	}
-	
-	private static void deriveAnonymousFunction(final JstFuncType functionDefType, final JstMethod anonymousFunction){
+
+	private static void deriveAnonymousFunction(
+			final JstFuncType functionDefType, final JstMethod anonymousFunction) {
 		final IJstMethod paramFunction = functionDefType.getFunction();
 		deriveAnonymousFunction(paramFunction, anonymousFunction);
 	}
-	
+
 	/**
-	 * by huzhou@ebay.com renamed to derived, as no infer wrapping types are being created in this case
+	 * by huzhou@ebay.com renamed to derived, as no infer wrapping types are
+	 * being created in this case
+	 * 
 	 * @param paramFunction
 	 * @param anonymousFunction
 	 */
-	private static void deriveAnonymousFunction(final IJstMethod paramFunction, final JstMethod anonymousFunction){
-		if(anonymousFunction == paramFunction){
+	private static void deriveAnonymousFunction(final IJstMethod paramFunction,
+			final JstMethod anonymousFunction) {
+		if (anonymousFunction == paramFunction) {
 			return;
 		}
-		
-		//deal with return type inference and argument type inferences
+
+		// deal with return type inference and argument type inferences
 		final IJstType paramFunctionRtnType = paramFunction.getRtnType();
 		anonymousFunction.setRtnType(paramFunctionRtnType);
-		
-		if(!paramFunction.isDispatcher()){
+
+		if (!paramFunction.isDispatcher()) {
 			final List<JstArg> params = paramFunction.getArgs();
 			final List<JstArg> inferParams = anonymousFunction.getArgs();
 			deriveAnonymousFunctionParams(params, inferParams, true);
-			if(anonymousFunction.isDispatcher()){
-				for(IJstMethod anonymousFunctionOverload : anonymousFunction.getOverloaded()){
-					deriveAnonymousFunctionOverload(anonymousFunctionOverload, inferParams, paramFunctionRtnType);
+			if (anonymousFunction.isDispatcher()) {
+				for (IJstMethod anonymousFunctionOverload : anonymousFunction
+						.getOverloaded()) {
+					deriveAnonymousFunctionOverload(anonymousFunctionOverload,
+							inferParams, paramFunctionRtnType);
 				}
 			}
-		}
-		else{
+		} else {
 			final List<JstArg> inferParams = anonymousFunction.getArgs();
 			boolean firstOverload = true;
-			for(IJstMethod paramFunctionOverload : sortByNumberOfParams(paramFunction)){
+			for (IJstMethod paramFunctionOverload : sortByNumberOfParams(paramFunction)) {
 				final List<JstArg> params = paramFunctionOverload.getArgs();
-				deriveAnonymousFunctionParams(params, inferParams, firstOverload);
+				deriveAnonymousFunctionParams(params, inferParams,
+						firstOverload);
 				firstOverload = false;
 			}
-			if(anonymousFunction.isDispatcher()){
-				for(IJstMethod anonymousFunctionOverload : anonymousFunction.getOverloaded()){
-					deriveAnonymousFunctionOverload(anonymousFunctionOverload, inferParams, paramFunctionRtnType);
+			if (anonymousFunction.isDispatcher()) {
+				for (IJstMethod anonymousFunctionOverload : anonymousFunction
+						.getOverloaded()) {
+					deriveAnonymousFunctionOverload(anonymousFunctionOverload,
+							inferParams, paramFunctionRtnType);
 				}
 			}
 		}
@@ -2586,108 +2809,119 @@ public class JstExpressionTypeLinkerHelper {
 
 	private static List<IJstMethod> sortByNumberOfParams(
 			final IJstMethod paramFunction) {
-		final List<IJstMethod> overloads = new ArrayList<IJstMethod>(paramFunction.getOverloaded());
-		final List<IJstMethodSortable> sorting = new ArrayList<IJstMethodSortable>(overloads.size());
-		for(IJstMethod overload : overloads){
+		final List<IJstMethod> overloads = new ArrayList<IJstMethod>(
+				paramFunction.getOverloaded());
+		final List<IJstMethodSortable> sorting = new ArrayList<IJstMethodSortable>(
+				overloads.size());
+		for (IJstMethod overload : overloads) {
 			sorting.add(new IJstMethodSortable(overload));
 		}
 		Collections.sort(sorting);
 		overloads.clear();
-		for(IJstMethodSortable sort : sorting){
+		for (IJstMethodSortable sort : sorting) {
 			overloads.add(sort.getMethod());
 		}
 		return overloads;
 	}
-	
-	private static final class IJstMethodSortable implements Comparable<IJstMethodSortable>{
+
+	private static final class IJstMethodSortable implements
+			Comparable<IJstMethodSortable> {
 
 		private final IJstMethod m_method;
-		
-		public IJstMethodSortable(final IJstMethod m){
+
+		public IJstMethodSortable(final IJstMethod m) {
 			m_method = m;
 		}
-		
-		public final IJstMethod getMethod(){
+
+		public final IJstMethod getMethod() {
 			return m_method;
 		}
-		
+
 		@Override
 		public int compareTo(IJstMethodSortable o) {
 			return o.m_method.getArgs().size() - m_method.getArgs().size();
 		}
-		
+
 	}
 
 	private static void deriveAnonymousFunctionOverload(
-			final IJstMethod anonymousFunctionOverload, 
-			final List<JstArg> inferParams,
-			final IJstType paramFunctionRtnType) {
-		final List<JstArg> anonymousFunctionOverloadParams = anonymousFunctionOverload.getArgs();
-		for(Iterator<JstArg> anonymousFunctionOverloadParamsIt = anonymousFunctionOverloadParams.iterator(), inferParamsIt = inferParams.iterator(); 
-			anonymousFunctionOverloadParamsIt.hasNext() && inferParamsIt.hasNext();){
-			final JstArg anonymousFunctionOverloadParam = anonymousFunctionOverloadParamsIt.next();
+			final IJstMethod anonymousFunctionOverload,
+			final List<JstArg> inferParams, final IJstType paramFunctionRtnType) {
+		final List<JstArg> anonymousFunctionOverloadParams = anonymousFunctionOverload
+				.getArgs();
+		for (Iterator<JstArg> anonymousFunctionOverloadParamsIt = anonymousFunctionOverloadParams
+				.iterator(), inferParamsIt = inferParams.iterator(); anonymousFunctionOverloadParamsIt
+				.hasNext() && inferParamsIt.hasNext();) {
+			final JstArg anonymousFunctionOverloadParam = anonymousFunctionOverloadParamsIt
+					.next();
 			final JstArg inferParam = inferParamsIt.next();
 			anonymousFunctionOverloadParam.clearTypes();
 			anonymousFunctionOverloadParam.addTypes(inferParam.getTypes());
 		}
-		
-		if(anonymousFunctionOverload instanceof JstMethod){
-			((JstMethod)anonymousFunctionOverload).setRtnType(paramFunctionRtnType);
+
+		if (anonymousFunctionOverload instanceof JstMethod) {
+			((JstMethod) anonymousFunctionOverload)
+					.setRtnType(paramFunctionRtnType);
 		}
 	}
 
-//	private static JstArg[] replicateJstArgs(IJstMethod paramFunctionOverload) {
-//		final List<JstArg> originalParams = paramFunctionOverload.getArgs();
-//		final JstArg[] replicated = new JstArg[originalParams.size()];
-//		for(int i = 0; i < replicated.length; i++){
-//			final JstArg originalParam = originalParams.get(i); 
-//			replicated[i] = new JstArg(originalParam.getTypes(), originalParam.getName(), originalParam.isVariable(), originalParam.isOptional(), originalParam.isFinal());
-//		}
-//		return replicated;
-//	}
+	// private static JstArg[] replicateJstArgs(IJstMethod
+	// paramFunctionOverload) {
+	// final List<JstArg> originalParams = paramFunctionOverload.getArgs();
+	// final JstArg[] replicated = new JstArg[originalParams.size()];
+	// for(int i = 0; i < replicated.length; i++){
+	// final JstArg originalParam = originalParams.get(i);
+	// replicated[i] = new JstArg(originalParam.getTypes(),
+	// originalParam.getName(), originalParam.isVariable(),
+	// originalParam.isOptional(), originalParam.isFinal());
+	// }
+	// return replicated;
+	// }
 
-	private static void deriveAnonymousFunctionParams(final List<JstArg> params,
-			final List<JstArg> inferParams,
+	private static void deriveAnonymousFunctionParams(
+			final List<JstArg> params, final List<JstArg> inferParams,
 			final boolean clearTypes) {
-		if(params != null && inferParams != null){
-			for(int paramIdx = 0, paramLen = params.size(), inferParamLen = inferParams.size(); 
-				paramIdx < paramLen && paramIdx < inferParamLen;
-				paramIdx++){
-				
+		if (params != null && inferParams != null) {
+			for (int paramIdx = 0, paramLen = params.size(), inferParamLen = inferParams
+					.size(); paramIdx < paramLen && paramIdx < inferParamLen; paramIdx++) {
+
 				final JstArg param = params.get(paramIdx);
 				final JstArg inferParam = inferParams.get(paramIdx);
-				final List<IJstType> inferParamTypes = new ArrayList<IJstType>(param.getTypes());
-				if(clearTypes){
+				final List<IJstType> inferParamTypes = new ArrayList<IJstType>(
+						param.getTypes());
+				if (clearTypes) {
 					inferParam.clearTypes();
 				}
 				inferParam.addTypes(inferParamTypes);
 			}
 		}
 	}
-	
 
 	/**
-	 * TODO this is incomplete to inject the _invoke_ method in all possible places yet
+	 * TODO this is incomplete to inject the _invoke_ method in all possible
+	 * places yet
+	 * 
 	 * @author huzhou
-	 *
+	 * 
 	 */
-	public static class OverwritableFType extends JstProxyType{
-		
+	public static class OverwritableFType extends JstProxyType {
+
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 6883185350087966254L;
 
 		private IJstMethod _invoke;
+
 		protected OverwritableFType(final IJstType targetType,
 				final IJstMethod invoke) {
 			super(targetType);
 			_invoke = invoke;
 		}
-		
+
 		@Override
 		public IJstMethod getMethod(final String name) {
-			if("_invoke_".equals(name)){
+			if ("_invoke_".equals(name)) {
 				return _invoke;
 			}
 			return super.getMethod(name);
@@ -2695,93 +2929,96 @@ public class JstExpressionTypeLinkerHelper {
 
 		@Override
 		public IJstMethod getMethod(final String name, boolean isStatic) {
-			if("_invoke_".equals(name)){
+			if ("_invoke_".equals(name)) {
 				return _invoke;
 			}
 			return super.getMethod(name, isStatic);
 		}
 
 		@Override
-		public IJstMethod getMethod(final String name, boolean isStatic, boolean recursive) {
-			if("_invoke_".equals(name)){
+		public IJstMethod getMethod(final String name, boolean isStatic,
+				boolean recursive) {
+			if ("_invoke_".equals(name)) {
 				return _invoke;
 			}
 			return super.getMethod(name, isStatic, recursive);
 		}
-		
+
 		@Override
 		public void accept(IJstNodeVisitor visitor) {
 			return;
 		}
 	}
-	
-	public static class OverwritableSynthJstProxyMethod extends SynthJstProxyMethod{
+
+	public static class OverwritableSynthJstProxyMethod extends
+			SynthJstProxyMethod {
 
 		/**
 		 * 
 		 */
 		private static final long serialVersionUID = 1L;
-		
+
 		public OverwritableSynthJstProxyMethod(IJstMethod targetType) {
 			super(targetType);
 		}
 
 		private IJstType _rtnType;
-		
+
 		private List<JstArg> _jstArgs;
-		
+
 		private List<IJstMethod> _overloaded;
-		
+
 		@Override
-		public IJstType getRtnType(){
-			if(_rtnType != null){
+		public IJstType getRtnType() {
+			if (_rtnType != null) {
 				return _rtnType;
 			}
 			return super.getRtnType();
 		}
-		
-		public void setRtnType(final IJstType rtnType){
+
+		public void setRtnType(final IJstType rtnType) {
 			_rtnType = rtnType;
 		}
-		
+
 		@Override
 		public List<JstArg> getArgs() {
-			if(_jstArgs != null){
+			if (_jstArgs != null) {
 				return Collections.unmodifiableList(_jstArgs);
 			}
 			return super.getArgs();
 		}
-		
-		public void setArgs(final List<JstArg> args){
+
+		public void setArgs(final List<JstArg> args) {
 			_jstArgs = new ArrayList<JstArg>(args);
 		}
-		
+
 		@Override
-		public List<IJstMethod> getOverloaded(){
-			if(_overloaded != null){
+		public List<IJstMethod> getOverloaded() {
+			if (_overloaded != null) {
 				return Collections.unmodifiableList(_overloaded);
 			}
 			return super.getOverloaded();
 		}
-		
-		public void addOverloaded(final IJstMethod overload){
-			if(_overloaded == null){
+
+		public void addOverloaded(final IJstMethod overload) {
+			if (_overloaded == null) {
 				_overloaded = new ArrayList<IJstMethod>(2);
 			}
 			_overloaded.add(overload);
 		}
 	}
 
-/************************************************************
- * MISC HELPERS FOR TYPE DECORATIONS, RESULT TYPE UPDATS ETC.
- * **********************************************************
- */
-	
+	/************************************************************
+	 * MISC HELPERS FOR TYPE DECORATIONS, RESULT TYPE UPDATS ETC.
+	 * **********************************************************
+	 */
+
 	public static boolean isStaticRef(IJstType qualifierType) {
-		boolean isStatic = qualifierType instanceof IJstRefType || qualifierType.isFType();
+		boolean isStatic = qualifierType instanceof IJstRefType
+				|| qualifierType.isFType();
 		return isStatic;
 	}
-	
+
 	/**
 	 * 
 	 * @param resolver
@@ -2789,15 +3026,15 @@ public class JstExpressionTypeLinkerHelper {
 	 * @param type
 	 */
 	public static void setExprType(final JstExpressionBindingResolver resolver,
-			final IExpr expr, 
-			final IJstType type,
-			final GroupInfo groupInfo) {
+			final IExpr expr, final IJstType type, final GroupInfo groupInfo) {
 		// modification by huzhou to stop resolving of JstAttributedType in
 		// linker
 		IJstType realType = type instanceof JstAttributedType
 				|| type instanceof JstFuncType ? type : getBindedJstType(type);
 
-		realType = getCorrectType(resolver, realType, groupInfo); // find real type in cache
+		realType = getCorrectType(resolver, realType, groupInfo); // find real
+																	// type in
+																	// cache
 
 		if (expr instanceof JstIdentifier) {
 			JstIdentifier identifier = (JstIdentifier) expr;
@@ -2835,7 +3072,7 @@ public class JstExpressionTypeLinkerHelper {
 	public static IJstType getTargetJstType(IJstType type) {
 
 		while (type instanceof JstProxyType && !(type instanceof IInferred)
-			&& !(type instanceof JstParamType)) {
+				&& !(type instanceof JstParamType)) {
 			type = ((JstProxyType) type).getType();
 		}
 
@@ -2843,41 +3080,41 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	// find the real type in JstCache
-	public static IJstType getCorrectType(final JstExpressionBindingResolver resolver, final IJstType type, final GroupInfo groupInfo) {
-		if(type == null){
+	public static IJstType getCorrectType(
+			final JstExpressionBindingResolver resolver, final IJstType type,
+			final GroupInfo groupInfo) {
+		if (type == null) {
 			return null;
 		}
 		// bugfix for otype using attributed presentation
-		else if(type instanceof JstAttributedType){
-			final IJstNode rtnBinding = look4ActualBinding(resolver, type, groupInfo);
-			if(rtnBinding instanceof IJstOType && rtnBinding != type){
-				return (IJstOType)rtnBinding;
+		else if (type instanceof JstAttributedType) {
+			final IJstNode rtnBinding = look4ActualBinding(resolver, type,
+					groupInfo);
+			if (rtnBinding instanceof IJstOType && rtnBinding != type) {
+				return (IJstOType) rtnBinding;
+			} else if (rtnBinding instanceof JstProxyMethod) {
+				return new JstFuncType((JstProxyMethod) rtnBinding);
 			}
-			else if(rtnBinding instanceof JstProxyMethod){
-				return new JstFuncType((JstProxyMethod)rtnBinding);
-			}
-		}
-		else if(type instanceof JstTypeRefType) {
-			IJstType target = ((JstTypeRefType)type).getReferencedNode();
+		} else if (type instanceof JstTypeRefType) {
+			IJstType target = ((JstTypeRefType) type).getReferencedNode();
 			IJstType extended = getExtendedType(target, groupInfo);
 			if (extended != target) {
 				return new JstTypeRefType(extended);
 			}
+		} else if (type instanceof JstFuncType) {
+			updateFunctionType((JstFuncType) type, groupInfo);
 		}
-		else if(type instanceof JstFuncType){
-			updateFunctionType((JstFuncType)type, groupInfo);
-		}
-		
-		if(!(type instanceof JstType)){
+
+		if (!(type instanceof JstType)) {
 			return type;
 		}
-		
+
 		JstType jstType = (JstType) type;
 		if (!jstType.getStatus().isPhantom()) {
-			if(jstType instanceof JstArray){
-				updateArrayType((JstArray)jstType, groupInfo);
-			}
-			else if(jstType.isFType() || jstType instanceof JstFunctionRefType){
+			if (jstType instanceof JstArray) {
+				updateArrayType((JstArray) jstType, groupInfo);
+			} else if (jstType.isFType()
+					|| jstType instanceof JstFunctionRefType) {
 				updateFunctionType(jstType, groupInfo);
 			}
 			return getExtendedType(jstType, groupInfo);
@@ -2887,42 +3124,46 @@ public class JstExpressionTypeLinkerHelper {
 		// JstCache
 		JstType typeInCache = JstCache.getInstance().getType(jstType.getName());
 		if (typeInCache != null) {
-			if(typeInCache instanceof JstArray){
-				updateArrayType((JstArray)typeInCache, groupInfo);
-			}
-			else if(jstType.isFType()
-					|| jstType instanceof JstFunctionRefType){
+			if (typeInCache instanceof JstArray) {
+				updateArrayType((JstArray) typeInCache, groupInfo);
+			} else if (jstType.isFType()
+					|| jstType instanceof JstFunctionRefType) {
 				updateFunctionType(jstType, groupInfo);
 			}
 			return getExtendedType(typeInCache, groupInfo);
 		}
 		return getExtendedType(jstType, groupInfo);
 	}
-	
-	public static IJstType getExtendedType(final IJstType targetType, final GroupInfo groupInfo) {
+
+	public static IJstType getExtendedType(final IJstType targetType,
+			final GroupInfo groupInfo) {
 		if (targetType == null || targetType instanceof JstExtendedType) {
 			return targetType;
 		}
-		if (targetType instanceof JstArray || targetType instanceof JstVariantType  || targetType instanceof JstMixedType) {
-			return targetType; //TODO
+		if (targetType instanceof JstArray
+				|| targetType instanceof JstVariantType
+				|| targetType instanceof JstMixedType) {
+			return targetType; // TODO
 		}
 		String typeName = targetType.getName();
 		TypeExtensionRegistry ter = TypeExtensionRegistry.getInstance();
-		if (groupInfo!=null && !ter.isNonExtendedType(typeName, groupInfo.getGroupName())) {
+		if (groupInfo != null
+				&& !ter.isNonExtendedType(typeName, groupInfo.getGroupName())) {
 			List<String> baseTypes = new ArrayList<String>();
 			IJstType base = targetType.getExtend();
 			while (base != null) {
 				baseTypes.add(base.getName());
-				if(base!=base.getExtend()){
+				if (base != base.getExtend()) {
 					base = base.getExtend();
-				}else{
+				} else {
 					base = null;
 				}
 			}
 			List<String> extensions = ter.getExtension(typeName, baseTypes,
-				groupInfo.getGroupName(), groupInfo.getDependentGroups());
+					groupInfo.getGroupName(), groupInfo.getDependentGroups());
 			if (extensions != null && extensions.size() > 0) {
-				List<IJstType> extTypes = new ArrayList<IJstType>(extensions.size());
+				List<IJstType> extTypes = new ArrayList<IJstType>(
+						extensions.size());
 				for (String extName : extensions) {
 					IJstType extType = JstCache.getInstance().getType(extName);
 					if (extType != null) {
@@ -2934,45 +3175,51 @@ public class JstExpressionTypeLinkerHelper {
 		}
 		return targetType;
 	}
-	
-//	public static void decorateFTypeWithFunctionType(final JstExpressionBindingResolver resolver, final IJstType ftype){
-//		if(ftype == null 
-//				|| !(ftype.isFType() || ftype instanceof JstFunctionRefType)){
-//			throw new IllegalArgumentException("the vjo type in this context must be a non-null ftype");
-//		}
-//		
-//		final IJstType functionType = getNativeFunctionJstType(resolver);
-//		if(functionType != null 
-//				&& ftype instanceof JstType){
-//			final JstType fJstType = (JstType)ftype;
-//			for(IJstProperty functionProperty: functionType.getAllPossibleProperties(false, true)){
-//				if(fJstType.getProperty(functionProperty.getName().getName(), true) == null){
-//					final IJstProperty functionPropertyProxy = new SynthJstProxyProp(functionProperty){
-//						private static final long serialVersionUID = 1L;
-//						
-//						@Override
-//						public boolean isStatic(){
-//							return true;
-//						}
-//					};
-//					fJstType.addProperty(functionPropertyProxy);
-//				}
-//			}
-//			for(IJstMethod functionMethod: functionType.getMethods(false, true)){
-//				if(fJstType.getMethod(functionMethod.getName().getName(), true) == null){
-//					final IJstMethod functionMethodProxy = new SynthJstProxyMethod(functionMethod){
-//						private static final long serialVersionUID = 1L;
-//						
-//						@Override
-//						public boolean isStatic(){
-//							return true;
-//						}
-//					};
-//					fJstType.addMethod(functionMethodProxy);
-//				}
-//			}
-//		}
-//	}
+
+	// public static void decorateFTypeWithFunctionType(final
+	// JstExpressionBindingResolver resolver, final IJstType ftype){
+	// if(ftype == null
+	// || !(ftype.isFType() || ftype instanceof JstFunctionRefType)){
+	// throw new
+	// IllegalArgumentException("the vjo type in this context must be a non-null ftype");
+	// }
+	//
+	// final IJstType functionType = getNativeFunctionJstType(resolver);
+	// if(functionType != null
+	// && ftype instanceof JstType){
+	// final JstType fJstType = (JstType)ftype;
+	// for(IJstProperty functionProperty:
+	// functionType.getAllPossibleProperties(false, true)){
+	// if(fJstType.getProperty(functionProperty.getName().getName(), true) ==
+	// null){
+	// final IJstProperty functionPropertyProxy = new
+	// SynthJstProxyProp(functionProperty){
+	// private static final long serialVersionUID = 1L;
+	//
+	// @Override
+	// public boolean isStatic(){
+	// return true;
+	// }
+	// };
+	// fJstType.addProperty(functionPropertyProxy);
+	// }
+	// }
+	// for(IJstMethod functionMethod: functionType.getMethods(false, true)){
+	// if(fJstType.getMethod(functionMethod.getName().getName(), true) == null){
+	// final IJstMethod functionMethodProxy = new
+	// SynthJstProxyMethod(functionMethod){
+	// private static final long serialVersionUID = 1L;
+	//
+	// @Override
+	// public boolean isStatic(){
+	// return true;
+	// }
+	// };
+	// fJstType.addMethod(functionMethodProxy);
+	// }
+	// }
+	// }
+	// }
 
 	public static String getFullName(MtdInvocationExpr mie) {
 		if (mie.getMethodIdentifier() == null) {
@@ -3005,12 +3252,15 @@ public class JstExpressionTypeLinkerHelper {
 
 		return name;
 	}
-	
-	public static IJstType findFullQualifiedType(final JstExpressionBindingResolver resolver, String fullName, GroupInfo groupInfo) {
+
+	public static IJstType findFullQualifiedType(
+			final JstExpressionBindingResolver resolver, String fullName,
+			GroupInfo groupInfo) {
 		JstTypeSpaceMgr tsMgr = resolver.getController().getJstTypeSpaceMgr();
 		ITypeSpace<IJstType, IJstNode> ts = tsMgr.getTypeSpace();
 
-		List<IJstType> typeList = ts.getVisibleType(fullName, ts.getGroup(groupInfo.getGroupName()) );
+		List<IJstType> typeList = ts.getVisibleType(fullName,
+				ts.getGroup(groupInfo.getGroupName()));
 
 		if (typeList != null && typeList.size() != 0) {
 			IJstType type = typeList.get(0);
@@ -3022,11 +3272,11 @@ public class JstExpressionTypeLinkerHelper {
 
 		// do an extra lookup in JstCache if type is not found in TS
 		//
-//		IJstType typeInCache = JstCache.getInstance().getType(fullName);
-//
-//		if (typeInCache != null) {
-//			return typeInCache;
-//		}
+		// IJstType typeInCache = JstCache.getInstance().getType(fullName);
+		//
+		// if (typeInCache != null) {
+		// return typeInCache;
+		// }
 
 		return null;
 	}
@@ -3069,16 +3319,16 @@ public class JstExpressionTypeLinkerHelper {
 			return false;
 		}
 	}
-	
 
 	/**
 	 * helper for {@link #visitIdentifier(JstIdentifier)}
+	 * 
 	 * @param identifier
 	 * @param parent
 	 */
-	public static boolean isJstIdentifierVisitExcluded(final JstIdentifier identifier, 
-			final IJstNode parent) {
-		if(identifier instanceof JstProxyIdentifier){
+	public static boolean isJstIdentifierVisitExcluded(
+			final JstIdentifier identifier, final IJstNode parent) {
+		if (identifier instanceof JstProxyIdentifier) {
 			return true;
 		} else if (parent instanceof FieldAccessExpr) {
 			IExpr qualifier = ((FieldAccessExpr) parent).getExpr();
@@ -3095,81 +3345,85 @@ public class JstExpressionTypeLinkerHelper {
 					&& qualifier != identifier) {
 				return true;
 			}
-		} else if (parent instanceof NV) {// bugfix by huzhou, no need to bind obj literal's names here
-			//@see visitNV
+		} else if (parent instanceof NV) {// bugfix by huzhou, no need to bind
+											// obj literal's names here
+			// @see visitNV
 			if (identifier == ((NV) parent).getIdentifier()) {
 				return true;
 			}
 		} else if (parent instanceof AssignExpr
-				&& ((AssignExpr)parent).getLHS() == identifier
-				&& parent.getParentNode() instanceof JstVars){
+				&& ((AssignExpr) parent).getLHS() == identifier
+				&& parent.getParentNode() instanceof JstVars) {
 			return true;
 		}
 		return false;
 	}
-	
-	public static boolean isResolveExcluded(final JstIdentifier identifier, 
+
+	public static boolean isResolveExcluded(final JstIdentifier identifier,
 			final IJstNode parent) {
-		//we won't further resolve var declarations
-		if(parent != null && parent instanceof AssignExpr){
+		// we won't further resolve var declarations
+		if (parent != null && parent instanceof AssignExpr) {
 			IJstNode grandParent = parent.getParentNode();
-			if(grandParent != null
-					&& (grandParent instanceof JstVars
-							||grandParent instanceof JstVar)){
-				return identifier == ((AssignExpr)parent).getLHS();
+			if (grandParent != null
+					&& (grandParent instanceof JstVars || grandParent instanceof JstVar)) {
+				return identifier == ((AssignExpr) parent).getLHS();
 			}
 		}
-		//we won't be able to determine ftype's actual usage till FieldAccessExpr, MtdInvocationExpr is further explored
-		if(identifier.getType() != null && identifier.getType().isFType()){
+		// we won't be able to determine ftype's actual usage till
+		// FieldAccessExpr, MtdInvocationExpr is further explored
+		if (identifier.getType() != null && identifier.getType().isFType()) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
-	public static IJstMethod look4EnclosingMethod(final IJstNode child){
-		if(child == null){
+
+	public static IJstMethod look4EnclosingMethod(final IJstNode child) {
+		if (child == null) {
 			return null;
-		}
-		else if(child instanceof IJstMethod){
-			return (IJstMethod)child;
-		}
-		else{
+		} else if (child instanceof IJstMethod) {
+			return (IJstMethod) child;
+		} else {
 			return look4EnclosingMethod(child.getParentNode());
 		}
 	}
-	
-/**********************************************************
- * HELPERS FOR: vjo.make, vjo.mixin handling
- * and vjo.ctype().endType() handling
- * ********************************************************
- */
 
-	public static interface GlobalNativeTypeInfoProvider{
+	/**********************************************************
+	 * HELPERS FOR: vjo.make, vjo.mixin handling and vjo.ctype().endType()
+	 * handling ********************************************************
+	 */
+
+	public static interface GlobalNativeTypeInfoProvider {
 		LinkerSymbolInfo findTypeInSymbolMap(final String name,
 				final List<VarTable> varTablesBottomUp);
 	}
-	
+
 	public static IJstType processSyntacticCalls(MtdInvocationExpr mie,
-			String methodName,
-			final GlobalNativeTypeInfoProvider provider) {
-		if (mie.getQualifyExpr() != null && VjoKeywords.VJO.equals(mie.getQualifyExpr().toExprText())) {
+			String methodName, final GlobalNativeTypeInfoProvider provider) {
+		if (mie.getQualifyExpr() != null
+				&& VjoKeywords.VJO.equals(mie.getQualifyExpr().toExprText())) {
 			final List<IExpr> args = mie.getArgs();
-			if(VjoKeywords.MIXIN.equals(methodName)){
+			if (VjoKeywords.MIXIN.equals(methodName)) {
 				if (args.size() == 2) {
 					IExpr arg1 = args.get(0);
 					IExpr arg2 = args.get(1);
 					IJstType targetType = arg2.getResultType();
 					if (arg1 instanceof SimpleLiteral
-							&& arg2 instanceof JstIdentifier && targetType != null) {
+							&& arg2 instanceof JstIdentifier
+							&& targetType != null) {
 						String mtypeName = ((SimpleLiteral) arg1).getValue();
-						IJstType mType = JstCache.getInstance().getType(mtypeName);
+						IJstType mType = JstCache.getInstance().getType(
+								mtypeName);
 						if (mType != null) {
 							IJstType newType = JstTypeHelper.mixin(targetType,
 									mType);
 							String varName = ((JstIdentifier) arg2).getName();
-							LinkerSymbolInfo info = provider.findTypeInSymbolMap(varName, JstExpressionTypeLinkerHelper.getVarTablesBottomUp(mie));
-							if (info != null) { // replace old type with new type from mixin
+							LinkerSymbolInfo info = provider
+									.findTypeInSymbolMap(varName,
+											JstExpressionTypeLinkerHelper
+													.getVarTablesBottomUp(mie));
+							if (info != null) { // replace old type with new
+												// type from mixin
 								info.setType(newType);
 								info.setBinding(newType);
 							}
@@ -3177,13 +3431,12 @@ public class JstExpressionTypeLinkerHelper {
 					}
 				}
 			}
-		} 
-		else if (VjoKeywords.ENDTYPE.equals(methodName)) {
+		} else if (VjoKeywords.ENDTYPE.equals(methodName)) {
 			return handleVjoEndType(mie);
 		}
 		return null;
 	}
-	
+
 	protected static IJstType handleVjoEndType(MtdInvocationExpr mie) {
 		MtdInvocationExpr current = mie;
 		IExpr qualifier = mie.getQualifyExpr();
@@ -3203,8 +3456,8 @@ public class JstExpressionTypeLinkerHelper {
 		}
 
 		if (qualifier != null && mtdId != null) {
-			if(VjoKeywords.VJO.equals(qualifier.toExprText())
-					&& VjoKeywords.MAKE.equals(mtdId.toExprText())){
+			if (VjoKeywords.VJO.equals(qualifier.toExprText())
+					&& VjoKeywords.MAKE.equals(mtdId.toExprText())) {
 				final List<IExpr> args = current.getArgs();
 				if (args.size() >= 2) {
 					IExpr arg2 = args.get(1);
@@ -3221,23 +3474,26 @@ public class JstExpressionTypeLinkerHelper {
 								.getResultType();
 						if (resultType instanceof IJstRefType) {
 							IJstType newType = JstTypeHelper
-									.make(((IJstRefType) resultType).getReferencedNode());
+									.make(((IJstRefType) resultType)
+											.getReferencedNode());
 							return newType;
 						}
 					}
 				}
-			}
-			else{
-				//check if it's a local type creation
+			} else {
+				// check if it's a local type creation
 				IJstType mtdResultType = mie.getQualifyExpr().getResultType();
-				if(mtdResultType != null && mtdResultType.getMethod(VjoKeywords.ENDTYPE) != null){
-					mtdResultType = mtdResultType.getMethod(VjoKeywords.ENDTYPE).getRtnType();
+				if (mtdResultType != null
+						&& mtdResultType.getMethod(VjoKeywords.ENDTYPE) != null) {
+					mtdResultType = mtdResultType
+							.getMethod(VjoKeywords.ENDTYPE).getRtnType();
 				}
-				if(mtdResultType != null 
-						&& mtdResultType.getPackage() != null 
-						&& "VjoSelfDescribed".equals(mtdResultType.getPackage().getGroupName())
-						&& !(mtdResultType instanceof IJstRefType)){
-					//forcing to be typereftype
+				if (mtdResultType != null
+						&& mtdResultType.getPackage() != null
+						&& "VjoSelfDescribed".equals(mtdResultType.getPackage()
+								.getGroupName())
+						&& !(mtdResultType instanceof IJstRefType)) {
+					// forcing to be typereftype
 					return JstTypeHelper.getJstTypeRefType(mtdResultType);
 				}
 			}
@@ -3245,44 +3501,53 @@ public class JstExpressionTypeLinkerHelper {
 		return null;
 	}
 
-/**********************************************************************
- * HELPERS FOR: find types in native type spaces
- * ********************************************************************
- */
-	
+	/**********************************************************************
+	 * HELPERS FOR: find types in native type spaces
+	 * ********************************************************************
+	 */
+
 	/**
 	 * GET TYPES FROM NATIVE TS
+	 * 
 	 * @param resolver
 	 * @return
 	 */
-	public static IJstType getNativeArrayJstType(final JstExpressionBindingResolver resolver) {
+	public static IJstType getNativeArrayJstType(
+			final JstExpressionBindingResolver resolver) {
 		return getNativeTypeFromTS(resolver, "Array");
 	}
-	
-	public static IJstType getNativeNumberJstType(final JstExpressionBindingResolver resolver) {
-		return getNativeTypeFromTS(resolver,"Number");
+
+	public static IJstType getNativeNumberJstType(
+			final JstExpressionBindingResolver resolver) {
+		return getNativeTypeFromTS(resolver, "Number");
 	}
 
-	public static IJstType getNativeStringJstType(final JstExpressionBindingResolver resolver) {
-		return getNativeTypeFromTS(resolver,"String");
+	public static IJstType getNativeStringJstType(
+			final JstExpressionBindingResolver resolver) {
+		return getNativeTypeFromTS(resolver, "String");
 	}
 
-	public static IJstType getNativeObjectJstType(final JstExpressionBindingResolver resolver) {
+	public static IJstType getNativeObjectJstType(
+			final JstExpressionBindingResolver resolver) {
 		return getNativeTypeFromTS(resolver, "Object");
 	}
-	
-	public static IJstType getNativeBooleanJstType(final JstExpressionBindingResolver resolver) {
-		return getNativeTypeFromTS(resolver, org.ebayopensource.dsf.jsnative.global.PrimitiveBoolean.class.getSimpleName());
+
+	public static IJstType getNativeBooleanJstType(
+			final JstExpressionBindingResolver resolver) {
+		return getNativeTypeFromTS(resolver,
+				org.ebayopensource.dsf.jsnative.global.PrimitiveBoolean.class
+						.getSimpleName());
 	}
 
-	public static IJstType getNativeVoidJstType(final JstExpressionBindingResolver resolver) {
+	public static IJstType getNativeVoidJstType(
+			final JstExpressionBindingResolver resolver) {
 		return getNativeTypeFromTS(resolver, "void");
 	}
-	
-	public static IJstType getNativeFunctionJstType(final JstExpressionBindingResolver resolver) {
+
+	public static IJstType getNativeFunctionJstType(
+			final JstExpressionBindingResolver resolver) {
 		return getNativeTypeFromTS(resolver, "Function");
 	}
-	
 
 	public static IJstType getNativeTypeFromTS(
 			final JstExpressionBindingResolver resolver, final String name) {
@@ -3291,29 +3556,30 @@ public class JstExpressionTypeLinkerHelper {
 		}
 
 		IJstType jstType = getNativeTypeFromTS(resolver,
-				JstTypeSpaceMgr.JS_NATIVE_GRP, name );
-//		if (jstType == null) {
-//			jstType = getNativeTypeFromNativeLib(resolver,
-//					JstTypeSpaceMgr.JS_BROWSER_GRP, name);
-//		}
-//		if (jstType == null) {
-//			jstType = getNativeTypeFromNativeLib(resolver,
-//					JstTypeSpaceMgr.VJO_SELF_DESCRIBED, name);
-//		}
+				JstTypeSpaceMgr.JS_NATIVE_GRP, name);
+		// if (jstType == null) {
+		// jstType = getNativeTypeFromNativeLib(resolver,
+		// JstTypeSpaceMgr.JS_BROWSER_GRP, name);
+		// }
+		// if (jstType == null) {
+		// jstType = getNativeTypeFromNativeLib(resolver,
+		// JstTypeSpaceMgr.VJO_SELF_DESCRIBED, name);
+		// }
 		return jstType;
 	}
 
 	public static IJstType getNativeTypeFromTS(
-			final JstExpressionBindingResolver resolver, final String groupName,
-			final String name) {
+			final JstExpressionBindingResolver resolver,
+			final String groupName, final String name) {
 		TypeName typeName = new TypeName(groupName, name);
 
 		JstTypeSpaceMgr tsMgr = resolver.getController().getJstTypeSpaceMgr();
-	
-		JstQueryExecutor queryExecutor = tsMgr.getQueryExecutor();
-		return queryExecutor.findType(typeName, tsMgr.getTypeSpace().getGroup(groupName));
 
-//		return queryExecutor.findType(typeName);
+		JstQueryExecutor queryExecutor = tsMgr.getQueryExecutor();
+		return queryExecutor.findType(typeName,
+				tsMgr.getTypeSpace().getGroup(groupName));
+
+		// return queryExecutor.findType(typeName);
 	}
 
 	public static IJstType getNativeElementType(
@@ -3327,30 +3593,30 @@ public class JstExpressionTypeLinkerHelper {
 		return type;
 	}
 
-	//exact match means param and argument has the same type
-	//subtype means param type is more general than argument type
-	//implicitConversion suggests that though subtype relation doesn't exist
-		//argument type is still assignable to param type with some implicit conversion
-		//for example: var b = true;//<boolean; b = 1;//implicitly converting number to boolean:true
-	//the order suggests that exact match is the highest priority
-	//when comparing 2 overloading signatures
-	//one is a better match than the other iff
-		//for all its param argument matching result, it has a better or equivalent case
+	// exact match means param and argument has the same type
+	// subtype means param type is more general than argument type
+	// implicitConversion suggests that though subtype relation doesn't exist
+	// argument type is still assignable to param type with some implicit
+	// conversion
+	// for example: var b = true;//<boolean; b = 1;//implicitly converting
+	// number to boolean:true
+	// the order suggests that exact match is the highest priority
+	// when comparing 2 overloading signatures
+	// one is a better match than the other iff
+	// for all its param argument matching result, it has a better or equivalent
+	// case
 	public static enum ParamMatchingArgCase {
-		exact,
-		subtype,
-		implicitConversion,
-		object
+		exact, subtype, implicitConversion, object
 	}
 
-	public static class OverloadBestMatchCandidate implements Comparable<OverloadBestMatchCandidate>{
+	public static class OverloadBestMatchCandidate implements
+			Comparable<OverloadBestMatchCandidate> {
 		private final IJstMethod m_method;
 		private final List<JstArg> m_parameters;
 		private final List<IExpr> m_arguments;
-		
-		public OverloadBestMatchCandidate(final IJstMethod method, 
-				final List<JstArg> parameter,
-				final List<IExpr> arguments){
+
+		public OverloadBestMatchCandidate(final IJstMethod method,
+				final List<JstArg> parameter, final List<IExpr> arguments) {
 			assert method != null;
 			assert parameter != null;
 			assert arguments != null;
@@ -3358,70 +3624,76 @@ public class JstExpressionTypeLinkerHelper {
 			m_parameters = new ArrayList<JstArg>(parameter);
 			m_arguments = new ArrayList<IExpr>(arguments);
 		}
-		
-		public IJstMethod getMethod(){
+
+		public IJstMethod getMethod() {
 			return m_method;
 		}
-		
-		public List<JstArg> getParameters(){
+
+		public List<JstArg> getParameters() {
 			return Collections.unmodifiableList(m_parameters);
 		}
-		
-		public List<IExpr> getArguments(){
+
+		public List<IExpr> getArguments() {
 			return Collections.unmodifiableList(m_arguments);
 		}
-		
-		//for each argument
-		//compare argument and parameter matching case
-		//exact > subtype > implicit conversion
-		//if self's lower index parameter type is better it's better, generates: -1, 
-		//if on the contrary, then other is better, generates: 1
-		//otherwise, check the higher index parameter till exceeding the length
+
+		// for each argument
+		// compare argument and parameter matching case
+		// exact > subtype > implicit conversion
+		// if self's lower index parameter type is better it's better,
+		// generates: -1,
+		// if on the contrary, then other is better, generates: 1
+		// otherwise, check the higher index parameter till exceeding the length
 		@Override
 		public int compareTo(final OverloadBestMatchCandidate other) {
-			return compareToBeginsAt(0, m_arguments, m_parameters, other.m_parameters);
+			return compareToBeginsAt(0, m_arguments, m_parameters,
+					other.m_parameters);
 		}
 
 		private int compareToBeginsAt(final int argumentIndex,
-			final List<IExpr> arguments,
-			final List<JstArg> selfParameters,
-			final List<JstArg> otherParameters) {
-			
-			//bugfix by huzhou@ebay.com
-			//though argumentIndex exceeds the arguments length
-			//we'd like to know if parameter size exceeds or not
-			//exceeding means there's variable lengthed parameter at this position
-			//when otherParameters length is greater than self's
-			//self is a better match
-			if(argumentIndex >= arguments.size()){
+				final List<IExpr> arguments, final List<JstArg> selfParameters,
+				final List<JstArg> otherParameters) {
+
+			// bugfix by huzhou@ebay.com
+			// though argumentIndex exceeds the arguments length
+			// we'd like to know if parameter size exceeds or not
+			// exceeding means there's variable lengthed parameter at this
+			// position
+			// when otherParameters length is greater than self's
+			// self is a better match
+			if (argumentIndex >= arguments.size()) {
 				return selfParameters.size() - otherParameters.size();
 			}
-			
+
 			final IExpr argument = m_arguments.get(argumentIndex);
 			final JstArg selfParameter = m_parameters.get(argumentIndex);
 			final JstArg otherParameter = otherParameters.get(argumentIndex);
-			
-			final ParamMatchingArgCase selfCase = argMatchingParam(argument, selfParameter);
-			final ParamMatchingArgCase otherCase = argMatchingParam(argument, otherParameter);
+
+			final ParamMatchingArgCase selfCase = argMatchingParam(argument,
+					selfParameter);
+			final ParamMatchingArgCase otherCase = argMatchingParam(argument,
+					otherParameter);
 			final int compared = selfCase.compareTo(otherCase);
-			
-			return compared == 0 ? compareToBeginsAt(argumentIndex + 1, arguments, selfParameters, otherParameters) : compared;
+
+			return compared == 0 ? compareToBeginsAt(argumentIndex + 1,
+					arguments, selfParameters, otherParameters) : compared;
 		}
-		
+
 		@Override
-		public boolean equals(final Object other){
-			if(other instanceof OverloadBestMatchCandidate){
-				final OverloadBestMatchCandidate otherScoreEntry = (OverloadBestMatchCandidate)other;
+		public boolean equals(final Object other) {
+			if (other instanceof OverloadBestMatchCandidate) {
+				final OverloadBestMatchCandidate otherScoreEntry = (OverloadBestMatchCandidate) other;
 				return m_method == otherScoreEntry.m_method
-					&& m_parameters == otherScoreEntry.m_parameters
-					&& m_arguments == otherScoreEntry.m_arguments;
+						&& m_parameters == otherScoreEntry.m_parameters
+						&& m_arguments == otherScoreEntry.m_arguments;
 			}
 			return false;
 		}
-		
+
 		@Override
-		public int hashCode(){
-			return m_method.hashCode() + m_parameters.hashCode() + m_arguments.hashCode();
+		public int hashCode() {
+			return m_method.hashCode() + m_parameters.hashCode()
+					+ m_arguments.hashCode();
 		}
 	}
 }
