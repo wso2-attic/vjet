@@ -345,6 +345,17 @@ public class JstType extends BaseJstNode implements IJstType {
 		}
 	}
 
+	
+	public IJstTypeReference getInactiveImportRef(final String typeName) {
+		if (typeName == null || m_inactiveImports.isEmpty()) {
+			return null;
+		}
+		synchronized (this){
+			IJstTypeReference t = m_inactiveImports.get(typeName);
+			return (t != null)? t : null;
+		}
+	}
+
 	public List<? extends IJstType> getInactiveImports() {
 		List<IJstType> list = new ArrayList<IJstType>();
 		synchronized(this){			

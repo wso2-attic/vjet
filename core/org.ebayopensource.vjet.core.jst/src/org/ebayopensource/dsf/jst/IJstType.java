@@ -139,6 +139,14 @@ public interface IJstType extends IJstNode {
 	IJstType getInactiveImport(String typeName);
 	
 	/**
+	 * Answer the inactive imported type with given name.
+	 * 
+	 * @param typeName
+	 * @return
+	 */
+	IJstTypeReference getInactiveImportRef(String typeName);
+	
+	/**
 	 * Answer an unmodifiable list of inactive imports 
 	 * @return List<? extends IJstType>
 	 */
