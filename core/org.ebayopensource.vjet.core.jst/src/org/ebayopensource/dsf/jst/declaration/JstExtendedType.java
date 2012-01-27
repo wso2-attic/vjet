@@ -174,6 +174,13 @@ public class JstExtendedType implements IJstType {
 	public List<? extends IJstTypeReference> getImportsRef() {
 		return m_targetType.getImportsRef();
 	}
+	
+	/**
+	 * @see IJstType#getImportRef()
+	 */
+	public IJstTypeReference getInactiveImportRef(String typeName) {
+		return m_targetType.getInactiveImportRef(typeName);
+	}
 
 	public IJstType getInactiveImport(String typeName) {
 		return m_targetType.getInactiveImport(typeName);

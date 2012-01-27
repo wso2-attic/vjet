@@ -119,6 +119,15 @@ public class JstType extends BaseJstNode implements IJstType {
 			return;
 		}
 
+		setName(name);
+	}
+
+	/**
+	 * Sets the given name
+	 * 
+	 * @param name
+	 */
+	public void setName(final String name) {
 		int index = name.lastIndexOf(".");
 		if (index != -1) {
 			setPackage(new JstPackage(name.substring(0, index)));
@@ -333,6 +342,17 @@ public class JstType extends BaseJstNode implements IJstType {
 		synchronized (this){
 			IJstTypeReference t = m_inactiveImports.get(typeName);
 			return (t != null)? t.getReferencedType() : null;
+		}
+	}
+
+	
+	public IJstTypeReference getInactiveImportRef(final String typeName) {
+		if (typeName == null || m_inactiveImports.isEmpty()) {
+			return null;
+		}
+		synchronized (this){
+			IJstTypeReference t = m_inactiveImports.get(typeName);
+			return (t != null)? t : null;
 		}
 	}
 

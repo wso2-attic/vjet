@@ -195,6 +195,13 @@ public abstract class JstProxyType implements IJstType {
 	}
 	
 	/**
+	 * @see IJstType#getImportRef()
+	 */
+	public IJstTypeReference getInactiveImportRef(String typeName) {
+		return m_targetType.getInactiveImportRef(typeName);
+	}
+
+	/**
 	 * @see IJstType#getInactiveImports()
 	 */
 	public List<? extends IJstType> getInactiveImports() {
