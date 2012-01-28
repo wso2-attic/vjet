@@ -129,7 +129,6 @@
 				</dependency>
 				</dependencies>
 				<configuration>
-						<forkMode>always</forkMode>
           				<trimStackTrace>false</trimStackTrace>
           				<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 					<test>org.ebayopensource.dsf.AllJsToJavaTests</test>
