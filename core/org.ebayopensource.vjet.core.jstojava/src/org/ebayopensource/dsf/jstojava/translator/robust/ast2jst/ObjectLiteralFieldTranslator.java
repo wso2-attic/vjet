@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator.robust.ast2jst;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
@@ -43,7 +44,9 @@ public class ObjectLiteralFieldTranslator extends
 			final JstIdentifier id = createId(astObjectliteralField); 
 			bindObjLiteralId(astObjectliteralField, id, value);
 			
+			
 			NV nv = new NV(id, value); 
+			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(astObjectliteralField.sourceStart()));
 			int start = id.getSource().getStartOffSet();
 			if (value.getSource() != null) {
 				int end = value.getSource().getEndOffSet();
