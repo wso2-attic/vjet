@@ -1955,11 +1955,12 @@ public class JstType extends BaseJstNode implements IJstType {
 		synchronized(this){
 			if (m_staticInits != null) {
 				removeChildren(m_staticInits);
-				removeChild(m_initBlock);
-				m_initBlock=null;
 				m_staticInits = null;
 			}
-
+			if (m_initBlock != null) {
+				removeChild(m_initBlock);
+				m_initBlock=null;
+			}
 		}
 	}
 	/**
