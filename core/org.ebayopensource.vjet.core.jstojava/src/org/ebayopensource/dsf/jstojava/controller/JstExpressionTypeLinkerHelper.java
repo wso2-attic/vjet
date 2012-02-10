@@ -34,7 +34,6 @@ import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
 import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
-import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstFuncArgAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncScopeAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
@@ -97,10 +96,8 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
-import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtension;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
-import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructorResolver;
-import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.IMetaExtension;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
@@ -2514,7 +2511,7 @@ public class JstExpressionTypeLinkerHelper {
 												String key = ((JstLiteral) keyArg)
 														.toString();
 												key = unquote(key);
-												MetaExtension metaExt = fmr
+												IMetaExtension metaExt = fmr
 														.getExtentedArgBinding(
 																targetFunc,
 																key,

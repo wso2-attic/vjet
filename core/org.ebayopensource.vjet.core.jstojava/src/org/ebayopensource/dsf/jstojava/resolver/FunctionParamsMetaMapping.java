@@ -21,14 +21,14 @@ import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.translator.BaseFindTypeSupport;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 
-public class FunctionMetaMapping {
+public class FunctionParamsMetaMapping {
 	
 	private Map<String, Map<String, MetaExtension>> m_maps =
 		new HashMap<String, Map<String, MetaExtension>>();
 	
 	private final String m_groupId;
 	
-	public FunctionMetaMapping(String groupId) {
+	public FunctionParamsMetaMapping(String groupId) {
 		m_groupId = groupId;
 	}
 	
@@ -48,7 +48,7 @@ public class FunctionMetaMapping {
 		return funcMetaMap.get(key);
 	}
 	
-	public FunctionMetaMapping addMapping(
+	public FunctionParamsMetaMapping addMapping(
 		String targetFunc, String key, String[] metaArr) {
 		List<IJsCommentMeta> metaList = new ArrayList<IJsCommentMeta>();
 		for (String metaDef : metaArr) {

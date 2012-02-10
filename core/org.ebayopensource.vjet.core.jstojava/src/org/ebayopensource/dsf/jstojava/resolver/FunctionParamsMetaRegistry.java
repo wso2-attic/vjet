@@ -18,16 +18,19 @@ import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtensio
 
 /**
  * Registry of function arg meta mapping at Lib/Group level from meta bootstrap.
- * The argument type (second arg) will be resolved to a typed function based on first
- * argument value (string key).
+ * The argument types of 2nd to N arguments will be resolved to a typed function based on first
+ * argument value (JstIdentifier or literal). 
+ * 
+ * TODO look at replacing FunctionMetaRegistry with this registry
+ * 
  */
-public class FunctionMetaRegistry {
+public class FunctionParamsMetaRegistry {
 	
-	private static FunctionMetaRegistry s_instance = new FunctionMetaRegistry();
+	private static FunctionParamsMetaRegistry s_instance = new FunctionParamsMetaRegistry();
 	private Map<String, FunctionMetaMapping> m_funcMetaMappings = new LinkedHashMap<String, FunctionMetaMapping>();
 	private Set<String> m_tergetFuncs = new HashSet<String>();
 	
-	public static FunctionMetaRegistry getInstance() {
+	public static FunctionParamsMetaRegistry getInstance() {
 		return s_instance;
 	}
 	
