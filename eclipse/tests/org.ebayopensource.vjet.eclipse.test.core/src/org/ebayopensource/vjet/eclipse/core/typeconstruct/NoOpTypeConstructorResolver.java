@@ -3,13 +3,13 @@
  */
 package org.ebayopensource.vjet.eclipse.core.typeconstruct;
 
-import java.util.List;
-
-import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.ebayopensource.dsf.jst.expr.CastExpr;
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructContext;
 import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructorResolver;
+import org.ebayopensource.dsf.jstojava.translator.JstUtil;
 
 /**
  * @author paragraval
@@ -22,16 +22,16 @@ public class NoOpTypeConstructorResolver implements ITypeConstructorResolver {
 	 * 
 	 * @see
 	 * org.ebayopensource.dsf.jstojava.resolver.ITypeConstructorResolver#resolve
-	 * (java.util.List)
+	 * (org.ebayopensource.dsf.jstojava.resolver.ITypeConstructContext)
 	 */
 	@Override
-	public IJstType resolve(List<IExpr> args) {
+	public void resolve(ITypeConstructContext constrCtx) {
 		// creating JstType
-		String typeName = args.get(0).toExprText();
-		typeName = trimQuotes(typeName);
+		String typeName = constrCtx.getArgsExpr().get(0).toExprText();
+		typeName = JstUtil.getCorrectName(typeName);
 		JstType jstType = JstFactory.getInstance()
 				.createJstType(typeName, true);
-		return jstType;
+		constrCtx.addType(jstType);
 	}
 
 	/*
@@ -46,32 +46,9 @@ public class NoOpTypeConstructorResolver implements ITypeConstructorResolver {
 		return "test";
 	}
 
-	/**
-	 * If the given string is prefixed and suffixed with either ' or " then
-	 * truncates them.
-	 * 
-	 * @param input
-	 * @return
-	 */
-	private String trimQuotes(String input) {
-		if (input == null) {
-			return "";
-		}
-		if (input.startsWith("'") || input.startsWith("\"")) {
-			if (input.length() > 1) {
-				input = input.substring(1);
-			} else {
-				input = "";
-			}
-		}
-		if (input.endsWith("'") || input.endsWith("\"")) {
-			if (input.length() > 1) {
-				input = input.substring(0, input.length() - 1);
-			} else {
-				input = "";
-			}
-		}
-		return input;
+	@Override
+	public Class<? extends IExpr> getExprClass() {
+		return CastExpr.class;
 	}
 
 }

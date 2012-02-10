@@ -24,8 +24,8 @@ public class JstArg extends BaseJstNode {
 
 	private final List<IJstTypeReference> m_types = new ArrayList<IJstTypeReference>();
 	private final String m_name;
-	private final boolean m_isVariable;
-	private final boolean m_isOptional;
+	private boolean m_isVariable;
+	private boolean m_isOptional;
 	private final boolean m_isFinal;
 
 	//
@@ -140,8 +140,16 @@ public class JstArg extends BaseJstNode {
 		return m_isVariable;
 	}
 
+	public void setVariable(boolean isVariable) {
+		this.m_isVariable = isVariable;
+	}
+
 	public boolean isOptional() {
 		return m_isOptional;
+	}
+
+	public void setOptional(boolean isOptional) {
+		this.m_isOptional = isOptional;
 	}
 
 	public boolean isFinal() {

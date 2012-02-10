@@ -8,13 +8,34 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.resolver;
 
-import java.util.List;
-
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.token.IExpr;
 
 public interface ITypeConstructorResolver {
-	IJstType resolve(List<IExpr> args);
 
+	// IJstType resolve(List<IExpr> args);
+	/**
+	 * Resolves the given expressions from {@link ITypeConstructContext} to
+	 * {@link IJstType} and adds it to the resolved JST types list in
+	 * {@link ITypeConstructContext}.
+	 * 
+	 * @param constrCtx
+	 *            reference to {@link ITypeConstructContext} with input
+	 *            expressions
+	 */
+	void resolve(ITypeConstructContext constrCtx);
+
+	/**
+	 * The groupId for which this resolver will create the types
+	 * 
+	 * @return
+	 */
 	String getGroupId();
+
+	/**
+	 * The type of expression supported by this resolver.
+	 * 
+	 * @return
+	 */
+	Class<? extends IExpr> getExprClass();
 }
