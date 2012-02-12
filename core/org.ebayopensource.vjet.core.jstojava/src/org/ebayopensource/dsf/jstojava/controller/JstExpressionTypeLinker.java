@@ -1331,7 +1331,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 							.tryDerivingAnonymousFunctionsFromParam(mie,
 									mtdBinding, this, m_groupInfo);
 					JstExpressionTypeLinkerHelper.bindMtdInvocations(
-							m_resolver, this, mie, mtdBinding);
+							m_resolver, this, mie, mtdBinding,m_groupInfo);
 					return;
 				}
 			}
@@ -2107,7 +2107,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				m_resolver, fullName, m_groupInfo);
 		if (type != null) {
 			JstExpressionTypeLinkerHelper.bindMtdInvocations(m_resolver, this,
-					mtdInvocationExpr, type.getConstructor());
+					mtdInvocationExpr, type.getConstructor(),m_groupInfo);
 			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this,
 					mtdInvocationExpr, type, m_groupInfo);
 			JstExpressionTypeLinkerHelper

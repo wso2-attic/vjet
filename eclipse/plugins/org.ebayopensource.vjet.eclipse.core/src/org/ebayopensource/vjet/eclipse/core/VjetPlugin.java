@@ -11,12 +11,15 @@ package org.ebayopensource.vjet.eclipse.core;
 import java.util.Collection;
 
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
+import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
 import org.ebayopensource.vjet.eclipse.core.builder.TypeSpaceBuilder;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
 import org.ebayopensource.vjet.eclipse.core.ts.EclipseTypeSpaceLoader;
 import org.ebayopensource.vjet.eclipse.core.ts.JstLibResolver;
 import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceLoadJob;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamMappingExtensionRegistry;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
@@ -148,7 +151,7 @@ public class VjetPlugin extends Plugin {
 		});
 		
 		initTypeCostructorRegistry();
-		
+		initFunctionParamsRegistry();
 		m_loadJob.schedule();
 		
 	}
@@ -176,6 +179,30 @@ public class VjetPlugin extends Plugin {
 		}
 		
 	}
+	
+	private void initFunctionParamsRegistry() {
+
+		FunctionParamsMetaRegistry registry = FunctionParamsMetaRegistry
+				.getInstance();
+
+		FunctionParamMappingExtensionRegistry extensionRegistry = new FunctionParamMappingExtensionRegistry();
+		Collection<FunctionParamResolverExtension> extensions = extensionRegistry
+				.getResolverExtensions();
+		for (FunctionParamResolverExtension extension : extensions) {
+			try {
+				registry.addMapping(extension.createResolver());
+			} catch (CoreException e) {
+				VjetPlugin
+						.getDefault()
+						.getLog()
+						.log(new Status(IStatus.ERROR, VjetPlugin.PLUGIN_ID,
+								"Error intializing the " + extension.toString()
+										+ " resolver.", e));
+			}
+		}
+		
+	}
+	
 	
 	private void addTraceGroupEventListeners() {
 		TypeSpaceBuilder.addGroupTraceEventListeners(m_typeSpaceMgr

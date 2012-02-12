@@ -58,7 +58,7 @@ public class FunctionMetaRegistry {
 	public void clear(String groupId) {
 		m_funcMetaMappings.remove(groupId);
 		m_tergetFuncs.clear();
-		for (FunctionMetaMapping mapping : m_funcMetaMappings.values()) {
+		for (IFunctionMetaMapping mapping : m_funcMetaMappings.values()) {
 			m_tergetFuncs.addAll(mapping.getSupportedTargetFuncs());
 		}
 	}
@@ -70,7 +70,7 @@ public class FunctionMetaRegistry {
 	
 	private IMetaExtension getExtentedArgBinding(
 		String targetFunc, String key, String groupId) {
-		FunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
+		IFunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
 		return (mapping == null) ? null : mapping.getExtentedArgBinding(targetFunc, key);
 	}
 }

@@ -97,6 +97,7 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.IMetaExtension;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
@@ -1962,7 +1963,7 @@ public class JstExpressionTypeLinkerHelper {
 
 			if (type != null) {
 				bindMtdInvocations(resolver, revisitor, mie,
-						type.getConstructor());
+						type.getConstructor(), groupInfo);
 				setExprType(resolver, mie, type, groupInfo);
 				return true;
 			}
@@ -1985,7 +1986,7 @@ public class JstExpressionTypeLinkerHelper {
 			type = look4ReturnType(resolver, mtd, qualifierType, mie);
 		}
 
-		bindMtdInvocations(resolver, revisitor, mie, mtd);
+		bindMtdInvocations(resolver, revisitor, mie, mtd, groupInfo);
 		setExprType(resolver, mie, type, groupInfo);
 	}
 
@@ -2011,7 +2012,7 @@ public class JstExpressionTypeLinkerHelper {
 	public static void bindMtdInvocations(
 			final JstExpressionBindingResolver resolver,
 			final IJstVisitor revisitor, final MtdInvocationExpr mtdExpr,
-			final IJstNode mtd) {
+			final IJstNode mtd, final GroupInfo grpInfo) {
 
 		IJstNode updateBinding = mtd;
 		// handle argument types
@@ -2023,9 +2024,25 @@ public class JstExpressionTypeLinkerHelper {
 			final List<IJstMethod> matchingMtds = getMatchingMtdFromOverloads(
 					bindMtd, mtdExpr.getArgs());
 			if (matchingMtds.size() == 1) {
+
 				final IJstMethod matchingMtd = matchingMtds.iterator().next();
 				final List<IExpr> arguments = mtdExpr.getArgs();
-				final List<JstArg> parameters = matchingMtd.getArgs();
+				List<JstArg> parameters = matchingMtd.getArgs();
+				// check if function arg mapping is supported
+				boolean supportArgTypeExt = matchingMtd
+						.isFuncArgMetaExtensionEnabled();
+				// if support function args pass first argument and get 2nd
+				// through n arguments from mapping rather than from orginal
+				// definition
+				IJstMethod extMtd = null;
+				if (supportArgTypeExt && mtdExpr.getArgs().size() > 1) {
+
+					extMtd = bindArgumentMappng(revisitor, grpInfo,
+							matchingMtd, mtdExpr.getArgs().get(0));
+					parameters = extMtd.getArgs();
+
+				}
+
 				for (int i = 0, len = arguments.size(); i < len; i++) {
 					final IExpr argExpr = arguments.get(i);
 					if (parameters.size() > i) {
@@ -2035,7 +2052,11 @@ public class JstExpressionTypeLinkerHelper {
 						}
 					}
 				}
-				updateBinding = matchingMtd;
+				if (extMtd != null) {
+					updateBinding = extMtd;
+				} else {
+					updateBinding = matchingMtd;
+				}
 			}
 		}
 
@@ -2047,6 +2068,31 @@ public class JstExpressionTypeLinkerHelper {
 					.getMethodIdentifier();
 			expr.getName().setJstBinding(updateBinding);
 		}
+	}
+
+	private static IJstMethod bindArgumentMappng(IJstVisitor revisitor,
+			GroupInfo groupInfo, IJstMethod callingMethod, IExpr keyArg) {
+		// TODO Auto-generated method stub
+		String targetFunc = callingMethod.getOwnerType().getName()
+				+ (callingMethod.isStatic() ? "::" : ":")
+				+ callingMethod.getName().getName();
+		FunctionParamsMetaRegistry fmr = FunctionParamsMetaRegistry
+				.getInstance();
+	
+		if (fmr.isFuncMetaMappingSupported(targetFunc)) {
+			String key = keyArg.toExprText();
+			key = unquote(key);
+			IMetaExtension metaExt = fmr.getExtentedArgBinding(targetFunc, key,
+					groupInfo.getGroupName(), groupInfo.getDependentGroups());
+			if (metaExt != null) {
+				IJstMethod extFunc = metaExt.getMethod();
+				JstExpressionTypeLinkerTraversal.accept(
+						extFunc, revisitor);
+				IJstMethod resolved = unwrapMethod(extFunc);
+				return resolved;
+			}
+		}
+		return null;
 	}
 
 	private static List<IJstMethod> getMatchingMtdFromOverloads(
@@ -2474,78 +2520,11 @@ public class JstExpressionTypeLinkerHelper {
 					JstFuncType paramType = paramTypes.get(paramIdx);
 					if (paramType != null) {
 						final IExpr arg = arguments.get(argIdx);
-						if (arg instanceof FuncExpr) {// it actually could be
-														// new Function as
-														// ObjCreateExpr but
-														// it's useless as we
-														// won't inspect the
-														// string definition
-							final FuncExpr funcArg = (FuncExpr) arg;
-							final IJstMethod func = funcArg.getFunc();
-							// infer when function has no annotation only
-							// TODO check how to verify function has no
-							// annotation
-							if (func != null && isAnonymousFunction(func)
-									&& func instanceof JstMethod) {
 
-								if (paramIdx == 1 && supportArgTypeExt) {
-									IExpr keyArg = arguments.get(0);
-									if (keyArg instanceof JstLiteral) {
-										IJstType qualiferType = mie
-												.getQualifyExpr()
-												.getResultType();
-										if (qualiferType != null) {
-											if (qualiferType instanceof IJstRefType) {
-												qualiferType = ((IJstRefType) qualiferType)
-														.getReferencedNode();
-											}
-											String targetFunc = qualiferType
-													.getName()
-													+ (callingMethod.isStatic() ? "::"
-															: ":")
-													+ callingMethod.getName()
-															.getName();
-											FunctionMetaRegistry fmr = FunctionMetaRegistry
-													.getInstance();
-											if (fmr.isFuncMetaMappingSupported(targetFunc)) {
-												String key = ((JstLiteral) keyArg)
-														.toString();
-												key = unquote(key);
-												IMetaExtension metaExt = fmr
-														.getExtentedArgBinding(
-																targetFunc,
-																key,
-																groupInfo
-																		.getGroupName(),
-																groupInfo
-																		.getDependentGroups());
-												if (metaExt != null) {
-													IJstMethod extFunc = metaExt
-															.getMethod();
-													if (extFunc != null) {
-														JstExpressionTypeLinkerTraversal
-																.accept(extFunc,
-																		revisitor);
-														IJstMethod resolved = unwrapMethod(extFunc);
-														if (resolved != null) {
-															paramType = new JstFuncType(
-																	unwrapMethod(extFunc));
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-								deriveAnonymousFunction(paramType,
-										(JstMethod) func);
-								// bugfix by huzhou@ebay.com, needs to revisit
-								// the func expression
-								// to allow the correct binding inside after the
-								// inference
-								JstExpressionTypeLinkerTraversal.accept(func,
-										revisitor);
-							}
+						if (arg instanceof FuncExpr) {
+							processFunctionExpression(mie, revisitor,
+									groupInfo, callingMethod, arguments,
+									supportArgTypeExt, paramIdx, paramType, arg);
 						}
 						// tricks the loop to continue till all arguments are
 						// consumed
@@ -2561,6 +2540,71 @@ public class JstExpressionTypeLinkerHelper {
 					}
 				}
 			}
+		}
+	}
+
+	private static void processFunctionExpression(final MtdInvocationExpr mie,
+			final IJstVisitor revisitor, final GroupInfo groupInfo,
+			final IJstMethod callingMethod, final List<IExpr> arguments,
+			boolean supportArgTypeExt, int paramIdx, JstFuncType paramType,
+			final IExpr arg) {
+		// it actually could be
+		// new Function as
+		// ObjCreateExpr but
+		// it's useless as we
+		// won't inspect the
+		// string definition
+		final FuncExpr funcArg = (FuncExpr) arg;
+		final IJstMethod func = funcArg.getFunc();
+		// infer when function has no annotation only
+		// TODO check how to verify function has no
+		// annotation
+		if (func != null && isAnonymousFunction(func)
+				&& func instanceof JstMethod) {
+
+			if (paramIdx == 1 && supportArgTypeExt) {
+				IExpr keyArg = arguments.get(0);
+				if (keyArg instanceof JstLiteral) {
+					IJstType qualiferType = mie.getQualifyExpr()
+							.getResultType();
+					if (qualiferType != null) {
+						if (qualiferType instanceof IJstRefType) {
+							qualiferType = ((IJstRefType) qualiferType)
+									.getReferencedNode();
+						}
+						String targetFunc = qualiferType.getName()
+								+ (callingMethod.isStatic() ? "::" : ":")
+								+ callingMethod.getName().getName();
+						FunctionMetaRegistry fmr = FunctionMetaRegistry
+								.getInstance();
+						if (fmr.isFuncMetaMappingSupported(targetFunc)) {
+							String key = ((JstLiteral) keyArg).toString();
+							key = unquote(key);
+							IMetaExtension metaExt = fmr.getExtentedArgBinding(
+									targetFunc, key, groupInfo.getGroupName(),
+									groupInfo.getDependentGroups());
+							if (metaExt != null) {
+								IJstMethod extFunc = metaExt.getMethod();
+								if (extFunc != null) {
+									JstExpressionTypeLinkerTraversal.accept(
+											extFunc, revisitor);
+									IJstMethod resolved = unwrapMethod(extFunc);
+									if (resolved != null) {
+										paramType = new JstFuncType(
+												unwrapMethod(extFunc));
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			deriveAnonymousFunction(paramType, (JstMethod) func);
+			// bugfix by huzhou@ebay.com, needs to revisit
+			// the func expression
+			// to allow the correct binding inside after the
+			// inference
+			JstExpressionTypeLinkerTraversal.accept(func, revisitor);
 		}
 	}
 

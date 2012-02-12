@@ -27,14 +27,14 @@ import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtensio
 public class FunctionParamsMetaRegistry {
 	
 	private static FunctionParamsMetaRegistry s_instance = new FunctionParamsMetaRegistry();
-	private Map<String, FunctionMetaMapping> m_funcMetaMappings = new LinkedHashMap<String, FunctionMetaMapping>();
+	private Map<String, IFunctionMetaMapping> m_funcMetaMappings = new LinkedHashMap<String, IFunctionMetaMapping>();
 	private Set<String> m_tergetFuncs = new HashSet<String>();
 	
 	public static FunctionParamsMetaRegistry getInstance() {
 		return s_instance;
 	}
 	
-	public void addMapping(FunctionMetaMapping mapping) {
+	public void addMapping(IFunctionMetaMapping mapping) {
 		m_funcMetaMappings.put(mapping.getGroupId(), mapping);
 		m_tergetFuncs.addAll(mapping.getSupportedTargetFuncs());
 	}
@@ -61,7 +61,7 @@ public class FunctionParamsMetaRegistry {
 	public void clear(String groupId) {
 		m_funcMetaMappings.remove(groupId);
 		m_tergetFuncs.clear();
-		for (FunctionMetaMapping mapping : m_funcMetaMappings.values()) {
+		for (IFunctionMetaMapping mapping : m_funcMetaMappings.values()) {
 			m_tergetFuncs.addAll(mapping.getSupportedTargetFuncs());
 		}
 	}
@@ -73,7 +73,7 @@ public class FunctionParamsMetaRegistry {
 	
 	private IMetaExtension getExtentedArgBinding(
 		String targetFunc, String key, String groupId) {
-		FunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
+		IFunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
 		return (mapping == null) ? null : mapping.getExtentedArgBinding(targetFunc, key);
 	}
 }
