@@ -25,7 +25,9 @@ import java.util.List;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.JstProblemId;
+import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
+import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
@@ -62,8 +64,8 @@ public abstract class VjoValidationBaseTester {
     
     @BeforeClass
     public static void start(){
-//    	JstCache.getInstance().clear();
-//    	LibManager.getInstance().clear();
+    	JstCache.getInstance().clear();
+    	LibManager.getInstance().clear();
     }
     
     
