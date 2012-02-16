@@ -88,6 +88,8 @@ public class TypeSpaceMgr {
 
 	private ModifyTypeCallback modifyTypeCallback = new ModifyTypeCallback();
 
+	private Map<String, URI> m_typeToFileMapSync;
+
 	public static final List<String> NATIVE_GLOBAL_OBJECTS;
 	static {
 		List<String> nativeGlobalObjects = new ArrayList<String>(16);
@@ -959,7 +961,10 @@ public class TypeSpaceMgr {
 	}
 
 	public Map<String, URI> getTypeToFileMap() {
-		return Collections.synchronizedMap(m_typeToFileMap);
+		if(m_typeToFileMapSync == null){
+			m_typeToFileMapSync = Collections.synchronizedMap(m_typeToFileMap);
+		}
+		return m_typeToFileMapSync;
 	}
 
 	public void setTypeToFileMap(Map<String, URI> typeToFileMap) {
