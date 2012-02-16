@@ -2039,7 +2039,9 @@ public class JstExpressionTypeLinkerHelper {
 
 					extMtd = bindArgumentMappng(revisitor, grpInfo,
 							matchingMtd, mtdExpr.getArgs().get(0));
-					parameters = extMtd.getArgs();
+					if(extMtd!=null){
+						parameters = extMtd.getArgs();
+					}
 
 				}
 
