@@ -639,23 +639,27 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		// how do I know what is the function?
 		if(getCurrentScopeFrame().getNode() != null && getCurrentScopeFrame().getNode() instanceof IJstMethod){
 			IJstMethod mtd = (IJstMethod)getCurrentScopeFrame().getNode();
-			// making this use a mixed type to add callParent to this instance of this
-			List<IJstType> types = new ArrayList<IJstType>();
-			// TODO fix name
-			JstType createJstType = JstFactory.getInstance().createJstType("SuperTest", false);
-			// TODO look up the inheritance chain for method
-			IJstType jstType = currentType.getExtends().get(0);
-			IJstMethod method = jstType.getMethod(mtd.getName().getName(), mtd.isStatic(), true);
-			if(method!=null){
-				SynthJstProxyMethod mtd2 = new SynthJstProxyMethod(method);
-				mtd2.getName().setName("callParent");
-				createJstType.addMethod(mtd2);
-				types.add(createJstType);
-				types.add(currentType);
-				JstMixedType newType = new JstMixedType(types) ;
-				currentType = newType;
-				
+			String mtdKey = createMtdKey(mtd);
+			if (mtdKey.equals("Ext.Base:callParent")) {
+				// making this use a mixed type to add callParent to this instance of this
+				List<IJstType> types = new ArrayList<IJstType>();
+				// TODO fix name
+				JstType createJstType = JstFactory.getInstance().createJstType("SuperTest", false);
+				// TODO look up the inheritance chain for method
+				IJstType jstType = currentType.getExtends().get(0);
+				IJstMethod method = jstType.getMethod(mtd.getName().getName(), mtd.isStatic(), true);
+				if(method!=null){
+					SynthJstProxyMethod mtd2 = new SynthJstProxyMethod(method);
+					mtd2.getName().setName("callParent");
+					createJstType.addMethod(mtd2);
+					types.add(createJstType);
+					types.add(currentType);
+					JstMixedType newType = new JstMixedType(types) ;
+					currentType = newType;
+					
+				}
 			}
+		
 			
 		}
 		
@@ -1399,7 +1403,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	 * @param mtd
 	 * @return
 	 */
-	private String createMtdKey(JstMethod mtd) {
+	private String createMtdKey(IJstMethod mtd) {
 		if(mtd==null){
 			return "";
 		}
