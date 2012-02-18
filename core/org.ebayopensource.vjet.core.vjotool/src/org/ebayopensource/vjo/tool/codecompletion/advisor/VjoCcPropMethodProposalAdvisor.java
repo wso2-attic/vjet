@@ -13,8 +13,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
+import org.ebayopensource.dsf.jst.IJstOType;
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcAdvisor;
@@ -82,7 +85,14 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 				addMethod(method, levels, isNative, ctx, tempString, exactMatch);
 			}
 		}
-		List<IJstProperty> properties = calledType.getAllPossibleProperties(false, false);
+		
+		List<IJstProperty> properties = new ArrayList<IJstProperty>();
+		if(calledType instanceof JstMixedType){
+			properties = handleMixedType((JstMixedType)calledType);
+		}else{
+			properties = getTypeProperties(calledType);
+		}
+		
 		Iterator<IJstProperty> it1 = properties.iterator();
 		while (it1.hasNext()) {
 			
@@ -106,6 +116,25 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 				appendData(ctx, property, (exactMatch && basicMatch));
 			}
 		}
+	}
+
+	private List<IJstProperty> handleMixedType(JstMixedType calledType) {
+		List<IJstProperty> props = new ArrayList<IJstProperty>();
+		for(IJstType type: calledType.getMixedTypes()){
+			if(type instanceof JstAttributedType){
+				JstAttributedType atype = ((JstAttributedType)type);
+				IJstOType otype = atype.getOType(atype.getAttributeName());
+				props.addAll(getTypeProperties(otype));
+			}
+			
+		}
+		return props;
+	}
+
+	private List<IJstProperty> getTypeProperties(IJstType calledType) {
+		
+		
+		return calledType.getAllPossibleProperties(false, false);
 	}
 
 	private boolean isReferenceByDot(IJstMethod method) {

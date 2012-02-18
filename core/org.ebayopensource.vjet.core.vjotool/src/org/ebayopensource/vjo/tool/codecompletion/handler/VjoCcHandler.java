@@ -22,6 +22,7 @@ import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeRefType;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
@@ -624,7 +625,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 				ctx.setActingPackageToken(str);
 				result.add(VjoCcPackageProposalAdvisor.ID);
 				result.add(VjoCcTypeProposalAdvisor.ID);
-
+				
 			}
 		} else if (node instanceof MtdInvocationExpr) {
 			// Scenerior: v.<cursor>method();

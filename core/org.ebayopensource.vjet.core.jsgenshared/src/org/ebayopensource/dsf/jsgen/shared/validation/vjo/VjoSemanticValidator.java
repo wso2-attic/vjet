@@ -354,10 +354,12 @@ public abstract class VjoSemanticValidator implements
 		}
 		else if(type instanceof SynthOlType){
 			final SynthOlType synthOlType = (SynthOlType)type;
-			final IJstType resolvedOType = synthOlType.getResolvedOType();
+			for(IJstType resolvedOType :  synthOlType.getResolvedOTypes()){
+			
 			if(resolvedOType != null && isOType(resolvedOType)){//resolved type must be an otype
 				validateSynthOlType(ctx, jstNode, synthOlType,
 						(JstObjectLiteralType)resolvedOType);
+			}
 			}
 		}
 		else{

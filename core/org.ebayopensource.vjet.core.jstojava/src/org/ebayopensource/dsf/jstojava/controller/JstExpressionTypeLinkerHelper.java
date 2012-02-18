@@ -2245,6 +2245,12 @@ public class JstExpressionTypeLinkerHelper {
 			if (exprType instanceof JstDeferredType) {
 				((JstDeferredType) exprType).setResolvedType(type);
 			} else if (expr instanceof ObjLiteral
+					&& exprType instanceof SynthOlType
+					&& type instanceof JstMixedType) {
+				
+				doObjLiteralAndOTypeBindingsMixedTypes((ObjLiteral) expr,
+						(SynthOlType) exprType, (JstMixedType)type, revisitor);
+			}else if (expr instanceof ObjLiteral
 					&& exprType instanceof SynthOlType) {
 				doObjLiteralAndOTypeBindings((ObjLiteral) expr,
 						(SynthOlType) exprType, type, revisitor);
@@ -2341,6 +2347,18 @@ public class JstExpressionTypeLinkerHelper {
 		return false;
 	}
 
+	private static void doObjLiteralAndOTypeBindingsMixedTypes(
+			final ObjLiteral objLiteral, final SynthOlType synthOlType,
+			final JstMixedType mtype, final IJstVisitor revisitor) {
+		for(IJstType type : mtype.getMixedTypes()){
+			if(type instanceof JstAttributedType){
+				JstAttributedType atype = (JstAttributedType)type;
+				IJstOType otype = atype.getOType(atype.getAttributeName());
+				doObjLiteralAndOTypeBindings(objLiteral, synthOlType, otype, revisitor);
+			}
+		}
+	}
+	
 	private static void doObjLiteralAndOTypeBindings(
 			final ObjLiteral objLiteral, final SynthOlType synthOlType,
 			final IJstType otype, final IJstVisitor revisitor) {
@@ -2348,7 +2366,7 @@ public class JstExpressionTypeLinkerHelper {
 			return;
 		}
 
-		synthOlType.setResolvedOType(otype);
+		synthOlType.addResolvedOType(otype);
 		// now we traverse the object literal to look 4 further bindings like:
 		// functions, embedded obj literals etc.
 		for (NV nv : objLiteral.getNVs()) {

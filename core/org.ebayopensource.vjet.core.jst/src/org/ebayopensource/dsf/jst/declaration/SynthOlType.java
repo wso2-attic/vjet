@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.declaration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
@@ -29,7 +30,7 @@ public class SynthOlType extends JstType implements ISynthesized {
 	private final ObjLiteral m_ol;
 	private boolean m_init = false;
 	
-	private IJstType m_resolvedOType;
+	private List<IJstType> m_resolvedOType;
 	
 	public SynthOlType(ObjLiteral ol) {
 		m_ol = ol;
@@ -217,11 +218,19 @@ public class SynthOlType extends JstType implements ISynthesized {
 		return super.getInstanceMethod(name, recursive);
 	}
 
-	public void setResolvedOType(IJstType m_resolvedOType) {
-		this.m_resolvedOType = m_resolvedOType;
+//	public void setResolvedOType(IJstType m_resolvedOType) {
+//		this.m_resolvedOType = m_resolvedOType;
+//	}
+
+	public List<IJstType> getResolvedOTypes() {
+		return m_resolvedOType;
 	}
 
-	public IJstType getResolvedOType() {
-		return m_resolvedOType;
+	public void addResolvedOType(IJstType otype) {
+		if(m_resolvedOType==null){
+			m_resolvedOType = new ArrayList<IJstType>();
+		}
+		m_resolvedOType.add(otype);
+		
 	}
 }

@@ -28,11 +28,13 @@ import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
+import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialAttributedMethod;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialOtypeMethod;
@@ -44,6 +46,7 @@ import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.JstVar;
 import org.ebayopensource.dsf.jst.declaration.JstVariantType;
 import org.ebayopensource.dsf.jst.declaration.JstVars;
+import org.ebayopensource.dsf.jst.declaration.SynthJstProxyMethod;
 import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.declaration.TopLevelVarTable;
 import org.ebayopensource.dsf.jst.declaration.VarTable;
@@ -209,9 +212,9 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 				if (mtd.isStatic()) { // static scope
 					m_scopeStack.push(new ScopeFrame(JstTypeHelper
-							.getJstTypeRefType(ownerType), true));
+							.getJstTypeRefType(ownerType), true, mtd));
 				} else {
-					m_scopeStack.push(new ScopeFrame(ownerType, false));
+					m_scopeStack.push(new ScopeFrame(ownerType, false, mtd));
 				}
 			}
 		} else if (node instanceof JstBlock
@@ -402,7 +405,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				final ObjLiteral rhsObjLiteral = (ObjLiteral) node.getValue();
 				final IJstType rhsType = rhsObjLiteral.getResultType();
 				if (rhsType instanceof SynthOlType) {
-					((SynthOlType) rhsType).setResolvedOType(type);
+					((SynthOlType) rhsType).addResolvedOType(type);
 				}
 			}
 		}
@@ -629,6 +632,36 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	 */
 	private IJstType resolveThisIdentifier(JstIdentifier identifier) {
 		IJstType currentType = getCurrentScopeFrame().getCurrentType();
+		// TODO make this an extension
+		
+		// EXTJS Specific not acceptable code ... just trace code
+		// how do I know I am in a function?
+		// how do I know what is the function?
+		if(getCurrentScopeFrame().getNode() != null && getCurrentScopeFrame().getNode() instanceof IJstMethod){
+			IJstMethod mtd = (IJstMethod)getCurrentScopeFrame().getNode();
+			// making this use a mixed type to add callParent to this instance of this
+			List<IJstType> types = new ArrayList<IJstType>();
+			// TODO fix name
+			JstType createJstType = JstFactory.getInstance().createJstType("SuperTest", false);
+			// TODO look up the inheritance chain for method
+			IJstType jstType = currentType.getExtends().get(0);
+			IJstMethod method = jstType.getMethod(mtd.getName().getName(), mtd.isStatic(), true);
+			if(method!=null){
+				SynthJstProxyMethod mtd2 = new SynthJstProxyMethod(method);
+				mtd2.getName().setName("callParent");
+				createJstType.addMethod(mtd2);
+				types.add(createJstType);
+				types.add(currentType);
+				JstMixedType newType = new JstMixedType(types) ;
+				currentType = newType;
+				
+			}
+			
+		}
+		
+		
+
+		
 		identifier.setJstBinding(currentType);
 		identifier.setType(currentType);
 		return currentType;
@@ -2225,11 +2258,24 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		private HashMap<String, LinkerSymbolInfo> m_SymbolMap = new HashMap<String, LinkerSymbolInfo>();
 		private Stack<JstVar> m_catchVarStack = new Stack<JstVar>();
 		private String m_name;
+		private IJstNode m_node;
 
 		ScopeFrame(IJstType type, boolean isStatic) {
 			m_currentType = type;
 			m_isStatic = isStatic;
 			m_name = (type == null) ? null : type.getName();
+		}
+
+		ScopeFrame(IJstType type, boolean isStatic, IJstNode currentNode) {
+			m_currentType = type;
+			m_isStatic = isStatic;
+			m_name = (type == null) ? null : type.getName();
+			m_node = currentNode;
+		}
+		
+
+		public IJstNode getNode() {
+			return m_node;
 		}
 
 		void addSymbolBinding(String symbolName, LinkerSymbolInfo nodeBinding) {
