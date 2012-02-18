@@ -352,15 +352,18 @@ public abstract class VjoSemanticValidator implements
 						resolvedType);
 			}
 		}
-		else if(type != null && type instanceof SynthOlType){
+		else if(type instanceof SynthOlType){
 			final SynthOlType synthOlType = (SynthOlType)type;
-			for(IJstType resolvedOType :  synthOlType.getResolvedOTypes()){
+			if(synthOlType.getResolvedOTypes()!=null){
+				for(IJstType resolvedOType :  synthOlType.getResolvedOTypes()){
+					
+					if(resolvedOType != null && isOType(resolvedOType)){//resolved type must be an otype
+						validateSynthOlType(ctx, jstNode, synthOlType,
+								(JstObjectLiteralType)resolvedOType);
+					}
+				}
+			}
 			
-			if(resolvedOType != null && isOType(resolvedOType)){//resolved type must be an otype
-				validateSynthOlType(ctx, jstNode, synthOlType,
-						(JstObjectLiteralType)resolvedOType);
-			}
-			}
 		}
 		else{
 			//validating if the type isn't resolved, which results in a missing import etc.
