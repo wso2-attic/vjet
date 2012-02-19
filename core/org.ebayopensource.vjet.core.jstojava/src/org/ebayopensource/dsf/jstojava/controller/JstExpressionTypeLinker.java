@@ -133,7 +133,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	public void setCurrentType(IJstType currentType) {
 		this.m_currentType = currentType;
 	}
-
+	
 	void setGroupName(String groupName) {
 		List<String> dependentGroups = null;
 		JstTypeSpaceMgr tsMgr = m_resolver.getController().getJstTypeSpaceMgr();
@@ -804,7 +804,11 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		IJstType outerType = m_currentType.getOuterType();
 		if (outerType != null && outerType != m_currentType) {
 			setCurrentType(outerType);
+		}else if( m_currentType.getParentNode() instanceof IJstType){
+			setCurrentType((IJstType)m_currentType.getParentNode());
 		}
+		
+		
 	}
 
 	private void postVisitConditionalExpr(final ConditionalExpr condExpr) {
@@ -1433,8 +1437,9 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			tcr.resolve(mtdKey, constrCtx);
 
 			if (constrCtx.getTypes().size() > 0) {
-				// TODO how to support multiple return types
+				// TODO test nested types here
 				setCurrentType(constrCtx.getTypes().get(0));
+				// TODO how to support multiple return types
 			}
 
 		}

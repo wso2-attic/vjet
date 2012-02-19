@@ -25,7 +25,7 @@ public class DefsRobustTranslator extends TypeRobustTranslator{
 
 
 	protected void transformType() {
-		weakTranslator.getProvider().getTypeTranslator().processMType(
+		weakTranslator.getProvider().getTypeTranslator().processOType(
 				(MessageSend) current, jst);
 		weakTranslator.getCtx().setCurrentType(jst);
 	}
