@@ -66,6 +66,9 @@ public class VjoCcObjLiteralAdvisor extends AbstractVjoCcAdvisor implements
 			final SynthOlType enclosingObjLiteralType = (SynthOlType) olExprType;
 			final List<IJstType> olResolvedTypes = enclosingObjLiteralType
 					.getResolvedOTypes();
+			if(olResolvedTypes==null){
+				return;
+			}
 			for (IJstType olResolvedType : olResolvedTypes) {
 				if (olResolvedType != null
 						&& olResolvedType instanceof JstObjectLiteralType) {
