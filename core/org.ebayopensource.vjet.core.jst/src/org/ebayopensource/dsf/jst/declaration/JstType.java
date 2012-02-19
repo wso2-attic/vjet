@@ -106,6 +106,8 @@ public class JstType extends BaseJstNode implements IJstType {
 	
 	private boolean m_isFakeType = false;
 
+	private List<IJstType> m_secondaryTypes;
+
 	//
 	// Constructor
 	//
@@ -1949,6 +1951,18 @@ public class JstType extends BaseJstNode implements IJstType {
 	}
 	
 	/**
+	 * Remove all embedded types from the type
+	 */
+	public void clearSecondaryTypes() {
+		synchronized(this){
+			if (m_secondaryTypes != null) {
+				removeChildren(m_secondaryTypes);
+				m_secondaryTypes = null;
+			}
+		}
+	}
+	
+	/**
 	 * Remove all static initialization statements from the type
 	 */
 	public void clearStaticInits() {
@@ -3039,5 +3053,39 @@ public class JstType extends BaseJstNode implements IJstType {
 	
 	public void addOption(String name, Object value){
 		m_options.put(name, value);
+	}
+
+	public void addSecondaryType(IJstType secondaryType){
+		if(m_secondaryTypes==null){
+			m_secondaryTypes = new ArrayList<IJstType>();
+		}
+		m_secondaryTypes.add(secondaryType);
+	}
+	
+	public void addSecondaryType(final JstType secondaryType) {
+		if (secondaryType == null){
+			return;
+		}
+		synchronized(this){
+			if (m_secondaryTypes != null && m_secondaryTypes.contains(secondaryType)){
+				return;
+			}
+		
+			if (m_secondaryTypes == null) {
+				m_secondaryTypes = new ArrayList<IJstType>(1);
+			}
+			m_secondaryTypes.add(secondaryType);
+			addChild(secondaryType);
+		}
+		secondaryType.m_outerType = this;
+		secondaryType.setParent(this);
+	}
+	
+	@Override
+	public List<? extends IJstType> getSecondaryTypes() {
+		if(m_secondaryTypes==null){
+			return Collections.EMPTY_LIST;
+		}
+		return Collections.unmodifiableList(m_secondaryTypes);
 	}
 }

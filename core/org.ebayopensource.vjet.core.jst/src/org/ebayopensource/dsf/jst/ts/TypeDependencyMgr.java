@@ -87,6 +87,7 @@ class TypeDependencyMgr {
 	 */
 	public void addInnerAndOTypes(Group<IJstType> group, IJstType type, boolean buildDependency) {
 		List<? extends IJstType> innerTypes = type.getEmbededTypes();
+		List<? extends IJstType> secondaryTypes = type.getSecondaryTypes();
 		List<? extends IJstType> oTypes = type.getOTypes();
 		
 		List<IJstType> combinedTypeList = new ArrayList<IJstType>();
@@ -97,6 +98,10 @@ class TypeDependencyMgr {
 		
 		if (oTypes != null && !oTypes.isEmpty()) {
 			combinedTypeList.addAll(oTypes);
+		}
+		
+		if (secondaryTypes != null && !secondaryTypes.isEmpty()) {
+			combinedTypeList.addAll(secondaryTypes);
 		}
 		
 		for (IJstType innerOType : combinedTypeList) {
@@ -116,6 +121,7 @@ class TypeDependencyMgr {
 	
 	public void removeInnerAndOTypes(Group<IJstType> group, IJstType type) {
 		List<? extends IJstType> innerTypes = type.getEmbededTypes();
+		List<? extends IJstType> secondaryTypes = type.getSecondaryTypes();
 		List<? extends IJstType> oTypes = type.getOTypes();
 		
 		List<IJstType> combinedTypeList = new ArrayList<IJstType>();
@@ -126,6 +132,9 @@ class TypeDependencyMgr {
 		
 		if (oTypes != null && !oTypes.isEmpty()) {
 			combinedTypeList.addAll(oTypes);
+		}
+		if (secondaryTypes != null && !secondaryTypes.isEmpty()) {
+			combinedTypeList.addAll(secondaryTypes);
 		}
 		
 		for (IJstType innerOType : combinedTypeList) {

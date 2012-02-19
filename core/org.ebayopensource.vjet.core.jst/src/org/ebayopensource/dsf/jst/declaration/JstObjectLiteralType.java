@@ -17,7 +17,7 @@ import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
 
-public class JstObjectLiteralType extends JstType implements IJstOType, IJstType{
+public class JstObjectLiteralType extends JstType implements IJstOType{
 
 	private static final long serialVersionUID = 1L;
 	private List<IJstProperty> m_optionalFields = null;

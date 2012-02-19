@@ -765,4 +765,9 @@ public abstract class JstProxyType implements IJstType {
 		return m_targetType.getOptions();
 	}
 	
+	@Override
+	public List<? extends IJstType> getSecondaryTypes() {
+		return m_targetType.getSecondaryTypes();
+	}
+	
 }

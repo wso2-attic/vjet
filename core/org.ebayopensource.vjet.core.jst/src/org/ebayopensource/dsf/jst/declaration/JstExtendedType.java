@@ -670,6 +670,11 @@ public class JstExtendedType implements IJstType {
 		}
 		return names;
 	}
+
+	@Override
+	public List<? extends IJstType> getSecondaryTypes() {
+		throw new UnsupportedOperationException("secondary types not supported for extension");
+	}
 	
 
 }

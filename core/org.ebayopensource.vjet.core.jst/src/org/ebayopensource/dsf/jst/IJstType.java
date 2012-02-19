@@ -568,6 +568,13 @@ public interface IJstType extends IJstNode {
 	IJstType getEmbededType(String shortName);
 	
 	/**
+	 * Answer an unmodifiable list of all secondary types in this type
+	 * These types are similar to Java Raw type support see java lang spec
+	 * @return List<? extends IJstType>
+	 */
+	List<? extends IJstType> getSecondaryTypes();
+	
+	/**
 	 * Answer an unmodifiable list of static embeded types of the type
 	 * @return List<? extends IJstType>
 	 */
