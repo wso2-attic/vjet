@@ -23,12 +23,18 @@ public final class NV extends BaseJstNode implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private final JstIdentifier m_name;
-	private final IExpr m_value;
+	private JstIdentifier m_name;
+	private IExpr m_value;
+
+	private boolean m_optional;
 	
 	//
 	// Constructor
 	//
+	public NV(){
+		
+	}
+	
 	public NV(final String name, final JstLiteral value){
 		this(name, (IExpr)value);
 	}
@@ -54,12 +60,24 @@ public final class NV extends BaseJstNode implements Serializable {
 		return m_name.getName();
 	}
 	
+	public void setName(String name){
+		m_name =  new JstIdentifier(name);
+	}
+	
+	public void setName(JstIdentifier name){
+		m_name = name;
+	}
+	
 	public JstIdentifier getIdentifier() {
 		return m_name;
 	}
 
 	public IExpr getValue() {
 		return m_value;
+	}
+	
+	public void setValue(IExpr value) {
+		m_value = value;
 	}
 
 	@Override
@@ -70,5 +88,13 @@ public final class NV extends BaseJstNode implements Serializable {
 	@Override
 	public String toString(){
 		return m_name.toSimpleTermText() + ":" + m_value;
+	}
+	
+	public boolean isOptional(){
+		return m_optional;
+	}
+	
+	public void setOptional(boolean optional){
+		 m_optional = optional;
 	}
 }

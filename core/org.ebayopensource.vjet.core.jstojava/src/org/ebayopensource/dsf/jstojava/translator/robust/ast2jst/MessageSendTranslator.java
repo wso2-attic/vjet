@@ -76,12 +76,12 @@ public class MessageSendTranslator extends
 					}
 					IExpression argExpression = args[i];
 					BaseAst2JstTranslator translator;
-					if (argExpression instanceof ObjectLiteral
-							&& (isVjoOL(methodNameStr))) {
-						translator = new VjoOLTranslator(m_ctx);
-					} else {
+//					if (argExpression instanceof ObjectLiteral
+//							&& (isVjoOL(methodNameStr))) {
+//						translator = new VjoOLTranslator(m_ctx);
+//					} else {
 						translator = getTranslator(argExpression);
-					}
+//					}
 					Object stmt = translator.translate(argExpression);
 					if (stmt instanceof IExpr) {
 						

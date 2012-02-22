@@ -28,6 +28,10 @@ public class ObjLiteral extends JstLiteral {
 		m_jstType = new SynthOlType(this);
 	}
 	
+	public void setJstType(IJstType type){
+		m_jstType = type;
+	}
+	
 	//
 	// Satisfy ILiteral
 	//

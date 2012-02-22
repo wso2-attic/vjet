@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.advisor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
@@ -64,15 +65,20 @@ public class VjoCcObjLiteralAdvisor extends AbstractVjoCcAdvisor implements
 		final IJstType olExprType = enclosingObjLiteral.getResultType();
 		if (olExprType != null && olExprType instanceof SynthOlType) {
 			final SynthOlType enclosingObjLiteralType = (SynthOlType) olExprType;
-			final List<IJstType> olResolvedTypes = enclosingObjLiteralType
+			List<IJstType> olResolvedTypes = enclosingObjLiteralType
 					.getResolvedOTypes();
-			if(olResolvedTypes==null){
-				return;
+			if (olResolvedTypes==null && enclosingObjLiteralType !=null) {
+				olResolvedTypes = new ArrayList<IJstType>();
+				olResolvedTypes.add(enclosingObjLiteralType);
 			}
+			//olResolvedTypes.add(enclosingObjLiteralType);
+//			if(olResolvedTypes==null){
+//				return;
+//			}
 			for (IJstType olResolvedType : olResolvedTypes) {
 				if (olResolvedType != null
-						&& olResolvedType instanceof JstObjectLiteralType) {
-					final JstObjectLiteralType otype = (JstObjectLiteralType) olResolvedType;
+						&& (olResolvedType instanceof JstObjectLiteralType || olResolvedType instanceof SynthOlType)) {
+					final IJstType otype =  olResolvedType;
 					// names proposals, filtered with the partial name if
 					// non-empty
 					if (proposingName) {
@@ -81,8 +87,7 @@ public class VjoCcObjLiteralAdvisor extends AbstractVjoCcAdvisor implements
 						for (IJstProperty otypePty : otype.getProperties(false)) {
 							final JstName ptyName = otypePty.getName();
 							// letter case tolerated
-							if (ptyName.getName() != null
-									&& ptyName.getName().toLowerCase()
+							if( ptyName.getName() != null && ptyName.getName().toLowerCase()
 											.startsWith(name.toLowerCase())) {
 								appendData(
 										ctx,

@@ -40,15 +40,17 @@ public class ObjectLiteralFieldTranslator extends
 		// store completion position
 		int completionPos = m_ctx.getCompletionPos();
 		try {
+			NV nv = new NV();
+			
 			final IExpr value = (IExpr)getTranslatorAndTranslate(astObjectliteralField.initializer);
 			final JstIdentifier id = createId(astObjectliteralField); 
-			bindObjLiteralId(astObjectliteralField, id, value);
+			bindObjLiteralId(astObjectliteralField, id, value, nv);
+			nv.setName(id);
+			nv.setValue(value);
 			
-			
-			NV nv = new NV(id, value); 
 			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(astObjectliteralField.sourceStart()));
 			int start = id.getSource().getStartOffSet();
-			if (value.getSource() != null) {
+			if (value!=null && value.getSource() != null) {
 				int end = value.getSource().getEndOffSet();
 				int length = end - start;
 				nv.setSource(TranslateHelper.createJstSource(m_ctx
@@ -63,7 +65,7 @@ public class ObjectLiteralFieldTranslator extends
 	}
 
 	private void bindObjLiteralId(ObjectLiteralField astObjectliteralField,
-			final JstIdentifier id, IExpr value) {
+			final JstIdentifier id, IExpr value, NV nv) {
 		// added by huzhou@ebay.com to bind objectLiteral's methods early on
 		if (value instanceof FuncExpr) {
 			final TranslateHelper.RenameableSynthJstProxyMethod mtdBinding = new TranslateHelper.RenameableSynthJstProxyMethod(((FuncExpr)value).getFunc(), id.getName());
@@ -74,10 +76,12 @@ public class ObjectLiteralFieldTranslator extends
 		final List<IJsCommentMeta> metaArr = getCommentMeta(astObjectliteralField);
 		if (metaArr != null && metaArr.size() > 0) {
 			final IJsCommentMeta meta = metaArr.get(0);
+			nv.setOptional(meta.getTyping().isOptional());
 			final IJstType metaDefinedType = TranslateHelper.findType(m_ctx,
 					meta.getTyping(), meta);
 			if (metaDefinedType != null) {
 				id.setType(metaDefinedType);
+				
 				if(metaDefinedType instanceof JstFuncType){
 					final IJstMethod replacement = TranslateHelper.MethodTranslateHelper.createJstSynthesizedMethod(metaArr, m_ctx, id.getName());
 					if(replacement != null){

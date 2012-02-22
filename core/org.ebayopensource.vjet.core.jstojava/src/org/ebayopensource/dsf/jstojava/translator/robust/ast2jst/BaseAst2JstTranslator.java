@@ -172,11 +172,11 @@ public abstract class BaseAst2JstTranslator<T extends IASTNode, E> {
 
 	protected Object getTranslatorAndTranslate(IASTNode astNode) {
 		BaseAst2JstTranslator translator;
-		if (astNode instanceof ObjectLiteral && isVjoContext()) {
-			translator = new VjoOLTranslator(m_ctx);
-		} else {
+//		if (astNode instanceof ObjectLiteral && isVjoContext()) {
+//			translator = new VjoOLTranslator(m_ctx);
+//		} else {
 			translator = getTranslator(astNode);
-		}
+//		}
 
 		Object object = null;
 

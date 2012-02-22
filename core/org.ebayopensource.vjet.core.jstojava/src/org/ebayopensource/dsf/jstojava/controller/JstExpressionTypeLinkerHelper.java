@@ -1029,7 +1029,14 @@ public class JstExpressionTypeLinkerHelper {
 			for (JstArg arg : args) {
 				for (IJstType parameterType : arg.getTypes()) {
 					IJstType parameterCorrectType = parameterType;
-					if (parameterType instanceof JstType
+					if (parameterType instanceof JstMixedType
+							&& !((JstType) parameterType).getStatus().isValid()) {
+						final JstMixedType mixedOTypes = (JstMixedType)parameterType;
+						for(IJstType mixedType :mixedOTypes.getMixedTypes()){
+							
+						}
+					}
+					else if (parameterType instanceof JstType
 							&& !((JstType) parameterType).getStatus().isValid()) {
 						final IJstType potentialOtypeMemberType = parameterType;
 						IJstOType resolvedOtype = getOtype(potentialOtypeMemberType
@@ -2360,13 +2367,19 @@ public class JstExpressionTypeLinkerHelper {
 	}
 	
 	private static void doObjLiteralAndOTypeBindings(
-			final ObjLiteral objLiteral, final SynthOlType synthOlType,
+			 ObjLiteral objLiteral, final SynthOlType synthOlType,
 			final IJstType otype, final IJstVisitor revisitor) {
-		if (otype == null || !(otype instanceof JstObjectLiteralType)) {
+		
+		// support nested obj literals
+		if(otype != null && (otype instanceof SynthOlType) ){
+			objLiteral.setJstType(otype);	
+		}
+		else if (otype != null && (otype instanceof JstObjectLiteralType)) {
+			synthOlType.addResolvedOType(otype);
+		}else{
 			return;
 		}
-
-		synthOlType.addResolvedOType(otype);
+		
 		// now we traverse the object literal to look 4 further bindings like:
 		// functions, embedded obj literals etc.
 		for (NV nv : objLiteral.getNVs()) {
