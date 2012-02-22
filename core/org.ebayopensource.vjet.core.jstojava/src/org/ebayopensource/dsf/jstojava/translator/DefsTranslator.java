@@ -66,9 +66,6 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 
 			if (node instanceof ObjLiteral) {
 				ObjLiteral literal = ((ObjLiteral) node);
-				IndentedPrintStream ps = new IndentedPrintStream(System.out);
-				JstDepthFirstTraversal.accept(literal,
-						new JstPrettyPrintVisitor(ps));
 				for (NV field : literal.getNVs()) {
 					processDef(jstType, field);
 					System.out.println(field);
