@@ -83,8 +83,12 @@ public class VjoCcObjLiteralAdvisor extends AbstractVjoCcAdvisor implements
 					// non-empty
 					if (proposingName) {
 						String nvOp = (enclosingObjLiteral != null) ? ": " : "";
+						
 						// otype.addOptionalField(optionalField)
 						for (IJstProperty otypePty : otype.getProperties(false)) {
+							if(otypePty.getValue() instanceof ObjLiteral || otypePty.getValue()==null){
+								nvOp += "{}";
+							}
 							final JstName ptyName = otypePty.getName();
 							// letter case tolerated
 							if( ptyName.getName() != null && ptyName.getName().toLowerCase()
