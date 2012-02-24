@@ -11,6 +11,7 @@ package org.ebayopensource.dsf.jstojava.translator;
 import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
+import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
@@ -24,6 +25,7 @@ import org.ebayopensource.dsf.jst.expr.FuncExpr;
 import org.ebayopensource.dsf.jst.term.JstLiteral;
 import org.ebayopensource.dsf.jst.term.NV;
 import org.ebayopensource.dsf.jst.term.ObjLiteral;
+import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
 import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
@@ -62,12 +64,11 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 			translator.setParent(jstType);
 			Object node = translator.translate(expr);
 			// post process Object Literal
-
+			
 			if (node instanceof ObjLiteral) {
 				ObjLiteral literal = ((ObjLiteral) node);
 				for (NV field : literal.getNVs()) {
-					processDef(jstType, field);
-					System.out.println(field);
+					processDef(jstType, literal, field);
 				}
 				
 			}
@@ -77,20 +78,24 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 		}
 	}
 
-	private void processDef(JstType jstType, NV field) {
+	private void processDef(JstType jstType, ObjLiteral literal, NV field) {
 
 		if (field.getValue() != null) {
 
 			if (field.getValue() instanceof ObjLiteral) {
 				processObjLiteralDef(jstType, field.getName(),
 						(ObjLiteral) field.getValue());
-			}
-
-			if (field.getValue() instanceof FuncExpr) {
+			}else if (field.getValue() instanceof FuncExpr) {
 				processFunctionDef(jstType,
 						((FuncExpr) field.getValue()).getFunc());
 
 			}
+			else if (field.getValue() instanceof BaseJstNode){
+				processObjLiteralDef(jstType, field.getName(),
+						(BaseJstNode)field.getValue());
+			}
+			
+			
 		}
 
 	}
@@ -119,6 +124,18 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 		jstType.addOType(otype);
 	}
 
+	private void processObjLiteralDef(JstType jstType, String name,
+			BaseJstNode value) {
+
+		JstObjectLiteralType otype = new JstObjectLiteralType(name);
+		otype.setPackage(new JstPackage(jstType.getName()));
+		// TODO add source info
+		JstCache.getInstance().addOType(otype);
+		jstType.addProperty(new JstProperty(otype, name));
+		
+		jstType.addOType(otype);
+	}
+	
 	private JstProperty createPropertyFromNV(NV nv){
 		IExpr value = nv.getValue();
 	

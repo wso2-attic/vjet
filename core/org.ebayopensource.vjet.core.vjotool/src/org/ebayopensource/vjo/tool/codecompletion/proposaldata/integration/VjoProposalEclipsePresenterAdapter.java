@@ -20,7 +20,9 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
+import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.token.ILHS;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
 import org.ebayopensource.vjo.meta.VjoKeywords;
@@ -563,13 +565,17 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 			final IJstProperty pty = (RenameableSynthJstProxyProp)node;
 			final String ptyName = pty.getName().getName();
 			displayString = CodeCompletionUtils.getPropertyString(pty);
-			
+			int cursorPosition = ptyName.length();
 			final IJstType ptyType = pty.getType();
+			if(ptyType instanceof SynthOlType || ptyType instanceof JstObjectLiteralType){
+				cursorPosition--;
+			}
 			if(ptyType instanceof JstFuncType){
 				displayString = CodeCompletionUtils.getFullMethodString(((JstFuncType)ptyType).getFunction(), pty.getOwnerType(), displayString.contains("?"));
 			}
+		
 			return new VjoEclipseCompletionProposalAdapter<IMAGE, CONTEXT_INFO>(ptyName,
-					getReplacementOffset(data), getReplacementLength(data), ptyName.length(),
+					getReplacementOffset(data), getReplacementLength(data), cursorPosition,
 					m_labelProvider.getScriptImage(pty), displayString,
 					null, externalInfo);
 		}

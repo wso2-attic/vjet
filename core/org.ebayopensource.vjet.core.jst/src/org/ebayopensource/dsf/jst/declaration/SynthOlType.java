@@ -230,7 +230,9 @@ public class SynthOlType extends JstType implements ISynthesized {
 		if(m_resolvedOType==null){
 			m_resolvedOType = new ArrayList<IJstType>();
 		}
-		m_resolvedOType.add(otype);
+		if(!m_resolvedOType.contains(otype)){
+			m_resolvedOType.add(otype);
+		}
 		
 	}
 }
