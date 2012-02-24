@@ -87,7 +87,11 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
+import org.ebayopensource.dsf.jstojava.resolver.IThisObjScopeResolver;
+import org.ebayopensource.dsf.jstojava.resolver.IThisScopeContext;
 import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructContext;
+import org.ebayopensource.dsf.jstojava.resolver.ThisObjScopeResolverRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.ThisScopeContext;
 import org.ebayopensource.dsf.jstojava.resolver.TypeConstructContext;
 import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
@@ -640,6 +644,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		if(getCurrentScopeFrame().getNode() != null && getCurrentScopeFrame().getNode() instanceof IJstMethod){
 			IJstMethod mtd = (IJstMethod)getCurrentScopeFrame().getNode();
 			String mtdKey = createMtdKey(mtd);
+			/*
 			if (mtdKey.equals("Ext.Base:callParent")) {
 				// making this use a mixed type to add callParent to this instance of this
 				List<IJstType> types = new ArrayList<IJstType>();
@@ -657,6 +662,16 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					JstMixedType newType = new JstMixedType(types) ;
 					currentType = newType;
 					
+				}
+			}
+			*/
+			ThisObjScopeResolverRegistry registry = ThisObjScopeResolverRegistry.getInstance();
+			if(registry.hasResolver(mtdKey)) {
+				IThisScopeContext context = new ThisScopeContext(currentType, mtd);
+				registry.resolve(mtdKey, context);
+				IJstType newType = context.getThisType();
+				if(newType != null) {
+					currentType = newType;
 				}
 			}
 		

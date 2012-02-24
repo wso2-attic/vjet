@@ -12,6 +12,7 @@ import java.util.Collection;
 
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.ThisObjScopeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
 import org.ebayopensource.vjet.eclipse.core.builder.TypeSpaceBuilder;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
@@ -20,6 +21,8 @@ import org.ebayopensource.vjet.eclipse.core.ts.JstLibResolver;
 import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceLoadJob;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamMappingExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamResolverExtension;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExtension;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
@@ -149,11 +152,12 @@ public class VjetPlugin extends Plugin {
 				loader.setStarted(true);
 			}
 		});
-		
+
 		initTypeCostructorRegistry();
 		initFunctionParamsRegistry();
+		initThisObjScopeResolverRegistry();
 		m_loadJob.schedule();
-		
+
 	}
 
 	private void initTypeCostructorRegistry() {
@@ -177,9 +181,9 @@ public class VjetPlugin extends Plugin {
 										+ " resolver.", e));
 			}
 		}
-		
+
 	}
-	
+
 	private void initFunctionParamsRegistry() {
 
 		FunctionParamsMetaRegistry registry = FunctionParamsMetaRegistry
@@ -200,10 +204,33 @@ public class VjetPlugin extends Plugin {
 										+ " resolver.", e));
 			}
 		}
-		
+
 	}
-	
-	
+
+	private void initThisObjScopeResolverRegistry() {
+
+		ThisObjScopeResolverRegistry registry = ThisObjScopeResolverRegistry
+				.getInstance();
+
+		ThisScopeResolverExtensionRegistry extensionRegistry = new ThisScopeResolverExtensionRegistry();
+		Collection<ThisScopeResolverExtension> extensions = extensionRegistry
+				.getResolverExtensions();
+		for (ThisScopeResolverExtension extension : extensions) {
+			try {
+				registry.addResolver(extension.getKey(),
+						extension.createResolver());
+			} catch (CoreException e) {
+				VjetPlugin
+						.getDefault()
+						.getLog()
+						.log(new Status(IStatus.ERROR, VjetPlugin.PLUGIN_ID,
+								"Error intializing the " + extension.toString()
+										+ " resolver.", e));
+			}
+		}
+
+	}
+
 	private void addTraceGroupEventListeners() {
 		TypeSpaceBuilder.addGroupTraceEventListeners(m_typeSpaceMgr
 				.getController().getJstTypeSpaceMgr());
