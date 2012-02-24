@@ -4,6 +4,7 @@
   <!-- <extension-point id="validators" name="VJET Project Validators" schema="schema/validators.exsd"/> -->
    <extension-point id="typeconstruct" name="VJET Type Constructor" schema="schema/typeconstruct.exsd"/>
    <extension-point id="functionparam" name="VJET Function Param Extension" schema="schema/functionparam.exsd"/>
+   <extension-point id="thisresolver" name="This scope resolver" schema="schema/thisresolver.exsd"/>
 
    <extension
          id="org.ebayopensource.vjet.core.nature"
