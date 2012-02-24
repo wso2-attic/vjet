@@ -27,6 +27,7 @@ import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletio
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstFieldOrMethodCompletion;
 import org.eclipse.mod.wst.jsdt.core.ast.IExpression;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ASTNode;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ObjectLiteral;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ObjectLiteralField;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.SingleNameReference;
 
@@ -41,8 +42,14 @@ public class ObjectLiteralFieldTranslator extends
 		int completionPos = m_ctx.getCompletionPos();
 		try {
 			NV nv = new NV();
+			if(astObjectliteralField.initializer instanceof ObjectLiteral){
+				m_ctx.enterBlock(ScopeIds.PROPERTY);
+			}
 			
-			final IExpr value = (IExpr)getTranslatorAndTranslate(astObjectliteralField.initializer);
+			List<IJsCommentMeta> metaArr = getCommentMeta(astObjectliteralField);
+			IExpr value = (IExpr)getTranslatorAndTranslate(astObjectliteralField.initializer);
+			value = TranslateHelper
+					.getCastable(value, metaArr, m_ctx);
 			final JstIdentifier id = createId(astObjectliteralField); 
 			bindObjLiteralId(astObjectliteralField, id, value, nv);
 			nv.setName(id);
@@ -55,6 +62,9 @@ public class ObjectLiteralFieldTranslator extends
 				int length = end - start;
 				nv.setSource(TranslateHelper.createJstSource(m_ctx
 						.getSourceUtil(), length, start, end));
+			}
+			if(astObjectliteralField.initializer instanceof ObjectLiteral){
+				m_ctx.exitBlock();
 			}
 			m_result = nv;
 			return nv; 
@@ -94,10 +104,11 @@ public class ObjectLiteralFieldTranslator extends
 	
 	private List<IJsCommentMeta> getCommentMeta(
 			ObjectLiteralField ast) {
-		final int next = m_ctx.getNextNodeSourceStart();
 		return m_ctx.getCommentCollector().getCommentMeta(
-				ast.sourceStart, 
-				m_ctx.getPreviousNodeSourceEnd(), next);
+				ast.sourceStart,
+				m_ctx.getPreviousNodeSourceEnd(),
+				m_ctx.getNextNodeSourceStart());
+		
 	}
 
 	private JstIdentifier createId(ObjectLiteralField astObjectliteralField) {

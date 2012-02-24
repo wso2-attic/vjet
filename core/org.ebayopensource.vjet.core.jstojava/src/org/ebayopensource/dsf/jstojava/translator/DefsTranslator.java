@@ -11,6 +11,7 @@ package org.ebayopensource.dsf.jstojava.translator;
 import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
+import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
@@ -19,14 +20,12 @@ import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.expr.FuncExpr;
 import org.ebayopensource.dsf.jst.term.JstLiteral;
 import org.ebayopensource.dsf.jst.term.NV;
 import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
-import org.ebayopensource.dsf.jst.ts.util.JstPrettyPrintVisitor;
 import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.BaseAst2JstTranslator;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.TranslatorFactory;
@@ -70,7 +69,7 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 					processDef(jstType, field);
 					System.out.println(field);
 				}
-				System.out.println(node);
+				
 			}
 
 		} finally {
@@ -122,11 +121,30 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 
 	private JstProperty createPropertyFromNV(NV nv){
 		IExpr value = nv.getValue();
+	
 		if ((nv.getName() != null) && (nv.getName().length() > 0)
 				&& (value instanceof JstLiteral)) {
+			JstLiteral literal = (JstLiteral)value;
 			// create the JstProperty
-			JstProperty jstProperty = new JstProperty(
-					((JstLiteral) value).getResultType(), nv.getName(),
+			// problem with result type 
+			List<IJsCommentMeta> commentMeta = TranslateHelper.findMetaFromExpr(literal);
+			IJsCommentMeta meta = null;
+			if(commentMeta!=null){
+				meta = commentMeta.get(0);
+			}
+			IJstType jstType = null;
+			if(meta !=null){
+				jstType = TranslateHelper.findType(m_ctx, meta.getTyping(), meta);
+			}
+			
+			if(jstType==null){
+				jstType = value.getResultType();
+			}
+			if(jstType==null){
+				jstType = JstCache.getInstance().getType("Object");
+			}
+			
+			JstProperty jstProperty = new JstProperty(jstType, nv.getName(),
 					(JstLiteral) value, new JstModifiers());
 			jstProperty.setSource(nv.getSource());
 			jstProperty.setComments(nv.getComments());
