@@ -83,10 +83,11 @@ public class VjoCcObjLiteralAdvisor extends AbstractVjoCcAdvisor implements
 					// non-empty
 					if (proposingName) {
 						String nvOp = (enclosingObjLiteral != null) ? ": " : "";
-						
+						int count= 0;
 						// otype.addOptionalField(optionalField)
 						for (IJstProperty otypePty : otype.getProperties(false)) {
-							if(otypePty.getValue() instanceof ObjLiteral || otypePty.getValue()==null){
+							
+							if(count==0 && (otypePty.getValue() instanceof ObjLiteral || otypePty.getType() instanceof JstObjectLiteralType)){
 								nvOp += "{}";
 							}
 							final JstName ptyName = otypePty.getName();
@@ -98,6 +99,7 @@ public class VjoCcObjLiteralAdvisor extends AbstractVjoCcAdvisor implements
 										proposeObjLiteralProperty(otypePty,
 												nvOp), true);
 							}
+							count++;
 						}
 					}
 					// function signature proposals, matching name required
