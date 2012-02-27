@@ -667,14 +667,14 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			}
 			*/
 			ThisObjScopeResolverRegistry registry = ThisObjScopeResolverRegistry.getInstance();
-			if(registry.hasResolver(mtdKey)) {
+//			if(registry.hasResolver(mtdKey)) {
 				IThisScopeContext context = new ThisScopeContext(currentType, mtd);
 				registry.resolve(mtdKey, context);
 				IJstType newType = context.getThisType();
 				if(newType != null) {
 					currentType = newType;
 				}
-			}
+//			}
 		
 			
 		}

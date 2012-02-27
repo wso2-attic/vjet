@@ -9,6 +9,7 @@
 package org.ebayopensource.dsf.jstojava.resolver;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,14 +38,20 @@ public class ThisObjScopeResolverRegistry {
 	}
 
 	public void resolve(String key, IThisScopeContext context) {
-		List<IThisObjScopeResolver> resolverList = m_resolvers.get(key);
-		if (resolverList == null) {
-			return;
+		Collection<List<IThisObjScopeResolver>> resolverList = m_resolvers.values();
+		for (List<IThisObjScopeResolver> list : resolverList) {
+			for (IThisObjScopeResolver iThisObjScopeResolver : list) {
+				iThisObjScopeResolver.resolve(context);
+			}
 		}
-		for (int i = 0; i < resolverList.size(); i++) {
-			IThisObjScopeResolver resolver = resolverList.get(i);
-			resolver.resolve(context);
-		}
+		
+//		if (resolverList == null) {
+//			return;
+//		}
+//		for (int i = 0; i < resolverList.size(); i++) {
+//			IThisObjScopeResolver resolver = resolverList.get(i);
+//			resolver.resolve(context);
+//		}
 	}
 
 	public boolean hasResolver(String key) {
