@@ -114,6 +114,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	private HierarcheQualifierSearcher m_searcher = new HierarcheQualifierSearcher();
 
 	private GroupInfo m_groupInfo = null;
+	private boolean m_typeConstructedDuringLink;
 
 	JstExpressionTypeLinker(JstExpressionBindingResolver resolver) {
 		m_resolver = resolver;
@@ -1454,10 +1455,21 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			if (constrCtx.getTypes().size() > 0) {
 				// TODO test nested types here
 				setCurrentType(constrCtx.getTypes().get(0));
+				setTypeConstructedDuringLink(true);
 				// TODO how to support multiple return types
 			}
 
 		}
+	}
+
+	private void setTypeConstructedDuringLink(boolean b) {
+		m_typeConstructedDuringLink = b;
+		
+	}
+	
+	public boolean getTypeConstructedDuringLink() {
+		return m_typeConstructedDuringLink;
+		
 	}
 
 	private void postVisitObjCreationExpr(final ObjCreationExpr objCreationExpr) {
