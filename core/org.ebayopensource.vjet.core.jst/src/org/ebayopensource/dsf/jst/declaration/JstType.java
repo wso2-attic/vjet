@@ -1914,6 +1914,16 @@ public class JstType extends BaseJstNode implements IJstType {
 		}
 	}
 	
+	
+	/**
+	 * Remove alias from the type
+	 */
+	public void clearAlias() {
+		synchronized (this) {
+			m_alias = null;
+		}
+	}
+	
 	/**
 	 * Remove all extends from the type
 	 */
@@ -2933,6 +2943,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		clearModifiers();
 		clearParams();
 		clearName();
+		clearAlias();
 		clearExpects();
 		clearMixins();
 		clearExtends();
