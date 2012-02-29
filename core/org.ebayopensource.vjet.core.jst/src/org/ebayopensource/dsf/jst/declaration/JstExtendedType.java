@@ -59,6 +59,10 @@ public class JstExtendedType implements IJstType {
 		return m_targetType.getAlias();
 	}
 
+	public String getAliasTypeName() {
+		return m_targetType.getAliasTypeName();
+	}
+
 	public List<IJstProperty> getAllPossibleProperties(boolean isStatic, boolean recursive) {
 		return m_targetType.getAllPossibleProperties(isStatic, recursive);
 	}

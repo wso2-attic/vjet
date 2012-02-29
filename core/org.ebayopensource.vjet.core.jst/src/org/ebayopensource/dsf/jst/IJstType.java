@@ -49,6 +49,12 @@ public interface IJstType extends IJstNode {
 	String getAlias();
 	
 	/**
+	 * Answer the alias name (a short-hand to refer the type) of the type
+	 * @return String
+	 */
+	String getAliasTypeName();
+	
+	/**
 	 * Answer whether it's a class
 	 * @return boolean
 	 */

@@ -58,6 +58,7 @@ public class JstType extends BaseJstNode implements IJstType {
 	private JstPackage m_pkg;
 	private String m_simpleName;
 	private String m_alias;
+	private String m_aliasTypeName;
 	List<IJstOType> m_otypes = new ArrayList<IJstOType>();
 
 	// using JstTypeReference not JstType to prevent owneriship (getParent() === this) of the imported type
@@ -201,6 +202,13 @@ public class JstType extends BaseJstNode implements IJstType {
 			return getName();
 		}
 		return m_alias;
+	}
+	
+	/**
+	 * @see IJstType#getAliasTypeName()
+	 */
+	public String getAliasTypeName() {
+		return m_aliasTypeName;
 	}
 
 	public Category getCategory(){
@@ -1506,6 +1514,16 @@ public class JstType extends BaseJstNode implements IJstType {
 	 */
 	public JstType setAlias(final String alias) {
 		m_alias = alias;
+		return this;
+	}
+	
+	/**
+	 * Set the alias type name (a short-hand to refer the type) of the type
+	 * @param aliasTypeName String
+	 * @return JstType
+	 */
+	public JstType setAliasTypeName(final String aliasTypeName) {
+		m_aliasTypeName = aliasTypeName;
 		return this;
 	}
 
