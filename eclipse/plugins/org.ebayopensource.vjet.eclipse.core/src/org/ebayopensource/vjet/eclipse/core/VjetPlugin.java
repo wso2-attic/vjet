@@ -14,6 +14,7 @@ import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.ThisObjScopeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.vjet.eclipse.core.builder.TypeSpaceBuilder;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
 import org.ebayopensource.vjet.eclipse.core.ts.EclipseTypeSpaceLoader;
@@ -21,6 +22,8 @@ import org.ebayopensource.vjet.eclipse.core.ts.JstLibResolver;
 import org.ebayopensource.vjet.eclipse.core.ts.TypeSpaceLoadJob;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamMappingExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamResolverExtension;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionReturnTypeResolverExtension;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionReturnTypeResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtension;
@@ -156,6 +159,8 @@ public class VjetPlugin extends Plugin {
 		initTypeCostructorRegistry();
 		initFunctionParamsRegistry();
 		initThisObjScopeResolverRegistry();
+		initFunctionReturnTypeRegistry();
+		
 		m_loadJob.schedule();
 
 	}
@@ -225,6 +230,30 @@ public class VjetPlugin extends Plugin {
 						.getLog()
 						.log(new Status(IStatus.ERROR, VjetPlugin.PLUGIN_ID,
 								"Error intializing the " + extension.toString()
+										+ " resolver.", e));
+			}
+		}
+
+	}
+
+	private void initFunctionReturnTypeRegistry() {
+
+		TypeResolverRegistry registry = TypeResolverRegistry
+				.getInstance();
+
+		FunctionReturnTypeResolverExtensionRegistry extensionRegistry = new FunctionReturnTypeResolverExtensionRegistry();
+		Collection<FunctionReturnTypeResolverExtension> extensions = extensionRegistry
+				.getResolverExtensions();
+		for (FunctionReturnTypeResolverExtension extension : extensions) {
+			try {
+				registry.addResolver(extension.getKey(),
+						extension.createResolver());
+			} catch (CoreException e) {
+				VjetPlugin
+						.getDefault()
+						.getLog()
+						.log(new Status(IStatus.ERROR, VjetPlugin.PLUGIN_ID,
+								"Error intializing the functionreturntype " + extension.toString()
 										+ " resolver.", e));
 			}
 		}
