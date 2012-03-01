@@ -33,7 +33,7 @@ import org.eclipse.mod.wst.jsdt.internal.compiler.ast.SingleNameReference;
 
 public class ObjectLiteralFieldTranslator extends
 		BaseAst2JstTranslator<ObjectLiteralField, Object> {
-	
+
 	private NV m_result;
 
 	@Override
@@ -42,43 +42,46 @@ public class ObjectLiteralFieldTranslator extends
 		int completionPos = m_ctx.getCompletionPos();
 		try {
 			NV nv = new NV();
-			if(astObjectliteralField.initializer instanceof ObjectLiteral){
+			if (astObjectliteralField.initializer instanceof ObjectLiteral) {
 				m_ctx.enterBlock(ScopeIds.PROPERTY);
 			}
-			
-			List<IJsCommentMeta> metaArr = getCommentMeta(astObjectliteralField);
-			IExpr value = (IExpr)getTranslatorAndTranslate(astObjectliteralField.initializer);
-			value = TranslateHelper
-					.getCastable(value, metaArr, m_ctx);
-			final JstIdentifier id = createId(astObjectliteralField); 
+
+			// List<IJsCommentMeta> metaArr =
+			// getCommentMeta(astObjectliteralField);
+			IExpr value = (IExpr) getTranslatorAndTranslate(astObjectliteralField.initializer);
+			// value = TranslateHelper
+			// .getCastable(value, metaArr, m_ctx);
+			final JstIdentifier id = createId(astObjectliteralField);
 			bindObjLiteralId(astObjectliteralField, id, value, nv);
 			nv.setName(id);
 			nv.setValue(value);
-			
-			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(astObjectliteralField.sourceStart()));
+
+			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(
+					astObjectliteralField.sourceStart()));
 			int start = id.getSource().getStartOffSet();
-			if (value!=null && value.getSource() != null) {
+			if (value != null && value.getSource() != null) {
 				int end = value.getSource().getEndOffSet();
 				int length = end - start;
-				nv.setSource(TranslateHelper.createJstSource(m_ctx
-						.getSourceUtil(), length, start, end));
+				nv.setSource(TranslateHelper.createJstSource(
+						m_ctx.getSourceUtil(), length, start, end));
 			}
-			if(astObjectliteralField.initializer instanceof ObjectLiteral){
+			if (astObjectliteralField.initializer instanceof ObjectLiteral) {
 				m_ctx.exitBlock();
 			}
 			m_result = nv;
-			return nv; 
+			return nv;
 		} finally {
 			// restore previous completion position
 			m_ctx.setCompletionPos(completionPos);
-		}			
+		}
 	}
 
 	private void bindObjLiteralId(ObjectLiteralField astObjectliteralField,
 			final JstIdentifier id, IExpr value, NV nv) {
 		// added by huzhou@ebay.com to bind objectLiteral's methods early on
 		if (value instanceof FuncExpr) {
-			final TranslateHelper.RenameableSynthJstProxyMethod mtdBinding = new TranslateHelper.RenameableSynthJstProxyMethod(((FuncExpr)value).getFunc(), id.getName());
+			final TranslateHelper.RenameableSynthJstProxyMethod mtdBinding = new TranslateHelper.RenameableSynthJstProxyMethod(
+					((FuncExpr) value).getFunc(), id.getName());
 			id.setJstBinding(mtdBinding);
 			id.setType(new JstFuncType(mtdBinding));
 		}
@@ -86,37 +89,42 @@ public class ObjectLiteralFieldTranslator extends
 		final List<IJsCommentMeta> metaArr = getCommentMeta(astObjectliteralField);
 		if (metaArr != null && metaArr.size() > 0) {
 			final IJsCommentMeta meta = metaArr.get(0);
-			nv.setOptional(meta.getTyping().isOptional());
-			final IJstType metaDefinedType = TranslateHelper.findType(m_ctx,
-					meta.getTyping(), meta);
-			if (metaDefinedType != null) {
-				id.setType(metaDefinedType);
-				
-				if(metaDefinedType instanceof JstFuncType){
-					final IJstMethod replacement = TranslateHelper.MethodTranslateHelper.createJstSynthesizedMethod(metaArr, m_ctx, id.getName());
-					if(replacement != null){
-						TranslateHelper.replaceSynthesizedMethodBinding(id, replacement);
+			if (meta.getTyping() != null) {
+				nv.setOptional(meta.getTyping().isOptional());
+				final IJstType metaDefinedType = TranslateHelper.findType(
+						m_ctx, meta.getTyping(), meta);
+				if (metaDefinedType != null) {
+					id.setType(metaDefinedType);
+
+					if (metaDefinedType instanceof JstFuncType) {
+						final IJstMethod replacement = TranslateHelper.MethodTranslateHelper
+								.createJstSynthesizedMethod(metaArr, m_ctx,
+										id.getName());
+						if (replacement != null) {
+							TranslateHelper.replaceSynthesizedMethodBinding(id,
+									replacement);
+						}
 					}
 				}
 			}
 		}
 	}
-	
-	private List<IJsCommentMeta> getCommentMeta(
-			ObjectLiteralField ast) {
-		return m_ctx.getCommentCollector().getCommentMeta(
-				ast.sourceStart,
+
+	private List<IJsCommentMeta> getCommentMeta(ObjectLiteralField ast) {
+		return m_ctx.getCommentCollector().getCommentMeta(ast.sourceStart,
 				m_ctx.getPreviousNodeSourceEnd(),
 				m_ctx.getNextNodeSourceStart());
-		
+
 	}
 
 	private JstIdentifier createId(ObjectLiteralField astObjectliteralField) {
-		JstIdentifier id = new JstIdentifier(astObjectliteralField.getFieldName().toString());
+		JstIdentifier id = new JstIdentifier(astObjectliteralField
+				.getFieldName().toString());
 		int startOffset = astObjectliteralField.sourceStart;
 		int endOffset = astObjectliteralField.sourceEnd;
 		int length = endOffset - startOffset + 1;
-		id.setSource(TranslateHelper.createJstSource(m_ctx.getSourceUtil(), length,startOffset,endOffset));
+		id.setSource(TranslateHelper.createJstSource(m_ctx.getSourceUtil(),
+				length, startOffset, endOffset));
 		return id;
 	}
 
@@ -125,7 +133,7 @@ public class ObjectLiteralFieldTranslator extends
 		if (m_ctx.isCreatedCompletion()) {
 			return;
 		}
-		
+
 		int startPos = astNode.sourceStart();
 		int endPos = getSourceEnd(astNode);
 
@@ -134,9 +142,12 @@ public class ObjectLiteralFieldTranslator extends
 				&& completionPos <= endPos;
 
 		boolean isAfterSource = completionPos == endPos + 1;
-		if(!isAfterSource && astNode.getInitializer() instanceof SingleNameReference){
-			final SingleNameReference missing = (SingleNameReference)astNode.getInitializer();
-			if(TranslateHelper.MISSING_TOKEN.equals(String.valueOf(missing.getToken()))){
+		if (!isAfterSource
+				&& astNode.getInitializer() instanceof SingleNameReference) {
+			final SingleNameReference missing = (SingleNameReference) astNode
+					.getInitializer();
+			if (TranslateHelper.MISSING_TOKEN.equals(String.valueOf(missing
+					.getToken()))) {
 				isAfterSource = true;
 			}
 		}
@@ -144,72 +155,70 @@ public class ObjectLiteralFieldTranslator extends
 		if (insideSource || isAfterSource) {
 			JstCompletion completion = createCompletion(astNode, isAfterSource);
 			if (completion != null) {
-				JstCommentUtil.fillCompletion((ASTNode) astNode, m_ctx, completion);
-//				m_ctx.getS
+				JstCommentUtil.fillCompletion((ASTNode) astNode, m_ctx,
+						completion);
+				// m_ctx.getS
 				m_ctx.addSyntaxError(completion);
 			}
 		}
 	}
-	
+
 	@Override
 	protected JstCompletion createCompletion(
 			ObjectLiteralField astObjectLiteralField, boolean isAfterSource) {
 
-			int completionPos = m_ctx.getCompletionPos();
-			if(completionPos < astObjectLiteralField.sourceStart){
-				return null;
-			}
-			
-			String preStr = new String(m_ctx.getOriginalSource(),
-					astObjectLiteralField.sourceStart, completionPos
-							- astObjectLiteralField.sourceStart);
-			if (preStr == null) {
-				return null;
-			}
-			String[] strs = (" " + preStr + " ").split(":");
-			if (strs.length == 0) {
-				// TODO
-				return null;
-			} else if (strs.length == 1) {
-				String token = strs[0].trim();
-				JstCompletion completion = new JstFieldOrMethodCompletion(m_result,
-						m_ctx.getCurrentScope() == ScopeIds.PROPS);
-				IExpression expr = astObjectLiteralField.getFieldName();
-				JstSource jstSource = null;
-				if (expr != null) {
-					if (expr.sourceEnd() + 1 > completionPos) {
-						jstSource = createSource(
-								expr.sourceStart(),
-								expr.sourceEnd() + 1, m_ctx
-										.getSourceUtil());
-					} else {
-						jstSource = createSource(
-								expr.sourceStart(),
-								completionPos, m_ctx
-										.getSourceUtil());
-					}
-				}
-				completion.setSource(jstSource);
-				completion.setCompositeToken(preStr);
-				completion.setToken(token);
-				m_ctx.setCreatedCompletion(true);
-				completion.setScopeStack(m_ctx.getScopeStack());
-				return completion;
-			} else if (strs.length == 2) {
-				String token = strs[1].trim();
-				//if cursor is After "(", null will be return
-				if(token.indexOf("(") >= 0 || !isJavaIdentifier(token)) {
-					return null;
-				}
-				JstCompletion completion = new JstFieldOrMethodCompletion(m_result, ScopeIds.PROPS == m_ctx.getCurrentScope());
-				completion.setCompositeToken(preStr);
-				completion.setToken(token);
-				m_ctx.setCreatedCompletion(true);
-				completion.setScopeStack(m_ctx.getScopeStack());
-				return completion;
-			}
+		int completionPos = m_ctx.getCompletionPos();
+		if (completionPos < astObjectLiteralField.sourceStart) {
+			return null;
+		}
 
-//		}
+		String preStr = new String(m_ctx.getOriginalSource(),
+				astObjectLiteralField.sourceStart, completionPos
+						- astObjectLiteralField.sourceStart);
+		if (preStr == null) {
+			return null;
+		}
+		String[] strs = (" " + preStr + " ").split(":");
+		if (strs.length == 0) {
+			// TODO
+			return null;
+		} else if (strs.length == 1) {
+			String token = strs[0].trim();
+			JstCompletion completion = new JstFieldOrMethodCompletion(m_result,
+					m_ctx.getCurrentScope() == ScopeIds.PROPS);
+			IExpression expr = astObjectLiteralField.getFieldName();
+			JstSource jstSource = null;
+			if (expr != null) {
+				if (expr.sourceEnd() + 1 > completionPos) {
+					jstSource = createSource(expr.sourceStart(),
+							expr.sourceEnd() + 1, m_ctx.getSourceUtil());
+				} else {
+					jstSource = createSource(expr.sourceStart(), completionPos,
+							m_ctx.getSourceUtil());
+				}
+			}
+			completion.setSource(jstSource);
+			completion.setCompositeToken(preStr);
+			completion.setToken(token);
+			m_ctx.setCreatedCompletion(true);
+			completion.setScopeStack(m_ctx.getScopeStack());
+			return completion;
+		} else if (strs.length == 2) {
+			String token = strs[1].trim();
+			// if cursor is After "(", null will be return
+			if (token.indexOf("(") >= 0 || !isJavaIdentifier(token)) {
+				return null;
+			}
+			JstCompletion completion = new JstFieldOrMethodCompletion(m_result,
+					ScopeIds.PROPS == m_ctx.getCurrentScope());
+			completion.setCompositeToken(preStr);
+			completion.setToken(token);
+			m_ctx.setCreatedCompletion(true);
+			completion.setScopeStack(m_ctx.getScopeStack());
+			return completion;
+		}
+
+		// }
 		return null;
 	}
 }
