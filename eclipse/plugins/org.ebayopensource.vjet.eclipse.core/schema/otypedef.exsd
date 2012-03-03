@@ -3,10 +3,10 @@
 <schema targetNamespace="org.ebayopensource.vjet.eclipse.core" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.ebayopensource.vjet.eclipse.core" id="functionreturntype" name="VJET Function Return Type Resolver"/>
+         <meta.schema plugin="org.ebayopensource.vjet.eclipse.core" id="otypedef" name="VJET OType resolver"/>
       </appInfo>
       <documentation>
-         Defines an extension point to describe an extension for function return type resolver.
+         Defines an extension point to describe an extension for OType resolver.
       </documentation>
    </annotation>
 
@@ -50,7 +50,7 @@
    <element name="resolver">
       <annotation>
          <documentation>
-            Element which defines the resolver for resolving the return type of a function.
+            Element which defines the resolver for resolving the type of object literal.
          </documentation>
       </annotation>
       <complexType>
@@ -67,18 +67,18 @@
          <attribute name="key" type="string" use="required">
             <annotation>
                <documentation>
-                  A key to which this return type of a function resolver is attached within the VJET framework.
-This resolver will be called whenever a request arrives to identify return type of a function based on this key (function name).
+                  A key to which this otype resolver is attached within the VJET framework.
+This resolver will be called whenever a request arrives to identify otype definition based on this key.
                </documentation>
             </annotation>
          </attribute>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
-                  A fully qualified class name of the Java class implementing org.ebayopensource.dsf.jstojava.resolver.ITypeResolver interface.
+                  A fully qualified class name of the Java class implementing org.ebayopensource.dsf.jstojava.resolver.IOTypeResolver interface.
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn=":org.ebayopensource.dsf.jstojava.resolver.ITypeResolver"/>
+                  <meta.attribute kind="java" basedOn=":org.ebayopensource.dsf.jstojava.resolver.IOTypeResolver"/>
                </appInfo>
             </annotation>
          </attribute>
@@ -91,7 +91,7 @@ This resolver will be called whenever a request arrives to identify return type 
             <meta.element translatable="true"/>
          </appInfo>
          <documentation>
-            description about the function return type resolver
+            description about the otype definition resolver
          </documentation>
       </annotation>
    </element>

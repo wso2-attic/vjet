@@ -12,6 +12,7 @@ import java.util.Collection;
 
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.OTypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.ThisObjScopeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
@@ -24,6 +25,8 @@ import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamMappingEx
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionParamResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionReturnTypeResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.FunctionReturnTypeResolverExtensionRegistry;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.OTypeResolverExtension;
+import org.ebayopensource.vjet.eclipse.core.typeconstruct.OTypeResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtension;
@@ -160,7 +163,8 @@ public class VjetPlugin extends Plugin {
 		initFunctionParamsRegistry();
 		initThisObjScopeResolverRegistry();
 		initFunctionReturnTypeRegistry();
-		
+		initOTypeRegistry();
+
 		m_loadJob.schedule();
 
 	}
@@ -238,8 +242,7 @@ public class VjetPlugin extends Plugin {
 
 	private void initFunctionReturnTypeRegistry() {
 
-		TypeResolverRegistry registry = TypeResolverRegistry
-				.getInstance();
+		TypeResolverRegistry registry = TypeResolverRegistry.getInstance();
 
 		FunctionReturnTypeResolverExtensionRegistry extensionRegistry = new FunctionReturnTypeResolverExtensionRegistry();
 		Collection<FunctionReturnTypeResolverExtension> extensions = extensionRegistry
@@ -253,8 +256,33 @@ public class VjetPlugin extends Plugin {
 						.getDefault()
 						.getLog()
 						.log(new Status(IStatus.ERROR, VjetPlugin.PLUGIN_ID,
-								"Error intializing the functionreturntype " + extension.toString()
-										+ " resolver.", e));
+								"Error intializing the functionreturntype "
+										+ extension.toString() + " resolver.",
+								e));
+			}
+		}
+
+	}
+
+	private void initOTypeRegistry() {
+
+		OTypeResolverRegistry registry = OTypeResolverRegistry.getInstance();
+
+		OTypeResolverExtensionRegistry extensionRegistry = new OTypeResolverExtensionRegistry();
+		Collection<OTypeResolverExtension> extensions = extensionRegistry
+				.getResolverExtensions();
+		for (OTypeResolverExtension extension : extensions) {
+			try {
+				registry.addResolver(extension.getKey(),
+						extension.createResolver());
+			} catch (CoreException e) {
+				VjetPlugin
+						.getDefault()
+						.getLog()
+						.log(new Status(IStatus.ERROR, VjetPlugin.PLUGIN_ID,
+								"Error intializing the otypedef "
+										+ extension.toString() + " resolver.",
+								e));
 			}
 		}
 

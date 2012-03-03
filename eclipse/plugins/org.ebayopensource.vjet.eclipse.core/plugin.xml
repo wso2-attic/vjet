@@ -6,6 +6,7 @@
    <extension-point id="functionparam" name="VJET Function Param Extension" schema="schema/functionparam.exsd"/>
    <extension-point id="thisresolver" name="This scope resolver" schema="schema/thisresolver.exsd"/>
    <extension-point id="functionreturntype" name="Function Return Type Resolver" schema="schema/functionreturntype.exsd"/>
+   <extension-point id="otypedef" name="OType definition resolver" schema="schema/otypedef.exsd"/>
 
    <extension
          id="org.ebayopensource.vjet.core.nature"
