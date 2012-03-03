@@ -623,6 +623,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 			type = fae.getExpr().getResultType();
 			if (!StringUtils.isBlankOrEmpty(str) && !StringUtils.isVj$Expr(str)) {
 				ctx.setActingPackageToken(str);
+				result.add(VjoCcPropMethodProposalAdvisor.ID);
 				result.add(VjoCcPackageProposalAdvisor.ID);
 				result.add(VjoCcTypeProposalAdvisor.ID);
 				

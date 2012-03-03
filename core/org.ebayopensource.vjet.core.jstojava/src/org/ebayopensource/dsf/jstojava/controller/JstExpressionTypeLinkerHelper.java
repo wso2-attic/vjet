@@ -99,6 +99,8 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.IMetaExtension;
+import org.ebayopensource.dsf.jstojava.resolver.IOTypeResolver;
+import org.ebayopensource.dsf.jstojava.resolver.OTypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
@@ -2368,7 +2370,32 @@ public class JstExpressionTypeLinkerHelper {
 	
 	private static void doObjLiteralAndOTypeBindings(
 			 ObjLiteral objLiteral, final SynthOlType synthOlType,
-			final IJstType otype, final IJstVisitor revisitor) {
+			 IJstType otype, final IJstVisitor revisitor) {
+		
+		
+		OTypeResolverRegistry otypeResolver = OTypeResolverRegistry.getInstance();
+	
+		if(objLiteral.getNVs().size()>0){
+			NV firstPosition = objLiteral.getNVs().get(0);
+			String key = firstPosition.getName();
+			if(otypeResolver.hasResolver(key)){
+				
+				otype = otypeResolver.resolve(key, firstPosition);
+				if(otype instanceof JstAttributedType){
+					JstAttributedType atype =(JstAttributedType)otype;
+					final String attributeName = atype.getAttributeName();
+					if (atype.isOType()) {
+						final IJstType objLiteralOrFunctionRefType = atype
+								.getOType(attributeName);
+						if (objLiteralOrFunctionRefType != null) {
+							otype = objLiteralOrFunctionRefType;
+						}
+					} 
+				}
+				
+				synthOlType.addResolvedOType(otype);
+			}
+		}
 		
 		// support nested obj literals
 		if(otype != null && (otype instanceof SynthOlType) ){
@@ -2377,7 +2404,7 @@ public class JstExpressionTypeLinkerHelper {
 		else if (otype != null && (otype instanceof JstObjectLiteralType)) {
 			synthOlType.addResolvedOType(otype);
 		}else{
-			return;
+//			return;
 		}
 		
 		// now we traverse the object literal to look 4 further bindings like:
@@ -2410,6 +2437,19 @@ public class JstExpressionTypeLinkerHelper {
 	private static void doObjLiteralValueBinding(final IJstType otype,
 			final IJstVisitor revisitor, final String name,
 			final IExpr valueExpr) {
+		if(valueExpr instanceof JstArrayInitializer){
+			JstArrayInitializer arrayValueExpr = (JstArrayInitializer)valueExpr;
+			for(IExpr element: arrayValueExpr.getExprs()){
+				if(element instanceof ObjLiteral){
+					doObjLiteralAndOTypeBindings((ObjLiteral) element,
+							(SynthOlType) element.getResultType(), otype,
+							revisitor);
+				}
+				
+			}
+		
+		}
+		
 		if (valueExpr instanceof FuncExpr
 				&& isAnonymousFunction(((FuncExpr) valueExpr).getFunc())) {
 			final IJstProperty matchingOTypePty = otype.getProperty(name,

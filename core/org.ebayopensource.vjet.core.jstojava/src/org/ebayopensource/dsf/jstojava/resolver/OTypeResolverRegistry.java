@@ -74,7 +74,7 @@ public class OTypeResolverRegistry {
 			}
 			
 			try {
-				final JsCommentMeta commentMeta = VjComment.parse("//>" + typeName);;
+				final JsCommentMeta commentMeta = VjComment.parse("//> " + typeName);;
 				final JsTypingMeta typingMeta = commentMeta.getTyping();
 				IFindTypeSupport findSupport = new IFindTypeSupport() {
 					
