@@ -9,10 +9,43 @@
 package org.ebayopensource.dsf.jstojava.translator;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
+import org.ebayopensource.dsf.jst.declaration.JstCache;
+import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
+import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.eclipse.mod.wst.jsdt.core.ast.IObjectLiteralField;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.Expression;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ObjectLiteral;
 
 public class OptionsTranslator extends BasePropsProtosTranslator {
 	public OptionsTranslator(TranslateCtx ctx) {
 		super(ctx);
 		type = ScopeIds.OPTIONS;
+	}
+	
+	@Override
+	public void process(Expression expr, JstType jstType) {
+		
+		if(expr instanceof ObjectLiteral){
+			ObjectLiteral objLit = (ObjectLiteral)expr;
+			// process NV which start with alias::
+			for (IObjectLiteralField field : objLit.getFields()) {
+				String fieldName = field.getFieldName().toString();
+				fieldName = fieldName.replace("\"", "");
+				fieldName = fieldName.replace("\'", "");
+				if(fieldName.startsWith("alias")){
+					String fieldValue  = field.getInitializer().toString();
+					fieldValue = fieldValue.replace("\"", "");
+					fieldValue = fieldValue.replace("\'", "");
+					fieldValue = fieldValue.replace("::", ".");
+					JstType otype = JstCache.getInstance().getType(fieldValue);
+					if(otype != null && otype instanceof JstObjectLiteralType){
+						JstCache.getInstance().addAliasType(fieldName, (JstObjectLiteralType)otype);
+					}
+				}
+				
+			}
+		}
+		
+		super.process(expr, jstType);
 	}
 }

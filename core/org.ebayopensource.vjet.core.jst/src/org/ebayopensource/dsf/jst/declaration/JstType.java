@@ -2737,6 +2737,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		private static final int HAS_RESOLUTION = 5;
 		private static final int IS_PHANTOM = 8;
 		private static final int IS_PROMOTED= 9;
+		private static final int IS_ALIAS_PROMOTED= 10;
 		
 		private int m_status;
 		private boolean m_isValid;
@@ -2797,6 +2798,11 @@ public class JstType extends BaseJstNode implements IJstType {
 			return (m_status & IS_PROMOTED) == IS_PROMOTED;
 		}
 		
+		public boolean isAliasTypeNamePromoted() {
+			return (m_status & IS_ALIAS_PROMOTED) == IS_ALIAS_PROMOTED;
+		}
+		
+		
 		@Override
 		public String toString(){
 			Z z = new Z();
@@ -2806,9 +2812,11 @@ public class JstType extends BaseJstNode implements IJstType {
 			z.format("hasImpl", hasImpl());
 			z.format("isPhantom", isPhantom());
 			z.format("isPromoted", areGlobalsPromoted());
-			
+			z.format("isAliasTypeNamePromoted", isAliasTypeNamePromoted());
 			return z.toString();
 		}
+
+
 	}
 
 	public void addInitWithoutChild(final IStmt stmt, boolean isStatic) {
@@ -2978,6 +2986,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		clearOTypes();
 		clearOptions();
 		clearVarTable();
+		clearSecondaryTypes();
 	}
 
 	private void clearGlobalVars() {

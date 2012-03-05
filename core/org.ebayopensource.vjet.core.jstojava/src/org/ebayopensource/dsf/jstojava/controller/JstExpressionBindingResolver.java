@@ -9,6 +9,7 @@
 package org.ebayopensource.dsf.jstojava.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.ebayopensource.dsf.jsgen.shared.jstvalidator.DefaultJstProblem;
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
@@ -77,6 +78,8 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 			
 		}
 	}
+	
+
 
 	private void promoteGlobals(IJstType type, JstTypeSpaceMgr mgr,
 			ResolutionResult rr) {

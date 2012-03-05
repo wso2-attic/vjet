@@ -57,7 +57,7 @@ public class DefsRobustTranslator extends TypeRobustTranslator{
 		lookupEmptyCompletion();
 
 		// move to the next iteration
-		return super.transform();
+		return false;
 
 	}
 }

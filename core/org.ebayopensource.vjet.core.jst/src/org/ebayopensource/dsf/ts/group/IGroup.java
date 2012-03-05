@@ -11,6 +11,7 @@ package org.ebayopensource.dsf.ts.group;
 import java.util.List;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.ts.graph.IDependencyGraph;
 
 /**
@@ -97,4 +98,6 @@ public interface IGroup<E> {
 	 * @return boolean true if read only
 	 */
 	boolean isReadOnly();
+
+	Map<? extends String, E> getAliasTypeNames();
 }

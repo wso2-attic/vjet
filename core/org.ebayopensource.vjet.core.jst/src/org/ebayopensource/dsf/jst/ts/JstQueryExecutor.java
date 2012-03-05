@@ -744,4 +744,9 @@ public class JstQueryExecutor {
 	public List<IJstNode> getGlobalExtensions(String globalVarName) {
 		return m_ts.getGlobalExtensions(globalVarName);
 	}
+
+	public Map<String, IJstType> findAllVisibleAliasNames(String groupName) {
+		Group<IJstType> fromGroup = m_ts.getGroup(groupName);
+		return m_ts.getAllVisibleAliasNames(fromGroup);
+	}
 }

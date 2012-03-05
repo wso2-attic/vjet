@@ -24,6 +24,13 @@ import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 
 /**
  * Registry of function-return-type resolvers at Lib/Group level from meta bootstrap.
+ * 
+ * Say you take document.create("div") 
+ * 
+ * return value should be HTMLDivElement based on "div" string
+ * 
+ * There is a way to do this in JS and through a Java extension
+ * 
  */
 public class TypeResolverRegistry {
 	

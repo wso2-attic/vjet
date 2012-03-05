@@ -15,6 +15,7 @@ public class JsType extends JsTypingMeta {
 	
 	private final String m_name;
 	private boolean m_isTypeRef = false;
+	private boolean m_aliasRef = false;
 	private List<ArgType> m_args = new ArrayList<ArgType>();
 	
 	public JsType(Token type) {
@@ -44,9 +45,19 @@ public class JsType extends JsTypingMeta {
 	public boolean isTypeRef() {
 		return m_isTypeRef;
 	}
+	
+	public boolean isAliasRef() {
+		return m_aliasRef;
+	}
+
 
 	public JsType setTypeRef(boolean typeRef) {
 		m_isTypeRef = typeRef;
+		return this;
+	}
+	
+	public JsType setAliasRef(boolean alias) {
+		m_aliasRef= alias;
 		return this;
 	}
 	

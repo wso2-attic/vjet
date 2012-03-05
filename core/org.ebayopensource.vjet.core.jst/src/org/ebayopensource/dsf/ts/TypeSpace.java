@@ -17,14 +17,14 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.mina.util.IdentityHashSet;
-
+import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ts.TypeSpaceLocker;
 import org.ebayopensource.dsf.ts.graph.DependencyNode;
 import org.ebayopensource.dsf.ts.group.Group;
 import org.ebayopensource.dsf.ts.group.GroupDependencyNode;
 import org.ebayopensource.dsf.ts.group.GroupSymbolMapTable;
-import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.group.GroupSymbolMapTable.GlobalSymbolMapEntry;
+import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.index.DependencyIndexNode;
 import org.ebayopensource.dsf.ts.method.MethodIndex;
 import org.ebayopensource.dsf.ts.method.MethodName;
@@ -1492,5 +1492,21 @@ public class TypeSpace<T,D> implements ITypeSpace<T,D> {
 			return fullyQualifiedName.substring(0, idx);
 		}
 		return fullyQualifiedName;
+	}
+
+
+	@Override
+	public Map<String, T> getAllVisibleAliasNames(IGroup<T> fromGroup) {
+		// TODO Auto-generated method stub
+		if (fromGroup == null){
+			return Collections.EMPTY_MAP;
+		}
+		Map<String,T> map = new HashMap<String,T>();
+		
+		map.putAll(fromGroup.getAliasTypeNames());
+		for (IGroup<T> g: fromGroup.getGroupDependency()){
+			map.putAll(fromGroup.getAliasTypeNames());
+		}
+		return map;
 	}
 }

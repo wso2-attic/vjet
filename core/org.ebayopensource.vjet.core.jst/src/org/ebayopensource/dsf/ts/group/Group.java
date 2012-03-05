@@ -10,12 +10,14 @@ package org.ebayopensource.dsf.ts.group;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.ts.TypeSpace;
@@ -41,6 +43,7 @@ public class Group<E> implements IGroup<E> {
 	
 	// user objects associated with the entities stored in group
 	private final Map<String,Object> m_userObjects;
+	private Map<String, E> m_aliasTypeNames;
 	
 	public static final String DEFAULT_GRP_NAME = "DefaultGroup";	
 	
@@ -216,7 +219,7 @@ public class Group<E> implements IGroup<E> {
 		}
 		
 		setGroupNameInJstType(entity);
-		
+		setAliasTypeNameInGroup(entity);
 		DependencyNode<E> node = null;
 		if (m_typeSpace != null) {
 			node = m_typeSpace.getUnresolvedNodes().get(name);
@@ -243,6 +246,25 @@ public class Group<E> implements IGroup<E> {
 		return true;
 	}
 	
+	private void setAliasTypeNameInGroup(E entity) {
+		if(entity instanceof JstType){
+			JstType type = (JstType)entity;
+			if(type.getAliasTypeName()!=null){
+			    addAliasTypeName(type.getAliasTypeName(),entity);
+			}
+		}
+		
+	}
+
+	private void addAliasTypeName(String aliasTypeName, E type) {
+		if(m_aliasTypeNames==null){
+			m_aliasTypeNames = new HashMap<String, E>();
+		}
+		m_aliasTypeNames.put(aliasTypeName,type);
+		
+	}
+	
+
 	/**
 	 * Add given entities to the group and associated dependency graph
 	 * @param entities Map<String,E>
@@ -370,5 +392,9 @@ public class Group<E> implements IGroup<E> {
 			}
 		}
 		return false;
+	}
+
+	public Map<String, E> getAliasTypeNames() {
+		return m_aliasTypeNames;
 	}
 }

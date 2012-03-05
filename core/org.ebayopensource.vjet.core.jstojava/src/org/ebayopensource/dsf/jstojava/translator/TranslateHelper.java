@@ -406,7 +406,12 @@ public class TranslateHelper {
 		IJstType jstType = null;
 		// handling simple jsType and generics
 		if (jsTypingMeta instanceof JsType) {
-			jstType = findType(findSupport, (JsType)jsTypingMeta);
+			if(((JsType) jsTypingMeta).isAliasRef()){
+				jstType = JstCache.getInstance().getAliasType(jsTypingMeta.getType(), true);
+			}else{
+			
+				jstType = findType(findSupport, (JsType)jsTypingMeta);
+			}
 		}
 		// handling floating function types
 		else if (jsTypingMeta instanceof JsFuncType) {

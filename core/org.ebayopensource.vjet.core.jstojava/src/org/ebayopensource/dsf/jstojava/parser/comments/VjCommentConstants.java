@@ -29,65 +29,67 @@ public interface VjCommentConstants {
   /** RegularExpression Id. */
   int NEEDS = 11;
   /** RegularExpression Id. */
-  int TYPEREF = 12;
+  int ALIASREF = 12;
   /** RegularExpression Id. */
-  int TYPEREF_OLD = 13;
+  int TYPEREF = 13;
   /** RegularExpression Id. */
-  int LP = 14;
+  int TYPEREF_OLD = 14;
   /** RegularExpression Id. */
-  int RP = 15;
+  int LP = 15;
   /** RegularExpression Id. */
-  int LCB = 16;
+  int RP = 16;
   /** RegularExpression Id. */
-  int RCB = 17;
+  int LCB = 17;
   /** RegularExpression Id. */
-  int LB = 18;
+  int RCB = 18;
   /** RegularExpression Id. */
-  int RB = 19;
+  int LB = 19;
   /** RegularExpression Id. */
-  int OR = 20;
+  int RB = 20;
   /** RegularExpression Id. */
-  int GT = 21;
+  int OR = 21;
   /** RegularExpression Id. */
-  int LT = 22;
+  int GT = 22;
   /** RegularExpression Id. */
-  int QUESTIONMARK = 23;
+  int LT = 23;
   /** RegularExpression Id. */
-  int EXTENDS = 24;
+  int QUESTIONMARK = 24;
   /** RegularExpression Id. */
-  int SUPER = 25;
+  int EXTENDS = 25;
   /** RegularExpression Id. */
-  int ABSTRACT = 26;
+  int SUPER = 26;
   /** RegularExpression Id. */
-  int COMMA = 27;
+  int ABSTRACT = 27;
   /** RegularExpression Id. */
-  int COLON = 28;
+  int COMMA = 28;
   /** RegularExpression Id. */
-  int DOUBLE_COLON = 29;
+  int COLON = 29;
   /** RegularExpression Id. */
-  int SEMICOLON = 30;
+  int DOUBLE_COLON = 30;
   /** RegularExpression Id. */
-  int CARET = 31;
+  int SEMICOLON = 31;
   /** RegularExpression Id. */
-  int PLUS = 32;
+  int CARET = 32;
   /** RegularExpression Id. */
-  int FUNCTION_ARG = 33;
+  int PLUS = 33;
   /** RegularExpression Id. */
-  int THIS = 34;
+  int FUNCTION_ARG = 34;
   /** RegularExpression Id. */
-  int TYPE = 35;
+  int THIS = 35;
   /** RegularExpression Id. */
-  int LITERAL = 36;
+  int TYPE = 36;
   /** RegularExpression Id. */
-  int DOTDOTDOT = 37;
+  int LITERAL = 37;
   /** RegularExpression Id. */
-  int LETTER = 38;
+  int DOTDOTDOT = 38;
   /** RegularExpression Id. */
-  int DIGIT = 39;
+  int LETTER = 39;
   /** RegularExpression Id. */
-  int PERIOD = 40;
+  int DIGIT = 40;
   /** RegularExpression Id. */
-  int PERCENT = 41;
+  int PERIOD = 41;
+  /** RegularExpression Id. */
+  int PERCENT = 42;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -106,6 +108,7 @@ public interface VjCommentConstants {
     "\"static\"",
     "\"dynamic\"",
     "\"needs\"",
+    "\"alias::\"",
     "\"type::\"",
     "\"Type::\"",
     "\"(\"",
