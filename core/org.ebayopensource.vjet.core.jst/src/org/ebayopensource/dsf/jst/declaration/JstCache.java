@@ -30,6 +30,7 @@ public class JstCache {
 	private Map<String, IJstLib> m_lib = new HashMap<String, IJstLib>();
 	private Map<String, String> m_typeSymbolMapping = new HashMap<String, String>();
 	private Map<IJstType, IJstRefType> m_typeRefTypeMap = new HashMap<IJstType, IJstRefType>();
+	private Map<String,String> m_aliasTempMapping;
 
 	
 	//
@@ -368,6 +369,11 @@ public class JstCache {
 		m_typeSymbolMapping.clear();
 		m_typeRefTypeMap.clear();
 		m_aliasTypes.clear();
+		m_aliasTempMapping.clear();
 		
+	}
+	public boolean createAliasPlaceHolder(String alias, String typeName) {
+		m_aliasTempMapping.put(alias,typeName);
+		return true;
 	}
 }

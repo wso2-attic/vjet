@@ -37,9 +37,24 @@ public class OptionsTranslator extends BasePropsProtosTranslator {
 					fieldValue = fieldValue.replace("\"", "");
 					fieldValue = fieldValue.replace("\'", "");
 					fieldValue = fieldValue.replace("::", ".");
+					String alias = fieldName.substring(fieldName.indexOf("alias::")+7);
 					JstType otype = JstCache.getInstance().getType(fieldValue);
+					
+				
 					if(otype != null && otype instanceof JstObjectLiteralType){
-						JstCache.getInstance().addAliasType(fieldName, (JstObjectLiteralType)otype);
+						JstObjectLiteralType aliasType = JstCache.getInstance().getAliasType(fieldName, false);
+						if(aliasType!=null){
+							aliasType = (JstObjectLiteralType)otype;
+						}else{
+							
+							JstCache.getInstance().addAliasType(alias, (JstObjectLiteralType)otype);
+						}
+					}else{
+						
+						 JstCache.getInstance().getAliasType(alias, true);
+						
+						JstCache.getInstance().createAliasPlaceHolder(alias, fieldValue);
+						
 					}
 				}
 				

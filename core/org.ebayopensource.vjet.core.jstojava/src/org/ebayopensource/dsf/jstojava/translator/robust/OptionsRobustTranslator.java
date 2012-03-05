@@ -30,7 +30,7 @@ public class OptionsRobustTranslator extends CompletionsFilteredRobustTranslator
 		}
 		weakTranslator.getProvider().getOptionsTranslator().process(
 			arguments[0], jst);
-
+		
 		m_ctx.setPreviousNodeSourceEnd(current.sourceEnd());
 		// lookup possible empty completions
 		lookupEmptyCompletion();
