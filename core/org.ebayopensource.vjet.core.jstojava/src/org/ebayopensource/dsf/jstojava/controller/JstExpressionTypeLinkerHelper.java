@@ -1864,7 +1864,7 @@ public class JstExpressionTypeLinkerHelper {
 				if (parameters.size() > i) {
 					if (doesExprRequireResolve(argExpr)) {
 						doExprTypeResolve(resolver, revisitor, argExpr,
-								parameters.get(i).getType());
+								parameters.get(i).getTypes());
 					}
 				}
 				methodId.setJstBinding(matchingMtd);
@@ -2059,7 +2059,7 @@ public class JstExpressionTypeLinkerHelper {
 					if (parameters.size() > i) {
 						if (doesExprRequireResolve(argExpr)) {
 							doExprTypeResolve(resolver, revisitor, argExpr,
-									parameters.get(i).getType());
+									parameters.get(i).getTypes());
 						}
 					}
 				}
@@ -2240,6 +2240,7 @@ public class JstExpressionTypeLinkerHelper {
 		}
 	}
 
+	
 	public static void doExprTypeResolve(
 			final JstExpressionBindingResolver resolver,
 			final IJstVisitor revisitor, final IExpr expr, final IJstType type) {
@@ -2317,6 +2318,14 @@ public class JstExpressionTypeLinkerHelper {
 					((JstArrayInitializer) expr).setType(trueArray);
 				}
 			}
+		}
+	}
+
+	public static void doExprTypeResolve(
+			final JstExpressionBindingResolver resolver,
+			final IJstVisitor revisitor, final IExpr expr, final List<IJstType> types) {
+		for (IJstType iJstType : types) {
+			doExprTypeResolve( resolver,revisitor, expr, iJstType);
 		}
 	}
 
