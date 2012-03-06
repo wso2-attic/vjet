@@ -2393,7 +2393,7 @@ public class JstExpressionTypeLinkerHelper {
 					} 
 				}
 				
-				synthOlType.addResolvedOType(otype);
+			//	synthOlType.addResolvedOType(otype);
 			}
 		}
 		
@@ -2473,6 +2473,10 @@ public class JstExpressionTypeLinkerHelper {
 				final IJstType propertyType = matchingProperty.getType();
 				doObjLiteralAndOTypeBindings((ObjLiteral) valueExpr,
 						(SynthOlType) valueExpr.getResultType(), propertyType,
+						revisitor);
+			}else{
+				doObjLiteralAndOTypeBindings((ObjLiteral) valueExpr,
+						(SynthOlType) valueExpr.getResultType(), otype,
 						revisitor);
 			}
 		}
