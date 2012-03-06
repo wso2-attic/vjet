@@ -18,6 +18,7 @@ import org.ebayopensource.dsf.jst.term.NV;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
+import org.ebayopensource.dsf.jstojava.parser.comments.TokenMgrError;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
 import org.ebayopensource.dsf.jstojava.translator.IFindTypeSupport;
@@ -111,8 +112,10 @@ public class OTypeResolverRegistry {
 				return TranslateHelper.findType(findSupport, typingMeta, commentMeta);
 				
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// do nothing will validate later
+				
+			} catch(TokenMgrError e){
+				// do nothing will validate later
 			}
 			
 		
