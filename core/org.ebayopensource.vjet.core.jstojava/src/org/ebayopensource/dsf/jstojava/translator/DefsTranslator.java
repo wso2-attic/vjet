@@ -118,7 +118,7 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 				otype.addOptionalField(prop);
 			}
 			// how do I know this is optional?
-			System.out.println(prop);
+			//System.out.println(prop);
 			
 		}
 		jstType.addOType(otype);
