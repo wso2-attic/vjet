@@ -9,6 +9,8 @@
 package org.ebayopensource.dsf.jst.expr;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.BaseJstNode;
@@ -100,6 +102,9 @@ public class JstArrayInitializer extends BaseJstNode implements IExpr,IJstResult
 		m_type = type;
 	}
 	public List<IExpr> getExprs(){
+		if(m_exprs==null){
+			return Collections.EMPTY_LIST;
+		}
 		return m_exprs;
 	}
 	public void setExprs(List<IExpr> exprs){
