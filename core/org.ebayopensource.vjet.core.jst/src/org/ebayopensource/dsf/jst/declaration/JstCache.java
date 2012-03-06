@@ -369,7 +369,7 @@ public class JstCache {
 		m_typeSymbolMapping.clear();
 		m_typeRefTypeMap.clear();
 		m_aliasTypes.clear();
-		m_aliasTempMapping.clear();
+		m_aliasTempMapping = null;
 		
 	}
 	public boolean createAliasPlaceHolder(String alias, String typeName) {
