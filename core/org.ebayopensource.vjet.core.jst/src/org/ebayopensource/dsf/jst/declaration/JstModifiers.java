@@ -62,10 +62,6 @@ public final class JstModifiers extends BaseJstNode {
 	 */
 	public static final int DYNAMIC = 0x0020;
 	
-	/**
-	 * ? modifier constant (bit mask). Applicable to Properties
-	 */
-	private static final int OPTIONAL = 0x0030;
 
 	private static final String S_PUBLIC = "public";
 	private static final String S_PROTECTED = "protected";
@@ -79,7 +75,6 @@ public final class JstModifiers extends BaseJstNode {
 	private static final String S_FINAL_COMMA = "final,";
 	private static final String S_ABSTRACT_COMMA = "abstract,";
 	private static final String S_DYNAMIC_COMMA = "dynamic,";
-	private static final String S_OPTIONAL_COMMA = "?optional,";
 
 
 	private int m_flags;
@@ -258,9 +253,6 @@ public final class JstModifiers extends BaseJstNode {
 		if (isDynamic()) {
 			sb.append(S_DYNAMIC_COMMA);
 		}
-		if (isOptional()) {
-			sb.append(S_OPTIONAL_COMMA);
-		}
 
 		sb.append("]");
 
@@ -297,12 +289,4 @@ public final class JstModifiers extends BaseJstNode {
 		return m_flags;
 	}
 
-	public boolean isOptional() {
-		return (m_flags & OPTIONAL) != 0;
-	}
-	
-	public JstModifiers setOptional() {
-		m_flags = m_flags | OPTIONAL;
-		return this;
-	}
 }

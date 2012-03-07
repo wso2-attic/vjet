@@ -1072,12 +1072,12 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     public void testBug6217Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
-        expectedProblems.add(createNewProblem(
-                VjoSyntaxProbIds.OTypeWithNoneObjLiteralProperty, 3, 0));
+//        expectedProblems.add(createNewProblem(
+//                VjoSyntaxProbIds.OTypeWithNoneObjLiteralProperty, 3, 0));
         expectedProblems.add(createNewProblem(
                 MethodProbIds.BodyForAbstractMethod, 12, 0));
-        expectedProblems.add(createNewProblem(
-                VjoSyntaxProbIds.OTypeWithInnerTypes, 1, 0));
+//        expectedProblems.add(createNewProblem(
+//                VjoSyntaxProbIds.OTypeWithInnerTypes, 1, 0));
         // expectedProblems.add(createNewProblem(VjoSyntaxProbIds.IncorrectVjoSyntax,
         // 22, 0));
         // bugfix by roy, incorrect vjo syntax issue are now changed to

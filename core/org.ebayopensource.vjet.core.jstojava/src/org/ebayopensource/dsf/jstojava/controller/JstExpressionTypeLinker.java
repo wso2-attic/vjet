@@ -1863,6 +1863,15 @@ class JstExpressionTypeLinker implements IJstVisitor {
 							rhsType, pos, scopes);
 
 				}
+				if(rhsResolveNeeded && rhsExpr instanceof ObjLiteral){
+					IJstType rhsType = rhsExpr.getResultType();
+					if (rhsType == null) {
+						rhsType = new JstInferredType(JstCache.getInstance().getType(
+								"Object"));
+					} 
+					JstExpressionTypeLinkerHelper.doObjLiteralAndOTypeBindings((ObjLiteral) rhsExpr,
+							(SynthOlType) rhsExpr.getResultType(), rhsType, this);
+				}
 
 			}
 

@@ -21,14 +21,15 @@ import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.expr.FuncExpr;
 import org.ebayopensource.dsf.jst.term.JstLiteral;
 import org.ebayopensource.dsf.jst.term.NV;
 import org.ebayopensource.dsf.jst.term.ObjLiteral;
-import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
 import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.BaseAst2JstTranslator;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.TranslatorFactory;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.Expression;
@@ -80,25 +81,28 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 
 	private void processDef(JstType jstType, ObjLiteral literal, NV field) {
 
-		if (field.getValue() != null) {
-
-			if (field.getValue() instanceof ObjLiteral) {
+		IExpr value = field.getValue();
+		if (value != null) {
+			
+			if (value instanceof ObjLiteral) {
 				processObjLiteralDef(jstType, field.getName(),
-						(ObjLiteral) field.getValue());
-			}else if (field.getValue() instanceof FuncExpr) {
+						(ObjLiteral) value);
+			}else if (value instanceof FuncExpr) {
 				processFunctionDef(jstType,
-						((FuncExpr) field.getValue()).getFunc());
+						((FuncExpr) value).getFunc());
 
 			}
-			else if (field.getValue() instanceof BaseJstNode){
+			else if (value instanceof BaseJstNode){
 				processObjLiteralDef(jstType, field.getName(),
-						(BaseJstNode)field.getValue());
+						(BaseJstNode)value, field);
 			}
 			
 			
 		}
 
 	}
+
+	
 
 	// take the object literal and construct
 	// JstObjLiteralType
@@ -117,16 +121,21 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 			if(field.isOptional()){
 				otype.addOptionalField(prop);
 			}
-			// how do I know this is optional?
-			//System.out.println(prop);
 			
 		}
 		jstType.addOType(otype);
 	}
 
 	private void processObjLiteralDef(JstType jstType, String name,
-			BaseJstNode value) {
-
+			BaseJstNode value, NV field) {
+		if (value instanceof FieldAccessExpr) {
+			FieldAccessExpr fieldAccessExpr = (FieldAccessExpr) value;
+			IJstType type = fieldAccessExpr.getType();
+			IJstType fnType = JstCache.getInstance().getType("Function");
+			if (fnType != null && fnType.equals(type)) {
+				processFunction(jstType, name, fieldAccessExpr,field);		
+			}
+		}else{
 		JstObjectLiteralType otype = new JstObjectLiteralType(name);
 		otype.setPackage(new JstPackage(jstType.getName()));
 		// TODO add source info
@@ -134,7 +143,45 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 		jstType.addProperty(new JstProperty(otype, name));
 		
 		jstType.addOType(otype);
+		}
 	}
+
+	private void processFunction(JstType jstType, String name,
+			FieldAccessExpr fieldAccessExpr, NV nv) {
+		List<IJsCommentMeta> commentMeta = TranslateHelper.findMetaFromExpr(fieldAccessExpr);
+		if(commentMeta!=null){
+			JstMethod meth = (JstMethod)TranslateHelper.MethodTranslateHelper.createJstSynthesizedMethod( commentMeta, m_ctx,
+				name);
+			meth.setSource(nv.getSource());
+			jstType.addMethod(meth);
+		}
+			
+
+	}
+	
+		private IJsCommentMeta getLongestArgList(List<IJsCommentMeta> metaArr) {
+				
+				IJsCommentMeta maxMeta = null;
+				int maxParamCount = 0;
+				List<JsParam> params = null;
+				for (IJsCommentMeta meta : metaArr) {
+					if (maxMeta == null) {
+						maxMeta = meta;
+						params = TranslateHelper.getParams(meta);
+						if (params != null) {
+							maxParamCount = params.size();
+						}
+					}
+					else {
+						params = TranslateHelper.getParams(meta);
+						if (params != null && params.size() > maxParamCount) {
+							maxParamCount = params.size();
+							maxMeta = meta;
+						}
+					}
+				}
+				return maxMeta;
+			}
 	
 	private JstProperty createPropertyFromNV(NV nv){
 		IExpr value = nv.getValue();
@@ -162,7 +209,7 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 			}
 			
 			JstProperty jstProperty = new JstProperty(jstType, nv.getName(),
-					(JstLiteral) value, new JstModifiers());
+					(JstLiteral) value, new JstModifiers().setPublic());
 			jstProperty.setSource(nv.getSource());
 			jstProperty.setComments(nv.getComments());
 			return jstProperty;

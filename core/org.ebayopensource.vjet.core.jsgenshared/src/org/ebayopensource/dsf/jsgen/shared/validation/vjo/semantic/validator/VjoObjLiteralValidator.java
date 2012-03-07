@@ -60,7 +60,7 @@ public class VjoObjLiteralValidator
 				String[] arguments = new String[2];
 				arguments[0] = nv.getName() != null ? nv.getName() : "NULL";
 				arguments[1] = objLiteral.toExprText();
-				final BaseVjoSemanticRuleCtx ruleCtx = new BaseVjoSemanticRuleCtx(objLiteral, ctx.getGroupId(), arguments);
+				final BaseVjoSemanticRuleCtx ruleCtx = new BaseVjoSemanticRuleCtx(nv.getIdentifier(), ctx.getGroupId(), arguments);
 				satisfyRule(ctx, VjoSemanticRuleRepo.getInstance().OBJECT_LITERAL_SHOULD_HAVE_UNIQUE_KEY, ruleCtx);
 			}
 			nameSet.add(nv.getName());

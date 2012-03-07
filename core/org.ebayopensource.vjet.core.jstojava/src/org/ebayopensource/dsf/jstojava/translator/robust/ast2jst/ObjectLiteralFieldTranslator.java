@@ -54,7 +54,9 @@ public class ObjectLiteralFieldTranslator extends
 			final JstIdentifier id = createId(astObjectliteralField);
 			bindObjLiteralId(astObjectliteralField, id, value, nv);
 			nv.setName(id);
+			nv.addChild(id);
 			nv.setValue(value);
+			nv.addChild(value);
 
 			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(
 					astObjectliteralField.sourceStart()));
@@ -120,8 +122,8 @@ public class ObjectLiteralFieldTranslator extends
 	private JstIdentifier createId(ObjectLiteralField astObjectliteralField) {
 		JstIdentifier id = new JstIdentifier(astObjectliteralField
 				.getFieldName().toString());
-		int startOffset = astObjectliteralField.sourceStart;
-		int endOffset = astObjectliteralField.sourceEnd;
+		int startOffset = astObjectliteralField.fieldName.sourceStart;
+		int endOffset = astObjectliteralField.fieldName.sourceEnd;
 		int length = endOffset - startOffset + 1;
 		id.setSource(TranslateHelper.createJstSource(m_ctx.getSourceUtil(),
 				length, startOffset, endOffset));
