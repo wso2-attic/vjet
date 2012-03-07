@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Core
-Bundle-SymbolicName: org.ebayopensource.vjet.extjs.core
-Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.ebayopensource.vjet.core.jst;bundle-version="1.0.0",
- org.ebayopensource.vjet.core.jstojava;bundle-version="1.0.0"
-Export-Package: org.ebayopensource.vjet.extjs.core
