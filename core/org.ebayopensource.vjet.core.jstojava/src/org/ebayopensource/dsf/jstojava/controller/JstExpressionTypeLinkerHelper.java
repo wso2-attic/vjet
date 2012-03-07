@@ -2377,7 +2377,7 @@ public class JstExpressionTypeLinkerHelper {
 		}
 	}
 	
-	private static void doObjLiteralAndOTypeBindings(
+	static void doObjLiteralAndOTypeBindings(
 			 ObjLiteral objLiteral, final SynthOlType synthOlType,
 			 IJstType otype, final IJstVisitor revisitor) {
 		
@@ -2413,7 +2413,7 @@ public class JstExpressionTypeLinkerHelper {
 		else if (otype != null && (otype instanceof JstObjectLiteralType)) {
 			synthOlType.addResolvedOType(otype);
 		}else{
-//			return;
+    		return;
 		}
 		
 		// now we traverse the object literal to look 4 further bindings like:

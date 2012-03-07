@@ -8,15 +8,22 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator.robust.ast2jst;
 
+import java.util.List;
+
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.JstSource;
+import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletionOnQualifiedNameReference;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.FieldReference;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.FunctionExpression;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.MethodDeclaration;
 
 public class FieldReferenceTranslator extends
 		BaseAst2JstTranslator<FieldReference, FieldAccessExpr> {
@@ -40,7 +47,24 @@ public class FieldReferenceTranslator extends
 		if (qualifier instanceof JstIdentifier) {
 			IJstType type = ((JstIdentifier)qualifier).getType();
 			if (type!=null && type.getProperty(identifierStr)!=null) {
-				identifier.setType(type.getProperty(identifierStr).getType());
+				
+				IJstType fnType = JstCache.getInstance().getType("Function");
+				
+				
+				IJstType propType = type.getProperty(identifierStr).getType();
+				if (fnType != null && fnType.equals(propType)) {
+					List<IJsCommentMeta> metaArr= m_ctx.getCommentCollector().getCommentMeta(
+//							 sourceStart is incorrect when there is js doc in front of it
+							expr.sourceStart, 
+							m_ctx.getPreviousNodeSourceEnd(), m_ctx.getNextNodeSourceStart(),true);
+					if(metaArr!=null && metaArr.size()>0){
+						final JsCommentMetaNode metaJstNode = new JsCommentMetaNode();
+						metaJstNode.setJsCommentMetas(metaArr);
+						far.addChild(metaJstNode);
+					}
+				}
+				
+				identifier.setType(propType);
 			}
 		}
 		JstSource source = TranslateHelper.getSource(expr, m_ctx.getSourceUtil());
@@ -49,6 +73,8 @@ public class FieldReferenceTranslator extends
 
 		return far;
 	}
+	
+
 
 	@Override
 	protected JstCompletion createCompletion(FieldReference astNode,
