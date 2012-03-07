@@ -227,18 +227,6 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     public void testMethodsWithSameName_1() throws Exception {
         expectProblems.clear();
         
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 8,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 12,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 16,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 25,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 29,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 33,
-                0));
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 25,
                 0));
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 29,
@@ -263,12 +251,6 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     @Description("Test duplicate method name ")
     public void testMethodsWithSameName_2() throws Exception {
         expectProblems.clear();
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 7,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 10,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 13,
-                0));
         expectProblems
                 .add(createNewProblem(MethodProbIds.AmbiguousMethod, 7, 0));
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 10,
@@ -300,18 +282,6 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     @Description("Test duplicate method name ")
     public void testMethodsWithSameName_3() throws Exception {
         expectProblems.clear();
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 8,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 12,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 16,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 25,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 29,
-                0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 33,
-                0));
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 25,
                 0));
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 29,
@@ -351,8 +321,6 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
         // 29, 0));
         // expectProblems.add(createNewProblem(FieldProbIds.FieldInitializationDependsOnUnintializedTypes,
         // 34, 0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 32,
-                0));
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 32,
                 0));
         // expectProblems.add(createNewProblem(FieldProbIds.FieldInitializationDependsOnUnintializedTypes,

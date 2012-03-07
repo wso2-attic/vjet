@@ -2917,8 +2917,6 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 11,
                 0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 11,
-                0));
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
                 "org.ebayopensource.dsf.jst.validation.vjo.BugFixes.", "Bug8714.js", this
                         .getClass());
@@ -3044,8 +3042,6 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
         expectProblems.clear();
         expectProblems
                 .add(createNewProblem(MethodProbIds.AmbiguousMethod, 9, 0));
-        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 9,
-                0));
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
                 "org.ebayopensource.dsf.jst.validation.vjo.BugFixes.", "Bug8878.js", this
                         .getClass());
