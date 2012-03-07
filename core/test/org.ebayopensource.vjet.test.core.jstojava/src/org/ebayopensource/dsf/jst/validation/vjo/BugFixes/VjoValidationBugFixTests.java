@@ -1072,12 +1072,12 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     public void testBug6217Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
-        expectedProblems.add(createNewProblem(
-                VjoSyntaxProbIds.OTypeWithNoneObjLiteralProperty, 3, 0));
+//        expectedProblems.add(createNewProblem(
+//                VjoSyntaxProbIds.OTypeWithNoneObjLiteralProperty, 3, 0));
         expectedProblems.add(createNewProblem(
                 MethodProbIds.BodyForAbstractMethod, 12, 0));
-        expectedProblems.add(createNewProblem(
-                VjoSyntaxProbIds.OTypeWithInnerTypes, 1, 0));
+//        expectedProblems.add(createNewProblem(
+//                VjoSyntaxProbIds.OTypeWithInnerTypes, 1, 0));
         // expectedProblems.add(createNewProblem(VjoSyntaxProbIds.IncorrectVjoSyntax,
         // 22, 0));
         // bugfix by roy, incorrect vjo syntax issue are now changed to
@@ -2917,6 +2917,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 11,
                 0));
+        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 11,
+                0));
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
                 "org.ebayopensource.dsf.jst.validation.vjo.BugFixes.", "Bug8714.js", this
                         .getClass());
@@ -3042,6 +3044,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
         expectProblems.clear();
         expectProblems
                 .add(createNewProblem(MethodProbIds.AmbiguousMethod, 9, 0));
+        expectProblems.add(createNewProblem(FieldProbIds.DuplicateField, 9,
+                0));
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
                 "org.ebayopensource.dsf.jst.validation.vjo.BugFixes.", "Bug8878.js", this
                         .getClass());
