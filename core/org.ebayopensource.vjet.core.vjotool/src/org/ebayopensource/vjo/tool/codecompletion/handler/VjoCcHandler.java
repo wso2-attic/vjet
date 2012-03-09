@@ -10,6 +10,8 @@ package org.ebayopensource.vjo.tool.codecompletion.handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.BaseJstNode;
@@ -22,7 +24,6 @@ import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
-import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeRefType;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
@@ -598,7 +599,8 @@ public class VjoCcHandler implements IVjoCcHandler {
 		}
 		JstCompletion completion = ctx.getCompletion();
 		IJstNode node = completion.getRealParent();
-		List<String> result = new ArrayList<String>();
+		//List<String> result = new ArrayList<String>();
+		Set<String> result = new TreeSet<String>();
 		IJstType type = null;
 		boolean afterThis = false;
 		if (node instanceof FieldAccessExpr) {
