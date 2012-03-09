@@ -373,6 +373,9 @@ public class JstCache {
 		
 	}
 	public boolean createAliasPlaceHolder(String alias, String typeName) {
+		if(m_aliasTempMapping==null){
+			m_aliasTempMapping = new HashMap<String, String>();
+		}
 		m_aliasTempMapping.put(alias,typeName);
 		return true;
 	}
