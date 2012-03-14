@@ -42,6 +42,7 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcParameterProposal
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcStaticPropMethodProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeNameAliasProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcVariableProposalAdvisor;
 
@@ -79,6 +80,7 @@ public class VjoCcAdvisorSorter implements Comparator<IVjoCcProposalData>, Seria
 
 		SORT_MAP.put(VjoCcOwnerTypeProposalAdvisor.ID, ++i);
 		SORT_MAP.put(VjoCcAliasProposalAdvisor.ID, ++i);
+		SORT_MAP.put(VjoCcTypeNameAliasProposalAdvisor.ID, ++i);
 		SORT_MAP.put(VjoCcTypeProposalAdvisor.ID, ++i);
 		SORT_MAP.put(VjoAttributedProposalAdvisor.ID, ++i);
 		SORT_MAP.put(VjoCcNeedsItemProposalAdvisor.ID, i);

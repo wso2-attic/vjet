@@ -243,7 +243,7 @@ public abstract class AbstractVjoProposalPresenter {
 //					+ CompletionConstants.DOT + type.getSimpleName();
 //				}
 //			} else {
-				replaceString = type.getSimpleName();
+				replaceString = type.getName();
 //			}
 		}
 		return replaceString;

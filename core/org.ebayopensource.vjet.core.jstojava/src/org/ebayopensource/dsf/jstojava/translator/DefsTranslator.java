@@ -191,15 +191,23 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 			JstLiteral literal = (JstLiteral)value;
 			// create the JstProperty
 			// problem with result type 
-			List<IJsCommentMeta> commentMeta = TranslateHelper.findMetaFromExpr(literal);
-			IJsCommentMeta meta = null;
-			if(commentMeta!=null){
-				meta = commentMeta.get(0);
-			}
 			IJstType jstType = null;
-			if(meta !=null){
-				jstType = TranslateHelper.findType(m_ctx, meta.getTyping(), meta);
+			IJstType type = nv.getIdentifier().getType();
+			if(type!=null){
+				jstType = type;
 			}
+			if(jstType==null){
+			List<IJsCommentMeta> commentMeta = TranslateHelper.findMetaFromExpr(literal);
+				IJsCommentMeta meta = null;
+				if(commentMeta!=null){
+					meta = commentMeta.get(0);
+				}
+				if(meta !=null){
+					jstType = TranslateHelper.findType(m_ctx, meta.getTyping(), meta);
+				}
+			
+			}
+			
 			
 			if(jstType==null){
 				jstType = value.getResultType();

@@ -4,15 +4,17 @@ import java.util.Set;
 
 public interface IFunctionMetaMapping {
 
-	public abstract String getGroupId();
+	String getGroupId();
 
-	public abstract boolean hasMetaExtension(String targetFunc);
+	boolean hasMetaExtension(String targetFunc);
 
-	public abstract IMetaExtension getExtension(String targetFunc, String key);
+	IMetaExtension getExtension(String targetFunc, String key);
 
-	public abstract IMetaExtension getExtentedArgBinding(String targetFunc,
+	IMetaExtension getExtentedArgBinding(String targetFunc,
 			String key);
 
-	public abstract Set<String> getSupportedTargetFuncs();
+	Set<String> getSupportedTargetFuncs();
+
+	boolean isFirstArgumentType(String targetFunc);
 
 }

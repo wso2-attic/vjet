@@ -112,4 +112,10 @@ public class FunctionMetaMapping implements IFunctionMetaMapping {
 					new BaseFindTypeSupport(), "_fn_");
 		}
 	}
+
+	@Override
+	public boolean isFirstArgumentType(String targetFunc) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

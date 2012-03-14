@@ -73,4 +73,13 @@ public class FunctionMetaRegistry {
 		IFunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
 		return (mapping == null) ? null : mapping.getExtentedArgBinding(targetFunc, key);
 	}
+
+	public boolean isFirstArgumentType(String targetFunc, String groupId) {
+		IFunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
+		if(mapping!=null){
+			return mapping.isFirstArgumentType(targetFunc);
+		}
+		return false;
+		
+	}
 }
