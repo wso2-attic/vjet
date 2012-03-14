@@ -395,6 +395,9 @@ public class Group<E> implements IGroup<E> {
 	}
 
 	public Map<String, E> getAliasTypeNames() {
+		if(m_aliasTypeNames==null){
+			return Collections.EMPTY_MAP;
+		}
 		return m_aliasTypeNames;
 	}
 }
