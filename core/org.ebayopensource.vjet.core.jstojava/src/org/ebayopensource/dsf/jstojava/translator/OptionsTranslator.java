@@ -28,36 +28,59 @@ public class OptionsTranslator extends BasePropsProtosTranslator {
 		if(expr instanceof ObjectLiteral){
 			ObjectLiteral objLit = (ObjectLiteral)expr;
 			// process NV which start with alias::
+			if(objLit.getFields()==null){
+				return;
+			}
 			for (IObjectLiteralField field : objLit.getFields()) {
 				String fieldName = field.getFieldName().toString();
 				fieldName = fieldName.replace("\"", "");
 				fieldName = fieldName.replace("\'", "");
-				if(fieldName.startsWith("alias")){
+				
+				if(fieldName.equals("alias")){
 					String fieldValue  = field.getInitializer().toString();
 					fieldValue = fieldValue.replace("\"", "");
 					fieldValue = fieldValue.replace("\'", "");
 					fieldValue = fieldValue.replace("::", ".");
-					String alias = fieldName.substring(fieldName.indexOf("alias::")+7);
-					JstType otype = JstCache.getInstance().getType(fieldValue);
 					
-				
-					if(otype != null && otype instanceof JstObjectLiteralType){
-						JstObjectLiteralType aliasType = JstCache.getInstance().getAliasType(fieldName, false);
-						if(aliasType!=null){
-							aliasType = (JstObjectLiteralType)otype;
-						}else{
-							
-							JstCache.getInstance().addAliasType(alias, (JstObjectLiteralType)otype);
-						}
-					}else{
-						
-						 JstCache.getInstance().getAliasType(alias, true);
-						
-						JstCache.getInstance().createAliasPlaceHolder(alias, fieldValue);
-						
+					JstObjectLiteralType jstObjectLiteralType = JstCache.getInstance().getAliasType(fieldValue, false);
+					
+					jstObjectLiteralType = (JstObjectLiteralType)jstType.getOType("cfg");
+					if(jstObjectLiteralType!=null){
+						jstObjectLiteralType.setAliasTypeName(fieldValue);
+						JstCache.getInstance().addAliasType(fieldValue, jstObjectLiteralType);
 					}
+					
 				}
 				
+//				String fieldName = field.getFieldName().toString();
+//				fieldName = fieldName.replace("\"", "");
+//				fieldName = fieldName.replace("\'", "");
+//				if(fieldName.startsWith("alias")){
+//					String fieldValue  = field.getInitializer().toString();
+//					fieldValue = fieldValue.replace("\"", "");
+//					fieldValue = fieldValue.replace("\'", "");
+//					fieldValue = fieldValue.replace("::", ".");
+//					String alias = fieldName.substring(fieldName.indexOf("alias::")+7);
+//					JstType otype = JstCache.getInstance().getType(fieldValue);
+//					
+//				
+//					if(otype != null && otype instanceof JstObjectLiteralType){
+//						JstObjectLiteralType aliasType = JstCache.getInstance().getAliasType(fieldName, false);
+//						if(aliasType!=null){
+//							aliasType = (JstObjectLiteralType)otype;
+//						}else{
+//							
+//							JstCache.getInstance().addAliasType(alias, (JstObjectLiteralType)otype);
+//						}
+//					}else{
+//						
+//						 JstCache.getInstance().getAliasType(alias, true);
+//						
+//						JstCache.getInstance().createAliasPlaceHolder(alias, fieldValue);
+//						
+//					}
+//				}
+//				
 			}
 		}
 		
