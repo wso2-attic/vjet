@@ -1505,7 +1505,7 @@ public class TypeSpace<T,D> implements ITypeSpace<T,D> {
 		
 		map.putAll(fromGroup.getAliasTypeNames());
 		for (IGroup<T> g: fromGroup.getGroupDependency()){
-			map.putAll(fromGroup.getAliasTypeNames());
+			map.putAll(g.getAliasTypeNames());
 		}
 		return map;
 	}
