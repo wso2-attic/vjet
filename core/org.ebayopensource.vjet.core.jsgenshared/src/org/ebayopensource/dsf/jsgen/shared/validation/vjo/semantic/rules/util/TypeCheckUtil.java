@@ -545,12 +545,13 @@ public class TypeCheckUtil {
 		}
 
 		if (assignTo instanceof JstMixedType) {
+			
 			for (IJstType mType : ((JstMixedType) assignTo).getMixedTypes()) {
-				if (!isAssignable(mType, assignFrom)) {
-					return false;
+				if (isAssignable(mType, assignFrom)) {
+					return true;
 				}
 			}
-			return true;
+			return false;
 		}
 
 		if (assignFrom instanceof JstMixedType) {
