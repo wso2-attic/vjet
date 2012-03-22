@@ -3,7 +3,7 @@ vjo.ctype("org.ebayopensource.dsf.jst.validation.vjo.rt.otype.OTypeUser")
 //>needs(org.ebayopensource.dsf.jst.validation.vjo.rt.otype.OTypeNested)
 .props({
 	
-	foo: function(objLiteral){//<void foo(OType.NVPair)
+	foo: function(objLiteral){//<void foo(OType::NVPair)
 		alert(objLiteral.name);
 		alert(objLiteral.value);
 		alert(objLiteral);
@@ -51,12 +51,12 @@ vjo.ctype("org.ebayopensource.dsf.jst.validation.vjo.rt.otype.OTypeUser")
 	},
 	
 	further: function(){
-		var nvContract = null;//<OType.NVPair
+		var nvContract = null;//<OType::NVPair
 		nvContract = {
 			
 		};
 		
-		var player = function(nv){//<OType.play
+		var player = function(nv){//<OType::play
 			alert(nv.name);
 		};
 		player(nvContract);
@@ -66,7 +66,7 @@ vjo.ctype("org.ebayopensource.dsf.jst.validation.vjo.rt.otype.OTypeUser")
 		var enclosed = {
 				nvContract : {}//<OTypeNested.Enclosed.NestedNV
 				,
-				nestedPlayer : function(nv){//<OTypeNested.Enclosed.nestedPlay
+				nestedPlayer : function(nv){//<OTypeNested.Enclosed::nestedPlay
 					alert(nv.label);
 					nv.print();
 				}

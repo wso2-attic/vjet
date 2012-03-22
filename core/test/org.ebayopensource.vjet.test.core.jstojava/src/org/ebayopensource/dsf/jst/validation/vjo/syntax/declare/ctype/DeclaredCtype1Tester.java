@@ -44,7 +44,7 @@ public class DeclaredCtype1Tester extends VjoValidationBaseTester {
     public void setUp(){
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
-        expectProblems.add(createNewProblem(VjoSyntaxProbIds.InvalidIdentifier, 3, 0));
+        expectProblems.add(createNewProblem(VjoSyntaxProbIds.InvalidIdentifier, 1, 0));
     }
 
     @Test

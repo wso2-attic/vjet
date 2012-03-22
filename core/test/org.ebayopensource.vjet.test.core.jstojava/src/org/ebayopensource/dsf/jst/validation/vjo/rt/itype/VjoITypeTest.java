@@ -72,8 +72,8 @@ public class VjoITypeTest extends VjoValidationBaseTester{
 	public void testBadIType3() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
-		expectProblems.add(createNewProblem(VjoSyntaxProbIds.InvalidIdentifier, 2, 0));
-		expectProblems.add(createNewProblem(VjoSyntaxProbIds.ITypeWithInstanceProperty, 2, 0));
+		expectProblems.add(createNewProblem(VjoSyntaxProbIds.InvalidIdentifier, 1, 0));
+		expectProblems.add(createNewProblem(VjoSyntaxProbIds.ITypeWithInstanceProperty, 1, 0));
 		
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.itype.", "BadIType3.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
