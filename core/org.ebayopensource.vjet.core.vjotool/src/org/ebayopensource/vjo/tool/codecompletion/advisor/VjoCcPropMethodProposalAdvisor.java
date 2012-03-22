@@ -18,6 +18,7 @@ import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstMixedType;
+import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcAdvisor;
@@ -124,6 +125,10 @@ public class VjoCcPropMethodProposalAdvisor extends AbstractVjoCcAdvisor
 			if(type instanceof JstAttributedType){
 				JstAttributedType atype = ((JstAttributedType)type);
 				IJstOType otype = atype.getOType(atype.getAttributeName());
+				props.addAll(getTypeProperties(otype));
+			}
+			if(type instanceof JstObjectLiteralType){
+				JstObjectLiteralType otype = ((JstObjectLiteralType)type);
 				props.addAll(getTypeProperties(otype));
 			}
 			

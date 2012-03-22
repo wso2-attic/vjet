@@ -134,9 +134,10 @@ public abstract class VjoSemanticValidator implements
 			return unknownType;// = ((JstArray)unknownType).getComponentType();
 		}
 		
-		if (unknownType instanceof IJstOType && unknownType.getParentNode() != null){
-			unknownType = unknownType.getParentNode().getOwnerType();
-		}
+		// TODO should otype really require needs? disable for now
+//		if (unknownType instanceof IJstOType && unknownType.getParentNode() != null){
+//			unknownType = unknownType.getParentNode().getOwnerType();
+//		}
 		
 		final JstPackage jstPackage = unknownType.getPackage();
 		if (jstPackage != null){

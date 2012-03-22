@@ -23,6 +23,7 @@ public class TypeConstructContext implements ITypeConstructContext {
 	private final List<IJstType> resolvedJstTypes;
 	private final IJstCompletion jstCompletion;
 	private final Class<? extends IExpr> exprClass;
+	private String groupName;
 
 	public Class<? extends IExpr> getExprClass() {
 		return exprClass;
@@ -31,7 +32,7 @@ public class TypeConstructContext implements ITypeConstructContext {
 
 
 	public TypeConstructContext(IExpr inputExpr, IExpr lhsExpr,
-			List<IExpr> argsExprList, IJstCompletion jstCompletion, Class<? extends IExpr> class1) {
+			List<IExpr> argsExprList, IJstCompletion jstCompletion, Class<? extends IExpr> class1, String groupName) {
 
 		this.inputExpr = inputExpr;
 		this.lhsExpr = lhsExpr;
@@ -39,6 +40,7 @@ public class TypeConstructContext implements ITypeConstructContext {
 		this.jstCompletion = jstCompletion;
 		this.exprClass = class1;
 		resolvedJstTypes = new ArrayList<IJstType>();
+		this.setGroupName(groupName);
 	}
 
 	@Override
@@ -103,6 +105,18 @@ public class TypeConstructContext implements ITypeConstructContext {
 	@Override
 	public IJstCompletion getCompletion() {
 		return jstCompletion;
+	}
+
+
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
 }

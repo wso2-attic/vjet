@@ -63,6 +63,8 @@ public interface ITypeConstructContext {
 	
 
 	public Class<? extends IExpr> getExprClass();
+	
+	public String getGroupName();
 
 
 

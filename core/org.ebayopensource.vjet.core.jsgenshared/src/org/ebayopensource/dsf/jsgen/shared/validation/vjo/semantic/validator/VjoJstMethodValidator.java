@@ -218,7 +218,22 @@ public class VjoJstMethodValidator
 						final BaseVjoSemanticRuleCtx ruleCtx = new BaseVjoSemanticRuleCtx(argument, ctx.getGroupId(), new String[]{argument.getName(), jstMethod.getName().getName()});
 						satisfyRule(ctx, VjoSemanticRuleRepo.getInstance().METHOD_ARGS_TYPE_SHOULD_NOT_BE_VOID, ruleCtx);
 					}
-					if(getKnownType(ctx, jstMethod.getOwnerType(), argType) == null){
+					if(argType instanceof JstMixedType){
+						JstMixedType mixedType = (JstMixedType)argType;
+						for(IJstType type: mixedType.getMixedTypes()){
+							
+							if(getKnownType(ctx, jstMethod.getOwnerType(), type) == null){		
+								if(!ctx.getMissingImportTypes().contains(type)){
+									ctx.addMissingImportType(type);
+								}
+	
+								final BaseVjoSemanticRuleCtx ruleCtx = new BaseVjoSemanticRuleCtx(argument, ctx.getGroupId(), new String[]{type.getName()});
+								satisfyRule(ctx, VjoSemanticRuleRepo.getInstance().UNKNOWN_TYPE_MISSING_IMPORT, ruleCtx);
+							}
+							
+							
+						}
+					}else if(getKnownType(ctx, jstMethod.getOwnerType(), argType) == null){
 						//report problem, type unknown
 						if(!ctx.getMissingImportTypes().contains(argType)){
 							ctx.addMissingImportType(argType);

@@ -1448,7 +1448,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 			// TODO pass the reference to JSTCompletion
 			ITypeConstructContext constrCtx = new TypeConstructContext(mie,
-					lhs, exprs, null, class1);
+					lhs, exprs, null, class1,m_groupInfo.getGroupName());
 			// resolve
 			tcr.resolve(mtdKey, constrCtx);
 
