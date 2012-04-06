@@ -286,7 +286,7 @@ public class CodeCompletionUtil {
 			File file = new File(fileLoc + ARTIFACT_FOLDER + "/");
 			System.out.println("LAX : file : " + file);
 			
-			ts.processEvent(new AddGroupEvent(GROUP_NAME, grpPath, srcPath,
+			ts.processEvent(new AddGroupEvent(GROUP_NAME, grpPath, "artifact",
 					null, getDefaultLibList()), new ISourceEventCallback<IJstType>() {
 				public void onComplete(EventListenerStatus<IJstType> status) {
 					synchronized (fullyLoaded) {

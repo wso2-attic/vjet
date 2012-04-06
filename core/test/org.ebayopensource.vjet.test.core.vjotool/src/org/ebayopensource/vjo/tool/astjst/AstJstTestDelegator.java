@@ -92,7 +92,7 @@ public class AstJstTestDelegator {
 			testNodes = astUtil.getExpectedNodes(bean.getJst(),inputList);
 			
 			// Put assertions
-			astUtil.testAssertions(testNodes, bean.getJst(), jxPathInput);
+			astUtil.testAssertions(data.testNumber,testNodes, bean.getJst(), jxPathInput);
 			
 			// test custom assertions
 			astUtil.testCustomAssertions(testNodes, bean.getJst(), jxPathInput.getClassName());
