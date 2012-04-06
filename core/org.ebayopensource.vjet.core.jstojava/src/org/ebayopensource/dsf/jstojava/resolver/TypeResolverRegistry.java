@@ -59,7 +59,7 @@ public class TypeResolverRegistry {
 		for (int i = 0; i < resolverList.size(); i++) {
 			ITypeResolver resolver = resolverList.get(i);
 			String typeName = resolver.resolve(args);
-			if(typeName.equals("")){
+			if(typeName==null || typeName.equals("")){
 				return null;
 			}
 			if(typeName.contains("org.mozilla.mod.javascript.Undefined")){
