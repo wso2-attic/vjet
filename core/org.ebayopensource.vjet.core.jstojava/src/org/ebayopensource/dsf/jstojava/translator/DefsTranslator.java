@@ -61,14 +61,16 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 			BaseAst2JstTranslator translator;
 			if (expr instanceof ObjectLiteral) {
 				ObjectLiteral literal =(ObjectLiteral)expr;
-				for (ObjectLiteralField field : literal.fields) {
-					if (field.getInitializer() instanceof ObjectLiteral) {
-						JstObjectLiteralType objLitType = new JstObjectLiteralType(field.fieldName.toString());
-						objLitType.setPackage(new JstPackage(m_ctx.getCurrentType().getPackage().getName()+"."+m_ctx.getCurrentType().getName()));
-//						jstObjLitCfgType.addProperty(new JstProperty(objLitType, propName));
-//						jstObjLitCfgType.addOType(objLitType);
-						
-						jstType.addOType(objLitType);
+				if(literal.fields!=null){
+					for (ObjectLiteralField field : literal.fields) {
+						if (field.getInitializer() instanceof ObjectLiteral) {
+							JstObjectLiteralType objLitType = new JstObjectLiteralType(field.fieldName.toString());
+							objLitType.setPackage(new JstPackage(m_ctx.getCurrentType().getPackage().getName()+"."+m_ctx.getCurrentType().getName()));
+	//						jstObjLitCfgType.addProperty(new JstProperty(objLitType, propName));
+	//						jstObjLitCfgType.addOType(objLitType);
+							
+							jstType.addOType(objLitType);
+						}
 					}
 				}
 			}
