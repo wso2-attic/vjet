@@ -2325,6 +2325,7 @@ public class JstExpressionTypeLinkerHelper {
 			final JstExpressionBindingResolver resolver,
 			final IJstVisitor revisitor, final IExpr expr, final List<IJstType> types) {
 		for (IJstType iJstType : types) {
+			
 			doExprTypeResolve( resolver,revisitor, expr, iJstType);
 		}
 	}
@@ -2373,6 +2374,8 @@ public class JstExpressionTypeLinkerHelper {
 				JstAttributedType atype = (JstAttributedType)type;
 				IJstOType otype = atype.getOType(atype.getAttributeName());
 				doObjLiteralAndOTypeBindings(objLiteral, synthOlType, otype, revisitor);
+			}else if(type instanceof JstObjectLiteralType){
+				doObjLiteralAndOTypeBindings(objLiteral, synthOlType, (IJstOType)type, revisitor);
 			}
 		}
 	}
