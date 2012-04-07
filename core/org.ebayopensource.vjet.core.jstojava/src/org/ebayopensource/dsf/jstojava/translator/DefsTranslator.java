@@ -14,6 +14,7 @@ import java.util.List;
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
@@ -65,7 +66,9 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 					for (ObjectLiteralField field : literal.fields) {
 						if (field.getInitializer() instanceof ObjectLiteral) {
 							JstObjectLiteralType objLitType = new JstObjectLiteralType(field.fieldName.toString());
-							objLitType.setPackage(new JstPackage(m_ctx.getCurrentType().getPackage().getName()+"."+m_ctx.getCurrentType().getName()));
+							if(m_ctx.getCurrentType().getPackage()!=null){
+								objLitType.setPackage(new JstPackage(m_ctx.getCurrentType().getPackage().getName()+"."+m_ctx.getCurrentType().getName()));
+							}
 	//						jstObjLitCfgType.addProperty(new JstProperty(objLitType, propName));
 	//						jstObjLitCfgType.addOType(objLitType);
 							
@@ -110,6 +113,16 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 				processFunctionDef(jstType,
 						((FuncExpr) value).getFunc());
 
+			}else if (value instanceof FieldAccessExpr) {
+				IJstType type = ((FieldAccessExpr) value).getType();
+				IJstType fnType = JstCache.getInstance().getType("Function");
+				if (fnType != null && fnType.equals(type)) {
+					
+					processFunction(jstType, field.getName(), (FieldAccessExpr)value, field);
+					
+								
+						
+				}
 			}
 			else if (value instanceof BaseJstNode){
 				processObjLiteralDef(jstType, field.getName(),
@@ -175,8 +188,13 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 		if(commentMeta!=null){
 			JstMethod meth = (JstMethod)TranslateHelper.MethodTranslateHelper.createJstSynthesizedMethod( commentMeta, m_ctx,
 				name);
-			meth.setSource(nv.getSource());
-			jstType.addMethod(meth);
+			JstMethod meth2 = new JstMethod(meth.getName(), meth.getModifiers(), meth.getRtnType());
+			for(JstArg a: meth.getArgs()){
+				meth2.addArg(a);
+			}
+			meth2.setSource(nv.getSource());
+			processFunctionDef(jstType, meth2);
+			jstType.addMethod(meth2);
 		}
 			
 
