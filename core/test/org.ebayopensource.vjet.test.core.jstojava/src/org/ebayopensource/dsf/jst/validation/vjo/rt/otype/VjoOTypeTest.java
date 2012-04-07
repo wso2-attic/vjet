@@ -145,10 +145,10 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 	@Description("Test nested otypes, callbacks")
 	public void testOTypeAsCallbacks() throws Exception {
 		expectProblems.clear();
-	//	expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 8, 0));
-		expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 6, 0));
+		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 8, 0));
+		expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 9, 0));
 	//	expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 14, 0));
-		expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 12, 0));
+	//	expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 12, 0));
 		
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.otype.", "CallbackClient.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
