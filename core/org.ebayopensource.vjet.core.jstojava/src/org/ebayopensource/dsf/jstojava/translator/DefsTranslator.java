@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
@@ -33,6 +34,8 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.BaseAst2JstTranslator;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.TranslatorFactory;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.Expression;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ObjectLiteral;
+import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ObjectLiteralField;
 
 public class DefsTranslator extends BasePropsProtosTranslator {
 	public DefsTranslator(TranslateCtx ctx) {
@@ -56,6 +59,20 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 		getCtx().enterBlock(type);
 		try {
 			BaseAst2JstTranslator translator;
+			if (expr instanceof ObjectLiteral) {
+				ObjectLiteral literal =(ObjectLiteral)expr;
+				for (ObjectLiteralField field : literal.fields) {
+					if (field.getInitializer() instanceof ObjectLiteral) {
+						JstObjectLiteralType objLitType = new JstObjectLiteralType(field.fieldName.toString());
+						objLitType.setPackage(new JstPackage(m_ctx.getCurrentType().getPackage().getName()+"."+m_ctx.getCurrentType().getName()));
+//						jstObjLitCfgType.addProperty(new JstProperty(objLitType, propName));
+//						jstObjLitCfgType.addOType(objLitType);
+						
+						jstType.addOType(objLitType);
+					}
+				}
+			}
+			
 			// if (expr instanceof ObjectLiteral) {
 			// translator = new VjoOLTranslator(getCtx());
 			// } else {
@@ -109,7 +126,11 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 	private void processObjLiteralDef(JstType jstType, String name,
 			ObjLiteral value) {
 
-		JstObjectLiteralType otype = new JstObjectLiteralType(name);
+		JstObjectLiteralType otype = (JstObjectLiteralType)jstType.getOType(name);
+		
+		if (otype ==null) {
+			otype = new JstObjectLiteralType(name);
+		}
 		otype.setPackage(new JstPackage(jstType.getName()));
 		// TODO add source info
 		JstCache.getInstance().addOType(otype);
@@ -228,6 +249,7 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 	private void processFunctionDef(JstType type, JstMethod mtd) {
 		if (mtd != null) {
 			type.addMethod(mtd);
+			
 			JstFunctionRefType ref = new JstFunctionRefType(mtd);
 			ref.setPackage(new JstPackage(type.getName()));
 			type.addOType(ref);
