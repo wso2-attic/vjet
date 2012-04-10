@@ -39,13 +39,13 @@ public class VjoCcObjLiteralAdvisorTest extends VjoCcBaseTest {
 	@Test
 	public void testObjLiteralAdviseBasic() {
 		testProposals(CodeCompletionUtil.GROUP_NAME, 
-				"objLiteralAdvisor.ObjLiteralTest", "ol", new String[0]);
+				"objLiteralAdvisor.ObjLiteralTest", "ol", new String[]{"id: "});
 	}
 	
 	@Test
 	public void testObjLiteralAdviseOType() {
 		testProposals(CodeCompletionUtil.GROUP_NAME, 
-				"objLiteralAdvisor.ObjLiteralWithOTypeTest", "ol", new String[]{"id: ", "onMsg: "});
+				"objLiteralAdvisor.ObjLiteralWithOTypeTest", "ol", new String[]{"id: "});
 	}
 	
 	private void testProposals(final String group, 
