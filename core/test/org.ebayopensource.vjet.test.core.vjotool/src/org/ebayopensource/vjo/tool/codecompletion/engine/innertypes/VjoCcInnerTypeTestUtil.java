@@ -58,6 +58,7 @@ public class VjoCcInnerTypeTestUtil extends VjoCcBaseTest {
 
 	public void testCcProposals() {
 		initialize();
+		System.out.println("sample js file loading:" +sampleJs);
 		URL url = this.getClass().getClassLoader().getResource(sampleJs);
 		Map<Integer, List<String>> map = filterPositions(getFileContents(url
 				.getFile()));

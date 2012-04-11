@@ -44,7 +44,7 @@ import org.ebayopensource.vjo.lib.TsLibLoader;
 
 public class CodeCompletionUtil {
 	public static Boolean fullyLoaded = true;
-	public static String ARTIFACT_FOLDER = "";
+	public static String ARTIFACT_FOLDER = "artifact";
 	public static final String GROUP_NAME = "test";
 	private static IJstParseController controller;
 
@@ -276,15 +276,15 @@ public class CodeCompletionUtil {
 				srcPath = artifactDir.getName();
 			}
 			
-			System.out.println("LAX : u : " + u + " u1 = " + u);
+	//		System.out.println("LAX : u : " + u + " u1 = " + u);
 			
-			String fileLoc = u.getFile();
-			if( u.getFile().indexOf("src/")!=-1){
-				fileLoc = u.getFile().substring(0, u.getFile().indexOf("src/"));
-			}
-			System.out.println("LAX : fileLoc : " + fileLoc);
-			File file = new File(fileLoc + ARTIFACT_FOLDER + "/");
-			System.out.println("LAX : file : " + file);
+//			String fileLoc = u.getFile();
+//			if( u.getFile().indexOf("src/")!=-1){
+//				fileLoc = u.getFile().substring(0, u.getFile().indexOf("src/"));
+//			}
+		//	System.out.println("LAX : fileLoc : " + fileLoc);
+		//	File file = new File(fileLoc + ARTIFACT_FOLDER + "/");
+			System.out.println("groupPath loading to ts : " + grpPath);
 			
 			ts.processEvent(new AddGroupEvent(GROUP_NAME, grpPath, "artifact",
 					null, getDefaultLibList()), new ISourceEventCallback<IJstType>() {
@@ -313,6 +313,7 @@ public class CodeCompletionUtil {
 				e.printStackTrace();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException(e.getLocalizedMessage());
 		}
 	}
