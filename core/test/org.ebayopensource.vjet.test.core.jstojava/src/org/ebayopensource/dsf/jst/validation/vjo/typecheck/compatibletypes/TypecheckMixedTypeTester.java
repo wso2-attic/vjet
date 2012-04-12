@@ -46,18 +46,19 @@ public class TypecheckMixedTypeTester extends VjoValidationBaseTester {
     @Before
     public void setUp() {
         expectProblems.clear();
-        expectProblems.add(createNewProblem(
-                TypeProbIds.IncompatibleTypesInEqualityOperator, 13, 0));
-        expectProblems.add(createNewProblem(
-                TypeProbIds.IncompatibleTypesInEqualityOperator, 14, 0));
-        expectProblems.add(createNewProblem(
-                TypeProbIds.IncompatibleTypesInEqualityOperator, 27, 0));
-        expectProblems.add(createNewProblem(
-                TypeProbIds.IncompatibleTypesInEqualityOperator, 28, 0));
-        expectProblems.add(createNewProblem(
-                TypeProbIds.IncompatibleTypesInEqualityOperator, 36, 0));
-        expectProblems.add(createNewProblem(
-                TypeProbIds.IncompatibleTypesInEqualityOperator, 37, 0));
+        // REMOVED since mixed types could be ok here boolean could be assigned to boolean+String mixed type
+//        expectProblems.add(createNewProblem(
+//                TypeProbIds.IncompatibleTypesInEqualityOperator, 13, 0));
+//        expectProblems.add(createNewProblem(
+//                TypeProbIds.IncompatibleTypesInEqualityOperator, 14, 0));
+//        expectProblems.add(createNewProblem(
+//                TypeProbIds.IncompatibleTypesInEqualityOperator, 27, 0));
+//        expectProblems.add(createNewProblem(
+//                TypeProbIds.IncompatibleTypesInEqualityOperator, 28, 0));
+//        expectProblems.add(createNewProblem(
+//                TypeProbIds.IncompatibleTypesInEqualityOperator, 36, 0));
+//        expectProblems.add(createNewProblem(
+//                TypeProbIds.IncompatibleTypesInEqualityOperator, 37, 0));
     }
 
     @Test

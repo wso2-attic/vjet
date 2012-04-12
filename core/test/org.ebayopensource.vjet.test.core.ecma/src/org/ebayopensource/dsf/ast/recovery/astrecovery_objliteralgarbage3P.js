@@ -1,0 +1,5 @@
+zoo.zat("test").foo({
+	
+})
+
+

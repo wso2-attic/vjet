@@ -59,7 +59,7 @@
 	</dependencies>
 
 	<properties>
-		<java.source.path>${basedir}/target/test-classes</java.source.path>
+		<java.source.path>${basedir}/src:${basedir}/artifact</java.source.path>
 	</properties>
 
 	<build>
@@ -76,7 +76,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${basedir}/target/test-classes</outputDirectory>
+							<outputDirectory>${basedir}/target/test-classes/artifact</outputDirectory>
 							<resources>
 								<resource>
 									<directory>${basedir}/src</directory>
@@ -87,7 +87,36 @@
 								</resource>
 								<resource>
 									<directory>${basedir}/artifact</directory>
-									<filtering>false</filtering>
+									<includes>
+										<include>**/*.js</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>copy-resources-2</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/test-classes/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/artifact</directory>
+									<includes>
+										<include>**/*.xml</include>
+										<include>**/*.java</include>
+										<include>**/*.js</include>
+									</includes>
+								</resource>
+								<resource>
+									<directory>${basedir}/src</directory>
+									<includes>
+										<include>**/*.java</include>
+									</includes>
 								</resource>
 							</resources>
 						</configuration>

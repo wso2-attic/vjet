@@ -406,7 +406,12 @@ public class TranslateHelper {
 		IJstType jstType = null;
 		// handling simple jsType and generics
 		if (jsTypingMeta instanceof JsType) {
+			if(((JsType) jsTypingMeta).isAliasRef()){
+				jstType = JstCache.getInstance().getAliasType(jsTypingMeta.getType(), true);
+			}else{
+			
 			jstType = findType(findSupport, (JsType)jsTypingMeta);
+			}
 		}
 		// handling floating function types
 		else if (jsTypingMeta instanceof JsFuncType) {
@@ -2931,7 +2936,15 @@ public class TranslateHelper {
 		 * @param methName
 		 * @return
 		 */
-		private static JstMethod createJstMethod(
+		public static JstMethod createJstMethodNoMeta(
+				IJsCommentMeta meta, final TranslateCtx ctx,
+				boolean useJsAnnotForArgs, final String methName) {
+			return createJstMethod((MethodDeclaration)null, null,
+					meta, ctx,
+					 useJsAnnotForArgs,  methName);
+		}
+		
+		public static JstMethod createJstMethod(
 				final MethodDeclaration astMtdDecl, final IArgument[] astArgs,
 				IJsCommentMeta meta, final TranslateCtx ctx,
 				boolean useJsAnnotForArgs, final String methName) {

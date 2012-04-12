@@ -52,7 +52,7 @@ public class VjoETypeTest extends VjoValidationBaseTester{
 	public void testBadEType1() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
-		expectProblems.add(createNewProblem(VjoSyntaxProbIds.InvalidIdentifier, 2, 0));
+		expectProblems.add(createNewProblem(VjoSyntaxProbIds.InvalidIdentifier, 1, 0));
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.etype.", "BadEType1.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}

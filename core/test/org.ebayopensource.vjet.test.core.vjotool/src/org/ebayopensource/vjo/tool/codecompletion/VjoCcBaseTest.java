@@ -36,6 +36,10 @@ public abstract class VjoCcBaseTest extends TestCase {
 		return getEmptyContext(new TypeName(CodeCompletionUtil.GROUP_NAME, ""));
 	}
 
+	public void reset(){
+		//m_jstTypeSpaceMgr = null;
+	}
+	
 	/**
 	 * @param typeName
 	 *            the correct name of current jst type, it must obey the package +
@@ -140,6 +144,7 @@ public abstract class VjoCcBaseTest extends TestCase {
 
 	public int lastPositionInFile(String string, IJstType type) {
 		URL url = getSourceUrl(type.getName(), ".js");
+		System.out.println("source url = "+ url);
 		String content = VjoParser.getContent(url);
 
 		if (string == null)

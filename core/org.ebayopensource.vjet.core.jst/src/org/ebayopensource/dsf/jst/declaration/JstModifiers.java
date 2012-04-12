@@ -61,6 +61,7 @@ public final class JstModifiers extends BaseJstNode {
 	 * "dynamic" modifier constant (bit mask). Applicable to JS types.
 	 */
 	public static final int DYNAMIC = 0x0020;
+	
 
 	private static final String S_PUBLIC = "public";
 	private static final String S_PROTECTED = "protected";
@@ -74,6 +75,7 @@ public final class JstModifiers extends BaseJstNode {
 	private static final String S_FINAL_COMMA = "final,";
 	private static final String S_ABSTRACT_COMMA = "abstract,";
 	private static final String S_DYNAMIC_COMMA = "dynamic,";
+
 
 	private int m_flags;
 
@@ -286,4 +288,5 @@ public final class JstModifiers extends BaseJstNode {
 	public int getFlags() {
 		return m_flags;
 	}
+
 }

@@ -363,6 +363,9 @@ public class VjoSourceParser extends AbstractSourceParser {
 	private void processMethod(IJstMethod method,
 			TypeDeclaration typeDeclaration, JstSource nameSource) {
 
+		if(nameSource==null){
+			nameSource = new JstSource(0, 0, 0, 0, 0, 0);
+		}
 		VjoMethodDeclaration methodDeclaration = new VjoMethodDeclaration(
 				method.getName().getName(), nameSource.getStartOffSet(),
 				nameSource.getEndOffSet() + 1, nameSource.getStartOffSet(),

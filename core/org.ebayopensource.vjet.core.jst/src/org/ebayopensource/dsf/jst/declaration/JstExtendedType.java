@@ -59,6 +59,10 @@ public class JstExtendedType implements IJstType {
 		return m_targetType.getAlias();
 	}
 
+	public String getAliasTypeName() {
+		return m_targetType.getAliasTypeName();
+	}
+
 	public List<IJstProperty> getAllPossibleProperties(boolean isStatic, boolean recursive) {
 		return m_targetType.getAllPossibleProperties(isStatic, recursive);
 	}
@@ -173,6 +177,13 @@ public class JstExtendedType implements IJstType {
 
 	public List<? extends IJstTypeReference> getImportsRef() {
 		return m_targetType.getImportsRef();
+	}
+	
+	/**
+	 * @see IJstType#getImportRef()
+	 */
+	public IJstTypeReference getInactiveImportRef(String typeName) {
+		return m_targetType.getInactiveImportRef(typeName);
 	}
 
 	public IJstType getInactiveImport(String typeName) {
@@ -662,6 +673,11 @@ public class JstExtendedType implements IJstType {
 			names.add(method.getName().getName());
 		}
 		return names;
+	}
+
+	@Override
+	public List<? extends IJstType> getSecondaryTypes() {
+		throw new UnsupportedOperationException("secondary types not supported for extension");
 	}
 	
 

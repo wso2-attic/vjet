@@ -358,8 +358,42 @@ public class VjCommentParserTest {
 		TestCase.assertTrue(combType.getTypes().get(1) instanceof JsFuncArgAttributedType);
 	}
 	
+	
+	@Test
+	public void testFunctionArgumentCombined() throws ParseException {
+		JsCommentMeta meta = VjComment.parse("//>public [this + %2] foo([Number+String], Object)");
+		JsTypingMeta typing = meta.getTyping();
+		TestCase.assertTrue(typing instanceof JsFuncType);
+		TestCase.assertTrue(((JsFuncType)typing).getReturnType() instanceof JsMixinType);
+		JsMixinType combType = (JsMixinType)((JsFuncType)typing).getReturnType();
+		TestCase.assertTrue(combType.getTypes().get(0) instanceof JsFuncScopeAttributedType);
+		TestCase.assertTrue(combType.getTypes().get(1) instanceof JsFuncArgAttributedType);
+	}
+	
 	@Test
 	public void testArrayTyping() throws ParseException {
+		JsCommentMeta meta = VjComment.parse("//>public (int fn(int))[] foo(A:b[][], {int[]|A::x[]})");
+		JsFuncType func = (JsFuncType)meta.getTyping();
+		JsTypingMeta retTyping = func.getReturnType();
+		TestCase.assertTrue(retTyping instanceof JsFuncType);
+		TestCase.assertEquals(1, retTyping.getDimension());
+		
+		List<JsParam> params = func.getParams();
+		JsAttributed attributed = (JsAttributed)params.get(0).getTypes().get(0);
+		TestCase.assertEquals("A", attributed.getAttributor().getType());
+		TestCase.assertEquals("b", attributed.getName());
+		TestCase.assertTrue(attributed.isInstance());
+		TestCase.assertEquals(2, attributed.getDimension());
+		
+		attributed = (JsAttributed)params.get(1).getTypes().get(1);
+		TestCase.assertEquals("A", attributed.getAttributor().getType());
+		TestCase.assertEquals("x", attributed.getName());
+		TestCase.assertFalse(attributed.isInstance());
+		TestCase.assertEquals(1, attributed.getDimension());
+	}
+	
+	@Test
+	public void testMixingTypes() throws ParseException {
 		JsCommentMeta meta = VjComment.parse("//>public (int fn(int))[] foo(A:b[][], {int[]|A::x[]})");
 		JsFuncType func = (JsFuncType)meta.getTyping();
 		JsTypingMeta retTyping = func.getReturnType();

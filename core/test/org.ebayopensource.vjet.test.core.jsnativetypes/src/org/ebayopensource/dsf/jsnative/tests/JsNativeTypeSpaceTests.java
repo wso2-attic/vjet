@@ -42,6 +42,7 @@ import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.datatype.JstReservedTypes;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
@@ -488,7 +489,7 @@ public class JsNativeTypeSpaceTests {
 	
 	IJstParser getParser(){
 		return new IJstParser(){
-			public IScriptUnit parse(String groupName, String fileName, String source){
+			public IWritableScriptUnit parse(String groupName, String fileName, String source){
 				final JstType type = JstCache.getInstance().getType(fileName);
 				if (type == null ){
 					return null;
@@ -497,7 +498,7 @@ public class JsNativeTypeSpaceTests {
 					type.setPackage(new JstPackage());
 				}
 				type.getPackage().setGroupName(groupName);
-				IScriptUnit unit = new IScriptUnit(){
+				IWritableScriptUnit unit = new IWritableScriptUnit(){
 
 					public IJstNode getNode(int startOffset) {
 						// TODO Auto-generated method stub
@@ -521,6 +522,30 @@ public class JsNativeTypeSpaceTests {
 					public IJstType getType() {
 						// TODO Auto-generated method stub
 						return type;
+					}
+
+					@Override
+					public void setType(IJstType type) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void setSyntaxRoot(JstBlock block) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void setJstBlockList(List<JstBlock> blocks) {
+						// TODO Auto-generated method stub
+						
+					}
+
+					@Override
+					public void setProblems(List<IScriptProblem> probs) {
+						// TODO Auto-generated method stub
+						
 					}
 					
 				};

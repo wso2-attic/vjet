@@ -582,7 +582,7 @@ public class VjoOLFieldTranslator extends
 
 			if (isEnumContext()) {
 				value = createEnumValue(astObjectliteralField.initializer);
-			} else {
+			} else{
 				value = (IExpr) getTranslatorAndTranslate(astObjectliteralField.initializer);
 			}
 		} finally {
@@ -1035,6 +1035,7 @@ public class VjoOLFieldTranslator extends
 			property.getModifiers().setFinal();
 		}
 
+		// TODO move this to defs translator
 		if (m_parent instanceof JstObjectLiteralType) {
 			property.getModifiers().setPublic();
 			if (jsTyping != null) {

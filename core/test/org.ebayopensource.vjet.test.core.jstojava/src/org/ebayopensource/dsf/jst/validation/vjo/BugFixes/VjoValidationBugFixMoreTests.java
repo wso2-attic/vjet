@@ -226,6 +226,7 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     @Description("Test duplicate method name ")
     public void testMethodsWithSameName_1() throws Exception {
         expectProblems.clear();
+        
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 25,
                 0));
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 29,

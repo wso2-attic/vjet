@@ -28,11 +28,13 @@ import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
+import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
+import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialAttributedMethod;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialOtypeMethod;
@@ -44,6 +46,7 @@ import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.JstVar;
 import org.ebayopensource.dsf.jst.declaration.JstVariantType;
 import org.ebayopensource.dsf.jst.declaration.JstVars;
+import org.ebayopensource.dsf.jst.declaration.SynthJstProxyMethod;
 import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.declaration.TopLevelVarTable;
 import org.ebayopensource.dsf.jst.declaration.VarTable;
@@ -84,6 +87,13 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
+import org.ebayopensource.dsf.jstojava.resolver.IThisObjScopeResolver;
+import org.ebayopensource.dsf.jstojava.resolver.IThisScopeContext;
+import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructContext;
+import org.ebayopensource.dsf.jstojava.resolver.ThisObjScopeResolverRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.ThisScopeContext;
+import org.ebayopensource.dsf.jstojava.resolver.TypeConstructContext;
+import org.ebayopensource.dsf.jstojava.resolver.TypeConstructorRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
@@ -95,23 +105,25 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	public static final String WINDOW = "Window";
 	public static final String GLOBAL = "Global";
 	public static final String WINDOW_VAR = "window";
-	
+
 	private final JstExpressionBindingResolver m_resolver;
 	private final JstExpressionTypeLinkerHelper.GlobalNativeTypeInfoProvider m_provider;
-	
+
 	private IJstType m_currentType;
 	private Stack<ScopeFrame> m_scopeStack = new Stack<ScopeFrame>();
 	private HierarcheQualifierSearcher m_searcher = new HierarcheQualifierSearcher();
-	
+
 	private GroupInfo m_groupInfo = null;
-	
+	private boolean m_typeConstructedDuringLink;
+
 	JstExpressionTypeLinker(JstExpressionBindingResolver resolver) {
 		m_resolver = resolver;
-		m_provider = new JstExpressionTypeLinkerHelper.GlobalNativeTypeInfoProvider(){
+		m_provider = new JstExpressionTypeLinkerHelper.GlobalNativeTypeInfoProvider() {
 			@Override
-			public LinkerSymbolInfo findTypeInSymbolMap(final String name, 
+			public LinkerSymbolInfo findTypeInSymbolMap(final String name,
 					final List<VarTable> varTablesBottomUp) {
-				return JstExpressionTypeLinker.this.findTypeInSymbolMap(name, varTablesBottomUp);
+				return JstExpressionTypeLinker.this.findTypeInSymbolMap(name,
+						varTablesBottomUp);
 			}
 		};
 	}
@@ -130,9 +142,11 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	void setGroupName(String groupName) {
 		List<String> dependentGroups = null;
 		JstTypeSpaceMgr tsMgr = m_resolver.getController().getJstTypeSpaceMgr();
-		IGroup<IJstType> currentGroup = tsMgr.getTypeSpace().getGroup(groupName);
-		if(currentGroup!=null){
-			List<IGroup<IJstType>> groupDependency = currentGroup.getGroupDependency();
+		IGroup<IJstType> currentGroup = tsMgr.getTypeSpace()
+				.getGroup(groupName);
+		if (currentGroup != null) {
+			List<IGroup<IJstType>> groupDependency = currentGroup
+					.getGroupDependency();
 			if (groupDependency != null && !groupDependency.isEmpty()) {
 				dependentGroups = new ArrayList<String>(groupDependency.size());
 				for (IGroup<IJstType> group : groupDependency) {
@@ -152,17 +166,19 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 	/**
 	 * get the resolver
+	 * 
 	 * @return
 	 */
 	public JstExpressionBindingResolver resolver() {
 		return m_resolver;
 	}
-	
+
 	/**
 	 * visit the node in prior to the visits of its children nodes
 	 */
 	public void preVisit(IJstNode node) {
-		final IJstType object = JstCache.getInstance().getType("Object"); // get global
+		final IJstType object = JstCache.getInstance().getType("Object"); // get
+																			// global
 
 		if (m_currentType == null) {
 			m_scopeStack.push(new ScopeFrame(object, false)); // scope unknown
@@ -190,22 +206,20 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			if (mtd.getParentNode() != m_currentType) {
 				m_scopeStack.push(new ScopeFrame(object, false)); // scope
 																	// unknown
-			} 
-			//by huzhou@ebay.com pushing unknown scope for ftype#_invoke_
-			else if(m_currentType != null 
-					&& m_currentType.isFType()
-					&& mtd.getName() != null
-					&& "_invoke_".equals(mtd.getName().getName())){
-				m_scopeStack.push(new ScopeFrame(object, false));
 			}
-			else {
+			// by huzhou@ebay.com pushing unknown scope for ftype#_invoke_
+			else if (m_currentType != null && m_currentType.isFType()
+					&& mtd.getName() != null
+					&& "_invoke_".equals(mtd.getName().getName())) {
+				m_scopeStack.push(new ScopeFrame(object, false));
+			} else {
 				IJstType ownerType = mtd.getOwnerType();
 
 				if (mtd.isStatic()) { // static scope
 					m_scopeStack.push(new ScopeFrame(JstTypeHelper
-							.getJstTypeRefType(ownerType), true));
+							.getJstTypeRefType(ownerType), true, mtd));
 				} else {
-					m_scopeStack.push(new ScopeFrame(ownerType, false));
+					m_scopeStack.push(new ScopeFrame(ownerType, false, mtd));
 				}
 			}
 		} else if (node instanceof JstBlock
@@ -223,67 +237,71 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					((CatchStmt) node).getException());
 		}
 	}
-	
+
 	/**
-	 * visit the node and determines whether its children nodes should be visited or not
-	 * TODO unify with preVisit
+	 * visit the node and determines whether its children nodes should be
+	 * visited or not TODO unify with preVisit
+	 * 
 	 * @param node
 	 * @return
 	 */
 	public boolean visit(IJstNode node) {
 		if (node == null) {
 			return false;
-		}
-		else if(node instanceof JstTypeReference){
+		} else if (node instanceof JstTypeReference) {
 			return true;
 		}
 
 		if (node instanceof JstType) {
-			visitJstType((JstType)node);
+			visitJstType((JstType) node);
 		} else if (node instanceof JstVar) {
-			visitJstVar((JstVar)node);
+			visitJstVar((JstVar) node);
 			return false;
 		} else if (node instanceof JstIdentifier) {
 			visitIdentifier((JstIdentifier) node);
 			return node instanceof JstProxyIdentifier;
 		} else if (node instanceof JstVars) {
-			visitJstVars((JstVars)node);
+			visitJstVars((JstVars) node);
 		} else if (node instanceof JstProperty) {
-			visitJstProperty((JstProperty)node);
+			visitJstProperty((JstProperty) node);
 		} else if (node instanceof JstMethod) {
-			visitJstMethod((JstMethod)node);
+			visitJstMethod((JstMethod) node);
 		} else if (node instanceof FuncExpr) {
-			visitFuncExpr((FuncExpr)node);
-		} else if (node instanceof ForInStmt) { // process var in ForInStmt before visiting its block
-			visitForInStmt((ForInStmt)node);
+			visitFuncExpr((FuncExpr) node);
+		} else if (node instanceof ForInStmt) { // process var in ForInStmt
+												// before visiting its block
+			visitForInStmt((ForInStmt) node);
 		} else if (node instanceof JstBlock) {
-			visitJstBlock((JstBlock)node);
+			visitJstBlock((JstBlock) node);
 		} else if (node instanceof NV) {
-			visitNV((NV)node);
+			visitNV((NV) node);
 		} else if (node instanceof SimpleLiteral) {
-			visitSimpleLiteral((SimpleLiteral)node);
-		} else if (node instanceof ArrayAccessExpr){
-			visitArrayAccessExpr((ArrayAccessExpr)node);
+			visitSimpleLiteral((SimpleLiteral) node);
+		} else if (node instanceof ArrayAccessExpr) {
+			visitArrayAccessExpr((ArrayAccessExpr) node);
 		}
 
 		return true;
 	}
 
 	private void visitJstMethod(final JstMethod method) {
-//		removed by huzhou@ebay.com, moved to JstExpressionTypeLinkerHelper#fixMethodTypeRef
-//		final IJstType rtnType = method.getRtnType();
-//		if(rtnType instanceof JstAttributedType){
-//			final IJstNode rtnBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, rtnType, m_groupInfo);
-//			if(rtnBinding instanceof IJstOType && rtnBinding != rtnType){
-//				method.setRtnType((IJstOType)rtnBinding);
-//			}
-//		}
+		// removed by huzhou@ebay.com, moved to
+		// JstExpressionTypeLinkerHelper#fixMethodTypeRef
+		// final IJstType rtnType = method.getRtnType();
+		// if(rtnType instanceof JstAttributedType){
+		// final IJstNode rtnBinding =
+		// JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, rtnType,
+		// m_groupInfo);
+		// if(rtnBinding instanceof IJstOType && rtnBinding != rtnType){
+		// method.setRtnType((IJstOType)rtnBinding);
+		// }
+		// }
 	}
 
 	private void visitSimpleLiteral(final SimpleLiteral literal) {
-		final IJstType literalType  = literal.getResultType();
-		final IJstType extendedType = 
-			JstExpressionTypeLinkerHelper.getExtendedType(literalType, m_groupInfo);
+		final IJstType literalType = literal.getResultType();
+		final IJstType extendedType = JstExpressionTypeLinkerHelper
+				.getExtendedType(literalType, m_groupInfo);
 		if (extendedType != literalType) {
 			literal.setResultType(extendedType);
 		}
@@ -291,14 +309,18 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 	private void visitArrayAccessExpr(ArrayAccessExpr node) {
 		final IJstType componentType = node.getResultType();
-		if(componentType instanceof JstType
-				&& !((JstType)componentType).getStatus().isValid()){
+		if (componentType instanceof JstType
+				&& !((JstType) componentType).getStatus().isValid()) {
 			final IJstType potentialOtypeMemberType = componentType;
-			IJstOType resolvedOtype = JstExpressionTypeLinkerHelper.getOtype(potentialOtypeMemberType.getName());
-			if(resolvedOtype == null){
-				resolvedOtype = JstExpressionTypeLinkerHelper.getOtype(JstExpressionTypeLinkerHelper.getFullNameIfShortName4InnerType(getType(), potentialOtypeMemberType));
+			IJstOType resolvedOtype = JstExpressionTypeLinkerHelper
+					.getOtype(potentialOtypeMemberType.getName());
+			if (resolvedOtype == null) {
+				resolvedOtype = JstExpressionTypeLinkerHelper
+						.getOtype(JstExpressionTypeLinkerHelper
+								.getFullNameIfShortName4InnerType(getType(),
+										potentialOtypeMemberType));
 			}
-			if(resolvedOtype != null){
+			if (resolvedOtype != null) {
 				node.setType(resolvedOtype);
 			}
 		}
@@ -306,43 +328,48 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 	private void visitFuncExpr(FuncExpr funcExpr) {
 		final JstMethod function = funcExpr.getFunc();
-		JstExpressionTypeLinkerHelper.fixMethodTypeRef(m_resolver, function, getType(), m_groupInfo);
+		JstExpressionTypeLinkerHelper.fixMethodTypeRef(m_resolver, function,
+				getType(), m_groupInfo);
 	}
 
 	private void visitJstProperty(JstProperty property) {
-		JstExpressionTypeLinkerHelper.fixPropertyTypeRef(m_resolver, property, m_groupInfo);
+		JstExpressionTypeLinkerHelper.fixPropertyTypeRef(m_resolver, property,
+				m_groupInfo);
 	}
 
 	private void visitJstType(JstType node) {
-		for(IJstMethod staticMtd : node.getMethods(true, false)){
-			if(staticMtd instanceof JstMethod){
-				JstExpressionTypeLinkerHelper.fixMethodTypeRef(m_resolver, (JstMethod)staticMtd, getType(), m_groupInfo);
+		for (IJstMethod staticMtd : node.getMethods(true, false)) {
+			if (staticMtd instanceof JstMethod) {
+				JstExpressionTypeLinkerHelper.fixMethodTypeRef(m_resolver,
+						(JstMethod) staticMtd, getType(), m_groupInfo);
 			}
 		}
-		for(IJstMethod instanceMtd : node.getMethods(false, false)){
-			if(instanceMtd instanceof JstMethod){
-				JstExpressionTypeLinkerHelper.fixMethodTypeRef(m_resolver, (JstMethod)instanceMtd, getType(), m_groupInfo);
+		for (IJstMethod instanceMtd : node.getMethods(false, false)) {
+			if (instanceMtd instanceof JstMethod) {
+				JstExpressionTypeLinkerHelper.fixMethodTypeRef(m_resolver,
+						(JstMethod) instanceMtd, getType(), m_groupInfo);
 			}
 		}
 	}
 
 	private void visitJstBlock(final JstBlock jstBlock) {
-		if(jstBlock == null) {
+		if (jstBlock == null) {
 			return;
 		}
-		
-		for(IStmt stmt: jstBlock.getStmts()){
-			if(stmt instanceof ExprStmt){
-				final IExpr expr = ((ExprStmt)stmt).getExpr();
+
+		for (IStmt stmt : jstBlock.getStmts()) {
+			if (stmt instanceof ExprStmt) {
+				final IExpr expr = ((ExprStmt) stmt).getExpr();
 				if (expr instanceof FuncExpr) {
 					final FuncExpr funcExpr = (FuncExpr) expr;
 					final IJstMethod mtd = funcExpr.getFunc();
-		
-					final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(stmt);
+
+					final VarTable varTable = JstExpressionTypeLinkerHelper
+							.getVarTable(stmt);
 					final String varName = mtd.getName().getName();
 					if (varTable != null
 							&& varTable.getVarNode(varName) == null) {
-						varTable.addVarNode(varName, mtd/*, true*/);
+						varTable.addVarNode(varName, mtd/* , true */);
 					}
 				}
 			}
@@ -355,68 +382,83 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		if (type == null) {
 			type = node.getValue().getResultType();
 		}
-		final IJstNode bound = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, type, m_groupInfo);
-		if(bound != null) {
+		final IJstNode bound = JstExpressionTypeLinkerHelper
+				.look4ActualBinding(m_resolver, type, m_groupInfo);
+		if (bound != null) {
 			identifier.setJstBinding(bound);
-			if(bound instanceof RenameableSynthJstProxyProp){
-				((RenameableSynthJstProxyProp)bound).setName(identifier.getName());
+			if (bound instanceof RenameableSynthJstProxyProp) {
+				((RenameableSynthJstProxyProp) bound).setName(identifier
+						.getName());
+			} else if (bound instanceof RenameableSynthJstProxyMethod) {
+				((RenameableSynthJstProxyMethod) bound).setName(identifier
+						.getName());
 			}
-			else if(bound instanceof RenameableSynthJstProxyMethod){
-				((RenameableSynthJstProxyMethod)bound).setName(identifier.getName());
-			}
-			
+
 			IJstType resolvedType = type;
 			if (type instanceof JstAttributedType) {
-				resolvedType = JstExpressionTypeLinkerHelper.getResolvedAttributedType(m_resolver, identifier, (JstAttributedType)type, bound);
+				resolvedType = JstExpressionTypeLinkerHelper
+						.getResolvedAttributedType(m_resolver, identifier,
+								(JstAttributedType) type, bound);
 			}
-			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this, identifier, resolvedType, m_groupInfo);
+			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this,
+					identifier, resolvedType, m_groupInfo);
 		}
-		
-		if(type instanceof JstObjectLiteralType){//otype, infer rhs
-			if(node.getValue() != null && node.getValue() instanceof ObjLiteral){
-				final ObjLiteral rhsObjLiteral = (ObjLiteral)node.getValue();
+
+		if (type instanceof JstObjectLiteralType) {// otype, infer rhs
+			if (node.getValue() != null
+					&& node.getValue() instanceof ObjLiteral) {
+				final ObjLiteral rhsObjLiteral = (ObjLiteral) node.getValue();
 				final IJstType rhsType = rhsObjLiteral.getResultType();
-				if(rhsType instanceof SynthOlType){
-					((SynthOlType)rhsType).setResolvedOType(type);
+				if (rhsType instanceof SynthOlType) {
+					((SynthOlType) rhsType).addResolvedOType(type);
 				}
 			}
 		}
 	}
-	
+
 	private void visitJstVars(final JstVars vars) {
-		JstExpressionTypeLinkerHelper.fixVarsTypeRef(m_resolver, vars, m_groupInfo);
-		
+		JstExpressionTypeLinkerHelper.fixVarsTypeRef(m_resolver, vars,
+				m_groupInfo);
+
 		IJstType varType = vars.getType();
-		if(varType instanceof JstType
-				&& !((JstType)varType).getStatus().isValid()){
+		if (varType instanceof JstType
+				&& !((JstType) varType).getStatus().isValid()) {
 			final IJstType potentialOtypeMemberType = varType;
-			IJstOType resolvedOtype = JstExpressionTypeLinkerHelper.getOtype(potentialOtypeMemberType.getName());
-			if(resolvedOtype == null){
-				resolvedOtype = JstExpressionTypeLinkerHelper.getOtype(JstExpressionTypeLinkerHelper.getFullNameIfShortName4InnerType(getType(), potentialOtypeMemberType));
+			IJstOType resolvedOtype = JstExpressionTypeLinkerHelper
+					.getOtype(potentialOtypeMemberType.getName());
+			if (resolvedOtype == null) {
+				resolvedOtype = JstExpressionTypeLinkerHelper
+						.getOtype(JstExpressionTypeLinkerHelper
+								.getFullNameIfShortName4InnerType(getType(),
+										potentialOtypeMemberType));
 			}
-			if(resolvedOtype != null){
+			if (resolvedOtype != null) {
 				vars.setType(resolvedOtype);
 			}
-		}
-		else if(varType instanceof JstAttributedType){
-			final IJstNode varBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, varType, m_groupInfo);
-			if(varBinding instanceof IJstOType && varBinding != varType){
-				varType = (IJstOType)varBinding;
-				vars.setType((IJstOType)varBinding);
+		} else if (varType instanceof JstAttributedType) {
+			final IJstNode varBinding = JstExpressionTypeLinkerHelper
+					.look4ActualBinding(m_resolver, varType, m_groupInfo);
+			if (varBinding instanceof IJstOType && varBinding != varType) {
+				varType = (IJstOType) varBinding;
+				vars.setType((IJstOType) varBinding);
 			}
 		}
-		
+
 		JstInitializer initializer = vars.getInitializer();
 		if (initializer != null) {
 			List<AssignExpr> list = initializer.getAssignments();
 			for (AssignExpr assignExpr : list) {
 				ILHS lhs = assignExpr.getLHS();
 				if (lhs instanceof JstIdentifier) {
-					JstIdentifier identifier = (JstIdentifier)lhs;
-					final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(identifier);
-					if(varTable != null){
-						if(varTable.getVarNode(identifier.getName()) == null){
-							varTable.addVarNode(identifier.getName(), lhs/*, true*/);
+					JstIdentifier identifier = (JstIdentifier) lhs;
+					final VarTable varTable = JstExpressionTypeLinkerHelper
+							.getVarTable(identifier);
+					if (varTable != null) {
+						if (varTable.getVarNode(identifier.getName()) == null) {
+							varTable.addVarNode(identifier.getName(), lhs/*
+																		 * ,
+																		 * true
+																		 */);
 						}
 						varTable.addVarType(identifier.getName(), varType);
 					}
@@ -424,160 +466,222 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			}
 		}
 	}
-	
+
 	private void visitJstVar(final JstVar var) {
 		IJstType varType = var.getType();
-		if(varType instanceof JstType
-				&& !((JstType)varType).getStatus().isValid()){
+		if (varType instanceof JstType
+				&& !((JstType) varType).getStatus().isValid()) {
 			final IJstType potentialOtypeMemberType = varType;
-			IJstOType resolvedOtype = JstExpressionTypeLinkerHelper.getOtype(potentialOtypeMemberType.getName());
-			if(resolvedOtype == null){
-				resolvedOtype = JstExpressionTypeLinkerHelper.getOtype(JstExpressionTypeLinkerHelper.getFullNameIfShortName4InnerType(getType(), potentialOtypeMemberType));
+			IJstOType resolvedOtype = JstExpressionTypeLinkerHelper
+					.getOtype(potentialOtypeMemberType.getName());
+			if (resolvedOtype == null) {
+				resolvedOtype = JstExpressionTypeLinkerHelper
+						.getOtype(JstExpressionTypeLinkerHelper
+								.getFullNameIfShortName4InnerType(getType(),
+										potentialOtypeMemberType));
 			}
-			if(resolvedOtype != null){
+			if (resolvedOtype != null) {
 				var.setType(resolvedOtype);
 			}
-		}
-		else if(varType instanceof JstAttributedType){
-			final IJstNode varBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, varType, m_groupInfo);
-			if(varBinding instanceof IJstOType && varBinding != varType){
-				varType = (IJstOType)varBinding;
-				var.setType((IJstOType)varBinding);
+		} else if (varType instanceof JstAttributedType) {
+			final IJstNode varBinding = JstExpressionTypeLinkerHelper
+					.look4ActualBinding(m_resolver, varType, m_groupInfo);
+			if (varBinding instanceof IJstOType && varBinding != varType) {
+				varType = (IJstOType) varBinding;
+				var.setType((IJstOType) varBinding);
 			}
 		}
-		
-		final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(var);
-		if(varTable != null){
-			if(varTable.getVarNode(var.getName()) == null){
-				varTable.addVarNode(var.getName(), var/*, true*/);
+
+		final VarTable varTable = JstExpressionTypeLinkerHelper
+				.getVarTable(var);
+		if (varTable != null) {
+			if (varTable.getVarNode(var.getName()) == null) {
+				varTable.addVarNode(var.getName(), var/* , true */);
 			}
 			varTable.addVarType(var.getName(), varType);
 		}
 	}
-	
+
 	private void visitIdentifier(JstIdentifier identifier) {
 		IJstNode parent = identifier.getParentNode();
 		// only resolve identifier without qualifiers, e.g. this.name, resolve
 		// this, not name
-		if(JstExpressionTypeLinkerHelper.isJstIdentifierVisitExcluded(identifier, parent)){
+		if (JstExpressionTypeLinkerHelper.isJstIdentifierVisitExcluded(
+				identifier, parent)) {
 			return;
 		}
 		visitIdentifierCommon(identifier, parent);
-		
-		if(JstExpressionTypeLinkerHelper.isResolveExcluded(identifier, parent)){
+
+		if (JstExpressionTypeLinkerHelper.isResolveExcluded(identifier, parent)) {
 			return;
 		}
 		visitIdentifierAndUpdateBindings(identifier);
 	}
-	
+
 	private void visitIdentifierAndUpdateBindings(final JstIdentifier identifier) {
 		final String identifierName = identifier.getName();
-		final LinkerSymbolInfo info = findTypeInSymbolMap(identifierName, JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
+		final LinkerSymbolInfo info = findTypeInSymbolMap(identifierName,
+				JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
 		if (info != null) {
 			final IJstType knownType = info.getType();
 			final IJstNode knownBinding = info.getBinding();
-			final IJstNode actualBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, knownType, m_groupInfo);
-			if(actualBinding != null &&
-					actualBinding != knownBinding){
-				//update binding
+			final IJstNode actualBinding = JstExpressionTypeLinkerHelper
+					.look4ActualBinding(m_resolver, knownType, m_groupInfo);
+			if (actualBinding != null && actualBinding != knownBinding) {
+				// update binding
 				identifier.setJstBinding(actualBinding);
 				info.setBinding(actualBinding);
-				
-				if(actualBinding instanceof IJstType
-						&& actualBinding != knownType){
-					final IJstType actualType = (IJstType)actualBinding;
+
+				if (actualBinding instanceof IJstType
+						&& actualBinding != knownType) {
+					final IJstType actualType = (IJstType) actualBinding;
 					identifier.setType(actualType);
 					info.setType(actualType);
-				}
-				else if(actualBinding instanceof IJstProperty){
-					final IJstType actualType = ((IJstProperty)actualBinding).getType();
+				} else if (actualBinding instanceof IJstProperty) {
+					final IJstType actualType = ((IJstProperty) actualBinding)
+							.getType();
 					identifier.setType(actualType);
 					info.setType(actualType);
-				}
-				else if(actualBinding instanceof IJstMethod){
-					final IJstType actualType = new JstFuncType((IJstMethod)actualBinding);
+				} else if (actualBinding instanceof IJstMethod) {
+					final IJstType actualType = new JstFuncType(
+							(IJstMethod) actualBinding);
 					identifier.setType(actualType);
 					info.setType(actualType);
 				}
 			}
-		} 
+		}
 	}
-	
+
 	private void visitIdentifierCommon(JstIdentifier identifier, IJstNode parent) {
 		final String name = identifier.toExprText();
 		// lookup at catch var e.g. catch(ex) first, then current scope second
-		final LinkerSymbolInfo info = findTypeInSymbolMap(name, JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
+		final LinkerSymbolInfo info = findTypeInSymbolMap(name,
+				JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
 
 		if (info != null) {
 			IJstNode varBinding = info.getBinding();
-			if (varBinding != null 
-					&& varBinding != identifier) {
-				IJstType varType = JstExpressionTypeLinkerHelper.getVarType(m_resolver, varBinding);
-				if(varType == null){
+			if (varBinding != null && varBinding != identifier) {
+				IJstType varType = JstExpressionTypeLinkerHelper.getVarType(
+						m_resolver, varBinding);
+				if (varType == null) {
 					varType = info.getType();
 				}
-				
+
 				if (varType instanceof JstFuncType) {
-					JstExpressionTypeLinkerHelper.updateFunctionType((JstFuncType)varType, m_groupInfo);
+					JstExpressionTypeLinkerHelper.updateFunctionType(
+							(JstFuncType) varType, m_groupInfo);
 				}
 				identifier.setJstBinding(varBinding);
 				identifier.setType(varType);
-				JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, varType, m_groupInfo);
+				JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver,
+						varType, m_groupInfo);
 				if (varType != null && varType instanceof JstInferredType
-					&& ((JstInferredType)varType).modified()) {
-					JstInferredType inferredType = (JstInferredType)varType;
+						&& ((JstInferredType) varType).modified()) {
+					JstInferredType inferredType = (JstInferredType) varType;
 					Set<Object> scopes = new HashSet<Object>();
 					scopes.addAll(m_scopeStack);
-					IJstType currentType = 
-						inferredType.getCurrentType(identifier.getSource().getStartOffSet(), scopes);
+					IJstType currentType = inferredType.getCurrentType(
+							identifier.getSource().getStartOffSet(), scopes);
 					if (!isSameType(currentType, inferredType.getType())) {
 						if (!(currentType instanceof IInferred)) {
 							if (currentType instanceof IJstRefType) {
-								currentType = new JstInferredRefType((IJstRefType)currentType);
+								currentType = new JstInferredRefType(
+										(IJstRefType) currentType);
 							} else {
 								currentType = new JstInferredType(currentType);
 							}
 						}
-						JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this, identifier, currentType, m_groupInfo);
+						JstExpressionTypeLinkerHelper.doExprTypeUpdate(
+								m_resolver, this, identifier, currentType,
+								m_groupInfo);
 					} else {
-						JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this, identifier, varType, m_groupInfo);
-					}					
+						JstExpressionTypeLinkerHelper.doExprTypeUpdate(
+								m_resolver, this, identifier, varType,
+								m_groupInfo);
+					}
 				} else {
-					JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this, identifier, varType, m_groupInfo);
-				}		
-				
-				//bugfix by huzhou@ebay.com only updates the symbol table when there's a type changes (binding doesn't change in this case)
-				if(varType != info.getType()){
+					JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
+							this, identifier, varType, m_groupInfo);
+				}
+
+				// bugfix by huzhou@ebay.com only updates the symbol table when
+				// there's a type changes (binding doesn't change in this case)
+				if (varType != info.getType()) {
 					info.setBinding(varBinding);
 					info.setType(varType);
 				}
-			}
-			else{
+			} else {
 				identifier.setJstBinding(info.getBinding());
-				JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this, identifier, info.getType(), m_groupInfo);
+				JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
+						this, identifier, info.getType(), m_groupInfo);
 			}
-		} 
-		else if (name.equals(THIS)) { // this keyword
+		} else if (name.equals(THIS)) { // this keyword
 			resolveThisIdentifier(identifier);
-		} 
-		else if (JstExpressionTypeLinkerHelper.getFromWithVarName(m_resolver, getCurrentScopeFrame(), identifier, m_groupInfo)) {
-			
-		} 
-		else if (JstExpressionTypeLinkerHelper.getFromGlobalTypeName(m_resolver, getCurrentScopeFrame(), identifier, m_groupInfo)) {
-				
-		} 
-		else if (JstExpressionTypeLinkerHelper.getFromGlobalVarName(m_resolver, getCurrentScopeFrame(), identifier, m_groupInfo)) {
-			
+		} else if (JstExpressionTypeLinkerHelper.getFromWithVarName(m_resolver,
+				getCurrentScopeFrame(), identifier, m_groupInfo)) {
+
+		} else if (JstExpressionTypeLinkerHelper.getFromGlobalTypeName(
+				m_resolver, getCurrentScopeFrame(), identifier, m_groupInfo)) {
+
+		} else if (JstExpressionTypeLinkerHelper.getFromGlobalVarName(
+				m_resolver, getCurrentScopeFrame(), identifier, m_groupInfo)) {
+
 		}
 	}
 
 	/**
 	 * helper for {@link #visitIdentifier(JstIdentifier)}
+	 * 
 	 * @param identifier
 	 * @return
 	 */
 	private IJstType resolveThisIdentifier(JstIdentifier identifier) {
 		IJstType currentType = getCurrentScopeFrame().getCurrentType();
+		// TODO make this an extension
+		
+		// EXTJS Specific not acceptable code ... just trace code
+		// how do I know I am in a function?
+		// how do I know what is the function?
+		if(getCurrentScopeFrame().getNode() != null && getCurrentScopeFrame().getNode() instanceof IJstMethod){
+			IJstMethod mtd = (IJstMethod)getCurrentScopeFrame().getNode();
+			String mtdKey = createMtdKey(mtd);
+			/*
+			if (mtdKey.equals("Ext.Base:callParent")) {
+				// making this use a mixed type to add callParent to this instance of this
+				List<IJstType> types = new ArrayList<IJstType>();
+				// TODO fix name
+				JstType createJstType = JstFactory.getInstance().createJstType("SuperTest", false);
+				// TODO look up the inheritance chain for method
+				IJstType jstType = currentType.getExtends().get(0);
+				IJstMethod method = jstType.getMethod(mtd.getName().getName(), mtd.isStatic(), true);
+				if(method!=null){
+					SynthJstProxyMethod mtd2 = new SynthJstProxyMethod(method);
+					mtd2.getName().setName("callParent");
+					createJstType.addMethod(mtd2);
+					types.add(createJstType);
+					types.add(currentType);
+					JstMixedType newType = new JstMixedType(types) ;
+					currentType = newType;
+					
+				}
+			}
+			*/
+			ThisObjScopeResolverRegistry registry = ThisObjScopeResolverRegistry.getInstance();
+//			if(registry.hasResolver(mtdKey)) {
+				IThisScopeContext context = new ThisScopeContext(currentType, mtd);
+				registry.resolve(mtdKey, context);
+				IJstType newType = context.getThisType();
+				if(newType != null) {
+					currentType = newType;
+				}
+//			}
+		
+			
+		}
+		
+		
+
+		
 		identifier.setJstBinding(currentType);
 		identifier.setType(currentType);
 		return currentType;
@@ -606,13 +710,13 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 			String varName = jstVar.getName();
 
-			final LinkerSymbolInfo info = findTypeInSymbolMap(varName, JstExpressionTypeLinkerHelper.getVarTablesBottomUp(jstVar));
+			final LinkerSymbolInfo info = findTypeInSymbolMap(varName,
+					JstExpressionTypeLinkerHelper.getVarTablesBottomUp(jstVar));
 			if (info != null) {
 				info.setBinding(jstVar);
 				info.setType(jstVar.getType());
 			}
-		} 
-		else if (var instanceof JstIdentifier) {
+		} else if (var instanceof JstIdentifier) {
 			final JstIdentifier jstIdentifier = (JstIdentifier) var;
 			if (jstIdentifier.getJstBinding() == jstIdentifier) {
 				jstIdentifier.setJstBinding(null); // clear binding to itself
@@ -631,25 +735,26 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				}
 			}
 
-			final LinkerSymbolInfo info = findTypeInSymbolMap(jstIdentifier
-					.toExprText(), JstExpressionTypeLinkerHelper.getVarTablesBottomUp(jstIdentifier));
-			if (info != null){
+			final LinkerSymbolInfo info = findTypeInSymbolMap(
+					jstIdentifier.toExprText(),
+					JstExpressionTypeLinkerHelper
+							.getVarTablesBottomUp(jstIdentifier));
+			if (info != null) {
 				info.setType(jstIdentifier.getType());
 			}
 		}
 	}
 
-
 	/**
 	 * @see postVisit
 	 */
 	public void endVisit(IJstNode node) {
-		//emptied by huzhou@ebay.com, moved all into postVisit
+		// emptied by huzhou@ebay.com, moved all into postVisit
 	}
 
 	/**
-	 * visit the node after the visits of its children nodes
-	 * this postVisit(IJstNode) method serves as the dispatcher
+	 * visit the node after the visits of its children nodes this
+	 * postVisit(IJstNode) method serves as the dispatcher
 	 */
 	public void postVisit(IJstNode node) {
 		// inner type
@@ -663,8 +768,8 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			postVisitJstArg((JstArg) node);
 		} else if (node instanceof MtdInvocationExpr) {
 			postVisitMtdInvocationExpr((MtdInvocationExpr) node);
-		} else if (node instanceof ObjCreationExpr){
-			postVisitObjCreationExpr((ObjCreationExpr)node);
+		} else if (node instanceof ObjCreationExpr) {
+			postVisitObjCreationExpr((ObjCreationExpr) node);
 		} else if (node instanceof FieldAccessExpr) {
 			postVisitFieldAccessExpr((FieldAccessExpr) node);
 		} else if (node instanceof ArrayAccessExpr) {
@@ -679,13 +784,13 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			if (!m_scopeStack.isEmpty()) {
 				m_scopeStack.pop();
 			}
-			if(node instanceof WithStmt){
-				postVisitWithStmt((WithStmt)node);
-			} //handle potential otype method binding
-			else if(node instanceof JstPotentialOtypeMethod){
+			if (node instanceof WithStmt) {
+				postVisitWithStmt((WithStmt) node);
+			} // handle potential otype method binding
+			else if (node instanceof JstPotentialOtypeMethod) {
 				postVisitJstPotentialOtypeMethod((JstPotentialOtypeMethod) node);
-			} //handle potential attributed type method binding
-			else if(node instanceof JstPotentialAttributedMethod){
+			} // handle potential attributed type method binding
+			else if (node instanceof JstPotentialAttributedMethod) {
 				postVisitJstPotentialAttributedMethod((JstPotentialAttributedMethod) node);
 			}
 		} else if (node instanceof CatchStmt) {
@@ -700,9 +805,9 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			postVisitInfixExpr((InfixExpr) node);
 		} else if (node instanceof JstArrayInitializer) {
 			postVisitJstArrayInitializer((JstArrayInitializer) node);
-		} else if (node instanceof RtnStmt){
+		} else if (node instanceof RtnStmt) {
 			postVisitRtnStmt((RtnStmt) node);
-		} else if (node instanceof FuncExpr){
+		} else if (node instanceof FuncExpr) {
 			postVisitFuncExpr((FuncExpr) node);
 		} else if (node instanceof ExprStmt) {
 			postVisitExprStmt((ExprStmt) node);
@@ -715,73 +820,94 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		IJstType outerType = m_currentType.getOuterType();
 		if (outerType != null && outerType != m_currentType) {
 			setCurrentType(outerType);
+		}else if( m_currentType.getParentNode() instanceof IJstType){
+			setCurrentType((IJstType)m_currentType.getParentNode());
 		}
+		
+		
 	}
-	
+
 	private void postVisitConditionalExpr(final ConditionalExpr condExpr) {
 		final IExpr ifValExpr = condExpr.getThenExpr();
 		final IExpr elseValExpr = condExpr.getElseExpr();
-		if(ifValExpr != null
-				&& elseValExpr != null
+		if (ifValExpr != null && elseValExpr != null
 				&& ifValExpr.getResultType() != null
 				&& elseValExpr.getResultType() != null
-				&& ifValExpr.getResultType() != elseValExpr.getResultType()){
-			condExpr.setResultType(new JstVariantType(Arrays.asList(ifValExpr.getResultType(), elseValExpr.getResultType())));
+				&& ifValExpr.getResultType() != elseValExpr.getResultType()) {
+			condExpr.setResultType(new JstVariantType(Arrays.asList(
+					ifValExpr.getResultType(), elseValExpr.getResultType())));
 		}
 	}
 
-	private void postVisitJstPotentialOtypeMethod(final JstPotentialOtypeMethod method) {
-		if(method.getResolvedOtypeMethod() == null){
-			final IJstType potentialOtypeJstFunctionRefType = method.getPotentialOtypeJstFunctionRefType();
-			if(potentialOtypeJstFunctionRefType != null){
-				final IJstOType resolvedOtype = JstExpressionTypeLinkerHelper.getOtype(potentialOtypeJstFunctionRefType.getName());
-				if(resolvedOtype instanceof JstFunctionRefType){
-					//recreate the method to match the JstFunctionRefType declaration
-					method.setResolvedOtypeMethod(((JstFunctionRefType)resolvedOtype).getMethodRef());
+	private void postVisitJstPotentialOtypeMethod(
+			final JstPotentialOtypeMethod method) {
+		if (method.getResolvedOtypeMethod() == null) {
+			final IJstType potentialOtypeJstFunctionRefType = method
+					.getPotentialOtypeJstFunctionRefType();
+			if (potentialOtypeJstFunctionRefType != null) {
+				final IJstOType resolvedOtype = JstExpressionTypeLinkerHelper
+						.getOtype(potentialOtypeJstFunctionRefType.getName());
+				if (resolvedOtype instanceof JstFunctionRefType) {
+					// recreate the method to match the JstFunctionRefType
+					// declaration
+					method.setResolvedOtypeMethod(((JstFunctionRefType) resolvedOtype)
+							.getMethodRef());
 					JstExpressionTypeLinkerTraversal.accept(method, this);
 				}
 			}
 		}
 	}
-	
-	private void postVisitJstPotentialAttributedMethod(final JstPotentialAttributedMethod method) {
-		if(method.getResolvedAttributedMethod() == null){
-			final IJstType potentialJstAttributedType = method.getPotentialJstAttributedType();
-			if(potentialJstAttributedType instanceof JstAttributedType){
-				final JstAttributedType attributedType = ((JstAttributedType)potentialJstAttributedType);
-				final IJstMethod attributedMethod 
-					= attributedType.getAttributorType().getMethod(attributedType.getAttributeName() != null ? attributedType.getAttributeName() : "", attributedType.isStaticAttribute());
-				if(attributedMethod != null){
+
+	private void postVisitJstPotentialAttributedMethod(
+			final JstPotentialAttributedMethod method) {
+		if (method.getResolvedAttributedMethod() == null) {
+			final IJstType potentialJstAttributedType = method
+					.getPotentialJstAttributedType();
+			if (potentialJstAttributedType instanceof JstAttributedType) {
+				final JstAttributedType attributedType = ((JstAttributedType) potentialJstAttributedType);
+				final IJstMethod attributedMethod = attributedType
+						.getAttributorType()
+						.getMethod(
+								attributedType.getAttributeName() != null ? attributedType.getAttributeName()
+										: "",
+								attributedType.isStaticAttribute());
+				if (attributedMethod != null) {
 					method.setResolvedAttributedMethod(attributedMethod);
 					JstExpressionTypeLinkerTraversal.accept(method, this);
 				}
 			}
 		}
 	}
-	
+
 	/**
-	 * post visit return statement, which could resolve the JstDeferredType if met
+	 * post visit return statement, which could resolve the JstDeferredType if
+	 * met
+	 * 
 	 * @param rtnStmt
 	 */
-	private void postVisitRtnStmt(final RtnStmt rtnStmt){
+	private void postVisitRtnStmt(final RtnStmt rtnStmt) {
 		final IExpr rtnExpr = rtnStmt.getExpression();
-		final IJstMethod enclosingMtd = JstExpressionTypeLinkerHelper.look4EnclosingMethod(rtnStmt);
-		if(JstExpressionTypeLinkerHelper.doesExprRequireResolve(rtnExpr)){
-			if(enclosingMtd != null
-					&& enclosingMtd.getRtnType() != null){
-				
-				JstExpressionTypeLinkerHelper.doExprTypeResolve(m_resolver, this, rtnExpr, enclosingMtd.getRtnType());
+		final IJstMethod enclosingMtd = JstExpressionTypeLinkerHelper
+				.look4EnclosingMethod(rtnStmt);
+		if (JstExpressionTypeLinkerHelper.doesExprRequireResolve(rtnExpr)) {
+			if (enclosingMtd != null && enclosingMtd.getRtnType() != null) {
+
+				JstExpressionTypeLinkerHelper.doExprTypeResolve(m_resolver,
+						this, rtnExpr, enclosingMtd.getRtnType());
 			}
 		}
-		JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromReturn(rtnStmt, enclosingMtd, this);
+		JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromReturn(
+				rtnStmt, enclosingMtd, this);
 	}
 
 	/**
 	 * post visit {@link JstArrayInitializer}
+	 * 
 	 * @param array
 	 */
 	private void postVisitJstArrayInitializer(final JstArrayInitializer array) {
-		final IJstType objectType = JstExpressionTypeLinkerHelper.getNativeObjectJstType(m_resolver);
+		final IJstType objectType = JstExpressionTypeLinkerHelper
+				.getNativeObjectJstType(m_resolver);
 		IJstType arrType = array.getResultType();
 		if (array.getResultType() == null) {
 			IJstType candidateComponentType = null;
@@ -804,43 +930,56 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			}
 
 			final JstArray arrayType = new JstArray(
-				candidateComponentType != null ? candidateComponentType : objectType);
-			JstExpressionTypeLinkerHelper.updateArrayType((JstArray)arrayType, m_groupInfo);			
-			JstExpressionTypeLinkerHelper.updateResultType((JstArrayInitializer) array, arrayType);// number type?
-		} else if (arrType instanceof JstArray){
-			JstExpressionTypeLinkerHelper.updateArrayType((JstArray)arrType, m_groupInfo);
-		}		
+					candidateComponentType != null ? candidateComponentType
+							: objectType);
+			JstExpressionTypeLinkerHelper.updateArrayType((JstArray) arrayType,
+					m_groupInfo);
+			JstExpressionTypeLinkerHelper.updateResultType(
+					(JstArrayInitializer) array, arrayType);// number type?
+		} else if (arrType instanceof JstArray) {
+			JstExpressionTypeLinkerHelper.updateArrayType((JstArray) arrType,
+					m_groupInfo);
+		}
 	}
 
 	/**
 	 * post visit {@link InfixExpr}
+	 * 
 	 * @param expr
 	 */
 	private void postVisitInfixExpr(final InfixExpr expr) {
 		final InfixExpr.Operator op = expr.getOperator();
 		if (InfixExpr.Operator.PLUS.equals(op)) {
-			final IJstType stringType = JstExpressionTypeLinkerHelper .getNativeStringJstType(m_resolver);
-			final IJstType numType = JstExpressionTypeLinkerHelper.getNativeNumberJstType(m_resolver);
-			final IJstType objectType = JstExpressionTypeLinkerHelper.getNativeObjectJstType(m_resolver);
-			final IJstType leftType = expr.getLeft() != null ? expr.getLeft().getResultType() : null;
-			final IJstType rightType = expr.getRight() != null ? expr.getRight().getResultType() : null;
+			final IJstType stringType = JstExpressionTypeLinkerHelper
+					.getNativeStringJstType(m_resolver);
+			final IJstType numType = JstExpressionTypeLinkerHelper
+					.getNativeNumberJstType(m_resolver);
+			final IJstType objectType = JstExpressionTypeLinkerHelper
+					.getNativeObjectJstType(m_resolver);
+			final IJstType leftType = expr.getLeft() != null ? expr.getLeft()
+					.getResultType() : null;
+			final IJstType rightType = expr.getRight() != null ? expr
+					.getRight().getResultType() : null;
 			if (numType != null
 					&& leftType != null
 					&& numType.getSimpleName().equals(leftType.getSimpleName())
 					&& rightType != null
 					&& numType.getSimpleName()
 							.equals(rightType.getSimpleName())) {
-				JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// int type
+				JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// int
+																				// type
 			} else if (stringType != null
 					&& (((leftType != null && stringType.getSimpleName()
 							.equals(leftType.getSimpleName())) || (rightType != null && stringType
 							.getSimpleName().equals(rightType.getSimpleName()))))) {
-				JstExpressionTypeLinkerHelper.updateResultType(expr, stringType);// String type
+				JstExpressionTypeLinkerHelper
+						.updateResultType(expr, stringType);// String type
 			} else if (objectType != null
 					&& (((leftType != null && objectType.getSimpleName()
 							.equals(leftType.getSimpleName())) || (rightType != null && objectType
 							.getSimpleName().equals(rightType.getSimpleName()))))) {
-				JstExpressionTypeLinkerHelper.updateResultType(expr, objectType);// Object type
+				JstExpressionTypeLinkerHelper
+						.updateResultType(expr, objectType);// Object type
 			} else {
 				// Don't set the result type here
 			}
@@ -855,57 +994,74 @@ class JstExpressionTypeLinker implements IJstVisitor {
 										.getNativeObjectJstType(m_resolver));
 				deferredType.addCandidateType(left.getResultType());
 				deferredType.addCandidateType(right.getResultType());
-				JstExpressionTypeLinkerHelper.updateResultType(expr, deferredType);
+				JstExpressionTypeLinkerHelper.updateResultType(expr,
+						deferredType);
 			}
 		} else {
 			final IJstType numType = JstExpressionTypeLinkerHelper
 					.getNativeNumberJstType(m_resolver);
-			JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// number type?
+			JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// number
+																			// type?
 		}
 	}
 
 	/**
-	 * post visit PostfixExpr
-	 * postfixExpr are {++, --} which determines the result type has to be Number
+	 * post visit PostfixExpr postfixExpr are {++, --} which determines the
+	 * result type has to be Number
+	 * 
 	 * @param expr
 	 */
 	private void postVisitPostfixExpr(final PostfixExpr expr) {
-		final IJstType numType = JstExpressionTypeLinkerHelper.getNativeNumberJstType(m_resolver);
-		JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// number type?
+		final IJstType numType = JstExpressionTypeLinkerHelper
+				.getNativeNumberJstType(m_resolver);
+		JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// number
+																		// type?
 	}
 
 	/**
 	 * post visit PrefixExpr
+	 * 
 	 * @param expr
 	 */
 	private void postVisitPrefixExpr(final PrefixExpr expr) {
 		IJstType type = expr.getResultType();
 		if (PrefixExpr.Operator.TYPEOF.equals(expr.getOperator())) {
-			final IJstType stringType = JstExpressionTypeLinkerHelper.getNativeStringJstType(m_resolver);
+			final IJstType stringType = JstExpressionTypeLinkerHelper
+					.getNativeStringJstType(m_resolver);
 			if (!TypeCheckUtil.isAssignable(stringType, type)) {
-				JstExpressionTypeLinkerHelper.updateResultType(expr, stringType);// string type
+				JstExpressionTypeLinkerHelper
+						.updateResultType(expr, stringType);// string type
 			}
 		} else if (PrefixExpr.Operator.DELETE.equals(expr.getOperator())) {
-			final IJstType objectType = JstExpressionTypeLinkerHelper.getNativeObjectJstType(m_resolver);
-			JstExpressionTypeLinkerHelper.updateResultType(expr, objectType);// object type
+			final IJstType objectType = JstExpressionTypeLinkerHelper
+					.getNativeObjectJstType(m_resolver);
+			JstExpressionTypeLinkerHelper.updateResultType(expr, objectType);// object
+																				// type
 		} else if (PrefixExpr.Operator.NOT.equals(expr.getOperator())) {
 			final IJstType boolType = JstCache.getInstance().getType("boolean");
 			if (!TypeCheckUtil.isAssignable(boolType, type)) {
-				JstExpressionTypeLinkerHelper.updateResultType(expr, boolType);// boolean type
+				JstExpressionTypeLinkerHelper.updateResultType(expr, boolType);// boolean
+																				// type
 			}
 		} else if (PrefixExpr.Operator.VOID.equals(expr.getOperator())) {
-			final IJstType voidType = JstExpressionTypeLinkerHelper.getNativeVoidJstType(m_resolver);
-			JstExpressionTypeLinkerHelper.updateResultType(expr, voidType);// void type?
+			final IJstType voidType = JstExpressionTypeLinkerHelper
+					.getNativeVoidJstType(m_resolver);
+			JstExpressionTypeLinkerHelper.updateResultType(expr, voidType);// void
+																			// type?
 		} else {
-			final IJstType numType = JstExpressionTypeLinkerHelper.getNativeNumberJstType(m_resolver);
+			final IJstType numType = JstExpressionTypeLinkerHelper
+					.getNativeNumberJstType(m_resolver);
 			if (!TypeCheckUtil.isAssignable(numType, type)) {
-				JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// number type?
+				JstExpressionTypeLinkerHelper.updateResultType(expr, numType);// number
+																				// type?
 			}
 		}
 	}
 
 	/**
-	 * Post visit {@link JstProperty} to update their type as initializer's Expr result type
+	 * Post visit {@link JstProperty} to update their type as initializer's Expr
+	 * result type
+	 * 
 	 * @param pty
 	 */
 	private void postVisitJstProperty(JstProperty pty) {
@@ -930,53 +1086,68 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	}
 
 	/**
-	 * post visit {@link ArrayAccessExpr} and set the result type as Array's component type
+	 * post visit {@link ArrayAccessExpr} and set the result type as Array's
+	 * component type
+	 * 
 	 * @param aae
 	 */
 	private void postVisitArrayAccessExpr(final ArrayAccessExpr aae) {
-		IJstType qualifierType = JstExpressionTypeLinkerHelper.getQualifierType(m_resolver, aae);
+		IJstType qualifierType = JstExpressionTypeLinkerHelper
+				.getQualifierType(m_resolver, aae);
 		if (qualifierType != null) {
 			if (qualifierType instanceof JstArray) {
 				JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
-					this, aae, ((JstArray) qualifierType).getComponentType(), m_groupInfo);
-			}
-			else if(qualifierType instanceof JstVariantType){
-				final JstVariantType variantQualifierType = (JstVariantType)qualifierType;
-				final List<IJstType> variantTypes = variantQualifierType.getVariantTypes();
-				final List<JstArray> arrayTypes = new ArrayList<JstArray>(variantTypes.size());
-				for(IJstType variantType : variantTypes){
-					if(variantType instanceof JstArray){
-						arrayTypes.add((JstArray)variantType);
+						this, aae,
+						((JstArray) qualifierType).getComponentType(),
+						m_groupInfo);
+			} else if (qualifierType instanceof JstVariantType) {
+				final JstVariantType variantQualifierType = (JstVariantType) qualifierType;
+				final List<IJstType> variantTypes = variantQualifierType
+						.getVariantTypes();
+				final List<JstArray> arrayTypes = new ArrayList<JstArray>(
+						variantTypes.size());
+				for (IJstType variantType : variantTypes) {
+					if (variantType instanceof JstArray) {
+						arrayTypes.add((JstArray) variantType);
 					}
 				}
-				if(arrayTypes.size() == 1){
+				if (arrayTypes.size() == 1) {
 					JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
-							this, aae, arrayTypes.get(0).getComponentType(), m_groupInfo);
-				}
-				else if(arrayTypes.size() > 1){
-					final List<IJstType> componentTypes = new ArrayList<IJstType>(arrayTypes.size());
-					for(JstArray arrayType : arrayTypes){
+							this, aae, arrayTypes.get(0).getComponentType(),
+							m_groupInfo);
+				} else if (arrayTypes.size() > 1) {
+					final List<IJstType> componentTypes = new ArrayList<IJstType>(
+							arrayTypes.size());
+					for (JstArray arrayType : arrayTypes) {
 						componentTypes.add(arrayType.getComponentType());
 					}
-					final JstVariantType variantComponentType = new JstVariantType(componentTypes);
+					final JstVariantType variantComponentType = new JstVariantType(
+							componentTypes);
 					JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
 							this, aae, variantComponentType, m_groupInfo);
 				}
 			}
-			
-			//enhancement by huzhou@ebay.com to support type properties' accessing using array accessing style
+
+			// enhancement by huzhou@ebay.com to support type properties'
+			// accessing using array accessing style
 			final IExpr indexExpr = aae.getIndex();
-			if(indexExpr instanceof SimpleLiteral){
-				final SimpleLiteral indexLiteral = ((SimpleLiteral)indexExpr);
-				if("String".equals(indexLiteral.getResultType().getName())){
+			if (indexExpr instanceof SimpleLiteral) {
+				final SimpleLiteral indexLiteral = ((SimpleLiteral) indexExpr);
+				if ("String".equals(indexLiteral.getResultType().getName())) {
 					final String indexValue = indexLiteral.getValue();
-					final boolean isStatic = JstExpressionTypeLinkerHelper.isStaticRef(qualifierType);
-					IJstProperty pty = JstExpressionTypeLinkerHelper.getProperty(qualifierType, indexValue, isStatic);
-					if (pty == null){
-						pty = JstExpressionTypeLinkerHelper.getProperty(qualifierType, '"' + indexValue + '"', isStatic);
+					final boolean isStatic = JstExpressionTypeLinkerHelper
+							.isStaticRef(qualifierType);
+					IJstProperty pty = JstExpressionTypeLinkerHelper
+							.getProperty(qualifierType, indexValue, isStatic);
+					if (pty == null) {
+						pty = JstExpressionTypeLinkerHelper
+								.getProperty(qualifierType,
+										'"' + indexValue + '"', isStatic);
 					}
-					if (pty == null){
-						pty = JstExpressionTypeLinkerHelper.getProperty(qualifierType, "'" + indexValue + "'", isStatic);
+					if (pty == null) {
+						pty = JstExpressionTypeLinkerHelper
+								.getProperty(qualifierType, "'" + indexValue
+										+ "'", isStatic);
 					}
 					if (pty != null) {
 						aae.setType(pty.getType());
@@ -988,56 +1159,62 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 	/**
 	 * post visit {@link JstProxyIdentifier}
+	 * 
 	 * @param id
 	 */
 	private void postVisitJstProxyIdentifier(JstProxyIdentifier id) {
 		postVisit(id.getActualExpr());
-		
-		//actual expression could be bound with a function in one of the following cases:
-		//1. JstFuncType
-		//2. JstAttributedType
-		//3. FuncExpr (should visit FuncExpr and resolve as JstFuncType)
-		//4. ObjCreationExpr (new Function() corner case)
+
+		// actual expression could be bound with a function in one of the
+		// following cases:
+		// 1. JstFuncType
+		// 2. JstAttributedType
+		// 3. FuncExpr (should visit FuncExpr and resolve as JstFuncType)
+		// 4. ObjCreationExpr (new Function() corner case)
 		final IExpr actualExpr = id.getActualExpr();
-		if(actualExpr != null){
-			if(actualExpr.getResultType() instanceof JstFuncType){
-				final JstFuncType funcType = (JstFuncType)actualExpr.getResultType();
-				if(funcType != null){
+		if (actualExpr != null) {
+			if (actualExpr.getResultType() instanceof JstFuncType) {
+				final JstFuncType funcType = (JstFuncType) actualExpr
+						.getResultType();
+				if (funcType != null) {
 					id.setJstBinding(funcType.getFunction());
 				}
-			}
-			else if(actualExpr.getResultType() instanceof JstAttributedType){
-				final JstAttributedType attributedType = (JstAttributedType)actualExpr.getResultType();
-				if(attributedType != null){
-					final IJstNode attributedBinding = attributedType.getJstBinding();
-					if(attributedBinding != null && attributedBinding instanceof IJstMethod){
+			} else if (actualExpr.getResultType() instanceof JstAttributedType) {
+				final JstAttributedType attributedType = (JstAttributedType) actualExpr
+						.getResultType();
+				if (attributedType != null) {
+					final IJstNode attributedBinding = attributedType
+							.getJstBinding();
+					if (attributedBinding != null
+							&& attributedBinding instanceof IJstMethod) {
 						id.setJstBinding(attributedBinding);
 					}
 				}
-			}
-			else if(actualExpr instanceof FuncExpr){
-				final FuncExpr funcExpr = (FuncExpr)actualExpr;
+			} else if (actualExpr instanceof FuncExpr) {
+				final FuncExpr funcExpr = (FuncExpr) actualExpr;
 				id.setJstBinding(funcExpr.getFunc());
-			}
-			else if(actualExpr instanceof ObjCreationExpr){
-				final ObjCreationExpr objCreateExpr = (ObjCreationExpr)actualExpr;
-				if("Function".equals(objCreateExpr.getResultType().getSimpleName())){
-					final JstSynthesizedMethod flexMtd = JstExpressionTypeLinkerHelper.createFlexMethod(m_resolver, null);
+			} else if (actualExpr instanceof ObjCreationExpr) {
+				final ObjCreationExpr objCreateExpr = (ObjCreationExpr) actualExpr;
+				if ("Function".equals(objCreateExpr.getResultType()
+						.getSimpleName())) {
+					final JstSynthesizedMethod flexMtd = JstExpressionTypeLinkerHelper
+							.createFlexMethod(m_resolver, null);
 					id.setJstBinding(flexMtd);
 				}
 			}
 			id.setType(actualExpr.getResultType());
 		}
 	}
-	
+
 	/**
 	 * post visit {@link MtdInvocationExpr}
 	 */
 	@SuppressWarnings("deprecation")
 	private void postVisitMtdInvocationExpr(MtdInvocationExpr mie) {
 
-		if (JstExpressionTypeLinkerHelper.bindThisMtdInvocationInConstructs(m_resolver,
-			this, mie, getCurrentScopeFrame().getCurrentType(), m_groupInfo)){
+		if (JstExpressionTypeLinkerHelper.bindThisMtdInvocationInConstructs(
+				m_resolver, this, mie, getCurrentScopeFrame().getCurrentType(),
+				m_groupInfo)) {
 			return;
 		}
 
@@ -1046,223 +1223,342 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			return;
 		}
 
-		IJstType qualifierType = JstExpressionTypeLinkerHelper.getQualifierType(m_resolver, mie);
+		IJstType qualifierType = JstExpressionTypeLinkerHelper
+				.getQualifierType(m_resolver, mie);
 		IJstType mtdBindingType = methodId.getType();
 		String methodName = methodId.getName();
-		
-		final IJstType vjoSyntacticType = JstExpressionTypeLinkerHelper.processSyntacticCalls(mie, methodName, m_provider);
+
+		final IJstType vjoSyntacticType = JstExpressionTypeLinkerHelper
+				.processSyntacticCalls(mie, methodName, m_provider);
 		if (mtdBindingType != null) { // constructor
-			if(JstExpressionTypeLinkerHelper.checkConstructorCalls(m_resolver,this, mie, methodId, mtdBindingType)){
-				return;//constructor handled
+			if (JstExpressionTypeLinkerHelper.checkConstructorCalls(m_resolver,
+					this, mie, methodId, mtdBindingType)) {
+				return;// constructor handled
 			}
 		}
-		
-		//extracted by huzhou for further linking case:
-		//anonymous function argument infer from parameter definition
+
+		// extracted by huzhou for further linking case:
+		// anonymous function argument infer from parameter definition
 		IJstNode mtdBinding = null;
 		// search method in qualifier
 		if (qualifierType != null) {
-			//by huzhou@ebay.com ftype references are always static
-			final boolean isStatic = JstExpressionTypeLinkerHelper.isStaticRef(qualifierType);
-			mtdBinding = JstExpressionTypeLinkerHelper.getCorrectMethod(m_resolver, qualifierType, methodName, isStatic);
+			// by huzhou@ebay.com ftype references are always static
+			final boolean isStatic = JstExpressionTypeLinkerHelper
+					.isStaticRef(qualifierType);
+			mtdBinding = JstExpressionTypeLinkerHelper.getCorrectMethod(
+					m_resolver, qualifierType, methodName, isStatic);
 
 			if (mtdBinding != null) {
 				JstExpressionTypeLinkerHelper.bindMtdInvocationExpr(m_resolver,
-					this, mtdBinding, qualifierType, mie, m_groupInfo);
-				if (vjoSyntacticType != null) { // replace result type of endType()
-											// call
+						this, mtdBinding, qualifierType, mie, m_groupInfo);
+				if (vjoSyntacticType != null) { // replace result type of
+												// endType()
+					// call
 					mie.setResultType(vjoSyntacticType);
 				}
-				JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromParam(mie, mtdBinding, this, m_groupInfo);
-				
+				JstExpressionTypeLinkerHelper
+						.tryDerivingAnonymousFunctionsFromParam(mie,
+								mtdBinding, this, m_groupInfo);
+
+				if (mtdBinding instanceof JstMethod) {
+					JstMethod mtd = (JstMethod) mtdBinding;
+					// create type based on java extension
+					// TODO consolidate this CnP from
+					// getReturnTypeFormFactoryEnabled
+					String mtdKey = createMtdKey(mtd);
+
+					constructType(mie, null, mtdKey, MtdInvocationExpr.class);
+				}
+
 				return;
-			} 
-			else {
-				//try global ext function in prior
-				if(mie.getQualifyExpr() != null && mie.getQualifyExpr() instanceof JstIdentifier){
-					final JstIdentifier qualifier = (JstIdentifier)mie.getQualifyExpr();
+			} else {
+				// try global ext function in prior
+				if (mie.getQualifyExpr() != null
+						&& mie.getQualifyExpr() instanceof JstIdentifier) {
+					final JstIdentifier qualifier = (JstIdentifier) mie
+							.getQualifyExpr();
 					final IJstNode qualifierBinding = qualifier.getJstBinding();
 					String globalVarName = null;
-					if(qualifierBinding != null){
-						globalVarName = JstExpressionTypeLinkerHelper.getGlobalVarNameFromBinding(qualifierBinding);
+					if (qualifierBinding != null) {
+						globalVarName = JstExpressionTypeLinkerHelper
+								.getGlobalVarNameFromBinding(qualifierBinding);
 					}
-					if(globalVarName != null){
-						if (JstExpressionTypeLinkerHelper.isGlobalVarExtended(m_resolver, globalVarName)) {
-							final IJstGlobalVar extVar = JstExpressionTypeLinkerHelper.getGlobalVarExtensionByName(m_resolver, methodName, globalVarName);
-							if(extVar != null){
-								mtdBinding = JstExpressionTypeLinkerHelper.look4ActualGlobalVarBinding(m_resolver, extVar, m_groupInfo);
-								JstExpressionTypeLinkerHelper.doMethodBinding(m_resolver, mie, methodId, mtdBinding);
+					if (globalVarName != null) {
+						if (JstExpressionTypeLinkerHelper.isGlobalVarExtended(
+								m_resolver, globalVarName)) {
+							final IJstGlobalVar extVar = JstExpressionTypeLinkerHelper
+									.getGlobalVarExtensionByName(m_resolver,
+											methodName, globalVarName);
+							if (extVar != null) {
+								mtdBinding = JstExpressionTypeLinkerHelper
+										.look4ActualGlobalVarBinding(
+												m_resolver, extVar, m_groupInfo);
+								JstExpressionTypeLinkerHelper.doMethodBinding(
+										m_resolver, mie, methodId, mtdBinding);
 							}
 						}
 					}
 				}
-				
+
 				IJstType declaringType = m_searcher.searchType(qualifierType,
 						methodName, HierarchyDepth.THIS, isStatic);
 				if (declaringType != null) {
-					mtdBinding = JstExpressionTypeLinkerHelper.getDeclaredMethod(declaringType, methodName, isStatic);
+					mtdBinding = JstExpressionTypeLinkerHelper
+							.getDeclaredMethod(declaringType, methodName,
+									isStatic);
 					if (mtdBinding == null) {
-						mtdBinding = JstExpressionTypeLinkerHelper.getConstructs(declaringType, methodName);
+						mtdBinding = JstExpressionTypeLinkerHelper
+								.getConstructs(declaringType, methodName);
 					}
-					
-					if (mtdBinding == null && qualifierType instanceof IJstRefType) {
-						declaringType = JstExpressionTypeLinkerHelper.getNativeFunctionJstType(m_resolver);
-						mtdBinding = JstExpressionTypeLinkerHelper.getDeclaredMethod(declaringType, methodName, isStatic);
+
+					if (mtdBinding == null
+							&& qualifierType instanceof IJstRefType) {
+						declaringType = JstExpressionTypeLinkerHelper
+								.getNativeFunctionJstType(m_resolver);
+						mtdBinding = JstExpressionTypeLinkerHelper
+								.getDeclaredMethod(declaringType, methodName,
+										isStatic);
 					}
-					
+
 					if (mtdBinding != null) {
-						JstExpressionTypeLinkerHelper.bindMtdInvocationExpr(m_resolver,
-							this, mtdBinding, qualifierType, mie, m_groupInfo);
-						JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromParam(mie, mtdBinding, this, m_groupInfo);
+						JstExpressionTypeLinkerHelper.bindMtdInvocationExpr(
+								m_resolver, this, mtdBinding, qualifierType,
+								mie, m_groupInfo);
+						JstExpressionTypeLinkerHelper
+								.tryDerivingAnonymousFunctionsFromParam(mie,
+										mtdBinding, this, m_groupInfo);
 						return;
 					}
 				}
 			}
 		} else {// no qualifier, global method or local function
 			mtdBinding = methodId.getJstBinding();
-			if (mtdBinding != null){
-				
-				//by huzhou@ebay.com to allow inferred function binding to work
-				if(mtdBindingType instanceof JstInferredType){
-					mtdBindingType = ((JstInferredType)mtdBindingType).getType();
+			if (mtdBinding != null) {
+
+				// by huzhou@ebay.com to allow inferred function binding to work
+				if (mtdBindingType instanceof JstInferredType) {
+					mtdBindingType = ((JstInferredType) mtdBindingType)
+							.getType();
 				}
-				//added in the case where args are functions, and used directly
-				if(mtdBindingType instanceof JstFuncType){
-					final JstFuncType funcType = (JstFuncType)mtdBindingType;
+				// added in the case where args are functions, and used directly
+				if (mtdBindingType instanceof JstFuncType) {
+					final JstFuncType funcType = (JstFuncType) mtdBindingType;
 					mtdBinding = funcType.getFunction();
 				}
-				if(mtdBindingType instanceof JstAttributedType){
-					mtdBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, mtdBindingType, m_groupInfo);
+				if (mtdBindingType instanceof JstAttributedType) {
+					mtdBinding = JstExpressionTypeLinkerHelper
+							.look4ActualBinding(m_resolver, mtdBindingType,
+									m_groupInfo);
 				}
-				if(mtdBindingType instanceof JstFunctionRefType){
-					final JstFunctionRefType funcType = (JstFunctionRefType)mtdBindingType;
+				if (mtdBindingType instanceof JstFunctionRefType) {
+					final JstFunctionRefType funcType = (JstFunctionRefType) mtdBindingType;
 					mtdBinding = funcType.getMethodRef();
 				}
-				if(mtdBindingType != null && mtdBindingType.isFType()){
-					mtdBinding = JstExpressionTypeLinkerHelper.getFTypeInvokeMethod(m_resolver, mtdBindingType);
+				if (mtdBindingType != null && mtdBindingType.isFType()) {
+					mtdBinding = JstExpressionTypeLinkerHelper
+							.getFTypeInvokeMethod(m_resolver, mtdBindingType);
 				}
 
-				if(mtdBinding instanceof IJstGlobalProp){
-					mtdBinding = JstExpressionTypeLinkerHelper.getFurtherGlobalVarBinding(m_resolver, (IJstGlobalProp)mtdBinding, m_groupInfo);
+				if (mtdBinding instanceof IJstGlobalProp) {
+					mtdBinding = JstExpressionTypeLinkerHelper
+							.getFurtherGlobalVarBinding(m_resolver,
+									(IJstGlobalProp) mtdBinding, m_groupInfo);
 				}
-				//revisit binding
-				if(mtdBinding instanceof IJstGlobalFunc){
-					mtdBinding = JstExpressionTypeLinkerHelper.getFurtherGlobalVarBinding(m_resolver, (IJstGlobalFunc)mtdBinding, m_groupInfo);
+				// revisit binding
+				if (mtdBinding instanceof IJstGlobalFunc) {
+					mtdBinding = JstExpressionTypeLinkerHelper
+							.getFurtherGlobalVarBinding(m_resolver,
+									(IJstGlobalFunc) mtdBinding, m_groupInfo);
 				}
-				
-				if(mtdBinding instanceof IJstMethod) {
-					IJstMethod mtd = (IJstMethod)mtdBinding;
+
+				if (mtdBinding instanceof IJstMethod) {
+					IJstMethod mtd = (IJstMethod) mtdBinding;
 					IJstType rtnType = null;
 					if (mtd.isTypeFactoryEnabled()) {
-						rtnType = JstExpressionTypeLinkerHelper.getReturnTypeFormFactoryEnabled(mie, mtd);
+						rtnType = JstExpressionTypeLinkerHelper
+								.getReturnTypeFormFactoryEnabled(mie, mtd);
 					}
 					if (rtnType == null) {
-						rtnType = JstExpressionTypeLinkerHelper.getBestRtnTypeFromAllOverloadMtds(mie, mtd);
+						rtnType = JstExpressionTypeLinkerHelper
+								.getBestRtnTypeFromAllOverloadMtds(mie, mtd);
 					}
+
 					mie.setResultType(rtnType);
-					JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromParam(mie, mtdBinding, this, m_groupInfo);
-					JstExpressionTypeLinkerHelper.bindMtdInvocations(m_resolver, this, mie, mtdBinding);
+					JstExpressionTypeLinkerHelper
+							.tryDerivingAnonymousFunctionsFromParam(mie,
+									mtdBinding, this, m_groupInfo);
+					JstExpressionTypeLinkerHelper.bindMtdInvocations(
+							m_resolver, this, mie, mtdBinding,m_groupInfo);
 					return;
 				}
 			}
 		}
-		
+
 		// check if invocation through full qualified name
 		IJstType fullNamedType = checkFullyQualifierTypeInvocation(mie);
 
 		if (fullNamedType == null) { // check if invocation through this() etc.
-			JstSource source = JstExpressionTypeLinkerHelper.createSourceRef(mie);
-			resolver().error(
-					"Cant find " + methodName + " method in "
-							+ JstExpressionTypeLinkerHelper.getTypeName(qualifierType) + " type.",
-							JstExpressionTypeLinkerHelper.getTypeName(qualifierType), source.getStartOffSet(),
-					source.getEndOffSet(), source.getRow(), source.getColumn());
-		}
-		else{
+			JstSource source = JstExpressionTypeLinkerHelper
+					.createSourceRef(mie);
+			resolver()
+					.error("Cant find "
+							+ methodName
+							+ " method in "
+							+ JstExpressionTypeLinkerHelper.getTypeName(qualifierType)
+							+ " type.",
+							JstExpressionTypeLinkerHelper
+									.getTypeName(qualifierType),
+							source.getStartOffSet(), source.getEndOffSet(),
+							source.getRow(), source.getColumn());
+		} else {
 			final IJstType currentType = getType();
-			if(currentType != null && currentType instanceof JstType){
-				((JstType)currentType).addFullyQualifiedImport(fullNamedType);
+			if (currentType != null && currentType instanceof JstType) {
+				((JstType) currentType).addFullyQualifiedImport(fullNamedType);
 			}
 			mie.addChild(new JstTypeReference(currentType));
 		}
 	}
+
+	/**
+	 * @param mtd
+	 * @return
+	 */
+	private String createMtdKey(IJstMethod mtd) {
+		if(mtd==null){
+			return "";
+		}
+		String mtdKey = mtd.getOwnerType().getName();
+		mtdKey += mtd.isStatic() ? "::" : ":";
+		mtdKey += mtd.getName().getName();
+		return mtdKey;
+	}
+
+	/**
+	 * @param mie
+	 * @param mtdKey
+	 * @param class1
+	 */
+	private void constructType(MtdInvocationExpr mie, IExpr lhs, String mtdKey,
+			Class<? extends IExpr> class1) {
+		// TODO use only with double caret
+		TypeConstructorRegistry tcr = TypeConstructorRegistry.getInstance();
+
+		if (tcr.hasResolver(mtdKey)) {
+			List<IExpr> exprs = mie.getArgs();
+
+			// TODO pass the reference to JSTCompletion
+			ITypeConstructContext constrCtx = new TypeConstructContext(mie,
+					lhs, exprs, null, class1,m_groupInfo.getGroupName());
+			// resolve
+			tcr.resolve(mtdKey, constrCtx);
+
+			if (constrCtx.getTypes().size() > 0) {
+				// TODO test nested types here
+				setCurrentType(constrCtx.getTypes().get(0));
+				setTypeConstructedDuringLink(true);
+				// TODO how to support multiple return types
+			}
+
+		}
+	}
+
+	private void setTypeConstructedDuringLink(boolean b) {
+		m_typeConstructedDuringLink = b;
+		
+	}
 	
+	public boolean getTypeConstructedDuringLink() {
+		return m_typeConstructedDuringLink;
+		
+	}
+
 	private void postVisitObjCreationExpr(final ObjCreationExpr objCreationExpr) {
-		final JsCommentMetaNode metaNode = JstExpressionTypeLinkerHelper.getJsCommentMetaNode(objCreationExpr);
-		final IJstType metaType = metaNode != null ? metaNode.getResultType() : null;
+		final JsCommentMetaNode metaNode = JstExpressionTypeLinkerHelper
+				.getJsCommentMetaNode(objCreationExpr);
+		final IJstType metaType = metaNode != null ? metaNode.getResultType()
+				: null;
 		final IExpr mtdInvocationExpr = objCreationExpr.getExpression();
-		if(mtdInvocationExpr != null){
+		if (mtdInvocationExpr != null) {
 			final IJstType prevType = mtdInvocationExpr.getResultType();
-			if(metaType != null && metaType != prevType){
-				if(mtdInvocationExpr instanceof MtdInvocationExpr){
-					((MtdInvocationExpr)mtdInvocationExpr).setResultType(metaType);
+			if (metaType != null && metaType != prevType) {
+				if (mtdInvocationExpr instanceof MtdInvocationExpr) {
+					((MtdInvocationExpr) mtdInvocationExpr)
+							.setResultType(metaType);
 				}
 			}
 		}
 	}
-	
+
 	private void postVisitExprStmt(final ExprStmt stmt) {
 		final IExpr expr = stmt.getExpr();
 		if (expr instanceof JstIdentifier) {
 			JstIdentifier id = (JstIdentifier) expr;
 			handleGlobalVarBinding(id, stmt, id, true);
-		} 
-		else if (expr instanceof FuncExpr) {
+		} else if (expr instanceof FuncExpr) {
 			final FuncExpr funcExpr = (FuncExpr) expr;
 			final IJstMethod mtd = funcExpr.getFunc();
 
-			final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(stmt);
+			final VarTable varTable = JstExpressionTypeLinkerHelper
+					.getVarTable(stmt);
 			if (varTable != null
 					&& varTable.getVarNode(mtd.getName().getName()) != null) {
-				varTable.addVarType(mtd.getName().getName(), funcExpr.getResultType());
+				varTable.addVarType(mtd.getName().getName(),
+						funcExpr.getResultType());
 			}
 		}
 	}
 
 	/**
 	 * helper for {@link #postVisitExprStmt(ExprStmt)}
+	 * 
 	 * @param id
 	 * @param parentNode
 	 * @param parentNodeForMeta
 	 * @param setBinding
 	 */
-	private void handleGlobalVarBinding(
-		JstIdentifier id, BaseJstNode parentNode, IJstNode parentNodeForMeta, boolean setBinding) {
-		if (id.getJstBinding() != null 
-				|| (parentNode instanceof AssignExpr 
-						&& parentNode.getParentNode() instanceof JstVars 
-						&& ((AssignExpr)parentNode).getLHS() == id)) {
+	private void handleGlobalVarBinding(JstIdentifier id,
+			BaseJstNode parentNode, IJstNode parentNodeForMeta,
+			boolean setBinding) {
+		if (id.getJstBinding() != null
+				|| (parentNode instanceof AssignExpr
+						&& parentNode.getParentNode() instanceof JstVars && ((AssignExpr) parentNode)
+						.getLHS() == id)) {
 			return;
 		}
-		List<IJsCommentMeta> metaList = JstExpressionTypeLinkerHelper.getJsCommentMeta(parentNodeForMeta);
+		List<IJsCommentMeta> metaList = JstExpressionTypeLinkerHelper
+				.getJsCommentMeta(parentNodeForMeta);
 		if (metaList != null && metaList.size() > 0) {
-			//TODO need to handle more cases, such as functions, attributed types
+			// TODO need to handle more cases, such as functions, attributed
+			// types
 			IJsCommentMeta meta = metaList.get(0);
 			JsTypingMeta jsTypingMeta = meta.getTyping();
 			IJstType jstType = null;
 			if (jsTypingMeta instanceof JsType) {
-				jstType = JstExpressionTypeLinkerHelper.findType((JsType)jsTypingMeta);
-			}
-			else if(jsTypingMeta instanceof JsAttributed){
-				final JsAttributed jsAttributed = (JsAttributed)jsTypingMeta;
+				jstType = JstExpressionTypeLinkerHelper
+						.findType((JsType) jsTypingMeta);
+			} else if (jsTypingMeta instanceof JsAttributed) {
+				final JsAttributed jsAttributed = (JsAttributed) jsTypingMeta;
 				final JsType attributor = jsAttributed.getAttributor();
-				final IJstType attributorType = attributor == null ? 
-						TranslateHelper.getGlobalType() : JstExpressionTypeLinkerHelper.findType(attributor);
+				final IJstType attributorType = attributor == null ? TranslateHelper
+						.getGlobalType() : JstExpressionTypeLinkerHelper
+						.findType(attributor);
 				final String attributeName = jsAttributed.getName();
 				final boolean isStatic = !jsAttributed.isInstance();
-				jstType = new JstAttributedType(attributorType, attributeName, isStatic);
+				jstType = new JstAttributedType(attributorType, attributeName,
+						isStatic);
 			} else if (jsTypingMeta instanceof JsVariantType) {
-				jstType = JstExpressionTypeLinkerHelper.findType((JsVariantType)jsTypingMeta);
+				jstType = JstExpressionTypeLinkerHelper
+						.findType((JsVariantType) jsTypingMeta);
 			}
 			if (jstType != null) {
 				id.setType(jstType);
-				JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, id.getType(), m_groupInfo);
+				JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver,
+						id.getType(), m_groupInfo);
 				JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
-					this, id, id.getType(), m_groupInfo);
+						this, id, id.getType(), m_groupInfo);
 				if (setBinding) {
 					id.setJstBinding(jstType);
-				}
-				else {
+				} else {
 					id.setJstBinding(null);
 				}
 				JstTypeReference ref = new JstTypeReference(jstType);
@@ -1270,18 +1566,20 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				parentNode.addChild(ref);
 			}
 		}
-		//adding to the pseudo global var table (init funciton's var table instead)
+		// adding to the pseudo global var table (init funciton's var table
+		// instead)
 		final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(id);
-		if(varTable != null){
-			if(varTable.getVarNode(id.getName()) == null){
+		if (varTable != null) {
+			if (varTable.getVarNode(id.getName()) == null) {
 				varTable.addVarNode(id.getName(), id);
 			}
 			varTable.addVarType(id.getName(), id.getType());
 		}
 	}
-	
+
 	/**
 	 * post visit {@link FieldAccessExpr}
+	 * 
 	 * @param fae
 	 */
 	@SuppressWarnings("deprecation")
@@ -1291,17 +1589,20 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			return;
 		}
 
-		IJstType qualifierType = JstExpressionTypeLinkerHelper.getQualifierType(m_resolver, fae);
+		IJstType qualifierType = JstExpressionTypeLinkerHelper
+				.getQualifierType(m_resolver, fae);
 		String fieldName = "";
 
 		if (qualifierType != null) {
-			final boolean isStatic = JstExpressionTypeLinkerHelper.isStaticRef(qualifierType);
+			final boolean isStatic = JstExpressionTypeLinkerHelper
+					.isStaticRef(qualifierType);
 			fieldName = fieldId.getName();
-			IJstProperty pty = JstExpressionTypeLinkerHelper.getProperty(qualifierType, fieldName, isStatic);
+			IJstProperty pty = JstExpressionTypeLinkerHelper.getProperty(
+					qualifierType, fieldName, isStatic);
 
 			if (pty != null) {
 				JstExpressionTypeLinkerHelper.bindFieldAccessExpr(m_resolver,
-					pty, qualifierType, fae, m_groupInfo);
+						pty, qualifierType, fae, m_groupInfo);
 				return;
 			} else {
 				IJstType declaringType = m_searcher
@@ -1311,8 +1612,9 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					pty = declaringType.getProperty(fieldName, isStatic);
 
 					if (pty != null) {
-						JstExpressionTypeLinkerHelper.bindFieldAccessExpr(m_resolver,
-							pty, qualifierType, fae, m_groupInfo);
+						JstExpressionTypeLinkerHelper.bindFieldAccessExpr(
+								m_resolver, pty, qualifierType, fae,
+								m_groupInfo);
 						return;
 					}
 				}
@@ -1320,38 +1622,45 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		}
 
 		IJstType fullNamedType = checkFullyQualifierTypeAccess(fae);
-		
-		//by huzhou@ebay.com handling global var extension case
-		final IExpr qualifier = fae.getExpr();//extension has only 1 level right now
+
+		// by huzhou@ebay.com handling global var extension case
+		final IExpr qualifier = fae.getExpr();// extension has only 1 level
+												// right now
 		final JstIdentifier identifier = fae.getName();
-		if(qualifier instanceof JstIdentifier 
-				&& identifier != null
-				&& identifier.getName() != null){
-			final IJstNode qualifierBinding = ((JstIdentifier)qualifier).getJstBinding();
-			if(qualifierBinding != null){
+		if (qualifier instanceof JstIdentifier && identifier != null
+				&& identifier.getName() != null) {
+			final IJstNode qualifierBinding = ((JstIdentifier) qualifier)
+					.getJstBinding();
+			if (qualifierBinding != null) {
 				String globalVarName = null;
-				if(qualifierBinding instanceof IJstGlobalProp){
-					globalVarName = ((IJstGlobalProp)qualifierBinding).getName().getName();
+				if (qualifierBinding instanceof IJstGlobalProp) {
+					globalVarName = ((IJstGlobalProp) qualifierBinding)
+							.getName().getName();
+				} else if (qualifierBinding instanceof IJstGlobalFunc) {
+					globalVarName = ((IJstGlobalFunc) qualifierBinding)
+							.getName().getName();
 				}
-				else if(qualifierBinding instanceof IJstGlobalFunc){
-					globalVarName = ((IJstGlobalFunc)qualifierBinding).getName().getName();
-				}
-				if(globalVarName != null){
+				if (globalVarName != null) {
 					final String identifierName = identifier.getName();
-					final List<IJstNode> extensions = m_resolver.getController().getJstTypeSpaceMgr().getQueryExecutor().getGlobalExtensions(globalVarName);
+					final List<IJstNode> extensions = m_resolver
+							.getController().getJstTypeSpaceMgr()
+							.getQueryExecutor()
+							.getGlobalExtensions(globalVarName);
 					for (IJstNode ext : extensions) {
 						if (ext instanceof IJstGlobalVar) {
 							IJstGlobalVar extVar = (IJstGlobalVar) ext;
-							if(identifierName.equals(extVar.getName().getName())){
+							if (identifierName.equals(extVar.getName()
+									.getName())) {
 								final IJstNode identifierBinding = JstExpressionTypeLinkerHelper
-									.findGlobalVarBinding(m_resolver, extVar, m_groupInfo);
-								if(identifierBinding != null){
+										.findGlobalVarBinding(m_resolver,
+												extVar, m_groupInfo);
+								if (identifierBinding != null) {
 									identifier.setJstBinding(identifierBinding);
 								}
 								break;
 							}
-						}		
-					}	
+						}
+					}
 				}
 			}
 		}
@@ -1362,27 +1671,33 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					&& !checkMethodReferenceByFieldAccess(fae, qualifierType,
 							fieldId)) {
 
-				JstSource source = JstExpressionTypeLinkerHelper.createSourceRef(fae);
-				resolver().error(
-						"Cant find " + fieldName + " field in "
+				JstSource source = JstExpressionTypeLinkerHelper
+						.createSourceRef(fae);
+				resolver()
+						.error("Cant find "
+								+ fieldName
+								+ " field in "
 								+ JstExpressionTypeLinkerHelper.getTypeName(qualifierType)
 								+ " type. with source = " + fae.getSource(),
-								JstExpressionTypeLinkerHelper.getTypeName(qualifierType), source.getStartOffSet(),
-						source.getEndOffSet(), source.getRow(),
-						source.getColumn());
+								JstExpressionTypeLinkerHelper
+										.getTypeName(qualifierType),
+								source.getStartOffSet(), source.getEndOffSet(),
+								source.getRow(), source.getColumn());
 			}
-		}
-		else{// added by huzhou@ebay.com to setup the linkage to the Fully qualified type references
+		} else {// added by huzhou@ebay.com to setup the linkage to the Fully
+				// qualified type references
 			final IJstType currentType = getType();
-			if(currentType != null && currentType instanceof JstType){
-				((JstType)currentType).addFullyQualifiedImport(fullNamedType);
+			if (currentType != null && currentType instanceof JstType) {
+				((JstType) currentType).addFullyQualifiedImport(fullNamedType);
 			}
 			fae.addChild(new JstTypeReference(currentType));
 		}
 	}
 
 	/**
-	 * helper for {@link #postVisitFieldAccessExpr(FieldAccessExpr)} for FieldAccess to methods
+	 * helper for {@link #postVisitFieldAccessExpr(FieldAccessExpr)} for
+	 * FieldAccess to methods
+	 * 
 	 * @param fae
 	 * @param qualifierType
 	 * @param fieldId
@@ -1422,44 +1737,50 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 		return isMethodReference;
 	}
-	
-	private void postVisitFuncExpr(FuncExpr funcExpr){
+
+	private void postVisitFuncExpr(FuncExpr funcExpr) {
 		IJstType funcType = funcExpr.getResultType();
-		
-		if(!(funcType instanceof JstFuncType)){
-			if(funcType instanceof JstAttributedType){
-				final JstAttributedType attributedType = (JstAttributedType)funcType;
-				final IJstMethod attributedFunc = attributedType.getAttributorType().getMethod(attributedType.getAttributeName(), attributedType.isStaticAttribute(), true);
-				if(attributedFunc != null){
-					JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromAssignment(funcExpr, attributedFunc, false, this);
+
+		if (!(funcType instanceof JstFuncType)) {
+			if (funcType instanceof JstAttributedType) {
+				final JstAttributedType attributedType = (JstAttributedType) funcType;
+				final IJstMethod attributedFunc = attributedType
+						.getAttributorType().getMethod(
+								attributedType.getAttributeName(),
+								attributedType.isStaticAttribute(), true);
+				if (attributedFunc != null) {
+					JstExpressionTypeLinkerHelper
+							.tryDerivingAnonymousFunctionsFromAssignment(
+									funcExpr, attributedFunc, false, this);
 					funcType = new JstFuncType(attributedFunc);
-				}
-				else{
-					funcType = new JstFuncType(funcExpr.getFunc());					
+				} else {
+					funcType = new JstFuncType(funcExpr.getFunc());
 				}
 				funcExpr.setType(funcType);
-			}
-			else if(funcType instanceof JstFunctionRefType){
-				final JstFunctionRefType otypeFuncType = (JstFunctionRefType)funcType;
+			} else if (funcType instanceof JstFunctionRefType) {
+				final JstFunctionRefType otypeFuncType = (JstFunctionRefType) funcType;
 				final IJstMethod otypeFunc = otypeFuncType.getMethodRef();
-				if(otypeFunc != null){
-					JstExpressionTypeLinkerHelper.tryDerivingAnonymousFunctionsFromAssignment(funcExpr, otypeFunc, false, this);
+				if (otypeFunc != null) {
+					JstExpressionTypeLinkerHelper
+							.tryDerivingAnonymousFunctionsFromAssignment(
+									funcExpr, otypeFunc, false, this);
 					funcType = new JstFuncType(otypeFunc);
-				}
-				else{
+				} else {
 					funcType = new JstFuncType(funcExpr.getFunc());
 				}
 				funcExpr.setType(funcType);
 			}
 		}
-		
+
 		if (funcType instanceof JstFuncType) {
-			JstExpressionTypeLinkerHelper.updateFunctionType((JstFuncType)funcType, m_groupInfo);
+			JstExpressionTypeLinkerHelper.updateFunctionType(
+					(JstFuncType) funcType, m_groupInfo);
 		}
 	}
 
 	/**
 	 * post visit {@link AssignExpr}
+	 * 
 	 * @param assignExpr
 	 */
 	private void postVisitAssignExpr(AssignExpr assignExpr) {
@@ -1470,79 +1791,167 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		JstIdentifier identifier = null;
 		if (lhs instanceof JstIdentifier) {
 			identifier = (JstIdentifier) lhs;
-			final LinkerSymbolInfo info = findTypeInSymbolMap(identifier.toExprText(), JstExpressionTypeLinkerHelper.getVarTablesBottomUp(assignExpr));
+			final LinkerSymbolInfo info = findTypeInSymbolMap(
+					identifier.toExprText(),
+					JstExpressionTypeLinkerHelper
+							.getVarTablesBottomUp(assignExpr));
 			if (info == null) {
 				IExpr rhsExpr = assignExpr.getExpr();
 				if (rhsExpr instanceof CastExpr) {
 					identifier.setType(rhsExpr.getResultType());
-				} 
+				}
 				handleGlobalVarBinding(identifier, assignExpr, rhsExpr, false);
 				if (identifier.getType() == null) {
-					identifier.setType(JstCache.getInstance().getType("Object"));
+					identifier
+							.setType(JstCache.getInstance().getType("Object"));
 				}
 			}
 		}
-		
+
 		final IJstType lhsType = lhs.getType();
 		final IExpr rhsExpr = assignExpr.getExpr();
-		final boolean rhsResolveNeeded = JstExpressionTypeLinkerHelper.doesExprRequireResolve(rhsExpr);
+		final boolean rhsResolveNeeded = JstExpressionTypeLinkerHelper
+				.doesExprRequireResolve(rhsExpr);
 		if (lhsType != null && !(lhsType instanceof IInferred)
-			&& rhsResolveNeeded){
-			//resolved
-			JstExpressionTypeLinkerHelper.doExprTypeResolve(m_resolver, this, rhsExpr, lhsType);
-		} else if (lhsType instanceof IInferred && !rhsResolveNeeded && identifier != null && rhsExpr != null) {
+				&& rhsResolveNeeded) {
+			// resolved
+			JstExpressionTypeLinkerHelper.doExprTypeResolve(m_resolver, this,
+					rhsExpr, lhsType);
+		} else if (lhsType instanceof IInferred && !rhsResolveNeeded
+				&& identifier != null && rhsExpr != null) {
 			IJstType rhsType = rhsExpr.getResultType();
 			if (rhsType == null) {
-				rhsType = new JstInferredType(JstCache.getInstance().getType("Object"));
+				rhsType = new JstInferredType(JstCache.getInstance().getType(
+						"Object"));
 			} else if (rhsType instanceof JstInferredType) {
-				rhsType = ((JstInferredType)rhsType).getType();
-			}				
+				rhsType = ((JstInferredType) rhsType).getType();
+			}
 			if (!isSameType(lhsType, rhsType)) {
 				IJstNode binding = identifier.getJstBinding();
 				IJstType originalType = null;
 				if (binding instanceof JstIdentifier) {
-					originalType = ((JstIdentifier)binding).getType();
+					originalType = ((JstIdentifier) binding).getType();
 				}
 				if (originalType instanceof JstInferredType) {
 					int pos = lhs.getSource().getStartOffSet();
-					((JstInferredType)originalType).setCurrentType(rhsType, pos, m_scopeStack.peek());
+					((JstInferredType) originalType).setCurrentType(rhsType,
+							pos, m_scopeStack.peek());
 				}
 			}
-		} else if (lhsType == null && lhs instanceof FieldAccessExpr && rhsExpr != null) {
-			IExpr qualifier = ((FieldAccessExpr)lhs).getExpr();
+		} else if (lhsType == null && lhs instanceof FieldAccessExpr
+				&& rhsExpr != null) {
+
+			IExpr qualifier = ((FieldAccessExpr) lhs).getExpr();
 			if (qualifier instanceof JstIdentifier) {
-				IJstNode binding = ((JstIdentifier)qualifier).getJstBinding();
+				IJstNode binding = ((JstIdentifier) qualifier).getJstBinding();
 				IJstType qualifierType = null;
 				if (binding instanceof JstIdentifier) {
-					qualifierType = ((JstIdentifier)binding).getType();
+					qualifierType = ((JstIdentifier) binding).getType();
 				}
 				if (qualifierType instanceof JstInferredType) {
 					IJstType rhsType = rhsExpr.getResultType();
 					if (rhsType == null) {
-						rhsType = new JstInferredType(JstCache.getInstance().getType("Object"));
-					}	
+						rhsType = new JstInferredType(JstCache.getInstance()
+								.getType("Object"));
+					}
+
 					int pos = lhs.getSource().getStartOffSet();
 					Set<Object> scopes = new HashSet<Object>();
 					scopes.addAll(m_scopeStack);
-					((JstInferredType)qualifierType).addNewProperty(
-						((FieldAccessExpr)lhs).getName().getName(), rhsType, pos, scopes);
+					((JstInferredType) qualifierType).addNewProperty(
+							((FieldAccessExpr) lhs).getName().getName(),
+							rhsType, pos, scopes);
+
 				}
+				if(rhsResolveNeeded && rhsExpr instanceof ObjLiteral){
+					IJstType rhsType = rhsExpr.getResultType();
+					if (rhsType == null) {
+						rhsType = new JstInferredType(JstCache.getInstance().getType(
+								"Object"));
+					} 
+					JstExpressionTypeLinkerHelper.doObjLiteralAndOTypeBindings((ObjLiteral) rhsExpr,
+							(SynthOlType) rhsExpr.getResultType(), rhsType, this);
+				}
+
 			}
+
+		} else if (lhs instanceof FieldAccessExpr && rhsExpr != null) {
+
+			constructForAssigment(lhs, rhsExpr);
+
+		} else if ((lhs instanceof JstIdentifier) && (rhsExpr != null)
+				&& (rhsExpr instanceof MtdInvocationExpr)) {
+
+			constructForAssigment(lhs, rhsExpr);
+
 		}
+
 	}
-	
+
+	/**
+	 * @param lhs
+	 * @param rhsExpr
+	 */
+	private void constructForAssigment(final ILHS lhs, final IExpr rhsExpr) {
+		if (!(rhsExpr instanceof MtdInvocationExpr)) {
+			return;
+		}
+		MtdInvocationExpr mie = (MtdInvocationExpr) rhsExpr;
+		JstMethod mtd = bindMethod(mie);
+		String mtdKey = createMtdKey(mtd);
+
+		constructType(mie, (IExpr) lhs, mtdKey, AssignExpr.class);
+	}
+
+	private JstMethod bindMethod(MtdInvocationExpr mie) {
+
+		JstIdentifier methodId = JstExpressionTypeLinkerHelper.getName(mie);
+		if (JstExpressionTypeLinkerHelper.isEmptyExpr(methodId)) {
+			return null;
+		}
+		IJstType qualifierType = JstExpressionTypeLinkerHelper
+				.getQualifierType(m_resolver, mie);
+		String methodName = methodId.getName();
+
+		IJstNode mtdBinding = null;
+		// search method in qualifier
+		if (qualifierType != null) {
+			// by huzhou@ebay.com ftype references are always static
+			final boolean isStatic = JstExpressionTypeLinkerHelper
+					.isStaticRef(qualifierType);
+			mtdBinding = JstExpressionTypeLinkerHelper.getCorrectMethod(
+					m_resolver, qualifierType, methodName, isStatic);
+
+			if (mtdBinding != null) {
+				JstExpressionTypeLinkerHelper.bindMtdInvocationExpr(m_resolver,
+						this, mtdBinding, qualifierType, mie, m_groupInfo);
+
+				JstExpressionTypeLinkerHelper
+						.tryDerivingAnonymousFunctionsFromParam(mie,
+								mtdBinding, this, m_groupInfo);
+				if (mtdBinding instanceof JstMethod) {
+					return (JstMethod) mtdBinding;
+				}
+
+			}
+
+		}
+		return null;
+	}
+
 	private static boolean isSameType(IJstType t1, IJstType t2) {
 		return t1.getName().equals(t2.getName());
 	}
 
-
 	/**
 	 * post visit {@link JstVars}
+	 * 
 	 * @param vars
 	 */
 	private void postVisitJstVars(JstVars vars) {
 		final IJstType varType = vars.getType();
-		JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, varType, m_groupInfo);
+		JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, varType,
+				m_groupInfo);
 
 		final boolean isInferred = (varType instanceof IInferred);
 		final JstInitializer initializer = vars.getInitializer();
@@ -1552,39 +1961,44 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			for (AssignExpr assignExpr : list) {
 				ILHS lhs = assignExpr.getLHS();
 				IExpr rhsExpr = assignExpr.getExpr();
-				if( !isInferred){
-					JstExpressionTypeLinkerHelper.doJsCommentMetaUpdate(varType, rhsExpr);
-					if(JstExpressionTypeLinkerHelper.doesExprRequireResolve(rhsExpr)){
-						//resolved
-						JstExpressionTypeLinkerHelper.doExprTypeResolve(m_resolver, this, rhsExpr, varType);
+				if (!isInferred) {
+					JstExpressionTypeLinkerHelper.doJsCommentMetaUpdate(
+							varType, rhsExpr);
+					if (JstExpressionTypeLinkerHelper
+							.doesExprRequireResolve(rhsExpr)) {
+						// resolved
+						JstExpressionTypeLinkerHelper.doExprTypeResolve(
+								m_resolver, this, rhsExpr, varType);
 					}
 				}
 				if (lhs instanceof JstIdentifier) {
-					JstIdentifier identifier = (JstIdentifier)lhs;
+					JstIdentifier identifier = (JstIdentifier) lhs;
 					if (rhsExpr instanceof CastExpr) {
 						varsSet = whenRhsExprIsCast(vars, varsSet, rhsExpr,
 								identifier);
-					} 
-					else if (isInferred && rhsExpr != null) {
+					} else if (isInferred && rhsExpr != null) {
 						whenRhsExprCanInfer(vars, varType, list, rhsExpr,
 								identifier);
-					} 
-					else {
+					} else {
 						identifier.setJstBinding(varType);
-						//bugfix by huzhou@ebay.com to deal with inferred dup
-						if(varType instanceof IInferred){
-							final IJstType cloneInferredType = (IJstType)JstExpressionTypeLinkerHelper.cloneInferredType((IInferred)varType);
+						// bugfix by huzhou@ebay.com to deal with inferred dup
+						if (varType instanceof IInferred) {
+							final IJstType cloneInferredType = (IJstType) JstExpressionTypeLinkerHelper
+									.cloneInferredType((IInferred) varType);
 							identifier.setType(cloneInferredType);
-						}
-						else{
+						} else {
 							identifier.setType(varType);
 						}
 					}
-					
-					final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(identifier);
-					if(varTable != null){
-						if(varTable.getVarNode(identifier.getName()) == null){
-							varTable.addVarNode(identifier.getName(), lhs/*, true*/);
+
+					final VarTable varTable = JstExpressionTypeLinkerHelper
+							.getVarTable(identifier);
+					if (varTable != null) {
+						if (varTable.getVarNode(identifier.getName()) == null) {
+							varTable.addVarNode(identifier.getName(), lhs/*
+																		 * ,
+																		 * true
+																		 */);
 						}
 						varTable.addVarType(identifier.getName(), varType);
 					}
@@ -1600,22 +2014,24 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		if (inferingType != null) {
 			if (inferingType instanceof JstFuncType) {
 				inferredType = new JstInferredType(inferingType);
-				IJstNode jstBinding = ((JstFuncType)inferingType).getFunction();
+				IJstNode jstBinding = ((JstFuncType) inferingType)
+						.getFunction();
 				identifier.setJstBinding(jstBinding);
-			}
-			else {
+			} else {
 				if (inferingType instanceof IJstRefType) {
-					inferredType = new JstInferredRefType((IJstRefType)inferingType);
+					inferredType = new JstInferredRefType(
+							(IJstRefType) inferingType);
 				} else {
 					inferredType = new JstInferredType(inferingType);
 				}
 				identifier.setJstBinding(inferredType);
 			}
-			
-		}					
+
+		}
 		identifier.setType(inferredType);
-		final LinkerSymbolInfo info = findTypeInSymbolMap(identifier
-				.toExprText(), JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
+		final LinkerSymbolInfo info = findTypeInSymbolMap(
+				identifier.toExprText(),
+				JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
 		if (info != null && info.getBinding() == vars) {
 			info.setType(inferredType);
 		}
@@ -1630,16 +2046,17 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		IJstNode castBinding = null;
 		final IJstType castType = cast.getResultType();
 		identifier.setType(castType);
-		if(castType instanceof JstFuncType){
-			castBinding = ((JstFuncType)castType).getFunction();
+		if (castType instanceof JstFuncType) {
+			castBinding = ((JstFuncType) castType).getFunction();
 			identifier.setJstBinding(castBinding);
 		}
-		
-		final LinkerSymbolInfo info = findTypeInSymbolMap(identifier
-				.toExprText(), JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
+
+		final LinkerSymbolInfo info = findTypeInSymbolMap(
+				identifier.toExprText(),
+				JstExpressionTypeLinkerHelper.getVarTablesBottomUp(identifier));
 		if (info != null && info.getBinding() == vars) {
 			info.setType(castType);
-			if(castBinding != null){
+			if (castBinding != null) {
 				info.setBinding(castBinding);
 			}
 		}
@@ -1650,85 +2067,109 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		varsSet = true;
 		return varsSet;
 	}
-	
+
 	private void postVisitJstVar(JstVar var) {
-		final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(var);
-		if(varTable != null){
-			if(varTable.getVarNode(var.getName()) == null){
-				varTable.addVarNode(var.getName(), var/*, true*/);
+		final VarTable varTable = JstExpressionTypeLinkerHelper
+				.getVarTable(var);
+		if (varTable != null) {
+			if (varTable.getVarNode(var.getName()) == null) {
+				varTable.addVarNode(var.getName(), var/* , true */);
 			}
 			varTable.addVarType(var.getName(), var.getType());
 		}
 	}
-	
+
 	private void postVisitJstArg(JstArg parameter) {
-//		removed by huzhou@ebay.com, moved to JstExpressionTypeLinkerHelper#fixMethodTypeRef
-//		final List<IJstType> parameterTypes = parameter.getTypes();
-//		final List<IJstType> updatedParameterTypes = new ArrayList<IJstType>(parameterTypes.size());
-//		
-//		boolean updated = false;
-//		for(IJstType parameterType : parameterTypes){
-//			final IJstNode parameterBinding = JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver, parameterType, m_groupInfo);
-//			if(parameterBinding instanceof IJstOType && parameterType != parameterBinding){
-//				updatedParameterTypes.add((IJstOType)parameterBinding); updated = true;
-//			}
-//			else{
-//				updatedParameterTypes.add(parameterType);
-//			}
-//		}
-//		
-//		if(updated){
-//			parameter.clearTypes();
-//			parameter.addTypes(updatedParameterTypes);
-//		}
-//		
-		final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(parameter);
-		if(varTable != null){
-			if(varTable.getVarNode(parameter.getName()) == null){
-				varTable.addVarNode(parameter.getName(), parameter/*, true*/);
+		// removed by huzhou@ebay.com, moved to
+		// JstExpressionTypeLinkerHelper#fixMethodTypeRef
+		// final List<IJstType> parameterTypes = parameter.getTypes();
+		// final List<IJstType> updatedParameterTypes = new
+		// ArrayList<IJstType>(parameterTypes.size());
+		//
+		// boolean updated = false;
+		// for(IJstType parameterType : parameterTypes){
+		// final IJstNode parameterBinding =
+		// JstExpressionTypeLinkerHelper.look4ActualBinding(m_resolver,
+		// parameterType, m_groupInfo);
+		// if(parameterBinding instanceof IJstOType && parameterType !=
+		// parameterBinding){
+		// updatedParameterTypes.add((IJstOType)parameterBinding); updated =
+		// true;
+		// }
+		// else{
+		// updatedParameterTypes.add(parameterType);
+		// }
+		// }
+		//
+		// if(updated){
+		// parameter.clearTypes();
+		// parameter.addTypes(updatedParameterTypes);
+		// }
+		//
+		final VarTable varTable = JstExpressionTypeLinkerHelper
+				.getVarTable(parameter);
+		if (varTable != null) {
+			if (varTable.getVarNode(parameter.getName()) == null) {
+				varTable.addVarNode(parameter.getName(), parameter/* , true */);
 			}
 			varTable.addVarType(parameter.getName(), parameter.getType());
 		}
 	}
-	
-	private void postVisitWithStmt(WithStmt with){
-		//TODO fix this in with
+
+	private void postVisitWithStmt(WithStmt with) {
+		// TODO fix this in with
 		final BoolExpr condition = with.getCondition();
 		final IExpr scope = condition.getLeft();
 		final IJstType scopeType = scope.getResultType();
-		if(scopeType != null){
-			final VarTable varTable = JstExpressionTypeLinkerHelper.getVarTable(with);
-			for(IJstProperty pty : scopeType.getAllPossibleProperties(JstExpressionTypeLinkerHelper.isStaticRef(scopeType), true)){
-				final String varName = pty != null && pty.getName() != null ? pty.getName().getName() : null;
-				if(varTable != null && varName != null && varTable.getVarNode(varName) == null){
-					varTable.addVarNode(varName, pty/*, true*/);
+		if (scopeType != null) {
+			final VarTable varTable = JstExpressionTypeLinkerHelper
+					.getVarTable(with);
+			for (IJstProperty pty : scopeType.getAllPossibleProperties(
+					JstExpressionTypeLinkerHelper.isStaticRef(scopeType), true)) {
+				final String varName = pty != null && pty.getName() != null ? pty
+						.getName().getName() : null;
+				if (varTable != null && varName != null
+						&& varTable.getVarNode(varName) == null) {
+					varTable.addVarNode(varName, pty/* , true */);
 				}
 			}
-			for(IJstMethod mtd : scopeType.getMethods(JstExpressionTypeLinkerHelper.isStaticRef(scopeType), true)){
+			for (IJstMethod mtd : scopeType.getMethods(
+					JstExpressionTypeLinkerHelper.isStaticRef(scopeType), true)) {
 				final String varName = mtd.getName().getName();
-				if(varTable != null && varName != null && varTable.getVarNode(varName) == null){
-					varTable.addVarNode(varName, mtd/*, true*/);
+				if (varTable != null && varName != null
+						&& varTable.getVarNode(varName) == null) {
+					varTable.addVarNode(varName, mtd/* , true */);
 				}
 			}
 		}
 	}
-	
-/***************************************************************
- * SYMBOL MAP MANAGEMENT
- ***************************************************************
- */
+
+	/***************************************************************
+	 * SYMBOL MAP MANAGEMENT
+	 *************************************************************** 
+	 */
 	// check if the field access expression is fully qualifier type name
 	// if there is, bind to the TypeRefType
 	private IJstType checkFullyQualifierTypeAccess(
 			FieldAccessExpr fieldAccessExpr) {
 		final String fullName = fieldAccessExpr.toExprText();
-		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(m_resolver, fullName, m_groupInfo);
+		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(
+				m_resolver, fullName, m_groupInfo);
 		if (type != null) {
 			final JstTypeRefType typeRef = new JstTypeRefType(type);
 			fieldAccessExpr.getName().setJstBinding(typeRef);
-			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
-				this, fieldAccessExpr, typeRef, m_groupInfo);
-			JstExpressionTypeLinkerHelper.setPackageBindingForQualifier(fieldAccessExpr.getExpr()); // set the package binding for each qualifier, e.g. a.b.c
+			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this,
+					fieldAccessExpr, typeRef, m_groupInfo);
+			JstExpressionTypeLinkerHelper
+					.setPackageBindingForQualifier(fieldAccessExpr.getExpr()); // set
+																				// the
+																				// package
+																				// binding
+																				// for
+																				// each
+																				// qualifier,
+																				// e.g.
+																				// a.b.c
 			return typeRef;
 		}
 		return null;
@@ -1738,23 +2179,31 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	// if there is, bind to the constructor
 	private IJstType checkFullyQualifierTypeInvocation(
 			MtdInvocationExpr mtdInvocationExpr) {
-		final String fullName = JstExpressionTypeLinkerHelper.getFullName(mtdInvocationExpr);
-		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(m_resolver, fullName, m_groupInfo);
+		final String fullName = JstExpressionTypeLinkerHelper
+				.getFullName(mtdInvocationExpr);
+		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(
+				m_resolver, fullName, m_groupInfo);
 		if (type != null) {
-			JstExpressionTypeLinkerHelper.bindMtdInvocations(m_resolver, this, mtdInvocationExpr, type.getConstructor());
-			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver,
-				this, mtdInvocationExpr, type, m_groupInfo);
-			JstExpressionTypeLinkerHelper.setPackageBindingForQualifier(mtdInvocationExpr.getQualifyExpr()); // set the package binding for each qualifier, e.g. a.b.c
+			JstExpressionTypeLinkerHelper.bindMtdInvocations(m_resolver, this,
+					mtdInvocationExpr, type.getConstructor(),m_groupInfo);
+			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this,
+					mtdInvocationExpr, type, m_groupInfo);
+			JstExpressionTypeLinkerHelper
+					.setPackageBindingForQualifier(mtdInvocationExpr
+							.getQualifyExpr()); // set the package binding for
+												// each qualifier, e.g. a.b.c
 			return type;
 		}
 		return null;
 	}
-	
-	private LinkerSymbolInfo findTypeInSymbolMap(final String symbolName, 
+
+	private LinkerSymbolInfo findTypeInSymbolMap(final String symbolName,
 			final List<VarTable> varTablesBottomUp) {
-		//lookup in local cache 1st (bugfix by huzhou@ebay.com, lookup only 1 level)
-		final ScopeFrame frames[] = m_scopeStack.toArray(new ScopeFrame[m_scopeStack.size()]);
-		if(frames.length > 0){
+		// lookup in local cache 1st (bugfix by huzhou@ebay.com, lookup only 1
+		// level)
+		final ScopeFrame frames[] = m_scopeStack
+				.toArray(new ScopeFrame[m_scopeStack.size()]);
+		if (frames.length > 0) {
 			final ScopeFrame frame = frames[frames.length - 1];
 			final LinkerSymbolInfo info = ((ScopeFrame) frame)
 					.getSymbolBinding(symbolName);
@@ -1762,22 +2211,23 @@ class JstExpressionTypeLinker implements IJstVisitor {
 				return info;
 			}
 		}
-		
-		//go to var table to find the available symbol
-		if(varTablesBottomUp != null){
-			for(VarTable varTable : varTablesBottomUp){
-				final IJstNode var = 
-					varTable instanceof TopLevelVarTable 
-						? ((TopLevelVarTable)varTable).getSelfVarNode(symbolName)
-						: varTable.getVarNode(symbolName);
-				if(var != null){
-					final LinkerSymbolInfo lazy = new LinkerSymbolInfo(symbolName, varTable.getVarType(symbolName), var, varTable);
+
+		// go to var table to find the available symbol
+		if (varTablesBottomUp != null) {
+			for (VarTable varTable : varTablesBottomUp) {
+				final IJstNode var = varTable instanceof TopLevelVarTable ? ((TopLevelVarTable) varTable)
+						.getSelfVarNode(symbolName) : varTable
+						.getVarNode(symbolName);
+				if (var != null) {
+					final LinkerSymbolInfo lazy = new LinkerSymbolInfo(
+							symbolName, varTable.getVarType(symbolName), var,
+							varTable);
 					getCurrentScopeFrame().addSymbolBinding(symbolName, lazy);
 					return lazy;
 				}
 			}
 		}
-		
+
 		for (int i = frames.length - 1; i >= 0; i--) {
 			final ScopeFrame frame = frames[i];
 			final LinkerSymbolInfo info = ((ScopeFrame) frame)
@@ -1789,16 +2239,15 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 		return null;
 	}
-	
-/**********************************************************
- * inner types helping the scope managements
- * ********************************************************
- */
+
+	/**********************************************************
+	 * inner types helping the scope managements
+	 * ********************************************************
+	 */
 
 	/**
-	 * symbol struct
-	 * modified by huzhou@ebay.com to shield off the difference between
-	 * 1. local var lookups (nested levels, modified to use VarTables)
+	 * symbol struct modified by huzhou@ebay.com to shield off the difference
+	 * between 1. local var lookups (nested levels, modified to use VarTables)
 	 * 2. global var lookups
 	 */
 	static class LinkerSymbolInfo {
@@ -1806,48 +2255,47 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		private final VarTable m_varTable;
 		private IJstType m_type;
 		private IJstNode m_binding;
-		
-		public LinkerSymbolInfo(final String name,
-				final IJstType type, 
-				final IJstNode binding,
-				final VarTable varTable) {
+
+		public LinkerSymbolInfo(final String name, final IJstType type,
+				final IJstNode binding, final VarTable varTable) {
 			m_name = name;
 			m_type = type;
 			m_binding = binding;
 			m_varTable = varTable;
 		}
-		
-		public IJstType getType(){
+
+		public IJstType getType() {
 			return m_type;
 		}
-		
-		public void setType(final IJstType type){
+
+		public void setType(final IJstType type) {
 			m_type = type;
-			if(m_varTable != null){
+			if (m_varTable != null) {
 				m_varTable.addVarType(m_name, m_type);
 			}
 		}
-		
-		public IJstNode getBinding(){
+
+		public IJstNode getBinding() {
 			return m_binding;
 		}
-		
-		public void setBinding(final IJstNode binding){
+
+		public void setBinding(final IJstNode binding) {
 			m_binding = binding;
-			if(m_varTable != null){
+			if (m_varTable != null) {
 				m_varTable.addVarNode(m_name, m_binding);
 			}
 		}
-		
-		public VarTable getVarTable(){
+
+		public VarTable getVarTable() {
 			return m_varTable;
 		}
 	}
 
 	/**
 	 * frame stack struct
+	 * 
 	 * @author huzhou
-	 *
+	 * 
 	 */
 	static class ScopeFrame {
 		private IJstType m_currentType;
@@ -1855,6 +2303,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		private HashMap<String, LinkerSymbolInfo> m_SymbolMap = new HashMap<String, LinkerSymbolInfo>();
 		private Stack<JstVar> m_catchVarStack = new Stack<JstVar>();
 		private String m_name;
+		private IJstNode m_node;
 
 		ScopeFrame(IJstType type, boolean isStatic) {
 			m_currentType = type;
@@ -1862,8 +2311,19 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			m_name = (type == null) ? null : type.getName();
 		}
 
-		void addSymbolBinding(String symbolName,
-				LinkerSymbolInfo nodeBinding) {
+		ScopeFrame(IJstType type, boolean isStatic, IJstNode currentNode) {
+			m_currentType = type;
+			m_isStatic = isStatic;
+			m_name = (type == null) ? null : type.getName();
+			m_node = currentNode;
+		}
+		
+
+		public IJstNode getNode() {
+			return m_node;
+		}
+
+		void addSymbolBinding(String symbolName, LinkerSymbolInfo nodeBinding) {
 			m_SymbolMap.put(symbolName, nodeBinding);
 		}
 
@@ -1921,8 +2381,9 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 	/**
 	 * scope search util
+	 * 
 	 * @author huzhou
-	 *
+	 * 
 	 */
 	static class HierarcheQualifierSearcher {
 		public IJstType searchType(IJstType type, String methodName,
@@ -1952,7 +2413,8 @@ class JstExpressionTypeLinker implements IJstVisitor {
 			if (resultType != null) {
 				jstMethod = resultType.getMethod(methodName, isStatic);
 				if (jstMethod == null) {
-					jstMethod = JstExpressionTypeLinkerHelper.getConstructs(resultType, methodName);
+					jstMethod = JstExpressionTypeLinkerHelper.getConstructs(
+							resultType, methodName);
 				}
 			}
 
@@ -2092,8 +2554,9 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					if (mixinType.getReferencedType() == type)
 						continue;
 
-					resultType = searchPropertyType(mixinType
-							.getReferencedType(), propertyName, depth, isStatic); // RECURSIVE
+					resultType = searchPropertyType(
+							mixinType.getReferencedType(), propertyName, depth,
+							isStatic); // RECURSIVE
 					if (resultType != null)
 						return resultType;
 				}
@@ -2106,8 +2569,9 @@ class JstExpressionTypeLinker implements IJstVisitor {
 					if (expectType.getReferencedType() == type)
 						continue;
 
-					resultType = searchPropertyType(expectType
-							.getReferencedType(), propertyName, depth, isStatic);
+					resultType = searchPropertyType(
+							expectType.getReferencedType(), propertyName,
+							depth, isStatic);
 					if (resultType != null)
 						return resultType;
 				}

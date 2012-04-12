@@ -545,12 +545,13 @@ public class TypeCheckUtil {
 		}
 
 		if (assignTo instanceof JstMixedType) {
+			
 			for (IJstType mType : ((JstMixedType) assignTo).getMixedTypes()) {
-				if (!isAssignable(mType, assignFrom)) {
-					return false;
+				if (isAssignable(mType, assignFrom)) {
+					return true;
 				}
 			}
-			return true;
+			return false;
 		}
 
 		if (assignFrom instanceof JstMixedType) {
@@ -649,7 +650,7 @@ public class TypeCheckUtil {
 		if ((assignTo instanceof IJstType && "ObjLiteral".equals(assignTo
 				.getSimpleName()))// raw ObjLiteral type
 				|| (assignTo instanceof SynthOlType && ((SynthOlType) assignTo)
-						.getResolvedOType() == null)) {// unresolved SynthOlType
+						.getResolvedOTypes() == null)) {// unresolved SynthOlType
 			return (assignFrom instanceof IJstType && "ObjLiteral"
 					.equals(assignFrom.getSimpleName()))
 					|| assignFrom instanceof SynthOlType
@@ -661,12 +662,24 @@ public class TypeCheckUtil {
 						(JstObjectLiteralType) assignFrom) ? Boolean.TRUE
 						: Boolean.FALSE;
 			} else if (assignFrom instanceof SynthOlType) {
-				if (((SynthOlType) assignFrom).getResolvedOType() != null) {
-					return isAssignable((JstObjectLiteralType) assignTo,
-							(JstObjectLiteralType) ((SynthOlType) assignFrom)
-									.getResolvedOType()) ? Boolean.TRUE
+				
+				
+				if (((SynthOlType) assignFrom).getResolvedOTypes() != null) {
+					SynthOlType syntType  = (SynthOlType) assignFrom;
+					boolean isOTypeAssignable = false;
+					for(IJstType otype: syntType.getResolvedOTypes()){
+						if(otype!=null){
+							isOTypeAssignable = isAssignable((JstObjectLiteralType) assignTo,
+									otype) ? Boolean.TRUE
 							: Boolean.FALSE;
-				} else {// when SynthOlType isn't bound to otype, it should also
+							if(isOTypeAssignable){
+								return true;
+							}
+						}
+					}
+				} 
+				
+				else {// when SynthOlType isn't bound to otype, it should also
 						// match the lhs's properties declarations
 						// it's not enforced because there's an otype
 						// declaration case, where otype defines

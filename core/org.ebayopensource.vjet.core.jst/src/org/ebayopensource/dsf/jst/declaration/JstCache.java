@@ -24,11 +24,13 @@ public class JstCache {
 
 	private List<JstType> m_temp = new ArrayList<JstType>();
 	private Map<String,JstType> m_types = new HashMap<String,JstType>();
+	private Map<String,JstObjectLiteralType> m_aliasTypes = new HashMap<String,JstObjectLiteralType>();
 	private Map<String,JstRefType> m_refTypes = new HashMap<String,JstRefType>();
 	private Map<String,JstPackage> m_pkgs = new HashMap<String,JstPackage>();
 	private Map<String, IJstLib> m_lib = new HashMap<String, IJstLib>();
 	private Map<String, String> m_typeSymbolMapping = new HashMap<String, String>();
 	private Map<IJstType, IJstRefType> m_typeRefTypeMap = new HashMap<IJstType, IJstRefType>();
+	private Map<String,String> m_aliasTempMapping;
 
 	
 	//
@@ -92,6 +94,24 @@ public class JstCache {
 		}
 		return addType(type.getName(), type);
 	}
+	public synchronized boolean addAliasType(String alias, JstObjectLiteralType type){
+		if (type == null){
+			return false;
+		}
+		
+		if (alias == null){
+			return false;
+		}
+		
+		//Do not add local types to cache
+		if (type.isLocalType()){
+			return false;
+		}
+
+		m_aliasTypes.put(alias, type);
+		return true;
+	}
+	
 	
 	public synchronized boolean addType(String key, JstType type){
 		if (type == null){
@@ -108,10 +128,6 @@ public class JstCache {
 			return false;
 		}
 
-		if (m_types.containsKey(key)){
-			return false;
-		}
-		
 		m_types.put(key, type);
 		return true;
 	}
@@ -124,6 +140,20 @@ public class JstCache {
 		m_types.put(oType.getName(), oType);
 		return true;
 	}
+	
+	public synchronized JstObjectLiteralType getAliasType(String alias, boolean create){
+		JstObjectLiteralType jstType = m_aliasTypes.get(alias);
+		if (jstType != null){
+			return jstType;
+		}
+		if(create){
+			jstType = new JstObjectLiteralType(alias);
+			addAliasType(alias,jstType);
+			return jstType;
+		}
+		return null;
+	}
+	
 	
 	public synchronized JstType getType(String fullName, boolean create){
 		JstType jstType = getType(fullName);
@@ -314,6 +344,11 @@ public class JstCache {
 			p.println(t.getName());
 		}
 		
+		p.println("types with aliases");
+		for(String t : m_aliasTypes.keySet()){
+			p.print("alias:"+ t  + m_aliasTypes.get(t).getName() );
+		}
+		
 		p.println("type in lib");
 		for (IJstLib lib : m_lib.values()) {
 			
@@ -333,6 +368,15 @@ public class JstCache {
 		m_pkgs.clear();
 		m_typeSymbolMapping.clear();
 		m_typeRefTypeMap.clear();
+		m_aliasTypes.clear();
+		m_aliasTempMapping = null;
 		
+	}
+	public boolean createAliasPlaceHolder(String alias, String typeName) {
+		if(m_aliasTempMapping==null){
+			m_aliasTempMapping = new HashMap<String, String>();
+		}
+		m_aliasTempMapping.put(alias,typeName);
+		return true;
 	}
 }

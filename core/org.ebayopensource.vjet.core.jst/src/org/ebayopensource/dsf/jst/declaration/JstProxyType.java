@@ -108,6 +108,13 @@ public abstract class JstProxyType implements IJstType {
 	public String getAlias() {
 		return m_targetType.getAlias();
 	}
+	
+	/**
+	 * @see IJstType#getAliasTypeName()
+	 */
+	public String getAliasTypeName() {
+		return m_targetType.getAliasTypeName();
+	}
 
 	/**
 	 * @see IJstType#isClass()
@@ -194,6 +201,13 @@ public abstract class JstProxyType implements IJstType {
 		return m_targetType.getInactiveImport(typeName);
 	}
 	
+	/**
+	 * @see IJstType#getImportRef()
+	 */
+	public IJstTypeReference getInactiveImportRef(String typeName) {
+		return m_targetType.getInactiveImportRef(typeName);
+	}
+
 	/**
 	 * @see IJstType#getInactiveImports()
 	 */
@@ -756,6 +770,11 @@ public abstract class JstProxyType implements IJstType {
 	@Override
 	public Map<String, Object> getOptions() {
 		return m_targetType.getOptions();
+	}
+	
+	@Override
+	public List<? extends IJstType> getSecondaryTypes() {
+		return m_targetType.getSecondaryTypes();
 	}
 	
 }

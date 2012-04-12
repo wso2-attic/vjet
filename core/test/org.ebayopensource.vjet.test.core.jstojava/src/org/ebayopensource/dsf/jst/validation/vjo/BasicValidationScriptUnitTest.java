@@ -23,6 +23,7 @@ import org.ebayopensource.dsf.jst.IJstParseController;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.ts.IJstTypeLoader;
@@ -91,7 +92,7 @@ public class BasicValidationScriptUnitTest {
 		final VjoParser p = new VjoParser(); 
 		JstParseController c = new JstParseController(p);
 		
-		final IScriptUnit target = c.parse("test", targetFile.getAbsolutePath(),
+		final IWritableScriptUnit target =(IWritableScriptUnit)c.parse("test", targetFile.getAbsolutePath(),
 				VjoParser.getContent(targetFile));
 		
 		final IJstType targetType = target.getType();

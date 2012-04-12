@@ -49,6 +49,12 @@ public interface IJstType extends IJstNode {
 	String getAlias();
 	
 	/**
+	 * Answer the alias name (a short-hand to refer the type) of the type
+	 * @return String
+	 */
+	String getAliasTypeName();
+	
+	/**
 	 * Answer whether it's a class
 	 * @return boolean
 	 */
@@ -137,6 +143,14 @@ public interface IJstType extends IJstNode {
 	 * @return IJstType
 	 */
 	IJstType getInactiveImport(String typeName);
+	
+	/**
+	 * Answer the inactive imported type with given name.
+	 * 
+	 * @param typeName
+	 * @return
+	 */
+	IJstTypeReference getInactiveImportRef(String typeName);
 	
 	/**
 	 * Answer an unmodifiable list of inactive imports 
@@ -558,6 +572,13 @@ public interface IJstType extends IJstNode {
 	 * @return IJstType
 	 */
 	IJstType getEmbededType(String shortName);
+	
+	/**
+	 * Answer an unmodifiable list of all secondary types in this type
+	 * These types are similar to Java Raw type support see java lang spec
+	 * @return List<? extends IJstType>
+	 */
+	List<? extends IJstType> getSecondaryTypes();
 	
 	/**
 	 * Answer an unmodifiable list of static embeded types of the type

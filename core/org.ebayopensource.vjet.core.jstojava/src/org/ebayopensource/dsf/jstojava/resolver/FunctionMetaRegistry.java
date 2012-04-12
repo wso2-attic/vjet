@@ -40,10 +40,10 @@ public class FunctionMetaRegistry {
 		return m_tergetFuncs.contains(targetFunc);
 	}
 	
-	public MetaExtension getExtentedArgBinding(
+	public IMetaExtension getExtentedArgBinding(
 		String targetFunc, String key, String groupId, List<String> dependentGroupIds) {
 		
-		MetaExtension method = getExtentedArgBinding(targetFunc, key, groupId);
+		IMetaExtension method = getExtentedArgBinding(targetFunc, key, groupId);
 		if (method == null && dependentGroupIds != null) {
 			for (int i = 0; i < dependentGroupIds.size(); i++) {
 				method = getExtentedArgBinding(targetFunc, key, dependentGroupIds.get(i));
@@ -58,7 +58,7 @@ public class FunctionMetaRegistry {
 	public void clear(String groupId) {
 		m_funcMetaMappings.remove(groupId);
 		m_tergetFuncs.clear();
-		for (FunctionMetaMapping mapping : m_funcMetaMappings.values()) {
+		for (IFunctionMetaMapping mapping : m_funcMetaMappings.values()) {
 			m_tergetFuncs.addAll(mapping.getSupportedTargetFuncs());
 		}
 	}
@@ -68,9 +68,18 @@ public class FunctionMetaRegistry {
 		m_tergetFuncs.clear();
 	}
 	
-	private MetaExtension getExtentedArgBinding(
+	private IMetaExtension getExtentedArgBinding(
 		String targetFunc, String key, String groupId) {
-		FunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
+		IFunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
 		return (mapping == null) ? null : mapping.getExtentedArgBinding(targetFunc, key);
+	}
+
+	public boolean isFirstArgumentType(String targetFunc, String groupId) {
+		IFunctionMetaMapping mapping = m_funcMetaMappings.get(groupId);
+		if(mapping!=null){
+			return mapping.isFirstArgumentType(targetFunc);
+		}
+		return false;
+		
 	}
 }

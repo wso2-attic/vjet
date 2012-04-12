@@ -128,7 +128,7 @@ public class AstJstTestUtil {
 //	}
 
 
-	public void testAssertions(List<IJstNode> nodeList, IJstType rootNode, JxPathInput jxPathInput){
+	public void testAssertions(int testNumber, List<IJstNode> nodeList, IJstType rootNode, JxPathInput jxPathInput){
 		Assert.assertEquals(jxPathInput.getPathName() + ": ", jxPathInput.getTotalCount(), nodeList.size());
 		
 		for(BindingInput bindInfo : jxPathInput.getBindingInfo()){
@@ -143,7 +143,7 @@ public class AstJstTestUtil {
 			if (!bindInfo.getBindNode().equals("")){
 				if ((n instanceof JstIdentifier) &&
 						bindInfo.getStatus().equals("pass")){
-					assertJstIdentifiers((JstIdentifier)n,bindInfo);
+					assertJstIdentifiers(testNumber,(JstIdentifier)n,bindInfo);
 				}
 				else if(bindInfo.getStatus().equals("pass")){
 					assertType(n, bindInfo);
@@ -231,7 +231,7 @@ public class AstJstTestUtil {
 	}
 	
 	
-	private void assertJstIdentifiers(JstIdentifier n, BindingInput bindInfo){
+	private void assertJstIdentifiers(int testNumber, JstIdentifier n, BindingInput bindInfo){
 		if(n.getParentNode() instanceof JstProxyIdentifier){
 			n = (JstProxyIdentifier)n.getParentNode();
 		}
@@ -242,10 +242,10 @@ public class AstJstTestUtil {
 			bNode = getParentType(bNode).getParentNode();
 		}
 		Assert.assertNotNull(bindInfo);
-		Assert.assertTrue("Binding for node:"+n.toString()+" for position "+
+		Assert.assertTrue("test # "+ testNumber+" failed, Binding for node:"+n.toString()+" for position "+
 			bindInfo.getPosition()+" is null", bNode != null);
 		
-//		printLog(bNode);
+		printLog(bNode);
 		Assert.assertEquals(bindInfo.getBindNode(), getNodeName(bNode));
 		
 		if (bindInfo.getBindType()!=null && 

@@ -15,11 +15,11 @@ import org.ebayopensource.dsf.jstojava.mixer.TypeExtensionRegistry;
 import org.ebayopensource.dsf.jstojava.mixer.TypeMixer;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.IMetaExtension;
 import org.ebayopensource.dsf.jstojava.resolver.MapBasedTypeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.ScriptableBasedTypeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.SingleThreadExecutor;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
-import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaMapping.MetaExtension;
 import org.mozilla.mod.javascript.Context;
 import org.mozilla.mod.javascript.ContextFactory;
 import org.mozilla.mod.javascript.Function;
@@ -181,6 +181,9 @@ public class JsLibBootstrapLoader {
 		load("var functionArgMappings = {'a.b.A:f1':{'open':'void fn(int)', 'click':['boolean fn(String)', 'Date fn(boolean)'],"
 			+ "'close':'Window:alert'}}", "g3");
 		
+		// type resolver 
+		//addTypeProcessor()
+		
 		TypeResolverRegistry trs = TypeResolverRegistry.getInstance();
 		System.out.println(trs.resolve("a.b.A:f1", new String[] {"'a'"}));
 		System.out.println(trs.resolve("a.b.A:f1", new String[] {"\"b\""}));
@@ -206,7 +209,7 @@ public class JsLibBootstrapLoader {
 		System.out.println(ter.isNonExtendedType("x.d.C", "g2"));
 		
 		FunctionMetaRegistry fmr = FunctionMetaRegistry.getInstance();
-		MetaExtension method = fmr.getExtentedArgBinding("a.b.A:f1", "open", "g3", null);
+		IMetaExtension method = fmr.getExtentedArgBinding("a.b.A:f1", "open", "g3", null);
 		System.out.println(method.toString());
 		method = fmr.getExtentedArgBinding("a.b.A:f1", "click", "g3", null);
 		System.out.println(method.toString());

@@ -10,6 +10,8 @@ package org.ebayopensource.vjo.tool.codecompletion.handler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.BaseJstNode;
@@ -22,6 +24,7 @@ import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstExtendedType;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstTypeRefType;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
@@ -30,6 +33,8 @@ import org.ebayopensource.dsf.jst.expr.ObjCreationExpr;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
+import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.IJstCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstComletionOnMessageSend;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
@@ -43,6 +48,7 @@ import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstNeedsOnTy
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstSatisfiesOnTypeCompletion;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstTypeCompletion;
 import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
+import org.ebayopensource.vjo.tool.codecompletion.IVjoCcAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcHandler;
 import org.ebayopensource.vjo.tool.codecompletion.StringUtils;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
@@ -72,6 +78,7 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposa
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcStaticPropMethodProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeNameAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeNameAliasProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcVariableProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.keyword.CompletionConstants;
@@ -260,8 +267,35 @@ public class VjoCcHandler implements IVjoCcHandler {
 			}
 			// xxx( <cursor> a, b)
 			if (completion.getRealParent() instanceof MtdInvocationExpr) {
+				
+				List<String> advisors = new ArrayList<String>();
 				MtdInvocationExpr mtd = (MtdInvocationExpr) completion
 						.getRealParent();
+				JstMethod method = (JstMethod)mtd.getMethod();
+				IJstType type = method.getOwnerType();
+				
+				if(method.isFuncArgMetaExtensionEnabled()){
+					
+					String targetFunc = method.getOwnerType().getName()
+							+ (method.isStatic() ? "::" : ":")
+							+ method.getName().getName();
+					
+					if(FunctionParamsMetaRegistry.getInstance().isFirstArgumentType(targetFunc,type.getPackage().getGroupName() )){
+						// TODO jstmethod to method key add to utility method
+						// TODO add alias advisor
+						advisors.add(VjoCcTypeProposalAdvisor.ID);
+						advisors.add(VjoCcTypeNameAliasProposalAdvisor.ID);
+						// TODO add package list here
+					//	advisors.add(VjoCcPackageProposalAdvisor.ID);
+						return advisors.toArray(new String[advisors.size()]); 
+					}
+					
+				}
+				
+				// TODO add extension here for other libraries to add custom advisors
+				// method key as input
+				// return list of advisors
+				
 				// This advisor is available, Only when parameter can be found,
 				// by huzhou@ebay.com propose vjo.getType with package/type proposal
 				if(isVjoGetTypeProposal(mtd)){
@@ -269,12 +303,14 @@ public class VjoCcHandler implements IVjoCcHandler {
 					//must set package info, otherwise, type partial match won't happen
 					ctx.putInfo(VjoCcCtx.INFO_KEY_IN_TYPE_SCOPE, true);
 					ctx.setActingPackageToken(ctx.getToken());
-					return new String[] {VjoCcTypeProposalAdvisor.ID,
-							VjoCcPackageProposalAdvisor.ID};
+					advisors.add(VjoCcTypeProposalAdvisor.ID);
+					advisors.add(VjoCcPackageProposalAdvisor.ID);
+					return advisors.toArray(new String[advisors.size()]);
 				}
 				if (VjoCcParameterHintAdvisor.isAvailable(mtd, ctx)) {
 					ctx.putInfo(VjoCcCtx.INFO_KEY_PARAMETER_HINT, mtd);
-					return new String[] { VjoCcParameterHintAdvisor.ID };
+					advisors.add(VjoCcParameterHintAdvisor.ID);
+					return advisors.toArray(new String[advisors.size()]);
 				}
 			} else if (completion.getRealParent() instanceof ObjCreationExpr) {
 				ObjCreationExpr oce = (ObjCreationExpr) completion
@@ -597,7 +633,8 @@ public class VjoCcHandler implements IVjoCcHandler {
 		}
 		JstCompletion completion = ctx.getCompletion();
 		IJstNode node = completion.getRealParent();
-		List<String> result = new ArrayList<String>();
+		//List<String> result = new ArrayList<String>();
+		Set<String> result = new TreeSet<String>();
 		IJstType type = null;
 		boolean afterThis = false;
 		if (node instanceof FieldAccessExpr) {
@@ -624,7 +661,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 				ctx.setActingPackageToken(str);
 				result.add(VjoCcPackageProposalAdvisor.ID);
 				result.add(VjoCcTypeProposalAdvisor.ID);
-
+				
 			}
 		} else if (node instanceof MtdInvocationExpr) {
 			// Scenerior: v.<cursor>method();

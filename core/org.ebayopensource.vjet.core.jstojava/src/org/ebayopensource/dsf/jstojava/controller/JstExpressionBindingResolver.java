@@ -9,6 +9,7 @@
 package org.ebayopensource.dsf.jstojava.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.ebayopensource.dsf.jsgen.shared.jstvalidator.DefaultJstProblem;
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
@@ -65,11 +66,20 @@ public class JstExpressionBindingResolver implements IJstRefResolver {
 		m_typeLinkerVisitor.setCurrentType(type);
 		m_typeLinkerVisitor.setGroupName(type.getPackage().getGroupName());
 		JstExpressionTypeLinkerTraversal.accept(type, m_typeLinkerVisitor);
+		// hijack type with factory created argument
+		if (m_typeLinkerVisitor.getTypeConstructedDuringLink()) {
+			JstExpressionTypeLinkerTraversal.accept(m_typeLinkerVisitor.getType(), m_typeLinkerVisitor);
+			type = m_typeLinkerVisitor.getType();
+		}
 		if (type instanceof JstType) {
 			JstType type2 = (JstType) type;
 			setResolutionStatus(type2);
+			rr.setType(type2);
+			
 		}
 	}
+	
+
 
 	private void promoteGlobals(IJstType type, JstTypeSpaceMgr mgr,
 			ResolutionResult rr) {

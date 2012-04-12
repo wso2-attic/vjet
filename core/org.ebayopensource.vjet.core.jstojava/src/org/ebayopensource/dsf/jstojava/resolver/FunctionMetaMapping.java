@@ -21,7 +21,7 @@ import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.translator.BaseFindTypeSupport;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 
-public class FunctionMetaMapping {
+public class FunctionMetaMapping implements IFunctionMetaMapping {
 	
 	private Map<String, Map<String, MetaExtension>> m_maps =
 		new HashMap<String, Map<String, MetaExtension>>();
@@ -32,15 +32,27 @@ public class FunctionMetaMapping {
 		m_groupId = groupId;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.dsf.jstojava.resolver.IFunctionMetaMapping#getGroupId()
+	 */
+	@Override
 	public String getGroupId() {
 		return m_groupId;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.dsf.jstojava.resolver.IFunctionMetaMapping#hasMetaExtension(java.lang.String)
+	 */
+	@Override
 	public boolean hasMetaExtension(String targetFunc) {
 		return m_maps.containsKey(targetFunc);
 	}
 	
-	public MetaExtension getExtension(String targetFunc, String key) {
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.dsf.jstojava.resolver.IFunctionMetaMapping#getExtension(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public IMetaExtension getExtension(String targetFunc, String key) {
 		Map<String, MetaExtension> funcMetaMap = m_maps.get(targetFunc);
 		if (funcMetaMap == null) {
 			return null;
@@ -48,7 +60,7 @@ public class FunctionMetaMapping {
 		return funcMetaMap.get(key);
 	}
 	
-	public FunctionMetaMapping addMapping(
+	public IFunctionMetaMapping addMapping(
 		String targetFunc, String key, String[] metaArr) {
 		List<IJsCommentMeta> metaList = new ArrayList<IJsCommentMeta>();
 		for (String metaDef : metaArr) {
@@ -71,15 +83,23 @@ public class FunctionMetaMapping {
 		return this;
 	}
 	
-	public MetaExtension getExtentedArgBinding(String targetFunc, String key) {
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.dsf.jstojava.resolver.IFunctionMetaMapping#getExtentedArgBinding(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public IMetaExtension getExtentedArgBinding(String targetFunc, String key) {
 		return getExtension(targetFunc, key);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.ebayopensource.dsf.jstojava.resolver.IFunctionMetaMapping#getSupportedTargetFuncs()
+	 */
+	@Override
 	public Set<String> getSupportedTargetFuncs() {
 		return m_maps.keySet();
 	}
 	
-	public static class MetaExtension {
+	public static class MetaExtension implements IMetaExtension {
 		private List<IJsCommentMeta> m_metaList;
 		
 		MetaExtension(List<IJsCommentMeta> metaList) {
@@ -91,5 +111,11 @@ public class FunctionMetaMapping {
 				.createJstSynthesizedMethod(m_metaList,
 					new BaseFindTypeSupport(), "_fn_");
 		}
+	}
+
+	@Override
+	public boolean isFirstArgumentType(String targetFunc) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

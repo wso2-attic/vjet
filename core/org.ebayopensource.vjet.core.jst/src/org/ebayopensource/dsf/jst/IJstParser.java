@@ -16,7 +16,7 @@ public interface IJstParser {
 
 	
 	IScriptUnit preParse(String groupName, String fileName, String source);
-	IScriptUnit parse(String groupName, String fileName, String source);
+	IWritableScriptUnit parse(String groupName, String fileName, String source);
 	IScriptUnit parse(String groupName, File file);
 	IScriptUnit postParse(IScriptUnit unit);
 	

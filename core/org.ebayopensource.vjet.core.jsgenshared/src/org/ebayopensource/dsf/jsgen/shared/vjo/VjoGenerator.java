@@ -240,6 +240,18 @@ public class VjoGenerator extends BaseGenerator {
 			getWriter().append("})");
 		}
 		
+		if(type.getAliasTypeName()!=null ){
+			writeNewline();
+			getWriter().append(".options({");
+			indent();
+			writeNewline(); 
+			writeIndent();
+			getWriter().append("alias:" + type.getAliasTypeName());
+			outdent();
+			writeNewline(); 
+			getWriter().append("})");
+		}
+		
 		writeTypeClosure();
 
 		if (type.getName() != null && !type.isEmbededType()) {

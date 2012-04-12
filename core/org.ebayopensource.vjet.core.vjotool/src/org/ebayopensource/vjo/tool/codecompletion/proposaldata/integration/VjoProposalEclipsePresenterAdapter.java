@@ -20,7 +20,9 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
+import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPackage;
+import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.token.ILHS;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyProp;
 import org.ebayopensource.vjo.meta.VjoKeywords;
@@ -57,6 +59,7 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcPropMethodProposa
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcStaticPropMethodProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcThisProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeNameAdvisor;
+import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeNameAliasProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcTypeProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcVariableProposalAdvisor;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.keyword.CompletionConstants;
@@ -202,7 +205,8 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 			return genVariableProposal(data);
 		} else if (VjoCcPackageProposalAdvisor.ID.equals(advisor)) {
 			return genPackageProposal(data);
-		} else if (VjoCcTypeNameAdvisor.ID.equals(advisor)) {
+		} else if (VjoCcTypeNameAdvisor.ID.equals(advisor)
+				|| VjoCcTypeNameAliasProposalAdvisor.ID.equals(advisor)) {
 			return genTypeNameProposal(data);
 		} else if (VjoCcConstructorGenProposalAdvisor.ID.equals(advisor)) {
 			return genConstructorGenProposal(data);
@@ -563,13 +567,17 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 			final IJstProperty pty = (RenameableSynthJstProxyProp)node;
 			final String ptyName = pty.getName().getName();
 			displayString = CodeCompletionUtils.getPropertyString(pty);
-			
+			int cursorPosition = ptyName.length();
 			final IJstType ptyType = pty.getType();
+			if(ptyType instanceof SynthOlType || ptyType instanceof JstObjectLiteralType){
+				cursorPosition--;
+			}
 			if(ptyType instanceof JstFuncType){
 				displayString = CodeCompletionUtils.getFullMethodString(((JstFuncType)ptyType).getFunction(), pty.getOwnerType(), displayString.contains("?"));
 			}
+		
 			return new VjoEclipseCompletionProposalAdapter<IMAGE, CONTEXT_INFO>(ptyName,
-					getReplacementOffset(data), getReplacementLength(data), ptyName.length(),
+					getReplacementOffset(data), getReplacementLength(data), cursorPosition,
 					m_labelProvider.getScriptImage(pty), displayString,
 					null, externalInfo);
 		}
@@ -823,24 +831,24 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 				tempReplaceOffset = m_replaceOffset + token.length()
 						- ptoken.length();
 			}
-			if (m_vjoCcCtx.needInsertNeedsExpr(type)) {
-				String insertStr = VjoKeywords.NEEDS + "('" + type.getName()
-						+ "')" + m_lineSeperator + CompletionConstants.DOT;
-				return m_typeProposalFactory.createTypeCompletionProposal(replaceString,
-						tempReplaceOffset, tempReplaceLength, replaceString
-								.length()
-								+ insertStr.length(), m_vjoCcCtx
-								.getNeedsPosition(), insertStr,
-						m_labelProvider.getScriptImage(type),
-						CodeCompletionUtils.getTypeDispalyString(type), null,
-						externalInfo);
-			} else {
+//			if (m_vjoCcCtx.needInsertNeedsExpr(type)) {
+//				String insertStr = VjoKeywords.NEEDS + "('" + type.getName()
+//						+ "')" + m_lineSeperator + CompletionConstants.DOT;
+//				return m_typeProposalFactory.createTypeCompletionProposal(replaceString,
+//						tempReplaceOffset, tempReplaceLength, replaceString
+//								.length()
+//								+ insertStr.length(), m_vjoCcCtx
+//								.getNeedsPosition(), insertStr,
+//						m_labelProvider.getScriptImage(type),
+//						CodeCompletionUtils.getTypeDispalyString(type), null,
+//						externalInfo);
+//			} else {
 				return new VjoEclipseCompletionProposalAdapter<IMAGE, CONTEXT_INFO>(replaceString, tempReplaceOffset,
 						tempReplaceLength, replaceString.length(),
 						m_labelProvider.getScriptImage(type),
 						CodeCompletionUtils.getTypeDispalyString(type), null,
 						externalInfo);
-			}
+//			}
 		}
 
 	}

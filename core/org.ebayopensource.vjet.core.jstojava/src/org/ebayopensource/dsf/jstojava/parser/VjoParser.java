@@ -36,6 +36,7 @@ import org.ebayopensource.dsf.jst.IJstParser;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.ProblemSeverity;
 import org.ebayopensource.dsf.jst.SimpleBinding;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
@@ -100,7 +101,7 @@ public class VjoParser implements IJstParser {
 		m_config = cfg;
 	}
 
-	public IScriptUnit parse(String groupName, String fileName, String source) {
+	public IWritableScriptUnit parse(String groupName, String fileName, String source) {
 		return parseInternal(groupName, fileName, source, new TranslateCtx(
 				m_config), null);
 	}
@@ -162,7 +163,7 @@ public class VjoParser implements IJstParser {
 				config), file);
 	}
 
-	private IScriptUnit parseInternal(final String groupName,
+	private IWritableScriptUnit parseInternal(final String groupName,
 			final String fileName, final String source, final TranslateCtx ctx,
 			final File file) {
 		if (s_debug) {
@@ -227,36 +228,10 @@ public class VjoParser implements IJstParser {
 		JstCache.getInstance().printTypes(System.out);
 	}
 
-	private IScriptUnit createScriptUnit(final JstBlock block,
+	private IWritableScriptUnit createScriptUnit(final JstBlock block,
 			final List<JstBlock> blockList, final IJstType type,
 			final List<IScriptProblem> probs) {
-		IScriptUnit unit = new IScriptUnit() {
-
-			public IJstNode getNode(int startOffset) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-
-			public JstBlock getSyntaxRoot() {
-				// TODO Auto-generated method stub
-				return block;
-			}
-
-			public List<JstBlock> getJstBlockList() {
-				return blockList;
-			}
-
-			public IJstType getType() {
-				// TODO Auto-generated method stub
-				return type;
-			}
-
-			public List<IScriptProblem> getProblems() {
-				// TODO Auto-generated method stub
-				return probs;
-			}
-
-		};
+		IWritableScriptUnit unit = new WorkableScriptUnit(block,blockList,type,probs);
 		postParse(unit);
 		return unit;
 	}

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- @generated-ignore. Generated file, do not add to source control! -->
+<projectDescription>
+	<name>org.ebayopensource.vjet.test.core.ecma</name>
+	<comment>gened by V3 build!</comment>
+	<projects>
+		<project>DSFExt</project>
+		<project>DSFUtil</project>
+		<project>DSFJst</project>
+		<project>DSFJsNative</project>
+		<project>DSFVjoDef</project>
+		<project>DsfJsGenShared</project>
+		<project>DSFJsToJava</project>
+		<project>DSFJavaToJs</project>
+		<project>DSFVjoTool</project>
+		<project>DSFJstLibBuild</project>
+		<project>VjetTestUtils</project>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments/>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+</projectDescription>

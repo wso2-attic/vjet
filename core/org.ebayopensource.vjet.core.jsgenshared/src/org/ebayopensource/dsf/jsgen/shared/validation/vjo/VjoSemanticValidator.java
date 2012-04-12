@@ -134,9 +134,10 @@ public abstract class VjoSemanticValidator implements
 			return unknownType;// = ((JstArray)unknownType).getComponentType();
 		}
 		
-		if (unknownType instanceof IJstOType && unknownType.getParentNode() != null){
-			unknownType = unknownType.getParentNode().getOwnerType();
-		}
+		// TODO should otype really require needs? disable for now
+//		if (unknownType instanceof IJstOType && unknownType.getParentNode() != null){
+//			unknownType = unknownType.getParentNode().getOwnerType();
+//		}
 		
 		final JstPackage jstPackage = unknownType.getPackage();
 		if (jstPackage != null){
@@ -354,11 +355,16 @@ public abstract class VjoSemanticValidator implements
 		}
 		else if(type instanceof SynthOlType){
 			final SynthOlType synthOlType = (SynthOlType)type;
-			final IJstType resolvedOType = synthOlType.getResolvedOType();
-			if(resolvedOType != null && isOType(resolvedOType)){//resolved type must be an otype
-				validateSynthOlType(ctx, jstNode, synthOlType,
-						(JstObjectLiteralType)resolvedOType);
+			if(synthOlType.getResolvedOTypes()!=null){
+				for(IJstType resolvedOType :  synthOlType.getResolvedOTypes()){
+					
+					if(resolvedOType != null && isOType(resolvedOType)){//resolved type must be an otype
+						validateSynthOlType(ctx, jstNode, synthOlType,
+								(JstObjectLiteralType)resolvedOType);
+					}
+				}
 			}
+			
 		}
 		else{
 			//validating if the type isn't resolved, which results in a missing import etc.

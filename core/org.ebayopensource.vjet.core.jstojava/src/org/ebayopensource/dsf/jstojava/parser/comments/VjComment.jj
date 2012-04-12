@@ -47,6 +47,7 @@ PARSER_END(VjComment)
 |	<STATIC: "static" >
 |	<DYNAMIC: "dynamic" >
 |	<NEEDS: "needs" >
+|	<ALIASREF: "alias::" >
 |	<TYPEREF: "type::" >
 |	<TYPEREF_OLD: "Type::" >
 |	<LP: "(" >
@@ -233,6 +234,11 @@ private JsTypingMeta BasicTyping(JsCommentMeta meta) :
 	{
 		return typing;
 	}
+|	<ALIASREF> (token = <TYPE>)
+	{
+		typing = new JsType(token).setAliasRef(true);
+		return typing;
+	}
 |	<TYPEREF> (token = <TYPE>)
 	{
 		typing = new JsType(token).setTypeRef(true);
@@ -399,6 +405,12 @@ private JsTypingMeta ParamType() :
 	{
 		return typing;
 	}
+	
+|	<LB>typing = MixinType(null)<RB>
+	{
+		 return typing;
+	}
+	
 |	typing = Typing(null)
 	{		
 		return typing;

@@ -58,6 +58,7 @@ public class JstType extends BaseJstNode implements IJstType {
 	private JstPackage m_pkg;
 	private String m_simpleName;
 	private String m_alias;
+	private String m_aliasTypeName;
 	List<IJstOType> m_otypes = new ArrayList<IJstOType>();
 
 	// using JstTypeReference not JstType to prevent owneriship (getParent() === this) of the imported type
@@ -106,6 +107,8 @@ public class JstType extends BaseJstNode implements IJstType {
 	
 	private boolean m_isFakeType = false;
 
+	private List<IJstType> m_secondaryTypes;
+
 	//
 	// Constructor
 	//
@@ -119,11 +122,21 @@ public class JstType extends BaseJstNode implements IJstType {
 			return;
 		}
 
+		setName(name);
+	}
+
+	/**
+	 * Sets the given name
+	 * 
+	 * @param name
+	 */
+	public void setName(final String name) {
 		int index = name.lastIndexOf(".");
 		if (index != -1) {
 			setPackage(new JstPackage(name.substring(0, index)));
 			setSimpleName(name.substring(index+1));
 		} else {
+			setPackage(new JstPackage());
 			setSimpleName(name);
 		}
 	}
@@ -189,6 +202,13 @@ public class JstType extends BaseJstNode implements IJstType {
 			return getName();
 		}
 		return m_alias;
+	}
+	
+	/**
+	 * @see IJstType#getAliasTypeName()
+	 */
+	public String getAliasTypeName() {
+		return m_aliasTypeName;
 	}
 
 	public Category getCategory(){
@@ -332,6 +352,17 @@ public class JstType extends BaseJstNode implements IJstType {
 		synchronized (this){
 			IJstTypeReference t = m_inactiveImports.get(typeName);
 			return (t != null)? t.getReferencedType() : null;
+		}
+	}
+
+	
+	public IJstTypeReference getInactiveImportRef(final String typeName) {
+		if (typeName == null || m_inactiveImports.isEmpty()) {
+			return null;
+		}
+		synchronized (this){
+			IJstTypeReference t = m_inactiveImports.get(typeName);
+			return (t != null)? t : null;
 		}
 	}
 
@@ -1485,6 +1516,16 @@ public class JstType extends BaseJstNode implements IJstType {
 		m_alias = alias;
 		return this;
 	}
+	
+	/**
+	 * Set the alias type name (a short-hand to refer the type) of the type
+	 * @param aliasTypeName String
+	 * @return JstType
+	 */
+	public JstType setAliasTypeName(final String aliasTypeName) {
+		m_aliasTypeName = aliasTypeName;
+		return this;
+	}
 
 	/**
 	 * Add given type to the dependency map, using simple name
@@ -1891,6 +1932,16 @@ public class JstType extends BaseJstNode implements IJstType {
 		}
 	}
 	
+	
+	/**
+	 * Remove alias from the type
+	 */
+	public void clearAlias() {
+		synchronized (this) {
+			m_alias = null;
+		}
+	}
+	
 	/**
 	 * Remove all extends from the type
 	 */
@@ -1928,17 +1979,30 @@ public class JstType extends BaseJstNode implements IJstType {
 	}
 	
 	/**
+	 * Remove all embedded types from the type
+	 */
+	public void clearSecondaryTypes() {
+		synchronized(this){
+			if (m_secondaryTypes != null) {
+				removeChildren(m_secondaryTypes);
+				m_secondaryTypes = null;
+			}
+		}
+	}
+	
+	/**
 	 * Remove all static initialization statements from the type
 	 */
 	public void clearStaticInits() {
 		synchronized(this){
 			if (m_staticInits != null) {
 				removeChildren(m_staticInits);
-				removeChild(m_initBlock);
-				m_initBlock=null;
 				m_staticInits = null;
 			}
-
+			if (m_initBlock != null) {
+				removeChild(m_initBlock);
+				m_initBlock=null;
+			}
 		}
 	}
 	/**
@@ -2673,6 +2737,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		private static final int HAS_RESOLUTION = 5;
 		private static final int IS_PHANTOM = 8;
 		private static final int IS_PROMOTED= 9;
+		private static final int IS_ALIAS_PROMOTED= 10;
 		
 		private int m_status;
 		private boolean m_isValid;
@@ -2733,6 +2798,11 @@ public class JstType extends BaseJstNode implements IJstType {
 			return (m_status & IS_PROMOTED) == IS_PROMOTED;
 		}
 		
+		public boolean isAliasTypeNamePromoted() {
+			return (m_status & IS_ALIAS_PROMOTED) == IS_ALIAS_PROMOTED;
+		}
+		
+		
 		@Override
 		public String toString(){
 			Z z = new Z();
@@ -2742,9 +2812,11 @@ public class JstType extends BaseJstNode implements IJstType {
 			z.format("hasImpl", hasImpl());
 			z.format("isPhantom", isPhantom());
 			z.format("isPromoted", areGlobalsPromoted());
-			
+			z.format("isAliasTypeNamePromoted", isAliasTypeNamePromoted());
 			return z.toString();
 		}
+
+
 	}
 
 	public void addInitWithoutChild(final IStmt stmt, boolean isStatic) {
@@ -2897,6 +2969,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		clearModifiers();
 		clearParams();
 		clearName();
+		clearAlias();
 		clearExpects();
 		clearMixins();
 		clearExtends();
@@ -2913,6 +2986,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		clearOTypes();
 		clearOptions();
 		clearVarTable();
+		clearSecondaryTypes();
 	}
 
 	private void clearGlobalVars() {
@@ -3017,5 +3091,39 @@ public class JstType extends BaseJstNode implements IJstType {
 	
 	public void addOption(String name, Object value){
 		m_options.put(name, value);
+	}
+
+	public void addSecondaryType(IJstType secondaryType){
+		if(m_secondaryTypes==null){
+			m_secondaryTypes = new ArrayList<IJstType>();
+		}
+		m_secondaryTypes.add(secondaryType);
+	}
+	
+	public void addSecondaryType(final JstType secondaryType) {
+		if (secondaryType == null){
+			return;
+		}
+		synchronized(this){
+			if (m_secondaryTypes != null && m_secondaryTypes.contains(secondaryType)){
+				return;
+			}
+		
+			if (m_secondaryTypes == null) {
+				m_secondaryTypes = new ArrayList<IJstType>(1);
+			}
+			m_secondaryTypes.add(secondaryType);
+			addChild(secondaryType);
+		}
+		secondaryType.m_outerType = this;
+		secondaryType.setParent(this);
+	}
+	
+	@Override
+	public List<? extends IJstType> getSecondaryTypes() {
+		if(m_secondaryTypes==null){
+			return Collections.EMPTY_LIST;
+		}
+		return Collections.unmodifiableList(m_secondaryTypes);
 	}
 }

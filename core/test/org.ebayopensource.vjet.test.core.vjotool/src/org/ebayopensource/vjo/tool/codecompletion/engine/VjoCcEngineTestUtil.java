@@ -183,6 +183,7 @@ public class VjoCcEngineTestUtil extends VjoCcBaseTest {
 
 	private void getPositionAdvisorMapping() {
 		try {
+			System.out.println("loading xml file: "+ xmlFile);
 			URL url = VjoCcEngineTestUtil.class.getClassLoader().getResource(xmlFile);
 			File file = new File(url.getFile());
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory

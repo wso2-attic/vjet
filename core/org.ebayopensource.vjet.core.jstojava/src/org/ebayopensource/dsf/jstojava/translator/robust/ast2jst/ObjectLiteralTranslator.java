@@ -57,7 +57,8 @@ public class ObjectLiteralTranslator extends
 		if (scopeId == ScopeIds.PROPS
 				|| scopeId == ScopeIds.PROTOS
 				|| scopeId == ScopeIds.VALUES
-				|| scopeId == ScopeIds.DEFS) {
+//				|| scopeId == ScopeIds.DEFS
+				) {
 
 			return null;
 		}
@@ -66,7 +67,7 @@ public class ObjectLiteralTranslator extends
 		return result;
 	}
 
-	private ObjLiteral processObjectLiteral(ObjectLiteral astObjectLiteral) {
+	 ObjLiteral processObjectLiteral(ObjectLiteral astObjectLiteral) {
 		List<ObjectLiteralField> astFields = new ArrayList<ObjectLiteralField>(
 				astObjectLiteral.fields.length);
 		ObjLiteral result = new ObjLiteral();

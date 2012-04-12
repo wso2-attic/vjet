@@ -25,8 +25,8 @@ public class DefsRobustTranslator extends TypeRobustTranslator{
 
 
 	protected void transformType() {
-		weakTranslator.getProvider().getTypeTranslator().processMType(
-				(MessageSend) current, jst);
+//		weakTranslator.getProvider().getTypeTranslator().processOType(
+//				(MessageSend) current, jst);
 		weakTranslator.getCtx().setCurrentType(jst);
 	}
 	
@@ -57,7 +57,7 @@ public class DefsRobustTranslator extends TypeRobustTranslator{
 		lookupEmptyCompletion();
 
 		// move to the next iteration
-		return super.transform();
+		return false;
 
 	}
 }

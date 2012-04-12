@@ -128,6 +128,9 @@ public class TypeRobustTranslator extends CompletionsFilteredRobustTranslator
 		transformType();
 		
 		TranslateCtx ctx = weakTranslator.getCtx();
+		if(!(current instanceof MessageSend)){
+			return false;
+		}
 		int next = ((MessageSend)current).sourceEnd; 
 		if (astElements.size()>0) {
 			

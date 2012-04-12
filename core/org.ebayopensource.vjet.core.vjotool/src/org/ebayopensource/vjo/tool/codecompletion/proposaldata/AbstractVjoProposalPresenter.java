@@ -232,17 +232,19 @@ public abstract class AbstractVjoProposalPresenter {
 		} else if (CodeCompletionUtils.isNativeType(type)) {
 			replaceString = type.getName();
 		} else {
+			// TODO this.vj$ translation move down to advisor level 
+			// the scope is not known here
 			// see if need add this.vj$
-			if (vjoCcCtx.getPositionType() != VjoCcCtx.POSITION_AFTER_THISVJO) {
-				if (vjoCcCtx.isAfterFieldAccess()) {
-					replaceString = type.getName();
-				} else {
-					replaceString = CompletionConstants.THIS_VJO
-					+ CompletionConstants.DOT + type.getSimpleName();
-				}
-			} else {
-				replaceString = type.getSimpleName();
-			}
+//			if (vjoCcCtx.getPositionType() != VjoCcCtx.POSITION_AFTER_THISVJO) {
+//				if (vjoCcCtx.isAfterFieldAccess()) {
+//					replaceString = type.getName();
+//				} else {
+//					replaceString = CompletionConstants.THIS_VJO
+//					+ CompletionConstants.DOT + type.getSimpleName();
+//				}
+//			} else {
+				replaceString = type.getName();
+//			}
 		}
 		return replaceString;
 

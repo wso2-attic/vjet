@@ -11,6 +11,7 @@ package org.ebayopensource.dsf.ts;
 import java.util.List;
 import java.util.Map;
 
+import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.ts.group.Group;
 import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.method.MethodIndex;
@@ -297,5 +298,7 @@ public interface ITypeSpace<T,D> {
 	 */
 	D getVisibleGlobal(final String global, IGroup<T> fromGroup);
 
-	List<D> getAllVisibleGlobals(IGroup<T> fromGroup);
+	Map<String, T> getAllVisibleAliasNames(IGroup<T> fromGroup);
+
+
 }
