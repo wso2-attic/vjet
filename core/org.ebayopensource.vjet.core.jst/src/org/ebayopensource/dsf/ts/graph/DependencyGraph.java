@@ -358,12 +358,14 @@ public class DependencyGraph<E> implements IDependencyGraph<E> {
 			}
 			
 			m_group.getTypeSpace().addUnresolvedNode(node);
+			
+			// Remove this type from the dependent list of all it's dependency nodes
+			for (DependencyNode<E> d: node.getDependencies().values()){
+				d.removeDependent(node);
+			}
 		}
 
-		// Remove this type from the dependent list of all it's dependency nodes
-		for (DependencyNode<E> d: node.getDependencies().values()){
-			d.removeDependent(node);
-		}
+		
 	}
 	
 	/**
