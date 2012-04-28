@@ -161,16 +161,22 @@ public class JsDocGenerator extends BaseGenerator {
 			if(mtd.isTypeFactoryEnabled()){
 				getWriter().append("^");
 			}
-			
+		
 			
 			writeJsDocReturnType(getName(rtnType,root));
+			
 			if (rtnType instanceof JstTypeWithArgs){
 				appendArguments((JstTypeWithArgs)rtnType);
 			}
 		}
 		
+		getWriter().append(SPACE);
+		if(mtd.isFuncArgMetaExtensionEnabled()){
+			getWriter().append("^");
+		}
 		// name
-		writeJsDocName(name);
+		//writeJsDocName(name);
+		getWriter().append(name);
 		
 		// parameters
 		writeJsDocParamType(mtd,root);
