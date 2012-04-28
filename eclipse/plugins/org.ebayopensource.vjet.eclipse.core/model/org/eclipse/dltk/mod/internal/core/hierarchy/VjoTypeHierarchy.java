@@ -250,6 +250,10 @@ public class VjoTypeHierarchy implements ITypeHierarchy,
 		subTypes = typeSpaceMgr.findSubTypes(name);
 		IJstType currentType = typeSpaceMgr.findType(name);
 
+		if(currentType==null){
+			return;
+		}
+		
 		if (isInterface(fType) || currentType.isInterface()) {
 			// find which class implements this interface
 			// FIXME backend API cannot find which interfaces extends my
