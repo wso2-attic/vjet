@@ -110,6 +110,7 @@ public class VjBootStrapDef {
 		OTYPE = new JsBuilderDef("vjo","otype")
 				.mtd(GLOBALS, 0, 1)
 				.mtd(DEFS, 0, 1)
+				.mtd(OPTIONS, 0, 1)
 				.mtd(END_TYPE,1, 1);
 		
 		FTYPE = new JsBuilderDef("vjo","ftype")
