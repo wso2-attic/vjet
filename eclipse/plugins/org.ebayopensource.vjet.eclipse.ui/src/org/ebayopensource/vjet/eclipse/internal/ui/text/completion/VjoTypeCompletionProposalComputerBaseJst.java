@@ -60,9 +60,9 @@ public class VjoTypeCompletionProposalComputerBaseJst extends
 			return Collections.emptyList();
 		}
 		IVjoCcEngine engine = new VjoCcEngine(TypeSpaceMgr.parser());
-		String typeName = CodeassistUtils.getTypeName(vjoSourceModule);
+		String groupName = CodeassistUtils.getGroupName(vjoSourceModule);
 
-		List<IVjoCcProposalData> list = engine.complete(typeName, new String(
+		List<IVjoCcProposalData> list = engine.complete(groupName, new String(
 				vjoSourceModule.getFileName()), vjoSourceModule
 				.getSourceContents(), offset);
 		// printProposal(list);

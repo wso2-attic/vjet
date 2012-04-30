@@ -2640,9 +2640,9 @@ public class CodeassistUtils {
 	
 	/**
 	 * @param vjoSourceModule
-	 * @return Actual type name from VjoSourceModule
+	 * @return Actual group name from VjoSourceModule
 	 */
-	public static String getTypeName(VjoSourceModule vjoSourceModule) {
+	public static String getGroupName(VjoSourceModule vjoSourceModule) {
 		String tName = vjoSourceModule.getGroupName();
 		TypeName typeName = vjoSourceModule.getTypeName();
 		if (typeName != null) {

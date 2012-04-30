@@ -99,8 +99,8 @@ public class VjoCommentCompletionProposalComputer extends
 		// TypeSpaceMgr.parser().resolve(type);
 		IVjoCcEngine engine = new VjoCcEngine(TypeSpaceMgr.parser());
 
-		String typeName = CodeassistUtils.getTypeName(vjoSourceModule);
-		List<IVjoCcProposalData> list = engine.completeComment(typeName,
+		String groupName = CodeassistUtils.getGroupName(vjoSourceModule);
+		List<IVjoCcProposalData> list = engine.completeComment(groupName,
 				new String(vjoSourceModule.getFileName()), vjoSourceModule
 						.getSourceContents(), offset, commentTxt,
 				relativeCursorPos);
