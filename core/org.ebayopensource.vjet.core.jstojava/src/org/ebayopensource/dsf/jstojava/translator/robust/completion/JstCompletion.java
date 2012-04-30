@@ -31,6 +31,10 @@ public abstract class JstCompletion extends JstSyntaxError implements
 		this.realParent = parent;
 	}
 
+	public void setRealParent(IJstNode realParent) {
+		this.realParent = realParent;
+	}
+
 	public String[] getCompletion() {
 		return completions;
 	}
