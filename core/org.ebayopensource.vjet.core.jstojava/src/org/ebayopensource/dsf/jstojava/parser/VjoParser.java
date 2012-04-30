@@ -105,6 +105,10 @@ public class VjoParser implements IJstParser {
 		return parseInternal(groupName, fileName, source, new TranslateCtx(
 				m_config), null);
 	}
+	
+	public IWritableScriptUnit parse(String groupName, String fileName, String source, TranslateCtx ctx) {
+		return parseInternal(groupName, fileName, source, ctx, null);
+	}
 
 	public IScriptUnit parse(String groupName, URL url) {
 		return parse(groupName, url.getFile(), getContent(url));
@@ -143,10 +147,10 @@ public class VjoParser implements IJstParser {
 				null);
 	}
 
-	public IScriptUnit parse(final String groupName, final String fileName,
-			final String source, final TranslateCtx ctx) {
-		return parseInternal(groupName, fileName, source, ctx, null);
-	}
+//	public IScriptUnit parse(final String groupName, final String fileName,
+//			final String source, final TranslateCtx ctx) {
+//		return parseInternal(groupName, fileName, source, ctx, null);
+//	}
 
 	private IScriptUnit parseInternal(String groupName, String fileName,
 			String source, File file) {
