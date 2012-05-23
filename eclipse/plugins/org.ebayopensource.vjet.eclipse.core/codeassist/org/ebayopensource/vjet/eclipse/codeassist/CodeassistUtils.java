@@ -184,7 +184,10 @@ public class CodeassistUtils {
 		if (outerType == jstType) {
 			return findType(scriptProject, jstType.getName());
 		} else {
-			String packageName = outerType.getPackage().getName();
+			String packageName = "";
+			if(outerType.getPackage()!=null){
+				packageName =outerType.getPackage().getName();
+			}
 			String typeName = jstType.getName();
 			if (typeName.contains(packageName)) {
 				if (StringUtils.isBlankOrEmpty(packageName)) {
