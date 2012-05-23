@@ -753,6 +753,11 @@ public class VjoJstTypeValidator
 						
 						for(IJstMethod overrideMtd : candidateMtds){
 							if(overrideMtd != null){
+								
+								if(!overrideMtd.getParentNode().equals(jstType)){
+									continue;
+								}
+								
 								if(overrideMtd.equals(staticExtMtd)){
 									overrided = false;
 								}
@@ -1092,7 +1097,9 @@ public class VjoJstTypeValidator
 							} else {
 								String typeName = jstType.getSimpleName();
 								String fileName = getFileName(jstTypePath);
-								if (!typeName.equals(fileName)) {
+								if(typeName==null){
+									isPackageValid = false;
+								}else if (!typeName.equals(fileName)) {
 									isPackageValid = false;
 								}
 							}
