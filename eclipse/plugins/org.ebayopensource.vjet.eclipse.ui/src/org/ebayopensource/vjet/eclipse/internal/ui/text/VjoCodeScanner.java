@@ -254,10 +254,10 @@ public class VjoCodeScanner extends JavascriptCodeScanner {
 
 	@Override
 	public void setRange(IDocument document, int offset, int length) {
-		if (documentChanged(document)) {
-			hightPoints.clear();
-			initHighLightPoints(document);
-		}
+//		if (documentChanged(document)) {
+//			hightPoints.clear();
+//			initHighLightPoints(document);
+//		}
 		super.setRange(document, offset, length);
 	}
 
