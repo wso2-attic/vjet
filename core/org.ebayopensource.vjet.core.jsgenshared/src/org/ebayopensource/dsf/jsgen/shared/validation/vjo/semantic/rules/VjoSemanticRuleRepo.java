@@ -332,7 +332,7 @@ public class VjoSemanticRuleRepo {
 //		MULTIPLE_INHERITS.setGlobalPolicy(GLOBAL_ERROR_POLICY);
 //		MULTIPLE_PROPS.setGlobalPolicy(GLOBAL_ERROR_POLICY);
 //		MULTIPLE_PROTOS.setGlobalPolicy(GLOBAL_ERROR_POLICY);
-		NAME_SPACE_COLLISION.setGlobalPolicy(GLOBAL_ERROR_POLICY);
+		NAME_SPACE_COLLISION.setGlobalPolicy(GLOBAL_WARNING_POLICY);
 		REDUNDANT_IMPORT.setGlobalPolicy(GLOBAL_WARNING_POLICY);
 		PRIVATE_METHOD_REFERENCED_NOWHERE.setGlobalPolicy(GLOBAL_WARNING_POLICY);
 		PRIVATE_PROPERTY_REFERENCED_NOWHERE.setGlobalPolicy(GLOBAL_WARNING_POLICY);
@@ -1272,7 +1272,7 @@ public class VjoSemanticRuleRepo {
 		JAVA_COMPAT_TYPE_CHECK.setRuleSetDesription("Java Compatible Type Checking");
 		
 //		HIERARCHY_AND_STRUCTURE.setRuleSetName("Hierachy_And_Structure");
-//		HIERARCHY_AND_STRUCTURE.setRuleSetDesription("Hierachical and structural");
+//		HIERARCHY_AND_STRUCTURE.setRuleSetDesription("Hierarchical and structural");
 		
 		JAVASCRIPT_EXTENSIONS.setRuleSetName("JAVASCRIPT_SEMANTIC");
 		JAVASCRIPT_EXTENSIONS.setRuleSetDesription("JavaScript Semantic Validation");
