@@ -1979,6 +1979,18 @@ public class JstType extends BaseJstNode implements IJstType {
 	}
 	
 	/**
+	 * Remove all outer type from the type
+	 */
+	public void clearOuterType() {
+		synchronized(this){
+			if (m_outerType != null) {
+				//removeChildren(m_outerType);
+				m_outerType = null;
+			}
+		}
+	}
+	
+	/**
 	 * Remove all embedded types from the type
 	 */
 	public void clearSecondaryTypes() {
@@ -2987,6 +2999,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		clearOptions();
 		clearVarTable();
 		clearSecondaryTypes();
+		clearOuterType();
 	}
 
 	private void clearGlobalVars() {
