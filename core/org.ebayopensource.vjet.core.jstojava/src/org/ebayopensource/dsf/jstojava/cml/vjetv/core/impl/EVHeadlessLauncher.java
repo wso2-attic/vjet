@@ -248,14 +248,18 @@ public class EVHeadlessLauncher implements IHeadLessLauncher {
         for (Iterator<File> iterator = jsFiles.iterator(); iterator.hasNext();) {
             ++i;
             validateFile = iterator.next();
-            baseReporter.printCurrentStates("(" + i + " of " + size + ")"
-                    + " Validating : " + validateFile.getAbsolutePath());
+            
             try {
                 actualProblemList = validateFile(validateFile);
-                if (null != actualProblemList && actualProblemList.size() >= 0) {
-                    baseReporter.printCurrentStates(baseReporter.printProblems(
+                if (null != actualProblemList && actualProblemList.size() > 0) {
+                	
+                	
+                    String printProblems = baseReporter.printProblems(
                             actualProblemList, result, conf.getReportLevel(),
-                            true, validateFile));
+                            true, validateFile);
+                    if(printProblems!=null){
+                    	baseReporter.printCurrentStates(printProblems);
+                    }
                     resultDataMap.put(validateFile, actualProblemList);
                 }
             } catch (Throwable e) {
