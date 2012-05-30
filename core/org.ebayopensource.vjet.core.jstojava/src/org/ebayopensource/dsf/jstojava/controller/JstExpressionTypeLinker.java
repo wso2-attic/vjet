@@ -333,7 +333,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 	}
 
 	private void visitJstProperty(JstProperty property) {
-		JstExpressionTypeLinkerHelper.fixPropertyTypeRef(m_resolver, property,
+		JstExpressionTypeLinkerHelper.fixPropertyTypeRef(m_resolver, this,property,
 				m_groupInfo);
 	}
 

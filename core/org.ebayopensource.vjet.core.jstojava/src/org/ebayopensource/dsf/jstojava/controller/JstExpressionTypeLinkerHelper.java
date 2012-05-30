@@ -1173,12 +1173,17 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	public static void fixPropertyTypeRef(
-			final JstExpressionBindingResolver resolver, JstProperty pty,
+			final JstExpressionBindingResolver resolver, IJstVisitor jstExpressionTypeLinker, JstProperty pty,
 			GroupInfo groupInfo) {
 		final IJstType ptyType = pty.getType();
 		final IJstType correctType = getCorrectType(resolver, ptyType,
 				groupInfo);
-
+		if(pty.getValue()!=null && pty.getValue() instanceof IExpr){
+			doExprTypeResolve(resolver, jstExpressionTypeLinker, (IExpr)pty.getValue(), correctType);
+		}else if(pty.getInitializer()!=null){
+			doExprTypeResolve(resolver, jstExpressionTypeLinker, pty.getInitializer(), correctType);
+		}
+		
 		if (correctType != ptyType) {
 			pty.setType(correctType);
 		}
