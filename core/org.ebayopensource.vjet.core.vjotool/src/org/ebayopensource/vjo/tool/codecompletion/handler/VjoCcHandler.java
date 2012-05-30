@@ -32,6 +32,7 @@ import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.expr.ObjCreationExpr;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
+import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
@@ -111,10 +112,13 @@ public class VjoCcHandler implements IVjoCcHandler {
 			IJstType type = ctx.getActingType();
 			List<String> list = new ArrayList<String>();
 			if(completion.inScope(ScopeIds.METHOD) || completion.inScope(ScopeIds.INITS)
-					|| completion.inScope(ScopeIds.METHOD_CALL) || completion.inScope(ScopeIds.PROPS)) {
+					|| completion.inScope(ScopeIds.METHOD_CALL) ) {
 				list.add(VjoCcObjLiteralAdvisor.ID);
 			}
 			else{
+				if(completion.getRealParent() instanceof ObjLiteral && completion.inScope(ScopeIds.PROPS)){
+					list.add(VjoCcObjLiteralAdvisor.ID);
+				}
 				// if bol is true, no need to add constructor proposal
 				boolean bol = (type == null || type.isInterface() || type.isMixin());
 				list.add(VjoCcFunctionGenProposalAdvisor.ID);
