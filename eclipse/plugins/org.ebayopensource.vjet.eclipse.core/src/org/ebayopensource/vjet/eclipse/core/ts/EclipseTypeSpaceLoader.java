@@ -90,7 +90,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	private TypeSpaceMgr m_tsmgr = TypeSpaceMgr.getInstance();
 
 	private boolean m_started = false;
-	
+
 	private Map<String, List<String>> m_groupDependency;
 
 	/**
@@ -422,12 +422,12 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	 * Return map of the group depends.
 	 */
 	public Map<String, List<String>> getGroupDepends() {
-		
-		if (m_groupDependency != null){
+
+		if (m_groupDependency != null) {
 			return m_groupDependency;
 		}
 		try {
-			
+
 			/*
 			 * sleep 3 seconds before getting the model to make sure we use it
 			 * after it's initialized, otherwise
@@ -435,36 +435,35 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 			 */
 			Thread.sleep(3000);
 			updateGroupDepends();
-			
+
 		} catch (InterruptedException e) {
 		}
 		return m_groupDependency;
 	}
-	
-	
-	private void updateGroupDepends(IProject project)  {
+
+	private void updateGroupDepends(IProject project) {
 		m_groupDependency = new HashMap<String, List<String>>();
-//		Model model = m_manager.getModel();
-//		IScriptProject[] projects;
-//
-//		try {
-//			projects = model.getScriptProjects(VjoNature.NATURE_ID);
-//			for (IScriptProject project : projects) {
-	
-				try {
-					createDepends(m_groupDependency, DLTKCore.create(project));
-				} catch (ModelException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-//			}
-//		} catch (ModelException e) {
-//			DLTKCore.error(e.toString(), e);
-//		}
+		// Model model = m_manager.getModel();
+		// IScriptProject[] projects;
+		//
+		// try {
+		// projects = model.getScriptProjects(VjoNature.NATURE_ID);
+		// for (IScriptProject project : projects) {
+
+		try {
+			createDepends(m_groupDependency, DLTKCore.create(project));
+		} catch (ModelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// }
+		// } catch (ModelException e) {
+		// DLTKCore.error(e.toString(), e);
+		// }
 
 	}
-	
-	private void updateGroupDepends()  {
+
+	private void updateGroupDepends() {
 		m_groupDependency = new HashMap<String, List<String>>();
 		Model model = m_manager.getModel();
 		IScriptProject[] projects;
@@ -485,21 +484,21 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	 * @param project
 	 * @return
 	 * @throws ModelException
-	 * @see org.ebayopensource.vjet.eclipse.internal.launching.SdkBuildpathContainer#computeBuildpathEntries(String sdkName)
+	 * @see org.ebayopensource.vjet.eclipse.internal.launching.SdkBuildpathContainer#computeBuildpathEntries(String
+	 *      sdkName)
 	 */
 	private IBuildpathEntry[] createDepends(Map<String, List<String>> groups,
 			IScriptProject project) throws ModelException {
 
 		List<String> list = getDependsProjects(groups, project.getElementName());
 
-	
-		IBuildpathEntry[] entries = TypeSpaceBuilder.getSerFileGroupDepends(project, list);
-		
+		IBuildpathEntry[] entries = TypeSpaceBuilder.getSerFileGroupDepends(
+				project, list);
+
 		groups.put(project.getElementName(), list);
-		
+
 		return entries;
 	}
-
 
 	/**
 	 * Returns list of the depends groups for specified group.
@@ -529,37 +528,59 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	 * 
 	 */
 	public void resourceChanged(IResourceChangeEvent event) {
+
 		int type = event.getType();
 
-		if (!isStarted() || !m_tsmgr.isAllowChanges() || event.getDelta().getAffectedChildren()[0].getResource()==null) {
+		IProject project = getProject(event);
+		if (!isStarted() || !m_tsmgr.isAllowChanges() || project==null) {
 			return;
 		}
-	
-		IProject project = event.getDelta().getAffectedChildren()[0].getResource().getProject();
-		
 
-		// process close project event.
-		if (type == IResourceChangeEvent.PRE_CLOSE
-				|| type == IResourceChangeEvent.PRE_DELETE) {
-			
-					
-			
-			updateGroupDepends( project);
-			processCloseProject(event);
-		}
+		if (project!=null) {
 
-		// process add/modify/delete resources events.
-		if (type == IResourceChangeEvent.POST_CHANGE) {
+			// process close project event.
+			if (type == IResourceChangeEvent.PRE_CLOSE
+					|| type == IResourceChangeEvent.PRE_DELETE) {
 
-			if (isBildPathChangedEvent(event.getDelta())) {
 				updateGroupDepends(project);
-				new TypeSpaceReloadJob(project).schedule();
-				//m_reloadJob.schedule();
-			} else {
-				processChanges(event);
+				processCloseProject(event);
+				// TODO after close build dependent projects
+			}
+
+			// process add/modify/delete resources events.
+			if (type == IResourceChangeEvent.POST_CHANGE) {
+
+				if (isBildPathChangedEvent(event.getDelta())) {
+					updateGroupDepends(project);
+					new TypeSpaceReloadJob(project).schedule();
+					// m_reloadJob.schedule();
+				} else {
+					processChanges(event);
+				}
+			}
+
+		} else {
+			if (type == IResourceChangeEvent.POST_CHANGE) {
+
+				if (!isBildPathChangedEvent(event.getDelta())) {
+					processChanges(event);
+				}
 			}
 		}
 
+	}
+
+	private IProject getProject(IResourceChangeEvent event) {
+		if (event.getDelta() != null
+				&& event.getDelta().getAffectedChildren().length > 0
+				&& event.getDelta().getAffectedChildren()[0].getResource() != null) {
+			return event.getDelta().getAffectedChildren()[0].getResource().getProject();
+		}
+		if(event.getResource()!=null && event.getResource() instanceof IProject){
+			return event.getResource().getProject();
+		}
+		
+		return null;
 	}
 
 	/**
@@ -578,7 +599,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 
 		for (IResourceDelta resourceDelta : resourceDeltas) {
 			IProject project = resourceDelta.getResource().getProject();
-			
+
 			if (!project.exists() || !project.isOpen()) {
 				continue;
 			}
@@ -596,7 +617,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 				// System.out.println(o);
 				// }
 				// }
-//				updateGroupDepends();
+				// updateGroupDepends();
 				processAddGroup(info, project);
 			}
 
@@ -605,7 +626,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 		// Calls group load job if group info list in not empty else call
 		// refresh job for changes resources.
 		if (!info.isEmpty()) {
-			
+
 			TypeSpaceGroupLoadJob groupLoadJob = new TypeSpaceGroupLoadJob(info);
 			m_tsmgr.setLoaded(false);
 			groupLoadJob.schedule();
@@ -660,7 +681,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 
 		boolean isBuildPathCnahgedEvent = false;
 		IResource resource = delta.getResource();
-		
+
 		// if changed .buildpath file
 		if (resource.getName().equals(ScriptProject.BUILDPATH_FILENAME)) {
 			isBuildPathCnahgedEvent = delta.getKind() == IResourceDelta.CHANGED;
@@ -711,8 +732,8 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 			default:
 				break;
 			}
-        } else if (PiggyBackClassPathUtil.isInSourceFolder(resource)
-                || resource instanceof IProject) {
+		} else if (PiggyBackClassPathUtil.isInSourceFolder(resource)
+				|| resource instanceof IProject) {
 			IResourceDelta[] deltas = delta.getAffectedChildren();
 			for (IResourceDelta resourceDelta : deltas) {
 				processDelta(resourceDelta);
@@ -766,7 +787,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 				m_changedTypes.add(name);
 				if (file.exists()) {
 					m_tsmgr.getController().parseAndResolve(name.groupName(),
-						file.getLocation().toFile());
+							file.getLocation().toFile());
 				}
 			}
 			break;
@@ -820,10 +841,10 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	public List<GroupInfo> getGroupInfo() {
 		return getScriptProjectEntries();
 	}
-	
+
 	public List<GroupInfo> getGroupInfo(String group) {
 		List<GroupInfo> info = new ArrayList<GroupInfo>();
-		Map<String,List<String>> groupDependency = getGroupDepends();
+		Map<String, List<String>> groupDependency = getGroupDepends();
 		IScriptProject p = m_manager.getModel().getScriptProject(group);
 		try {
 			populateGroupInfos(info, p, groupDependency);
@@ -860,7 +881,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	private void populateGroupInfos(List<GroupInfo> info,
 			IScriptProject[] projects) throws ModelException {
 
-		Map<String,List<String>> groupDependency = getGroupDepends();
+		Map<String, List<String>> groupDependency = getGroupDepends();
 		for (IScriptProject project : projects) {
 			populateGroupInfos(info, project, groupDependency);
 		}
@@ -875,8 +896,9 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	 *            {@link IScriptProject} object.
 	 * @throws ModelException
 	 */
-	private void populateGroupInfos(final List<GroupInfo> info, final IScriptProject project, 
-			final Map<String,List<String>> groupDependency)
+	private void populateGroupInfos(final List<GroupInfo> info,
+			final IScriptProject project,
+			final Map<String, List<String>> groupDependency)
 			throws ModelException {
 		// initialize dltk build path
 		if (!PiggyBackClassPathUtil
@@ -890,13 +912,13 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 
 		List<URL> urls = PiggyBackClassPathUtil
 				.getProjectDependantJars_DLTK(project);
-		
+
 		List<String> groupDepends = new ArrayList<String>();
 		TypeSpaceBuilder.getSerFileGroupDepends(project, groupDepends);
-		
-		IBuildpathEntry bootstrapPath = TypeSpaceBuilder.getBootstrapDir(project);
-		
-		
+
+		IBuildpathEntry bootstrapPath = TypeSpaceBuilder
+				.getBootstrapDir(project);
+
 		for (URL u : urls) {
 			java.io.File file = new java.io.File(u.getFile());
 			String fileName = file.getName();
@@ -908,9 +930,9 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 			if (!classPaths.contains(fileName)) {
 				List<String> srcPaths = new ArrayList<String>();
 				srcPaths.add(file.getPath());
-			
+
 				info.add(new GroupInfo(file.getName(), file.getAbsolutePath(),
-						srcPaths, null, groupDependency.get(file.getName()) ));
+						srcPaths, null, groupDependency.get(file.getName())));
 				classPaths.add(fileName);
 				System.out.println("ScriptProject<" + project.getElementName()
 						+ "> depends on :" + u);
@@ -924,7 +946,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 		java.io.File groupPath = project.getProject().getLocation().toFile();
 
 		List<String> bootstrapDirs = new ArrayList<String>();
-		if(bootstrapPath!=null){
+		if (bootstrapPath != null) {
 			String portableString = "";
 			portableString = getRelativeProjectPath(project, bootstrapPath);
 			bootstrapDirs.add(portableString);
@@ -933,7 +955,8 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 				classPaths, groupDependency.get(name), bootstrapDirs));
 	}
 
-	private String getRelativeProjectPath(IScriptProject project, IBuildpathEntry bootstrap) {
+	private String getRelativeProjectPath(IScriptProject project,
+			IBuildpathEntry bootstrap) {
 		String name = project.getElementName();
 		String bootstrapPath = bootstrap.getPath().toPortableString();
 		if (bootstrapPath.lastIndexOf(name) != -1) {
@@ -941,8 +964,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 				bootstrapPath = "";
 			} else {
 				bootstrapPath = bootstrapPath.substring(bootstrapPath
-						.indexOf(name)
-						+ name.length());
+						.indexOf(name) + name.length());
 
 			}
 		}
