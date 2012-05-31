@@ -54,5 +54,11 @@ public interface ITypeSpaceLoader {
 	 * @return list of the {@link GroupInfo} objects.
 	 */
 	List<GroupInfo> getGroupInfo();
+	/**
+	 * Return list of the {@link GroupInfo} objects for one group.
+	 * 
+	 * @return list of the {@link GroupInfo} objects.
+	 */
+	List<GroupInfo> getGroupInfo(String group);
 
 }

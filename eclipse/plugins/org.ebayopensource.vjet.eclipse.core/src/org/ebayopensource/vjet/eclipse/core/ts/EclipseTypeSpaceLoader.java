@@ -36,6 +36,7 @@ import org.eclipse.core.internal.resources.Workspace;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -440,6 +441,29 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 		return m_groupDependency;
 	}
 	
+	
+	private void updateGroupDepends(IProject project)  {
+		m_groupDependency = new HashMap<String, List<String>>();
+//		Model model = m_manager.getModel();
+//		IScriptProject[] projects;
+//
+//		try {
+//			projects = model.getScriptProjects(VjoNature.NATURE_ID);
+//			for (IScriptProject project : projects) {
+	
+				try {
+					createDepends(m_groupDependency, DLTKCore.create(project));
+				} catch (ModelException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//			}
+//		} catch (ModelException e) {
+//			DLTKCore.error(e.toString(), e);
+//		}
+
+	}
+	
 	private void updateGroupDepends()  {
 		m_groupDependency = new HashMap<String, List<String>>();
 		Model model = m_manager.getModel();
@@ -507,15 +531,20 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 	public void resourceChanged(IResourceChangeEvent event) {
 		int type = event.getType();
 
-		if (!isStarted() || !m_tsmgr.isAllowChanges()) {
+		if (!isStarted() || !m_tsmgr.isAllowChanges() || event.getDelta().getAffectedChildren()[0].getResource()==null) {
 			return;
 		}
 	
+		IProject project = event.getDelta().getAffectedChildren()[0].getResource().getProject();
+		
 
 		// process close project event.
 		if (type == IResourceChangeEvent.PRE_CLOSE
 				|| type == IResourceChangeEvent.PRE_DELETE) {
-			updateGroupDepends();
+			
+					
+			
+			updateGroupDepends( project);
 			processCloseProject(event);
 		}
 
@@ -523,8 +552,9 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 		if (type == IResourceChangeEvent.POST_CHANGE) {
 
 			if (isBildPathChangedEvent(event.getDelta())) {
-				updateGroupDepends();
-				m_reloadJob.schedule();
+				updateGroupDepends(project);
+				new TypeSpaceReloadJob(project).schedule();
+				//m_reloadJob.schedule();
 			} else {
 				processChanges(event);
 			}
@@ -789,6 +819,18 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 
 	public List<GroupInfo> getGroupInfo() {
 		return getScriptProjectEntries();
+	}
+	
+	public List<GroupInfo> getGroupInfo(String group) {
+		List<GroupInfo> info = new ArrayList<GroupInfo>();
+		Map<String,List<String>> groupDependency = getGroupDepends();
+		IScriptProject p = m_manager.getModel().getScriptProject(group);
+		try {
+			populateGroupInfos(info, p, groupDependency);
+		} catch (ModelException e) {
+			DLTKCore.error(e.toString(), e);
+		}
+		return info;
 	}
 
 	/**
