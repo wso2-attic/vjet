@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;

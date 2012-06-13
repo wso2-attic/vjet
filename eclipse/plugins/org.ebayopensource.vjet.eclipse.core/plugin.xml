@@ -143,6 +143,12 @@
 		</run>
 	</builder>
 </extension>
+  <extension
+        point="org.eclipse.dltk.mod.core.buildpathContainerInitializer">
+     <buildpathContainerInitializer
+           class="org.ebayopensource.vjet.eclipse.core.library.VJETZipContainerInitializer"
+           id="org.ebayopensource.vjet.eclipse.core.ZIP"/>
+  </extension>
 
   <!-- Comment by Eirc.Ma 20090724 this extension will used in enhancement
   <extension point="org.eclipse.core.resources.markers"

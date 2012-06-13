@@ -3,7 +3,11 @@ package org.ebayopensource.dsf.jstojava.parser.comments;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.ArrayList;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
+
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.Token;
+import org.ebayopensource.dsf.jst.meta.ArgType;
 
 public class VjComment implements VjCommentConstants {
 

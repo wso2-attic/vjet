@@ -12,7 +12,11 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta.DIRECTION;
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta.DIRECTION;
+import org.ebayopensource.dsf.jst.meta.ArgType;
+import org.ebayopensource.dsf.jst.meta.ArgType.WildCardType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncArgAttributedType;
@@ -20,10 +24,6 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncScopeAttributedType
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsMixinType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType.WildCardType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;

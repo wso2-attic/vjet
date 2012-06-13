@@ -120,8 +120,6 @@ public class TypeSpaceBuilder {
 			} else if (entry.getEntryKind() == IBuildpathEntry.BPE_LIBRARY){
 				String id = entry.getPath().segment(entry.getPath().segmentCount()-1);
 				list.add(id);
-
-			
 				
 			} else if (entry.getEntryKind() == IBuildpathEntry.BPE_CONTAINER) {
 				String id = entry.getPath().segment(0);

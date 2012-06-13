@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.jstojava.translator.robust.ast2jst;
 
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 import org.eclipse.mod.wst.jsdt.core.ast.IArgument;
 

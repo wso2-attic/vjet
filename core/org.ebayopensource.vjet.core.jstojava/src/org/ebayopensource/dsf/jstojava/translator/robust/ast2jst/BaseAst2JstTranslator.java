@@ -16,7 +16,7 @@ import org.ebayopensource.dsf.jsgen.shared.validation.common.ScopeId;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 import org.ebayopensource.dsf.jstojava.translator.robust.JstSourceUtil;

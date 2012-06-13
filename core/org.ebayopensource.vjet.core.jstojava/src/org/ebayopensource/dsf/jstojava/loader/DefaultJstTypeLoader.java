@@ -19,10 +19,12 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.ebayopensource.dsf.jsgroup.bootstrap.JsLibBootstrapLoader;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ts.IJstTypeLoader;
 import org.ebayopensource.dsf.jst.ts.util.JstSrcFileCollector;
 import org.ebayopensource.dsf.jst.ts.util.JstTypeSerializer;
+import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 
 /**
@@ -92,11 +94,16 @@ public class DefaultJstTypeLoader implements IJstTypeLoader {
 		
 		if (groupFolderOrFile != null) {
 			
-			if (groupFolderOrFile.isDirectory()) {
-				return loadJstTypesFromProject(groupName, groupFolderOrFile);
-			}
-			else {
-				return loadJstTypesFromLibrary(groupName, groupFolderOrFile);
+			try {
+				if (groupFolderOrFile.getCanonicalFile().isDirectory()) {
+					return loadJstTypesFromProject(groupName, groupFolderOrFile);
+				}
+				else {
+					return loadJstTypesFromLibrary(groupName, groupFolderOrFile);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
@@ -170,6 +177,14 @@ public class DefaultJstTypeLoader implements IJstTypeLoader {
 			
 			try {				
 				ZipFile jarFile = new ZipFile(libFile);
+				
+				// load in bootstrap.js first
+				ZipEntry bootstrapEntry = jarFile.getEntry("bootstrap.js");
+				if(bootstrapEntry!=null){
+					InputStream stream = jarFile.getInputStream(bootstrapEntry);
+					JsLibBootstrapLoader.load(VjoParser.load(stream, "bootstrap.js"), groupName);
+				}
+			
 				Enumeration<? extends ZipEntry> enumeration = jarFile.entries();
 				
 				while (enumeration.hasMoreElements()) {
@@ -180,14 +195,14 @@ public class DefaultJstTypeLoader implements IJstTypeLoader {
 						if (elem.getName().endsWith(".ser")) {
 							typeList.addAll(loadAllTypes(groupName, jarFile, elem));
 						}
-						else {
+						else if(!elem.getName().contains("bootstrap.js")) {
 							typeList.add(createType(groupName, jarFile, elem));
 						}
 					}
 				}					
 			}
 			catch (IOException e) {
-				
+				e.printStackTrace();
 			}				
 		}		
 		

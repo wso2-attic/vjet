@@ -11,6 +11,8 @@ package org.ebayopensource.dsf.jstojava.parser.comments;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+
 public class JsParam {
 	private String m_name;
 	private List<JsTypingMeta> m_types = new ArrayList<JsTypingMeta>(4);

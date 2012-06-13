@@ -6,10 +6,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.ebayopensource.dsf.jstojava.parser.comments;
+package org.ebayopensource.dsf.jst.meta;
 
-import org.ebayopensource.dsf.jst.meta.BaseJsCommentMetaNode;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
+
 
 /**
  * 

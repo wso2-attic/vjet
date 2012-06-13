@@ -17,12 +17,21 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.ebayopensource.dsf.jsgroup.bootstrap.JsLibBootstrapLoader;
+import org.ebayopensource.dsf.jst.IJstLib;
+import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.declaration.JstCache;
+import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
+import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.ts.IJstTypeLoader;
+import org.ebayopensource.dsf.jst.ts.IJstTypeLoader.SourceType;
 import org.ebayopensource.dsf.jst.ts.util.JstSrcFileCollector;
+import org.ebayopensource.dsf.jst.ts.util.JstTypeSerializer;
+import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
@@ -230,18 +239,25 @@ public class VjoJstTypeLoader implements IJstTypeLoader {
 			ZipFile jarFile = null;
 			try {
 				jarFile = new ZipFile(libFile);
+				
+				// load in bootstrap.js first
+				ZipEntry bootstrapEntry = jarFile.getEntry("bootstrap.js");
+				if(bootstrapEntry!=null){
+					InputStream stream = jarFile.getInputStream(bootstrapEntry);
+					JsLibBootstrapLoader.load(VjoParser.load(stream, "bootstrap.js"), groupName);
+				}
+				
 				Enumeration<? extends ZipEntry> enumeration = jarFile.entries();
 
 				while (enumeration.hasMoreElements()) {
 
 					ZipEntry elem = enumeration.nextElement();
-
-					if (!elem.isDirectory()) {
-						SourceType sourceType = createType(groupName, jarFile,
-								elem);
-						if (sourceType != null) {
-							typeList.add(sourceType);
-						}
+					
+					if (elem.getName().endsWith(".ser")) {
+						typeList.addAll(loadAllTypes(groupName, jarFile, elem));
+					}
+					else if(!elem.getName().contains("bootstrap.js")) {
+						typeList.add(createType(groupName, jarFile, elem));
 					}
 				}
 			} catch (IOException e) {
@@ -259,6 +275,28 @@ public class VjoJstTypeLoader implements IJstTypeLoader {
 
 		return typeList;
 	}
+	
+	protected List<SourceType> loadAllTypes(String groupName, ZipFile jarFile, ZipEntry elem) throws IOException {
+		
+		InputStream stream = jarFile.getInputStream(elem);
+		
+		List<IJstType> jstTypes = JstTypeSerializer.getInstance().deserialize(stream);
+		
+		List<SourceType> srcTypes = new ArrayList<SourceType>();
+		
+		for (IJstType type : jstTypes) {
+			if(JstCache.getInstance().getType(type.getName())==null){
+				JstCache.getInstance().addType((JstType)type);
+				if(type.getAliasTypeName()!=null && type instanceof JstObjectLiteralType){
+					JstCache.getInstance().addAliasType(type.getAliasTypeName(), (JstObjectLiteralType)type);
+				}
+				
+			}
+			srcTypes.add(new SourceType(groupName, type));			
+		}
+		
+		return srcTypes;		
+	}	
 
 	protected SourceType createType(String groupName, ZipFile jarFile,
 			ZipEntry elem) throws IOException {

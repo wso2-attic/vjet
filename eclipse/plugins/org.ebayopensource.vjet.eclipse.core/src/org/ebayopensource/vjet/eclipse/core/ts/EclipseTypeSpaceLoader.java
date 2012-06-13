@@ -536,35 +536,24 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 			return;
 		}
 
-		if (project!=null) {
+		// process close project event.
+		if (type == IResourceChangeEvent.PRE_CLOSE
+				|| type == IResourceChangeEvent.PRE_DELETE) {
 
-			// process close project event.
-			if (type == IResourceChangeEvent.PRE_CLOSE
-					|| type == IResourceChangeEvent.PRE_DELETE) {
+			updateGroupDepends(project);
+			processCloseProject(event);
+			// TODO after close build dependent projects
+		}
 
+		// process add/modify/delete resources events.
+		if (type == IResourceChangeEvent.POST_CHANGE) {
+
+			if (isBildPathChangedEvent(event.getDelta())) {
 				updateGroupDepends(project);
-				processCloseProject(event);
-				// TODO after close build dependent projects
-			}
-
-			// process add/modify/delete resources events.
-			if (type == IResourceChangeEvent.POST_CHANGE) {
-
-				if (isBildPathChangedEvent(event.getDelta())) {
-					updateGroupDepends(project);
-					new TypeSpaceReloadJob(project).schedule();
-					// m_reloadJob.schedule();
-				} else {
-					processChanges(event);
-				}
-			}
-
-		} else {
-			if (type == IResourceChangeEvent.POST_CHANGE) {
-
-				if (!isBildPathChangedEvent(event.getDelta())) {
-					processChanges(event);
-				}
+				new TypeSpaceReloadJob(project).schedule();
+				// m_reloadJob.schedule();
+			} else {
+				processChanges(event);
 			}
 		}
 

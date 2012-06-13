@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.translator.BaseFindTypeSupport;

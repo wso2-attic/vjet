@@ -37,7 +37,11 @@ public class JstMethodTranslator extends DefaultNodeTranslator {
 	public IModelElement[] convert(IVjoSourceModule module, IJstNode node) {
 		IJstMethod jstMethod = (IJstMethod) node;
 		IJstType ownerType = jstMethod.getOwnerType();
-		IType dltkType = (IType) JstNodeDLTKElementResolver.convert(module, ownerType)[0];
+		IModelElement[] convert = JstNodeDLTKElementResolver.convert(module, ownerType);
+		if(convert.length==0){
+			return null;
+		}
+		IType dltkType = (IType) convert[0];
 		if (dltkType == null) {
 			return null;
 		}

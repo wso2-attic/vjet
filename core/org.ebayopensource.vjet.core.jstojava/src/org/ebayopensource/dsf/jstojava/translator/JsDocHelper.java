@@ -12,7 +12,7 @@ import org.ebayopensource.dsf.jst.declaration.JstDoc;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 
 public class JsDocHelper {
 

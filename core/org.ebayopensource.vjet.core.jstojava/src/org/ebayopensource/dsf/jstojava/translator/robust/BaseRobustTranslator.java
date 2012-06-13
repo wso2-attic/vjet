@@ -14,7 +14,7 @@ import java.util.Stack;
 
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 import org.ebayopensource.dsf.jstojava.translator.BaseTranslator;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
