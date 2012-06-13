@@ -121,9 +121,12 @@ public class TypeResolverRegistry {
 		for (List<ITypeResolver> resolverList : m_resolvers.values()) {
 			for (int i = resolverList.size() - 1; i >=0; i--) {
 				ITypeResolver resolver = resolverList.get(i);
-				if (groupId.endsWith(resolver.getGroupId())) {
-					resolverList.remove(resolver);
+				for(String group : resolver.getGroupIds()){
+					if (groupId.endsWith(group)) {
+						resolverList.remove(resolver);
+					}
 				}
+				
 			}
 		}
 	}

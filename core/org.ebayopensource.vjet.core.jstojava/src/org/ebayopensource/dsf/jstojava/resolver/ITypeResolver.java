@@ -10,5 +10,5 @@ package org.ebayopensource.dsf.jstojava.resolver;
 
 public interface ITypeResolver {
 	String resolve(String[] args);
-	String getGroupId();
+	String[] getGroupIds();
 }

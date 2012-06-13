@@ -21,8 +21,8 @@ public class MapBasedTypeResolver implements ITypeResolver {
 	}
 	
 	@Override
-	public String getGroupId() {
-		return m_groupId;
+	public String[] getGroupIds() {
+		return new String[]{m_groupId};
 	}
 
 	@Override

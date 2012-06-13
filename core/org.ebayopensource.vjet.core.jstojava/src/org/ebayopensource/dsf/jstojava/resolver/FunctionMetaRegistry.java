@@ -32,7 +32,10 @@ public class FunctionMetaRegistry {
 	}
 	
 	public void addMapping(FunctionMetaMapping mapping) {
-		m_funcMetaMappings.put(mapping.getGroupId(), mapping);
+		for(String grp: mapping.getGroupIds()){
+			m_funcMetaMappings.put(grp, mapping);
+		}
+		
 		m_tergetFuncs.addAll(mapping.getSupportedTargetFuncs());
 	}
 	

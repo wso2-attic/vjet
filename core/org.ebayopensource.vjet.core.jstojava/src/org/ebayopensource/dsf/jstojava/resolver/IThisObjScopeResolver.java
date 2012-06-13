@@ -19,7 +19,7 @@ public interface IThisObjScopeResolver {
 	 * 
 	 * @return
 	 */
-	public String getGroupId();
+	public String[] getGroupIds();
 	
 	// TODO add extendType here or in extension schema? 
 
