@@ -17,6 +17,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.launching;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,6 +27,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.filesystem.URIUtil;
+import org.eclipse.core.internal.localstore.FileSystemResourceManager;
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.core.internal.resources.Workspace;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -35,11 +49,15 @@ import org.eclipse.dltk.mod.core.IBuildpathContainer;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
 import org.eclipse.dltk.mod.core.IBuiltinModuleProvider;
 import org.eclipse.dltk.mod.core.IInterpreterContainerExtension;
+import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.environment.EnvironmentPathUtils;
 import org.eclipse.dltk.mod.core.environment.IEnvironment;
 import org.eclipse.dltk.mod.core.internal.environment.LocalEnvironment;
 import org.eclipse.dltk.mod.internal.core.BuildpathEntry;
+import org.eclipse.dltk.mod.internal.core.ExternalFoldersManager;
+import org.eclipse.dltk.mod.internal.core.ModelManager;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 import org.eclipse.dltk.mod.launching.IInterpreterInstall;
 import org.eclipse.dltk.mod.launching.IInterpreterInstallChangedListener;
 import org.eclipse.dltk.mod.launching.PropertyChangeEvent;
@@ -146,11 +164,59 @@ public class VjoSdkBuildpathContainer implements IBuildpathContainer {
 			IBuildpathAttribute[] attributes = new IBuildpathAttribute[0];
 			ArrayList excluded = new ArrayList(); // paths to exclude
 			IEnvironment env = LocalEnvironment.getInstance();
-			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
-					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
-					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
-							.toArray(new IPath[excluded.size()]), false, true));
-			// entries.add(DLTKCore.newExtLibraryEntry(getSdkBasePath(groupName)));
+//			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
+//					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
+//					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
+//							.toArray(new IPath[excluded.size()]), false, true));
+			
+			
+			URI uri = null;
+			IPath p = null;
+			try {
+				// TODO how to get this without adding linked resource?
+				// must be absolute path for build path to work
+				String paramString = "typespace://VjoSelfDescribed/";
+				uri = new URI(paramString);
+				
+				
+				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot(); 
+				
+			
+				
+				IFile[] files = root.findFilesForLocationURI(uri,IContainer.INCLUDE_HIDDEN );
+				p = files[0].getFullPath();
+//				if ("zip".equals(uri.getScheme())) {
+//				    p = URIUtil.toPath(uri);
+//				}
+				System.out.println(p.getDevice());
+				System.out.println(p.isAbsolute());
+				System.out.println(uri);
+//				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+//				IWorkspaceRoot workspaceRoot = workspace.getRoot();
+//				IFile wSDLFile = (IFile) workspaceRoot
+//				        .findMember(paramString);
+//				System.out.println(wSDLFile);
+
+
+				
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+//			p.setDevice( "");
+			
+//			new BuildpathEntry(IProjectFragment.K_BINARY,
+//					IBuildpathEntry.BPE_LIBRARY,
+//					ScriptProject.canonicalizedPath(path), isExported, include, // inclusion
+//					// patterns
+//					exclude, // exclusion patterns
+//					accessRules, false, // no access rules to combine
+//					extraAttributes, externalLib);
+			 entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
+						IBuildpathEntry.BPE_LIBRARY, ScriptProject.canonicalizedPath(p), false, BuildpathEntry.INCLUDE_ALL, 
+						(IPath[]) excluded.toArray(new IPath[excluded.size()]), 
+						EMPTY_RULES, false, attributes, false));
 			rawEntries.add(groupName);
 		}
 		return (IBuildpathEntry[]) entries.toArray(new IBuildpathEntry[entries

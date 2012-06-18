@@ -329,19 +329,19 @@ public class VjetPlugin extends Plugin {
 				new Status(status, PLUGIN_ID, IStatus.OK, message, t));
 	}
 
-	public static IBuildpathEntry newSdkLibraryEntry(IPath path,
-			IAccessRule[] accessRules, IBuildpathAttribute[] extraAttributes,
-			IPath[] include, IPath[] exclude, boolean isExported,
-			boolean externalLib) {
-
-		if (path == null || path.segment(0) == null)
-			Assert.isTrue(false, "Library path cannot be null"); //$NON-NLS-1$
-		return new SerBuildPathEntry(IProjectFragment.K_BINARY,
-				IBuildpathEntry.BPE_LIBRARY, path, isExported, include, // inclusion
-				// patterns
-				exclude, // exclusion patterns
-				accessRules, false, // no access rules to combine
-				extraAttributes, externalLib);
-	}
+//	public static IBuildpathEntry newSdkLibraryEntry(IPath path,
+//			IAccessRule[] accessRules, IBuildpathAttribute[] extraAttributes,
+//			IPath[] include, IPath[] exclude, boolean isExported,
+//			boolean externalLib) {
+//
+//		if (path == null || path.segment(0) == null)
+//			Assert.isTrue(false, "Library path cannot be null"); //$NON-NLS-1$
+//		return new SerBuildPathEntry(IProjectFragment.K_BINARY,
+//				IBuildpathEntry.BPE_LIBRARY, path, isExported, include, // inclusion
+//				// patterns
+//				exclude, // exclusion patterns
+//				accessRules, false, // no access rules to combine
+//				extraAttributes, externalLib);
+//	}
 
 }

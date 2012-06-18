@@ -849,6 +849,12 @@ public class VjoTypeInfoViewer {
 				if (jstType.isInterface()) {
 					flags = Modifiers.AccInterface;
 				}
+				
+				DLTKSearchTypeNameMatch match;
+
+				match = new DLTKSearchTypeNameMatch(type, flags);
+				matches.add(match);
+				
 			}
 			// Deprecated
 			else if (CodeassistUtils.isNativeType(jstType)) {

@@ -18,11 +18,19 @@
 package org.ebayopensource.vjet.eclipse.internal.launching;
 
 import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.MessageFormat;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.dltk.mod.core.BuildpathContainerInitializer;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -33,6 +41,8 @@ import org.eclipse.dltk.mod.core.IDLTKLanguageToolkit;
 import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.environment.EnvironmentManager;
 import org.eclipse.dltk.mod.core.environment.IEnvironment;
+import org.eclipse.dltk.mod.internal.core.ExternalFoldersManager;
+import org.eclipse.dltk.mod.internal.core.ModelManager;
 import org.eclipse.dltk.mod.internal.launching.DLTKLaunchingPlugin;
 import org.eclipse.dltk.mod.launching.IInterpreterInstall;
 import org.eclipse.dltk.mod.launching.IInterpreterInstallType;
@@ -62,8 +72,26 @@ public class VjoContainerInitializer extends BuildpathContainerInitializer {
 				IInterpreterInstall interp = resolveInterpreter(
 						getNatureFromProject(project),
 						getEnvironmentFromProject(project), containerPath);
-				VjoSdkBuildpathContainer container = null;
-				container = new VjoSdkBuildpathContainer(interp, containerPath);
+				
+				String paramString = "typespace://VjoSelfDescribed";
+				URI uri=null;
+				try {
+					uri = new URI(paramString);
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				ExternalFoldersManager foldersManager = ModelManager
+						.getExternalManager();
+				IProject externalFoldersProject = foldersManager.getExternalFoldersProject();
+//				foldersManager.createLinkFolder(externalFolderPath, refreshIfExistAlready, monitor)
+				IFolder linkFile = foldersManager.createLinkFolder(new Path("VjoSelfDescribe"), uri,true, null );
+
+			
+				  
+				
+				VjoSdkBuildpathContainer container = new VjoSdkBuildpathContainer(interp, containerPath);
 				DLTKCore.setBuildpathContainer(containerPath,
 						new IScriptProject[] { project },
 						new IBuildpathContainer[] { container }, null);

@@ -11,6 +11,7 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.editor;
 
+import java.net.URI;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,9 +58,13 @@ import org.eclipse.core.filebuffers.FileBuffers;
 import org.eclipse.core.filebuffers.ITextFileBuffer;
 import org.eclipse.core.filebuffers.ITextFileBufferManager;
 import org.eclipse.core.filebuffers.LocationKind;
+import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -636,7 +641,23 @@ public class VjoEditor extends JavaScriptEditor {
     }
 
     public Image getTitleImage() {
+    	
+    	
+    	
         IEditorInput input = getEditorInput();
+        
+        if(input instanceof FileEditorInput){
+        	FileEditorInput fei = (FileEditorInput)input;
+        	URI uri = URIUtil.toURI(fei.getFile().getFullPath());
+        	if (uri != null) {
+        	   
+        	    if(uri.getScheme().equals("typespace")){
+        	    	  return VjetUIImages
+        	                    .getImage(VjetUIImages.IMAGE_BINARY_EDITOR_TITLE);
+        	    }
+        	}
+        }
+        
         if (input instanceof ExternalFileEditorInput || input instanceof ExternalStorageEditorInput) {
             return VjetUIImages
                     .getImage(VjetUIImages.IMAGE_BINARY_EDITOR_TITLE);
