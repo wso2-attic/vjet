@@ -11,6 +11,7 @@ package org.ebayopensource.vjet.eclipse.core;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,13 +24,17 @@ import java.util.zip.ZipFile;
 import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.sdk.VJetSdkEnvironment;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.URIUtil;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.AssertionFailedException;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -251,8 +256,9 @@ public class PiggyBackClassPathUtil {
 			IBuildpathEntry entry = entries[i];
 			if (entry.getEntryKind() == IBuildpathEntry.BPE_LIBRARY) {
 				IPath path = entry.getPath();
+			
 				File file = getFile(path);
-				if (file.exists() && file.isFile()) {
+				if (file!=null && file.exists() && file.isFile()) {
 					URL url = getURL(file);
 					if (url != null) {
 						urlsString.add(url);
@@ -271,10 +277,18 @@ public class PiggyBackClassPathUtil {
 		path = EnvironmentPathUtils.getLocalPath(path);
 		File file = path.toFile();
 		if (!file.exists()) {
-			IResource member = ResourcesPlugin.getWorkspace().getRoot().findMember(path);
-			if (member != null && member.exists()) {
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IResource member = root.findMember(path);
+			if (member != null && member.exists() && member.getLocation()!=null) {
 				file = member.getLocation().toFile();
+			}else if(member != null && member.exists() && member.getLocation()==null){
+				if(member.isLinked()){
+					return null;
+				}
+						
 			}
+			
+			
 		}
 		return file;
 	}
