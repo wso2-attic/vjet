@@ -36,7 +36,7 @@ import org.eclipse.dltk.mod.internal.core.util.Util;
 public class ExternalFoldersManager {
 	private static final boolean DEBUG = false;
 	private static final String EXTERNAL_PROJECT_NAME = ".org.eclipse.dltk.mod.core.external.folders"; //$NON-NLS-1$
-	private static final String LINKED_FOLDER_NAME = ".link"; //$NON-NLS-1$
+	private static final String LINKED_FOLDER_NAME = "links"; //$NON-NLS-1$
 	private HashMap folders;
 	private int counter = 0;
 
@@ -104,6 +104,29 @@ public class ExternalFoldersManager {
 		return result;
 	}
 
+	private synchronized IFolder addFolder(String name,
+			IPath externalFolderPath, IProject externalFoldersProject) {
+		HashMap knownFolders = getFolders();
+		Object existing = knownFolders.get(externalFolderPath);
+		if (existing != null) {
+			return (IFolder) existing;
+		}
+		IFolder result;
+		do {
+			result = externalFoldersProject.getFolder(name);
+
+			if (knownFolders.containsKey(name)) {
+				Object found = knownFolders.get(name);
+				if (found != null) {
+					return (IFolder) found;
+				}
+			}
+
+		} while (result.exists());
+		knownFolders.put(name, result);
+		return result;
+	}
+
 	public IFolder createLinkFolder(IPath folder, URI uri,
 			boolean refreshIfExistAlready, IProgressMonitor monitor)
 			throws CoreException {
@@ -117,6 +140,27 @@ public class ExternalFoldersManager {
 		// a
 		// resource
 		IFolder result = addFolder(folder, externalFoldersProject);
+		if (!result.exists())
+			result.createLink(uri, IResource.ALLOW_MISSING_LOCAL, monitor);
+		else if (refreshIfExistAlready)
+			result.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+		return result;
+	}
+
+	public IFolder createLinkFolderKeepFolderName(String folderName,
+			IPath externalFolderPath, URI uri, boolean refreshIfExistAlready,
+			IProgressMonitor monitor) throws CoreException {
+		IProject externalFoldersProject = createExternalFoldersProject(monitor); // run
+		// outside
+		// synchronized
+		// as
+		// this
+		// can
+		// create
+		// a
+		// resource
+		IFolder result = addFolder(folderName, externalFolderPath,
+				externalFoldersProject);
 		if (!result.exists())
 			result.createLink(uri, IResource.ALLOW_MISSING_LOCAL, monitor);
 		else if (refreshIfExistAlready)

@@ -73,23 +73,8 @@ public class VjoContainerInitializer extends BuildpathContainerInitializer {
 						getNatureFromProject(project),
 						getEnvironmentFromProject(project), containerPath);
 				
-				String paramString = "typespace://VjoSelfDescribed";
-				URI uri=null;
-				try {
-					uri = new URI(paramString);
-				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				ExternalFoldersManager foldersManager = ModelManager
-						.getExternalManager();
-				IProject externalFoldersProject = foldersManager.getExternalFoldersProject();
-//				foldersManager.createLinkFolder(externalFolderPath, refreshIfExistAlready, monitor)
-				IFolder linkFile = foldersManager.createLinkFolder(new Path("VjoSelfDescribe"), uri,true, null );
+				BuildPathUtils.addLinkForGroup("VjoSelfDescribed");
 
-			
-				  
 				
 				VjoSdkBuildpathContainer container = new VjoSdkBuildpathContainer(interp, containerPath);
 				DLTKCore.setBuildpathContainer(containerPath,
@@ -99,6 +84,7 @@ public class VjoContainerInitializer extends BuildpathContainerInitializer {
 			
 		}
 	}
+
 
 	/**
 	 * Returns the Interpreter install associated with the container path, or

@@ -44,6 +44,7 @@ import org.eclipse.dltk.mod.launching.ScriptRuntime;
 import org.eclipse.dltk.mod.launching.ScriptRuntime.DefaultInterpreterEntry;
 
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjo.lib.TsLibLoader;
 
 /**
  * Resolves a container for a InterpreterEnvironment buildpath container entry.
@@ -62,8 +63,12 @@ public class JsContainerInitializer extends BuildpathContainerInitializer {
 				IInterpreterInstall interp = resolveInterpreter(
 						getNatureFromProject(project),
 						getEnvironmentFromProject(project), containerPath);
-				JsSdkBuildpathContainer container = null;
-				container = new JsSdkBuildpathContainer(interp, containerPath);
+				
+				String[] defaultLibs = TsLibLoader.getJsNativeGroups();
+				for (String group : defaultLibs) {
+					BuildPathUtils.addLinkForGroup(group);
+				}
+				JsSdkBuildpathContainer container = new JsSdkBuildpathContainer(interp, containerPath);
 				DLTKCore.setBuildpathContainer(containerPath,
 						new IScriptProject[] { project },
 						new IBuildpathContainer[] { container }, null);

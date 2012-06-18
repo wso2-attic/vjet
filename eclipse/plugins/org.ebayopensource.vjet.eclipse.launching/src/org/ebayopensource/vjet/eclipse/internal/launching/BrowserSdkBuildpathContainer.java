@@ -35,11 +35,13 @@ import org.eclipse.dltk.mod.core.IBuildpathContainer;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
 import org.eclipse.dltk.mod.core.IBuiltinModuleProvider;
 import org.eclipse.dltk.mod.core.IInterpreterContainerExtension;
+import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.environment.EnvironmentPathUtils;
 import org.eclipse.dltk.mod.core.environment.IEnvironment;
 import org.eclipse.dltk.mod.core.internal.environment.LocalEnvironment;
 import org.eclipse.dltk.mod.internal.core.BuildpathEntry;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 import org.eclipse.dltk.mod.launching.IInterpreterInstall;
 import org.eclipse.dltk.mod.launching.IInterpreterInstallChangedListener;
 import org.eclipse.dltk.mod.launching.PropertyChangeEvent;
@@ -146,10 +148,18 @@ public class BrowserSdkBuildpathContainer implements IBuildpathContainer {
 			IBuildpathAttribute[] attributes = new IBuildpathAttribute[0];
 			ArrayList excluded = new ArrayList(); // paths to exclude
 			IEnvironment env = LocalEnvironment.getInstance();
-			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
-					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
-					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
-							.toArray(new IPath[excluded.size()]), false, true));
+			entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
+					IBuildpathEntry.BPE_LIBRARY, ScriptProject
+							.canonicalizedPath(BuildPathUtils
+									.createPathForGroup(groupName)),
+					false, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
+							.toArray(new IPath[excluded.size()]), EMPTY_RULES,
+					false, attributes, false));
+			
+//			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
+//					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
+//					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
+//							.toArray(new IPath[excluded.size()]), false, true));
 			// entries.add(DLTKCore.newExtLibraryEntry(getSdkBasePath(groupName)));
 			rawEntries.add(groupName);
 		}

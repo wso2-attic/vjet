@@ -13,7 +13,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.launching;
 
@@ -152,7 +152,7 @@ public class VjoSdkBuildpathContainer implements IBuildpathContainer {
 			// continue;
 			// entryPath = new Path(f.getCanonicalPath());
 			//
-			//				
+			//
 			String groupName = defaultLibs[i];
 			if (rawEntries.contains(groupName))
 				continue;
@@ -164,59 +164,14 @@ public class VjoSdkBuildpathContainer implements IBuildpathContainer {
 			IBuildpathAttribute[] attributes = new IBuildpathAttribute[0];
 			ArrayList excluded = new ArrayList(); // paths to exclude
 			IEnvironment env = LocalEnvironment.getInstance();
-//			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
-//					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
-//					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
-//							.toArray(new IPath[excluded.size()]), false, true));
 			
-			
-			URI uri = null;
-			IPath p = null;
-			try {
-				// TODO how to get this without adding linked resource?
-				// must be absolute path for build path to work
-				String paramString = "typespace://VjoSelfDescribed/";
-				uri = new URI(paramString);
-				
-				
-				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot(); 
-				
-			
-				
-				IFile[] files = root.findFilesForLocationURI(uri,IContainer.INCLUDE_HIDDEN );
-				p = files[0].getFullPath();
-//				if ("zip".equals(uri.getScheme())) {
-//				    p = URIUtil.toPath(uri);
-//				}
-				System.out.println(p.getDevice());
-				System.out.println(p.isAbsolute());
-				System.out.println(uri);
-//				IWorkspace workspace = ResourcesPlugin.getWorkspace();
-//				IWorkspaceRoot workspaceRoot = workspace.getRoot();
-//				IFile wSDLFile = (IFile) workspaceRoot
-//				        .findMember(paramString);
-//				System.out.println(wSDLFile);
-
-
-				
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-//			p.setDevice( "");
-			
-//			new BuildpathEntry(IProjectFragment.K_BINARY,
-//					IBuildpathEntry.BPE_LIBRARY,
-//					ScriptProject.canonicalizedPath(path), isExported, include, // inclusion
-//					// patterns
-//					exclude, // exclusion patterns
-//					accessRules, false, // no access rules to combine
-//					extraAttributes, externalLib);
-			 entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
-						IBuildpathEntry.BPE_LIBRARY, ScriptProject.canonicalizedPath(p), false, BuildpathEntry.INCLUDE_ALL, 
-						(IPath[]) excluded.toArray(new IPath[excluded.size()]), 
-						EMPTY_RULES, false, attributes, false));
+			entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
+					IBuildpathEntry.BPE_LIBRARY, ScriptProject
+							.canonicalizedPath(BuildPathUtils
+									.createPathForGroup("VjoSelfDescribed")),
+					false, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
+							.toArray(new IPath[excluded.size()]), EMPTY_RULES,
+					false, attributes, false));
 			rawEntries.add(groupName);
 		}
 		return (IBuildpathEntry[]) entries.toArray(new IBuildpathEntry[entries

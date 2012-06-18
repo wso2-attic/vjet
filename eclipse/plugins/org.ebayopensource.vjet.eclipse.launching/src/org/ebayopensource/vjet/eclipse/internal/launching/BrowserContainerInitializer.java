@@ -44,6 +44,7 @@ import org.eclipse.dltk.mod.launching.ScriptRuntime;
 import org.eclipse.dltk.mod.launching.ScriptRuntime.DefaultInterpreterEntry;
 
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjo.lib.TsLibLoader;
 
 /**
  * Resolves a container for a InterpreterEnvironment buildpath container entry.
@@ -63,6 +64,12 @@ public class BrowserContainerInitializer extends BuildpathContainerInitializer {
 						getNatureFromProject(project),
 						getEnvironmentFromProject(project), containerPath);
 				BrowserSdkBuildpathContainer container = null;
+				
+				String[] defaultLibs = TsLibLoader.getBrowserGroups();
+				for (String group : defaultLibs) {
+					BuildPathUtils.addLinkForGroup(group);
+				}
+				
 				container = new BrowserSdkBuildpathContainer(interp, containerPath);
 				DLTKCore.setBuildpathContainer(containerPath,
 						new IScriptProject[] { project },
