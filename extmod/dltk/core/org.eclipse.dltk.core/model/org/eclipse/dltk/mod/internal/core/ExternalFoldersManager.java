@@ -111,18 +111,8 @@ public class ExternalFoldersManager {
 		if (existing != null) {
 			return (IFolder) existing;
 		}
-		IFolder result;
-		do {
-			result = externalFoldersProject.getFolder(name);
+		IFolder result = externalFoldersProject.getFolder(name);
 
-			if (knownFolders.containsKey(name)) {
-				Object found = knownFolders.get(name);
-				if (found != null) {
-					return (IFolder) found;
-				}
-			}
-
-		} while (result.exists());
 		knownFolders.put(name, result);
 		return result;
 	}

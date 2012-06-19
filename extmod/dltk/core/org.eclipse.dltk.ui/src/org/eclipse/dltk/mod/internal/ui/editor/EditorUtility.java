@@ -327,6 +327,7 @@ public class EditorUtility {
 			} else if (element instanceof ISourceModule) {
 				ISourceModule unit = ((ISourceModule) element).getPrimary();
 				IResource resource = unit.getResource();
+
 				if (resource == null || !resource.exists()) {
 					return new ExternalFileEditorInput(element);
 				} else if (resource.exists() && resource instanceof IFile) {

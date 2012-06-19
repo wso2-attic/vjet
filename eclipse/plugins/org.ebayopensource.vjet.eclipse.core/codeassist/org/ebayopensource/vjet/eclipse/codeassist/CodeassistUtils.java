@@ -1937,6 +1937,8 @@ public class CodeassistUtils {
 	public static NativeVjoSourceModule createNativeModule(ISourceModule module) {
 		IVjoSourceModule sourceModule = (IVjoSourceModule) module;
 		ScriptFolder folder = (ScriptFolder) sourceModule.getParent();
+		
+		
 		return createNativeModule(folder, sourceModule.getElementName());
 	}
 

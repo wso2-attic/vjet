@@ -32,23 +32,16 @@ import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExten
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
-import org.ebayopensource.vjet.eclipse.internal.core.SerBuildPathEntry;
 import org.ebayopensource.vjo.lib.IResourceResolver;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
-import org.eclipse.dltk.mod.core.IAccessRule;
-import org.eclipse.dltk.mod.core.IBuildpathAttribute;
-import org.eclipse.dltk.mod.core.IBuildpathEntry;
-import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.osgi.framework.BundleContext;
 
 /**

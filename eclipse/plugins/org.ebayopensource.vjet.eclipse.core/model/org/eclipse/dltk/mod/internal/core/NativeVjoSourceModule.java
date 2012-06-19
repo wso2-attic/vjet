@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,21 +16,10 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.filesystem.IFileStore;
-import org.eclipse.core.internal.resources.File;
-import org.eclipse.core.internal.resources.Workspace;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.DLTKCore;
-import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.ISourceElementParserExtension;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.ModelException;
@@ -145,8 +132,7 @@ public class NativeVjoSourceModule extends VjoSourceModule {
 
 	@Override
 	public char[] getFileName() {
-		return getResource().getFullPath().toPortableString().toCharArray();
-		//return super.getElementName().toCharArray();
+		return super.getElementName().toCharArray();
 	}
 
 	@Override
@@ -154,40 +140,8 @@ public class NativeVjoSourceModule extends VjoSourceModule {
 		if (jstType == null) {
 			return null;
 		} else {
-			IFile file = getScriptProject().getProject().getFile(
+			return getScriptProject().getProject().getFile(
 					jstType.getName().replace(".", "/") + ".js");
-			if(file.exists()){
-				return file;
-			}
-			// jstype://jstType.getName()
-			
-			URI jstTypeURI = null;
-			try {
-				jstTypeURI = new URI("jsttype://////"+jstType.getPackage().getGroupName() +"@"+ jstType.getName());
-			} catch (URISyntaxException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		
-			if(getScriptProject().getProject().getName().endsWith(".zip") && getScriptProject().getParent() instanceof IScriptProject){
-				
-				IFile newjsttype = ((IScriptProject)getScriptProject().getParent()).getProject().getFile(jstType.getName());
-				try {
-					if(jstTypeURI!=null){
-						newjsttype.createLink(jstTypeURI, IResource.ALLOW_MISSING_LOCAL, null);
-						return newjsttype;
-					}
-				} catch (CoreException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-				
-			}
-		
-			
-			// TODO create resource on the fly here
-			return null;
 		}
 	}
 
