@@ -140,7 +140,7 @@ public class ExternalFoldersManager {
 	public IFolder createLinkFolderKeepFolderName(String folderName,
 			IPath externalFolderPath, URI uri, boolean refreshIfExistAlready,
 			IProgressMonitor monitor) throws CoreException {
-		IProject externalFoldersProject = createExternalFoldersProject(monitor); // run
+		IProject externalFoldersProject = createExternalFoldersProject(folderName,monitor); // run
 		// outside
 		// synchronized
 		// as
@@ -152,9 +152,9 @@ public class ExternalFoldersManager {
 		IFolder result = addFolder(folderName, externalFolderPath,
 				externalFoldersProject);
 		if (!result.exists())
-			result.createLink(uri, IResource.ALLOW_MISSING_LOCAL, monitor);
+			result.createLink(uri, IResource.VIRTUAL, monitor);
 		else if (refreshIfExistAlready)
-			result.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+			result.refreshLocal(IResource.VIRTUAL, monitor);
 		return result;
 	}
 
@@ -215,6 +215,11 @@ public class ExternalFoldersManager {
 	}
 
 	private IProject createExternalFoldersProject(IProgressMonitor monitor) {
+		return createExternalFoldersProject(EXTERNAL_PROJECT_NAME, monitor);
+	}
+
+	private IProject createExternalFoldersProject(String folderName,
+			IProgressMonitor monitor) {
 		IProject project = getExternalFoldersProject();
 		if (!project.isAccessible()) {
 			try {
@@ -223,11 +228,11 @@ public class ExternalFoldersManager {
 							.newProjectDescription(project.getName());
 					IPath stateLocation = DLTKCore.getPlugin()
 							.getStateLocation();
-					desc.setLocation(stateLocation
-							.append(EXTERNAL_PROJECT_NAME));
+					desc.setLocation(stateLocation.append(folderName));
 					// TODO(alon): Figure out the best compatibility mode for
 					// 3.3 vs 3.4
 					// project.create(DEBUG ? null : desc, monitor);
+
 					project.create(desc, IResource.HIDDEN, monitor);
 				}
 				try {
@@ -238,8 +243,7 @@ public class ExternalFoldersManager {
 					IPath stateLocation = DEBUG ? ResourcesPlugin
 							.getWorkspace().getRoot().getLocation() : DLTKCore
 							.getPlugin().getStateLocation();
-					IPath projectPath = stateLocation
-							.append(EXTERNAL_PROJECT_NAME);
+					IPath projectPath = stateLocation.append(folderName);
 					projectPath.toFile().mkdirs();
 					FileOutputStream output = new FileOutputStream(projectPath
 							.append(".project").toOSString()); //$NON-NLS-1$

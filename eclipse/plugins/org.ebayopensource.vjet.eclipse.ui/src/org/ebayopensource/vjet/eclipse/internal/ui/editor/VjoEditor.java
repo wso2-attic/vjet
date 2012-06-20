@@ -637,10 +637,17 @@ public class VjoEditor extends JavaScriptEditor {
         				return m_readOnlyType;
         			}
         			
+        			IPath fullPath = ((FileEditorInput)input).getFile().getFullPath();
+        	    	IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+        	    	IResource resource = root.findMember(fullPath);
+        	    	URI location = resource.getLocationURI();
+        	    	String typeName = location.getPath().replace("/", ".");
+        			
         			// TODO add support for type here
         			System.out.println("no type info for model");
         			String groupName = getTypspaceGroupFromURI(input);
-        			String typeName = input.getName().substring(0, input.getName().indexOf(".js"));
+        			
+        			typeName = typeName.substring(1, typeName.lastIndexOf(".js"));
 					NativeVjoSourceModule m2= new NativeVjoSourceModule( CodeassistUtils.getDefaultNativeSourceFolder(groupName), groupName,
         					typeName);
         			m2.setJstType(CodeassistUtils.findJstType(groupName, typeName));

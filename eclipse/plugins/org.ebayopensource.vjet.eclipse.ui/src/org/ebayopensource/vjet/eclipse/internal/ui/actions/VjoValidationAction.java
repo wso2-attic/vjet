@@ -193,6 +193,10 @@ public class VjoValidationAction implements IExecutableExtension,
 				for (IModelElement file : files) {
 					if (file.getElementType() == IProjectFragment.SOURCE_MODULE) {
 						resource = file.getResource();
+						if(resource != null && resource.getLocationURI().getScheme().equals("typespace")){
+							continue;
+						}
+						
 						if (resource != null && resource.getLocation().toOSString().endsWith(
 								VJOSUBFIX)) {
 							addSourceModules(resourceList, resource, sProject);

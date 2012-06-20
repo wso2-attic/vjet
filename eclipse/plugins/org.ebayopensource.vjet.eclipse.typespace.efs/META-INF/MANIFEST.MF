@@ -8,3 +8,4 @@ Require-Bundle: org.eclipse.core.filesystem,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.ebayopensource.vjet.eclipse.typespace.efs.internal.Activator
+Export-Package: org.ebayopensource.vjet.eclipse.typespace.efs

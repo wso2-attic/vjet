@@ -15,6 +15,8 @@ import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.typespace.efs.internal.GroupFileItem;
 import org.ebayopensource.vjet.eclipse.typespace.efs.internal.GroupItem;
 import org.ebayopensource.vjet.eclipse.typespace.efs.internal.GroupPkgDirectoryItem;
@@ -36,33 +38,44 @@ import org.eclipse.core.runtime.Path;
 public class TypeSpaceFileStore extends FileStore {
 	private static final long CURRENT_TIME_MILLIS = System.currentTimeMillis();
 
-	static GroupItem getRoot(URI uri) throws URISyntaxException, ZipException,
+	static synchronized GroupItem getRoot(URI uri) throws URISyntaxException, ZipException,
 			IOException, CoreException {
-//		URI type = new URI(uri.getHost());
-		return TypeSpaceFileSystem.getItem(uri);
+		URI type = new URI(uri.getScheme(),uri.getHost(),null,null);
+		
+		GroupItem item = TypeSpaceFileSystem.getItem(type);
+		
+		return item;
 	}
 
 	private String name;
 	private TypeSpaceFileStore parent;
 	private URI uri;
 
-	private GroupItem groupItem;
+	private final GroupItem groupItem;
 
-	private TypeSpaceFileStore(String name, TypeSpaceFileStore parent) {
-		this.name = name;
-		this.parent = parent;
-	}
 
 	public TypeSpaceFileStore(String name, TypeSpaceFileStore parent, URI uri)
 			throws ZipException, URISyntaxException, IOException, CoreException {
-		this(name, parent, getRoot(uri).getItem(new Path(uri.getPath()), 0));
+		this(name, parent, TypeSpaceFileStore.getRoot(uri).getItem(new Path(uri.getPath()), 0));
 		this.uri = uri;
 	}
+	
+	
 
 	public TypeSpaceFileStore(String name, TypeSpaceFileStore parent,
 			GroupItem item) {
-		this(name, parent);
+		this.name = name;
+		this.parent = parent;
 		this.groupItem = item;
+
+	}
+	
+	public TypeSpaceFileStore(String name, TypeSpaceFileStore parent,
+			GroupItem item, URI uri) {
+		this.name = name;
+		this.parent = parent;
+		this.groupItem = item;
+		this.uri = uri;
 
 	}
 
@@ -71,6 +84,11 @@ public class TypeSpaceFileStore extends FileStore {
 		if (isDirectory()) {
 			Collection collection = ((GroupPkgDirectoryItem) groupItem)
 					.getChildren();
+//			if(collection.size()==0 && groupItem instanceof GroupRootItem ){
+//				((GroupRootItem)groupItem).createEntries();
+//				collection = ((GroupPkgDirectoryItem) groupItem)
+//						.getChildren();
+//			}
 			String[] children = new String[collection.size()];
 			Iterator iterator = collection.iterator();
 			int i = 0;
@@ -121,27 +139,13 @@ public class TypeSpaceFileStore extends FileStore {
 
 	private String getTypeName() {
 		if(!isDirectory()){
-			StringBuilder sb = new StringBuilder();
-			GroupItem gi = groupItem;
-			int count =0;
-			do{
-				
-				
-				String groupName = gi.getName();
-				
-				if(count==0){
-					sb.insert(0, groupName);
-				}else{
-					sb.insert(0, groupName +".");
-				}
-				
-				
-				count++;
-				
-				gi = gi.getParent();
-			}while(!(gi instanceof GroupRootItem));
 			
-			String typename = sb.toString();
+			String typename = getUri().getPath();
+			if(typename.indexOf("/")==0){
+				typename = typename.substring(1,typename.length());
+			}
+			typename = typename.replace("/", ".");
+			
 			typename = typename.replace(".js", "");
 			
 			return typename;	
@@ -151,10 +155,6 @@ public class TypeSpaceFileStore extends FileStore {
 		}
 	}
 
-	public void delete(int options, IProgressMonitor monitor)
-			throws CoreException {
-		throw new UnsupportedOperationException();
-	}
 
 	public IFileInfo fetchInfo(int options, IProgressMonitor monitor) {
 
@@ -165,7 +165,9 @@ public class TypeSpaceFileStore extends FileStore {
 			fileInfo.setDirectory(false);
 			fileInfo.setLastModified(CURRENT_TIME_MILLIS);
 		}
+		
 		fileInfo.setExists(true);
+		
 		fileInfo.setAttribute(EFS.ATTRIBUTE_READ_ONLY, true);
 		return fileInfo;
 
@@ -213,7 +215,19 @@ public class TypeSpaceFileStore extends FileStore {
 		
 		if (isDirectory()) {
 			GroupItem child = ((GroupPkgDirectoryItem) groupItem).getItem(name);
-			return new TypeSpaceFileStore(name, this, child);
+			if(child==null){
+				VjetPlugin.error("no child for " + name + ", uri:" + getUri());
+				
+//				throw new RuntimeException("no child for " + name + ", uri:" + getUri() + " groupItemName:" +this.groupItem.getName());
+				return null;
+			}
+			
+			 
+			
+			TypeSpaceFileStore store = new TypeSpaceFileStore(name, this, child);
+			URI childURI = store.getUri();
+			TypeSpaceFileSystem.cache(childURI, store);
+			return store;
 		} else {
 			return null;
 		}
@@ -253,10 +267,6 @@ public class TypeSpaceFileStore extends FileStore {
 		// return new TypeSpaceFileStore(path.removeLastSegments(1));
 	}
 
-	public IFileStore mkdir(int options, IProgressMonitor monitor)
-			throws CoreException {
-		throw new UnsupportedOperationException();
-	}
 
 	public InputStream openInputStream(int options, IProgressMonitor monitor)
 			throws CoreException {
@@ -265,27 +275,21 @@ public class TypeSpaceFileStore extends FileStore {
 		String typeName = getTypeName();
 		IJstType type = TypeSpaceMgr.getInstance().getTypeSpace()
 				.getType(new TypeName(getGroupName(), typeName));
-		if (type != null) {
-			VjoGenerator gen = new VjoGenerator(new GeneratorCtx(
-					CodeStyle.PRETTY));
-			gen.writeType(type);
-			return new StringInputStream(gen.getGeneratedText());
+		
+		if(CodeassistUtils.isNativeGroup(getGroupName())){
+			if (type != null) {
+				VjoGenerator gen = new VjoGenerator(new GeneratorCtx(
+						CodeStyle.PRETTY));
+				gen.writeType(type);
+				return new StringInputStream(gen.getGeneratedText());
+			}
 		}
 
-		return new StringInputStream(getGroupName() + " : " + getTypeName());
+		return new StringInputStream( "/* Class : " + getTypeName() + "\n" + "see outline for more info \n*/");
 
 	}
 
-	public OutputStream openOutputStream(int options, IProgressMonitor monitor)
-			throws CoreException {
-		// return TREE.openOutputStream(path, options);
-		return null;
-	}
 
-	public void putInfo(IFileInfo info, int options, IProgressMonitor monitor)
-			throws CoreException {
-		// TREE.putInfo(path, info, options);
-	}
 
 	public URI toURI() {
 		try {
@@ -301,6 +305,7 @@ public class TypeSpaceFileStore extends FileStore {
 		return toURI();
 	}
 
+	
 	protected IPath getPath() {
 		if (parent == null) {
 			return new Path("/");
@@ -316,6 +321,8 @@ public class TypeSpaceFileStore extends FileStore {
 			return ((TypeSpaceFileStore) getParent()).getBase();
 		}
 	}
+	
+	
 
 	// public TSURI getTsURI(){
 	// return uri;

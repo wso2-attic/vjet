@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +32,8 @@ import org.ebayopensource.vjo.tool.typespace.TypeSpaceListener;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -185,7 +188,23 @@ public class VjoSourceModule extends JSSourceModule implements
 				}
 				problemReporter.reportToRequestor();
 			}
-			if (jstType == null || !reparsed) {
+			
+			if(jstType==null && isVirtualTypeResource(resource)){
+				
+				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+		    	IResource typespaceresource = root.findMember(resource.getFullPath());
+		    	if (typespaceresource != null) {
+		    	    URI location = typespaceresource.getLocationURI();
+		    	    String typeName = location.getPath().replace("/", ".");
+		    	    String groupName = location.getHost();
+		    	    if(typeName.indexOf(".")==0){
+		    	    	typeName = typeName.substring(1,typeName.length());
+		    	    }
+		    	    typeName = typeName.replace(".js", "");
+				
+				jstType = CodeassistUtils.findJstType(groupName, typeName);
+		    	}
+			}else if (jstType == null || !reparsed) {
 				if ("".equals(stName.groupName().trim())
 						&& (resource == null || !resource.exists())) {
 					jstType = CodeassistUtils.findNativeJstType(stName
@@ -225,6 +244,20 @@ public class VjoSourceModule extends JSSourceModule implements
 		} catch (CoreException e) {
 			throw new ModelException(e);
 		}
+	}
+
+	private boolean isVirtualTypeResource(IResource fileSystemLoc) {
+    	IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+    	IResource resource = root.findMember(fileSystemLoc.getFullPath());
+    	if (resource != null) {
+    	    URI location = resource.getLocationURI();
+        	if (location != null) {
+        	    if(location.getScheme().equals("typespace")){
+        	    	return true;
+        	    }
+        	}
+    	}
+		return false;
 	}
 
 	@Override

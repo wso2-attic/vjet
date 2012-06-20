@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +18,13 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -140,8 +148,27 @@ public class NativeVjoSourceModule extends VjoSourceModule {
 		if (jstType == null) {
 			return null;
 		} else {
-			return getScriptProject().getProject().getFile(
-					jstType.getName().replace(".", "/") + ".js");
+			String groupName = this.jstType.getPackage().getGroupName();
+			URI path =null;
+			String filePath =null;
+			try {
+				// typespace://ExtJsTL.zip:0/?group=ExtJsTL.zip
+				filePath = this.jstType.getName().replace(".", "/") + ".js";
+				path = new URI("typespace://"+ groupName + ":0/" + filePath+ "?group=" + groupName);
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			
+			  IFile[] files = root.findFilesForLocationURI(path,
+						IContainer.INCLUDE_HIDDEN);
+			    return files[0];
+			
+		
+//			return getScriptProject().getProject().getFile(
+//					jstType.getName().replace(".", "/") + ".js");
 		}
 	}
 

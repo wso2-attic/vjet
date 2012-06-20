@@ -124,6 +124,11 @@ public class TypeSpaceBuilder {
 			} else if (entry.getEntryKind() == IBuildpathEntry.BPE_CONTAINER) {
 				String id = entry.getPath().segment(0);
 				
+				if (org.ebayopensource.vjet.eclipse.core.VjetPlugin.VJETTL_ID.equals(id)) {
+					//add built in libs
+					list.add(entry.getPath().lastSegment());
+				
+				}
 				
 				
 				if (org.ebayopensource.vjet.eclipse.core.VjetPlugin.VJOLIB_ID.equals(id)) {

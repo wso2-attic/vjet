@@ -73,6 +73,8 @@ public class VjetPlugin extends Plugin {
 
 	public static final String VJOLIB_ID = "org.ebayopensource.vjet.eclipse.core.VJO_CONTAINER";
 
+	public static final String VJETTL_ID = "org.ebayopensource.vjet.eclipse.core.VJETTL";
+	
 	public static final String VJOLIB_LABEL = "VJO LIB";
 
 	public static final String BUILDER_ID = PLUGIN_ID + ".builder";

@@ -19,9 +19,11 @@ import java.util.zip.ZipException;
 import org.ebayopensource.vjet.eclipse.typespace.efs.internal.Activator;
 import org.ebayopensource.vjet.eclipse.typespace.efs.internal.GroupItem;
 import org.ebayopensource.vjet.eclipse.typespace.efs.internal.GroupRootItem;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.filesystem.provider.FileSystem;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -32,7 +34,7 @@ import org.eclipse.core.runtime.Status;
 public class TypeSpaceFileSystem extends FileSystem {
 	public static final String SCEME_TYPESPACE = "typespace";
 	private static Map<URI, GroupItem> tsItemCache = new HashMap<URI, GroupItem>();
-	private Map<URI, TypeSpaceFileStore> tstypeURICache = new HashMap<URI, TypeSpaceFileStore>();
+	private static Map<URI, TypeSpaceFileStore> tstypeURICache = new HashMap<URI, TypeSpaceFileStore>();
 
 	// /**
 	// * Converts a path to a URI in the memory file system.
@@ -57,16 +59,37 @@ public class TypeSpaceFileSystem extends FileSystem {
 		super();
 	}
 
+	public int attributes() {
+		return EFS.ATTRIBUTE_READ_ONLY;
+	}
+
 	public static GroupItem getItem(URI uri) throws ZipException, IOException,
 			CoreException {
-		if (tsItemCache .containsKey(uri)) {
+
+		if (tsItemCache.containsKey(uri)) {
 			return (GroupItem) tsItemCache.get(uri);
 		} else {
 			String groupName = uri.getHost();
+//			if (canInitialize(groupName)) {
 			GroupRootItem item = new GroupRootItem(groupName);
 			tsItemCache.put(uri, item);
 			return item;
+//			}
+
 		}
+
+	}
+
+	public static void initialize(URI uri, IFile zipFile) throws ZipException,
+			IOException, CoreException {
+		if (tstypeURICache.containsKey(uri)) {
+			return;
+		}
+
+		String groupName = uri.getHost();
+		GroupRootItem item = new GroupRootItem(groupName, zipFile);
+		tstypeURICache.put(uri, new TypeSpaceFileStore("root", null, item, uri));
+
 	}
 
 	public IFileStore getStore(URI uri) {
@@ -75,9 +98,14 @@ public class TypeSpaceFileSystem extends FileSystem {
 			if (tstypeURICache.containsKey(uri)) {
 				return (TypeSpaceFileStore) tstypeURICache.get(uri);
 			} else {
-				TypeSpaceFileStore store = new TypeSpaceFileStore("root", null,uri);
-				tstypeURICache.put(uri, store);
-				return store;
+				System.out.println("creating store:" + uri);
+				if (canInitialize(uri.getHost())) {
+					TypeSpaceFileStore store = new TypeSpaceFileStore("root",
+							null, uri);
+					tstypeURICache.put(uri, store);
+					return store;
+				}
+
 			}
 		} catch (Exception e) {
 			Activator
@@ -86,22 +114,26 @@ public class TypeSpaceFileSystem extends FileSystem {
 					.log((IStatus) new Status(Status.ERROR,
 							Activator.PLUGIN_ID, "could not create store for "
 									+ uri.toString(), e));
-			return EFS.getNullFileSystem().getStore(uri);
+
 		}
+		return EFS.getNullFileSystem().getStore(uri);
 	}
 
-	public boolean isCaseSensitive() {
+	static void cache(URI uri, TypeSpaceFileStore store) {
+		// if(!tstypeURICache.containsKey(uri)){
+		tstypeURICache.put(uri, store);
+		// }
+
+	}
+
+	private static boolean canInitialize(String groupName) {
+		if (TypeSpaceMgr.getInstance().getController() == null) {
+			return false;
+		}
+		if (TypeSpaceMgr.getInstance().getTypeSpace().getGroup(groupName) == null) {
+			return false;
+		}
 		return true;
-	}
-
-	@Override
-	public boolean canDelete() {
-		return false;
-	}
-
-	@Override
-	public boolean canWrite() {
-		return false;
 	}
 
 }

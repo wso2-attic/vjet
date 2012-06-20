@@ -129,5 +129,11 @@
            class="org.ebayopensource.vjet.eclipse.internal.launching.VjoContainerInitializer"
            id="org.ebayopensource.vjet.eclipse.core.VJO_CONTAINER"/>
   </extension>
+    <extension
+        point="org.eclipse.dltk.mod.core.buildpathContainerInitializer">
+     <buildpathContainerInitializer
+           class="org.ebayopensource.vjet.eclipse.internal.launching.VJETZipContainerInitializer"
+           id="org.ebayopensource.vjet.eclipse.core.VJETTL"/>
+  </extension>
  
 </plugin>
