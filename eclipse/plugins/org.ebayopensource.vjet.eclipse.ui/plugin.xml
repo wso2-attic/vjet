@@ -558,6 +558,16 @@
             nature="org.ebayopensource.vjet.core.nature">
       </buildpathContainerPath>
    </extension>
+   
+      <extension
+         point="org.eclipse.dltk.mod.ui.buildpathContainerPage">
+      <buildpathContainerPath
+            class="org.ebayopensource.vjet.eclipse.internal.ui.wizards.VJetTLBuildPathWizard"
+            id="org.ebayopensource.vjet.eclipse.core.VJETTL/ZIP"
+            name="VJET Type Libraries"
+            nature="org.ebayopensource.vjet.core.nature">
+      </buildpathContainerPath>
+   </extension>
 
    <extension
          point="org.eclipse.dltk.mod.ui.buildpathContainerPage">
