@@ -94,11 +94,11 @@ public class TypeSpaceFileSystem extends FileSystem {
 
 	public IFileStore getStore(URI uri) {
 		try {
-			System.out.println("looking for store:" + uri);
+//			System.out.println("looking for store:" + uri);
 			if (tstypeURICache.containsKey(uri)) {
 				return (TypeSpaceFileStore) tstypeURICache.get(uri);
 			} else {
-				System.out.println("creating store:" + uri);
+//				System.out.println("creating store:" + uri);
 				if (canInitialize(uri.getHost())) {
 					TypeSpaceFileStore store = new TypeSpaceFileStore("root",
 							null, uri);

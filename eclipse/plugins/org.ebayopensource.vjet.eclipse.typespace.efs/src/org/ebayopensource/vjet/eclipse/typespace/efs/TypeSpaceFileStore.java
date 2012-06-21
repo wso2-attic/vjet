@@ -222,8 +222,6 @@ public class TypeSpaceFileStore extends FileStore {
 				return null;
 			}
 			
-			 
-			
 			TypeSpaceFileStore store = new TypeSpaceFileStore(name, this, child);
 			URI childURI = store.getUri();
 			TypeSpaceFileSystem.cache(childURI, store);

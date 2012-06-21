@@ -644,7 +644,7 @@ public class VjoEditor extends JavaScriptEditor {
         	    	String typeName = location.getPath().replace("/", ".");
         			
         			// TODO add support for type here
-        			System.out.println("no type info for model");
+//        			System.out.println("no type info for model");
         			String groupName = getTypspaceGroupFromURI(input);
         			
         			typeName = typeName.substring(1, typeName.lastIndexOf(".js"));
