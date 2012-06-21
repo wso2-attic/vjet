@@ -22,11 +22,14 @@ import org.eclipse.core.filesystem.EFS;
 import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.ISourceElementParserExtension;
 import org.eclipse.dltk.mod.core.IType;
@@ -161,14 +164,27 @@ public class NativeVjoSourceModule extends VjoSourceModule {
 			}
 		
 			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IProject externalProject = ResourcesPlugin.getWorkspace().getRoot().getProject(ExternalFoldersManager.EXTERNAL_PROJECT_NAME);
+			
+			 IPath suffix = new Path(groupName).append(path.getPath());
+//			
+			 IFile f = externalProject.getFile(suffix);
+			 if(f.exists()){
+				 return f;
+			 }
+			 
+			 // try finding by uri
 			
 			  IFile[] files = root.findFilesForLocationURI(path,
 						IContainer.INCLUDE_HIDDEN);
+			  if(files.length>0){
 			    return files[0];
+			  }
 			
+			// fall back to old way but this doesn't work anymore
 		
-//			return getScriptProject().getProject().getFile(
-//					jstType.getName().replace(".", "/") + ".js");
+			return getScriptProject().getProject().getFile(
+					jstType.getName().replace(".", "/") + ".js");
 		}
 	}
 
