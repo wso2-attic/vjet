@@ -35,7 +35,7 @@ import org.eclipse.dltk.mod.internal.core.util.Util;
 
 public class ExternalFoldersManager {
 	private static final boolean DEBUG = false;
-	private static final String EXTERNAL_PROJECT_NAME = ".org.eclipse.dltk.mod.core.external.folders"; //$NON-NLS-1$
+	public static final String EXTERNAL_PROJECT_NAME = ".org.eclipse.dltk.mod.core.external.folders"; //$NON-NLS-1$
 	private static final String LINKED_FOLDER_NAME = "links"; //$NON-NLS-1$
 	private HashMap folders;
 	private int counter = 0;
@@ -140,7 +140,8 @@ public class ExternalFoldersManager {
 	public IFolder createLinkFolderKeepFolderName(String folderName,
 			IPath externalFolderPath, URI uri, boolean refreshIfExistAlready,
 			IProgressMonitor monitor) throws CoreException {
-		IProject externalFoldersProject = createExternalFoldersProject(folderName,monitor); // run
+		IProject externalFoldersProject = createExternalFoldersProject(
+				folderName, monitor); // run
 		// outside
 		// synchronized
 		// as
