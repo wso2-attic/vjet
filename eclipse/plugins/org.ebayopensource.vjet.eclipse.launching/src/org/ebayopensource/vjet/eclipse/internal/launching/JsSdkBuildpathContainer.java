@@ -60,6 +60,7 @@ public class JsSdkBuildpathContainer implements IBuildpathContainer {
 	 * Container path used to resolve to this interpreter
 	 */
 	private IPath fPath = null;
+	private List m_entries;
 	/**
 	 * Cache of buildpath entries per Interpreter install. Cleared when a
 	 * Interpreter changes.
@@ -112,65 +113,18 @@ public class JsSdkBuildpathContainer implements IBuildpathContainer {
 		return entries;
 	}
 
-	/**
-	 * Computes the buildpath entries associated with a interpreter - one entry
-	 * per library.
-	 * 
-	 * @param interpreter
-	 * @return buildpath entries
-	 */
-	private IBuildpathEntry[] computeBuildpathEntries(String sdkName) {
-		TypeSpaceMgr tmg = TypeSpaceMgr.getInstance();
 
-		String[] defaultLibs = TsLibLoader.getJsNativeGroups();
-		List entries = new ArrayList(defaultLibs.length);
-		Set rawEntries = new HashSet(defaultLibs.length);
-		for (int i = 0; i < defaultLibs.length; i++) {
-
-			// TODO Check this
-			// // resolve symlink
-			// IEnvironment environment = interpreter.getEnvironment();
-			//
-			// IFileHandle f = environment.getFile(entryPath);
-			// if (!f.exists())
-			// continue;
-			// entryPath = new Path(f.getCanonicalPath());
-			//
-			//				
-			String groupName = defaultLibs[i];
-			if (rawEntries.contains(groupName))
-				continue;
-
-			/*
-			 * if (!entryPath.isAbsolute()) Assert.isTrue(false, "Path for
-			 * IBuildpathEntry must be absolute"); //$NON-NLS-1$
-			 */
-			IBuildpathAttribute[] attributes = new IBuildpathAttribute[0];
-			ArrayList excluded = new ArrayList(); // paths to exclude
-//			IEnvironment env = LocalEnvironment.getInstance();
-			
-			entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
-					IBuildpathEntry.BPE_LIBRARY, ScriptProject
-							.canonicalizedPath(BuildPathUtils
-									.createPathForGroup(groupName)),
-					false, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
-							.toArray(new IPath[excluded.size()]), EMPTY_RULES,
-					false, attributes, false));
-			
-//			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
-//					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
-//					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
-//							.toArray(new IPath[excluded.size()]), false, true));
-			// entries.add(DLTKCore.newExtLibraryEntry(getSdkBasePath(groupName)));
-			rawEntries.add(groupName);
-		}
-		return (IBuildpathEntry[]) entries.toArray(new IBuildpathEntry[entries
-				.size()]);
-	}
 
 	private IPath getSdkBasePath(String groupName) {
 		return new Path(Util.getNativeTypeCacheDir(groupName).toString());
 	}
+	
+	private IBuildpathEntry[] computeBuildpathEntries(String sdkName) {
+		List entries = m_entries;
+		return (IBuildpathEntry[]) entries.toArray(new IBuildpathEntry[entries
+				.size()]);
+	}
+
 
 	/**
 	 * Constructs a interpreter buildpath container on the given interpreter
@@ -239,5 +193,10 @@ public class JsSdkBuildpathContainer implements IBuildpathContainer {
 				return 0;
 			}
 		};
+	}
+
+	public void setEntries(List createEntries) {
+		m_entries = createEntries;
+		
 	}
 }
