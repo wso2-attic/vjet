@@ -28,6 +28,7 @@ import org.ebayopensource.dsf.jst.declaration.JstName;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstRefType;
+import org.ebayopensource.dsf.jst.declaration.JstSynthesizedMethod;
 import org.ebayopensource.dsf.jst.declaration.JstSynthesizedProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.declaration.JstTypeRefType;
@@ -73,6 +74,7 @@ public class JstToDLTKNodeTranslator {
 				new MtdInvocationExprTranslator());
 		s_translators.put(JstArg.class, new JstArgTranslator());
 		s_translators.put(JstMethod.class, jstMethodTranslator);
+		s_translators.put(JstSynthesizedMethod.class, jstMethodTranslator);
 		s_translators.put(JstGlobalFunc.class, jstMethodTranslator);
 		s_translators.put(JstBlock.class, new JstBlockTranslator());
 		s_translators.put(JstName.class, new JstNameTranslator());
