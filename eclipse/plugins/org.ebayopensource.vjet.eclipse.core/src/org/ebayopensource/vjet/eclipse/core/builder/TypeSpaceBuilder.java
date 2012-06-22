@@ -28,6 +28,7 @@ import org.ebayopensource.dsf.ts.event.group.BatchGroupLoadingEvent;
 import org.ebayopensource.dsf.ts.event.group.IGroupEventListener;
 import org.ebayopensource.dsf.ts.event.group.RemoveGroupDependencyEvent;
 import org.ebayopensource.dsf.ts.event.group.RemoveGroupEvent;
+import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.core.parser.VjoParserToJstAndIType;
@@ -116,6 +117,10 @@ public class TypeSpaceBuilder {
 			if (entry.getEntryKind() == IBuildpathEntry.BPE_PROJECT) {
 				// add first segment of the project entry - project name.
 				list.add(entry.getPath().segment(0));
+				// add transitive project dependencies
+				
+				getSerFileGroupDepends(CodeassistUtils.getScriptProject(entry.getPath().segment(0)), list);
+				
 				
 			} else if (entry.getEntryKind() == IBuildpathEntry.BPE_LIBRARY){
 				String id = entry.getPath().segment(entry.getPath().segmentCount()-1);
