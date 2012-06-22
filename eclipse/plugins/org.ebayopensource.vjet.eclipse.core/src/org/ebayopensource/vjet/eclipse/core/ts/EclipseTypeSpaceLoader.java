@@ -675,6 +675,10 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 		if (resource.getName().equals(ScriptProject.BUILDPATH_FILENAME)) {
 			isBuildPathCnahgedEvent = delta.getKind() == IResourceDelta.CHANGED;
 		}
+		
+		if(resource instanceof IProject){
+			return true;
+		}
 
 		// check that no changes of the other recourses
 		if (!isBuildPathCnahgedEvent) {
