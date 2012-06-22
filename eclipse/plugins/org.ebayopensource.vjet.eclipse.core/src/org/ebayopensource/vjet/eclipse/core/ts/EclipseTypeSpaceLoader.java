@@ -676,7 +676,7 @@ public class EclipseTypeSpaceLoader implements ITypeSpaceLoader,
 			isBuildPathCnahgedEvent = delta.getKind() == IResourceDelta.CHANGED;
 		}
 		
-		if(resource instanceof IProject){
+		if(resource instanceof IProject && delta.getAffectedChildren().length==0){
 			return true;
 		}
 
