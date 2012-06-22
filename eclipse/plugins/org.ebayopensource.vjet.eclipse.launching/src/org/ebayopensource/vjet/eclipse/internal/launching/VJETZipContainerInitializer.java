@@ -45,8 +45,8 @@ public class VJETZipContainerInitializer extends BuildpathContainerInitializer {
 
 					BuildPathUtils.addLinkForGroup(groupName,
 							groupName);
-					System.out.println(containerPath);
-					System.out.println(project);
+//					System.out.println(containerPath);
+//					System.out.println(project);
 
 					VJETZipContainer container = new VJETZipContainer(
 							groupName, zipfile.getFullPath());
@@ -72,18 +72,19 @@ public class VJETZipContainerInitializer extends BuildpathContainerInitializer {
 				// TODO add to type space
 				entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
 						IBuildpathEntry.BPE_LIBRARY, ScriptProject
+								.canonicalizedPath(containerPath), false,
+						BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
+								.toArray(new IPath[excluded.size()]), EMPTY_RULES,
+						false, attributes, false));
+				entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
+						IBuildpathEntry.BPE_LIBRARY, ScriptProject
 								.canonicalizedPath(BuildPathUtils
 										.createPathForGroup(groupName)), false,
 						BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
 								.toArray(new IPath[excluded.size()]), EMPTY_RULES,
 						false, attributes, false));
 				
-				entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
-						IBuildpathEntry.BPE_LIBRARY, ScriptProject
-								.canonicalizedPath(containerPath), false,
-						BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
-								.toArray(new IPath[excluded.size()]), EMPTY_RULES,
-						false, attributes, false));
+				
 				return entries;
 
 			}
