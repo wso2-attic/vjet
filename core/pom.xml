@@ -21,7 +21,7 @@
       <module>org.ebayopensource.vjet.core.vjodef</module>
       <module>org.ebayopensource.vjet.core.jsgenshared</module>
       <module>org.ebayopensource.vjet.core.jstojava</module>
-      <!--<module>org.ebayopensource.vjet.core.javatojs</module>-->
+      <module>org.ebayopensource.vjet.core.javatojs</module>
       <module>org.ebayopensource.vjet.core.vjotool</module>
       <module>org.ebayopensource.vjet.core.wrapper</module>
       <module>runtime</module>
