@@ -12,7 +12,7 @@
       	<module>org.ebayopensource.vjet.test.core.jst</module>
       	<module>org.ebayopensource.vjet.test.core.jsnativetypes</module>
       	<module>org.ebayopensource.vjet.test.core.jstojava</module>
-      	<module>org.ebayopensource.vjet.test.core.javatojs</module>
+      	<!--<module>org.ebayopensource.vjet.test.core.javatojs</module>-->
       	<module>org.ebayopensource.vjet.test.core.vjotool</module>
       	<module>org.ebayopensource.vjet.test.rt.vjoruntime</module>
   </modules>
