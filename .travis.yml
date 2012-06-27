@@ -4,3 +4,5 @@ script: mvn -q clean install -s settings.xml
 branches:
   only:
     - master
+jdk:
+  - openjdk6
