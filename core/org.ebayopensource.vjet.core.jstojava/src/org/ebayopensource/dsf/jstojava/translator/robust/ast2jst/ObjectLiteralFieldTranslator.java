@@ -16,11 +16,13 @@ import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.expr.FuncExpr;
 import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.term.NV;
 import org.ebayopensource.dsf.jst.token.IExpr;
+import org.ebayopensource.dsf.jstojava.translator.JsDocHelper;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCommentUtil;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletion;
@@ -58,8 +60,18 @@ public class ObjectLiteralFieldTranslator extends
 			nv.setValue(value);
 			nv.addChild(value);
 
-			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(
-					astObjectliteralField.sourceStart()));
+			List<String> comments = new ArrayList<String>();
+			String comment =  m_ctx.getCommentCollector().getCommentNonMeta2(astObjectliteralField.sourceStart);
+			if(comment!=null){
+				comments.add(comment);
+			}
+//			nv.setComments(comments)
+//			JsDocHelper.addJsDoc(comment, value);
+			
+			nv.setComments(comments);
+			
+//			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(
+//					astObjectliteralField.sourceStart()));
 			int start = id.getSource().getStartOffSet();
 			if (value != null && value.getSource() != null) {
 				int end = value.getSource().getEndOffSet();
@@ -89,6 +101,7 @@ public class ObjectLiteralFieldTranslator extends
 		}
 
 		final List<IJsCommentMeta> metaArr = getCommentMeta(astObjectliteralField);
+		
 		if (metaArr != null && metaArr.size() > 0) {
 			final IJsCommentMeta meta = metaArr.get(0);
 			if (meta.getTyping() != null) {
@@ -102,9 +115,20 @@ public class ObjectLiteralFieldTranslator extends
 						final IJstMethod replacement = TranslateHelper.MethodTranslateHelper
 								.createJstSynthesizedMethod(metaArr, m_ctx,
 										id.getName());
+						
+						String commentStr =  m_ctx.getCommentCollector().getCommentNonMeta2(astObjectliteralField.sourceStart);
+						
+						 JsDocHelper.addJsDoc(commentStr, (JstMethod)((JstFuncType)metaDefinedType).getFunction());
+						
 						if (replacement != null) {
+							JsDocHelper.addJsDoc(commentStr, (JstMethod)replacement);
 							TranslateHelper.replaceSynthesizedMethodBinding(id,
 									replacement);
+							
+							
+							
+							
+							
 						}
 					}
 				}
@@ -118,6 +142,8 @@ public class ObjectLiteralFieldTranslator extends
 				m_ctx.getNextNodeSourceStart());
 
 	}
+	
+
 
 	private JstIdentifier createId(ObjectLiteralField astObjectliteralField) {
 		JstIdentifier id = new JstIdentifier(astObjectliteralField

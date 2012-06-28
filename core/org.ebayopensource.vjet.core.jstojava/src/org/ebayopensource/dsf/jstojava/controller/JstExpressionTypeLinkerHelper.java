@@ -15,6 +15,7 @@ import java.util.TreeSet;
 
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.util.TypeCheckUtil;
 import org.ebayopensource.dsf.jst.IInferred;
+import org.ebayopensource.dsf.jst.IJstDoc;
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
 import org.ebayopensource.dsf.jst.IJstGlobalProp;
 import org.ebayopensource.dsf.jst.IJstGlobalVar;
@@ -99,7 +100,6 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.IMetaExtension;
-import org.ebayopensource.dsf.jstojava.resolver.IOTypeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.OTypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
@@ -2473,13 +2473,22 @@ public class JstExpressionTypeLinkerHelper {
 					false, true);
 			final JstMethod func = ((FuncExpr) valueExpr).getFunc();
 			if (matchingOTypePty != null && func != null
-					&& matchingOTypePty.getType() != null
-					&& matchingOTypePty.getType() instanceof JstFuncType) {
-				deriveAnonymousFunction(
-						((JstFuncType) matchingOTypePty.getType())
-								.getFunction(),
-						func);
-				JstExpressionTypeLinkerTraversal.accept(valueExpr, revisitor);
+					&& matchingOTypePty.getType() != null) {
+				
+				if(matchingOTypePty.getType() instanceof JstFunctionRefType){
+					deriveAnonymousFunction(
+							((JstFunctionRefType) matchingOTypePty.getType())
+									.getMethodRef(),
+							func, matchingOTypePty.getDoc());
+					JstExpressionTypeLinkerTraversal.accept(valueExpr, revisitor);
+				}else if(matchingOTypePty.getType() instanceof JstFuncType){
+					deriveAnonymousFunction(
+							((JstFuncType) matchingOTypePty.getType())
+									.getFunction(),
+							func, matchingOTypePty.getDoc());
+					JstExpressionTypeLinkerTraversal.accept(valueExpr, revisitor);
+				}
+				
 			}
 		} else if (valueExpr instanceof ObjLiteral
 				&& valueExpr.getResultType() != null
@@ -2568,7 +2577,7 @@ public class JstExpressionTypeLinkerHelper {
 		if (func != null
 				&& (!checkAnonymous || (checkAnonymous && isAnonymousFunction(func)))
 				&& func instanceof JstMethod) {
-			deriveAnonymousFunction(lhsFunc, (JstMethod) func);
+			deriveAnonymousFunction(lhsFunc, (JstMethod) func, func.getDoc());
 			// bugfix by huzhou@ebay.com, needs to revisit the func expression
 			// to allow the correct binding inside after the inference
 			JstExpressionTypeLinkerTraversal.accept(func, revisitor);
@@ -2693,7 +2702,7 @@ public class JstExpressionTypeLinkerHelper {
 					}
 				}
 			}
-			deriveAnonymousFunction(paramType, (JstMethod) func);
+			deriveAnonymousFunction(paramType, (JstMethod) func, func.getDoc());
 			// bugfix by huzhou@ebay.com, needs to revisit
 			// the func expression
 			// to allow the correct binding inside after the
@@ -2868,7 +2877,7 @@ public class JstExpressionTypeLinkerHelper {
 					if (func != null && isAnonymousFunction(func)
 							&& func instanceof JstMethod) {
 						deriveAnonymousFunction((JstFuncType) rtnType,
-								(JstMethod) func);
+								(JstMethod) func, func.getDoc());
 						JstExpressionTypeLinkerTraversal
 								.accept(func, revisitor);
 					}
@@ -2890,9 +2899,9 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	private static void deriveAnonymousFunction(
-			final JstFuncType functionDefType, final JstMethod anonymousFunction) {
+			final JstFuncType functionDefType, final JstMethod anonymousFunction, IJstDoc doc) {
 		final IJstMethod paramFunction = functionDefType.getFunction();
-		deriveAnonymousFunction(paramFunction, anonymousFunction);
+		deriveAnonymousFunction(paramFunction, anonymousFunction, doc);
 	}
 
 	/**
@@ -2903,7 +2912,7 @@ public class JstExpressionTypeLinkerHelper {
 	 * @param anonymousFunction
 	 */
 	private static void deriveAnonymousFunction(final IJstMethod paramFunction,
-			final JstMethod anonymousFunction) {
+			final JstMethod anonymousFunction, IJstDoc doc) {
 		if (anonymousFunction == paramFunction) {
 			return;
 		}
@@ -2911,7 +2920,7 @@ public class JstExpressionTypeLinkerHelper {
 		// deal with return type inference and argument type inferences
 		final IJstType paramFunctionRtnType = paramFunction.getRtnType();
 		anonymousFunction.setRtnType(paramFunctionRtnType);
-
+		((JstMethod)paramFunction).setDoc(doc);
 		if (!paramFunction.isDispatcher()) {
 			final List<JstArg> params = paramFunction.getArgs();
 			final List<JstArg> inferParams = anonymousFunction.getArgs();

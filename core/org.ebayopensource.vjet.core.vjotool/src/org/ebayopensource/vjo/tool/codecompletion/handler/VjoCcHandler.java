@@ -414,6 +414,9 @@ public class VjoCcHandler implements IVjoCcHandler {
 			return false;
 		}
 		IJstType type = method.getOwnerType();
+		if(type==null){
+			return false;
+		}
 		String typeName = type.getName();
 		// TODO: here should use group name, but the result is empty now.
 		if (CodeCompletionUtils.isTypeType(typeName)) {
