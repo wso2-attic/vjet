@@ -419,7 +419,7 @@ public class VjoCcCtx {
 		}
 		JstSource source = jnode.getSource();
 		if (source != null
-				&& (source.getStartOffSet() < i && source.getEndOffSet() > i)) {
+				&& (source.getStartOffSet() < i && source.getEndOffSet() >= i)) {
 			return true;
 		}
 		return false;
