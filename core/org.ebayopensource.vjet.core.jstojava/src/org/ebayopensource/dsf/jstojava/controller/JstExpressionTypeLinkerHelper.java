@@ -3403,6 +3403,10 @@ public class JstExpressionTypeLinkerHelper {
 		JstTypeSpaceMgr tsMgr = resolver.getController().getJstTypeSpaceMgr();
 		ITypeSpace<IJstType, IJstNode> ts = tsMgr.getTypeSpace();
 
+		if(groupInfo == null){
+			return null;
+		}
+		
 		List<IJstType> typeList = ts.getVisibleType(fullName,
 				ts.getGroup(groupInfo.getGroupName()));
 
