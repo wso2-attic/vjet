@@ -1,7 +1,7 @@
 vjo.ctype("vjoPro.dsf.flash.Version")
 .needs(["vjoPro.dsf.client.Browser","vjoPro.dsf.client.ActiveX","vjoPro.dsf.utils.Bit","vjoPro.dsf.cookie.VjCookieJar"])
 .props({
-//>public String[]
+//>public int[]
 versions : [10,9], //versions to check
 //> public int get();
 get: function () {
