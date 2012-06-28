@@ -21,6 +21,7 @@ import org.ebayopensource.dsf.jst.ISynthesized;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstArray;
 import org.ebayopensource.dsf.jst.declaration.JstConstructor;
+import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstParamType;
@@ -39,14 +40,13 @@ public class JsDocGenerator extends BaseGenerator {
 
 	public static final String DOT = ".";
 	public static final String TYPE_REF_PREFIX = "type::";
-	private List<IJstMethod> m_methodsWritten;
+	private List<IJstMethod> m_methodsWritten = new ArrayList<IJstMethod>();
 	public JsDocGenerator(GeneratorCtx ctx) {
 		super(ctx);
 	}
 	
 	public void writeJsDoc(final IJstType type) {
 		
-		m_methodsWritten = new ArrayList<IJstMethod>();
 		JstModifiers modifiers = type.getModifiers();
 		boolean hasParams = type.getParamTypes().size() > 0;
 		getWriter().append(SPACE);
@@ -131,7 +131,7 @@ public class JsDocGenerator extends BaseGenerator {
 
 	public void writeJsDoc(IJstMethod mtd, String access, String name) {
 		startWriteJsDoc();
-		IJstType root = getType(mtd);
+		
 		// Final 
 		if (mtd.isFinal()){
 			getWriter().append(SPACE).append(JsCoreKeywords.EXT_FINAL);
@@ -144,6 +144,12 @@ public class JsDocGenerator extends BaseGenerator {
 			getWriter().append(SPACE).append(JsCoreKeywords.EXT_ABSTRACT);
 		}
 		
+		writeVjetDocRawMtd(mtd, name);
+
+	}
+
+	public void writeVjetDocRawMtd(IJstMethod mtd, String name) {
+		IJstType root = getType(mtd);
 		if (mtd.isOType() && mtd instanceof JstMethod) {		
 			JstMethod meth = (JstMethod)mtd;
 			getWriter().append(SPACE).append(meth.getOType().getName());
@@ -182,7 +188,6 @@ public class JsDocGenerator extends BaseGenerator {
 		writeJsDocParamType(mtd,root);
 
 		m_methodsWritten.add(mtd);
-
 	}
 
 	public void writeJsDoc(IJstMethod mtd, String access) {
@@ -447,6 +452,14 @@ public class JsDocGenerator extends BaseGenerator {
 			if (otype!=null){
 				return otype + DOT + name;
 			}
+			if(type instanceof JstFuncType){
+				getWriter().append("(");
+				IJstMethod mtd = ((JstFuncType)type).getFunction();
+				writeVjetDocRawMtd(mtd, mtd.getName().getName());
+				getWriter().append(")");
+				return "";
+			}
+			
 		}
 		return DataTypeHelper.getTypeName(type.getName());
 	}
