@@ -66,8 +66,6 @@ public class ObjectLiteralFieldTranslator extends
 				comments.add(comment);
 			}
 //			nv.setComments(comments)
-//			JsDocHelper.addJsDoc(comment, value);
-			
 			nv.setComments(comments);
 			
 //			nv.setComments(m_ctx.getCommentCollector().getCommentNonMeta(

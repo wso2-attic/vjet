@@ -278,6 +278,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 				List<String> advisors = new ArrayList<String>();
 				MtdInvocationExpr mtd = (MtdInvocationExpr) completion
 						.getRealParent();
+				// TODO problem when this is jst arg not jstmethod
 				JstMethod method = (JstMethod)mtd.getMethod();
 				IJstType type = method.getOwnerType();
 				

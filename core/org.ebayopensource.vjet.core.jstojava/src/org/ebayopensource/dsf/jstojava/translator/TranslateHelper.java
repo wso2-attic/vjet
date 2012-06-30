@@ -2348,6 +2348,12 @@ public class TranslateHelper {
 			}
 		}
 
+		private static List<String> getComments2(final IASTNode ast,
+				final TranslateCtx ctx) {
+			return ctx.getCommentCollector().getCommentNonMeta(
+					ast.sourceStart());
+		}
+		
 		private static String getComments(final IASTNode ast,
 				final TranslateCtx ctx) {
 			return ctx.getCommentCollector().getCommentNonMeta2(
@@ -2963,7 +2969,7 @@ public class TranslateHelper {
 			}
 			// jstMethod.setSource(TranslateHelper.getSource(astMtdDecl,
 			// ctx.getSourceUtil()));
-			// jstMethod.setComments(getComments(astMtdDecl, ctx));
+			 jstMethod.setComments(getComments2(astMtdDecl, ctx));
 
 			if (meta != null) {
 				jstMethod.setHasJsAnnotation(true);
