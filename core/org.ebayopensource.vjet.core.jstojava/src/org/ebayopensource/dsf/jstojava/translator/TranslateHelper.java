@@ -2350,6 +2350,9 @@ public class TranslateHelper {
 
 		private static List<String> getComments2(final IASTNode ast,
 				final TranslateCtx ctx) {
+			if(ast==null){
+				return Collections.EMPTY_LIST;
+			}
 			return ctx.getCommentCollector().getCommentNonMeta(
 					ast.sourceStart());
 		}
