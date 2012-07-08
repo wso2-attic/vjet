@@ -592,7 +592,12 @@ public class JstMethod extends BaseJstNode implements IJstMethod {
 	}
 	
 	public JstMethod setOverloaded(List<IJstMethod> jstMethods) {
-		m_overloaded = jstMethods;
+		if(jstMethods!=null){
+			m_overloaded = new ArrayList<IJstMethod>();
+			m_overloaded.addAll(jstMethods);
+		}else{
+			m_overloaded = jstMethods;
+		}
 		return this;
 	}
 	
