@@ -720,4 +720,6 @@ public interface IJstType extends IJstNode {
 	
 	Map<String, Object> getOptions();
 
+	boolean isSingleton();
+
 }

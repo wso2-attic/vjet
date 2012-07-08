@@ -36,6 +36,10 @@ public class OptionsTranslator extends BasePropsProtosTranslator {
 				fieldName = fieldName.replace("\"", "");
 				fieldName = fieldName.replace("\'", "");
 				
+				if(fieldName.equals("singleton")){
+					jstType.setSingleton(Boolean.valueOf(field.getInitializer().toString()));
+				}
+				
 				if(fieldName.equals("alias")){
 					String fieldValue  = field.getInitializer().toString();
 					fieldValue = fieldValue.replace("\"", "");

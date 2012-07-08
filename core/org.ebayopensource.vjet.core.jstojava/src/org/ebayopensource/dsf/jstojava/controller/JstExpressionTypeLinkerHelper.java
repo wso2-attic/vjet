@@ -613,7 +613,7 @@ public class JstExpressionTypeLinkerHelper {
 				bound = types.get(0);
 			}
 		}
-		bound = bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper
+		bound = bound instanceof IJstType && !(bound instanceof IJstRefType) && !((IJstType)bound).isSingleton() ? JstTypeHelper
 				.getJstTypeRefType((IJstType) bound) : bound;
 
 		return bound;
@@ -677,7 +677,7 @@ public class JstExpressionTypeLinkerHelper {
 	public static List<IJstType> collectBindingTypes(IJstNode bound) {
 		final List<IJstType> toBindTypes = new ArrayList<IJstType>(2);
 		if (bound instanceof IJstType) {
-			if (bound instanceof IJstRefType) {
+			if (bound instanceof IJstRefType || ((IJstType)bound).isSingleton()) {
 				toBindTypes.add((IJstType) bound);
 			} else {
 				toBindTypes.add(JstTypeHelper

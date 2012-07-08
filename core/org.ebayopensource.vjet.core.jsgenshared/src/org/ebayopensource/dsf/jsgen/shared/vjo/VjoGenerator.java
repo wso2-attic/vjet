@@ -240,6 +240,18 @@ public class VjoGenerator extends BaseGenerator {
 			getWriter().append("})");
 		}
 		
+		if(type.isSingleton()){
+			writeNewline();
+			getWriter().append(".options({");
+			indent();
+			writeNewline(); 
+			writeIndent();
+			getWriter().append("singleton:" + true);
+			outdent();
+			writeNewline(); 
+			getWriter().append("})");
+		}
+		
 		if(type.getAliasTypeName()!=null ){
 			writeNewline();
 			getWriter().append(".options({");

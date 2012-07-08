@@ -680,5 +680,10 @@ public class JstExtendedType implements IJstType {
 		throw new UnsupportedOperationException("secondary types not supported for extension");
 	}
 	
+	@Override
+	public boolean isSingleton() {
+		return m_targetType.isSingleton();
+	}
+	
 
 }

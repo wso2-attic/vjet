@@ -28,13 +28,11 @@ import org.ebayopensource.dsf.jst.declaration.JstAttributedType;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstDeferredType;
-import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.declaration.JstFuncType;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredRefType;
 import org.ebayopensource.dsf.jst.declaration.JstInferredType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
-import org.ebayopensource.dsf.jst.declaration.JstMixedType;
 import org.ebayopensource.dsf.jst.declaration.JstObjectLiteralType;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialAttributedMethod;
 import org.ebayopensource.dsf.jst.declaration.JstPotentialOtypeMethod;
@@ -46,7 +44,6 @@ import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.declaration.JstVar;
 import org.ebayopensource.dsf.jst.declaration.JstVariantType;
 import org.ebayopensource.dsf.jst.declaration.JstVars;
-import org.ebayopensource.dsf.jst.declaration.SynthJstProxyMethod;
 import org.ebayopensource.dsf.jst.declaration.SynthOlType;
 import org.ebayopensource.dsf.jst.declaration.TopLevelVarTable;
 import org.ebayopensource.dsf.jst.declaration.VarTable;
@@ -87,7 +84,6 @@ import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
-import org.ebayopensource.dsf.jstojava.resolver.IThisObjScopeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.IThisScopeContext;
 import org.ebayopensource.dsf.jstojava.resolver.ITypeConstructContext;
 import org.ebayopensource.dsf.jstojava.resolver.ThisObjScopeResolverRegistry;
@@ -2156,6 +2152,23 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		IJstType type = JstExpressionTypeLinkerHelper.findFullQualifiedType(
 				m_resolver, fullName, m_groupInfo);
 		if (type != null) {
+			if(type.isSingleton()){
+				JstInferredType infferedType = new JstInferredType(type);
+				fieldAccessExpr.getName().setJstBinding(infferedType);
+				JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this,
+						fieldAccessExpr, infferedType, m_groupInfo);
+				JstExpressionTypeLinkerHelper
+				.setPackageBindingForQualifier(fieldAccessExpr.getExpr()); // set
+																			// the
+																			// package
+																			// binding
+																			// for
+																			// each
+																			// qualifier,
+																			// e.g.
+																			// a.b.c
+				return infferedType;
+			}else{
 			final JstTypeRefType typeRef = new JstTypeRefType(type);
 			fieldAccessExpr.getName().setJstBinding(typeRef);
 			JstExpressionTypeLinkerHelper.doExprTypeUpdate(m_resolver, this,
@@ -2171,6 +2184,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 																				// e.g.
 																				// a.b.c
 			return typeRef;
+			}
 		}
 		return null;
 	}

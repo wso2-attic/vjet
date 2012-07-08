@@ -109,6 +109,8 @@ public class JstType extends BaseJstNode implements IJstType {
 
 	private List<IJstType> m_secondaryTypes;
 
+	private boolean m_singleton;
+
 	//
 	// Constructor
 	//
@@ -3138,5 +3140,15 @@ public class JstType extends BaseJstNode implements IJstType {
 			return Collections.EMPTY_LIST;
 		}
 		return Collections.unmodifiableList(m_secondaryTypes);
+	}
+
+	public void setSingleton(boolean b) {
+		m_singleton = b;
+		
+	}
+	
+	public boolean isSingleton() {
+		return m_singleton;
+		
 	}
 }
