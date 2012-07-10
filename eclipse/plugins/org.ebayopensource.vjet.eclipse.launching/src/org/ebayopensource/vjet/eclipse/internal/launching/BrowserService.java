@@ -19,8 +19,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWebBrowser;
 import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
+import org.eclipse.jetty.Server;
+import org.eclipse.jetty.handler.AbstractHandler;
 
 public class BrowserService {
 	
