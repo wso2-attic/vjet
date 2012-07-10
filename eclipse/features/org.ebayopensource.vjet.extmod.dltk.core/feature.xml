@@ -308,7 +308,7 @@ a jury trial in any resulting litigation.
    </url>
 
    <requires>
-      <import feature="org.eclipse.platform" version="3.3.0" match="compatible"/>
+      <import feature="org.eclipse.platform" version="3.3.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin

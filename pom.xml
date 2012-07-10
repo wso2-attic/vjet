@@ -462,6 +462,26 @@
 		    <module>eclipse</module>
 		</modules>
     </profile>
+    
+  	<profile>
+      <id>platform-juno</id>
+      <activation>
+        <property>
+          <name>platform-version-name</name>
+          <value>juno</value>
+        </property>
+      </activation>
+      <properties>
+        <eclipse-site>http://download.eclipse.org/releases/juno/</eclipse-site>
+        <platform-version>[3.6,3.7)</platform-version>
+        <swtbot-site>http://download.eclipse.org/technology/swtbot/juno/dev-build/update-site</swtbot-site>
+      </properties>
+	  <modules>
+		    <module>extmod</module>
+		    <module>core</module>
+		    <module>eclipse</module>
+		</modules>
+    </profile>
 
 	
 	<profile>
