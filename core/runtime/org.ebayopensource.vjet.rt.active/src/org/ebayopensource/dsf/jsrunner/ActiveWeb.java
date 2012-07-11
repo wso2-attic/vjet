@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.net.URL;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,8 +28,9 @@ import org.ebayopensource.dsf.html.dom.DHtmlDocument;
 import org.ebayopensource.dsf.html.dom.DHtmlDocumentBuilder;
 import org.ebayopensource.dsf.html.dom.DScript;
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.handler.AbstractHandler;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
 import com.ebay.kernel.util.xml.IIndenter;
 
@@ -229,11 +231,10 @@ public class ActiveWeb {
 	}
 	
 	private class WebHandler extends AbstractHandler {
-		public void handle(String target,
-			HttpServletRequest request,
-			HttpServletResponse response,
-			int dispatch) throws IOException {
-			
+
+		@Override
+		public void handle(String arg0, Request arg1, HttpServletRequest request,
+				HttpServletResponse response) throws IOException, ServletException {
 			if (DISPLAY_COMMAND.equalsIgnoreCase(request.getPathInfo())) {
 				m_intercepter.handleRequest(request, null);
 				m_intercepter.handleResponse(request, response, m_doc, IIndenter.COMPACT);
@@ -253,6 +254,7 @@ public class ActiveWeb {
 			} else {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			}
+			
 		}
 	}
 }

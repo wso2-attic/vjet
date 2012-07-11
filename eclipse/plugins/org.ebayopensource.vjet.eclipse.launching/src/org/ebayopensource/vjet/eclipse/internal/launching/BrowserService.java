@@ -11,6 +11,7 @@ package org.ebayopensource.vjet.eclipse.internal.launching;
 import java.io.IOException;
 import java.net.URL;
 
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,8 +20,9 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWebBrowser;
 import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
-import org.eclipse.jetty.Server;
-import org.eclipse.jetty.handler.AbstractHandler;
+import org.eclipse.jetty.server.Request;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.AbstractHandler;
 
 public class BrowserService {
 	
@@ -88,11 +90,10 @@ public class BrowserService {
 	
 	private class WebHandler extends AbstractHandler {
 		
-		public void handle(String target,
-			HttpServletRequest request,
-			HttpServletResponse response,
-			int dispatch) throws IOException {
-			
+
+		@Override
+		public void handle(String arg0, Request arg1, HttpServletRequest request,
+				HttpServletResponse response) throws IOException, ServletException {
 			request.setCharacterEncoding("UTF8");
 			String webUrl = request.getParameter(PARM_WEB_URL);
 			// TODO use the browser location and name to let ADOM to know which dom to emulate
@@ -114,6 +115,7 @@ public class BrowserService {
 			ServletOutputStream outputStream = response.getOutputStream();
 			outputStream.write(1);
 			outputStream.close();
+			
 		}
 	}
 }
