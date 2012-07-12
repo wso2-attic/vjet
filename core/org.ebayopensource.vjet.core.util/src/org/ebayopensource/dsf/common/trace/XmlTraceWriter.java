@@ -11,8 +11,7 @@ package org.ebayopensource.dsf.common.trace;
 import java.io.StringWriter;
 
 import org.ebayopensource.dsf.common.trace.IDsfTracer.ExitStatus;
-import com.ebay.kernel.calwrapper.CalTransaction;
-import com.ebay.kernel.calwrapper.CalTransactionHelper;
+
 import com.ebay.kernel.util.xml.IIndenter;
 import com.ebay.kernel.util.xml.IXmlStreamWriter;
 import com.ebay.kernel.util.xml.XmlStreamWriter;
@@ -41,10 +40,10 @@ public class XmlTraceWriter implements ITraceWriter {
 		m_xmlWriter = new XmlStreamWriter(new StringWriter(1024), new IIndenter.Pretty());
 		m_xmlWriter.writeStartElement("V4Trace");
 		
-		CalTransaction transaction = CalTransactionHelper.findTransaction("URL");
-		if (transaction != null) {
-			m_xmlWriter.writeAttribute("calid", transaction.getName());
-		}	
+//		CalTransaction transaction = CalTransactionHelper.findTransaction("URL");
+//		if (transaction != null) {
+//			m_xmlWriter.writeAttribute("calid", transaction.getName());
+//		}	
 	}
 	
 	//
