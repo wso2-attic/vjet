@@ -38,8 +38,6 @@ import org.ebayopensource.dsf.html.dom.util.IChildIntercepter;
 import org.ebayopensource.dsf.html.dom.util.INodeEmitter;
 import org.ebayopensource.dsf.html.dom.util.IRawSaxHandler;
 import org.ebayopensource.dsf.html.dom.util.ISelfRender;
-import com.ebay.kernel.calwrapper.CalTransaction;
-import com.ebay.kernel.calwrapper.CalTransactionFactory;
 import com.ebay.kernel.util.Z;
 import com.ebay.kernel.util.xml.IIndenter;
 import com.ebay.kernel.util.xml.IXmlStreamWriter;
@@ -115,21 +113,21 @@ public abstract class BaseDomWriter implements IRawSaxHandler, IChildIntercepter
 	{
 		if (node instanceof ISelfRender) {
 			final ISelfRender selfRender = (ISelfRender)node;
-			CalTransaction calTx = null;
+//			CalTransaction calTx = null;
 			boolean retcode = false;
 			try {
-				if (DomWriterBean.getInstance().isCalLogEnabled()) {
-					calTx = CalTransactionFactory.create(this.getClass().getSimpleName());
-					calTx.setName(node.getClass().getName());
-				}
+//				if (DomWriterBean.getInstance().isCalLogEnabled()) {
+//					calTx = CalTransactionFactory.create(this.getClass().getSimpleName());
+//					calTx.setName(node.getClass().getName());
+//				}
 		        // Let the component render itself. If it returns false,
 				// it wants us to render for it.
 				retcode = selfRender.render(this, m_writer, nodeEmitter);
 			} finally {
-				if (calTx != null){
-					calTx.setStatus("0");
-					calTx.completed();
-				}
+//				if (calTx != null){
+//					calTx.setStatus("0");
+//					calTx.completed();
+//				}
 			}
 			if(!retcode) {
 				final NodeList kids = node.getChildNodes();
