@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.common;
 import java.io.Serializable;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 public abstract class Id extends BaseEnum implements Serializable, Cloneable {	
 	private static long s_sequence = 0 ;	// We use for name generation

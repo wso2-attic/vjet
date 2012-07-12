@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.html.events;
 
 import java.util.ListIterator;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 public class IEEventType extends BaseEnum implements IDomEventType {
 

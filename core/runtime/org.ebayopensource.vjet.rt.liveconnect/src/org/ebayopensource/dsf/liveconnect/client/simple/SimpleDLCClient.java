@@ -19,7 +19,7 @@ import org.ebayopensource.dsf.liveconnect.client.IDLCClient;
 import org.ebayopensource.dsf.liveconnect.client.NativeEvent;
 import org.ebayopensource.dsf.liveconnect.client.DLCEvent.KeyInfo;
 import org.ebayopensource.dsf.liveconnect.client.DLCEvent.Position;
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 import com.ebay.kernel.resource.ResourceUtil;
 
 /**

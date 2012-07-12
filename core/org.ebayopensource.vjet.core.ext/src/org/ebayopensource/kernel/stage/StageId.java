@@ -10,7 +10,7 @@ package org.ebayopensource.kernel.stage;
 
 import java.io.Serializable;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 import com.ebay.kernel.exception.BaseRuntimeException;
 
 public class StageId extends BaseEnum implements Serializable, Cloneable {

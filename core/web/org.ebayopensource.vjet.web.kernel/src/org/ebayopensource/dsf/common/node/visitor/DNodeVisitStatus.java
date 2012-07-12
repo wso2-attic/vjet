@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.common.node.visitor;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 /**
  * Set of Enums used to indicate how the component graph traversals should

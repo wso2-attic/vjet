@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.services;
 
 import java.util.ListIterator;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 public class ConnectionProtocolEnum extends BaseEnum {
 

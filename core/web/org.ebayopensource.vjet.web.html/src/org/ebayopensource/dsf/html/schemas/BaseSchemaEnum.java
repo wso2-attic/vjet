@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.html.schemas;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 public abstract class BaseSchemaEnum extends BaseEnum {
 	protected BaseSchemaEnum(final int id, final String name) {

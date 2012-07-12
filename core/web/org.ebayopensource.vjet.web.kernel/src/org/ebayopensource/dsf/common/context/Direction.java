@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.common.context;
 import java.io.Serializable;
 import java.util.ListIterator;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 /**
  * Enum used to denote the direction of application processing.  During Request

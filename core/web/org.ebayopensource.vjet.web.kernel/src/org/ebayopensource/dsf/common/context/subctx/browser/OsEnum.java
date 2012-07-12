@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.common.context.subctx.browser;
 
 import java.util.ListIterator;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 import com.ebay.kernel.util.JdkUtil;
 
 
