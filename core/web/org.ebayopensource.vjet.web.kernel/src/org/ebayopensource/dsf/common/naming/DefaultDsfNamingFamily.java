@@ -13,7 +13,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.ebay.kernel.util.RopeBuffer;
 import org.ebayopensource.dsf.common.Z;
 /**
  * Checks whether the given name is valid for use. This is the default verifier
@@ -83,7 +82,7 @@ public class DefaultDsfNamingFamily implements IDsfNamingFamily, Serializable {
 
 	}
 	public String compose(final ResolvedNamePath resolvedNamePath) {
-		final RopeBuffer buffer = new RopeBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		final ParentScopes scopes = resolvedNamePath.getScopes();
 		if (scopes != null) {
 			final Iterator<String> iter = scopes.iterator();

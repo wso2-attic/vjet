@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.common.xml;
 
+import java.io.StringWriter;
 import java.io.Writer;
 
 import com.ebay.kernel.util.RopeBufferWriter;
@@ -37,7 +38,7 @@ public class XmlStreamWriterOptions {
 	//
 	public Writer getWriter() {
 		if (m_writer == null) {
-			m_writer = new RopeBufferWriter() ;
+			m_writer = new StringWriter() ;
 		}
 		return m_writer ;
 	}

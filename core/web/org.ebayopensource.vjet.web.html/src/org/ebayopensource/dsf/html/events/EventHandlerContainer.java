@@ -17,7 +17,6 @@ import java.util.Map;
 import org.ebayopensource.dsf.dom.DElement;
 import org.ebayopensource.dsf.html.dom.DBody;
 import org.ebayopensource.dsf.html.dom.HtmlTypeEnum;
-import com.ebay.kernel.util.RopeBuffer;
 
 public class EventHandlerContainer {
 	private Map<DsfEventTarget, List<EventsToHandlerPair>> m_targets ;
@@ -310,7 +309,7 @@ public class EventHandlerContainer {
 		}
         
 		// TODO: Put in a meaningul toString()
-        final RopeBuffer buffer = new RopeBuffer();
+        final StringBuilder buffer = new StringBuilder();
 
 	    return buffer.toString();
 	}

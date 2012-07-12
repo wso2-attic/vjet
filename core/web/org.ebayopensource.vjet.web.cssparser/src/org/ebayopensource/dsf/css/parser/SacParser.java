@@ -30,7 +30,6 @@ import org.ebayopensource.dsf.css.sac.ISelector;
 import org.ebayopensource.dsf.css.sac.ISelectorFactory;
 import org.ebayopensource.dsf.css.sac.ISelectorList;
 import org.ebayopensource.dsf.css.sac.ISimpleSelector;
-import com.ebay.kernel.util.RopeBuffer;
 
 // TODO: after parser code generation, do these items (these cannot be done in the .jj grammar file):
 // - clean up warnings in SacParserTokenManager
@@ -71,7 +70,7 @@ public class SacParser implements IParser, SacParserConstants {
     private ISelectorFactory m_selectorFactory = new DSelectorFactory();
     private IConditionFactory m_conditionFactory = new DConditionFactory();
     private boolean m_quiet = true;
-    private RopeBuffer m_errorMessage = new RopeBuffer();
+    private StringBuilder m_errorMessage = new StringBuilder();
 
     public SacParser() {
         this((CharStream) null);
@@ -182,7 +181,6 @@ public class SacParser implements IParser, SacParserConstants {
     private void assertError() throws CssException{
         if (m_errorMessage.length() != 0) {
             String errorMsg = m_errorMessage.toString();
-            m_errorMessage.clear();
             throw new CssException(CssException.SAC_SYNTAX_ERR, errorMsg, null);
         }
     }

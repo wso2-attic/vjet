@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ebayopensource.dsf.common.DsfVerifierConfig;
-import com.ebay.kernel.util.RopeBuffer;
 
 public final class DNamespace implements Serializable {
 	/**
@@ -141,7 +140,7 @@ public final class DNamespace implements Serializable {
 
 	@Override
 	public String toString() {
-		RopeBuffer buf = new RopeBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append("[Namespace: prefix: \"");
 		buf.append(m_prefix);
 		buf.append("\" uri: \"");
@@ -163,7 +162,7 @@ public final class DNamespace implements Serializable {
 	// Private
 	//
 	private static String namespaceKeyFor(final String prefix, final String uri){
-		RopeBuffer buf = new RopeBuffer();
+		StringBuilder buf = new StringBuilder();
 		if (prefix != null) {
 			buf.append(prefix);
 		}

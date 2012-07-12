@@ -11,7 +11,6 @@ package org.ebayopensource.af.common.error;
 // Java imports
 import java.io.Serializable;
 
-import com.ebay.kernel.util.RopeBuffer;
 
 /**
  * Error Identifier. Category,sub-category, and name together constitute
@@ -295,7 +294,7 @@ public	class 	 	ErrorId
 	 * context.category.subcategory.name
 	 */
 	public String getFullName() {
-		RopeBuffer rb = new RopeBuffer();
+		StringBuilder rb = new StringBuilder();
 		if (m_context != null) {
 			rb.append(m_context).append(SEPARATOR);
 		}

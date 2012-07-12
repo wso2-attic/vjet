@@ -27,7 +27,6 @@ import org.ebayopensource.dsf.dom.util.TextChildOperationUtil;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.ISimpleJsEventHandler;
 import org.ebayopensource.dsf.html.js.IJsFunc;
-import com.ebay.kernel.util.RopeBuffer;
 import org.ebayopensource.dsf.common.Z;
 
 public class DOption extends BaseAttrsHtmlElement
@@ -87,7 +86,7 @@ public class DOption extends BaseAttrsHtmlElement
 	}
 
 	public String getHtmlText() {
-		final RopeBuffer text = new RopeBuffer() ;
+		final StringBuilder text = new StringBuilder() ;
 
 		// Find the Text nodes contained within this element and return their
 		// concatenated value. Required to go around comments, entities, etc.

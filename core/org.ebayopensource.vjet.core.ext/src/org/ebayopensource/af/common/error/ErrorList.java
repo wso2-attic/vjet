@@ -21,7 +21,7 @@ import java.util.ListIterator;
 import java.util.TreeSet;
 
 import com.ebay.kernel.exception.BaseRuntimeException;
-import com.ebay.kernel.util.RopeBuffer;
+
 
 /**
  * Aggregates information about several individual errors.
@@ -653,7 +653,7 @@ public class ErrorList implements Serializable {
 	 * @return "{" [ErrorObject.toString()] { "," ErrorObject.toString() } "}"
 	 */
 	public String toString() {
-		RopeBuffer sb = new RopeBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("{ ");
 		int size = size();
 		for (int i = 0; i < size; i++) {
@@ -800,7 +800,7 @@ public class ErrorList implements Serializable {
 		}
 
 		public String toString() {
-			RopeBuffer sb = new RopeBuffer();
+			StringBuilder sb = new StringBuilder();
 			sb.append("{ ");
 			int size = size();
 			for (int i = 0; i < size; i++) {
