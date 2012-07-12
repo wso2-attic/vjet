@@ -11,7 +11,7 @@ package org.ebayopensource.af.common.error;
 // Java imports
 import java.util.ListIterator;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 import com.ebay.kernel.logger.LogLevel;
 /**
  * Enumeration of the severity levels for errors.

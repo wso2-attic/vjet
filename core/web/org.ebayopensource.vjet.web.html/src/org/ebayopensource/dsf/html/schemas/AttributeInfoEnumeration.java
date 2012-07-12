@@ -9,7 +9,7 @@
 package org.ebayopensource.dsf.html.schemas;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 public class AttributeInfoEnumeration implements IAttributeInfo {
 	private final String m_name;

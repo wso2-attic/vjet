@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.service;
 
 import java.util.ListIterator;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 /**
  * 

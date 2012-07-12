@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.ebayopensource.dsf.dom.DText;
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 public final class DOMTypeEnum extends BaseEnum {
 	private static final long serialVersionUID = 1L;

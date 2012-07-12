@@ -17,7 +17,7 @@ import org.ebayopensource.dsf.html.dom.DHtmlDocument;
 import org.ebayopensource.dsf.html.dom.DImg;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.IEEventType;
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 /**
  * This class is here for controlling server side JS execution during

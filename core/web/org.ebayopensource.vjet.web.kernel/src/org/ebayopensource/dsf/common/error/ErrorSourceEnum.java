@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.common.error;
 import java.io.Serializable;
 import java.util.List;
 
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 //
 // Enum Classes

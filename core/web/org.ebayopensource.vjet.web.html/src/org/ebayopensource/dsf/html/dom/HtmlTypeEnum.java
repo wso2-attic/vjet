@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.ebayopensource.dsf.dom.DText;
 import org.ebayopensource.dsf.html.events.IDomType;
-import com.ebay.kernel.BaseEnum;
+import org.ebayopensource.dsf.common.enums.BaseEnum;
 
 public final class HtmlTypeEnum extends BaseEnum implements IDomType {
 	private static final long serialVersionUID = 1L;

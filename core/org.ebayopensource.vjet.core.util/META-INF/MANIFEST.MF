@@ -11,6 +11,7 @@ Require-Bundle:
   uKernelCore;visibility:=reexport
 Export-Package: 
  org.ebayopensource.dsf.common,
+ org.ebayopensource.dsf.common.enums,
  org.ebayopensource.dsf.common.event,
  org.ebayopensource.dsf.common.exceptions,
  org.ebayopensource.dsf.common.trace,
