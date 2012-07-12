@@ -9,7 +9,7 @@
 package org.ebayopensource.dsf.dom;
 
 import org.ebayopensource.af.common.types.RawString;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class DRawString extends DText {
 	private RawString m_rawString ;

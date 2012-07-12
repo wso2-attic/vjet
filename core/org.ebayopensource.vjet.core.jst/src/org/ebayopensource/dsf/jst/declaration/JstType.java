@@ -29,7 +29,7 @@ import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.ISynthesized;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Implementation of IJstType

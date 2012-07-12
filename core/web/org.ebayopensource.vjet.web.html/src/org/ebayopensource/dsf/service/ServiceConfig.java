@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 import org.ebayopensource.dsf.services.ConnectionProtocolEnum;
 import org.ebayopensource.dsf.services.IRequestValidator;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class ServiceConfig implements Cloneable, Serializable {
 	

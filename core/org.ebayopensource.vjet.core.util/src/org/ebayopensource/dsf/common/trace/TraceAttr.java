@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.common.trace;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class TraceAttr implements ITraceData {
 	private String m_name;

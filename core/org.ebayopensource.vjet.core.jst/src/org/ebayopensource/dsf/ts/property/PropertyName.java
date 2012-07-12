@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.ts.property;
 
 import org.ebayopensource.dsf.ts.type.ISymbolName;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Immutable, scoped name for property

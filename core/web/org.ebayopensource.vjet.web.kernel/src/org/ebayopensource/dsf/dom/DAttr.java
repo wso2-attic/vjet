@@ -21,7 +21,7 @@ import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.common.trace.TraceCtx;
 import org.ebayopensource.dsf.dom.support.DsfDomLevelNotSupportedException;
 import org.ebayopensource.dsf.dom.support.XmlVerifier;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class DAttr extends DNode implements Attr, IValueBinding<String> {
 

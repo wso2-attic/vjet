@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.ts.event;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 
 public class EventListenerStatus<D> {

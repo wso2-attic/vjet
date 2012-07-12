@@ -18,7 +18,7 @@ import org.ebayopensource.dsf.css.dom.ICssStyleDeclaration;
 //import org.ebayopensource.dsf.css.CssIdConstant;
 //import org.ebayopensource.dsf.css.dom.ICssStyleDeclaration;
 //import org.ebayopensource.dsf.css.dom.impl.DCssStyleDeclaration;
-//import com.ebay.kernel.util.Z;
+//import org.ebayopensource.dsf.common.Z;
 
 /** 
  * @Deprecated - Use BaseHtmlElement instead.

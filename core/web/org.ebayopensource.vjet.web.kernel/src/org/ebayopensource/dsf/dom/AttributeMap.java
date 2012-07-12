@@ -30,7 +30,7 @@ import org.ebayopensource.dsf.common.naming.DsfInvalidNameException;
 import org.ebayopensource.dsf.common.naming.NameStatusCheck;
 import org.ebayopensource.dsf.common.node.IAttributeMap;
 import org.ebayopensource.dsf.dom.support.DsfDomNotSupportedRuntimeException;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * This class is basically a LinkedHashMap<String, Object> that is aware

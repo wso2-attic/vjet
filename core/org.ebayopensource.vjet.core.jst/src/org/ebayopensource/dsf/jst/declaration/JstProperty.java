@@ -19,7 +19,7 @@ import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.ISimpleTerm;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
 import org.ebayopensource.dsf.jst.util.DataTypeHelper;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Implementation of IJstProperty

@@ -25,7 +25,7 @@ import org.ebayopensource.dsf.dom.util.TextChildOperationUtil;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.ISimpleJsEventHandler;
 import org.ebayopensource.dsf.html.js.IJsFunc;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
 <a href='http://dev.w3.org/html5/spec/Overview.html#the-article-element'>W3C article</a>

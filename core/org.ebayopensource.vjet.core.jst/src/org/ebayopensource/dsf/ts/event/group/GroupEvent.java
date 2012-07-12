@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.ts.event.group;
 import org.ebayopensource.dsf.ts.event.ISourceEvent;
 import org.ebayopensource.dsf.ts.event.ISourceEventListener;
 import org.ebayopensource.dsf.ts.event.dispatch.IEventListenerHandle;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Base for all group related event types.

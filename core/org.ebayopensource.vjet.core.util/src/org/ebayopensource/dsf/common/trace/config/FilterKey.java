@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.common.trace.config;
 import org.ebayopensource.dsf.common.exceptions.DsfExceptionHelper;
 import org.ebayopensource.dsf.common.trace.filter.FilterId;
 import org.ebayopensource.dsf.common.trace.filter.ITraceEventFilter;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public final class FilterKey {
 	public static final String DELIMITER = ":";

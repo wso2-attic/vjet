@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.common.event;
 
 import java.util.EventObject;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Root of all DSF event objects.  The only framework requirement is for

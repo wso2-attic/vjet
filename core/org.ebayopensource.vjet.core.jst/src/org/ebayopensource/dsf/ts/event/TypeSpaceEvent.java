@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.ts.event;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Default implementation of ITypeSpaceEvent

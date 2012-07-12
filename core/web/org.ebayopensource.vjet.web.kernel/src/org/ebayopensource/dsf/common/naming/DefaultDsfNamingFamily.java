@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.ebay.kernel.util.RopeBuffer;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 /**
  * Checks whether the given name is valid for use. This is the default verifier
  * which implements <code>IDsfNamingFamily</code>. The html id is invalid, if

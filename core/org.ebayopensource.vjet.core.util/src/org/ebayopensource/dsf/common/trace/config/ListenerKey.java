@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.common.trace.config;
 import org.ebayopensource.dsf.common.exceptions.DsfExceptionHelper;
 import org.ebayopensource.dsf.common.trace.listener.ITraceEventListener;
 import org.ebayopensource.dsf.common.trace.listener.ListenerId;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public final class ListenerKey {
 	

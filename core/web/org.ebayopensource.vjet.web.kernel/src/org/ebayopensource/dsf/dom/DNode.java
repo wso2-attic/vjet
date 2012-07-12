@@ -71,7 +71,7 @@ import org.ebayopensource.dsf.dom.support.DsfDomLevelNotSupportedException;
 import org.ebayopensource.dsf.dom.support.DsfDomNotSupportedRuntimeException;
 import org.ebayopensource.dsf.dom.support.Jif;
 import org.ebayopensource.kernel.stage.IStage;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public abstract class DNode
 	implements 

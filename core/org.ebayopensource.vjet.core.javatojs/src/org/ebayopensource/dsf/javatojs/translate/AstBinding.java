@@ -18,7 +18,7 @@ import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.TypeDeclaration;
 
 import org.ebayopensource.dsf.jst.JstSource.IBinding;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class AstBinding implements IBinding {
 	

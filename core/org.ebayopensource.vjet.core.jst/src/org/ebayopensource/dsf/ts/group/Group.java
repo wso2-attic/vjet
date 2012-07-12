@@ -24,7 +24,7 @@ import org.ebayopensource.dsf.ts.TypeSpace;
 import org.ebayopensource.dsf.ts.graph.DependencyGraph;
 import org.ebayopensource.dsf.ts.graph.DependencyNode;
 import org.ebayopensource.dsf.ts.graph.IDependencyCollector;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Default implementation of <code>IGroup</code>.

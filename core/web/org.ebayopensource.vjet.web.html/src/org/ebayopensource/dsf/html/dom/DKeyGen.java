@@ -22,7 +22,7 @@ import org.ebayopensource.dsf.dom.support.DNamespace;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.ISimpleJsEventHandler;
 import org.ebayopensource.dsf.html.js.IJsFunc;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
 <a href='http://dev.w3.org/html5/spec/Overview.html#the-keygen-element'>W3C keygen</a>

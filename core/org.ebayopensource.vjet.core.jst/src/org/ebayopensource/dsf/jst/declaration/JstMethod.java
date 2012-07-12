@@ -23,7 +23,7 @@ import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Implementation of <code>IJstMethod</code>

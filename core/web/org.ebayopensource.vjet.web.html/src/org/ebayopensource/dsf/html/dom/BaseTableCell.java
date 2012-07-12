@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.html.dom;
 import org.w3c.dom.Node;
 
 import org.ebayopensource.dsf.dom.DNode;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public abstract class BaseTableCell extends BaseAttrsHtmlElement {
 	/** "left" */

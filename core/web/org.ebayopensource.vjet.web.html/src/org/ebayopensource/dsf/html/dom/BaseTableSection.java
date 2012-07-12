@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.html.dom;
 
 import org.w3c.dom.Node;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public abstract class BaseTableSection extends BaseAttrsHtmlElement {
 

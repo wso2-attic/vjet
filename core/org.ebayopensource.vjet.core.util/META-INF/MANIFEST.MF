@@ -26,4 +26,5 @@ Export-Package:
  org.ebayopensource.dsf.json,
  org.ebayopensource.dsf.serializers,
  org.ebayopensource.dsf.util
+Import-Package: org.ebayopensource.dsf.common
 
