@@ -33,7 +33,9 @@ import org.eclipse.dltk.mod.debug.core.model.IScriptDebugTarget;
 import org.eclipse.dltk.mod.internal.debug.core.model.ScriptDebugTarget;
 import org.eclipse.dltk.mod.launching.InterpreterConfig;
 import org.eclipse.dltk.mod.launching.ScriptLaunchConfigurationConstants;
+import org.eclipse.jdt.internal.launching.JavaSourceLookupDirector;
 import org.eclipse.jdt.launching.IJavaLaunchConfigurationConstants;
+import org.eclipse.jdt.launching.sourcelookup.JavaSourceLocator;
 
 import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjet.eclipse.internal.debug.debugger.VjetDebugEngineRunner;
@@ -256,9 +258,11 @@ public class LaunchListener implements ILaunchListener {
 		if (origLocator instanceof VjetSourceLookupDirector) {
 			return;
 		}
-		// modify by patrick
-		launch.setSourceLocator(getSourceLocator(launch, origLocator));
-		// end modify
+		
+		// added for bug VJET-107
+		if(origLocator instanceof JavaSourceLookupDirector ){
+			launch.setSourceLocator(getSourceLocator(launch, origLocator));
+		}
 	}
 
 	// add by patrick
