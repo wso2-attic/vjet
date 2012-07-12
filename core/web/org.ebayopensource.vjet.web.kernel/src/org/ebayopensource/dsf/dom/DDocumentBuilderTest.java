@@ -14,7 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.ebayopensource.dsf.common.DsfVerifierConfig;
 import org.ebayopensource.dsf.dom.util.XmlWriterHelper;
-import com.ebay.kernel.util.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 public class DDocumentBuilderTest {
 	

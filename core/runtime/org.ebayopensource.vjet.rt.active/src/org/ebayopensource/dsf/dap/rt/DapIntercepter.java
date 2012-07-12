@@ -30,7 +30,8 @@ import org.ebayopensource.dsf.liveconnect.client.IDLCClient;
 import org.ebayopensource.dsf.service.client.IClientServiceHandlerRegistry;
 import com.ebay.kernel.logger.LogLevel;
 import com.ebay.kernel.logger.Logger;
-import com.ebay.kernel.util.xml.IIndenter;
+
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 /**
  * This class intercepts incoming request and outgoing response to

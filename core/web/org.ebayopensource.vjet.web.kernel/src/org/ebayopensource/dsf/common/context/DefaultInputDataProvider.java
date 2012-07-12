@@ -14,7 +14,7 @@ import java.util.Map.Entry;
 
 import org.ebayopensource.dsf.common.exceptions.DsfExceptionHelper;
 import org.ebayopensource.dsf.common.trace.introspect.ITraceable;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 public class DefaultInputDataProvider implements IInputParamValueProvider, ITraceable {
 

@@ -32,6 +32,8 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 import org.ebayopensource.dsf.dap.cnr.DapCaptureData.DapHttpCall;
 import org.ebayopensource.dsf.dap.cnr.DapCaptureData.DlcRnR;
 import org.ebayopensource.dsf.dap.cnr.DapCaptureData.DlcSend;
@@ -57,8 +59,7 @@ import org.ebayopensource.dsf.liveconnect.client.IDLCClient;
 import org.ebayopensource.dsf.liveconnect.client.DLCEvent.KeyInfo;
 import org.ebayopensource.dsf.liveconnect.client.DLCEvent.Position;
 import org.ebayopensource.dsf.liveconnect.client.simple.SimpleDLCClient;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
+
 
 /*
  * The XML structure could be like below:

@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.dap.cnr;
 
 import org.ebayopensource.dsf.dap.rt.DapCtx;
 import org.ebayopensource.dsf.dap.rt.IDapConsoleHandler;
-import com.ebay.kernel.util.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 public class DapConsoleCaptureDumpHandler implements IDapConsoleHandler {
 

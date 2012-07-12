@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.dom.util;
 
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
+
+
 
 public class XmlWriter extends BaseDomWriter {
 

@@ -14,12 +14,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import org.ebayopensource.dsf.common.context.DsfCtx;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 import org.ebayopensource.dsf.html.HtmlWriterHelper;
 import org.ebayopensource.dsf.html.dom.BaseHtmlElement;
 import org.ebayopensource.dsf.html.dom.DBody;
 import org.ebayopensource.dsf.html.dom.DHtml;
 import org.ebayopensource.dsf.html.dom.DHtmlDocument;
-import com.ebay.kernel.util.xml.IIndenter;
 
 public class DapDomHelper {
 	

@@ -29,7 +29,7 @@ import org.ebayopensource.dsf.html.dom.DSelect;
 import org.ebayopensource.dsf.html.dom.ECssAttr;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
 import org.ebayopensource.dsf.liveconnect.IDLCDispatcher;
-import com.ebay.kernel.util.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 public final class DapDomChangeListener implements IDomChangeListener {
 	private static final String EMPTY = "";

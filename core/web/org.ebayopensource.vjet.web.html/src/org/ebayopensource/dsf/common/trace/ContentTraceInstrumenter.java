@@ -19,7 +19,7 @@ import org.ebayopensource.dsf.dom.DRawString;
 import org.ebayopensource.dsf.dom.DText;
 import org.ebayopensource.dsf.html.dom.DScript;
 import org.ebayopensource.dsf.html.dom.DSelect;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 public class ContentTraceInstrumenter implements IInstrumentDElement {
 	

@@ -21,10 +21,11 @@ import org.ebayopensource.dsf.common.trace.introspect.ITraceObjectIntrospector;
 import org.ebayopensource.dsf.common.trace.introspect.JavaBeanTraceIntrospector;
 import org.ebayopensource.dsf.common.tracer.TraceManager;
 import org.ebayopensource.dsf.common.tracer.TraceUtil;
-import com.ebay.kernel.cache.SequencedHashMap;
-import com.ebay.kernel.util.XmlEncoder;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.XmlEncoder;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
+
+import org.apache.commons.collections.map.ListOrderedMap;
 
 public class DefaultTraceEventHandler implements ITraceEventHandler {
 	
@@ -36,7 +37,7 @@ public class DefaultTraceEventHandler implements ITraceEventHandler {
 
 	// Indent Support
 	private int m_traceDepth = -1;
-	private SequencedHashMap m_stackLabels = new SequencedHashMap();
+	private ListOrderedMap m_stackLabels = new ListOrderedMap();
 	
 	private static final String DOT = ".";
 	private boolean m_endElement = false;
@@ -360,7 +361,7 @@ public class DefaultTraceEventHandler implements ITraceEventHandler {
 	}
 	
 	private void pop(final String label){
-		if (m_stackLabels.remove(m_stackLabels.getLastKey()) != null){
+		if (m_stackLabels.remove(m_stackLabels.lastKey()) != null){
 			m_traceDepth--;
 		}
 	}

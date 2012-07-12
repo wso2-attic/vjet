@@ -17,7 +17,7 @@ import org.ebayopensource.dsf.DSFRootAnchor;
 import org.ebayopensource.dsf.dom.DAttr;
 import org.ebayopensource.dsf.dom.DElement;
 import org.ebayopensource.dsf.html.dom.util.ISelfRender;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 public class DefaultNodeInstrumenter implements IInstrumentDElement {
 	// Add non-standard attribute spycmpname=classNameOfNode and add a

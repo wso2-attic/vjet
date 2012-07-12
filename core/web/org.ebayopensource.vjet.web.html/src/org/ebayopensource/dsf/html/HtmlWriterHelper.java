@@ -19,6 +19,7 @@ import org.w3c.dom.Node;
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.common.node.IAttributeMap;
 import org.ebayopensource.dsf.common.trace.TraceCtx;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 import org.ebayopensource.dsf.dom.DAttr;
 import org.ebayopensource.dsf.dom.DNode;
 import org.ebayopensource.dsf.dom.util.DomToRawSaxGenerator;
@@ -29,7 +30,6 @@ import org.ebayopensource.dsf.html.dom.util.IHtmlStreamWriter;
 import org.ebayopensource.dsf.html.dom.util.INodeEmitter;
 import org.ebayopensource.dsf.html.dom.util.IRawSaxHandler;
 import org.ebayopensource.dsf.html.schemas.ISchema;
-import com.ebay.kernel.util.xml.IIndenter;
 /**
  * Provides methods to support rendering/encoding DSF graphs. Those methods can
  * return the HTML as a String as well as do the rendering to a Writer.

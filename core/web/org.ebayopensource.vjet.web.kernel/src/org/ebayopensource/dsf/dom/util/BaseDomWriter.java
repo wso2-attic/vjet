@@ -16,9 +16,13 @@ import java.util.Set;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import org.ebayopensource.dsf.common.Z;
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.common.node.IAttributeMap;
 import org.ebayopensource.dsf.common.trace.TraceCtx;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.XmlStreamException;
 import org.ebayopensource.dsf.dom.DAttr;
 import org.ebayopensource.dsf.dom.DCDATASection;
 import org.ebayopensource.dsf.dom.DComment;
@@ -38,10 +42,8 @@ import org.ebayopensource.dsf.html.dom.util.IChildIntercepter;
 import org.ebayopensource.dsf.html.dom.util.INodeEmitter;
 import org.ebayopensource.dsf.html.dom.util.IRawSaxHandler;
 import org.ebayopensource.dsf.html.dom.util.ISelfRender;
-import com.ebay.kernel.util.Z;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
-import com.ebay.kernel.util.xml.XmlStreamException;
+
+
 
 public abstract class BaseDomWriter implements IRawSaxHandler, IChildIntercepter{
 	/**

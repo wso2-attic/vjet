@@ -20,10 +20,11 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.ebay.kernel.logger.Logger;
-import com.ebay.kernel.util.XmlEncoder;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.XmlEncoder;
 
 /**
  * Java Bean introspector writes the state of target object into writer.
@@ -40,7 +41,7 @@ import com.ebay.kernel.util.xml.IXmlStreamWriter;
 public class JavaBeanTraceIntrospector extends DefaultTraceIntrospector {
 	
 	static private JavaBeanTraceIntrospector s_default = new JavaBeanTraceIntrospector();
-	private static Logger s_logger = Logger.getInstance(JavaBeanTraceIntrospector.class);
+	private static Logger s_logger = Logger.getLogger(JavaBeanTraceIntrospector.class.getName());
 	
 	private static final String[] getterPrefixes = { "get", "is", "has" };
 	private static final String GetterException ="getter-exception";
@@ -105,7 +106,7 @@ public class JavaBeanTraceIntrospector extends DefaultTraceIntrospector {
 		}
 		catch(Throwable t){
 			//t.printStackTrace();
-			s_logger.log(t);
+			s_logger.log(Level.SEVERE, "could not write ", t);
 		}
 	}
 	

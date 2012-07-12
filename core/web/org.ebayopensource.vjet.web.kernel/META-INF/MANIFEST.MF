@@ -47,5 +47,7 @@ Export-Package:
   org.ebayopensource.dsf.html.dom.util,
   org.ebayopensource.dsf.common.context.subctx.browser,
   org.ebayopensource.dsf.common.context.subctx.browser.internal
+Import-Package: org.apache.commons.collections,
+ org.apache.commons.collections.map;version="3.2.0"
 
 

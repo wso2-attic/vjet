@@ -13,7 +13,7 @@ import org.w3c.dom.NodeList;
 
 import org.ebayopensource.dsf.dom.DElement;
 import org.ebayopensource.dsf.html.dom.DBr;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 /**
  * Base DSF component class. If there is no natural wrapping tag, and you wish
  * to reduce page weight, you can extend from <code>InvisibleContainer</code>.

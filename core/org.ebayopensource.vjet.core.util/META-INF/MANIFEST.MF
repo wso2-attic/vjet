@@ -10,19 +10,20 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: 
   uKernelCore;visibility:=reexport
 Export-Package: 
-  org.ebayopensource.dsf.common,
-  org.ebayopensource.dsf.json,
-  org.ebayopensource.dsf.serializers,
-  org.ebayopensource.dsf.util,
-  org.ebayopensource.dsf.common.event,
-  org.ebayopensource.dsf.common.exceptions,
-  org.ebayopensource.dsf.common.trace,
-  org.ebayopensource.dsf.common.tracer,
-  org.ebayopensource.dsf.javatojs.anno,
-  org.ebayopensource.dsf.common.trace.config,
-  org.ebayopensource.dsf.common.trace.event,
-  org.ebayopensource.dsf.common.trace.filter,
-  org.ebayopensource.dsf.common.trace.handler,
-  org.ebayopensource.dsf.common.trace.introspect,
-  org.ebayopensource.dsf.common.trace.listener
+ org.ebayopensource.dsf.common,
+ org.ebayopensource.dsf.common.event,
+ org.ebayopensource.dsf.common.exceptions,
+ org.ebayopensource.dsf.common.trace,
+ org.ebayopensource.dsf.common.trace.config,
+ org.ebayopensource.dsf.common.trace.event,
+ org.ebayopensource.dsf.common.trace.filter,
+ org.ebayopensource.dsf.common.trace.handler,
+ org.ebayopensource.dsf.common.trace.introspect,
+ org.ebayopensource.dsf.common.trace.listener,
+ org.ebayopensource.dsf.common.tracer,
+ org.ebayopensource.dsf.common.xml,
+ org.ebayopensource.dsf.javatojs.anno,
+ org.ebayopensource.dsf.json,
+ org.ebayopensource.dsf.serializers,
+ org.ebayopensource.dsf.util
 

@@ -21,9 +21,9 @@ import java.util.logging.Logger;
 import org.ebayopensource.dsf.common.trace.handler.TraceFileHandler;
 import org.ebayopensource.dsf.common.trace.handler.TraceFormatter;
 import org.ebayopensource.dsf.common.trace.listener.ITraceEventListener;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
 
 public class TranslateTraceMgr {
 	

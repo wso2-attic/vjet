@@ -17,8 +17,8 @@ import org.ebayopensource.dsf.common.trace.event.TraceEvent;
 import org.ebayopensource.dsf.common.trace.event.TraceType;
 import org.ebayopensource.dsf.common.trace.listener.ITraceEventListener;
 import org.ebayopensource.dsf.common.trace.listener.ListenerId;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 
 public class TranslateTraceListener implements ITraceEventListener {
 	

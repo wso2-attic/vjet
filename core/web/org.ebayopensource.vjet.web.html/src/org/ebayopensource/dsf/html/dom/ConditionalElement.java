@@ -17,7 +17,7 @@ import org.ebayopensource.dsf.html.IConditionalUsage.Condition;
 import org.ebayopensource.dsf.html.dom.util.INodeEmitter;
 import org.ebayopensource.dsf.html.dom.util.IRawSaxHandler;
 import org.ebayopensource.dsf.html.dom.util.ISelfRender;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 /**
  * This special element is to support device-specific conditional comment

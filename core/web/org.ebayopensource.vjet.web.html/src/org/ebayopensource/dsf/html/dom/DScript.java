@@ -14,6 +14,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import org.ebayopensource.dsf.common.Z;
 import org.ebayopensource.dsf.common.event.AbortDsfEventProcessingException;
 import org.ebayopensource.dsf.common.event.DsfEvent;
 import org.ebayopensource.dsf.common.node.IAttributeMap;
@@ -33,10 +34,8 @@ import org.ebayopensource.dsf.html.dom.util.ISelfRender;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.ISimpleJsEventHandler;
 import org.ebayopensource.dsf.html.js.IJsFunc;
-import com.ebay.kernel.util.RopeBuffer;
-import com.ebay.kernel.util.Z;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
 
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 /**
 * http://www.w3.org/TR/REC-html40/interact/scripts.html#edef-SCRIPT
 */
@@ -228,7 +227,7 @@ public class DScript extends BaseOrigNonAttrs implements ISelfRender
 	// HTML Attributes
 	//	
 	public String getHtmlText() {
-		final RopeBuffer text = new RopeBuffer();
+		final StringBuilder text = new StringBuilder();
 
 		// Find the Text nodes contained within this element and return their
 		// concatenated value. Required to go around comments, entities, etc.
