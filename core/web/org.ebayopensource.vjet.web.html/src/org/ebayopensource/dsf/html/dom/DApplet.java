@@ -23,7 +23,7 @@ import org.ebayopensource.dsf.dom.util.TextChildOperationUtil;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.ISimpleJsEventHandler;
 import org.ebayopensource.dsf.html.js.IJsFunc;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
 * Deprecated. The following element is not included in HTML 5.0 because it has 

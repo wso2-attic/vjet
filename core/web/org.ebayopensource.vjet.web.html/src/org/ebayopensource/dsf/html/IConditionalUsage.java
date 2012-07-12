@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.html;
 
 import java.io.Serializable;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * This provides an interface for the conditional usage of resources

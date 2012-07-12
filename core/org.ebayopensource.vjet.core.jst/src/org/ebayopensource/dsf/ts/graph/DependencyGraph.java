@@ -19,7 +19,7 @@ import java.util.Map.Entry;
 import org.ebayopensource.dsf.ts.TypeSpace;
 import org.ebayopensource.dsf.ts.group.Group;
 import org.ebayopensource.dsf.ts.util.CollectionHelper;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Default implementation of IDependencyGraph<E>.

@@ -9,7 +9,7 @@
 package org.ebayopensource.dsf.common.ovs;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Generic type for captioned values. Value cannot be null and is immutable.

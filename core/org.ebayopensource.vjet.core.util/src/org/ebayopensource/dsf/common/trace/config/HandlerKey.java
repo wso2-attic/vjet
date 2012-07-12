@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.common.trace.config;
 import org.ebayopensource.dsf.common.exceptions.DsfExceptionHelper;
 import org.ebayopensource.dsf.common.trace.handler.HandlerId;
 import org.ebayopensource.dsf.common.trace.handler.ITraceEventHandler;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public final class HandlerKey {
 

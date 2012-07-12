@@ -16,7 +16,7 @@ import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstAnnotation;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class JstAnnotation extends BaseJstNode implements IJstAnnotation {
 	

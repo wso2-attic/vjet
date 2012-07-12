@@ -16,7 +16,7 @@ import java.util.Map.Entry;
 
 import org.ebayopensource.dsf.javatojs.translate.config.MethodKey;
 import org.ebayopensource.dsf.javatojs.translate.custom.CustomAttr;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Meta data definition for Java to JS Custom Translation

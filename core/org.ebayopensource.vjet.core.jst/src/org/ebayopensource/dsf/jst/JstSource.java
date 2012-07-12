@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.jst;
 
 import java.io.Serializable;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class JstSource implements Serializable {
 

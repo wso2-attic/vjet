@@ -41,7 +41,7 @@ import org.ebayopensource.dsf.common.node.IDNodeList;
 import org.ebayopensource.dsf.dom.support.DNamespace;
 import org.ebayopensource.dsf.dom.support.DsfDomLevelNotSupportedException;
 import org.ebayopensource.dsf.dom.support.DsfDomNotSupportedRuntimeException;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * The <code>Document</code> interface represents the entire HTML or XML 

@@ -37,7 +37,7 @@ import org.ebayopensource.dsf.dom.support.DsfDomLevelNotSupportedException;
 import org.ebayopensource.dsf.dom.support.DsfDomNotSupportedRuntimeException;
 import org.ebayopensource.dsf.dom.support.NSNameVerifier;
 import org.ebayopensource.dsf.dom.support.XmlVerifier;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class DElement extends DNode implements Element {
 

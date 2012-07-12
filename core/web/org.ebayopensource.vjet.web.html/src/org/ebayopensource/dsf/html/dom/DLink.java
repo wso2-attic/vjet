@@ -22,7 +22,7 @@ import org.ebayopensource.dsf.dom.support.DNamespace;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.ISimpleJsEventHandler;
 import org.ebayopensource.dsf.html.js.IJsFunc;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
 * http://www.w3.org/TR/REC-html40/struct/links.html#edef-LINK

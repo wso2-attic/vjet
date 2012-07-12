@@ -49,7 +49,7 @@ import org.ebayopensource.dsf.jstojava.translator.TranslateHelper;
 import org.ebayopensource.dsf.jstojava.translator.robust.JstSourceUtil;
 import org.ebayopensource.vjo.lib.LibManager;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class BootstrapParser {
 

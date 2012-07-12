@@ -12,7 +12,7 @@ import org.ebayopensource.dsf.ts.event.ISourceEvent;
 import org.ebayopensource.dsf.ts.event.ISourceEventListener;
 import org.ebayopensource.dsf.ts.event.dispatch.IEventListenerHandle;
 import org.ebayopensource.dsf.ts.method.MethodName;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public abstract class MethodEvent implements ISourceEvent<IEventListenerHandle> {
 	

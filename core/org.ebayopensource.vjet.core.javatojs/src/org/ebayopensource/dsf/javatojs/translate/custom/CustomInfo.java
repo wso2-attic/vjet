@@ -10,7 +10,7 @@ package org.ebayopensource.dsf.javatojs.translate.custom;
 
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class CustomInfo {
 	

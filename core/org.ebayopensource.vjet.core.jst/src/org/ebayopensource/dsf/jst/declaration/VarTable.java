@@ -19,7 +19,7 @@ import java.util.Map.Entry;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class VarTable implements Serializable {
 

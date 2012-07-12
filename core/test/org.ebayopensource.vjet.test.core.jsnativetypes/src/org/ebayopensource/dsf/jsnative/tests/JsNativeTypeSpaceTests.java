@@ -66,7 +66,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.ebay.junitnexgen.category.ModuleInfo;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 @ModuleInfo(value="JsNativeResource",subModuleId="JsNativeResource")
 public class JsNativeTypeSpaceTests {

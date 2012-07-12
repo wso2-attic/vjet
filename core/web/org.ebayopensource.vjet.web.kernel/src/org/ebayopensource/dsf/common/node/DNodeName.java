@@ -18,7 +18,7 @@ import org.ebayopensource.dsf.common.naming.NameStatusCheck;
 import org.ebayopensource.dsf.common.naming.ParentScopes;
 import org.ebayopensource.dsf.common.naming.ResolvedNamePath;
 import org.ebayopensource.dsf.dom.DNode;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class DNodeName implements IDsfName {
 	private static final long serialVersionUID = -4458564866139801250L;

@@ -12,7 +12,7 @@ import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * the wrapper node that is used for import/extend/satisfies.

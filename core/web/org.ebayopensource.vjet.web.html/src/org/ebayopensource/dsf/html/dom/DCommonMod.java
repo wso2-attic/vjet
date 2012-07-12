@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.html.dom;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public abstract class DCommonMod extends BaseAttrsHtmlElement {
 

@@ -22,7 +22,7 @@ import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class MtdInvocationExpr extends BaseJstNode implements IExpr, IStmt {
 	

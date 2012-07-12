@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.javatojs.translate.policy;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public class Pkg {
 	

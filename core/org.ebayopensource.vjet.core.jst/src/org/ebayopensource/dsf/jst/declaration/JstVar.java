@@ -14,7 +14,7 @@ import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.token.ILHS;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 public final class JstVar extends BaseJstNode implements ILHS, IStmt {
 

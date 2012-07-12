@@ -20,7 +20,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Notation;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
-import com.ebay.kernel.util.Z;
+import org.ebayopensource.dsf.common.Z;
 
 /**
  * Each <code>Document</code> has a <code>doctype</code> attribute whose value 
