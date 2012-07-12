@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.dom.util;
 import java.io.IOException;
 import java.io.Writer;
 
-import com.ebay.kernel.util.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 /**
  * Indenter used by HtmlLineLocator to locate line number of a given DOM tree.
  */

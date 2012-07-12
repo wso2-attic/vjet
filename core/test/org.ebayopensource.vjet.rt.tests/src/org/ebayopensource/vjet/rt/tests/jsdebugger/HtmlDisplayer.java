@@ -11,6 +11,7 @@ import org.ebayopensource.dsf.active.client.AWindow;
 import org.ebayopensource.dsf.active.dom.html.ANode;
 import org.ebayopensource.dsf.active.dom.html.ANodeInternal;
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 import org.ebayopensource.dsf.dom.DNode;
 import org.ebayopensource.dsf.html.HtmlWriterHelper;
 import org.ebayopensource.dsf.html.dom.DHtmlDocument;
@@ -18,7 +19,6 @@ import org.ebayopensource.dsf.util.NodeToDHtmlDocument;
 import org.w3c.dom.Node;
 
 
-import com.ebay.kernel.util.xml.IIndenter;
 
 /** 
  * This class is used to provide support for displaying HTML.  The HTML can be

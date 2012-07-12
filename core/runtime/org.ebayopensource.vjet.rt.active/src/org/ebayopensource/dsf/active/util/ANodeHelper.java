@@ -12,7 +12,7 @@ import org.ebayopensource.dsf.active.dom.html.ANode;
 import org.ebayopensource.dsf.active.dom.html.ANodeInternal;
 import org.ebayopensource.dsf.html.HtmlWriterHelper;
 import org.ebayopensource.dsf.html.XHtmlWriterHelper;
-import com.ebay.kernel.util.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 public final class ANodeHelper extends ANodeInternal {
 	

@@ -12,7 +12,7 @@ import org.ebayopensource.dsf.common.trace.IDsfInstrumenter;
 import org.ebayopensource.dsf.common.trace.TraceCtx;
 import org.ebayopensource.dsf.dom.DElement;
 import org.ebayopensource.dsf.html.dom.util.IRawSaxHandler;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 /**
  * Dom2RawSaxTraceGenerator

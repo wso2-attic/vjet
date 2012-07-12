@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.html.dom.util;
 
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
+
+
 /**
  * Interface for components that provides their own rendering. A subtype of a V4
  * DOM Type can control its own rendering and encoding via implementing this 

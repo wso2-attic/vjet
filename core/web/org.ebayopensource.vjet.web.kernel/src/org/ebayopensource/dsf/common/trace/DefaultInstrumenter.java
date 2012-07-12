@@ -16,7 +16,7 @@ import org.w3c.dom.Node;
 
 import org.ebayopensource.dsf.dom.DAttr;
 import org.ebayopensource.dsf.dom.DElement;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 /**
  * Default implementation for instrument handler management.

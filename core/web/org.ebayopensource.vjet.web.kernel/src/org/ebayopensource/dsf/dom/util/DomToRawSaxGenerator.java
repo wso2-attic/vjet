@@ -12,6 +12,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 import org.ebayopensource.dsf.dom.DCDATASection;
 import org.ebayopensource.dsf.dom.DComment;
 import org.ebayopensource.dsf.dom.DDocument;
@@ -25,7 +26,7 @@ import org.ebayopensource.dsf.dom.DText;
 import org.ebayopensource.dsf.html.dom.util.IChildIntercepter;
 import org.ebayopensource.dsf.html.dom.util.INodeEmitter;
 import org.ebayopensource.dsf.html.dom.util.IRawSaxHandler;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+
 
 /**
  * This implementation is highly recursive.  We haven't seen stack maintenance

@@ -11,10 +11,10 @@ package org.ebayopensource.dsf.common.trace;
 import java.io.StringWriter;
 
 import org.ebayopensource.dsf.common.trace.IDsfTracer.ExitStatus;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
 
 public class XmlTraceWriter implements ITraceWriter {
 

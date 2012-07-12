@@ -12,7 +12,8 @@ import org.ebayopensource.dsf.html.HtmlWriterHelper;
 import org.ebayopensource.dsf.html.dom.DHtmlDocument;
 import org.ebayopensource.dsf.html.dom.DHtmlDocumentBuilder;
 import com.ebay.kernel.util.FileUtils;
-import com.ebay.kernel.util.xml.IIndenter;
+
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 public class AEx {
 	public static void main(String[] args) {

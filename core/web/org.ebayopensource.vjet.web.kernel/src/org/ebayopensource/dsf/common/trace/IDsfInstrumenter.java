@@ -10,9 +10,10 @@ package org.ebayopensource.dsf.common.trace;
 
 	import org.w3c.dom.Node;
 
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 import org.ebayopensource.dsf.dom.DAttr;
 import org.ebayopensource.dsf.dom.DElement;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+
 
 	/**
  * Defines common interface for adding, detecting and running

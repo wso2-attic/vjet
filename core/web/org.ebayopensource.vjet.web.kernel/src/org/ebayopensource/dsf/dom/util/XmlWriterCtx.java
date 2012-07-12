@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.dom.util;
 import java.io.Writer;
 
 //import org.ebayopensource.dsf.html.schemas.ISchema;
-import com.ebay.kernel.util.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 public class XmlWriterCtx extends DomWriterCtx {
 	//

@@ -18,12 +18,12 @@ import org.w3c.dom.Node;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.common.trace.TraceCtx;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 import org.ebayopensource.dsf.dom.util.DomToRawSaxGenerator;
 import org.ebayopensource.dsf.dom.util.DomToRawSaxTraceGenerator;
 import org.ebayopensource.dsf.html.dom.util.HtmlStreamWriter;
 import org.ebayopensource.dsf.html.dom.util.HtmlWriter;
 import org.ebayopensource.dsf.html.schemas.Xhtml10Transitional;
-import com.ebay.kernel.util.xml.IIndenter;
 
 public class XHtmlWriterHelper {
 	/**

@@ -15,7 +15,7 @@ import org.ebayopensource.dsf.html.dom.HtmlTypeEnum;
 import org.ebayopensource.dsf.html.dom.HtmlTypeEnumAssociator;
 import org.ebayopensource.dsf.html.schemas.Html401Transitional;
 import org.ebayopensource.dsf.html.schemas.ISchema;
-import com.ebay.kernel.util.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IIndenter;
 
 public class HtmlWriterCtx extends DomWriterCtx {
 	private ISchema m_schema ; 

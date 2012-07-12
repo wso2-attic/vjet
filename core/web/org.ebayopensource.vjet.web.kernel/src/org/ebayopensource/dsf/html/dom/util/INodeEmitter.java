@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.html.dom.util;
 
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 import org.w3c.dom.Node;
 
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
 /**
  * Interface to generate all handler events for the passed in node. This is
  * useful when processing your own children. 

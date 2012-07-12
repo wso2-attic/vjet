@@ -8,7 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.html.dom.util;
 
-import com.ebay.kernel.util.xml.XmlStreamWriterDebugger;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriterDebugger;
+
 
 public class HtmlStreamWriterDebugger 
 	extends XmlStreamWriterDebugger implements IHtmlStreamWriter

@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.ProblemSeverity;
 import org.ebayopensource.dsf.jstojava.cml.vjetv.core.ArgumentsParser;
@@ -31,7 +32,7 @@ import org.ebayopensource.dsf.jstojava.cml.vjetv.model.IHeadlessLauncherConfigur
 import org.ebayopensource.dsf.jstojava.cml.vjetv.model.IHeadlessParserConfigure;
 import org.ebayopensource.dsf.jstojava.cml.vjetv.model.impl.EVLauncherResult;
 import org.ebayopensource.dsf.jstojava.cml.vjetv.util.FileOperator;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
+
 
 /**
  * Class/Interface description

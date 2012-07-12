@@ -17,7 +17,7 @@ import org.ebayopensource.dsf.html.dom.DA;
 import org.ebayopensource.dsf.html.dom.DSpan;
 import org.ebayopensource.dsf.html.dom.EHtmlAttr;
 import org.ebayopensource.dsf.html.dom.HtmlTypeEnum;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 public class LabelingComponentNodeInstrumenter implements IInstrumentDElement {
 

@@ -15,12 +15,13 @@ import java.io.Writer;
 import org.w3c.dom.DocumentType;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.XmlStreamException;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 import org.ebayopensource.dsf.dom.DDocumentType;
 import org.ebayopensource.dsf.html.HtmlWriterCtx;
 import org.ebayopensource.dsf.html.dom.DHtmlDocType;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.XmlStreamException;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
+
 
 public class HtmlStreamWriter extends XmlStreamWriter
 	implements IHtmlStreamWriter

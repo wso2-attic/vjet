@@ -19,12 +19,13 @@ import org.ebayopensource.dsf.common.trace.DataModelCtx;
 import org.ebayopensource.dsf.common.trace.TraceCtx;
 import org.ebayopensource.dsf.common.trace.introspect.JavaBeanTraceIntrospector;
 import org.ebayopensource.dsf.common.tracer.ITracer;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 import org.ebayopensource.dsf.dom.DNode;
 import com.ebay.kernel.logger.Logger;
 import com.ebay.kernel.util.Base64;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
-import com.ebay.kernel.util.xml.XmlStreamWriter;
+
 
 /**
  * 

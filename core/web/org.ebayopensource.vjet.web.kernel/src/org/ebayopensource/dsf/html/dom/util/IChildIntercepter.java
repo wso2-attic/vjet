@@ -8,8 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.html.dom.util;
 
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 import org.ebayopensource.dsf.dom.DElement;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+
 /**
  * Interface to generate the handler events for passed in node and its children.
  * The parser can ignore to generate the events for the subtree if it is already 

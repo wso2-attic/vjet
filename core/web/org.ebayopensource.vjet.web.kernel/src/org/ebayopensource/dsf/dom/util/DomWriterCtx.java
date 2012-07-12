@@ -11,10 +11,11 @@ package org.ebayopensource.dsf.dom.util;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import org.ebayopensource.dsf.common.Z;
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
-import com.ebay.kernel.util.Z;
-import com.ebay.kernel.util.xml.IIndenter;
-import com.ebay.kernel.util.xml.XmlStreamWriterOptions;
+import org.ebayopensource.dsf.common.xml.IIndenter;
+import org.ebayopensource.dsf.common.xml.XmlStreamWriterOptions;
+
 
 /**
  * BaseDomWriter helper class, holds information used by various writers to specify

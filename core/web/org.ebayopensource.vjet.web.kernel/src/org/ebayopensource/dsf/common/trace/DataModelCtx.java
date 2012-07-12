@@ -14,8 +14,9 @@ import java.util.Map;
 import org.ebayopensource.dsf.common.context.BaseSubCtx;
 import org.ebayopensource.dsf.common.context.ContextHelper;
 import org.ebayopensource.dsf.common.context.DsfCtx;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 import org.ebayopensource.dsf.dom.DNode;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+
 
 /*
  * DataModelHelper is designed as a singleton class. Any TLS information for 

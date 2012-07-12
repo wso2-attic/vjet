@@ -15,8 +15,9 @@ import org.w3c.dom.ProcessingInstruction;
 import org.ebayopensource.dsf.html.dom.util.INodeEmitter;
 import org.ebayopensource.dsf.html.dom.util.IRawSaxHandler;
 import org.ebayopensource.dsf.html.dom.util.ISelfRender;
-import com.ebay.kernel.util.Z;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+
+import org.ebayopensource.dsf.common.Z;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 
 /**
  * The <code>ProcessingInstruction</code> interface represents a "processing 

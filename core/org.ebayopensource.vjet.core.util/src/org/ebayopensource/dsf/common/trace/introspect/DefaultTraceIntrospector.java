@@ -13,10 +13,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import com.ebay.kernel.logger.Logger;
-import com.ebay.kernel.util.XmlEncoder;
-import com.ebay.kernel.util.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
+import org.ebayopensource.dsf.common.xml.XmlEncoder;
+
 
 /**
  * Default introspector that writes the state of passed in object into passed in writer.
@@ -34,7 +36,7 @@ public class DefaultTraceIntrospector implements ITraceObjectIntrospector {
 	
 	public static final int MAX_DEPTH_THROTTLE = 10;
 	public static final int MAX_COLLECTION_SIZE_THROTTLE = 50;
-	private static Logger s_logger = Logger.getInstance(DefaultTraceIntrospector.class);
+	private static Logger s_logger = Logger.getLogger(DefaultTraceIntrospector.class.getName());
 	
 	protected static final List<Class> s_primitiveTypes = new ArrayList<Class>(10);
 	static {
@@ -98,7 +100,7 @@ public class DefaultTraceIntrospector implements ITraceObjectIntrospector {
 		}
 		catch(Throwable t){
 			//t.printStackTrace();
-			s_logger.log(t);
+			s_logger.log(Level.SEVERE, "could not write state", t);
 		}
 	}
 	
@@ -235,10 +237,10 @@ public class DefaultTraceIntrospector implements ITraceObjectIntrospector {
 			}
 		} 
 		catch (IllegalArgumentException e) {
-			s_logger.log(e);
+			s_logger.log(Level.SEVERE,"",e);
 		} 
 		catch (IllegalAccessException e) {
-			s_logger.log(e);
+			s_logger.log(Level.SEVERE,"",e);
 		}
 		finally {
 			writer.writeEndElement();
