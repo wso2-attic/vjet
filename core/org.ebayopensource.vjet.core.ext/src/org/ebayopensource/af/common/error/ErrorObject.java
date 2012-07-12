@@ -11,7 +11,6 @@ package org.ebayopensource.af.common.error;
 // Java imports
 import java.io.Serializable;
 
-import com.ebay.kernel.util.RopeBuffer;
 
 /**
  * Aggregates information about an individual error.
@@ -299,7 +298,7 @@ public	class 		ErrorObject
 	 * @return "{" "Id :" ErrorId.toString() etc. "}"
 	 */
 	public String toString() {
-		RopeBuffer sb = new RopeBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		sb.append("{ ");
 		sb.append("Id : ");

@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.af.common.error;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.Serializable;
-import com.ebay.kernel.util.RopeBuffer;
 
 /**
  * Error arguments list based on String/String name/value pairs.
@@ -251,7 +250,7 @@ public	class		ErrorNamedArgs
 	 * @return "{" name ":" value { "," name ":" value } "}"
 	 */
 	public String toString() {
-		RopeBuffer sb = new RopeBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("{ ");
 		
 		int size = size();

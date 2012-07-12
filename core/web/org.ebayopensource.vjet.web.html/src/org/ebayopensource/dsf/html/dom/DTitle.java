@@ -24,7 +24,6 @@ import org.ebayopensource.dsf.dom.support.DNamespace;
 import org.ebayopensource.dsf.html.events.EventType;
 import org.ebayopensource.dsf.html.events.ISimpleJsEventHandler;
 import org.ebayopensource.dsf.html.js.IJsFunc;
-import com.ebay.kernel.util.RopeBuffer;
 import org.ebayopensource.dsf.common.Z;
 
 /**
@@ -87,7 +86,7 @@ public class DTitle extends BaseOrigNonAttrs //BaseI18nHtmlElement
 	//	
 	// TODO: Use TextChildOperationUtil?
 	public String getHtmlText() {
-		final RopeBuffer text = new RopeBuffer();
+		final StringBuilder text = new StringBuilder();
 
 		// Find the Text nodes contained within this element and return their
 		// concatenated value. Required to go around comments, entities, etc.

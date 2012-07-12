@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.ebay.kernel.util.RopeBuffer;
+
 /**
  * Checks whether the given html id is valid for use. The html id is invalid, if
  * it is:
@@ -83,7 +83,7 @@ public class HtmlIdNamingFamily
 
 	}
 	public String compose(final ResolvedNamePath resolvedNamePath) {
-		final RopeBuffer buffer = new RopeBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		final ParentScopes scopes = resolvedNamePath.getScopes();
 		if (scopes != null) {
 			final Iterator<String> iter = scopes.iterator();

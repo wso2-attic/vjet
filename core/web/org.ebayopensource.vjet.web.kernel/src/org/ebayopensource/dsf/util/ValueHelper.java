@@ -8,7 +8,6 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.util;
 
-import com.ebay.kernel.util.RopeBuffer;
 
 public class ValueHelper {
 	
@@ -32,7 +31,7 @@ public class ValueHelper {
 			return value.toString();
 		}
 		
-		RopeBuffer rb = new RopeBuffer();
+		StringBuilder rb = new StringBuilder();
 		
 		Object[] values = (Object[])value;
 		for (int i=0; i<values.length; i++){

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.ebayopensource.dsf.html.dom.BaseHtmlElement;
-import com.ebay.kernel.util.RopeBuffer;
 
 public final class InlineEventHandlerContainer {
 	private Map<DsfEventTarget, List<EventsToHandlerPair>> m_targets;
@@ -135,7 +134,7 @@ public final class InlineEventHandlerContainer {
 		}
 
 		// TODO: Put in a meaningul toString()
-		final RopeBuffer buffer = new RopeBuffer();
+		final StringBuilder buffer = new StringBuilder();
 
 		return buffer.toString();
 	}

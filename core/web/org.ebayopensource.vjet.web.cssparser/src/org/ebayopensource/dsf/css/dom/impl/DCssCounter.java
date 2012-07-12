@@ -12,7 +12,6 @@ import java.io.Serializable;
 
 import org.ebayopensource.dsf.css.dom.ICounter;
 import org.ebayopensource.dsf.css.sac.ILexicalUnit;
-import com.ebay.kernel.util.RopeBuffer;
 
 /**
  * @see org.w3c.dom.css.Counter
@@ -53,7 +52,7 @@ public class DCssCounter implements ICounter, Serializable, Cloneable {
     }
     
     public String toString() {
-        RopeBuffer sb = new RopeBuffer();
+    	StringBuilder sb = new StringBuilder();
         if (m_separator == null) {
             // This is a 'counter()' function
             sb.append("counter(");
