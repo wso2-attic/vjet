@@ -18,7 +18,7 @@ import java.util.Set;
 import org.ebayopensource.dsf.json.serializer.SerializationException;
 import org.ebayopensource.dsf.service.serializer.JsonSerializer;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 
 public class JsCoverageBean {

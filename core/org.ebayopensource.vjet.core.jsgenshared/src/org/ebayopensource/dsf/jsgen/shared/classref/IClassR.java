@@ -24,7 +24,7 @@ public interface IClassR {
     String IJsParamGenerator = "org.ebayopensource.dsf.resource.pattern.js.IJsParamGenerator";
     String StringBuilder = "java.lang.StringBuilder";
     String EventType = "org.ebayopensource.dsf.html.events.EventType";
-    String CodeGenerated = "com.ebay.kernel.CodeGenerated";
+    String CodeGenerated = "org.ebayopensource.dsf.util.CodeGenerated";
     String CodeGeneratedSimpleName = "CodeGenerated";
     String JsObj = "org.ebayopensource.dsf.aggregator.jsref.JsObj";
     String JsEnum = "org.ebayopensource.dsf.aggregator.jsref.JsEnum";

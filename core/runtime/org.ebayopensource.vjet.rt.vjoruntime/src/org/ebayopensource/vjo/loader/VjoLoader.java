@@ -21,7 +21,7 @@ import org.mozilla.mod.javascript.IJsJavaProxy;
 import org.mozilla.mod.javascript.Scriptable;
 import org.mozilla.mod.javascript.ScriptableObject;
 import org.mozilla.mod.javascript.NativeFunction;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 public class VjoLoader extends BaseScriptable {
 

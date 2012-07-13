@@ -1,6 +1,7 @@
 package org.ebayopensource.dsf.common;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StringUtils {
@@ -43,5 +44,40 @@ public class StringUtils {
         return result;
     }
 
-	
+    public static String join(
+            final Iterable<String> iterable,
+            final String joinString)
+        {
+            return join(iterable.iterator(), joinString);
+        }
+        public static String join(
+            final Iterator<String> iterator,
+            final String joinString)
+        {
+            final StringBuilder buf = new StringBuilder();
+            join(iterator, joinString, buf);
+            final String resultString = buf.toString();
+            return resultString;
+        }
+
+        public static void join(
+            final Iterable<String> iterator,
+            final String joinString,
+            final StringBuilder stringStream)
+        {
+            join(iterator.iterator(), joinString, stringStream);
+        }
+        public static void join(
+            final Iterator<String> iterator,
+            final String joinString,
+            final StringBuilder stringStream)
+        {
+            while (iterator.hasNext()) {
+                final String string = iterator.next();
+                stringStream.append(string);
+                if (iterator.hasNext()){
+                    stringStream.append(joinString);
+                }
+            }
+        }
 }

@@ -4,9 +4,7 @@ package org.ebayopensource.dsf.logger;
   
   
   /**
-   * Defines the logging levels for com.ebay.kernel.logger.Logger. 
-   * These levels are mapped to JDK 1.4 logging levels by 
-   * com.ebay.kernel.logger.LogLevelMapper class.
+   * Defines the logging levels for org.ebayopensource.dsf.logger.Logger. 
    * <p>
    * The JDK 1.4 levels in descending order are:
    * <ul>

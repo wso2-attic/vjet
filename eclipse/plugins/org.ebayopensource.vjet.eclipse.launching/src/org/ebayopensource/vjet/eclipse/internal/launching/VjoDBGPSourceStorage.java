@@ -23,7 +23,7 @@ import org.eclipse.dltk.mod.dbgp.IDbgpSession;
 import org.eclipse.dltk.mod.dbgp.exceptions.DbgpException;
 import org.eclipse.dltk.mod.launching.sourcelookup.Messages;
 
-import com.ebay.kernel.util.StringUtils;
+import org.ebayopensource.dsf.common.StringUtils;
 import org.ebayopensource.vjet.eclipse.launching.VjetLaunchingPlugin;
 
 public class VjoDBGPSourceStorage implements IStorage {

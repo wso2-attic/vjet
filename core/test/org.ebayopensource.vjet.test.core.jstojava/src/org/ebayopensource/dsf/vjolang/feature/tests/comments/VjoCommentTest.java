@@ -31,7 +31,7 @@ import org.junit.Test;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoCommentTest {

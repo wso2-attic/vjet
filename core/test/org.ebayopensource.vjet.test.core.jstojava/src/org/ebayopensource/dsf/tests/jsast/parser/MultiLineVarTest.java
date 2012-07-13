@@ -26,7 +26,7 @@ import org.junit.Test;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
  * Tests multi-line var test

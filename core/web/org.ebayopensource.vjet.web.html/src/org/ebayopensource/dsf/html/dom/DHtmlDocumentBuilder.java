@@ -25,7 +25,7 @@ import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
 import org.ebayopensource.dsf.dom.DDOMImplementationRegistry;
 import org.ebayopensource.dsf.html.dom.util.HtmlBuilder;
 import org.ebayopensource.dsf.html.sax.HtmlSaxParser;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 public class DHtmlDocumentBuilder extends DocumentBuilder {
 

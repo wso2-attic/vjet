@@ -44,7 +44,7 @@ import org.ebayopensource.dsf.html.sax.HtmlSaxParser;
 import org.ebayopensource.dsf.jsnative.HtmlElement;
 import org.ebayopensource.dsf.jsnative.Window;
 import org.ebayopensource.dsf.liveconnect.client.IDLCClient;
-import com.ebay.kernel.util.StringUtils;
+import org.ebayopensource.dsf.common.StringUtils;
 
 public class AHtmlParser
 	implements ContentHandler, LexicalHandler, IDocListener {

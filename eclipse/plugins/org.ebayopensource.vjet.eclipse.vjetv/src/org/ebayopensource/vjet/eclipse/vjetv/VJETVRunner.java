@@ -61,36 +61,6 @@ public class VJETVRunner implements IApplication {
             fileURL.add(files[i].toURL());
         }
 
-        // Step2. Prepare VJOJavaLib.jar and VJOJavaLibResource.jar
-        /*String viewPreStorePath = installFolderPath
-                + "/../../../../.metadata/.plugins/org.eclipse.core.runtime/.settings/com.ebay.kernel.EbayToolBox.prefs";
-        File viewPreStoreFile = new File(viewPreStorePath);
-        if (viewPreStoreFile.exists()) {
-            Properties p = new Properties();
-            try {
-                p.load(new FileInputStream(viewPreStoreFile));
-                String directoryPath = p
-                        .getProperty("com.ebay.kernel.wsad.toolbox.plugin.ViewStorageDirectory");
-                String viewName = p
-                        .getProperty("com.ebay.kernel.wsad.toolbox.plugin.SnapshotViewName");
-                String viewRootPath = directoryPath + SEPERATOR + viewName;
-                File vjoJavaLibFolder = new File(viewRootPath + SEPERATOR
-                        + "v3jars/v4/VjoJavaLib");
-                if (vjoJavaLibFolder.exists()) {
-                    fileURL.add(getFileFromFolder("VjoJavaLib.jar",
-                            vjoJavaLibFolder).toURL());
-                }
-                File vjoJavaLibResourceFolder = new File(viewRootPath
-                        + SEPERATOR + "v3jars/v4/VjoJavaLibResource");
-                if (vjoJavaLibResourceFolder.exists()) {
-                    fileURL.add(getFileFromFolder("VjoJavaLibResource.jar",
-                            vjoJavaLibResourceFolder).toURL());
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
-
         
         //Step3 run VJETV
         try {

@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.ebayopensource.dsf.jst.JstSource.IBinding;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 public class FileBinding implements IBinding{
 

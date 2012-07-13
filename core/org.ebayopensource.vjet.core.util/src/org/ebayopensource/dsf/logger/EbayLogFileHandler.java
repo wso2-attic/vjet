@@ -10,7 +10,7 @@ import java.util.logging.FileHandler;
        * LogManager adds this handler to the root logger if we have the following line in the
        * logging.properties;
        * <pre>
-       * handlers = com.ebay.kernel.logger.rt.  EbayLogFileHandler  </pre>
+       * handlers = org.ebayopensource.dsf.logger.  EbayLogFileHandler  </pre>
        * 
        * This handler will be added to the root if no other handlers are specified.
        * <p>

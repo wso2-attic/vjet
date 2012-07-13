@@ -34,7 +34,7 @@ import org.junit.Test;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
  * Tests if explicit static in .props is ok

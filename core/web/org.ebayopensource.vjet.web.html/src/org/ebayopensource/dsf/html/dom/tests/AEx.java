@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.html.dom.tests;
 import org.ebayopensource.dsf.html.HtmlWriterHelper;
 import org.ebayopensource.dsf.html.dom.DHtmlDocument;
 import org.ebayopensource.dsf.html.dom.DHtmlDocumentBuilder;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 import org.ebayopensource.dsf.common.xml.IIndenter;
 

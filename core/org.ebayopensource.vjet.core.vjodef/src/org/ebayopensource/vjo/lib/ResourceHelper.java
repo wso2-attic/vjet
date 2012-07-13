@@ -20,8 +20,7 @@ import java.util.Map;
 
 import org.ebayopensource.dsf.jst.IJstSerializer;
 import org.ebayopensource.dsf.jst.ts.util.ISdkEnvironment;
-
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
  * Helper class for JsNative serialized resource

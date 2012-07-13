@@ -11,7 +11,7 @@ package org.ebayopensource.vjo;
 import java.io.IOException;
 import java.net.URL;
 
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 //used to access VjBootstrap js resources, this is just an anchor class
 public class VjBootstrapJsr {

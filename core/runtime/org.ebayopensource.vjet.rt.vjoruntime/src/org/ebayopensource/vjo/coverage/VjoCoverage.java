@@ -22,7 +22,7 @@ import org.ebayopensource.dsf.util.JavaSourceLocator;
 import org.mozilla.mod.javascript.Context;
 import org.mozilla.mod.javascript.Scriptable;
 import org.mozilla.mod.javascript.ScriptableObject;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 public class VjoCoverage extends BaseScriptable {
 		

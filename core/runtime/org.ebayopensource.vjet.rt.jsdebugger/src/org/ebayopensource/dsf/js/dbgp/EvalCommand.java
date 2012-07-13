@@ -21,7 +21,7 @@ import org.mozilla.mod.javascript.NativeJavaArray;
 import org.mozilla.mod.javascript.NativeJavaClass;
 import org.mozilla.mod.javascript.NativeJavaObject;
 import org.mozilla.mod.javascript.NativeObject;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 final class EvalCommand extends DBGPDebugger.Command {
 

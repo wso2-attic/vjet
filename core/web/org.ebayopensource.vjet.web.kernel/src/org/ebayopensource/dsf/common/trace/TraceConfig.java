@@ -16,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 public class TraceConfig {
 	

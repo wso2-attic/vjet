@@ -24,7 +24,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 public class DDocumentBuilder extends DocumentBuilder {
 

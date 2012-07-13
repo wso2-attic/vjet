@@ -28,7 +28,7 @@ import org.ebayopensource.dsf.javatojs.tests.data.build.j2jma.P;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class VjoPrebuildAntTest {

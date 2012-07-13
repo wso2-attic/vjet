@@ -21,7 +21,7 @@ import org.ebayopensource.dsf.html.dom.DDiv;
 import org.ebayopensource.dsf.html.dom.DHtmlDocument;
 import org.ebayopensource.dsf.html.dom.DScript;
 import org.ebayopensource.dsf.liveconnect.DLCServer;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
  * Util class to enable the DLC for a web page.
