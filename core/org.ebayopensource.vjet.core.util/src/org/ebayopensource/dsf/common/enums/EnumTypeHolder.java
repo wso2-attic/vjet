@@ -2,7 +2,6 @@ package org.ebayopensource.dsf.common.enums;
 
 import java.util.Iterator;
 import java.util.List;
-import com.ebay.kernel.util.JdkUtil;
 
 /**
  * This final class is an implementation of EnumHolder.
@@ -18,7 +17,7 @@ public final class EnumTypeHolder implements EnumHolder {
 	 * Construct an EnumHolder for a given Enum type.
 	 */
 	public EnumTypeHolder(Class type) {
-		if (!JdkUtil.forceInit(BaseEnum.class).isAssignableFrom(type)) {
+		if (!BaseEnum.class.isAssignableFrom(type)) {
 			throw new IllegalArgumentException
 				("EnumTypeHolder: "+ type + " is not the right type");
 		}

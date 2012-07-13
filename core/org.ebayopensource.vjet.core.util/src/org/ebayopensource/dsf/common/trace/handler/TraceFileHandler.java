@@ -23,7 +23,9 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
-import com.ebay.kernel.logger.rt.EbayLogFileHandler;
+import org.ebayopensource.dsf.logger.EbayLogFileHandler;
+
+
 
 public class TraceFileHandler extends StreamHandler {
 	
@@ -104,9 +106,10 @@ public class TraceFileHandler extends StreamHandler {
 	// javadoc.
 	private void configure(IConfigWrapper config) {
 		final ConfigHelper cfg = new ConfigHelper(config);
+		
 		String cname = EbayLogFileHandler.class.getName();
 
-		pattern = cfg.getStringProperty(cname + ".pattern", "ebay.log");
+		pattern = cfg.getStringProperty(cname + ".pattern", "vjet.log");
 		
 		limit = cfg.getIntProperty(cname + ".limit", 0);
 		if (limit < 0) {

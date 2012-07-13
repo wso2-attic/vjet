@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.kernel.stage;
 
-import com.ebay.kernel.exception.BaseRuntimeException;
+import org.ebayopensource.dsf.common.exceptions.BaseRuntimeException;
 
 public class AbortStageProcessingException extends BaseRuntimeException {
 

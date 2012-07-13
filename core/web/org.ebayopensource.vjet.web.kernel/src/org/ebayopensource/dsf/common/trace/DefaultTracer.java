@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.ebayopensource.dsf.common.exceptions.DsfExceptionHelper;
-import com.ebay.kernel.cache.SequencedHashMap;
-import com.ebay.kernel.util.XmlEncoder;
+import org.ebayopensource.dsf.common.xml.XmlEncoder;
 
 /**
  * Default implementation for IDsfTracer
@@ -26,7 +26,7 @@ public class DefaultTracer implements IDsfTracer {
 	private List<ITraceWriter> m_writers = new ArrayList<ITraceWriter>(1);
 	private int m_traceDepth = -1;
 	private boolean m_traceEnabled = false;
-	private SequencedHashMap m_stackLabels = new SequencedHashMap();
+	private ListOrderedMap m_stackLabels = new ListOrderedMap();
 	
 	private static final String DOT = ".";
 	
@@ -369,13 +369,13 @@ public class DefaultTracer implements IDsfTracer {
 	}
 	
 	private void pop(final String label){
-		if (m_stackLabels.getLastValue().equals(label)){
+		if (m_stackLabels.get(m_stackLabels.lastKey()).equals(label)){
 			m_traceDepth--;
-			m_stackLabels.remove(m_stackLabels.getLastKey());
+			m_stackLabels.remove(m_stackLabels.lastKey());
 		}
 		else if (m_traceDepth > 0){
 			m_traceDepth--;
-			m_stackLabels.remove(m_stackLabels.getLastKey());
+			m_stackLabels.remove(m_stackLabels.lastKey());
 			pop(label);
 		}
 	}

@@ -24,7 +24,7 @@ import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
 import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import org.ebayopensource.dsf.javatojs.translate.config.CodeGenConfig;
 import org.ebayopensource.dsf.javatojs.translate.config.CodeGenConfig.TranslationMode;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 /**
  * Ant task for Java to JavaScript pre-build

@@ -34,7 +34,7 @@ import org.ebayopensource.dsf.ts.ITypeSpace;
 import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.type.TypeName;
 
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.Logger;
 
 /**
  * 

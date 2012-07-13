@@ -36,7 +36,7 @@ import org.ebayopensource.dsf.jsgen.shared.generate.JsrGenerator;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 /**
  * This class provides entry point and process control of java to js 

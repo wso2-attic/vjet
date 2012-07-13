@@ -23,7 +23,7 @@ import org.ebayopensource.dsf.javatojs.trace.TranslationTraceId;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.javatojs.translate.TranslationMode;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import com.ebay.kernel.cmdrunner.ResponseCommand;
+import org.ebayopensource.dsf.javatojs.control.translate.ResponseCommand;
 
 public abstract class BaseTask extends ResponseCommand {
 	

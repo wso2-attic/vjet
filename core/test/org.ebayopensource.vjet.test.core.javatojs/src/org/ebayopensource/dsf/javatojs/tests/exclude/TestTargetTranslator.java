@@ -24,7 +24,7 @@ import org.ebayopensource.dsf.javatojs.tests.exclude.anno.clz.TestStaticInit;
 import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 public class TestTargetTranslator {
 

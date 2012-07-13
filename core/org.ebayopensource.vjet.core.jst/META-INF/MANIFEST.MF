@@ -8,8 +8,8 @@ Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: 
-  org.ebayopensource.vjet.core.ext;visibility:=reexport,
-  org.ebayopensource.vjet.core.jsnative;visibility:=reexport
+ org.ebayopensource.vjet.core.ext;visibility:=reexport,
+ org.ebayopensource.vjet.core.jsnative;visibility:=reexport
 Export-Package: 
   org.ebayopensource.dsf.jst,
   org.ebayopensource.dsf.ts,

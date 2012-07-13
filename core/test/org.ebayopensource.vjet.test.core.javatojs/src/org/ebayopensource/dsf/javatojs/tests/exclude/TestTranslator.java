@@ -19,7 +19,7 @@ import org.ebayopensource.dsf.javatojs.control.BuildController;
 import org.ebayopensource.dsf.javatojs.control.ITranslationInitializer;
 import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 @AJavaOnly
 public class TestTranslator {
 	public TranslateCtx s_ctx;

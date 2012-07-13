@@ -11,8 +11,8 @@ package org.ebayopensource.af.common.types;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
-import com.ebay.kernel.logger.LogLevel;
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.dsf.logger.Logger;
 
 public class RawString implements Serializable, Cloneable {
 	

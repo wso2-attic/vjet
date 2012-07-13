@@ -28,8 +28,8 @@ import org.ebayopensource.dsf.html.sax.AHtmlSchema;
 import org.ebayopensource.dsf.liveconnect.client.DLCClientHelper;
 import org.ebayopensource.dsf.liveconnect.client.IDLCClient;
 import org.ebayopensource.dsf.service.client.IClientServiceHandlerRegistry;
-import com.ebay.kernel.logger.LogLevel;
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.dsf.logger.Logger;
 
 import org.ebayopensource.dsf.common.xml.IIndenter;
 

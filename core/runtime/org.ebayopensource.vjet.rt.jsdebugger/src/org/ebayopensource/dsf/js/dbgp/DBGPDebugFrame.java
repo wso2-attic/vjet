@@ -20,8 +20,8 @@ import org.mozilla.mod.javascript.VMBridge;
 import org.mozilla.mod.javascript.debug.DebugFrame;
 import org.mozilla.mod.javascript.debug.DebuggableScript;
 import org.mozilla.mod.javascript.debug.Debugger;
-import com.ebay.kernel.logger.LogLevel;
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.dsf.logger.Logger;
 import com.ebay.kernel.util.StringUtils;
 
 public final class DBGPDebugFrame implements DebugFrame {

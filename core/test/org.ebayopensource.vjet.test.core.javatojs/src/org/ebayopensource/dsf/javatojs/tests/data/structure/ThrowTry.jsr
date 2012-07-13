@@ -10,6 +10,7 @@ import org.ebayopensource.dsf.resource.pattern.js.JsResource;
 import org.ebayopensource.dsf.resource.pattern.js.IJsResourceRef;
 import vjo.java.lang.NumberFormatExceptionJsr;
 import vjo.java.lang.ExceptionJsr;
+import org.ebayopensource.dsf.logger.LoggerJsr;
 
 @org.ebayopensource.dsf.resource.utils.CodeGen("JsrGenerator")
 public class ThrowTryJsr extends JsObj {
@@ -29,7 +30,8 @@ public class ThrowTryJsr extends JsObj {
 
     public static final IComponentSpec SPEC = S.getResourceSpec()
         .addDependentComponent(NumberFormatExceptionJsr.ResourceSpec.getInstance())
-        .addDependentComponent(ExceptionJsr.ResourceSpec.getInstance());
+        .addDependentComponent(ExceptionJsr.ResourceSpec.getInstance())
+        .addDependentComponent(LoggerJsr.ResourceSpec.getInstance());
 
     public ThrowTryJsr(){
         super(S.getJsCmpMeta(), true);

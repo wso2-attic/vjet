@@ -47,7 +47,7 @@ import org.ebayopensource.dsf.jst.declaration.JstPackage;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.util.DataTypeHelper;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 import org.ebayopensource.vjo.lib.LibManager;
 
 public class BasePhase {

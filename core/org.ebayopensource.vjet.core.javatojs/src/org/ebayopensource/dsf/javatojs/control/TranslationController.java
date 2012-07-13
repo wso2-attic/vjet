@@ -53,7 +53,7 @@ import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
 import org.ebayopensource.dsf.jst.traversal.JstVisitorAdapter;
 import org.ebayopensource.dsf.jst.util.DataTypeHelper;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 /**
  * Entry class for Java to JST translation

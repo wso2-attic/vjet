@@ -14,6 +14,7 @@ Export-Package:
  org.ebayopensource.dsf.common.enums,
  org.ebayopensource.dsf.common.event,
  org.ebayopensource.dsf.common.exceptions,
+ org.ebayopensource.dsf.common.initialization,
  org.ebayopensource.dsf.common.trace,
  org.ebayopensource.dsf.common.trace.config,
  org.ebayopensource.dsf.common.trace.event,
@@ -25,7 +26,8 @@ Export-Package:
  org.ebayopensource.dsf.common.xml,
  org.ebayopensource.dsf.javatojs.anno,
  org.ebayopensource.dsf.json,
+ org.ebayopensource.dsf.logger,
  org.ebayopensource.dsf.serializers,
  org.ebayopensource.dsf.util
-Import-Package: org.ebayopensource.dsf.common
+Import-Package: org.apache.commons.collections.map;version="3.2.0"
 

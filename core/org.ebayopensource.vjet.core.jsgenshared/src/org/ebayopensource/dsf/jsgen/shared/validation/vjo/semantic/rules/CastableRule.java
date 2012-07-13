@@ -15,8 +15,8 @@
 //import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.util.TypeCheckUtil;
 //import org.ebayopensource.dsf.jst.IJstType;
 //import org.ebayopensource.dsf.jst.token.IExpr;
-//import com.ebay.kernel.logger.LogLevel;
-//import com.ebay.kernel.logger.Logger;
+//import org.ebayopensource.dsf.logger.LogLevel;
+//import org.ebayopensource.dsf.logger.Logger;
 //
 //public class CastableRule extends VjoSemanticRule<CastableRuleCtx> {
 //
