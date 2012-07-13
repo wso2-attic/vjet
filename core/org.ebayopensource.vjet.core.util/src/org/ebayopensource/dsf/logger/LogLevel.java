@@ -2,7 +2,6 @@ package org.ebayopensource.dsf.logger;
   
   import java.util.logging.Level;
   
-  import com.ebay.kernel.configuration.ObjectTypeConverter;
   
   /**
    * Defines the logging levels for com.ebay.kernel.logger.Logger. 
@@ -63,19 +62,5 @@ package org.ebayopensource.dsf.logger;
           }
           private static final long serialVersionUID = 9149560934874662806L;
       }
-      public static ObjectTypeConverter getTypeConverter(){
-          final ObjectTypeConverter converter = new ObjectTypeConverter(){
-              @Override
-              public Object convert(final String strVal) {
-                  final LogLevel logLevel = LogLevel.valueOf(strVal);
-                  return logLevel;
-              }
-              @Override
-              public String getStringValue(Object obj) {
-                  final String name = ((LogLevel) obj).name();
-                  return name;
-              }       
-          };
-          return converter;
-      }
+
   }

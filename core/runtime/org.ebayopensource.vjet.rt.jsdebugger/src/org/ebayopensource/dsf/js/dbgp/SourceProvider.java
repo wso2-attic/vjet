@@ -17,9 +17,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.ebay.kernel.logger.LogLevel;
-import com.ebay.kernel.logger.Logger;
-import com.ebay.kernel.util.StringUtils;
+import org.ebayopensource.dsf.common.StringUtils;
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.dsf.logger.Logger;
+
 
 /**
  * 

@@ -11,7 +11,6 @@ package org.ebayopensource.dsf.common.xml;
 import java.io.StringWriter;
 import java.io.Writer;
 
-import com.ebay.kernel.util.RopeBufferWriter;
 
 public class XmlStreamWriterOptions {
 	private Writer m_writer ;

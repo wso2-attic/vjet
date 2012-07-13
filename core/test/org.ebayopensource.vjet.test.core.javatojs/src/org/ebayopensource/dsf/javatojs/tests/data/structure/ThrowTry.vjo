@@ -1,8 +1,9 @@
 /* @org.ebayopensource.dsf.resource.utils.CodeGen("VjoGenerator") */
 vjo.ctype('org.ebayopensource.dsf.javatojs.tests.data.structure.ThrowTry') //< public
-.needs(['vjo.java.lang.NumberFormatException','vjo.java.lang.Exception'])
+.needs(['vjo.java.lang.NumberFormatException','vjo.java.lang.Exception',
+    'org.ebayopensource.dsf.logger.Logger'])
 .props({
-    s_Logger:null, //< private com.ebay.kernel.logger.Logger
+    s_Logger:null, //< private Logger
     s_count:0 //< private int
 })
 .protos({

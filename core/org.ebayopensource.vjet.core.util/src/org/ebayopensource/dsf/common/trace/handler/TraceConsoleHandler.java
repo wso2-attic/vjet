@@ -11,13 +11,13 @@ package org.ebayopensource.dsf.common.trace.handler;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.collections.map.ListOrderedMap;
 import org.ebayopensource.dsf.common.exceptions.DsfExceptionHelper;
 import org.ebayopensource.dsf.common.trace.event.TraceEvent;
 import org.ebayopensource.dsf.common.trace.event.TraceType;
 import org.ebayopensource.dsf.common.trace.introspect.DefaultTraceIntrospector;
 import org.ebayopensource.dsf.common.trace.introspect.ITraceObjectIntrospector;
 import org.ebayopensource.dsf.common.tracer.TraceUtil;
-import com.ebay.kernel.cache.SequencedHashMap;
 
 public class TraceConsoleHandler implements ITraceEventHandler {
 	
@@ -44,7 +44,7 @@ public class TraceConsoleHandler implements ITraceEventHandler {
 
 	// Indent Support
 	private int m_traceDepth = -1;
-	private SequencedHashMap m_stackLabels = new SequencedHashMap();
+	private ListOrderedMap m_stackLabels = new ListOrderedMap();
 	
 	private boolean m_active = true;
 
@@ -325,7 +325,7 @@ public class TraceConsoleHandler implements ITraceEventHandler {
 	}
 	
 	private void pop(final String label){
-		if (m_stackLabels.remove(m_stackLabels.getLastKey()) != null){
+		if (m_stackLabels.remove(m_stackLabels.lastKey()) != null){
 			m_traceDepth--;
 		}
 	}

@@ -16,10 +16,10 @@ import com.ebay.kernel.bean.configuration.BeanConfigCategoryInfo;
 import com.ebay.kernel.bean.configuration.BeanPropertyInfo;
 import com.ebay.kernel.bean.configuration.PropertyUpdateStatus;
 import com.ebay.kernel.context.AppBuildConfig;
-import com.ebay.kernel.initialization.BaseInitializable;
-import com.ebay.kernel.initialization.Initializable;
-import com.ebay.kernel.initialization.InitializationContext;
-import com.ebay.kernel.initialization.InitializationException;
+import org.ebayopensource.dsf.common.initialization.BaseInitializable;
+import org.ebayopensource.dsf.common.initialization.Initializable;
+import org.ebayopensource.dsf.common.initialization.InitializationContext;
+import org.ebayopensource.dsf.common.initialization.InitializationException;
 
 /**
  * Configure Bean to control the enable/disable of DSF verifier(s)

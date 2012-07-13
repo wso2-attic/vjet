@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.common.exceptions;
 
-import com.ebay.kernel.exception.BaseException;
+import org.ebayopensource.dsf.common.exceptions.BaseException;
 
 public class DsfException extends BaseException {
 

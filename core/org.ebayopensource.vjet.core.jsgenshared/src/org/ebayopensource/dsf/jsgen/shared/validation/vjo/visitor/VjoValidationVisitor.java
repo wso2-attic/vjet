@@ -101,7 +101,7 @@ import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jst.term.RegexpLiteral;
 import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.Logger;
 
 /**
  * <p> visitor pattern's visitor implementation for validation

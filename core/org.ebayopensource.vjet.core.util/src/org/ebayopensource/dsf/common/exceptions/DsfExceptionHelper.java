@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.common.exceptions;
 
-import com.ebay.kernel.logger.LogLevel;
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.dsf.logger.Logger;
 /**
  * The helper class used to log the error when <code>DsfRuntimeException</code>
  * is thrown.

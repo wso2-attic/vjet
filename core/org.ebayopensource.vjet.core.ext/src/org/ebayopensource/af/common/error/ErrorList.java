@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.TreeSet;
 
-import com.ebay.kernel.exception.BaseRuntimeException;
+import org.ebayopensource.dsf.common.exceptions.BaseRuntimeException;
 
 
 /**

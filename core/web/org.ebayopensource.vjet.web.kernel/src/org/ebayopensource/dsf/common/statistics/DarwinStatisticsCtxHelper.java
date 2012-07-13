@@ -11,8 +11,8 @@ package org.ebayopensource.dsf.common.statistics;
 import java.util.concurrent.ConcurrentMap;
 
 import org.ebayopensource.dsf.common.statistics.DarwinStatisticsCtx.DarwinStatisticsCount;
-import com.ebay.kernel.logger.LogLevel;
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.dsf.logger.Logger;
 
 
 

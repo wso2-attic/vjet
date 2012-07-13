@@ -20,7 +20,7 @@ import org.ebayopensource.dsf.javatojs.trace.TranslateMsgId;
 import org.ebayopensource.dsf.javatojs.util.AstBindingHelper;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 public class TranslateLogger {
 	

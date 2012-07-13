@@ -23,7 +23,7 @@ import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import org.ebayopensource.dsf.javatojs.translate.policy.ITranslationPolicy;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 
 /*

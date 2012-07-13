@@ -20,7 +20,7 @@ import org.ebayopensource.dsf.javatojs.tests.exclude.TestTargetTranslator.ClassL
 import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 /*
  * Type Error is thrown by Class as when accessing static setFlag() method

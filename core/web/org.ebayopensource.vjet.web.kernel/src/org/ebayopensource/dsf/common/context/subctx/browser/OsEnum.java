@@ -11,8 +11,6 @@ package org.ebayopensource.dsf.common.context.subctx.browser;
 import java.util.ListIterator;
 
 import org.ebayopensource.dsf.common.enums.BaseEnum;
-import com.ebay.kernel.util.JdkUtil;
-
 
 public final class OsEnum extends BaseEnum {
 
@@ -103,19 +101,19 @@ public final class OsEnum extends BaseEnum {
     // ------- Type specific interfaces -------------------------------//
     /** Get the enumeration instance for a given value or null */
     public static OsEnum get(int key) {
-        return (OsEnum)getEnum(JdkUtil.forceInit(OsEnum.class), key);
+        return (OsEnum)getEnum(OsEnum.class, key);
     }   
     /** Get the enumeration instance for a given value or return the
      *  elseEnum default.
      */
     public static OsEnum getElseReturn(int key, 
     OsEnum elseEnum) {  
-        return (OsEnum)getElseReturnEnum(JdkUtil.forceInit(OsEnum.class), key, elseEnum);
+        return (OsEnum)getElseReturnEnum(OsEnum.class, key, elseEnum);
     }   
     /** Return an bidirectional iterator that traverses the enumeration
      *  instances in the order they were defined.
      */
     public static ListIterator iterator() {
-        return getIterator(JdkUtil.forceInit(OsEnum.class));
+        return getIterator(OsEnum.class);
     }                         
 }

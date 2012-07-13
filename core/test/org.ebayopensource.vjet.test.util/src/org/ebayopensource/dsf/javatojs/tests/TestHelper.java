@@ -45,7 +45,7 @@ import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 public class TestHelper {
 

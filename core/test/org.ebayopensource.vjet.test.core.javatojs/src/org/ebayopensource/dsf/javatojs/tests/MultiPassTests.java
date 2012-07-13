@@ -34,7 +34,7 @@ import org.junit.Test;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 @ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class MultiPassTests {

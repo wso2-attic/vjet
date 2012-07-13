@@ -21,7 +21,6 @@ import org.ebayopensource.dsf.javatojs.tests.data.datatype.ObjectAndClass;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.PrimitiveSrc;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.TestArray;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.TestCollections;
-import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.junit.Test;
 
@@ -38,7 +37,6 @@ public class VjoDataTypeTests  {
 			s_initializer = new DefaultTranslationInitializer(){
 				public void initialize(){
 					super.initialize();
-					TranslateCtx ctx = TranslateCtx.ctx();
 //					ctx.getConfig().getPackageMapping().add("com", "vjo");
 				}
 			};

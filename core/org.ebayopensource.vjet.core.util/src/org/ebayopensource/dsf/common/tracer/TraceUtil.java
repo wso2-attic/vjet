@@ -11,7 +11,7 @@ package org.ebayopensource.dsf.common.tracer;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import com.ebay.kernel.util.XmlEncoder;
+import org.ebayopensource.dsf.common.xml.XmlEncoder;
 
 public class TraceUtil {
 	

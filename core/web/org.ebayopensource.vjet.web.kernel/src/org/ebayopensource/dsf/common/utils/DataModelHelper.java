@@ -23,7 +23,7 @@ import org.ebayopensource.dsf.common.xml.IIndenter;
 import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 import org.ebayopensource.dsf.dom.DNode;
-import com.ebay.kernel.logger.Logger;
+import org.ebayopensource.dsf.logger.Logger;
 import com.ebay.kernel.util.Base64;
 
 

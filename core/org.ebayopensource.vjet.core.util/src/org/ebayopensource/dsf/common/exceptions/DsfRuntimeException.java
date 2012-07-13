@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.common.exceptions;
 
-import com.ebay.kernel.exception.BaseRuntimeException;
+import org.ebayopensource.dsf.common.exceptions.BaseRuntimeException;
 
 /**
  * DSF defined runtime exception, which can be thrown during the DSF operation

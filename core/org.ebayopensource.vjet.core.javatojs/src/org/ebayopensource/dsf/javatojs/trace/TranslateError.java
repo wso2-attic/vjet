@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.trace;
 
-import com.ebay.kernel.logger.LogLevel;
+import org.ebayopensource.dsf.logger.LogLevel;
 
 public class TranslateError {
 	
