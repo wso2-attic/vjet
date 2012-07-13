@@ -11,7 +11,7 @@ package org.ebayopensource.vjo.runtime.tests.functional;
 import org.ebayopensource.dsf.dom.DNode;
 import org.ebayopensource.dsf.html.dom.DDiv;
 import org.ebayopensource.dsf.html.dom.DScript;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 import org.ebayopensource.vjo.VjBootstrapJsr;
 
 public class ProtosWithPropsNeedsTest {

@@ -11,7 +11,7 @@ import org.ebayopensource.dsf.js.dbgp.JsDebuggerEnabler;
 import org.ebayopensource.vjo.runner.VjoRunner;
 import org.junit.Test;
 
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 public class HelloV4DebuggingTest {
      public static void main(String[] args) {

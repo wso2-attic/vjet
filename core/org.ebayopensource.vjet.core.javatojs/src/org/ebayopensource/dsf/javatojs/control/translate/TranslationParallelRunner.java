@@ -43,8 +43,7 @@ public class TranslationParallelRunner {
 				s_instance = new TranslationParallelRunner();
 				
 				int cores = Runtime.getRuntime().availableProcessors();
-				ExecutorService s = Executors.newFixedThreadPool(cores + 1);
-				TranslationParallelRunner.getInstance().setRunner(s);
+				ExecutorService s = Executors.newScheduledThreadPool(cores + 1);
 				
 				s_instance.setRunner(s);
 			}

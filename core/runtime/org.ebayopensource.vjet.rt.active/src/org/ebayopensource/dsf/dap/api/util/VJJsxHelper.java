@@ -13,7 +13,7 @@ import org.ebayopensource.dsf.dap.proxy.Global;
 import org.ebayopensource.dsf.dap.proxy.INativeJsFuncProxy;
 import org.ebayopensource.dsf.dap.proxy.JFunction;
 import org.ebayopensource.dsf.dap.proxy.JFunctionX;
-import com.ebay.kernel.util.CallerIntrospector;
+import org.ebayopensource.dsf.common.CallerIntrospector;
 
 public class VJJsxHelper {
 	

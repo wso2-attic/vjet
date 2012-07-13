@@ -31,7 +31,7 @@ import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jst.traversal.IJstVisitor;
-import com.ebay.kernel.util.StringUtils;
+import org.ebayopensource.dsf.common.StringUtils;
 
 /**
  * Visitor that visualizes a JST type/tree. Use IndentedPrintStream for indented

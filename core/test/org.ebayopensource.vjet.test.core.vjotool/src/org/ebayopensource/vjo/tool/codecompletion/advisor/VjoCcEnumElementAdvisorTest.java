@@ -31,7 +31,7 @@ import org.junit.Test;
 
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.ModuleInfo;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 @Category({P1,FAST,UNIT})
 @ModuleInfo(value="DsfPrebuild",subModuleId="VJET")

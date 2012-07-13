@@ -8,37 +8,26 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.common;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ebay.kernel.bean.configuration.BaseConfigBean;
-import com.ebay.kernel.bean.configuration.BeanConfigCategoryInfo;
-import com.ebay.kernel.bean.configuration.BeanPropertyInfo;
-import com.ebay.kernel.bean.configuration.PropertyUpdateStatus;
-import com.ebay.kernel.context.AppBuildConfig;
+
 import org.ebayopensource.dsf.common.initialization.BaseInitializable;
 import org.ebayopensource.dsf.common.initialization.Initializable;
 import org.ebayopensource.dsf.common.initialization.InitializationContext;
-import org.ebayopensource.dsf.common.initialization.InitializationException;
 
 /**
  * Configure Bean to control the enable/disable of DSF verifier(s)
  * for node creation, naming, parent-child relationship, etc.
  */
-public class DsfVerifierConfig extends BaseConfigBean {
+public class DsfVerifierConfig implements Serializable  {
 
 	private static final long serialVersionUID = 1L;
 	private boolean m_verifyNaming = true;
 	private boolean m_verifyRelationship = true;
 	private boolean m_verifyInstantiation = true;
 	
-	public static final BeanPropertyInfo VERIFY_NAMING = 
-		createBeanPropertyInfo("m_verifyNaming", "VERIFY_NAMING", true);
-	
-	public static final BeanPropertyInfo VERIFY_RELATIONSHIP = 
-		createBeanPropertyInfo("m_verifyRelationship", "VERIFY_RELATIONSHIP", true);
-	public static final BeanPropertyInfo VERIFY_INSTANTIATION = 
-		createBeanPropertyInfo("m_verifyInstantiation", "VERIFY_INSTANTIATION", true);
 	
 	private static final DsfVerifierConfig s_instance = new DsfVerifierConfig();
 	
@@ -47,23 +36,7 @@ public class DsfVerifierConfig extends BaseConfigBean {
 	}
 	
 	private DsfVerifierConfig() {
-		try {
-			BeanConfigCategoryInfo category = 
-				BeanConfigCategoryInfo.createBeanConfigCategoryInfo(
-					"org.ebayopensource.dsf.verifiers",
-					null,
-					"V4.DSF",
-					true,
-					true,
-					null,
-					"For disable/enable dsf verifiers",
-					true);
-				
-			init(category, true);
-		}
-		catch (Exception e) {
-			throw new InitializationException(e);
-		}	
+
 	}
 	
 	/**
@@ -83,8 +56,8 @@ public class DsfVerifierConfig extends BaseConfigBean {
 	 * @param set
 	 * @return
 	 */
-	public PropertyUpdateStatus setVerifyNaming(final boolean set) {
-		return changeProperty(VERIFY_NAMING, m_verifyNaming, set);
+	public void setVerifyNaming(final boolean set) {
+		m_verifyNaming = set;
 	}
 
 	/**
@@ -105,16 +78,16 @@ public class DsfVerifierConfig extends BaseConfigBean {
 	 * @param set
 	 * @return
 	 */
-	public PropertyUpdateStatus setVerifyRelationship(final boolean set) {
-		return changeProperty(VERIFY_RELATIONSHIP, m_verifyRelationship, set);
+	public void setVerifyRelationship(final boolean set) {
+		m_verifyRelationship = set;
 	}
 	
 	public boolean isVerifyInstantiation() {
 		return m_verifyInstantiation;
 	}
 	
-	public PropertyUpdateStatus setVerifyInstantiation(final boolean set) {
-		return changeProperty(VERIFY_INSTANTIATION, m_verifyInstantiation, set);
+	public void setVerifyInstantiation(final boolean set) {
+		m_verifyInstantiation = set;
 	}
 	
 	//
@@ -131,11 +104,11 @@ public class DsfVerifierConfig extends BaseConfigBean {
 			
 			protected void initialize(final InitializationContext context) {
 				DsfVerifierConfig config = DsfVerifierConfig.getInstance();
-		        if (!AppBuildConfig.getInstance().isDev()) {
-		            //disable dsf verifier for non-dev env
-		            config.setVerifyNaming(false);
-		            config.setVerifyRelationship(false);
-		        }
+//		        if (!AppBuildConfig.getInstance().isDev()) {
+//		            //disable dsf verifier for non-dev env
+//		            config.setVerifyNaming(false);
+//		            config.setVerifyRelationship(false);
+//		        }
 			}
 			protected void shutdown(final InitializationContext context) {
 				s_initializable = null;

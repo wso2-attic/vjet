@@ -22,7 +22,7 @@ import org.ebayopensource.vjo.tool.astjst.TypeConstants.Types;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 
 
 public class TemplateCreationUtil extends VjoCcBaseTest {

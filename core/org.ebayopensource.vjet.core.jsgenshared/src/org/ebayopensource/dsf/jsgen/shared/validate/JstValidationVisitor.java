@@ -16,7 +16,7 @@ import java.util.Properties;
 import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.traversal.IJstVisitor;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 public class JstValidationVisitor implements IJstVisitor {
 

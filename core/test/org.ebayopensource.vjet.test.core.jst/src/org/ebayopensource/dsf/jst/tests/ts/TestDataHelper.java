@@ -16,7 +16,7 @@ import java.util.Map;
 
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ts.util.JstTypeSerializer;
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 public class TestDataHelper {
 	

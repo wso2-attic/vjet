@@ -188,18 +188,7 @@ public class TestHelper {
 			vjoActual = helper.toVjo(type, CodeStyle.PRETTY);
 			writeToFile(getFileName(Class.forName(type.getName()), vjoFileExt), vjoActual);
 		}
-//		try {
-//			com.ebay.kernel.util.FileUtils.writeFile("D:\\ccviews\\d_sjc_alpatel1_gort\\v4darwin\\DSFJavaToJsTests\\src\\com\\ebay\\dsf\\javatojs\\tests/types.txt", text, "cp1252");
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (FileNotFoundException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+
 	}
 
 	public void writeJsr(String type) {

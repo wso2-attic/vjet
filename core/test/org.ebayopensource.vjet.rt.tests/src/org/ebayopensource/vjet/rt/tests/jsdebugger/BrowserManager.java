@@ -4,7 +4,7 @@ package org.ebayopensource.vjet.rt.tests.jsdebugger;
  import java.io.FileOutputStream;
  import java.io.IOException;
 
- import com.ebay.kernel.cmdexec.CommandExecutor;
+import org.ebayopensource.dsf.common.cmdexec.CommandExecutor;
 
 /**
 * Utility to display a URL in a system browser.  The API's are NOT meant to display

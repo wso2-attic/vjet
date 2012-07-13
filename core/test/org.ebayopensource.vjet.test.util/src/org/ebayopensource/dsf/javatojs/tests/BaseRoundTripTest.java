@@ -24,8 +24,8 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Description;
-import com.ebay.kernel.resource.ResourceUtil;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.FileUtils;
 
 public class BaseRoundTripTest {
 

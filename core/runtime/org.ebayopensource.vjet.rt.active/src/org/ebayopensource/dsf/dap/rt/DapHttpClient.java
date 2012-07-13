@@ -12,11 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.common.exceptions.DsfRuntimeException;
-//import com.ebay.kernel.service.invocation.SvcInvocationConfig;
-//import com.ebay.kernel.service.invocation.client.exception.ReceivingTimeoutException;
-//import com.ebay.kernel.service.invocation.client.http.HttpClient;
-//import com.ebay.kernel.service.invocation.client.http.Request;
-//import com.ebay.kernel.service.invocation.client.http.Response;
 
 @SuppressWarnings("serial")
 public class DapHttpClient implements IDapHttpClient {

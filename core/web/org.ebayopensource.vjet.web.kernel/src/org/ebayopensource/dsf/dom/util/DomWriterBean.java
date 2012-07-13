@@ -8,29 +8,19 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.dom.util;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.ebayopensource.dsf.common.exceptions.DsfExceptionHelper;
-import com.ebay.kernel.bean.configuration.BaseConfigBean;
-import com.ebay.kernel.bean.configuration.BeanConfigCategoryInfo;
-import com.ebay.kernel.bean.configuration.DynamicConfigBean;
-import com.ebay.kernel.initialization.BaseInitializable;
-import com.ebay.kernel.initialization.Initializable;
-import com.ebay.kernel.initialization.InitializationContext;
+import org.ebayopensource.dsf.common.initialization.BaseInitializable;
+import org.ebayopensource.dsf.common.initialization.Initializable;
+import org.ebayopensource.dsf.common.initialization.InitializationContext;
 
-public class DomWriterBean extends BaseConfigBean {
+public class DomWriterBean implements Serializable {
 		
 	private static final long serialVersionUID = 770642500133798058L;
 	
-	public static final String CONFIG_CATEGORY_ID = "org.ebayopensource.dsf.dom.util.DomWriter";
-	public static final String CONFIG_CATEGORY_ALIAS = "DomWriter";
-	public static final String CONFIG_CATEGORY_GROUP = "DSF";
-	public static final String DESC = "DSF DomWriter configuration";
 	
-	public static final String CAL_LOG_ENABLE = "CalLogEnabled";
-	
-	private DynamicConfigBean m_configBean;
 	
 	//
 	// Singleton
@@ -41,34 +31,8 @@ public class DomWriterBean extends BaseConfigBean {
 	public static DomWriterBean getInstance() {
 		return s_instance;
 	}
-	
-	//
-	// API
-	//
-	public DomWriterBean setCalLogEnabled(boolean enable) {
-		try {
-			if (m_configBean.hasProperty(CAL_LOG_ENABLE)) {
-				m_configBean.setPropertyValue(CAL_LOG_ENABLE, Boolean.valueOf(enable));
-			}
-			else {
-				m_configBean.addProperty(CAL_LOG_ENABLE, Boolean.valueOf(enable));
-			}
-		}
-		catch(Throwable t){}
-		
-		return this;
-	}
-	
-	public boolean isCalLogEnabled() {
-		try {
-			return Boolean.valueOf(m_configBean.getPropertyValue(CAL_LOG_ENABLE).toString())
-				.booleanValue();
-		}
-		catch(Throwable t){
-			return false;
-		}
-	}
-	
+
+
 	//
 	// Init
 	//
@@ -103,25 +67,7 @@ public class DomWriterBean extends BaseConfigBean {
 	//
 	private void initConfigBean() {
 
-		BeanConfigCategoryInfo category = null;
-		try {
-			category = BeanConfigCategoryInfo.createBeanConfigCategoryInfo(
-					CONFIG_CATEGORY_ID, 
-					CONFIG_CATEGORY_ALIAS, 
-					CONFIG_CATEGORY_GROUP, 
-					true, 
-					true, 
-					null, 
-					DESC, 
-					true);
-			
-			m_configBean = new DynamicConfigBean(category);
-			m_configBean.setExternalMutable();
-			setCalLogEnabled(false);
-		} 
-		catch (Exception e) {
-			DsfExceptionHelper.chuck("Failed to create config category for " + CONFIG_CATEGORY_ID);
-		}
 	}
+	
 }
 

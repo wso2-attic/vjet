@@ -12,12 +12,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.ebayopensource.dsf.dom.util.DomWriterBean;
-import com.ebay.kernel.initialization.BaseInitializable;
-import com.ebay.kernel.initialization.BaseInitializationManager;
-import com.ebay.kernel.initialization.BaseModule;
-import com.ebay.kernel.initialization.Initializable;
-import com.ebay.kernel.initialization.InitializationContext;
-import com.ebay.kernel.initialization.ModuleInterface;
+import org.ebayopensource.dsf.common.initialization.BaseInitializable;
+import org.ebayopensource.dsf.common.initialization.BaseInitializationManager;
+import org.ebayopensource.dsf.common.initialization.BaseModule;
+import org.ebayopensource.dsf.common.initialization.Initializable;
+import org.ebayopensource.dsf.common.initialization.InitializationContext;
+import org.ebayopensource.dsf.common.initialization.ModuleInterface;
 
 public class Module extends BaseModule {
 

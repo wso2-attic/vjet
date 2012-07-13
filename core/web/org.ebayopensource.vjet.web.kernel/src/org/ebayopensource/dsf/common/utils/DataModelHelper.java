@@ -24,7 +24,7 @@ import org.ebayopensource.dsf.common.xml.IXmlStreamWriter;
 import org.ebayopensource.dsf.common.xml.XmlStreamWriter;
 import org.ebayopensource.dsf.dom.DNode;
 import org.ebayopensource.dsf.logger.Logger;
-import com.ebay.kernel.util.Base64;
+import org.apache.commons.codec.binary.Base64;;
 
 
 /**
@@ -130,7 +130,7 @@ public class DataModelHelper {
 	 * 
 	 * note:
 	 *    For the data model xml string <DataModelXMLStr> returned by JavaBeanTraceIntrospector(model-object),
-	 *    it contains com.ebay.kernel.util.XmlEncoder escaped substring(&lt;&gt;...).
+	 *    it contains XmlEncoder escaped substring(&lt;&gt;...).
 	 *    In order to bi-direction conversion of data model string, we can't use XmlEncoder
 	 *    as the encoder to encode the whole <DataModelXMLStr>.
 	 *     
@@ -170,7 +170,7 @@ public class DataModelHelper {
 		if ("".equals(s))
 			s = null;
 		if (encode && s!=null) {
-			s = Base64.encode(s.getBytes()); //s = URLEncoder.encode(s,"UTF-8");
+			s = new String(Base64.encodeBase64(s.getBytes())); //s = URLEncoder.encode(s,"UTF-8");
 		}
 		return s;
 	}
@@ -184,7 +184,7 @@ public class DataModelHelper {
 		if (encodedXmlStr==null)
 			return null;
 
-		byte bytes[] = Base64.decode(encodedXmlStr);
+		byte bytes[] = Base64.decodeBase64(encodedXmlStr.getBytes());
 		return new String(bytes);
 	}
 	

@@ -22,7 +22,7 @@ import org.mozilla.mod.javascript.debug.DebuggableScript;
 import org.mozilla.mod.javascript.debug.Debugger;
 import org.ebayopensource.dsf.logger.LogLevel;
 import org.ebayopensource.dsf.logger.Logger;
-import com.ebay.kernel.util.StringUtils;
+import org.ebayopensource.dsf.common.StringUtils;
 
 public final class DBGPDebugFrame implements DebugFrame {
 

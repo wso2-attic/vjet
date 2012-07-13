@@ -51,7 +51,7 @@ import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.TsLibLoader;
 import org.junit.Assert;
 
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
  * Vjo Validation tester helper class

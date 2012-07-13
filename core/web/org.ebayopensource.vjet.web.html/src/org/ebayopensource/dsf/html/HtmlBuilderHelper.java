@@ -9,6 +9,8 @@
 package org.ebayopensource.dsf.html;
 
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 //import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,7 +27,7 @@ import org.ebayopensource.dsf.html.dom.util.HtmlBuilderExt;
 //import org.ebayopensource.dsf.html.js.JSWindowFactory;
 import org.ebayopensource.dsf.html.sax.HtmlSaxParser;
 import org.ebayopensource.dsf.html.sax.Schema;
-import com.ebay.kernel.util.URLDecoder;
+
 /**
  * Provides some useful methods that returns a {@link DHtmlDocument} from 
  * the source input String.
@@ -269,7 +271,12 @@ public class HtmlBuilderHelper {
 			if (bDecode){//decode the input string
 				//URLDecoder replace "+" by " "
 				//to avoid lost "+", replace + by %2B, pre-decode					
-				newSrc = URLDecoder.decode(input.replaceAll("\\+", "%2B"), null);
+				try {
+					newSrc = URLDecoder.decode(input.replaceAll("\\+", "%2B"), "utf-8");
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				//wait for bug fix in URLDecoder
 				//newSrc = URLDecoder.decode(src.replaceAll("\\+", "%2B"), "UTF-8");
 			}

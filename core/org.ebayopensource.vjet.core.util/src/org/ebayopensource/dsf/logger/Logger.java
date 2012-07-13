@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Map;
 import java.util.Properties;
 import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
@@ -228,15 +227,6 @@ public class Logger {
 		Properties props2 = new Properties();
 
 		// update the class names
-		for (Map.Entry<Object, Object> e : props.entrySet()) {
-			String name = (String) e.getKey();
-			String value = (String) e.getValue();
-			name = name.replaceAll("com.ebay.logger.",
-					"com.ebay.kernel.logger.rt.");
-			value = value.replaceAll("com.ebay.logger.",
-					"com.ebay.kernel.logger.rt.");
-			props2.setProperty(name, value);
-		}
 
 		// remove any eBay handlers from the list as they cannot be loaded
 		// in IBM's version of JDK logger due to wrong ClassLoader
@@ -246,7 +236,7 @@ public class Logger {
 			String[] handlers = parseClassNames(handlersStr);
 			for (int i = 0; i < handlers.length; i++) {
 				String handler = handlers[i];
-				if (handler.startsWith("com.ebay.kernel.logger.rt.")) {
+				if (handler.startsWith("org.ebayopensource.dsf.logger")) {
 					ebayHandlerNames.add(handler);
 					continue;
 				}

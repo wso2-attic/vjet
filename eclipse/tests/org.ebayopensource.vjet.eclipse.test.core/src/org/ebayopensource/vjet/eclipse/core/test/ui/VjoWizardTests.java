@@ -46,7 +46,7 @@ import org.eclipse.ui.WorkbenchException;
 import org.osgi.framework.Bundle;
 
 import org.ebayopensource.dsf.jst.reserved.JsCoreKeywords;
-import com.ebay.kernel.util.FileUtils;
+import org.ebayopensource.dsf.common.FileUtils;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.ebayopensource.vjet.eclipse.internal.ui.wizards.VjetWizardMessages;

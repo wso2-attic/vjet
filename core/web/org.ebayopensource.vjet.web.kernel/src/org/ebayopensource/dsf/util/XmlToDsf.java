@@ -43,7 +43,7 @@ public class XmlToDsf {
 	 * retrieved via comp.getDsfName().getLocalName().  Attributes of the 
 	 * element are stored as DsfAttributes.
 	 * 
-	 * Look at com.ebay.kernel.util.FileUtils for helper methods to get the
+	 * Look at FileUtils for helper methods to get the
 	 * contents of a file into a String.
 	 */
 	public static DElement convertToDsfGraph(String xmlString) {

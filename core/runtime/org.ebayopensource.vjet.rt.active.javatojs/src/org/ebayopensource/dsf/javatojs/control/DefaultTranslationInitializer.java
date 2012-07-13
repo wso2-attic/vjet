@@ -63,7 +63,7 @@ public class DefaultTranslationInitializer extends BaseTranslationInitializer
 //		policy.addExcludePackage(new Pkg("org.mozilla.mod.javascript", true));
 		
 		// - Kernel
-		policy.addExcludePackage(new Pkg("com.ebay.kernel.*"));
+		policy.addExcludePackage(new Pkg("org.ebayopensource.dsf.common.*"));
 		
 		// - DSF
 		// (A)

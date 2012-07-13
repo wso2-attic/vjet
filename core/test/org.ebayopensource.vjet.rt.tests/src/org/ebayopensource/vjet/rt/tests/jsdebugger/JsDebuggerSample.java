@@ -5,7 +5,7 @@ import org.ebayopensource.dsf.active.client.AHtmlParser;
 import org.ebayopensource.dsf.active.client.AWindow;
 import org.ebayopensource.dsf.html.js.ActiveJsExecutionControlCtx;
 
-import com.ebay.kernel.resource.ResourceUtil;
+import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
  public class JsDebuggerSample {
      public static void main(String[] args) throws IOException {
