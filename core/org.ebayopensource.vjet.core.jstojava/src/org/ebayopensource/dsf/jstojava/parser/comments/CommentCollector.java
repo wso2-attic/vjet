@@ -98,7 +98,11 @@ public class CommentCollector  {
 			try {
 				JsCommentMeta commentMeta = null;
 				try {
-					commentMeta = VjComment.parse(comment);
+					if(isVjetComment(comment)){
+						commentMeta = VjComment.parse(comment);
+					}else{
+						continue;
+					}
 				} catch (ParseException e) {
 					reporter.error("VJET comment error: " + e.getMessage() +
 					" For comment :" + comment, new String(ast.getFileName()),
@@ -145,6 +149,26 @@ public class CommentCollector  {
 						jstSourceUtil.col(beginOffset));
 			}
 		}
+	}
+
+	private boolean isVjetComment(String comment) {
+		if(!isHTMLTag(comment)){
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isHTMLTag(String comment) {
+		int startLessThan = comment.indexOf('<');
+		int endGreaterThan = comment.indexOf('>');
+		int semiColon = comment.indexOf(';');
+		if(semiColon >-1 && semiColon<endGreaterThan){
+			return false;
+		}
+		if(startLessThan>-1 && endGreaterThan>-1 && startLessThan<endGreaterThan){
+			return true;
+		}
+		return false;
 	}
 
 	/**
