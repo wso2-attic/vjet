@@ -186,6 +186,13 @@ public class BaseJstNode implements IJstNode {
 	}
 	
 	/**
+	 * Get annotations for this node
+	 */
+	public void setAnnotations(List<IJstAnnotation> annotations) {
+		m_annotations = annotations;
+	}
+	
+	/**
 	 * Returns annotation for given name
 	 * @param name
 	 */
