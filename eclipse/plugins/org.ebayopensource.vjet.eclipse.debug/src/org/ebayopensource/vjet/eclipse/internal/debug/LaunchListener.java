@@ -249,6 +249,8 @@ public class LaunchListener implements ILaunchListener {
 	}
 
 	private void setUpSourceLocator(ILaunch launch) {
+		
+		
 		final ISourceLocator origLocator = launch.getSourceLocator();
 
 		if (origLocator == null || origLocator instanceof SourceLocatorProxy) {
@@ -259,7 +261,7 @@ public class LaunchListener implements ILaunchListener {
 			return;
 		}
 		
-		// added for bug VJET-107
+		// added for bug VJET-107 only proxy java source lookup not other js lookups
 		if(origLocator instanceof JavaSourceLookupDirector ){
 			launch.setSourceLocator(getSourceLocator(launch, origLocator));
 		}
@@ -370,6 +372,15 @@ public class LaunchListener implements ILaunchListener {
 		if (!ILaunchManager.DEBUG_MODE.equals(launch.getLaunchMode())) {
 			return;
 		}
+		boolean attachDebugger = VjetDebugPlugin
+				.getDefault()
+				.getPreferenceStore()
+				.getBoolean(
+						VjetDebugPreferenceConstants.PREF_VJET_DEBUGGER_ATTACH);
+		if (!attachDebugger)
+			return;
+		
+		
 		setUpSourceLocator(launch);
 
 		// String launchType =
