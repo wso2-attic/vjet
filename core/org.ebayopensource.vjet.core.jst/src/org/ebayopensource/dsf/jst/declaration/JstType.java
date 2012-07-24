@@ -27,6 +27,7 @@ import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IJstTypeReference;
 import org.ebayopensource.dsf.jst.ISynthesized;
+import org.ebayopensource.dsf.jst.declaration.JstType.Info;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jst.traversal.IJstNodeVisitor;
 import com.ebay.kernel.util.Z;
@@ -1333,6 +1334,12 @@ public class JstType extends BaseJstNode implements IJstType {
 		return null;
 	}
 	
+	public void setEmbeddedTypes(List<JstType> embeddedTypes){
+		for (JstType iJstType : embeddedTypes) {
+			addInnerType(iJstType);
+		}
+	}
+	
 	/**
 	 * @see IJstType#getStaticEmbededTypes()
 	 */
@@ -1450,6 +1457,7 @@ public class JstType extends BaseJstNode implements IJstType {
 			return list;
 		}
 	}
+	
 	
 	/**
 	 * {@link IJstType#getDoc()}
@@ -2532,6 +2540,7 @@ public class JstType extends BaseJstNode implements IJstType {
 		}
 	}
 	
+
 	public String getParamsDecoration(){
 		if (getParamNames().isEmpty()){
 			return EMPTY;
@@ -2563,6 +2572,13 @@ public class JstType extends BaseJstNode implements IJstType {
 			m_enumValues = new ArrayList<IJstProperty>();
 		}
 		return m_enumValues;
+	}
+	
+	public void setEnumValues(List<IJstProperty> enumValues) {
+		for(IJstProperty enumV : enumValues){
+			addEnumValue(enumV);
+		}
+		
 	}
 	
 	public synchronized void clearEnumValues(){
@@ -3135,7 +3151,7 @@ public class JstType extends BaseJstNode implements IJstType {
 	}
 	
 	@Override
-	public List<? extends IJstType> getSecondaryTypes() {
+	public List<IJstType> getSecondaryTypes() {
 		if(m_secondaryTypes==null){
 			return Collections.EMPTY_LIST;
 		}
@@ -3151,4 +3167,125 @@ public class JstType extends BaseJstNode implements IJstType {
 		return m_singleton;
 		
 	}
+
+	public void setExpects(List<IJstType> expects) {
+		for (IJstType expect : expects) {
+			addExpects(expect);
+		}
+		
+	}
+
+	public void setExtends(List<IJstType> extends1) {
+		// TODO should this be in reverse order?
+		for (IJstType extend : extends1) {
+			addExtend(extend);
+		}
+		
+	}
+
+	public void setImports(List<IJstType> imports) {
+		for (IJstType iJstType : imports) {
+			addImport(iJstType);
+		}
+		
+	}
+
+	public void setInactiveImports(List<? extends IJstType> inactiveImports) {
+		for (IJstType iJstType : inactiveImports) {
+			addInactiveImport(iJstType);
+		}
+		
+	}
+
+	public void setMethods(List<IJstMethod> methods) {
+		for (IJstMethod iJstMethod : methods) {
+			addMethod(iJstMethod);
+		}
+		
+	}
+
+	public void setProperties(List<IJstProperty> properties) {
+		for (IJstProperty iJstProperty : properties) {
+			addProperty(iJstProperty);
+		}
+		
+	}
+
+	public void setInstanceInitializers(List<IStmt> instanceInitializers) {
+		for (IStmt iStmt : instanceInitializers) {
+			addInit(iStmt, false);
+		}
+		
+	}
+
+	public void setStaticInitializers(List<IStmt> staticInitializers) {
+		for (IStmt iStmt : staticInitializers) {
+			addInit(iStmt, true);
+		}
+		
+	}
+
+	public void setGlobalVars(List<? extends IJstGlobalVar> globalVars) {
+		for (IJstGlobalVar iJstGlobalVar : globalVars) {
+			addGlobalVar(iJstGlobalVar);
+		}
+		
+	}
+
+	public void setMixins(List<IJstType> mixins) {
+		for (IJstType iJstType : mixins) {
+			addMixin(new JstTypeReference(iJstType));
+		}
+		
+	}
+
+	public void setModifers(JstModifiers modifiers) {
+		m_modifiers =modifiers;
+		
+	}
+
+	public void setOptions(Map<String, Object> options) {
+		m_options = options;
+		
+	}
+
+	public void setOTypes(List<IJstOType> oTypes) {
+		for (IJstOType iJstOType : oTypes) {
+			addOType(iJstOType);
+		}
+		
+	}
+
+	public void setParam(Map<String,JstParamType> paramTypes) {
+		m_paramTypes = paramTypes;
+		
+	}
+
+	public void setSatisfies(List<IJstType> satisfies) {
+		for (IJstType iJstType : satisfies) {
+			addSatisfy(iJstType);
+		}
+		
+	}
+
+	public void setSecondaryTypes(List<IJstType> secondaryTypes) {
+		m_secondaryTypes = secondaryTypes;
+		
+	}
+
+	public void setSiblingTypes(List<JstType> siblingTypes) {
+		for (JstType jstType : siblingTypes) {
+			addSiblingType(jstType);
+		}
+		
+	}
+
+	public void setStatus(Info status) {
+		m_info = status;
+		
+	}
+
+
+
+
 }
