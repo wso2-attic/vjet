@@ -1837,6 +1837,15 @@ class JstExpressionTypeLinker implements IJstVisitor {
 		} else if (lhsType == null && lhs instanceof FieldAccessExpr
 				&& rhsExpr != null) {
 
+			if(rhsExpr instanceof MtdInvocationExpr){
+				MtdInvocationExpr mtdInv = (MtdInvocationExpr)rhsExpr;
+				if(mtdInv.getMethod() instanceof JstMethod){
+					if(((JstMethod)mtdInv.getMethod()).isTypeFactoryEnabled()){
+						constructForAssigment(lhs, rhsExpr);
+					}
+				}
+			}
+			
 			IExpr qualifier = ((FieldAccessExpr) lhs).getExpr();
 			if (qualifier instanceof JstIdentifier) {
 				IJstNode binding = ((JstIdentifier) qualifier).getJstBinding();
@@ -1871,11 +1880,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 			}
 
-		} else if (lhs instanceof FieldAccessExpr && rhsExpr != null) {
-
-			constructForAssigment(lhs, rhsExpr);
-
-		} else if ((lhs instanceof JstIdentifier) && (rhsExpr != null)
+		}  else if ((lhs instanceof JstIdentifier) && (rhsExpr != null)
 				&& (rhsExpr instanceof MtdInvocationExpr)) {
 
 			constructForAssigment(lhs, rhsExpr);
