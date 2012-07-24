@@ -727,7 +727,7 @@ public class VjoJstTypeValidator
 					final BaseVjoSemanticRuleCtx ruleCtx = new BaseVjoSemanticRuleCtx(jstType, ctx.getGroupId(), new String[]{jstType.getName()});
 					satisfyRule(ctx, VjoSemanticRuleRepo.getInstance().SUPER_CLASS_SHOULD_NOT_BE_THE_SAME, ruleCtx);
 				}
-				else if(!extendType.isClass()){
+				else if(!extendType.isClass() && !extendType.isMixin()){
 					//report problem
 					//can't extend from a none class type
 					final BaseVjoSemanticRuleCtx ruleCtx = new BaseVjoSemanticRuleCtx(jstType, ctx.getGroupId(), new String[]{jstType.getName(), extendType.getName()});
