@@ -100,8 +100,6 @@ public class CommentCollector  {
 				try {
 					if(isVjetComment(comment)){
 						commentMeta = VjComment.parse(comment);
-					}else{
-						continue;
 					}
 				} catch (ParseException e) {
 					reporter.error("VJET comment error: " + e.getMessage() +
@@ -152,6 +150,7 @@ public class CommentCollector  {
 	}
 
 	private boolean isVjetComment(String comment) {
+		
 		if(!isHTMLTag(comment)){
 			return true;
 		}
@@ -166,7 +165,10 @@ public class CommentCollector  {
 			return false;
 		}
 		if(startLessThan>-1 && endGreaterThan>-1 && startLessThan<endGreaterThan){
-			return true;
+			if((endGreaterThan - startLessThan) < 10){ // delta has to be less than 10 chars for html tag
+				return true;
+			}
+			
 		}
 		return false;
 	}
