@@ -1880,7 +1880,7 @@ class JstExpressionTypeLinker implements IJstVisitor {
 
 			}
 
-		}  else if ((lhs instanceof JstIdentifier) && (rhsExpr != null)
+		}  else if ((lhs instanceof JstIdentifier || lhs instanceof FieldAccessExpr) && (rhsExpr != null)
 				&& (rhsExpr instanceof MtdInvocationExpr)) {
 
 			constructForAssigment(lhs, rhsExpr);
