@@ -316,15 +316,16 @@ public class CommentCollector  {
 		return comments;
 	}
 	
-	public List<String> getCommentNonMeta(int methodStartOffset) {
+	public List<String> getCommentNonMeta(int methodStartOffset, int previousOffset) {
 		
+		int lastCommentOffset = previousOffset;
 		List<String> comments = new ArrayList<String>();
-		while(m_lastcommentOffset<=methodStartOffset ){
-			String com = m_commentMap.get(m_lastcommentOffset);
+		while(lastCommentOffset<=methodStartOffset ){
+			String com = m_commentMap.get(lastCommentOffset);
 			if(com!=null){
 				Collections.addAll(comments,com.split("\n"));
 			}
-			m_lastcommentOffset++;
+			lastCommentOffset++;
 		}
 		return comments;
 		

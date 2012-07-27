@@ -2354,7 +2354,7 @@ public class TranslateHelper {
 				return Collections.EMPTY_LIST;
 			}
 			return ctx.getCommentCollector().getCommentNonMeta(
-					ast.sourceStart());
+					ast.sourceStart(), ctx.getPreviousNodeSourceEnd());
 		}
 		
 		private static String getComments(final IASTNode ast,
