@@ -111,10 +111,11 @@ public class JstParseController implements IJstParseController {
 				}
 				// copy resolve.getType into type
 				
+			}else{
+			
+			
+				su.setType(resolve.getType());
 			}
-			
-			
-			su.setType(resolve.getType());
 		}
 	}
 
