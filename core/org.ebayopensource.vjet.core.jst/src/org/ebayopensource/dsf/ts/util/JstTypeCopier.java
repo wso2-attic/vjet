@@ -23,6 +23,7 @@ public class JstTypeCopier  {
 	public static void replace(JstType replace, JstType copy){
 		replace.clearAll();
 		replace.setName(copy.getName());
+		replace.setPackage(copy.getPackage());
 		replace.setSource(copy.getSource());
 		replace.setAlias(copy.getAlias());
 		replace.setAliasTypeName(copy.getAliasTypeName());
