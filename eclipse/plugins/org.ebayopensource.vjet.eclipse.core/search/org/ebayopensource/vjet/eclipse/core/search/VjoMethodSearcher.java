@@ -125,12 +125,12 @@ public class VjoMethodSearcher extends AbstractVjoElementSearcher {
 				.getSourceModule();
 
 		String groupName = nativeVjoSourceModule.getTypeName().groupName();
-		String typeName = nativeVjoSourceModule.getTypeName().typeName();
+		String typeName = nativeVjoSourceModule.getType().getName();
 		IModelElement parent = method.getParent();
-		if (parent instanceof IType) {
-			typeName = ((IType) parent)
-					.getTypeQualifiedName(ENCLOSING_TYPE_SEPARATOR);
-		}
+//		if (parent instanceof IType) {
+//			typeName = ((IType) parent)
+//					.getTypeQualifiedName(ENCLOSING_TYPE_SEPARATOR);
+//		}
 		MethodName methodNameTest = new MethodName(new TypeName(groupName,
 				typeName), method.getElementName());
 

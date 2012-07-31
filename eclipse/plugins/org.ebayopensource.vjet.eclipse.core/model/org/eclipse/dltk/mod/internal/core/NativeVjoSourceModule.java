@@ -56,7 +56,7 @@ public class NativeVjoSourceModule extends VjoSourceModule {
 
 	@Override
 	public SourceTypeName getTypeName() {
-		return new SourceTypeName(group, getElementName());
+		return new SourceTypeName(group, getType().getName());
 	}
 
 	@Override
