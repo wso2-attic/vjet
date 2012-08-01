@@ -355,7 +355,20 @@ public class JsDocGenerator extends BaseGenerator {
 			if (arg.getTypeRef() instanceof IJstRefType) {
 				getWriter().append(TYPE_REF_PREFIX);
 			}
-			getWriter().append(getName(arg.getType(),root));
+			if(arg.getTypes().size()==1){
+				getWriter().append(getName(arg.getType(),root));
+			}else{
+				// support {T1|T2|T3}
+				getWriter().append('{');
+				for(int i=0; i<arg.getTypes().size();i++){
+					IJstType type = arg.getTypes().get(i);
+					getWriter().append(getName(type,root));
+					if(i!=arg.getTypes().size()-1){
+						getWriter().append('|');
+					}
+				}
+				getWriter().append('}');
+			}
 		
 			if (arg.getType() instanceof JstTypeWithArgs){
 				appendArguments((JstTypeWithArgs)arg.getType());
