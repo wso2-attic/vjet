@@ -13,25 +13,63 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import org.ebayopensource.dsf.common.initialization.BaseInitializable;
+import org.ebayopensource.dsf.common.initialization.BaseInitializationContext;
+import org.ebayopensource.dsf.common.initialization.Initializable;
+import org.ebayopensource.dsf.common.initialization.InitializationContext;
+
 
 
 public class TranslationParallelRunner {
 	
 	private static volatile boolean s_initialized = false;
 	
+	
 	//
 	// Singleton
 	//
 	private static volatile TranslationParallelRunner s_instance;
+	private static BaseInitializable s_initializable;
 	private TranslationParallelRunner(){
 		if (s_initialized){
 			return;
 		}
 		
+		 synchronized(TranslationParallelRunner.class){
+		 	
+			
+			  getInitializable().doInitialize(new BaseInitializationContext());
+			        s_initialized = true;
+			 
+			      }
+		
 		synchronized(TranslationParallelRunner.class){
 			s_initialized = true;
 		}
 	};
+	
+    public static synchronized Initializable getInitializable() {
+        if (s_initializable != null) {
+            return s_initializable;
+        }
+        BaseInitializable initializable = new BaseInitializable() {
+            protected void initialize(final InitializationContext context) {
+//                CommandRunner.initialize();
+                // Bean to enable/disable ThreadLocals being flushed at the end
+                // of the task
+//                ThreadLocalFlushBean.getBean();
+            }
+            protected void shutdown(final InitializationContext context) {
+//                if (m_defaultCommandRunner != null) {
+//                    m_defaultCommandRunner.shutdown();
+//                    m_defaultCommandRunner = null;
+//                }
+            }
+        };
+        s_initializable = initializable;
+        return s_initializable;
+    }
+	
 	
 	public static TranslationParallelRunner getInstance(){
 		if (s_instance != null){
