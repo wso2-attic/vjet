@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
+import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.declaration.JstName;
 import org.ebayopensource.dsf.jst.declaration.JstParamType;
@@ -95,6 +96,13 @@ public interface IJstMethod extends IJstNode{
 	 * @return boolean
 	 */
 	boolean isStatic();
+	
+	/**
+	 * Answer whether the return type is optional
+	 * 
+	 * @return
+	 */
+	boolean isReturnTypeOptional();
 
 	/**
 	 * Answer whether the method is final

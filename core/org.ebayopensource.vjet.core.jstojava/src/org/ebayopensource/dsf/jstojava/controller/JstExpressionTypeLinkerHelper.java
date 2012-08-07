@@ -2920,6 +2920,7 @@ public class JstExpressionTypeLinkerHelper {
 		// deal with return type inference and argument type inferences
 		final IJstType paramFunctionRtnType = paramFunction.getRtnType();
 		anonymousFunction.setRtnType(paramFunctionRtnType);
+		anonymousFunction.setReturnOptional(paramFunction.isReturnTypeOptional());
 		((JstMethod)paramFunction).setDoc(doc);
 		if (!paramFunction.isDispatcher()) {
 			final List<JstArg> params = paramFunction.getArgs();

@@ -951,8 +951,14 @@ public class TranslateHelper {
 
 		// Attempt to set the return type for dispatcher method
 		boolean olRetTypeSame = true;
+		boolean optionalReturn = false;
 		IJstType rtnType = null;
 		for (IJstMethod mtd : jstMethod.getOverloaded()) {
+			
+			if(mtd.isReturnTypeOptional()){
+				optionalReturn = true;
+			}
+			
 			IJstType currType = mtd.getRtnType();
 			if (rtnType != null && currType != null) {
 				if (!rtnType.getName().equals(currType.getName())) {
@@ -962,6 +968,8 @@ public class TranslateHelper {
 			}
 			rtnType = currType;
 		}
+		
+		jstMethod.setReturnOptional(optionalReturn);
 		// If all overloaded methods have the same return type, set the
 		// dispatcher method return
 		// type the same. Otherwise, let the linker figure it out.
@@ -2716,7 +2724,7 @@ public class TranslateHelper {
 				final List<JsTypingMeta> originalParamTypes = originalParam
 						.getTypes();
 				newParams.add(buildJsParam(originalParam.getName(),
-						originalParam.isFinal(), false, originalParam
+						originalParam.isFinal(), originalParam.isOptional(), originalParam
 								.isVariable(), originalParamTypes
 								.toArray(new JsTypingMeta[originalParamTypes
 										.size()])));
@@ -2992,6 +3000,7 @@ public class TranslateHelper {
 				final JsTypingMeta typing = meta.getTyping();
 				if (typing != null) {
 					final JsTypingMeta returnType = getReturnTyping(meta);
+ 					jstMethod.setReturnOptional(typing.isOptional());
 					final IJstType retType = findType(ctx, returnType, meta);
 					jstMethod.setRtnType(retType);
 					if (typing instanceof JsFuncType) {
@@ -3124,6 +3133,7 @@ public class TranslateHelper {
 					final JsTypingMeta retTyping = getReturnTyping(meta);
 					final IJstType retType = findType(ctx, retTyping, meta);
 					jstMethod.setRtnType(retType);
+					jstMethod.setReturnOptional(retTyping.isOptional());
 				}
 			}
 
@@ -3180,6 +3190,11 @@ public class TranslateHelper {
 				setFinal(originalJsFunc.isFinal());
 				setVariable(originalJsFunc.isVariable());
 			}
+		}
+		
+		@Override
+		public boolean isOptional() {
+			return m_originalJsFunc.isOptional();
 		}
 
 		@Override
@@ -3292,6 +3307,8 @@ public class TranslateHelper {
 			this.m_jsFuncType = func;
 		}
 
+		
+		
 		@Override
 		public boolean isMethod() {
 			return m_originalMeta.isMethod();
