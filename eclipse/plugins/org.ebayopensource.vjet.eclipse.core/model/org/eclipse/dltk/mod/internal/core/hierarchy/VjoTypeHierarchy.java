@@ -21,6 +21,7 @@ import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.ClassFileConstants;
 import org.ebayopensource.vjet.eclipse.core.IVjoSourceModule;
 import org.ebayopensource.vjet.eclipse.core.IVjoTypeHierarchy;
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 import org.eclipse.core.runtime.CoreException;
@@ -203,6 +204,8 @@ public class VjoTypeHierarchy implements ITypeHierarchy,
 			if (superItype != null) {
 				cacheSuperclass(fType, superItype);
 				computeSuperClasses(superItype);
+			}else{
+				VjetPlugin.error("Type hierarchy could created could not find dltk type for: " + superType.getName() );
 			}
 		}
 	}
@@ -250,6 +253,10 @@ public class VjoTypeHierarchy implements ITypeHierarchy,
 		subTypes = typeSpaceMgr.findSubTypes(name);
 		IJstType currentType = typeSpaceMgr.findType(name);
 
+		if(currentType==null){
+			return;
+		}
+		
 		if (isInterface(fType) || currentType.isInterface()) {
 			// find which class implements this interface
 			// FIXME backend API cannot find which interfaces extends my

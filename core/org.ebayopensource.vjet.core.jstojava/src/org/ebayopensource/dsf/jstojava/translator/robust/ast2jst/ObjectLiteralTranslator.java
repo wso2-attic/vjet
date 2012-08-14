@@ -158,12 +158,28 @@ public class ObjectLiteralTranslator extends
 			if(inFieldArea(astNode)) {
 				return null;
 			}
-			int lastFieldPos = getLastFieldPos(astNode);
-			String token = getToken(lastFieldPos);
-			//Has no token, or syntax error, return null JstCompletion.
-			if (token == null || token.indexOf("(") >= 0) {
-				return null;
+			// BMS 2012-05-10 Fix proposal problem when there's no token and the cursor is against the comma
+			String token = "";
+			// If butted up against a comma, this is OK
+			int index = m_ctx.getCompletionPos() - 1;
+			char c = m_ctx.getOriginalSource()[index];
+			if (c != ',')
+			{
+				int lastFieldPos = getLastFieldPos(astNode);
+				//String token = getToken(lastFieldPos);
+				token = getToken(lastFieldPos);
+
+				//Has no token, or syntax error, return null JstCompletion.
+				if (token == null || token.indexOf("(") >= 0) {
+					return null;
+				}
 			}
+		//	int lastFieldPos = getLastFieldPos(astNode);
+		//	String token = getToken(lastFieldPos);
+			//Has no token, or syntax error, return null JstCompletion.
+//			if (token == null || token.indexOf("(") >= 0) {
+//				return null;
+//			}
 			completion = new JstFieldOrMethodCompletion(m_result,
 					isStaticBlock());
 			if (token.trim().length() == 0) {

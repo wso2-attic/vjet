@@ -12,8 +12,8 @@
       version="1.0.0.qualifier"
       provider-name="eBay Open Source">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="https://www.ebayopensource.org/index.php/VJET/HomePage">
+     VJET JavaScript IDE replaces standard text editors or simple JavaScript editors used by many JavaScript developers today and brings common IDE features to JavaScript. VJET JavaScript helps developers focus on coding by providing assistance and support during the full development lifecycle.
    </description>
 
    <copyright url="http://www.example.com/copyright">

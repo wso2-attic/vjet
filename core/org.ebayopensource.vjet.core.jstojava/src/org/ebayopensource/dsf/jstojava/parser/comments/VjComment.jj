@@ -11,7 +11,10 @@ package org.ebayopensource.dsf.jstojava.parser.comments;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.ArrayList;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.Token;
+import org.ebayopensource.dsf.jst.meta.ArgType;
 
 public class VjComment {
 
@@ -364,10 +367,11 @@ private void Need(JsCommentMeta meta) :
 }
 
 private JsTypingMeta FuncDeclaration() :
-{String name = null; JsCommentMeta meta = new JsCommentMeta();}
+{String name = null; boolean isOptional = false; JsCommentMeta meta = new JsCommentMeta();}
 {
-	(addTyping(meta))? (name=Name())? (FormalParams(meta))?
+	(addTyping(meta))? (isOptional=Optional())? (name=Name())? (FormalParams(meta))?
 	{
+	    meta.getTyping().setOptional(isOptional);
 		meta.setName(name);
 		return meta.getTyping();
 	}

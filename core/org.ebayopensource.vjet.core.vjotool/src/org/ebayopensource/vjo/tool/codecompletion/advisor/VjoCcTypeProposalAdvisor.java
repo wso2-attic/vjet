@@ -146,7 +146,10 @@ public class VjoCcTypeProposalAdvisor extends AbstractVjoCcAdvisor implements
 		if (pck != null) {
 			ogroupName = pck.getGroupName();
 		}
-		String groupName = type.getPackage().getGroupName();
+		String groupName = null;
+		if (type.getPackage()!=null) {
+			groupName = type.getPackage().getGroupName();
+		}
 		return StringUtils.compare(ogroupName, groupName);
 	}
 	

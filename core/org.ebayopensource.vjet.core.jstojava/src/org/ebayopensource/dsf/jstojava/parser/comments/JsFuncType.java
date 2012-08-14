@@ -11,6 +11,9 @@ package org.ebayopensource.dsf.jstojava.parser.comments;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.Token;
+
 public class JsFuncType extends JsTypingMeta {
 	
 	private JsTypingMeta m_returnType;
@@ -22,7 +25,7 @@ public class JsFuncType extends JsTypingMeta {
 	public JsFuncType(JsTypingMeta returnType) {
 		m_returnType = returnType;
 		if (returnType != null) {
-			m_typingToken = returnType.m_typingToken;
+			setTypingToken(returnType.getTypingToken());
 		}
 	}
 		
@@ -33,7 +36,7 @@ public class JsFuncType extends JsTypingMeta {
 	public JsFuncType setFuncName(String name, Token nameToken) {
 		m_funcName = name;
 		if (nameToken != null) {
-			m_typingToken = nameToken;
+			setTypingToken(nameToken);
 		}
 		return this;
 	}

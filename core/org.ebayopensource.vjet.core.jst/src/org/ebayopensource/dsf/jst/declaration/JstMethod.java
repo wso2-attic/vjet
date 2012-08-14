@@ -63,6 +63,7 @@ public class JstMethod extends BaseJstNode implements IJstMethod {
 	private JstFunctionRefType m_oType;
 	
 	private List<IJstMethod> m_overloaded;
+	private boolean m_returnOptional;
 
 	//
 	// Constructors
@@ -403,6 +404,15 @@ public class JstMethod extends BaseJstNode implements IJstMethod {
 		}		
 		return this;
 	}
+	
+	public JstMethod setReturnOptional(boolean isReturnOptional){
+		m_returnOptional = isReturnOptional;
+		return this;
+	}
+	
+	public boolean isReturnTypeOptional(){
+		return m_returnOptional;
+	}
 
 	public JstMethod setRtnRefType(final IJstTypeReference rtnType) {
 		if (m_rtnType != null) {
@@ -592,7 +602,12 @@ public class JstMethod extends BaseJstNode implements IJstMethod {
 	}
 	
 	public JstMethod setOverloaded(List<IJstMethod> jstMethods) {
-		m_overloaded = jstMethods;
+		if(jstMethods!=null){
+			m_overloaded = new ArrayList<IJstMethod>();
+			m_overloaded.addAll(jstMethods);
+		}else{
+			m_overloaded = jstMethods;
+		}
 		return this;
 	}
 	

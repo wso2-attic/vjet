@@ -19,20 +19,35 @@ package org.ebayopensource.vjet.eclipse.internal.launching;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
+import org.ebayopensource.vjo.lib.TsLibLoader;
+import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.dltk.mod.core.BuildpathContainerInitializer;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.DLTKLanguageManager;
+import org.eclipse.dltk.mod.core.IAccessRule;
+import org.eclipse.dltk.mod.core.IBuildpathAttribute;
 import org.eclipse.dltk.mod.core.IBuildpathContainer;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
 import org.eclipse.dltk.mod.core.IDLTKLanguageToolkit;
+import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.environment.EnvironmentManager;
 import org.eclipse.dltk.mod.core.environment.IEnvironment;
+import org.eclipse.dltk.mod.internal.core.BuildpathEntry;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 import org.eclipse.dltk.mod.internal.launching.DLTKLaunchingPlugin;
 import org.eclipse.dltk.mod.launching.IInterpreterInstall;
 import org.eclipse.dltk.mod.launching.IInterpreterInstallType;
@@ -43,33 +58,115 @@ import org.eclipse.dltk.mod.launching.ScriptLaunchConfigurationConstants;
 import org.eclipse.dltk.mod.launching.ScriptRuntime;
 import org.eclipse.dltk.mod.launching.ScriptRuntime.DefaultInterpreterEntry;
 
-import org.ebayopensource.vjet.eclipse.core.VjetPlugin;
-
 /**
  * Resolves a container for a InterpreterEnvironment buildpath container entry.
  */
 public class JsContainerInitializer extends BuildpathContainerInitializer {
 
-	/**
-	 * @see BuildpathContainerInitializer#initialize(IPath, IScriptProject)
-	 */
-	public void initialize(IPath containerPath, IScriptProject project)
+	
+	private static IAccessRule[] EMPTY_RULES = new IAccessRule[0];
+
+	public void initialize(final IPath containerPath, final IScriptProject project)
 			throws CoreException {
 		int size = containerPath.segmentCount();
 		if (size > 0) {
 			if (containerPath.segment(0).equals(VjetPlugin.JS_DEFAULT_SDK)) {
 				
-				IInterpreterInstall interp = resolveInterpreter(
-						getNatureFromProject(project),
-						getEnvironmentFromProject(project), containerPath);
-				JsSdkBuildpathContainer container = null;
-				container = new JsSdkBuildpathContainer(interp, containerPath);
-				DLTKCore.setBuildpathContainer(containerPath,
-						new IScriptProject[] { project },
-						new IBuildpathContainer[] { container }, null);
+				final String[] defaultLibs = TsLibLoader.getJsNativeGroups();
+				
+				Job job = new Job("Add Links") {
+					public IStatus run(IProgressMonitor monitor) {
+						try {
+							IInterpreterInstall interp = resolveInterpreter(
+									getNatureFromProject(project),
+									getEnvironmentFromProject(project), containerPath);
+							JsSdkBuildpathContainer container = null;
+							
+							for(String group: defaultLibs){
+								BuildPathUtils.addLinkForGroup(group);
+							}
+							
+							container = new JsSdkBuildpathContainer(interp, containerPath);
+							container.setEntries(createEntries());
+							DLTKCore.setBuildpathContainer(containerPath,
+									new IScriptProject[] { project },
+									new IBuildpathContainer[] { container }, null);
+							
+							
+						} catch (CoreException e) {
+							return e.getStatus();
+						} finally {
+							monitor.done();
+						}
+						return Status.OK_STATUS;
+					}
+				};
+				job.setRule(ResourcesPlugin.getWorkspace().getRoot());
+				job.schedule();
+				
+				
+				
+				
+				
+				
+				
+				
 			}
 			
 		}
+	}
+	
+
+	protected List createEntries() {
+		
+		TypeSpaceMgr tmg = TypeSpaceMgr.getInstance();
+
+		String[] defaultLibs = TsLibLoader.getJsNativeGroups();
+		List entries = new ArrayList(defaultLibs.length);
+		Set rawEntries = new HashSet(defaultLibs.length);
+		for (int i = 0; i < defaultLibs.length; i++) {
+
+			// TODO Check this
+			// // resolve symlink
+			// IEnvironment environment = interpreter.getEnvironment();
+			//
+			// IFileHandle f = environment.getFile(entryPath);
+			// if (!f.exists())
+			// continue;
+			// entryPath = new Path(f.getCanonicalPath());
+			//
+			//				
+			String groupName = defaultLibs[i];
+			if (rawEntries.contains(groupName))
+				continue;
+
+			/*
+			 * if (!entryPath.isAbsolute()) Assert.isTrue(false, "Path for
+			 * IBuildpathEntry must be absolute"); //$NON-NLS-1$
+			 */
+			IBuildpathAttribute[] attributes = new IBuildpathAttribute[0];
+			ArrayList excluded = new ArrayList(); // paths to exclude
+//			IEnvironment env = LocalEnvironment.getInstance();
+			
+			entries.add(new BuildpathEntry(IProjectFragment.K_BINARY,
+					IBuildpathEntry.BPE_LIBRARY, ScriptProject
+							.canonicalizedPath(BuildPathUtils
+									.createPathForGroup(groupName)),
+					false, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
+							.toArray(new IPath[excluded.size()]), EMPTY_RULES,
+					false, attributes, false));
+			
+//			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
+//					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
+//					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
+//							.toArray(new IPath[excluded.size()]), false, true));
+			// entries.add(DLTKCore.newExtLibraryEntry(getSdkBasePath(groupName)));
+			rawEntries.add(groupName);
+			
+		}
+		
+		return entries;
+		
 	}
 
 	/**

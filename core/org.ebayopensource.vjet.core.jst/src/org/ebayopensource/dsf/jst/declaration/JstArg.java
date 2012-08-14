@@ -129,7 +129,10 @@ public class JstArg extends BaseJstNode {
 	}
 
 	public IJstTypeReference getTypeRef() {
-		return m_types.get(0);
+		if(m_types.size()>0){
+			return m_types.get(0);
+		}
+		return new JstTypeReference(JstCache.getInstance().getType("Object"));
 	}
 
 	public String getName() {

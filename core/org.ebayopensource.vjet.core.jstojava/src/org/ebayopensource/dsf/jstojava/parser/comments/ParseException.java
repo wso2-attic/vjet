@@ -12,6 +12,8 @@
  * */
 package org.ebayopensource.dsf.jstojava.parser.comments;
 
+import org.ebayopensource.dsf.jst.meta.Token;
+
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by

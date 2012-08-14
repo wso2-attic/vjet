@@ -13,10 +13,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
- 
+
  *******************************************************************************/
 package org.ebayopensource.vjet.eclipse.internal.launching;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -25,6 +27,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.filesystem.URIUtil;
+import org.eclipse.core.internal.localstore.FileSystemResourceManager;
+import org.eclipse.core.internal.resources.File;
+import org.eclipse.core.internal.resources.Workspace;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.DLTKCore;
@@ -35,11 +49,15 @@ import org.eclipse.dltk.mod.core.IBuildpathContainer;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
 import org.eclipse.dltk.mod.core.IBuiltinModuleProvider;
 import org.eclipse.dltk.mod.core.IInterpreterContainerExtension;
+import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.eclipse.dltk.mod.core.IScriptProject;
 import org.eclipse.dltk.mod.core.environment.EnvironmentPathUtils;
 import org.eclipse.dltk.mod.core.environment.IEnvironment;
 import org.eclipse.dltk.mod.core.internal.environment.LocalEnvironment;
 import org.eclipse.dltk.mod.internal.core.BuildpathEntry;
+import org.eclipse.dltk.mod.internal.core.ExternalFoldersManager;
+import org.eclipse.dltk.mod.internal.core.ModelManager;
+import org.eclipse.dltk.mod.internal.core.ScriptProject;
 import org.eclipse.dltk.mod.launching.IInterpreterInstall;
 import org.eclipse.dltk.mod.launching.IInterpreterInstallChangedListener;
 import org.eclipse.dltk.mod.launching.PropertyChangeEvent;
@@ -58,6 +76,7 @@ public class VjoSdkBuildpathContainer implements IBuildpathContainer {
 	 * Container path used to resolve to this interpreter
 	 */
 	private IPath fPath = null;
+	private List m_entries;
 	/**
 	 * Cache of buildpath entries per Interpreter install. Cleared when a
 	 * Interpreter changes.
@@ -103,59 +122,21 @@ public class VjoSdkBuildpathContainer implements IBuildpathContainer {
 		}
 		IBuildpathEntry[] entries = (IBuildpathEntry[]) fgBuildpathEntries
 				.get(fPath.lastSegment());
-		if (entries == null) {
+		if (entries == null  || m_entries ==null) {
 			entries = computeBuildpathEntries(fPath.lastSegment());
 			fgBuildpathEntries.put(fPath.lastSegment(), entries);
 		}
 		return entries;
 	}
-
-	/**
-	 * Computes the buildpath entries associated with a interpreter - one entry
-	 * per library.
-	 * 
-	 * @param interpreter
-	 * @return buildpath entries
-	 */
+	
 	private IBuildpathEntry[] computeBuildpathEntries(String sdkName) {
-		TypeSpaceMgr tmg = TypeSpaceMgr.getInstance();
-
-		String[] defaultLibs = TsLibLoader.getVjoGroups();
-		List entries = new ArrayList(defaultLibs.length);
-		Set rawEntries = new HashSet(defaultLibs.length);
-		for (int i = 0; i < defaultLibs.length; i++) {
-
-			// TODO Check this
-			// // resolve symlink
-			// IEnvironment environment = interpreter.getEnvironment();
-			//
-			// IFileHandle f = environment.getFile(entryPath);
-			// if (!f.exists())
-			// continue;
-			// entryPath = new Path(f.getCanonicalPath());
-			//
-			//				
-			String groupName = defaultLibs[i];
-			if (rawEntries.contains(groupName))
-				continue;
-
-			/*
-			 * if (!entryPath.isAbsolute()) Assert.isTrue(false, "Path for
-			 * IBuildpathEntry must be absolute"); //$NON-NLS-1$
-			 */
-			IBuildpathAttribute[] attributes = new IBuildpathAttribute[0];
-			ArrayList excluded = new ArrayList(); // paths to exclude
-			IEnvironment env = LocalEnvironment.getInstance();
-			entries.add(DLTKCore.newLibraryEntry(EnvironmentPathUtils
-					.getFullPath(env, getSdkBasePath(groupName)), EMPTY_RULES,
-					attributes, BuildpathEntry.INCLUDE_ALL, (IPath[]) excluded
-							.toArray(new IPath[excluded.size()]), false, true));
-			// entries.add(DLTKCore.newExtLibraryEntry(getSdkBasePath(groupName)));
-			rawEntries.add(groupName);
-		}
+		List entries = m_entries;
 		return (IBuildpathEntry[]) entries.toArray(new IBuildpathEntry[entries
 				.size()]);
 	}
+
+
+	
 
 	private IPath getSdkBasePath(String groupName) {
 		return new Path(Util.getNativeTypeCacheDir(groupName).toString());
@@ -228,5 +209,10 @@ public class VjoSdkBuildpathContainer implements IBuildpathContainer {
 				return 0;
 			}
 		};
+	}
+
+	public void setEntries(List createEntries) {
+		m_entries = createEntries;
+		
 	}
 }

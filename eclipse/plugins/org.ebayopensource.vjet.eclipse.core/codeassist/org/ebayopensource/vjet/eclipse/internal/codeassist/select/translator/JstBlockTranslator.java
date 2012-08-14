@@ -36,6 +36,8 @@ public class JstBlockTranslator extends DefaultNodeTranslator {
 	@Override
 	public IModelElement[] convert(IVjoSourceModule module, IJstNode node) {
 		JstBlock jstBlock = (JstBlock) node;
+		
+			
 		// jstBlock.getVarTable().
 		IJstType ownerType = jstBlock.getOwnerType();
 		IModelElement[] elements = JstNodeDLTKElementResolver.convert(module,
@@ -44,7 +46,12 @@ public class JstBlockTranslator extends DefaultNodeTranslator {
 			return null;
 		}
 		IType dltkType = (IType) elements[0];
+		
 		// find element by offset
+		if(module==null){
+			return null;
+		}
+		
 		IModelElement element = CodeassistUtils.findLocalElement(
 				(org.eclipse.dltk.mod.core.ISourceModule) module, jstBlock
 						.getSource().getStartOffSet());

@@ -871,7 +871,11 @@ public class NameLookup {
 		} else {
 			String[] splittedName = Util.splitOn('.', name, 0, name.length());
 			Object value = this.scriptFolders.get(splittedName);
-			if (value instanceof ProjectFragment) {
+			// START EBAY MOD - support for script folders which don't match declared package/namespace
+			if (value instanceof ScriptFolder) {
+				requestor.acceptScriptFolder((ScriptFolder) value);
+				// END EBAY MOD
+			} else if (value instanceof ProjectFragment) {
 				requestor.acceptScriptFolder(((ProjectFragment) value)
 						.getScriptFolder(toPath(splittedName)));
 			} else {

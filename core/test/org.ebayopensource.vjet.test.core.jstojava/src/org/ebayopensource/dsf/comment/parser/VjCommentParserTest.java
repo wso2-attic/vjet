@@ -8,11 +8,19 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.comment.parser;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta.DIRECTION;
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta.DIRECTION;
+import org.ebayopensource.dsf.jst.meta.ArgType;
+import org.ebayopensource.dsf.jst.meta.ArgType.WildCardType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncArgAttributedType;
@@ -20,13 +28,10 @@ import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncScopeAttributedType
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsMixinType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType.WildCardType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
+import org.ebayopensource.dsf.jstojava.parser.comments.VjCommentUtil;
 import org.junit.Test;
 
 public class VjCommentParserTest {
@@ -147,6 +152,49 @@ public class VjCommentParserTest {
 		TestCase.assertEquals(DIRECTION.BACK, meta.getDirection());
 		TestCase.assertTrue(meta.isCast());
 	}
+	
+	@Test
+	public void testHTMLTag() throws ParseException {
+		assertFalse(VjCommentUtil.isVjetComment("//<p>"));
+		assertFalse(VjCommentUtil.isVjetComment("// <debug>"));
+		assertTrue(VjCommentUtil.isVjetComment("//< Class<T>"));
+		assertTrue(VjCommentUtil.isVjetComment("//> Class<T>"));
+	}
+	
+	
+	@Test
+	public void testOptionalReturn() throws ParseException {
+		JsCommentMeta meta = VjComment.parse("//>public String? zot()");
+		assertEquals("String", meta.getTyping().getType());
+		assertTrue(meta.getTyping().isOptional());
+		
+	}
+	
+	@Test
+	public void testOptionalReturnCallBack() throws Exception {
+		JsCommentMeta meta = VjComment.parse("//>public (int? fnreturn(int))? foo((int? fnparam(String)) x)");
+		JsTypingMeta typing = meta.getTyping();
+		TestCase.assertTrue(typing instanceof JsFuncType);
+		assertTrue(typing.isOptional());
+		JsTypingMeta retTyping = ((JsFuncType)typing).getReturnType();
+		TestCase.assertTrue(retTyping instanceof JsFuncType);
+		JsFuncType funcType = (JsFuncType)retTyping;
+		TestCase.assertEquals("int", funcType.getReturnType().getType());
+		// support for function return values which have optional return
+		TestCase.assertTrue(funcType.getReturnType().isOptional());
+		
+		TestCase.assertEquals("int", funcType.getParams().get(0).getType());
+
+		JsTypingMeta paramTyping = ((JsFuncType)typing).getParams().get(0).getTypes().get(0);
+		TestCase.assertTrue(paramTyping instanceof JsFuncType);
+		funcType = (JsFuncType)paramTyping;
+		// support for function params/ callbacks which have optional return
+		TestCase.assertTrue(funcType.getReturnType().isOptional());
+		TestCase.assertEquals("int", funcType.getReturnType().getType());
+		TestCase.assertEquals("String", funcType.getParams().get(0).getType());	
+	}
+	
+	
 	
 	@Test
 	public void testModifiers() throws ParseException {
@@ -297,6 +345,7 @@ public class VjCommentParserTest {
 		TestCase.assertTrue(retTyping instanceof JsFuncType);
 		JsFuncType funcType = (JsFuncType)retTyping;
 		TestCase.assertEquals("int", funcType.getReturnType().getType());
+		TestCase.assertFalse(funcType.isOptional());
 		TestCase.assertEquals("int", funcType.getParams().get(0).getType());
 		
 		JsTypingMeta paramTyping = ((JsFuncType)typing).getParams().get(0).getTypes().get(0);

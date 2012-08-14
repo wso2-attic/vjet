@@ -30,7 +30,7 @@ public interface ITypeConstructorResolver {
 	 * 
 	 * @return
 	 */
-	String getGroupId();
+	String[] getGroupIds();
 
 	/**
 	 * The type of expression supported by this resolver.

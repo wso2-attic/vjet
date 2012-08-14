@@ -72,7 +72,7 @@ public class EclipseTypeLoadMonitor extends TypeLoadMonitor {
 		if (lastPercent != percent) {
 			m_monitor.worked((int)(percent-lastPercent));
 			lastPercent = percent;
-			System.out.println("percent = " + percent);
+//			System.out.println("percent = " + percent);
 		}
 	}
 

@@ -97,7 +97,7 @@ public class BaseReporter implements IHeadLessReporter {
         FileWriter fw;
         try {
             fw = new FileWriter(resultFile);
-            fw.write("Ebay VJET Valdation ===>");
+            fw.write("VJET Valdation ===>");
             fw.write(new Date().toString() + "\n");
             HashMap map = result.getReportData();
             EVLauncherResult evresult = (EVLauncherResult) result;
@@ -115,7 +115,7 @@ public class BaseReporter implements IHeadLessReporter {
                 fw.write("<" + i + "> JS Path: " + file + "\n");
                 if (value != null) {
                     if (value instanceof String) {
-                        String new_name = (String) value;
+//                        String new_name = (String) value;
                         fw.write("Error Message :  " + value + "\n");
                         fw
                                 .write("Please check verified JS files writtern by VJO syntax. \n");
@@ -162,18 +162,21 @@ public class BaseReporter implements IHeadLessReporter {
             EVLauncherResult evresult, String reportLevel, boolean calc,
             File validateFile) {
         StringBuffer message = new StringBuffer();
-        message.append("=====================================" +
-                    "============================================" +
-                    "============================================\n");
+//        message.append("=====================================" +
+//                    "============================================" +
+//                    "============================================\n");
         String sources = FileOperator.getSourceFromFile(validateFile);
+        boolean hasProblem = false;
         for (VjoSemanticProblem vjoSemanticProblem : actualProblems) {
             if (vjoSemanticProblem.type().equals(ProblemSeverity.error)) {
                 if (calc) {
                     evresult.setErrorNumber(evresult.getErrorNumber() + 1);
                 }
+                
                 if (reportLevel.equalsIgnoreCase(ProblemSeverity.error
                         .toString())
                         || reportLevel.equalsIgnoreCase("ALL")) {
+                	hasProblem=true;
                     printProblem(message, vjoSemanticProblem, sources);
                 }
             } else if (vjoSemanticProblem.type()
@@ -184,11 +187,17 @@ public class BaseReporter implements IHeadLessReporter {
                 if (reportLevel.equalsIgnoreCase(ProblemSeverity.warning
                         .toString())
                         || reportLevel.equalsIgnoreCase("ALL")) {
+                	hasProblem=true;
                     printProblem(message, vjoSemanticProblem, sources);
                 }
             }
         }
-        return message.toString();
+        
+        if(hasProblem){
+        	return  "Problems with: " + validateFile.getAbsolutePath() + "\n"+ message.toString();
+        }
+        return null;
+       // return message.toString();
     }
 
     /**

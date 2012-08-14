@@ -181,6 +181,11 @@ public class JstGlobalFunc extends BaseJstNode implements IJstGlobalFunc {
 		return m_method.getSource();
 	}
 
+	@Override
+	public boolean isReturnTypeOptional() {
+		return m_method.isReturnTypeOptional();
+	}
+
 
 
 }

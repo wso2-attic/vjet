@@ -11,6 +11,7 @@
  */
 package org.ebayopensource.vjet.eclipse.internal.ui.editor;
 
+import java.net.URI;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import org.ebayopensource.dsf.jst.declaration.JstProxyMethod;
 import org.ebayopensource.dsf.jst.declaration.JstProxyProperty;
 import org.ebayopensource.dsf.jst.declaration.JstVars;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
+import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jstojava.translator.JstUtil;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IImportDeclaration;
@@ -59,8 +61,12 @@ import org.eclipse.core.filebuffers.ITextFileBufferManager;
 import org.eclipse.core.filebuffers.LocationKind;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ProjectScope;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -81,6 +87,8 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.internal.core.JSSourceField;
 import org.eclipse.dltk.mod.internal.core.JSSourceMethod;
 import org.eclipse.dltk.mod.internal.core.JSSourceType;
+import org.eclipse.dltk.mod.internal.core.NativeVjoSourceModule;
+import org.eclipse.dltk.mod.internal.core.ScriptFolder;
 import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 import org.eclipse.dltk.mod.internal.ui.actions.FoldingActionGroup;
 import org.eclipse.dltk.mod.internal.ui.editor.EditorUtility;
@@ -500,6 +508,8 @@ public class VjoEditor extends JavaScriptEditor {
 
     private TogglePresentationAction m_togglePresentation;
 
+	private NativeVjoSourceModule m_readOnlyType;
+
     public VjoEditor() {
 //        System.out.println("Vjo Editor Created"); //$NON-NLS-1$
 //        WorkbenchPlugin.log(new Status(IStatus.INFO, VjetPlugin.PLUGIN_ID,
@@ -614,7 +624,39 @@ public class VjoEditor extends JavaScriptEditor {
     public IModelElement getInputModelElement() {
         IEditorInput input = getEditorInput();
         IModelElement element = super.getInputModelElement();
+        
+        
+        
         if (element != null) {
+        	
+        	if(element instanceof VjoSourceModule){
+        		VjoSourceModule module = (VjoSourceModule)element;
+        		if(module.getJstType()==null && isTypeSpaceScheme(input)){
+        			
+        			if(m_readOnlyType!=null){
+        				return m_readOnlyType;
+        			}
+        			
+        			IPath fullPath = ((FileEditorInput)input).getFile().getFullPath();
+        	    	IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+        	    	IResource resource = root.findMember(fullPath);
+        	    	URI location = resource.getLocationURI();
+        	    	String typeName = location.getPath().replace("/", ".");
+        			
+        			// TODO add support for type here
+//        			System.out.println("no type info for model");
+        			String groupName = getTypspaceGroupFromURI(input);
+        			
+        			typeName = typeName.substring(1, typeName.lastIndexOf(".js"));
+					NativeVjoSourceModule m2= new NativeVjoSourceModule( CodeassistUtils.getDefaultNativeSourceFolder(groupName), groupName,
+        					typeName);
+        			m2.setJstType(CodeassistUtils.findJstType(groupName, typeName));
+        			
+        			m_readOnlyType = m2;
+        			return m2;
+        		}
+        	}
+        	
             return element;
         } else if (input instanceof ExternalFileEditorInput) {
             return ((ExternalFileEditorInput) input).getModelElement();
@@ -636,7 +678,19 @@ public class VjoEditor extends JavaScriptEditor {
     }
 
     public Image getTitleImage() {
+    	
+    	
+    	
         IEditorInput input = getEditorInput();
+        
+        if(input instanceof FileEditorInput){
+        	FileEditorInput fei = (FileEditorInput)input;
+        	if(isTypeSpaceScheme(fei)){
+        	    	  return VjetUIImages
+        	                    .getImage(VjetUIImages.IMAGE_BINARY_EDITOR_TITLE);
+        	    }
+        }
+        
         if (input instanceof ExternalFileEditorInput || input instanceof ExternalStorageEditorInput) {
             return VjetUIImages
                     .getImage(VjetUIImages.IMAGE_BINARY_EDITOR_TITLE);
@@ -649,6 +703,50 @@ public class VjoEditor extends JavaScriptEditor {
         }
         return super.getTitleImage();
     }
+    
+    private boolean isTypeSpaceScheme(IEditorInput ei){
+    	FileEditorInput fei = null;
+    	if(ei instanceof FileEditorInput){
+    		fei = (FileEditorInput)ei;
+    	}else{
+    		return false;
+    	}
+    	IPath fullPath = fei.getFile().getFullPath();
+    	IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+    	IResource resource = root.findMember(fullPath);
+    	if (resource != null) {
+    	    URI location = resource.getLocationURI();
+        	if (location != null) {
+        	    if(location.getScheme().equals("typespace")){
+        	    	return true;
+        	    }
+        	}
+    	}
+		
+    	return false;
+    }
+    
+    private String getTypspaceGroupFromURI(IEditorInput ei){
+    	FileEditorInput fei = null;
+    	if(ei instanceof FileEditorInput){
+    		fei = (FileEditorInput)ei;
+    	}else{
+    		return null;
+    	}
+    	// TODO move into utility
+    	IPath fullPath = fei.getFile().getFullPath();
+    	IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+    	IResource resource = root.findMember(fullPath);
+    	
+    	URI location = resource.getLocationURI();
+    	if(location.getScheme().equals("typespace")){
+    		return location.getHost();
+    	}
+    	
+    	return null;
+   
+    }
+    
 
     @Override
     public boolean isDirty() {
@@ -664,7 +762,9 @@ public class VjoEditor extends JavaScriptEditor {
             return bol;
         } else {
             IEditorInput input = getEditorInput();
-            if (input instanceof ExternalFileEditorInput) {
+            if(isTypeSpaceScheme(input)){
+            	return false;
+            }else if (input instanceof ExternalFileEditorInput) {
                 return false;
             } else if (input instanceof org.eclipse.dltk.mod.internal.debug.ui.ExternalFileEditorInput) {
             	return false;
@@ -994,7 +1094,12 @@ public class VjoEditor extends JavaScriptEditor {
                 return;
             } else if (input instanceof org.eclipse.dltk.mod.internal.debug.ui.ExternalFileEditorInput) {
             	return;
+            }else if(input instanceof FileEditorInput){
+            	if(isTypeSpaceScheme((FileEditorInput)input)){
+            		return;
+            	}
             }
+            
             IProject project = this.getInputModelElement().getScriptProject().getProject();
             boolean hasNature = project.hasNature(VjoNature.NATURE_ID);
             if (!hasNature && !notShowDialog) {
@@ -1035,24 +1140,27 @@ public class VjoEditor extends JavaScriptEditor {
 
         IModelElement original = getInputModelElement();
         if (original instanceof IVjoSourceModule
-                && input instanceof ExternalStorageEditorInput) {
-            ITextFileBufferManager manager = FileBuffers
-                    .getTextFileBufferManager();
-            ITextFileBuffer buffer = manager
-                    .getTextFileBuffer(
-                            ((ExternalStorageEditorInput) input).getStorage().getFullPath(),
-                            LocationKind.NORMALIZE);
+        		&& isTypeSpaceScheme(input)) {
+//            ITextFileBufferManager manager = FileBuffers
+//                    .getTextFileBufferManager();
+//            ITextFileBuffer buffer = manager
+//                    .getTextFileBuffer(
+//                           ((FileEditorInput)input).getFile().getFullPath(),
+//                            LocationKind.NORMALIZE);
             // TODO use this version when Eclipse 3.2 support is not longer
             // required
-            // ITextFileBuffer buffer = manager.getTextFileBuffer(
-            // ((ExternalStorageEditorInput) input).getPath(input),
-            // LocationKind.NORMALIZE);
-            IDocument doc = buffer.getDocument();
-            IVjoSourceModule extSource = (IVjoSourceModule) original;
-            IBuffer buf = extSource.getBuffer();
-            String content = (buf != null) ? buf.getContents() : new String(
-                    extSource.getContentsAsCharArray());
-            doc.set(content);
+//             ITextFileBuffer buffer = manager.getTextFileBuffer(
+//            		  ((FileEditorInput)input).getFile().getFullPath(),
+//             LocationKind.NORMALIZE);
+//            IDocument doc = buffer.getDocument();
+//            IVjoSourceModule extSource = (IVjoSourceModule) original;
+//            IBuffer buf = extSource.getBuffer();
+//            String content = (buf != null) ? buf.getContents() : new String(
+//                    extSource.getContentsAsCharArray());
+//            doc.set(content);
+            
+            checkFileSuffix((FileEditorInput) input);
+            
             m_isArchiveFile = true;
         } else if (!CodeassistUtils.isVjoSourceModule(original)
                 && input instanceof FileEditorInput) {

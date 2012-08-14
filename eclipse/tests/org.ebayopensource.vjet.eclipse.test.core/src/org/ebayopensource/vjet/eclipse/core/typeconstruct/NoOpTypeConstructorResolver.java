@@ -42,8 +42,8 @@ public class NoOpTypeConstructorResolver implements ITypeConstructorResolver {
 	 * ()
 	 */
 	@Override
-	public String getGroupId() {
-		return "test";
+	public String[] getGroupIds() {
+		return new String[]{"test"};
 	}
 
 	@Override

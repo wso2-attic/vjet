@@ -16,7 +16,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta.DIRECTION;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta.DIRECTION;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
 import org.ebayopensource.dsf.jstojava.translator.robust.JstSourceUtil;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
@@ -97,7 +98,9 @@ public class CommentCollector  {
 			try {
 				JsCommentMeta commentMeta = null;
 				try {
-					commentMeta = VjComment.parse(comment);
+					if(VjCommentUtil.isVjetComment(comment)){
+						commentMeta = VjComment.parse(comment);
+					}
 				} catch (ParseException e) {
 					reporter.error("VJET comment error: " + e.getMessage() +
 					" For comment :" + comment, new String(ast.getFileName()),
@@ -145,6 +148,8 @@ public class CommentCollector  {
 			}
 		}
 	}
+
+
 
 	/**
 	 * @param previousEnd int
@@ -289,15 +294,16 @@ public class CommentCollector  {
 		return comments;
 	}
 	
-	public List<String> getCommentNonMeta(int methodStartOffset) {
+	public List<String> getCommentNonMeta(int methodStartOffset, int previousOffset) {
 		
+		int lastCommentOffset = previousOffset;
 		List<String> comments = new ArrayList<String>();
-		while(m_lastcommentOffset<=methodStartOffset ){
-			String com = m_commentMap.get(m_lastcommentOffset);
+		while(lastCommentOffset<=methodStartOffset ){
+			String com = m_commentMap.get(lastCommentOffset);
 			if(com!=null){
 				Collections.addAll(comments,com.split("\n"));
 			}
-			m_lastcommentOffset++;
+			lastCommentOffset++;
 		}
 		return comments;
 		

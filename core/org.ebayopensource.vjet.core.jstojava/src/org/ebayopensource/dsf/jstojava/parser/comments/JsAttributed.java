@@ -8,6 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.parser.comments;
 
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.Token;
+
 public class JsAttributed extends JsTypingMeta {
 	
 	String m_name;

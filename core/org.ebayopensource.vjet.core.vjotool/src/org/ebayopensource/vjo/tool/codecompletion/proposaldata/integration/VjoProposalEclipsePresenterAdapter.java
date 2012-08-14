@@ -566,6 +566,9 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		if (node instanceof RenameableSynthJstProxyProp) {
 			final IJstProperty pty = (RenameableSynthJstProxyProp)node;
 			final String ptyName = pty.getName().getName();
+			if(pty.getDoc()!=null){
+				externalInfo = pty.getDoc().getComment();
+			}
 			displayString = CodeCompletionUtils.getPropertyString(pty);
 			int cursorPosition = ptyName.length();
 			final IJstType ptyType = pty.getType();
@@ -584,6 +587,9 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 		
 		if (node instanceof IJstMethod) {
 			final IJstMethod method = (IJstMethod)node;
+			if(method.getDoc()!=null){
+				externalInfo = method.getDoc().getComment();
+			}
 			String replaceString = CodeCompletionUtils.getFullFunctionWithoutOverloading(method, getIndent());
 			replaceString = replaceString.replaceAll(CodeCompletionUtils.SEPERATE_TOKEN, getLineSeperator());
 			replaceString = m_labelUtil.evaluateIndent(replaceString, m_document, m_replaceOffset);
@@ -594,7 +600,7 @@ public class VjoProposalEclipsePresenterAdapter<DOCUMENT, POINT, IMAGE_DESCRIPTO
 					m_labelProvider
 							.getMethodImage(m_labelUtil
 									.translateModifers(method.getModifiers().getFlags())), name,
-					null, null);
+					null, externalInfo);
 		}
 		else{
 			return null;

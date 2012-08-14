@@ -149,7 +149,9 @@ public class JstTypeSpaceLoader implements ITypeSpaceLoader {
 					
 		// translate all jst types from source
 		for (SourceType srcType: jstTypeSrcList) {
-			
+			if(srcType==null){
+				continue;
+			}
 //			System.out.println(srcType.getFile());
 			
 			boolean isSerialized = false;

@@ -1,12 +1,14 @@
+//< needs (vjoPro.dsf.utils.logging.LogRecord)
 vjo.ctype("vjoPro.dsf.utils.logging.RootLogger")
 .needs("vjoPro.dsf.utils.logging.LogManager")
+
 .inherits("vjoPro.dsf.utils.logging.Logger")
 .protos({
 constructs: function(defaultLevel){
 this.base("");
 this.setLevel(defaultLevel);
 },
-
+//>public void logRecord(LogRecord)
 logRecord: function(lr) {
 // Make sure that the global handlers have been instantiated.
 this.initializeGlobalHandlers();

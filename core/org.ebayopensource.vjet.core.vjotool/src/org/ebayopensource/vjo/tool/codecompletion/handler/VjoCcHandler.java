@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
+import org.ebayopensource.dsf.jsgen.shared.validation.common.ScopeId;
 import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
 import org.ebayopensource.dsf.jst.IJstGlobalProp;
@@ -31,6 +32,7 @@ import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.expr.ObjCreationExpr;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
+import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
@@ -110,10 +112,13 @@ public class VjoCcHandler implements IVjoCcHandler {
 			IJstType type = ctx.getActingType();
 			List<String> list = new ArrayList<String>();
 			if(completion.inScope(ScopeIds.METHOD) || completion.inScope(ScopeIds.INITS)
-					|| completion.inScope(ScopeIds.METHOD_CALL)) {
+					|| completion.inScope(ScopeIds.METHOD_CALL) ) {
 				list.add(VjoCcObjLiteralAdvisor.ID);
 			}
 			else{
+				if(completion.getRealParent() instanceof ObjLiteral && completion.inScope(ScopeIds.PROPS)){
+					list.add(VjoCcObjLiteralAdvisor.ID);
+				}
 				// if bol is true, no need to add constructor proposal
 				boolean bol = (type == null || type.isInterface() || type.isMixin());
 				list.add(VjoCcFunctionGenProposalAdvisor.ID);
@@ -124,6 +129,8 @@ public class VjoCcHandler implements IVjoCcHandler {
 					}
 				}
 			}
+			
+			
 			// ctx.putInfo(INFO_KEY_STATICFUNCTION, ctx.isInStatic());
 			String[] ss = new String[list.size()];
 			list.toArray(ss);
@@ -271,6 +278,7 @@ public class VjoCcHandler implements IVjoCcHandler {
 				List<String> advisors = new ArrayList<String>();
 				MtdInvocationExpr mtd = (MtdInvocationExpr) completion
 						.getRealParent();
+				// TODO problem when this is jst arg not jstmethod
 				JstMethod method = (JstMethod)mtd.getMethod();
 				IJstType type = method.getOwnerType();
 				
@@ -407,6 +415,9 @@ public class VjoCcHandler implements IVjoCcHandler {
 			return false;
 		}
 		IJstType type = method.getOwnerType();
+		if(type==null){
+			return false;
+		}
 		String typeName = type.getName();
 		// TODO: here should use group name, but the result is empty now.
 		if (CodeCompletionUtils.isTypeType(typeName)) {

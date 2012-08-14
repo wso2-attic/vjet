@@ -9,6 +9,7 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IBuildpathEntry;
 import org.eclipse.dltk.mod.core.IModelElement;
+import org.eclipse.dltk.mod.core.IPackageDeclaration;
 import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.eclipse.dltk.mod.core.ISourceModule;
 import org.eclipse.dltk.mod.core.ModelException;
@@ -139,12 +141,11 @@ class ProjectElementInfo extends OpenableElementInfo {
 					// else add nonscriptresource
 					if (resources.length == resourcesCounter) {
 						// resize
-						System
-								.arraycopy(
-										resources,
-										0,
-										(resources = new IResource[resourcesCounter * 2]),
-										0, resourcesCounter);
+						System.arraycopy(
+								resources,
+								0,
+								(resources = new IResource[resourcesCounter * 2]),
+								0, resourcesCounter);
 					}
 					resources[resourcesCounter++] = res;
 					break;
@@ -156,19 +157,18 @@ class ProjectElementInfo extends OpenableElementInfo {
 					if ((srcIsProject
 							&& !Util.isExcluded(res, inclusionPatterns,
 									exclusionPatterns) && Util
-							.isValidFolderNameForPackage(res.getName()))
+								.isValidFolderNameForPackage(res.getName()))
 							|| this.isBuildpathEntry(resFullPath, buildpath)) {
 						break;
 					}
 					// else add nonscriptresource
 					if (resources.length == resourcesCounter) {
 						// resize
-						System
-								.arraycopy(
-										resources,
-										0,
-										(resources = new IResource[resourcesCounter * 2]),
-										0, resourcesCounter);
+						System.arraycopy(
+								resources,
+								0,
+								(resources = new IResource[resourcesCounter * 2]),
+								0, resourcesCounter);
 					}
 					resources[resourcesCounter++] = res;
 				}
@@ -263,6 +263,40 @@ class ProjectElementInfo extends OpenableElementInfo {
 				}
 				for (int j = 0, length2 = frags.length; j < length2; j++) {
 					ScriptFolder fragment = (ScriptFolder) frags[j];
+					// START EBAY MOD - support namespace which doesn't match directory structure
+					try {
+						ArrayList children = fragment
+								.getChildrenOfType(IModelElement.PACKAGE_DECLARATION);
+						for (Object elementObj : children) {
+
+							IPackageDeclaration elem = (IPackageDeclaration) elementObj;
+
+							String[] pkgName = elem.getElementName().split(
+									"\\.");
+							Object existing = fragmentsCache.get(pkgName);
+							String[] pkgFromPath = fragment.getElementName()
+									.split("\\.");
+							;
+							if (existing == null) {
+
+								if (!pkgName[pkgName.length - 1]
+										.equals(pkgFromPath[pkgFromPath.length - 1])) {
+									fragmentsCache.put(pkgName, fragment);
+									addNames(pkgName, isPackageCache);
+								}
+
+							}
+
+							// fragmentsCache.put(
+							// new String[] { elem.getElementName() },
+							// root);
+
+						}
+					} catch (ModelException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					// END EBAY MOD - support namespace which doesn't match directory structure
 					String[] pkgName = fragment.path.segments();
 					Object existing = fragmentsCache.get(pkgName);
 					if (existing == null) {

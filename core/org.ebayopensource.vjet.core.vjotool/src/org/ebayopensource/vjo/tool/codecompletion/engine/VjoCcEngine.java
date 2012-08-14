@@ -12,12 +12,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
+import org.ebayopensource.dsf.jsgen.shared.validation.common.ScopeId;
 import org.ebayopensource.dsf.jst.IJstParseController;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.IScriptUnit;
+import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.JstSource;
+import org.ebayopensource.dsf.jst.ResolutionResult;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
 import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.ebayopensource.dsf.jst.term.ObjLiteral;
+import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.ebayopensource.dsf.jstojava.translator.robust.completion.IJstCompletion;
@@ -107,7 +112,7 @@ public class VjoCcEngine implements IVjoCcEngine {
 		// resolve JstType from String content
 		TranslateCtx translateCtx = new TranslateCtx();
 		translateCtx.setCompletionPos(position);
-		IScriptUnit scriptUnit = parseJstContent(groupName, typeName, content,
+		IWritableScriptUnit scriptUnit = parseJstContent(groupName, typeName, content,
 				position, translateCtx);
 		IJstType jstType = scriptUnit.getType();
 		if (jstType == null) {
@@ -118,7 +123,7 @@ public class VjoCcEngine implements IVjoCcEngine {
 			// JstCompletionOnMethodAccess is useless for CC, so try recalculate
 			// it
 			content = preProcessContent(content, position);
-			IScriptUnit scriptUnit1 = parseJstContent(groupName, typeName,
+			IWritableScriptUnit scriptUnit1 = parseJstContent(groupName, typeName,
 					content, position, translateCtx);
 			IJstType jstType1 = scriptUnit.getType();
 			if (jstType1 != null) {
@@ -132,7 +137,25 @@ public class VjoCcEngine implements IVjoCcEngine {
 				}
 			}
 		}
-		m_jstParseController.resolve(jstType);
+		if(m_jstParseController instanceof JstParseController){
+			((JstParseController)m_jstParseController).resolve(groupName,scriptUnit);
+		}
+		
+		TypeName typeNameT = new TypeName(groupName,getTypeName(groupName, typeName));
+		
+		if((!scriptUnit.getType().equals(jstType)) &&jstCompletion instanceof JstCompletion){
+			JstCompletion c = (JstCompletion)jstCompletion;
+			
+			if(c.getRealParent() instanceof IJstType){
+				
+				c.setRealParent(scriptUnit.getType());
+			}
+			c.setParent(scriptUnit.getType());
+			jstType = scriptUnit.getType();
+			typeName = scriptUnit.getType().getName();
+			typeNameT = new TypeName(groupName, typeName);
+			
+		}
 		List<JstBlock> blocks = scriptUnit.getJstBlockList();
 		if (blocks != null && !blocks.isEmpty()) {
 			for (JstBlock block : blocks) {
@@ -141,8 +164,8 @@ public class VjoCcEngine implements IVjoCcEngine {
 			}
 		}
 		// create VjoCcCtx
-		VjoCcCtx ctx = new VjoCcCtx(m_jstParseController.getJstTypeSpaceMgr(),
-				new TypeName(groupName, getTypeName(groupName, typeName)));
+		VjoCcCtx ctx = new VjoCcCtx(m_jstParseController.getJstTypeSpaceMgr(), typeNameT);
+		
 		if (jstCompletion == null) {
 			ctx.setActingType(jstType);
 		} else {
@@ -171,12 +194,11 @@ public class VjoCcEngine implements IVjoCcEngine {
 		return typeName.replace("\\", ".");
 	}
 
-	private IScriptUnit parseJstContent(String groupName, String typeName,
+	private IWritableScriptUnit parseJstContent(String groupName, String typeName,
 			String content, int position, TranslateCtx ctx) {
 		VjoParser vjoParser = new VjoParser();
 
-		IScriptUnit scriptUnit = vjoParser.parse(groupName, typeName, content,
-				ctx);
+		IWritableScriptUnit scriptUnit = vjoParser.parse(groupName, typeName, content, ctx);
 		return scriptUnit;
 	}
 

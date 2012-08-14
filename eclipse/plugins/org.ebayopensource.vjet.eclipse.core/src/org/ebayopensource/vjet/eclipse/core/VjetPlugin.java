@@ -32,23 +32,16 @@ import org.ebayopensource.vjet.eclipse.core.typeconstruct.ThisScopeResolverExten
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtension;
 import org.ebayopensource.vjet.eclipse.core.typeconstruct.TypeConstructResolverExtensionRegistry;
 import org.ebayopensource.vjet.eclipse.core.validation.DefaultValidator;
-import org.ebayopensource.vjet.eclipse.internal.core.SerBuildPathEntry;
 import org.ebayopensource.vjo.lib.IResourceResolver;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
-import org.eclipse.dltk.mod.core.IAccessRule;
-import org.eclipse.dltk.mod.core.IBuildpathAttribute;
-import org.eclipse.dltk.mod.core.IBuildpathEntry;
-import org.eclipse.dltk.mod.core.IProjectFragment;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -80,6 +73,8 @@ public class VjetPlugin extends Plugin {
 
 	public static final String VJOLIB_ID = "org.ebayopensource.vjet.eclipse.core.VJO_CONTAINER";
 
+	public static final String VJETTL_ID = "org.ebayopensource.vjet.eclipse.core.VJETTL";
+	
 	public static final String VJOLIB_LABEL = "VJO LIB";
 
 	public static final String BUILDER_ID = PLUGIN_ID + ".builder";
@@ -329,19 +324,19 @@ public class VjetPlugin extends Plugin {
 				new Status(status, PLUGIN_ID, IStatus.OK, message, t));
 	}
 
-	public static IBuildpathEntry newSdkLibraryEntry(IPath path,
-			IAccessRule[] accessRules, IBuildpathAttribute[] extraAttributes,
-			IPath[] include, IPath[] exclude, boolean isExported,
-			boolean externalLib) {
-
-		if (path == null || path.segment(0) == null)
-			Assert.isTrue(false, "Library path cannot be null"); //$NON-NLS-1$
-		return new SerBuildPathEntry(IProjectFragment.K_BINARY,
-				IBuildpathEntry.BPE_LIBRARY, path, isExported, include, // inclusion
-				// patterns
-				exclude, // exclusion patterns
-				accessRules, false, // no access rules to combine
-				extraAttributes, externalLib);
-	}
+//	public static IBuildpathEntry newSdkLibraryEntry(IPath path,
+//			IAccessRule[] accessRules, IBuildpathAttribute[] extraAttributes,
+//			IPath[] include, IPath[] exclude, boolean isExported,
+//			boolean externalLib) {
+//
+//		if (path == null || path.segment(0) == null)
+//			Assert.isTrue(false, "Library path cannot be null"); //$NON-NLS-1$
+//		return new SerBuildPathEntry(IProjectFragment.K_BINARY,
+//				IBuildpathEntry.BPE_LIBRARY, path, isExported, include, // inclusion
+//				// patterns
+//				exclude, // exclusion patterns
+//				accessRules, false, // no access rules to combine
+//				extraAttributes, externalLib);
+//	}
 
 }

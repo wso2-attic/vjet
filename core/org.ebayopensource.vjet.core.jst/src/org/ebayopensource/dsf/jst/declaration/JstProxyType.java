@@ -30,6 +30,7 @@ import org.ebayopensource.dsf.jst.token.IStmt;
  */
 public abstract class JstProxyType implements IJstType {
 
+
 	private static final long serialVersionUID = 1L;
 
 	private IJstType m_targetType;
@@ -776,5 +777,11 @@ public abstract class JstProxyType implements IJstType {
 	public List<? extends IJstType> getSecondaryTypes() {
 		return m_targetType.getSecondaryTypes();
 	}
+	
+	@Override
+	public boolean isSingleton() {
+		return m_targetType.isSingleton();
+	}
+
 	
 }

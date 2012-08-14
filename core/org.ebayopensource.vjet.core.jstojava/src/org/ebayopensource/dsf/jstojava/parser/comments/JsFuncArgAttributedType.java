@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.parser.comments;
 
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.Token;
+
 /**
  * Representing an attributed type from function argument at invocation time.
  */

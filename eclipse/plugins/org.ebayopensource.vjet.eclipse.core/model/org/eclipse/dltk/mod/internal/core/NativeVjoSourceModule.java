@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.dltk.mod.internal.core;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,9 +18,18 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.ebayopensource.vjet.eclipse.internal.compiler.VjoSourceElementParser;
 import org.ebayopensource.vjo.tool.typespace.SourceTypeName;
+import org.eclipse.core.filesystem.EFS;
+import org.eclipse.core.filesystem.IFileStore;
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.ISourceElementParserExtension;
 import org.eclipse.dltk.mod.core.IType;
@@ -45,7 +56,7 @@ public class NativeVjoSourceModule extends VjoSourceModule {
 
 	@Override
 	public SourceTypeName getTypeName() {
-		return new SourceTypeName(group, getElementName());
+		return new SourceTypeName(group, getType().getName());
 	}
 
 	@Override
@@ -140,6 +151,38 @@ public class NativeVjoSourceModule extends VjoSourceModule {
 		if (jstType == null) {
 			return null;
 		} else {
+			String groupName = this.jstType.getPackage().getGroupName();
+			URI path =null;
+			String filePath =null;
+			try {
+				// typespace://ExtJsTL.zip:0/?group=ExtJsTL.zip
+				filePath = this.jstType.getName().replace(".", "/") + ".js";
+				path = new URI("typespace://"+ groupName + ":0/" + filePath+ "?group=" + groupName);
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IProject externalProject = ResourcesPlugin.getWorkspace().getRoot().getProject(ExternalFoldersManager.EXTERNAL_PROJECT_NAME);
+			
+			 IPath suffix = new Path(groupName).append(path.getPath());
+//			
+			 IFile f = externalProject.getFile(suffix);
+			 if(f.exists()){
+				 return f;
+			 }
+			 
+			 // try finding by uri
+			
+			  IFile[] files = root.findFilesForLocationURI(path,
+						IContainer.INCLUDE_HIDDEN);
+			  if(files.length>0){
+			    return files[0];
+			  }
+			
+			// fall back to old way but this doesn't work anymore
+		
 			return getScriptProject().getProject().getFile(
 					jstType.getName().replace(".", "/") + ".js");
 		}

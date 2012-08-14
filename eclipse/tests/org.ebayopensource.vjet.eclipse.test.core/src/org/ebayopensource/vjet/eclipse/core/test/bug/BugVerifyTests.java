@@ -145,7 +145,6 @@ import org.ebayopensource.vjet.eclipse.internal.parser.VjoSourceParser;
 import org.ebayopensource.vjet.eclipse.internal.ui.actions.AddVjoNatureAction;
 import org.ebayopensource.vjet.eclipse.internal.ui.actions.VjoValidationAction;
 import org.ebayopensource.vjet.eclipse.internal.ui.dialogs.VjoTypeInfoViewer;
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.NativeElementFileAdvisor;
 import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
 import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoOutlinePage;
 import org.ebayopensource.vjet.eclipse.internal.ui.text.VjetColorConstants;
@@ -1055,14 +1054,14 @@ public class BugVerifyTests extends AbstractVjoModelTests {
 	 * @throws Exception
 	 */
 	public void test5681() throws Exception {
-		try {
-			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
-			ScriptProject scriptProject = new ScriptProject(project, null);
-			NativeElementFileAdvisor advisor = new NativeElementFileAdvisor();
-			advisor.getFile(scriptProject);
-		} catch (ClassCastException e) {
-			assertTrue("ClassCastException occur!", false);
-		}
+//		try {
+//			IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT_NAME);
+//			ScriptProject scriptProject = new ScriptProject(project, null);
+//			NativeElementFileAdvisor advisor = new NativeElementFileAdvisor();
+//			advisor.getFile(scriptProject);
+//		} catch (ClassCastException e) {
+//			assertTrue("ClassCastException occur!", false);
+//		}
 	}
 	
 	/**

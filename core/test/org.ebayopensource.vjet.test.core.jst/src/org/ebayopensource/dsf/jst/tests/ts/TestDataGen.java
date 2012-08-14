@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
 
+import java.io.File;
+
 import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
 import org.ebayopensource.dsf.javatojs.control.TranslationController;
 import org.ebayopensource.vjet.prebuild.JstLibBuildMain;
@@ -21,8 +23,13 @@ public class TestDataGen extends JstLibBuildMain{
 
 	public static void main(String[] args) {
 
-		String srcDir = ".\\src\\org\\ebayopensource\\dsf\\jst\\tests\\ts\\data";
-		String outDir = ".\\src\\org\\ebayopensource\\dsf\\jst\\tests\\ts";
+		
+		String srcDir  = new File("src/org/ebayopensource/dsf/jst/tests/ts/data/").getAbsolutePath();
+		String outDir  = new File("src/org/ebayopensource/dsf/jst/tests/ts/").getAbsolutePath();
+		System.out.println("src dir = " + srcDir);
+		System.out.println("out dir = " + outDir);
+//		String srcDir = ".\\src\\org\\ebayopensource\\dsf\\jst\\tests\\ts\\data";
+//		String outDir = ".\\src\\org\\ebayopensource\\dsf\\jst\\tests\\ts";
 		String libName = "TestData";
 
 		TestDataGen libBuildCmd = new TestDataGen(srcDir, outDir,

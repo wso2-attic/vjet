@@ -74,6 +74,9 @@ public class JstSourceUtil implements IFindTypeSupport.ILineInfoProvider {
 
 	public LineInfo lineInfo(int startOffset) {
 		init();
+		if(m_tree.getRoot()==null){
+			return new LineInfo(0, 0, 0);
+		}
 		return binarySearch(m_lineInfo, startOffset);
 	}
 

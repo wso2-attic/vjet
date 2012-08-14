@@ -22,9 +22,13 @@ import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.ResolutionResult;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
+import org.ebayopensource.dsf.jst.declaration.JstProxyType;
+import org.ebayopensource.dsf.jst.declaration.JstType;
+
 import org.ebayopensource.dsf.jst.lib.IJstLibProvider;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.dsf.ts.util.JstTypeCopier;
 
 public class JstParseController implements IJstParseController {
 	
@@ -99,7 +103,19 @@ public class JstParseController implements IJstParseController {
 	private void addResolutionResultToSU(IWritableScriptUnit su, ResolutionResult resolve) {
 		su.getProblems().addAll(resolve.getProblems());
 		if(resolve.getType()!=null){
-			su.setType(resolve.getType());
+			
+			if(su.getType() instanceof JstType && resolve.getType() instanceof JstType){
+				JstType type = (JstType)su.getType();
+				if(type != resolve.getType()){
+					JstTypeCopier.replace(type, (JstType)resolve.getType());
+				}
+				// copy resolve.getType into type
+				
+			}else{
+			
+			
+				su.setType(resolve.getType());
+			}
 		}
 	}
 

@@ -12,7 +12,7 @@
 package org.ebayopensource.vjet.eclipse.internal.codeassist.select.translator;
 
 import org.ebayopensource.dsf.jst.IJstNode;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
+import org.ebayopensource.dsf.jst.meta.JsCommentMetaNode;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.JstNodeDLTKElementResolver;
 
 /**

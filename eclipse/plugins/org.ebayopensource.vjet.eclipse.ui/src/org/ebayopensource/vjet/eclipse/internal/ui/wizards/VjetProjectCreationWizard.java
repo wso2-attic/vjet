@@ -148,6 +148,9 @@ public class VjetProjectCreationWizard extends NewElementWizard implements
 		return path;
 	}
 	
+
+	
+	
 	private IPath getBrowserSDKPath() {
 		IPath path = new Path(VjetPlugin.BROWSERSDK_ID);
 		path = path.append(VjetPlugin.BROWSERSDK_LABEL);

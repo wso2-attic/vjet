@@ -59,26 +59,26 @@ import org.ebayopensource.dsf.jst.declaration.SynthJstProxyProp;
 import org.ebayopensource.dsf.jst.expr.BoolExpr;
 import org.ebayopensource.dsf.jst.expr.CastExpr;
 import org.ebayopensource.dsf.jst.expr.FuncExpr;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.JsAnnotation;
+import org.ebayopensource.dsf.jst.meta.JsCommentMetaNode;
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.JsAnnotation.JsAnnotationType;
+import org.ebayopensource.dsf.jst.meta.ArgType;
 import org.ebayopensource.dsf.jst.stmt.BlockStmt;
 import org.ebayopensource.dsf.jst.stmt.ExprStmt;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.token.IStmt;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsAnnotation;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsAnnotation.JsAnnotationType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsAttributed;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncArgAttributedType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncScopeAttributedType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsFuncType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsMixinType;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
@@ -951,8 +951,14 @@ public class TranslateHelper {
 
 		// Attempt to set the return type for dispatcher method
 		boolean olRetTypeSame = true;
+		boolean optionalReturn = false;
 		IJstType rtnType = null;
 		for (IJstMethod mtd : jstMethod.getOverloaded()) {
+			
+			if(mtd.isReturnTypeOptional()){
+				optionalReturn = true;
+			}
+			
 			IJstType currType = mtd.getRtnType();
 			if (rtnType != null && currType != null) {
 				if (!rtnType.getName().equals(currType.getName())) {
@@ -962,6 +968,8 @@ public class TranslateHelper {
 			}
 			rtnType = currType;
 		}
+		
+		jstMethod.setReturnOptional(optionalReturn);
 		// If all overloaded methods have the same return type, set the
 		// dispatcher method return
 		// type the same. Otherwise, let the linker figure it out.
@@ -2348,6 +2356,15 @@ public class TranslateHelper {
 			}
 		}
 
+		private static List<String> getComments2(final IASTNode ast,
+				final TranslateCtx ctx) {
+			if(ast==null){
+				return Collections.EMPTY_LIST;
+			}
+			return ctx.getCommentCollector().getCommentNonMeta(
+					ast.sourceStart(), ctx.getPreviousNodeSourceEnd());
+		}
+		
 		private static String getComments(final IASTNode ast,
 				final TranslateCtx ctx) {
 			return ctx.getCommentCollector().getCommentNonMeta2(
@@ -2707,7 +2724,7 @@ public class TranslateHelper {
 				final List<JsTypingMeta> originalParamTypes = originalParam
 						.getTypes();
 				newParams.add(buildJsParam(originalParam.getName(),
-						originalParam.isFinal(), false, originalParam
+						originalParam.isFinal(), originalParam.isOptional(), originalParam
 								.isVariable(), originalParamTypes
 								.toArray(new JsTypingMeta[originalParamTypes
 										.size()])));
@@ -2963,7 +2980,7 @@ public class TranslateHelper {
 			}
 			// jstMethod.setSource(TranslateHelper.getSource(astMtdDecl,
 			// ctx.getSourceUtil()));
-			// jstMethod.setComments(getComments(astMtdDecl, ctx));
+			 jstMethod.setComments(getComments2(astMtdDecl, ctx));
 
 			if (meta != null) {
 				jstMethod.setHasJsAnnotation(true);
@@ -2983,6 +3000,7 @@ public class TranslateHelper {
 				final JsTypingMeta typing = meta.getTyping();
 				if (typing != null) {
 					final JsTypingMeta returnType = getReturnTyping(meta);
+ 					jstMethod.setReturnOptional(typing.isOptional());
 					final IJstType retType = findType(ctx, returnType, meta);
 					jstMethod.setRtnType(retType);
 					if (typing instanceof JsFuncType) {
@@ -3115,6 +3133,7 @@ public class TranslateHelper {
 					final JsTypingMeta retTyping = getReturnTyping(meta);
 					final IJstType retType = findType(ctx, retTyping, meta);
 					jstMethod.setRtnType(retType);
+					jstMethod.setReturnOptional(retTyping.isOptional());
 				}
 			}
 
@@ -3171,6 +3190,11 @@ public class TranslateHelper {
 				setFinal(originalJsFunc.isFinal());
 				setVariable(originalJsFunc.isVariable());
 			}
+		}
+		
+		@Override
+		public boolean isOptional() {
+			return m_originalJsFunc.isOptional();
 		}
 
 		@Override
@@ -3283,6 +3307,8 @@ public class TranslateHelper {
 			this.m_jsFuncType = func;
 		}
 
+		
+		
 		@Override
 		public boolean isMethod() {
 			return m_originalMeta.isMethod();

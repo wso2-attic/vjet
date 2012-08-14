@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.ebayopensource.dsf.jst.IJstType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMeta;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.report.ErrorReporter;
@@ -121,9 +121,12 @@ public class TypeResolverRegistry {
 		for (List<ITypeResolver> resolverList : m_resolvers.values()) {
 			for (int i = resolverList.size() - 1; i >=0; i--) {
 				ITypeResolver resolver = resolverList.get(i);
-				if (groupId.endsWith(resolver.getGroupId())) {
-					resolverList.remove(resolver);
+				for(String group : resolver.getGroupIds()){
+					if (groupId.endsWith(group)) {
+						resolverList.remove(resolver);
+					}
 				}
+				
 			}
 		}
 	}

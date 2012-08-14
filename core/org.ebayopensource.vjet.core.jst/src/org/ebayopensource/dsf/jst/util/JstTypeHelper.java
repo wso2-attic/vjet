@@ -560,6 +560,7 @@ public class JstTypeHelper {
 			to.addParam(params.get(i));
 		}
 		to.setRtnRefType(from.getRtnTypeRef());
+		to.setReturnOptional(from.isReturnTypeOptional());
 	}
 
 	public static void populateMethod(JstMethod to, IJstMethod from,
@@ -611,6 +612,7 @@ public class JstTypeHelper {
 			to.addParam(params.get(i));
 		}
 		to.setRtnRefType(from.getRtnTypeRef());
+		to.setReturnOptional(from.isReturnTypeOptional());
 	}
 
 	public static IJstRefType getJstTypeRefType(IJstType type) {

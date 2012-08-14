@@ -49,7 +49,7 @@ public class VjoCcParameterProposalAdvisor extends AbstractVjoCcAdvisor
 			IJstMethod method = mit.next();
 			List<JstArg> args = method.getArgs();
 			if (args.isEmpty()) {
-				return;
+				continue;
 			}
 			Iterator<JstArg> it = args.iterator();
 			while (it.hasNext()) {

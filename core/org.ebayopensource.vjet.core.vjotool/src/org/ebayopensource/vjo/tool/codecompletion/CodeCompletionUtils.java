@@ -420,7 +420,22 @@ public class CodeCompletionUtils {
 		IJstType type = property.getType();
 		String rname = type == null ? "" : type.getName();
 		IJstType otype = property.getOwnerType();
-		return (otype == null) ? rname : otype.getSimpleName();
+		if(otype!=null){
+			if(otype instanceof JstObjectLiteralType){
+				JstObjectLiteralType objtype = (JstObjectLiteralType)otype;
+				
+				if(objtype.getParentNode()!=null && objtype.getParentNode() instanceof IJstType){
+					return ((IJstType)objtype.getParentNode()).getSimpleName() + "::" + objtype.getSimpleName();
+				}else{
+					return objtype.getName();
+				}
+				
+			}else{
+				return otype.getSimpleName();
+			}
+		}
+		
+		return rname;
 	}
 
 	public static String getTypeDispalyString(IJstType type) {

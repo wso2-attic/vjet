@@ -3,7 +3,10 @@ package org.ebayopensource.dsf.jstojava.parser.comments;
 import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.ArrayList;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.Token;
+import org.ebayopensource.dsf.jst.meta.ArgType;
 
 public class VjComment implements VjCommentConstants {
 
@@ -397,38 +400,45 @@ public class VjComment implements VjCommentConstants {
   }
 
   final private JsTypingMeta FuncDeclaration() throws ParseException {
- String name = null; JsCommentMeta meta = new JsCommentMeta();
+ String name = null; boolean isOptional = false; JsCommentMeta meta = new JsCommentMeta();
     if (jj_2_58(2)) {
       addTyping(meta);
     } else {
       ;
     }
     if (jj_2_59(2)) {
-      name = Name();
+      isOptional = Optional();
+      meta.setOptional(isOptional);
     } else {
       ;
     }
     if (jj_2_60(2)) {
+      name = Name();
+    } else {
+      ;
+    }
+    if (jj_2_61(2)) {
       FormalParams(meta);
     } else {
       ;
     }
+    			
                 meta.setName(name);
                 {if (true) return meta.getTyping();}
     throw new Error("Missing return statement in function");
   }
 
   final private void FormalParams(JsCommentMeta meta) throws ParseException {
-    if (jj_2_62(2)) {
+    if (jj_2_63(2)) {
       jj_consume_token(LP);
       jj_consume_token(RP);
                 meta.setMethod();
-    } else if (jj_2_63(2)) {
+    } else if (jj_2_64(2)) {
       jj_consume_token(LP);
       FormalParam(meta.setMethod());
       label_5:
       while (true) {
-        if (jj_2_61(2)) {
+        if (jj_2_62(2)) {
           ;
         } else {
           break label_5;
@@ -450,16 +460,16 @@ public class VjComment implements VjCommentConstants {
         boolean isFinal = false;
         boolean isOptional = false;
         boolean isVariable = false;
-    if (jj_2_64(2)) {
+    if (jj_2_65(2)) {
       isFinal = Final();
     } else {
       ;
     }
     typing = ParamType();
-    if (jj_2_67(2)) {
-      if (jj_2_65(2)) {
+    if (jj_2_68(2)) {
+      if (jj_2_66(2)) {
         isOptional = Optional();
-      } else if (jj_2_66(2)) {
+      } else if (jj_2_67(2)) {
         isVariable = VariableArg();
       } else {
         jj_consume_token(-1);
@@ -468,7 +478,7 @@ public class VjComment implements VjCommentConstants {
     } else {
       ;
     }
-    if (jj_2_68(2)) {
+    if (jj_2_69(2)) {
       name = Name();
     } else {
       ;
@@ -478,17 +488,17 @@ public class VjComment implements VjCommentConstants {
 
   final private JsTypingMeta ParamType() throws ParseException {
  JsTypingMeta typing;
-    if (jj_2_69(2)) {
+    if (jj_2_70(2)) {
       jj_consume_token(LCB);
       typing = MultiTypes(null);
       jj_consume_token(RCB);
                 {if (true) return typing;}
-    } else if (jj_2_70(2)) {
+    } else if (jj_2_71(2)) {
       jj_consume_token(LB);
       typing = MixinType(null);
       jj_consume_token(RB);
                  {if (true) return typing;}
-    } else if (jj_2_71(2)) {
+    } else if (jj_2_72(2)) {
       typing = Typing(null);
                 {if (true) return typing;}
     } else {
@@ -503,7 +513,7 @@ public class VjComment implements VjCommentConstants {
     collectTyping(typing, null);
     label_6:
     while (true) {
-      if (jj_2_72(2)) {
+      if (jj_2_73(2)) {
         ;
       } else {
         break label_6;
@@ -526,7 +536,7 @@ public class VjComment implements VjCommentConstants {
     mixinTyping(typing, null);
     label_7:
     while (true) {
-      if (jj_2_73(2)) {
+      if (jj_2_74(2)) {
         ;
       } else {
         break label_7;
@@ -567,7 +577,7 @@ public class VjComment implements VjCommentConstants {
     ArrayDimension(dim);
     label_8:
     while (true) {
-      if (jj_2_74(2)) {
+      if (jj_2_75(2)) {
         ;
       } else {
         break label_8;
@@ -1102,19 +1112,11 @@ public class VjComment implements VjCommentConstants {
     finally { jj_save(73, xla); }
   }
 
-  private boolean jj_3_22() {
-    if (jj_scan_token(ABSTRACT)) return true;
-    return false;
-  }
-
-  private boolean jj_3_11() {
-    if (jj_scan_token(CARET)) return true;
-    return false;
-  }
-
-  private boolean jj_3_58() {
-    if (jj_3R_15()) return true;
-    return false;
+  private boolean jj_2_75(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_75(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(74, xla); }
   }
 
   private boolean jj_3R_25() {
@@ -1125,6 +1127,8 @@ public class VjComment implements VjCommentConstants {
     if (jj_3_59()) jj_scanpos = xsp;
     xsp = jj_scanpos;
     if (jj_3_60()) jj_scanpos = xsp;
+    xsp = jj_scanpos;
+    if (jj_3_61()) jj_scanpos = xsp;
     return false;
   }
 
@@ -1317,14 +1321,14 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_6() {
-    if (jj_scan_token(LT)) return true;
-    if (jj_scan_token(LT)) return true;
+  private boolean jj_3_75() {
+    if (jj_3R_34()) return true;
     return false;
   }
 
-  private boolean jj_3_74() {
-    if (jj_3R_34()) return true;
+  private boolean jj_3_6() {
+    if (jj_scan_token(LT)) return true;
+    if (jj_scan_token(LT)) return true;
     return false;
   }
 
@@ -1400,13 +1404,13 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_31() {
-    if (jj_scan_token(TYPE)) return true;
+  private boolean jj_3_69() {
+    if (jj_3R_17()) return true;
     return false;
   }
 
-  private boolean jj_3_68() {
-    if (jj_3R_17()) return true;
+  private boolean jj_3_31() {
+    if (jj_scan_token(TYPE)) return true;
     return false;
   }
 
@@ -1450,19 +1454,19 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_15() {
-    if (jj_3R_17()) return true;
-    return false;
-  }
-
   private boolean jj_3R_31() {
     if (jj_scan_token(DOTDOTDOT)) return true;
     return false;
   }
 
-  private boolean jj_3_73() {
+  private boolean jj_3_74() {
     if (jj_scan_token(PLUS)) return true;
     if (jj_3R_33()) return true;
+    return false;
+  }
+
+  private boolean jj_3_15() {
+    if (jj_3R_17()) return true;
     return false;
   }
 
@@ -1476,7 +1480,7 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_66() {
+  private boolean jj_3_67() {
     if (jj_3R_31()) return true;
     return false;
   }
@@ -1489,20 +1493,20 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_72() {
+  private boolean jj_3_73() {
     if (jj_scan_token(OR)) return true;
     if (jj_3R_32()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_33() {
+    if (jj_3R_21()) return true;
     return false;
   }
 
   private boolean jj_3_40() {
     if (jj_scan_token(TYPE)) return true;
     if (jj_scan_token(DOUBLE_COLON)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_33() {
-    if (jj_3R_21()) return true;
     return false;
   }
 
@@ -1518,13 +1522,13 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_14() {
-    if (jj_scan_token(CARET)) return true;
+  private boolean jj_3R_20() {
+    if (jj_3R_33()) return true;
     return false;
   }
 
-  private boolean jj_3R_20() {
-    if (jj_3R_33()) return true;
+  private boolean jj_3_14() {
+    if (jj_scan_token(CARET)) return true;
     return false;
   }
 
@@ -1539,18 +1543,23 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_65() {
+  private boolean jj_3_66() {
     if (jj_3R_16()) return true;
     return false;
   }
 
-  private boolean jj_3_67() {
+  private boolean jj_3_68() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_65()) {
+    if (jj_3_66()) {
     jj_scanpos = xsp;
-    if (jj_3_66()) return true;
+    if (jj_3_67()) return true;
     }
+    return false;
+  }
+
+  private boolean jj_3R_32() {
+    if (jj_3R_21()) return true;
     return false;
   }
 
@@ -1560,8 +1569,8 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3R_32() {
-    if (jj_3R_21()) return true;
+  private boolean jj_3_61() {
+    if (jj_3R_18()) return true;
     return false;
   }
 
@@ -1602,6 +1611,11 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
+  private boolean jj_3R_19() {
+    if (jj_3R_32()) return true;
+    return false;
+  }
+
   private boolean jj_3_34() {
     if (jj_scan_token(LP)) return true;
     if (jj_3R_25()) return true;
@@ -1609,12 +1623,7 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3R_19() {
-    if (jj_3R_32()) return true;
-    return false;
-  }
-
-  private boolean jj_3_61() {
+  private boolean jj_3_62() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_29()) return true;
     return false;
@@ -1625,8 +1634,13 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_71() {
+  private boolean jj_3_72() {
     if (jj_3R_21()) return true;
+    return false;
+  }
+
+  private boolean jj_3_60() {
+    if (jj_3R_17()) return true;
     return false;
   }
 
@@ -1638,7 +1652,7 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_70() {
+  private boolean jj_3_71() {
     if (jj_scan_token(LB)) return true;
     if (jj_3R_20()) return true;
     return false;
@@ -1662,29 +1676,24 @@ public class VjComment implements VjCommentConstants {
   private boolean jj_3R_35() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_69()) {
-    jj_scanpos = xsp;
     if (jj_3_70()) {
     jj_scanpos = xsp;
-    if (jj_3_71()) return true;
+    if (jj_3_71()) {
+    jj_scanpos = xsp;
+    if (jj_3_72()) return true;
     }
     }
+    return false;
+  }
+
+  private boolean jj_3_70() {
+    if (jj_scan_token(LCB)) return true;
+    if (jj_3R_19()) return true;
     return false;
   }
 
   private boolean jj_3_19() {
     if (jj_scan_token(PROTECTED)) return true;
-    return false;
-  }
-
-  private boolean jj_3_60() {
-    if (jj_3R_18()) return true;
-    return false;
-  }
-
-  private boolean jj_3_69() {
-    if (jj_scan_token(LCB)) return true;
-    if (jj_3R_19()) return true;
     return false;
   }
 
@@ -1698,7 +1707,7 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_64() {
+  private boolean jj_3_65() {
     if (jj_3R_30()) return true;
     return false;
   }
@@ -1706,7 +1715,7 @@ public class VjComment implements VjCommentConstants {
   private boolean jj_3R_29() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_64()) jj_scanpos = xsp;
+    if (jj_3_65()) jj_scanpos = xsp;
     if (jj_3R_35()) return true;
     return false;
   }
@@ -1737,7 +1746,7 @@ public class VjComment implements VjCommentConstants {
   }
 
   private boolean jj_3_59() {
-    if (jj_3R_17()) return true;
+    if (jj_3R_16()) return true;
     return false;
   }
 
@@ -1746,9 +1755,19 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3_63() {
+  private boolean jj_3_64() {
     if (jj_scan_token(LP)) return true;
     if (jj_3R_29()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_18() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3_63()) {
+    jj_scanpos = xsp;
+    if (jj_3_64()) return true;
+    }
     return false;
   }
 
@@ -1757,17 +1776,7 @@ public class VjComment implements VjCommentConstants {
     return false;
   }
 
-  private boolean jj_3R_18() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3_62()) {
-    jj_scanpos = xsp;
-    if (jj_3_63()) return true;
-    }
-    return false;
-  }
-
-  private boolean jj_3_62() {
+  private boolean jj_3_63() {
     if (jj_scan_token(LP)) return true;
     if (jj_scan_token(RP)) return true;
     return false;
@@ -1775,6 +1784,21 @@ public class VjComment implements VjCommentConstants {
 
   private boolean jj_3_23() {
     if (jj_scan_token(STATIC)) return true;
+    return false;
+  }
+
+  private boolean jj_3_22() {
+    if (jj_scan_token(ABSTRACT)) return true;
+    return false;
+  }
+
+  private boolean jj_3_11() {
+    if (jj_scan_token(CARET)) return true;
+    return false;
+  }
+
+  private boolean jj_3_58() {
+    if (jj_3R_15()) return true;
     return false;
   }
 
@@ -1802,7 +1826,7 @@ public class VjComment implements VjCommentConstants {
    private static void jj_la1_init_1() {
       jj_la1_1 = new int[] {};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[74];
+  final private JJCalls[] jj_2_rtns = new JJCalls[75];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -2030,7 +2054,7 @@ public class VjComment implements VjCommentConstants {
 
   private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 74; i++) {
+    for (int i = 0; i < 75; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -2111,6 +2135,7 @@ public class VjComment implements VjCommentConstants {
             case 71: jj_3_72(); break;
             case 72: jj_3_73(); break;
             case 73: jj_3_74(); break;
+            case 74: jj_3_75(); break;
           }
         }
         p = p.next;

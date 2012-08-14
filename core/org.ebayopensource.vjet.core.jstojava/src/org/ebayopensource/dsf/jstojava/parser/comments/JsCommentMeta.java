@@ -12,8 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType.WildCardType;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.JsAnnotation;
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+import org.ebayopensource.dsf.jst.meta.Token;
+import org.ebayopensource.dsf.jst.meta.ArgType;
+import org.ebayopensource.dsf.jst.meta.ArgType.WildCardType;
 
 public class JsCommentMeta implements IJsCommentMeta {
 	DIRECTION m_direction;

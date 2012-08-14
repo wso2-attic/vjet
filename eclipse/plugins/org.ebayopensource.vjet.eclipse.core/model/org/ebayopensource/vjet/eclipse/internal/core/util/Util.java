@@ -40,6 +40,7 @@ import org.eclipse.dltk.mod.ast.Modifiers;
 import org.eclipse.dltk.mod.core.DLTKCore;
 import org.eclipse.dltk.mod.core.IType;
 import org.eclipse.dltk.mod.core.environment.EnvironmentPathUtils;
+import org.eclipse.dltk.mod.internal.core.NativeVjoSourceModule;
 import org.eclipse.dltk.mod.internal.core.ScriptProject;
 
 public class Util {
@@ -75,6 +76,11 @@ public class Util {
 	}
 
 	public static IJstType toJstType(IType type) {
+		
+		if(type.getParent() instanceof NativeVjoSourceModule){
+			return ((NativeVjoSourceModule)type.getParent()).getJstType();
+		}
+		
 		IFile file = (IFile) type.getResource();
 		String name = type.getElementName();
 		String groupName = type.getScriptProject().getElementName();

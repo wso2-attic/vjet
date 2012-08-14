@@ -15,6 +15,7 @@ import java.util.TreeSet;
 
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules.util.TypeCheckUtil;
 import org.ebayopensource.dsf.jst.IInferred;
+import org.ebayopensource.dsf.jst.IJstDoc;
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
 import org.ebayopensource.dsf.jst.IJstGlobalProp;
 import org.ebayopensource.dsf.jst.IJstGlobalVar;
@@ -72,6 +73,10 @@ import org.ebayopensource.dsf.jst.expr.JstArrayInitializer;
 import org.ebayopensource.dsf.jst.expr.JstInitializer;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.expr.ObjCreationExpr;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.JsCommentMetaNode;
+import org.ebayopensource.dsf.jst.meta.JsType;
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
 import org.ebayopensource.dsf.jst.stmt.BlockStmt;
 import org.ebayopensource.dsf.jst.stmt.RtnStmt;
 import org.ebayopensource.dsf.jst.stmt.WithStmt;
@@ -91,15 +96,10 @@ import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.dsf.jstojava.controller.JstExpressionTypeLinker.LinkerSymbolInfo;
 import org.ebayopensource.dsf.jstojava.controller.JstExpressionTypeLinker.ScopeFrame;
 import org.ebayopensource.dsf.jstojava.mixer.TypeExtensionRegistry;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsCommentMetaNode;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsTypingMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsVariantType;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.FunctionParamsMetaRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.IMetaExtension;
-import org.ebayopensource.dsf.jstojava.resolver.IOTypeResolver;
 import org.ebayopensource.dsf.jstojava.resolver.OTypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.resolver.TypeResolverRegistry;
 import org.ebayopensource.dsf.jstojava.translator.TranslateHelper.RenameableSynthJstProxyMethod;
@@ -613,7 +613,7 @@ public class JstExpressionTypeLinkerHelper {
 				bound = types.get(0);
 			}
 		}
-		bound = bound instanceof IJstType && !(bound instanceof IJstRefType) ? JstTypeHelper
+		bound = bound instanceof IJstType && !(bound instanceof IJstRefType) && !((IJstType)bound).isSingleton() ? JstTypeHelper
 				.getJstTypeRefType((IJstType) bound) : bound;
 
 		return bound;
@@ -677,7 +677,7 @@ public class JstExpressionTypeLinkerHelper {
 	public static List<IJstType> collectBindingTypes(IJstNode bound) {
 		final List<IJstType> toBindTypes = new ArrayList<IJstType>(2);
 		if (bound instanceof IJstType) {
-			if (bound instanceof IJstRefType) {
+			if (bound instanceof IJstRefType || ((IJstType)bound).isSingleton()) {
 				toBindTypes.add((IJstType) bound);
 			} else {
 				toBindTypes.add(JstTypeHelper
@@ -1173,12 +1173,17 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	public static void fixPropertyTypeRef(
-			final JstExpressionBindingResolver resolver, JstProperty pty,
+			final JstExpressionBindingResolver resolver, IJstVisitor jstExpressionTypeLinker, JstProperty pty,
 			GroupInfo groupInfo) {
 		final IJstType ptyType = pty.getType();
 		final IJstType correctType = getCorrectType(resolver, ptyType,
 				groupInfo);
-
+		if(pty.getValue()!=null && pty.getValue() instanceof IExpr){
+			doExprTypeResolve(resolver, jstExpressionTypeLinker, (IExpr)pty.getValue(), correctType);
+		}else if(pty.getInitializer()!=null){
+			doExprTypeResolve(resolver, jstExpressionTypeLinker, pty.getInitializer(), correctType);
+		}
+		
 		if (correctType != ptyType) {
 			pty.setType(correctType);
 		}
@@ -2468,13 +2473,22 @@ public class JstExpressionTypeLinkerHelper {
 					false, true);
 			final JstMethod func = ((FuncExpr) valueExpr).getFunc();
 			if (matchingOTypePty != null && func != null
-					&& matchingOTypePty.getType() != null
-					&& matchingOTypePty.getType() instanceof JstFuncType) {
-				deriveAnonymousFunction(
-						((JstFuncType) matchingOTypePty.getType())
-								.getFunction(),
-						func);
-				JstExpressionTypeLinkerTraversal.accept(valueExpr, revisitor);
+					&& matchingOTypePty.getType() != null) {
+				
+				if(matchingOTypePty.getType() instanceof JstFunctionRefType){
+					deriveAnonymousFunction(
+							((JstFunctionRefType) matchingOTypePty.getType())
+									.getMethodRef(),
+							func, matchingOTypePty.getDoc());
+					JstExpressionTypeLinkerTraversal.accept(valueExpr, revisitor);
+				}else if(matchingOTypePty.getType() instanceof JstFuncType){
+					deriveAnonymousFunction(
+							((JstFuncType) matchingOTypePty.getType())
+									.getFunction(),
+							func, matchingOTypePty.getDoc());
+					JstExpressionTypeLinkerTraversal.accept(valueExpr, revisitor);
+				}
+				
 			}
 		} else if (valueExpr instanceof ObjLiteral
 				&& valueExpr.getResultType() != null
@@ -2563,7 +2577,7 @@ public class JstExpressionTypeLinkerHelper {
 		if (func != null
 				&& (!checkAnonymous || (checkAnonymous && isAnonymousFunction(func)))
 				&& func instanceof JstMethod) {
-			deriveAnonymousFunction(lhsFunc, (JstMethod) func);
+			deriveAnonymousFunction(lhsFunc, (JstMethod) func, func.getDoc());
 			// bugfix by huzhou@ebay.com, needs to revisit the func expression
 			// to allow the correct binding inside after the inference
 			JstExpressionTypeLinkerTraversal.accept(func, revisitor);
@@ -2688,7 +2702,7 @@ public class JstExpressionTypeLinkerHelper {
 					}
 				}
 			}
-			deriveAnonymousFunction(paramType, (JstMethod) func);
+			deriveAnonymousFunction(paramType, (JstMethod) func, func.getDoc());
 			// bugfix by huzhou@ebay.com, needs to revisit
 			// the func expression
 			// to allow the correct binding inside after the
@@ -2863,7 +2877,7 @@ public class JstExpressionTypeLinkerHelper {
 					if (func != null && isAnonymousFunction(func)
 							&& func instanceof JstMethod) {
 						deriveAnonymousFunction((JstFuncType) rtnType,
-								(JstMethod) func);
+								(JstMethod) func, func.getDoc());
 						JstExpressionTypeLinkerTraversal
 								.accept(func, revisitor);
 					}
@@ -2885,9 +2899,9 @@ public class JstExpressionTypeLinkerHelper {
 	}
 
 	private static void deriveAnonymousFunction(
-			final JstFuncType functionDefType, final JstMethod anonymousFunction) {
+			final JstFuncType functionDefType, final JstMethod anonymousFunction, IJstDoc doc) {
 		final IJstMethod paramFunction = functionDefType.getFunction();
-		deriveAnonymousFunction(paramFunction, anonymousFunction);
+		deriveAnonymousFunction(paramFunction, anonymousFunction, doc);
 	}
 
 	/**
@@ -2898,7 +2912,7 @@ public class JstExpressionTypeLinkerHelper {
 	 * @param anonymousFunction
 	 */
 	private static void deriveAnonymousFunction(final IJstMethod paramFunction,
-			final JstMethod anonymousFunction) {
+			final JstMethod anonymousFunction, IJstDoc doc) {
 		if (anonymousFunction == paramFunction) {
 			return;
 		}
@@ -2906,7 +2920,8 @@ public class JstExpressionTypeLinkerHelper {
 		// deal with return type inference and argument type inferences
 		final IJstType paramFunctionRtnType = paramFunction.getRtnType();
 		anonymousFunction.setRtnType(paramFunctionRtnType);
-
+		anonymousFunction.setReturnOptional(paramFunction.isReturnTypeOptional());
+		((JstMethod)paramFunction).setDoc(doc);
 		if (!paramFunction.isDispatcher()) {
 			final List<JstArg> params = paramFunction.getArgs();
 			final List<JstArg> inferParams = anonymousFunction.getArgs();
@@ -3389,6 +3404,10 @@ public class JstExpressionTypeLinkerHelper {
 		JstTypeSpaceMgr tsMgr = resolver.getController().getJstTypeSpaceMgr();
 		ITypeSpace<IJstType, IJstNode> ts = tsMgr.getTypeSpace();
 
+		if(groupInfo == null){
+			return null;
+		}
+		
 		List<IJstType> typeList = ts.getVisibleType(fullName,
 				ts.getGroup(groupInfo.getGroupName()));
 

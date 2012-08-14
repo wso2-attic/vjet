@@ -128,7 +128,8 @@ public class VjoJstMethodValidator
 		
 		final VjoMethodControlFlowTable flowTable = ctx.getMethodControlFlowTable();
 		if(flowTable != null){
-			if(jstMethod.getRtnType() != null && !"void".equals(jstMethod.getRtnType().getSimpleName())){
+			// TODO support variant and mixed type testing here
+			if(jstMethod.getRtnType() != null && !"void".equals(jstMethod.getRtnType().getSimpleName()) && !jstMethod.isReturnTypeOptional()){
                 final List<IStmt> rtnStmts = flowTable.lookUpStmt(jstMethod);
 				boolean allReturned = rtnStmts.size() > 0;
                 for (IStmt stmt : rtnStmts) {

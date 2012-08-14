@@ -181,6 +181,9 @@ public class JstQueryExecutor {
 			return null;
 		}
 		IGroup<IJstType> group = m_ts.getGroup(groupName);
+		if(group==null){
+			return null;
+		}
 		for (IGroup<IJstType> depGrp : group.getGroupDependency()) {
 			var = m_ts.getGlobalVar(depGrp.getName(), ptyName);
 			if (var != null) {

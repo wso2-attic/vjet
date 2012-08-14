@@ -10,6 +10,7 @@ package org.ebayopensource.vjet.eclipse.internal.ui.scriptdoc;
 
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.URI;
 
 import org.ebayopensource.dsf.jst.IJstGlobalFunc;
 import org.ebayopensource.dsf.jst.IJstGlobalProp;
@@ -23,8 +24,7 @@ import org.eclipse.dltk.mod.core.IField;
 import org.eclipse.dltk.mod.core.IMember;
 import org.eclipse.dltk.mod.core.IMethod;
 import org.eclipse.dltk.mod.core.IModelElement;
-import org.eclipse.dltk.mod.core.IType;
-import org.eclipse.dltk.mod.internal.core.VjoExternalSourceModule;
+import org.eclipse.dltk.mod.internal.core.VjoSourceModule;
 import org.eclipse.dltk.mod.internal.core.VjoSourceType;
 import org.eclipse.dltk.mod.javascript.scriptdoc.JavaDoc2HTMLTextReader;
 import org.eclipse.dltk.mod.ui.documentation.IScriptDocumentationProvider;
@@ -45,8 +45,15 @@ public class VjetScriptDocProvider implements IScriptDocumentationProvider {
 		if (element instanceof VjoSourceType) {
 			VjoSourceType module = (VjoSourceType) element;
 			/// need to determine if this is a nested type? utility for this?
+			URI resource = element.getResource().getLocationURI();
+			System.out.println(resource);
+			if(resource.getScheme().equals("typespace")){
+				groupName = resource.getHost();
+			}else{
+				groupName = determineGroup(module);
+			}
+		
 			
-			groupName = module.getScriptProject().getElementName();
 			typeName = module.getFullyQualifiedName(".");
 			IJstType t = TypeSpaceMgr.findType(groupName, typeName);
 			if (t != null && t.getDoc() != null) {
@@ -55,16 +62,18 @@ public class VjetScriptDocProvider implements IScriptDocumentationProvider {
 			}
 		}
 
-		IType declaringType = element.getDeclaringType();
-		if (declaringType == null) {
-			return new StringReader("");
-		}
-		typeName = declaringType.getFullyQualifiedName(".");
+//		IType declaringType = element.getDeclaringType();
+//		if (declaringType == null) {
+//			return new StringReader("");
+//		}
+//		typeName = declaringType.getFullyQualifiedName(".");
 		String memberName = element.getElementName();
 		if (element.getParent() != null) {
+			
+			
 			IModelElement secondLevelParent = element.getParent().getParent();
-			if (secondLevelParent instanceof VjoExternalSourceModule) {
-				VjoExternalSourceModule module = (VjoExternalSourceModule) secondLevelParent;
+			if (secondLevelParent instanceof VjoSourceModule) {
+				VjoSourceModule module = (VjoSourceModule) secondLevelParent;
 				IJstType t = module.getJstType();
 				if(element instanceof VjoSourceType){
 					if (t != null && t.getDoc() != null) {
@@ -113,7 +122,7 @@ public class VjetScriptDocProvider implements IScriptDocumentationProvider {
 				return new JavaDoc2HTMLTextReader(new StringReader(m.getDoc()
 						.getComment()));
 			}
-		} else if (element instanceof IField) {
+		} else if (element instanceof IField  && typeName != "") {
 			IJstType type = TypeSpaceMgr.findType(groupName, typeName);
 			IJstProperty p = type.getProperty(memberName);
 			if(p ==null){
@@ -134,6 +143,12 @@ public class VjetScriptDocProvider implements IScriptDocumentationProvider {
 		}
 		return new StringReader("");
 
+	}
+
+
+
+	private String determineGroup(VjoSourceType module) {
+		return module.getScriptProject().getElementName();
 	}
 
 	

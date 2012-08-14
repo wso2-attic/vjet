@@ -240,8 +240,8 @@ public class VjoJavaLibBuildTask extends Task {
 		build0.setExclusion(".unloaded");
 		build0.setProjectDir(args[0]);
 		build0.m_buildJstLib = true;
-		build0.m_buildJstOutDir = "bin\\vjo\\generated";
-		build0.m_buildJstFileName = "testlib.ser";
+		build0.m_buildJstOutDir = args[1];
+		build0.m_buildJstFileName = "vjo_java_lib.ser";
 		build0.execute();
 		
 		

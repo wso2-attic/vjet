@@ -184,7 +184,10 @@ public class CodeassistUtils {
 		if (outerType == jstType) {
 			return findType(scriptProject, jstType.getName());
 		} else {
-			String packageName = outerType.getPackage().getName();
+			String packageName = "";
+			if(outerType.getPackage()!=null){
+				packageName =outerType.getPackage().getName();
+			}
 			String typeName = jstType.getName();
 			if (typeName.contains(packageName)) {
 				if (StringUtils.isBlankOrEmpty(packageName)) {
@@ -1934,6 +1937,8 @@ public class CodeassistUtils {
 	public static NativeVjoSourceModule createNativeModule(ISourceModule module) {
 		IVjoSourceModule sourceModule = (IVjoSourceModule) module;
 		ScriptFolder folder = (ScriptFolder) sourceModule.getParent();
+		
+		
 		return createNativeModule(folder, sourceModule.getElementName());
 	}
 
@@ -2640,9 +2645,9 @@ public class CodeassistUtils {
 	
 	/**
 	 * @param vjoSourceModule
-	 * @return Actual type name from VjoSourceModule
+	 * @return Actual group name from VjoSourceModule
 	 */
-	public static String getTypeName(VjoSourceModule vjoSourceModule) {
+	public static String getGroupName(VjoSourceModule vjoSourceModule) {
 		String tName = vjoSourceModule.getGroupName();
 		TypeName typeName = vjoSourceModule.getTypeName();
 		if (typeName != null) {

@@ -10,7 +10,7 @@ package org.ebayopensource.vjet.eclipse.ui;
 
 import java.io.IOException;
 
-import org.ebayopensource.vjet.eclipse.internal.ui.editor.NativeElementFileAdvisor;
+//import org.ebayopensource.vjet.eclipse.internal.ui.editor.NativeElementFileAdvisor;
 import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
 import org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle.CodeTemplateContextType;
 import org.ebayopensource.vjet.eclipse.internal.ui.preferences.codestyle.CodeTemplates;
@@ -19,7 +19,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.content.IContentType;
-import org.eclipse.dltk.mod.internal.ui.editor.ExternalFileEditorInput;
+//import org.eclipse.dltk.mod.internal.ui.editor.ExternalFileEditorInput;
 import org.eclipse.dltk.mod.ui.DLTKUIPlugin;
 import org.eclipse.dltk.mod.ui.viewsupport.ImageDescriptorRegistry;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -186,7 +186,7 @@ public class VjetUIPlugin extends AbstractUIPlugin implements IStartup {
 	}
 
 	private void registryAdvisor() {
-		ExternalFileEditorInput.registryAdvisor(new NativeElementFileAdvisor());
+//		ExternalFileEditorInput.registryAdvisor(new NativeElementFileAdvisor());
 	}
 
 	/*

@@ -331,15 +331,19 @@ public class TypeSpaceMgr {
 		Iterator<String> iter = set.iterator();
 
 		while (iter.hasNext()) {
-			String string = iter.next();
-			if (!TsLibLoader.isDefaultLibName(string)) {
-				setLoaded(false);
-				processEvent(new RemoveGroupEvent(string, string));
-			}
+			String group = iter.next();
+			cleanGroup(group);
 		}
 
 		this.m_groupDepends = null;
 
+	}
+
+	private void cleanGroup(String group) {
+		if (!TsLibLoader.isDefaultLibName(group)) {
+			setLoaded(false);
+			processEvent(new RemoveGroupEvent(group, group));
+		}
 	}
 
 	private void loadGroupDepends() {
@@ -551,6 +555,25 @@ public class TypeSpaceMgr {
 			ISourceEventCallback<IJstType> callback) {
 		clean();
 		load(monitor, callback);
+	}
+	
+	public synchronized void reloadGroup(TypeLoadMonitor monitor, String group,
+			ISourceEventCallback<IJstType> callback) {
+		cleanGroup(group);
+		
+		loadGroup(monitor, group, callback);
+	}
+
+	private void loadGroup(TypeLoadMonitor monitor, String group,
+			ISourceEventCallback<IJstType> callback) {
+		
+		if (m_typeLoader != null) {
+			monitor.preparationTypeListStarted();
+			List<GroupInfo> list = m_typeLoader.getGroupInfo(group);
+			monitor.preparationTypeListFinished();
+			
+			loadTypes(monitor, list, callback);
+		}
 	}
 
 	/**

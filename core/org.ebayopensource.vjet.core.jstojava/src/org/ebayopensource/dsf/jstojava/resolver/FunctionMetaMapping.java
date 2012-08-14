@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.ParseException;
 import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.ebayopensource.dsf.jstojava.translator.BaseFindTypeSupport;
@@ -26,17 +26,17 @@ public class FunctionMetaMapping implements IFunctionMetaMapping {
 	private Map<String, Map<String, MetaExtension>> m_maps =
 		new HashMap<String, Map<String, MetaExtension>>();
 	
-	private final String m_groupId;
+	private final String[] m_groupId;
 	
 	public FunctionMetaMapping(String groupId) {
-		m_groupId = groupId;
+		m_groupId = new String[]{groupId};
 	}
 	
 	/* (non-Javadoc)
 	 * @see org.ebayopensource.dsf.jstojava.resolver.IFunctionMetaMapping#getGroupId()
 	 */
 	@Override
-	public String getGroupId() {
+	public String[] getGroupIds() {
 		return m_groupId;
 	}
 	

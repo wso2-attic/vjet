@@ -4,5 +4,5 @@ import org.ebayopensource.dsf.jst.term.NV;
 
 public interface IOTypeResolver {
 	String resolve(NV field);
-	String getGroupId();
+	String[] getGroupIds();
 }

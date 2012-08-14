@@ -6,12 +6,12 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.ebayopensource.dsf.jstojava.parser.comments;
+package org.ebayopensource.dsf.jst.meta;
 
 
 public abstract class JsTypingMeta {
 
-	protected Token m_typingToken;
+	private Token m_typingToken;
 	private boolean m_isVariable = false;
 	private boolean m_isOptional = false;
 	private int m_dimensions = 0;	
@@ -21,7 +21,7 @@ public abstract class JsTypingMeta {
 	}
 	
 	public JsTypingMeta(Token typingToken) {
-		m_typingToken = typingToken;
+		setTypingToken(typingToken);
 	}
 	
 	public Token getTypingToken() {
@@ -61,20 +61,24 @@ public abstract class JsTypingMeta {
 	}
 	
 	public int getBeginOffset() {
-		return m_typingToken.beginOffset;
+		return getTypingToken().beginOffset;
 	}
 
 	public int getEndOffset() {
-		return m_typingToken.endOffset;
+		return getTypingToken().endOffset;
 	}
 	
 	public int getBeginColumn() {
-		return m_typingToken.beginColumn;
+		return getTypingToken().beginColumn;
 	}
 
 	public int getEndColumn() {
-		return m_typingToken.endColumn;
+		return getTypingToken().endColumn;
 	}
 	
 	public abstract String getType();
+
+	public void setTypingToken(Token m_typingToken) {
+		this.m_typingToken = m_typingToken;
+	}
 }

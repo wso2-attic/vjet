@@ -6,12 +6,11 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.ebayopensource.dsf.jstojava.parser.comments;
+package org.ebayopensource.dsf.jst.meta;
 
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
-import org.ebayopensource.dsf.jstojava.parser.comments.JsType.ArgType;
 
 public interface IJsCommentMeta {
 	public static enum DIRECTION {

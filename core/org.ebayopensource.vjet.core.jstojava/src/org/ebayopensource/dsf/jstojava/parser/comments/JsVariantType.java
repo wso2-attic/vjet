@@ -11,6 +11,8 @@ package org.ebayopensource.dsf.jstojava.parser.comments;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ebayopensource.dsf.jst.meta.JsTypingMeta;
+
 public class JsVariantType extends JsTypingMeta {
 	
 	private List<JsTypingMeta> m_types = new ArrayList<JsTypingMeta>(2);
@@ -19,8 +21,8 @@ public class JsVariantType extends JsTypingMeta {
 	}
 	
 	public JsVariantType add(JsTypingMeta type) {
-		if (m_typingToken == null) {
-			m_typingToken = type.m_typingToken;
+		if (getTypingToken() == null) {
+			setTypingToken(type.getTypingToken());
 		}
 		m_types.add(type);
 		return this;

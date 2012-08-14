@@ -31,6 +31,7 @@
       <module>org.ebayopensource.vjet.eclipse</module>
       
       <module>org.ebayopensource.vjet.all</module>
+      <module>org.ebayopensource.vjet.all.repo</module>
    </modules>
 
 </project>

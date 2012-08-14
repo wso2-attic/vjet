@@ -194,4 +194,9 @@ public class JstProxyMethod implements IJstMethod {
 	public boolean hasJsAnnotation() {
 		return m_targetMethod.hasJsAnnotation();
 	}
+
+	@Override
+	public boolean isReturnTypeOptional() {
+		return m_targetMethod.isReturnTypeOptional();
+	}
 }

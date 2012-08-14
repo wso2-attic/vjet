@@ -16,6 +16,7 @@ import org.ebayopensource.dsf.jst.BaseJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
+import org.ebayopensource.dsf.jst.declaration.JstDoc;
 import org.ebayopensource.dsf.jst.declaration.JstFunctionRefType;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
@@ -25,12 +26,12 @@ import org.ebayopensource.dsf.jst.declaration.JstProperty;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.expr.FuncExpr;
+import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
 import org.ebayopensource.dsf.jst.term.JstLiteral;
 import org.ebayopensource.dsf.jst.term.NV;
 import org.ebayopensource.dsf.jst.term.ObjLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
-import org.ebayopensource.dsf.jstojava.parser.comments.IJsCommentMeta;
 import org.ebayopensource.dsf.jstojava.parser.comments.JsParam;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.BaseAst2JstTranslator;
 import org.ebayopensource.dsf.jstojava.translator.robust.ast2jst.TranslatorFactory;
@@ -61,23 +62,29 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 		try {
 			BaseAst2JstTranslator translator;
 			if (expr instanceof ObjectLiteral) {
-				ObjectLiteral literal =(ObjectLiteral)expr;
-				if(literal.fields!=null){
+				ObjectLiteral literal = (ObjectLiteral) expr;
+				if (literal.fields != null) {
 					for (ObjectLiteralField field : literal.fields) {
 						if (field.getInitializer() instanceof ObjectLiteral) {
-							JstObjectLiteralType objLitType = new JstObjectLiteralType(field.fieldName.toString());
-							if(m_ctx.getCurrentType().getPackage()!=null){
-								objLitType.setPackage(new JstPackage(m_ctx.getCurrentType().getPackage().getName()+"."+m_ctx.getCurrentType().getName()));
+							JstObjectLiteralType objLitType = new JstObjectLiteralType(
+									field.fieldName.toString());
+							if (m_ctx.getCurrentType().getPackage() != null) {
+								objLitType.setPackage(new JstPackage(m_ctx
+										.getCurrentType().getPackage()
+										.getName()
+										+ "."
+										+ m_ctx.getCurrentType().getName()));
 							}
-	//						jstObjLitCfgType.addProperty(new JstProperty(objLitType, propName));
-	//						jstObjLitCfgType.addOType(objLitType);
-							
+							// jstObjLitCfgType.addProperty(new
+							// JstProperty(objLitType, propName));
+							// jstObjLitCfgType.addOType(objLitType);
+
 							jstType.addOType(objLitType);
 						}
 					}
 				}
 			}
-			
+
 			// if (expr instanceof ObjectLiteral) {
 			// translator = new VjoOLTranslator(getCtx());
 			// } else {
@@ -87,13 +94,13 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 			translator.setParent(jstType);
 			Object node = translator.translate(expr);
 			// post process Object Literal
-			
+
 			if (node instanceof ObjLiteral) {
 				ObjLiteral literal = ((ObjLiteral) node);
 				for (NV field : literal.getNVs()) {
 					processDef(jstType, literal, field);
 				}
-				
+
 			}
 
 		} finally {
@@ -105,59 +112,55 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 
 		IExpr value = field.getValue();
 		if (value != null) {
-			
+
 			if (value instanceof ObjLiteral) {
 				processObjLiteralDef(jstType, field.getName(),
 						(ObjLiteral) value);
-			}else if (value instanceof FuncExpr) {
-				processFunctionDef(jstType,
-						((FuncExpr) value).getFunc());
+			} else if (value instanceof FuncExpr) {
+				processFunctionDef(jstType, ((FuncExpr) value).getFunc());
 
-			}else if (value instanceof FieldAccessExpr) {
+			} else if (value instanceof FieldAccessExpr) {
 				IJstType type = ((FieldAccessExpr) value).getType();
 				IJstType fnType = JstCache.getInstance().getType("Function");
 				if (fnType != null && fnType.equals(type)) {
-					
-					processFunction(jstType, field.getName(), (FieldAccessExpr)value, field);
-					
-								
-						
+
+					processFunction(jstType, field.getName(),
+							(FieldAccessExpr) value, field);
+
 				}
-			}
-			else if (value instanceof BaseJstNode){
+			} else if (value instanceof BaseJstNode) {
 				processObjLiteralDef(jstType, field.getName(),
-						(BaseJstNode)value, field);
+						(BaseJstNode) value, field);
 			}
-			
-			
+
 		}
 
 	}
-
-	
 
 	// take the object literal and construct
 	// JstObjLiteralType
 	private void processObjLiteralDef(JstType jstType, String name,
 			ObjLiteral value) {
 
-		JstObjectLiteralType otype = (JstObjectLiteralType)jstType.getOType(name);
-		
-		if (otype ==null) {
+		JstObjectLiteralType otype = (JstObjectLiteralType) jstType
+				.getOType(name);
+
+		if (otype == null) {
 			otype = new JstObjectLiteralType(name);
 		}
 		otype.setPackage(new JstPackage(jstType.getName()));
 		// TODO add source info
 		JstCache.getInstance().addOType(otype);
 		jstType.addProperty(new JstProperty(otype, name));
-		for (NV field : value.getNVs()) {
+		for (int i = 0; i < value.getNVs().size(); i++) {
+			NV field = value.getNVs().get(i);
+
 			JstProperty prop = createPropertyFromNV(field);
-			
+
 			otype.addProperty(prop);
-			if(field.isOptional()){
+			if (field.isOptional()) {
 				otype.addOptionalField(prop);
 			}
-			
 		}
 		jstType.addOType(otype);
 	}
@@ -169,107 +172,120 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 			IJstType type = fieldAccessExpr.getType();
 			IJstType fnType = JstCache.getInstance().getType("Function");
 			if (fnType != null && fnType.equals(type)) {
-				processFunction(jstType, name, fieldAccessExpr,field);		
+				processFunction(jstType, name, fieldAccessExpr, field);
 			}
-		}else{
-		JstObjectLiteralType otype = new JstObjectLiteralType(name);
-		otype.setPackage(new JstPackage(jstType.getName()));
-		// TODO add source info
-		JstCache.getInstance().addOType(otype);
-		jstType.addProperty(new JstProperty(otype, name));
-		
-		jstType.addOType(otype);
+		} else {
+			JstObjectLiteralType otype = new JstObjectLiteralType(name);
+			otype.setPackage(new JstPackage(jstType.getName()));
+			// TODO add source info
+			JstCache.getInstance().addOType(otype);
+			jstType.addProperty(new JstProperty(otype, name));
+
+			jstType.addOType(otype);
 		}
 	}
 
 	private void processFunction(JstType jstType, String name,
 			FieldAccessExpr fieldAccessExpr, NV nv) {
-		List<IJsCommentMeta> commentMeta = TranslateHelper.findMetaFromExpr(fieldAccessExpr);
-		if(commentMeta!=null){
-			JstMethod meth = (JstMethod)TranslateHelper.MethodTranslateHelper.createJstSynthesizedMethod( commentMeta, m_ctx,
-				name);
-			JstMethod meth2 = new JstMethod(meth.getName(), meth.getModifiers(), meth.getRtnType());
-			for(JstArg a: meth.getArgs()){
+		List<IJsCommentMeta> commentMeta = TranslateHelper
+				.findMetaFromExpr(fieldAccessExpr);
+		
+		
+		
+		if (commentMeta != null) {
+			JstMethod meth = (JstMethod) TranslateHelper.MethodTranslateHelper
+					.createJstSynthesizedMethod(commentMeta, m_ctx, name);
+			JstMethod meth2 = new JstMethod(meth.getName(),
+					meth.getModifiers(), meth.getRtnType());
+			for (JstArg a : meth.getArgs()) {
 				meth2.addArg(a);
 			}
 			meth2.setSource(nv.getSource());
 			processFunctionDef(jstType, meth2);
 			jstType.addMethod(meth2);
 		}
-			
 
 	}
-	
-		private IJsCommentMeta getLongestArgList(List<IJsCommentMeta> metaArr) {
-				
-				IJsCommentMeta maxMeta = null;
-				int maxParamCount = 0;
-				List<JsParam> params = null;
-				for (IJsCommentMeta meta : metaArr) {
-					if (maxMeta == null) {
-						maxMeta = meta;
-						params = TranslateHelper.getParams(meta);
-						if (params != null) {
-							maxParamCount = params.size();
-						}
-					}
-					else {
-						params = TranslateHelper.getParams(meta);
-						if (params != null && params.size() > maxParamCount) {
-							maxParamCount = params.size();
-							maxMeta = meta;
-						}
-					}
+
+	private IJsCommentMeta getLongestArgList(List<IJsCommentMeta> metaArr) {
+
+		IJsCommentMeta maxMeta = null;
+		int maxParamCount = 0;
+		List<JsParam> params = null;
+		for (IJsCommentMeta meta : metaArr) {
+			if (maxMeta == null) {
+				maxMeta = meta;
+				params = TranslateHelper.getParams(meta);
+				if (params != null) {
+					maxParamCount = params.size();
 				}
-				return maxMeta;
+			} else {
+				params = TranslateHelper.getParams(meta);
+				if (params != null && params.size() > maxParamCount) {
+					maxParamCount = params.size();
+					maxMeta = meta;
+				}
 			}
-	
-	private JstProperty createPropertyFromNV(NV nv){
+		}
+		return maxMeta;
+	}
+
+	private JstProperty createPropertyFromNV(NV nv) {
 		IExpr value = nv.getValue();
-	
+
 		if ((nv.getName() != null) && (nv.getName().length() > 0)
 				&& (value instanceof JstLiteral)) {
-			JstLiteral literal = (JstLiteral)value;
+			JstLiteral literal = (JstLiteral) value;
 			// create the JstProperty
-			// problem with result type 
+			// problem with result type
 			IJstType jstType = null;
 			IJstType type = nv.getIdentifier().getType();
-			if(type!=null){
+			if (type != null) {
 				jstType = type;
 			}
-			if(jstType==null){
-			List<IJsCommentMeta> commentMeta = TranslateHelper.findMetaFromExpr(literal);
+			if (jstType == null) {
+				List<IJsCommentMeta> commentMeta = TranslateHelper
+						.findMetaFromExpr(literal);
 				IJsCommentMeta meta = null;
-				if(commentMeta!=null){
+				if (commentMeta != null) {
 					meta = commentMeta.get(0);
 				}
-				if(meta !=null){
-					jstType = TranslateHelper.findType(m_ctx, meta.getTyping(), meta);
+				if (meta != null) {
+					jstType = TranslateHelper.findType(m_ctx, meta.getTyping(),
+							meta);
 				}
-			
+
 			}
-			
-			
-			if(jstType==null){
+
+			if (jstType == null) {
 				jstType = value.getResultType();
 			}
-			if(jstType==null){
+			if (jstType == null) {
 				jstType = JstCache.getInstance().getType("Object");
 			}
-			
+
 			JstProperty jstProperty = new JstProperty(jstType, nv.getName(),
 					(JstLiteral) value, new JstModifiers().setPublic());
 			jstProperty.setSource(nv.getSource());
-			jstProperty.setComments(nv.getComments());
+
+		
+
+			 StringBuilder sb = new StringBuilder();
+			 for(String comment: nv.getComments()){
+				 sb.append(comment);
+			 }
+			 JsDocHelper.addJsDoc(sb.toString(), jstProperty);
+
+			
 			return jstProperty;
 		}
 		return null;
 	}
-	
+
 	private void processFunctionDef(JstType type, JstMethod mtd) {
 		if (mtd != null) {
 			type.addMethod(mtd);
-			
+
 			JstFunctionRefType ref = new JstFunctionRefType(mtd);
 			ref.setPackage(new JstPackage(type.getName()));
 			type.addOType(ref);

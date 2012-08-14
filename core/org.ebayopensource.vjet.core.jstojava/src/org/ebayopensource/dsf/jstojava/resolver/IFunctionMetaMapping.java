@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface IFunctionMetaMapping {
 
-	String getGroupId();
+	String[] getGroupIds();
 
 	boolean hasMetaExtension(String targetFunc);
 
