@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import com.ebay.kernel.initialization.ShutdownRuntimeException;
 
 /** This is a helper class that one can use to keep track of several
  * things that need to be initialized in a module's init manager.

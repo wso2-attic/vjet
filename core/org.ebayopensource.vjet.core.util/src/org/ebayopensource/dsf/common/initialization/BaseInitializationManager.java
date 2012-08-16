@@ -3,10 +3,9 @@ package org.ebayopensource.dsf.common.initialization;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ebay.kernel.context.RuntimeContext;
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.dsf.logger.Logger;
 
-import com.ebay.kernel.logger.LogLevel;
-import com.ebay.kernel.logger.Logger;
 
 
 
@@ -107,7 +106,7 @@ public abstract class BaseInitializationManager implements InitializationManager
 			
 		} finally {
 			if ( !isSuccess ) {
-				RuntimeContext.setErrorModule(getComponentName());
+//				RuntimeContext.setErrorModule(getComponentName());
 				m_state = InitializationState.INITAILIZED_FAILED;
 				context.out("initializing FAILED '" + getComponentName() + "' }");
 			}

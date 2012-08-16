@@ -469,6 +469,7 @@
   	<profile>
       <id>platform-juno</id>
       <activation>
+        <activeByDefault>true</activeByDefault>
         <property>
           <name>platform-version-name</name>
           <value>juno</value>
@@ -539,7 +540,7 @@
       <profile>
   		<id>all</id>
 	      <activation>
-	      	<activeByDefault>true</activeByDefault>
+	      	<activeByDefault>false</activeByDefault>
 	      </activation>
 	    <properties>
 				<eclipse-site>http://download.eclipse.org/releases/indigo/</eclipse-site>

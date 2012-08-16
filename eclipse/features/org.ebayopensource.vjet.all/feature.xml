@@ -308,10 +308,6 @@ a jury trial in any resulting litigation.
          version="1.0.0.qualifier"/>
 
    <includes
-         id="org.ebayopensource.vjet.binary"
-         version="1.0.0.qualifier"/>
-
-   <includes
          id="org.ebayopensource.vjet.core"
          version="1.0.0.qualifier"/>
 
