@@ -38,6 +38,8 @@ public class DefaultJstLibProvider implements IJstLibProvider{
 	
 	
 	private Map<String, IJstLib> m_jstLibMap = new HashMap<String,IJstLib>();
+
+
 	
 	/**
 	 * TODO: re-factor this, don't have the logic for adding library 

@@ -12,7 +12,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjotool"/>
 	<classpathentry kind="lib" path="lib/JUnitNexGen.jar"/>
-	<classpathentry kind="lib" path="lib/uKernelCore_1.7.3.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.6.0.v20100503.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.jdt.core_3.6.1.v_A68_R36x.jar"/>
 	<classpathentry kind="output" path="bin"/>

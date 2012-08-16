@@ -252,12 +252,12 @@ public class TestHelper {
 		String vjoActual = "";
 
 		JstType jstType = controller.targetedTranslation(srcType);
-
+		
 		vjoActual = helper.toVjo(jstType, CodeStyle.PRETTY);
 
 		String jsrActual = "";
 		jsrActual = helper.toJsr(jstType, CodeStyle.PRETTY);
-
+//		getCtx().getTraceManager().close();
 		printErrors(controller.getErrors());
 		printExceptions(controller.getExceptions());
 
@@ -281,6 +281,8 @@ public class TestHelper {
 					+ "\nActual Result : \n" + jsrActual, jsrExpectedResult,
 					jsrActual);
 		}
+		
+		
 		// getLogger().log(Level.INFO, "Ended testing type " +
 		// srcType.getSimpleName());
 	}

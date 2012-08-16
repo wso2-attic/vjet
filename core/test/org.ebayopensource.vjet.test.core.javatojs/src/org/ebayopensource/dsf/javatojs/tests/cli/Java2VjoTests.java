@@ -398,13 +398,16 @@ public class Java2VjoTests {
 			e.printStackTrace();
 		}
 		for (File file : files) {
+			if(file.isDirectory()){
+				continue;
+			}
 			String jsPath = file.getAbsolutePath();
 			if (jsPath.endsWith(".java")){
 				jsPath = jsPath.substring(0, jsPath.length()-4) + "js";
 			}
 			File jsFile = new File(jsPath);
 			//validate js file was created/updated after test was run.
-			assertTrue(dateInMillis <= jsFile.lastModified());
+			assertTrue("js file was created before test " + jsFile,dateInMillis <= jsFile.lastModified());
 			//validate js files written to output/logs
 			if (verbose) {
 				assertTrue(output.indexOf("Write " + jsFile.toURI().toURL()) > -1);

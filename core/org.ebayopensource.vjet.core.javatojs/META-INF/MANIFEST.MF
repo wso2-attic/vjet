@@ -8,11 +8,10 @@ Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: 
-  uKernelCore;visibility:=reexport,
-  org.ebayopensource.vjet.core.jsgenshared;visibility:=reexport,
-  org.eclipse.core.resources;visibility:=reexport,
-  org.eclipse.core.runtime;visibility:=reexport,
-  org.eclipse.jdt.core;visibility:=reexport
+ org.ebayopensource.vjet.core.jsgenshared;visibility:=reexport,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.eclipse.core.runtime;visibility:=reexport,
+ org.eclipse.jdt.core;visibility:=reexport
 Export-Package: 
   org.ebayopensource.dsf.javatojs,
   org.ebayopensource.dsf.javatojs.control,

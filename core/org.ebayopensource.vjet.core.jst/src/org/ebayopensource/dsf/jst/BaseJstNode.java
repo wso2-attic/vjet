@@ -22,7 +22,7 @@ public class BaseJstNode implements IJstNode {
 	private static final long serialVersionUID = 1L;
 	
 	private BaseJstNode m_parent;
-	private List<BaseJstNode> m_children = new ArrayList<BaseJstNode>();
+	private List<BaseJstNode> m_children;
 	private JstSource m_source;
 	private List<IJstAnnotation> m_annotations;
 	private List<String> m_comments;
@@ -121,17 +121,21 @@ public class BaseJstNode implements IJstNode {
 		}
 		if (child instanceof BaseJstNode){
 			synchronized (this){
+				initChildren();
 				m_children.add((BaseJstNode)child);
 			}
 			((BaseJstNode)child).setParent(this);
 		}
 	}
 	
+	
+	
 	public void removeChild(IJstNode child){
 		if (child == null || !getChildren(true).contains(child)){
 			return;
 		}
 		synchronized (this){
+			initChildren();
 			m_children.remove(child);
 		}
 		if (child instanceof BaseJstNode){
@@ -141,6 +145,7 @@ public class BaseJstNode implements IJstNode {
 	
 	public void removeChildren(Collection<? extends IJstNode> c) {
 		synchronized(this){
+			initChildren();
 			for (IJstNode t: c) {
 				m_children.remove(t);
 			}
@@ -152,7 +157,7 @@ public class BaseJstNode implements IJstNode {
 	 */
 	public void clearChildren() {
 		synchronized (this) {
-			m_children.clear();
+			m_children = null;
 		}
 	}
 	
@@ -241,12 +246,20 @@ public class BaseJstNode implements IJstNode {
 	// Private
 	//
 	private synchronized List<BaseJstNode> getChildren(boolean readOnly){
+		initChildren();
 		if (readOnly){
 			return Collections.unmodifiableList(m_children);
 		}
 		else {
 			return m_children;
 		}
+	}
+	
+	private synchronized void initChildren(){
+		if(m_children==null){
+			m_children = new ArrayList<BaseJstNode>();
+		}
+		
 	}
 	
 	private boolean isAncestor(IJstNode node){
