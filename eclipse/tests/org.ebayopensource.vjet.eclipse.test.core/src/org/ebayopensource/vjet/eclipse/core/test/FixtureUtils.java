@@ -11,9 +11,9 @@ package org.ebayopensource.vjet.eclipse.core.test;
 import org.ebayopensource.dsf.ts.event.EventListenerStatus;
 import org.ebayopensource.dsf.ts.event.ISourceEventCallback;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.core.test.contentassist.TestConstants;
 import org.ebayopensource.vjet.eclipse.core.test.parser.AbstractVjoModelTests;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class FixtureUtils {

@@ -15,12 +15,12 @@ import org.eclipse.dltk.mod.compiler.env.ISourceModule;
 import org.eclipse.dltk.mod.core.CompletionProposal;
 import org.eclipse.dltk.mod.core.ModelException;
 
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.codeassist.VjoCompletionEngine;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
 import org.ebayopensource.vjet.eclipse.core.test.parser.AbstractVjoModelTests;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 
 public class DefectCodeCompletionTests extends AbstractVjoModelTests {
 

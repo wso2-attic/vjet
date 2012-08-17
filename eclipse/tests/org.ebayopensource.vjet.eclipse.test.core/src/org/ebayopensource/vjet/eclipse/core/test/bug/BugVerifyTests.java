@@ -129,8 +129,6 @@ import org.ebayopensource.dsf.jst.declaration.JstTypeReference;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jstojava.translator.JstUtil;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.tools.view.EditorUtil;
-import com.ebay.tools.view.SyntaxHighlightUtil;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IImportContainer;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
@@ -154,6 +152,8 @@ import org.ebayopensource.vjet.eclipse.ui.VjetPreferenceConstants;
 import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
 import org.ebayopensource.vjet.eclipse.ui.actions.nature.AddVjoNaturePolicyManager;
 import org.ebayopensource.vjet.eclipse.ui.actions.nature.IAddVjoNaturePolicy;
+import org.ebayopensource.vjet.testframework.view.EditorUtil;
+import org.ebayopensource.vjet.testframework.view.SyntaxHighlightUtil;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 /**

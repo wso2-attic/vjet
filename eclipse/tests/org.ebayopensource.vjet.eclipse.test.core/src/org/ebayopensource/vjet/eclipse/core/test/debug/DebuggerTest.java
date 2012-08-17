@@ -20,8 +20,8 @@ import org.eclipse.dltk.mod.dbgp.exceptions.DbgpException;
 import org.eclipse.dltk.mod.debug.core.model.IScriptStackFrame;
 import org.eclipse.dltk.mod.debug.core.model.IScriptThread;
 
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 
 /**
  * 

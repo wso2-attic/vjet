@@ -15,9 +15,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.jface.text.Region;
 
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 
 public class VjoMarkOccurencesTests extends AbstractMarkOccurencesTests {
 

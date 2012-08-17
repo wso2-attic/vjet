@@ -17,11 +17,11 @@ import org.eclipse.dltk.mod.internal.core.ImportContainer;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IJSMethod;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 
 public class VjoNativeOffsetTests extends AbstractSearchModelTests {
 

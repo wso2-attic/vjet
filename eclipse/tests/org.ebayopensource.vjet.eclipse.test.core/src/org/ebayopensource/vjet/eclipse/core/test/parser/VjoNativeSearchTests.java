@@ -18,7 +18,6 @@ import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.dltk.mod.core.search.IDLTKSearchConstants;
 
 import org.ebayopensource.dsf.jst.IJstType;
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IJSMethod;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
@@ -26,6 +25,7 @@ import org.ebayopensource.vjet.eclipse.core.search.SearchQueryParameters;
 import org.ebayopensource.vjet.eclipse.core.search.VjoMatch;
 import org.ebayopensource.vjet.eclipse.core.search.VjoSearchEngine;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 
 public class VjoNativeSearchTests extends AbstractSearchModelTests{
 

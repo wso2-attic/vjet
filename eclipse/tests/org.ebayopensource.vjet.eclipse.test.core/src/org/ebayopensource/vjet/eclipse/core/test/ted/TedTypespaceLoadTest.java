@@ -37,10 +37,10 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.osgi.framework.Bundle;
 
-import com.ebay.tools.testframework.util.UnitTestHelper;
 import org.ebayopensource.vjet.eclipse.core.PiggyBackClassPathUtil;
 import org.ebayopensource.vjet.eclipse.core.test.parser.AbstractVjoModelTests;
 import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
+import org.ebayopensource.vjet.testframework.util.UnitTestHelper;
 
 public class TedTypespaceLoadTest extends AbstractVjoModelTests {
 	public static final String POM_FILE_NAME = "pom.xml";
