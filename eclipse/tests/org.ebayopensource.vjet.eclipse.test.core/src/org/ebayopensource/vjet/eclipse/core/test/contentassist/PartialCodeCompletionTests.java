@@ -50,7 +50,6 @@ import org.ebayopensource.dsf.ts.event.EventListenerStatus;
 import org.ebayopensource.dsf.ts.event.ISourceEventCallback;
 import org.ebayopensource.dsf.ts.event.group.AddGroupEvent;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.codeassist.VjoCompletionEngine;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.VjoNature;
@@ -59,6 +58,7 @@ import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
 import org.ebayopensource.vjet.eclipse.core.test.parser.AbstractVjoModelTests;
 import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoTypeCompletionProposalComputer;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class PartialCodeCompletionTests extends AbstractVjoModelTests {

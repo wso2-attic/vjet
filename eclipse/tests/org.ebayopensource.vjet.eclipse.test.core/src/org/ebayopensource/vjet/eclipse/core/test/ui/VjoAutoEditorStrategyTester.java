@@ -19,12 +19,12 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
-import com.ebay.tools.testframework.fixture.FixtureManager;
-import com.ebay.tools.view.RangeIndicatorUtil;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
 import org.ebayopensource.vjet.eclipse.internal.ui.editor.VjoEditor;
 import org.ebayopensource.vjet.eclipse.ui.VjetUIPlugin;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
+import org.ebayopensource.vjet.testframework.view.RangeIndicatorUtil;
 
 public class VjoAutoEditorStrategyTester extends
 		AbstractVjoAutoEditorStrategyTester {

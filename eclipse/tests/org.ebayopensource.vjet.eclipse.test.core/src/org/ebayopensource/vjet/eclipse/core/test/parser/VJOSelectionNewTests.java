@@ -21,11 +21,11 @@ import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstVar;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.codeassist.CodeassistUtils;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
 import org.ebayopensource.vjet.eclipse.internal.codeassist.select.VjoSelectionEngine;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjo.tool.typespace.TypeSpaceMgr;
 
 public class VJOSelectionNewTests extends AbstractSelectionModelTests {

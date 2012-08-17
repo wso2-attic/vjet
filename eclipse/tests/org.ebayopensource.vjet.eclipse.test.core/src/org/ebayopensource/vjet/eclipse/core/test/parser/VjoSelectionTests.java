@@ -12,10 +12,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.dltk.mod.core.ModelException;
 import org.eclipse.ui.PartInitException;
 
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.search.matching.ICategoryRequestor;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 
 public class VjoSelectionTests extends AbstractSelectionModelTests {
 

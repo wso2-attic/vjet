@@ -32,12 +32,12 @@ import org.eclipse.dltk.mod.ui.text.completion.CompletionProposalLabelProvider;
 import org.eclipse.dltk.mod.ui.text.completion.ScriptContentAssistInvocationContext;
 import org.eclipse.jface.text.source.ISourceViewer;
 
-import com.ebay.tools.testframework.fixture.FixtureManager;
 import org.ebayopensource.vjet.eclipse.core.IJSSourceModule;
 import org.ebayopensource.vjet.eclipse.core.VjoNature;
 import org.ebayopensource.vjet.eclipse.core.test.FixtureUtils;
 import org.ebayopensource.vjet.eclipse.core.test.parser.AbstractVjoModelTests;
 import org.ebayopensource.vjet.eclipse.internal.ui.text.completion.VjoTemplateCompletionProposalComputer;
+import org.ebayopensource.vjet.testframework.fixture.FixtureManager;
 
 public class TemplateTestUtil extends AbstractVjoModelTests {
 	
