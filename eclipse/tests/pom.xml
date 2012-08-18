@@ -19,6 +19,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>org.ebayopensource.vjet.eclipse.test.core</module>
+    <module>org.ebayopensource.vjet.testframework</module>
   </modules>
   
   <build>

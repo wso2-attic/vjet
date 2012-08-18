@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>org.ebayopensource.vjet.testframework</name>
-	<comment>@key test 32303037303533312D3130303020636F6D2E656261792E746F6F6C732E7465737466726D77726B2E7574696C2E65636C697073652F64646F6464 </comment>
 	<projects>
 	</projects>
 	<buildSpec>

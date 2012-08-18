@@ -1,6 +1,0 @@
-<JavaToJst><Controller method="TargetedTranslation"><DependencyPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.dependency.Dependency" mode="Dependency,Declaration" thread="1">
- <Dependents/>
- <Time start="18:25:08:917" end="18:25:08:923" duration="6"/>
-</Task></DependencyPhase><ImplementationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.dependency.Dependency" mode="Dependency,Declaration,Impl" thread="1">
- <Time start="18:25:08:932" end="18:25:08:936" duration="4"/>
-</Task></ImplementationPhase><Time start="18:25:08:438" end="18:25:08:938" duration="500"/></Controller></JavaToJst>

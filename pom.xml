@@ -16,7 +16,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tycho-version>0.12.0</tycho-version>
+    <tycho-version>0.15.0</tycho-version>
     <vjet-version>1.0.0-SNAPSHOT</vjet-version>
   </properties>
 
@@ -27,15 +27,10 @@
         <layout>p2</layout>
      </repository>
      <repository>
-        <id>orbit</id>
-        <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20120119162704/repository/</url>
-        <layout>p2</layout>
-     </repository>
-     <repository>
-        <id>vjetrelease</id>
-        <url>https://www.ebayopensource.org/p2/vjet/eclipse/</url>
-        <layout>p2</layout>
-     </repository>
+        <id>orbit-2012-5-26</id>
+	<layout>p2</layout>
+	<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20120526062928/repository/</url>
+	</repository>
      <repository>
         <id>m2eclipse</id>
         <url>http://m2eclipse.sonatype.org/sites/m2e</url>
@@ -481,7 +476,7 @@
       </activation>
       <properties>
         <eclipse-site>http://download.eclipse.org/releases/juno/</eclipse-site>
-        <platform-version>[3.6,3.7)</platform-version>
+        <platform-version>[4.0,4.2)</platform-version>
         <swtbot-site>http://download.eclipse.org/technology/swtbot/juno/dev-build/update-site</swtbot-site>
       </properties>
 	  <modules>
