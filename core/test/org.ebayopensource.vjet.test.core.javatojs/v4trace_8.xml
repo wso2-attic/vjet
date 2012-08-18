@@ -1,46 +1,6 @@
-<JavaToJst><Controller method="OnDemandTranslation"><DependencyPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.Dependent" mode="Dependency,Declaration" thread="10">
+<JavaToJst><Controller method="TargetedTranslation"><DependencyPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.Generics" mode="Dependency,Declaration" thread="1">
  <Dependents/>
- <Time start="09:25:06:146" end="09:25:06:150" duration="4"/>
-</Task></DependencyPhase><DeclarationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.Base" mode="Dependency,Declaration" thread="17">
- <Dependents/>
- <Time start="09:25:06:172" end="09:25:06:178" duration="6"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.A" mode="Dependency,Declaration" thread="15">
- <Dependents/>
- <Time start="09:25:06:172" end="09:25:06:179" duration="7"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.B" mode="Dependency,Declaration" thread="16">
- <Dependents/>
- <Time start="09:25:06:173" end="09:25:06:177" duration="4"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.C" mode="Dependency,Declaration" thread="14">
- <Dependents/>
- <Time start="09:25:06:173" end="09:25:06:180" duration="7"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.F" mode="Dependency,Declaration" thread="16">
- <Dependents/>
- <Time start="09:25:06:177" end="09:25:06:200" duration="23"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.D" mode="Dependency,Declaration" thread="22">
- <Dependents/>
- <Time start="09:25:06:180" end="09:25:06:199" duration="19"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.E" mode="Dependency,Declaration" thread="14">
- <Dependents/>
- <Time start="09:25:06:183" end="09:25:06:200" duration="17"/>
-</Task><Errors><WARN type="SrcNotFound" msg="Source not found for 'org.ebayopensource.dsf.dap.rt.DapHandlerAdapter' when translating org.ebayopensource.dsf.javatojs.tests.data.multipass.Base"/><WARN type="SrcNotFound" msg="Source not found for 'org.ebayopensource.dsf.dap.rt.DapHandlerAdapter' when translating org.ebayopensource.dsf.javatojs.tests.data.C"/></Errors></DeclarationPhase><DeclarationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.G" mode="Dependency,Declaration" thread="10">
- <Dependents/>
- <Time start="09:25:06:245" end="09:25:06:246" duration="1"/>
-</Task></DeclarationPhase><ImplementationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.Dependent" mode="Dependency,Declaration,Impl" thread="14">
- <Time start="09:25:06:254" end="09:25:06:332" duration="78"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.Base" mode="Dependency,Declaration,Impl" thread="16">
- <Time start="09:25:06:254" end="09:25:06:260" duration="6"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.A" mode="Dependency,Declaration,Impl" thread="22">
- <Time start="09:25:06:256" end="09:25:06:274" duration="18"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.B" mode="Dependency,Declaration,Impl" thread="16">
- <Time start="09:25:06:276" end="09:25:06:281" duration="5"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.C" mode="Dependency,Declaration,Impl" thread="15">
- <Time start="09:25:06:278" end="09:25:06:283" duration="5"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.F" mode="Dependency,Declaration,Impl" thread="22">
- <Time start="09:25:06:279" end="09:25:06:291" duration="12"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.D" mode="Dependency,Declaration,Impl" thread="16">
- <Time start="09:25:06:284" end="09:25:06:290" duration="6"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.E" mode="Dependency,Declaration,Impl" thread="22">
- <Time start="09:25:06:292" end="09:25:06:293" duration="1"/>
-</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.multipass.G" mode="Dependency,Declaration,Impl" thread="16">
- <Time start="09:25:06:293" end="09:25:06:293" duration="0"/>
-</Task></ImplementationPhase><Time start="09:25:06:142" end="09:25:06:362" duration="220"/></Controller></JavaToJst>
+ <Time start="12:45:50:568" end="12:45:50:594" duration="26"/>
+</Task></DependencyPhase><ImplementationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.Generics" mode="Dependency,Declaration,Impl" thread="1">
+ <Time start="12:45:50:596" end="12:45:50:602" duration="6"/>
+</Task></ImplementationPhase><Time start="12:45:50:562" end="12:45:50:603" duration="41"/></Controller></JavaToJst>

@@ -19,28 +19,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tycho-version>0.12.0</tycho-version>
     <vjet-version>1.0.0-SNAPSHOT</vjet-version>
   </properties>
 
-  <repositories>
-     <repository>
-        <id>helios</id>
-        <url>http://download.eclipse.org/releases/helios/</url>
-        <layout>p2</layout>
-     </repository>
-     <repository>
-        <id>orbit</id>
-        <url>http://download.eclipse.org/tools/orbit/downloads/drops/R20100519200754/repository</url>
-        <layout>p2</layout>
-     </repository>
-     <repository>
-        <id>m2eclipse</id>
-        <url>http://m2eclipse.sonatype.org/sites/m2e</url>
-        <layout>p2</layout>
-     </repository>
-  </repositories>
-  
   <dependencies>
       <!-- Testing Dependencies -->
       <dependency>
@@ -86,37 +67,6 @@
 	         </execution>
 	       </executions>
       </plugin>
-      <plugin>
-         <groupId>org.eclipse.tycho</groupId>
-         <artifactId>tycho-maven-plugin</artifactId>
-         <version>${tycho-version}</version>
-         <extensions>true</extensions>
-      </plugin>
-      <plugin>
-         <groupId>org.eclipse.tycho</groupId>
-         <artifactId>target-platform-configuration</artifactId>
-         <version>${tycho-version}</version>
-         <configuration>
-            <resolver>p2</resolver>
-            <environments>
-               <environment>
-                  <os>linux</os>
-                  <ws>gtk</ws>
-                  <arch>x86</arch>
-               </environment>
-               <environment>
-                  <os>win32</os>
-                  <ws>win32</ws>
-                  <arch>x86</arch>
-               </environment>
-               <environment>
-                  <os>macosx</os>
-                  <ws>cocoa</ws>
-                  <arch>x86_64</arch>
-               </environment>
-            </environments>
-         </configuration>
-      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -147,17 +97,6 @@
                   <version>1.8.1</version>
                </dependency>
             </dependencies>
-        </plugin>
-      	<!-- tycho plugins -->
-        <plugin>
-           <groupId>org.eclipse.tycho</groupId>
-           <artifactId>tycho-compiler-plugin</artifactId>
-           <version>${tycho-version}</version>
-           <configuration>
-              <encoding>UTF-8</encoding>
-              <source>1.6</source>
-              <target>1.6</target>
-           </configuration>
         </plugin>
         <plugin>
            <groupId>org.apache.maven.plugins</groupId>

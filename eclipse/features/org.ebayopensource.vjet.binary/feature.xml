@@ -291,11 +291,6 @@ the cause of action arose. Each party waives its rights to
 a jury trial in any resulting litigation.
    </license>
 
-    <plugin 
-        id="uKernelCore"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+
 
 </feature>
