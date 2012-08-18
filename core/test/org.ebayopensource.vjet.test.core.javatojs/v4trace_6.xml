@@ -1,0 +1,26 @@
+<JavaToJst><Package name="file:/Users/earlyster/Documents/juno_demo_workspace/vjet/core/test/org.ebayopensource.vjet.test.core.javatojs/src/org/ebayopensource/dsf/javatojs/tests/cli/data/"><Controller method="OnDemandTranslation"><DependencyPhase><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.Boo" mode="Dependency,Declaration" thread="1">
+ <Dependents/>
+ <Time start="18:23:07:438" end="18:23:07:439" duration="1"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.Goo" mode="Dependency,Declaration" thread="1">
+ <Dependents/>
+ <Time start="18:23:07:453" end="18:23:07:453" duration="0"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.subdir.Foo" mode="Dependency,Declaration" thread="1">
+ <Dependents/>
+ <Time start="18:23:07:454" end="18:23:07:454" duration="0"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.subdir.Hoo" mode="Dependency,Declaration" thread="1">
+ <Dependents/>
+ <Time start="18:23:07:454" end="18:23:07:455" duration="1"/>
+</Task></DependencyPhase><DeclarationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data2.Doo" mode="Dependency,Declaration" thread="1">
+ <Dependents/>
+ <Time start="18:23:07:456" end="18:23:07:456" duration="0"/>
+</Task></DeclarationPhase><ImplementationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.Boo" mode="Dependency,Declaration,Impl" thread="1">
+ <Time start="18:23:07:458" end="18:23:07:459" duration="1"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.Goo" mode="Dependency,Declaration,Impl" thread="1">
+ <Time start="18:23:07:460" end="18:23:07:460" duration="0"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.subdir.Foo" mode="Dependency,Declaration,Impl" thread="1">
+ <Time start="18:23:07:460" end="18:23:07:461" duration="1"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data.subdir.Hoo" mode="Dependency,Declaration,Impl" thread="1">
+ <Time start="18:23:07:461" end="18:23:07:461" duration="0"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.cli.data2.Doo" mode="Dependency,Declaration,Impl" thread="1">
+ <Time start="18:23:07:461" end="18:23:07:462" duration="1"/>
+</Task></ImplementationPhase><Time start="18:23:07:434" end="18:23:07:463" duration="29"/></Controller></Package></JavaToJst>
