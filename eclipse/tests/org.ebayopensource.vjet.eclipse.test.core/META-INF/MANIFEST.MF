@@ -8,7 +8,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.dltk.mod.core,
  org.eclipse.dltk.mod.core.tests,
  org.eclipse.core.resources,
- org.junit,
  org.ebayopensource.vjet.core.wrapper,
  org.ebayopensource.vjet.rt.wrapper,
  org.ebayopensource.vjet.web.wrapper,
@@ -36,7 +35,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.jdt.launching,
  org.ebayopensource.vjet.eclipse.launching,
  org.ebayopensource.vjet.eclipse.debug.ui,
- org.eclipse.debug.ui
+ org.eclipse.debug.ui,
+ org.junit;bundle-version="3.8.2"
 Bundle-Activator: org.ebayopensource.vjet.eclipse.core.test.VjetModelTestsPlugin
 Bundle-Localization: plugin
 Bundle-ClassPath: projects/,
