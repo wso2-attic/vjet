@@ -17,7 +17,7 @@
    </parent>
 
    <groupId>org.ebayopensource.vjet.eclipse.plugins</groupId>
-   <artifactId>ui.html</artifactId>
+   <artifactId>org.ebayopensource.vjet.eclipse.ui.html</artifactId>
    <version>1.0.0-SNAPSHOT</version>
    <packaging>eclipse-plugin</packaging>
    <name>VJET: Eclipse UI HTML</name>
