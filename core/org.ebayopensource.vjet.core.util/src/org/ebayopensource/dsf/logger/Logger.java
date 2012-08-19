@@ -157,7 +157,7 @@ public class Logger {
 		// find
 		// // logging.properties in the normal location
 		// InputStream resourceStream = ResourceUtil.getResourceAsStream(
-		// ConfigurationConstants.UKERNELCORE_CONFIG_DIR, s_resourceName);
+		// ConfigurationConstants.CONFIG_DIR, s_resourceName);
 		// Collection<String> ebayHandlerNames = new ArrayList<String>();
 		// InputStream resourceStream2;
 		// try {

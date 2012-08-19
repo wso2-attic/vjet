@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.control.translate;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
@@ -17,6 +18,8 @@ import org.ebayopensource.dsf.common.initialization.BaseInitializable;
 import org.ebayopensource.dsf.common.initialization.BaseInitializationContext;
 import org.ebayopensource.dsf.common.initialization.Initializable;
 import org.ebayopensource.dsf.common.initialization.InitializationContext;
+
+import java.util.concurrent.Future;
 
 
 
@@ -82,6 +85,9 @@ public class TranslationParallelRunner {
 				
 				int cores = Runtime.getRuntime().availableProcessors();
 				ExecutorService s = Executors.newScheduledThreadPool(cores + 1);
+
+//				ExecutorService s= Executors.newSingleThreadExecutor();
+
 				
 				s_instance.setRunner(s);
 			}
@@ -98,21 +104,13 @@ public class TranslationParallelRunner {
 	//
 	public Object execute(List<? extends BaseTask> tasks) {
 		
-		
+		try {
+			List<Future<Object>> answers = m_cmdRunner.invokeAll((Collection<? extends Callable<Object>>) tasks);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		for (Callable task: tasks){
-			
-			try {
-				m_cmdRunner.submit(task);
-			} 
-			catch (Exception ipEx) {
-				// TODO
-				ipEx.printStackTrace();
-			}
-		}	
-
-
-		
 		return null;
 	}
 	

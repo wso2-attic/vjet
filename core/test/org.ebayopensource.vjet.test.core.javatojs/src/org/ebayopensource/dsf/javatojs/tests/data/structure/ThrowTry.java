@@ -8,7 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.data.structure;
 
-import org.ebayopensource.dsf.logger.Logger;
+import org.ebayopensource.dsf.javatojs.tests.Logger;
+
+
 
 public class ThrowTry {
 	

@@ -7,8 +7,6 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: 
-  uKernelCore;visibility:=reexport
 Export-Package: 
  org.ebayopensource.dsf.common,
  org.ebayopensource.dsf.common.cmdexec,

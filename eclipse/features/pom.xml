@@ -21,7 +21,7 @@
       <!--  <module>org.ebayopensource.vjet.extmod.dltk.core.sdk</module> --> 
       <module>org.ebayopensource.vjet.extmod.dltk.javascript</module>
       
-      <module>org.ebayopensource.vjet.binary</module> 
+      <!-- <module>org.ebayopensource.vjet.binary</module>--> 
 
       <module>org.ebayopensource.vjet.core</module>
       <module>org.ebayopensource.vjet.web</module>

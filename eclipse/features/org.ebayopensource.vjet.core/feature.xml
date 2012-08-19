@@ -291,11 +291,6 @@ the cause of action arose. Each party waives its rights to
 a jury trial in any resulting litigation.
    </license>
 
-    <!--<includes id="JavaLauncherLib" version="0.0.0"/>-->
-
-   <requires>
-      <import feature="org.ebayopensource.vjet.binary" version="1.0.0" match="greaterOrEqual"/>
-   </requires>
 
    <plugin 
         id="org.ebayopensource.vjet.core.wrapper"
