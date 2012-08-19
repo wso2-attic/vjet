@@ -15,7 +15,7 @@ Require-Bundle: org.eclipse.dltk.mod.launching,
  org.eclipse.team.core;bundle-version="3.6.100",
  org.eclipse.debug.core;bundle-version="3.7.100",
  org.eclipse.core.filesystem,
- org.junit;bundle-version="3.8.2"
+ org.junit4;bundle-version="4.8.1"
 Eclipse-LazyStart: true
 Export-Package: org.eclipse.dltk.mod.core.tests,
  org.eclipse.dltk.mod.core.tests.buildpath,
