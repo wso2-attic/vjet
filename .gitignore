@@ -25,7 +25,7 @@ local.properties
 
 ## Mac OSX gitignore
 .DS_Store
-Icon?
+##Icon?
 
 # Thumbnails
 ._*
