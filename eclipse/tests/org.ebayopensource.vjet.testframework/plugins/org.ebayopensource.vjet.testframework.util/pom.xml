@@ -7,8 +7,8 @@
     <groupId>org.ebayopensource.vjet.testframework.plugins.pom</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <groupId>com.ebay.tools.testframework.plugins.pom</groupId>
-  <artifactId>com.ebay.tools.testframework.util</artifactId>
+  <groupId>org.ebayopensource.vjet.testframework</groupId>
+  <artifactId>org.ebayopensource.vjet.testframework.util</artifactId>
   <version>2.0.2-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 </project>
