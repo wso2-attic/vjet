@@ -3,14 +3,14 @@
 
 <!-- VALID ZIP PROJECT  ARTIFACT -->
 	<fixture id="com.ebay.tools.v4.repositoryeditor.ui.test.fixtures">
-		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project" 
+		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project.zip" 
 						testBundleId="org.ebayopensource.vjet.testframework.test"
 						projectName="com.ebay.tools.v4.repositoryeditor.tests.project.artifact"/>
 	</fixture>
 	
 <!-- VALID EMBEDDED PROJECT  ARTIFACT -->			
 	<fixture id="org.ebayopensource.vjet.testframework.fixture3">
-		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project"
+		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project.embedded"
 						testBundleId="org.ebayopensource.vjet.testframework.test"
 						projectName="repositoryeditor.project.artifact"/>
 	</fixture>	

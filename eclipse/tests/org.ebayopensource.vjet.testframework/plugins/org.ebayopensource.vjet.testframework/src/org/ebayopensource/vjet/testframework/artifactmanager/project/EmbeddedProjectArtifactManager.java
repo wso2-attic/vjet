@@ -12,7 +12,7 @@ package org.ebayopensource.vjet.testframework.artifactmanager.project;
 public class EmbeddedProjectArtifactManager extends WorkspaceProjectArtifactManager {
 
 	
-	private final String ARTIFACT_MANAGER_ID = "org.ebayopensource.vjet.testframework.artifact.project";
+	private final String ARTIFACT_MANAGER_ID = "org.ebayopensource.vjet.testframework.artifact.project.embedded";
 	
 	public String getArtifactType() {
 		return ARTIFACT_MANAGER_ID;
