@@ -1,0 +1,1 @@
+vjo.type("typeCompletion.tata.TypeA");
