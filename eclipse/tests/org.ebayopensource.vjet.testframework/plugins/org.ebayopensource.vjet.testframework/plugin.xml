@@ -4,17 +4,20 @@
    <extension-point id="org.ebayopensource.vjet.testframework" name="ArtifactManager" schema="schema/com.ebay.testframework.exsd"/>
    <extension
          point="org.ebayopensource.vjet.testframework">
+                  
+       <ArtifactManager
+            artifactType="org.ebayopensource.vjet.testframework.artifact.project.embedded"
+            className="org.ebayopensource.vjet.testframework.artifactmanager.project.WorkspaceProjectArtifactManager"/>
+         
+      <ArtifactManager
+            artifactType="org.ebayopensource.vjet.testframework.artifact.project.workspace"
+            className="org.ebayopensource.vjet.testframework.artifactmanager.project.WorkspaceProjectArtifactManager"/>
+
       <ArtifactManager
             artifactType="org.ebayopensource.vjet.testframework.artifact.project"
-            className="org.ebayopensource.vjet.testframework.artifactmanager.project.WorkspaceProjectArtifactManager"/>
-      <ArtifactManager
-            artifactType="com.ebay.artifact.project.workspace"
-            className="org.ebayopensource.vjet.testframework.artifactmanager.project.WorkspaceProjectArtifactManager">
-      </ArtifactManager>
-      <ArtifactManager
-            artifactType="com.ebay.artifact.project"
-            className="org.ebayopensource.vjet.testframework.artifactmanager.project.ProjectArtifactManager">
-      </ArtifactManager>
-    </extension>
+            className="org.ebayopensource.vjet.testframework.artifactmanager.project.ProjectArtifactManager"/>
+
+
+     </extension>
 
 </plugin>

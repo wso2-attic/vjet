@@ -25,7 +25,7 @@ import org.eclipse.core.runtime.CoreException;
  */
 public class WorkspaceProjectArtifactManager extends ProjectArtifactManager {
 
-	public static final String ARTIFACT_MANAGER_ID = "com.ebay.artifact.project.workspace";
+	public static final String ARTIFACT_MANAGER_ID = "org.ebayopensource.vjet.testframework.artifact.project";
 
 	public boolean setUp() {
 		File targetProjectDir = getTargetProjectDir();

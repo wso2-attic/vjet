@@ -40,7 +40,7 @@ public class ZipProjectArtifactManager implements IArtifactManager {
 	
 	public static final String PROJECT_NAME_ATTRIBUTE = "projectName";
 	
-	public static final String ARTIFACT_MANAGER_ID = "org.ebayopensource.vjet.testframework.artifact.project";
+	public static final String ARTIFACT_MANAGER_ID = "org.ebayopensource.vjet.testframework.artifact.project.zip";
 	
 	
 	public void init(IArtifactDef artifactDef, ISandbox sandBox) {

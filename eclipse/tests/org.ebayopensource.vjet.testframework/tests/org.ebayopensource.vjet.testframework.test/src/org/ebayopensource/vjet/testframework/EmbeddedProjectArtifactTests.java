@@ -37,7 +37,7 @@ public class EmbeddedProjectArtifactTests extends TestCase {
 		try {
 		
 			ISandbox sandBox = new Sandbox(this);
-			sandBox.setUp();
+			sandBox.setUp();;
 			FixtureDefManager fixtureDefManager = FixtureUtils.createFixtureDefManagerFromXml(TestConstants.VALID_FIXTURE_FILENAME, 
 																							  this, sandBox);
 			

@@ -9,7 +9,7 @@
 	
 <!-- PROJECT ARTIFACT WITH NO PROJECT NAME -->			
 	<fixture id="com.ebay.tools.v4.repositoryeditor.ui.test.fixtures.artifactnoprojectname">
-		<artifact artifactType="com.ebay.tools.artifact.project" />
+		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project.zip" />
 	</fixture>
 
 </fixtures>
