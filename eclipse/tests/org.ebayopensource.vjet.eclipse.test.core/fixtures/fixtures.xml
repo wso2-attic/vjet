@@ -3,18 +3,18 @@
 
 	<!-- VALID EMBEDDED PROJECT  ARTIFACT -->			
 	<fixture id="com.ebay.tools.vjet2.workspace1">
-		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project"
-						testBundleId="org.ebayopensource.vjet.eclipse.core.test"
+		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project.workspace"
+						testBundleId="org.ebayopensource.vjet.eclipse.test.core"
 						projectName="TestProject"/>
 	</fixture>
 	<fixture id="com.ebay.tools.vjet2.workspace2">
-		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project"
-						testBundleId="org.ebayopensource.vjet.eclipse.core.test"
+		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project.workspace"
+						testBundleId="org.ebayopensource.vjet.eclipse.test.core"
 						projectName="VJETProject"/>
 	</fixture>		
 	<fixture id="com.ebay.tools.vjet2.workspace3">
-		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project"
-						testBundleId="org.ebayopensource.vjet.eclipse.core.test"
+		<artifact artifactType="org.ebayopensource.vjet.testframework.artifact.project.workspace"
+						testBundleId="org.ebayopensource.vjet.eclipse.test.core"
 						projectName="VjoJavaLib"/>
 	</fixture>		
 
