@@ -41,3 +41,4 @@ Bundle-Localization: plugin
 Bundle-ClassPath: .,
   projects/
 Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.ebayopensource.vjet.eclipse.core.test.VjetModelTestsPlugin
