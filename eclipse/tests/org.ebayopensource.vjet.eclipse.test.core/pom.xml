@@ -17,7 +17,7 @@
    </parent>
    
    <groupId>org.ebayopensource.vjet.eclipse.tests</groupId>
-   <artifactId>org.ebayopensource.vjet.eclipse.core.test</artifactId>
+   <artifactId>org.ebayopensource.vjet.eclipse.test.core</artifactId>
    <packaging>eclipse-test-plugin</packaging>
    <version>1.0.0-SNAPSHOT</version>
    <name>VJET Test: Eclipse Core Tests</name>

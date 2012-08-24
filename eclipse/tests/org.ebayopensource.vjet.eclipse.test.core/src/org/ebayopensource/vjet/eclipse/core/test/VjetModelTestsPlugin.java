@@ -20,7 +20,7 @@ import org.osgi.framework.BundleContext;
  */
 public class VjetModelTestsPlugin extends Plugin {
 
-	public static final String PLUGIN_NAME = "org.ebayopensource.vjet.eclipse.core.test";
+	public static final String PLUGIN_NAME = "org.ebayopensource.vjet.eclipse.test.core";
 
 	// The shared instance.
 	private static VjetModelTestsPlugin m_plugin;

@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
-Bundle-SymbolicName: org.ebayopensource.vjet.eclipse.core.test;singleton:=true
+Bundle-SymbolicName: org.ebayopensource.vjet.eclipse.test.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: %providerName
-Require-Bundle: org.junit4;bundle-version="4.8.1",
- org.eclipse.core.runtime,
+Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.dltk.mod.core,
  org.eclipse.dltk.mod.core.tests,
  org.eclipse.core.resources,
@@ -25,6 +24,7 @@ Require-Bundle: org.junit4;bundle-version="4.8.1",
  org.ebayopensource.vjet.testframework.util,
  org.eclipse.dltk.mod.javascript.ui,
  org.eclipse.pde.core,
+ org.junit4,
  org.eclipse.dltk.mod.debug.ui,
  org.eclipse.dltk.mod.debug,
  org.eclipse.debug.core,
@@ -37,8 +37,7 @@ Require-Bundle: org.junit4;bundle-version="4.8.1",
  org.ebayopensource.vjet.eclipse.launching,
  org.ebayopensource.vjet.eclipse.debug.ui,
  org.eclipse.debug.ui
-Bundle-Activator: org.ebayopensource.vjet.eclipse.core.test.VjetModelTestsPlugin
 Bundle-Localization: plugin
-Bundle-ClassPath: projects/,
- tests.jar
+Bundle-ClassPath: .,
+  projects/
 Bundle-ActivationPolicy: lazy
