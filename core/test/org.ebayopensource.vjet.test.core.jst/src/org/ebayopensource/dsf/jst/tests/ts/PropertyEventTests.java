@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import org.ebayopensource.dsf.jst.IJstProperty;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -21,15 +21,14 @@ import org.ebayopensource.dsf.ts.event.property.RenamePropertyEvent;
 import org.ebayopensource.dsf.ts.method.MethodName;
 import org.ebayopensource.dsf.ts.property.PropertyName;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class PropertyEventTests extends BaseTest {
 	
-	@Category( { P1, UNIT })
-	@Description("Test renaming of property events")
+	//@Category( { P1, UNIT })
+	//@Description("Test renaming of property events")
 	public void testRenamePropertyEvents(){
 
 		JstTypeSpaceMgr tsMgr = getTypeSpaceManager();
@@ -60,8 +59,8 @@ public class PropertyEventTests extends BaseTest {
 		((JstProperty)ptyCountry).setName("COUNTRY");
 	}
 
-	@Category( { P1, UNIT })
-	@Description("Test removal/addition of property events")
+	//@Category( { P1, UNIT })
+	//@Description("Test removal/addition of property events")
 	public void testRemoveAddPropertyEvents(){
 		
 		TestDataHelper.clear();

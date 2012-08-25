@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.engine;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -30,12 +30,11 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcBugFixExtnTests extends VjoCcBaseTest {
 	private VjoCcEngine engine;
 	
@@ -197,7 +196,7 @@ public class VjoCcBugFixExtnTests extends VjoCcBaseTest {
 	}
 	
 	@Test
-	@Description("Code proposal for extra dot after instance variable")
+	//@Description("Code proposal for extra dot after instance variable")
 	public void testBug6352() {
 		String js = "BugJsFiles.Bug6352";
 		String[] names = new String[] { "iFunc" };
@@ -208,7 +207,7 @@ public class VjoCcBugFixExtnTests extends VjoCcBaseTest {
 	}
 	
 	@Test
-	@Description("Code proposal for sections in partial etype. Called CompletionsFileteredRobustTranslator.getAllowedTokens where changes are done.")
+	//@Description("Code proposal for sections in partial etype. Called CompletionsFileteredRobustTranslator.getAllowedTokens where changes are done.")
 	public void testBug6474() {
 		String js = "BugJsFiles.Bug6474";
 		String[] names = new String[] { "inits","options" };

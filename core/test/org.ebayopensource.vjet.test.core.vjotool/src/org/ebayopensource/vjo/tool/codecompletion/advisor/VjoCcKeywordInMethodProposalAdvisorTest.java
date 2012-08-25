@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.advisor;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -23,11 +23,10 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.keyword.VjoKeywordFact
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcKeywordInMethodProposalAdvisorTest extends VjoCcBaseTest {
 	public VjoCcKeywordInMethodProposalAdvisor advisor = new VjoCcKeywordInMethodProposalAdvisor();
 

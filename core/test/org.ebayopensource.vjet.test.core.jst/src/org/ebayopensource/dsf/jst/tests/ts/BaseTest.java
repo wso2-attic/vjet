@@ -48,6 +48,8 @@ import org.ebayopensource.dsf.ts.graph.DependencyGraph;
 import org.ebayopensource.dsf.ts.group.Group;
 import org.ebayopensource.dsf.ts.group.Project;
 import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjo.lib.IResourceResolver;
+import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.ResourceHelper;
 import org.ebayopensource.vjo.lib.TsLibLoader;
 
@@ -210,6 +212,11 @@ public class BaseTest extends TestCase {
 		
 		tsMgr.initialize();
 				
+		IResourceResolver jstLibResolver = JstLibResolver.getInstance()
+				.setSdkEnvironment(new VJetSdkEnvironment(new String[0], "DefaultSdk"));
+
+		LibManager.getInstance().setResourceResolver(jstLibResolver);
+		
 		TsLibLoader.loadDefaultLibs(tsMgr);
 	
 		BatchGroupLoadingEvent batchEvent = new BatchGroupLoadingEvent();

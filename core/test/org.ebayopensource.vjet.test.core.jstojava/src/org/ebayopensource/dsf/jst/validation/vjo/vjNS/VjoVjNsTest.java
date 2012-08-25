@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.vjNS;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -18,19 +18,18 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoVjNsTest extends VjoValidationBaseTester {
 
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test redundant import ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test redundant import ")
     public void testRt() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VjoSyntaxProbIds.RedundantImport,
@@ -42,8 +41,8 @@ public class VjoVjNsTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test redundant import ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test redundant import ")
     public void testRtExtn() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VjoSyntaxProbIds.RedundantImport,

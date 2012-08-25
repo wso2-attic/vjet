@@ -7,11 +7,11 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt.atype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
+
 
 import java.util.List;
 
@@ -21,18 +21,17 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P2,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P2,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoATypeTest extends VjoValidationBaseTester{
 	
 	List<VjoSemanticProblem> actualProblems = null;
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation error for non existing type usage and redundant needs")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation error for non existing type usage and redundant needs")
 	public void testAType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(TypeProbIds.UnusedActiveNeeds, 1, 0));
@@ -40,17 +39,17 @@ public class VjoATypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test proper usage of abstract type declaration")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test proper usage of abstract type declaration")
 	public void testBaseAType() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.atype.", "BaseAType.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
-			"props, protos, options, inits and endtype sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
+//			"props, protos, options, inits and endtype sections")
 	public void testBadAType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -60,9 +59,9 @@ public class VjoATypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
-			"props, protos, options, inits and endtype sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
+//			"props, protos, options, inits and endtype sections")
 	public void testBadAType2() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));

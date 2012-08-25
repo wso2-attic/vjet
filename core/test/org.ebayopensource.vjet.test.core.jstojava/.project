@@ -1,28 +1,25 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!-- @generated-ignore. Generated file, do not add to source control! -->
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
 	<name>org.ebayopensource.vjet.test.core.jstojava</name>
-	<comment>gened by V3 build!</comment>
-	<projects>
-		<project>DSFExt</project>
-		<project>DSFUtil</project>
-		<project>DSFJst</project>
-		<project>DSFJsNative</project>
-		<project>DSFVjoDef</project>
-		<project>DsfJsGenShared</project>
-		<project>DSFJsToJava</project>
-		<project>DSFJavaToJs</project>
-		<project>DSFVjoTool</project>
-		<project>DSFJstLibBuild</project>
-		<project>VjetTestUtils</project>
-	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments/>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.ManifestBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.pde.SchemaBuilder</name>
+			<arguments>
+			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.pde.PluginNature</nature>
 	</natures>
 </projectDescription>

@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.mtype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -29,8 +29,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
 
 /**
  * Declared ctype correct 1
@@ -38,8 +37,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
 public class DeclaredMtype3Tester extends VjoValidationBaseTester {
 
     @Before
@@ -49,7 +48,7 @@ public class DeclaredMtype3Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
+    //@Category( { P3, FAST, UNIT })
     public void testMTypes() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.declare.mtype.","DeclaredMixinType3.js", this.getClass());
@@ -57,7 +56,7 @@ public class DeclaredMtype3Tester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P3, FAST, UNIT })
+    //@Category( { P3, FAST, UNIT })
     public void testMTypeExpects() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -66,7 +65,7 @@ public class DeclaredMtype3Tester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P3, FAST, UNIT })
+    //@Category( { P3, FAST, UNIT })
     public void testMTypeExpectNeeds() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.UnusedActiveNeeds, 1, 0));
@@ -76,7 +75,7 @@ public class DeclaredMtype3Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
+    //@Category( { P3, FAST, UNIT })
     public void testMTypeMixinSelf() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.MixinedTypeShouldNotBeItself, 1, 0));
@@ -86,7 +85,7 @@ public class DeclaredMtype3Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
+    //@Category( { P3, FAST, UNIT })
     public void testMTypeDoubleMixin() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VjoSyntaxProbIds.RedundantImport, 3, 0));
@@ -96,7 +95,7 @@ public class DeclaredMtype3Tester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P3, FAST, UNIT })
+    //@Category( { P3, FAST, UNIT })
     public void testMTypeExpectsEType() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.ExpectsMustBeMtypeOrItype, 2, 0));
@@ -107,7 +106,7 @@ public class DeclaredMtype3Tester extends VjoValidationBaseTester {
     
     @Test
     @Ignore
-    @Category( { P3, FAST, UNIT })
+    //@Category( { P3, FAST, UNIT })
     public void testMTypeComprisedObject() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(

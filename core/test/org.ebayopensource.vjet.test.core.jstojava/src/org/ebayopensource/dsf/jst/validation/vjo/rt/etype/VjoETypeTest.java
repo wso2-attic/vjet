@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt.etype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -21,17 +21,16 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoETypeTest extends VjoValidationBaseTester{
 	List<VjoSemanticProblem> actualProblems = null;
 
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation warning for unused type in needs section")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation warning for unused type in needs section")
 	public void testEType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(TypeProbIds.UnusedActiveNeeds, 1, 0));
@@ -39,16 +38,16 @@ public class VjoETypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Sanity Test, EType defined properly should not produce validation error/warning")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Sanity Test, EType defined properly should not produce validation error/warning")
 	public void testBaseEType() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.etype.", "BaseEType.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test EType can have only needs, satisfies, values, props, protos, inits, options and endtype sections")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test EType can have only needs, satisfies, values, props, protos, inits, options and endtype sections")
 	public void testBadEType1() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -57,8 +56,8 @@ public class VjoETypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test EType can have only needs, satisfies, values, props, protos, inits, options and endtype sections")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test EType can have only needs, satisfies, values, props, protos, inits, options and endtype sections")
 	public void testBadEType2() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -66,9 +65,9 @@ public class VjoETypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test EType should have same name and package as file name and path. " +
-			"Also, EType fields are final and can not be modified.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test EType should have same name and package as file name and path. " +
+//			"Also, EType fields are final and can not be modified.")
 	public void testBadETypeAssign() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(FieldProbIds.UndefinedField, 8, 0));

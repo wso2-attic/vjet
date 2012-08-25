@@ -15,9 +15,9 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.generic;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.Collection;
 import java.util.List;
@@ -32,9 +32,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Class/Interface description
@@ -42,8 +41,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class GenericBugFixTester extends VjoValidationBaseTester {
     @Before
     public void setUp() {
@@ -51,8 +50,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
  
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes2() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -61,8 +60,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes4() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -71,8 +70,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes5() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -83,8 +82,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes6() {
         expectProblems.clear();
         //by huzhou@ebay.com, using method based parameter type now for this test case
@@ -96,8 +95,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes6A() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownMissingImport, 14, 0));
@@ -108,8 +107,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes6B() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownMissingImport, 14, 0));
@@ -121,8 +120,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes12() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.TypeMismatch, 13, 0));
@@ -132,8 +131,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes13() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 13, 0));
@@ -143,8 +142,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes18() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 18, 0));
@@ -154,8 +153,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes19() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -164,8 +163,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes20() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -174,8 +173,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes21() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -184,8 +183,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes22() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -194,8 +193,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes23() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -204,8 +203,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes24() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -215,8 +214,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
 
     @Test
     @Ignore//Bug here should fix
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes25() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -225,8 +224,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes26() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -235,8 +234,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes27() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 12, 0));
@@ -247,8 +246,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes28() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -258,8 +257,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes29() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -268,8 +267,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes30() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 12, 0));
@@ -279,8 +278,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes31() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 12, 0));
@@ -290,8 +289,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes32() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 13, 0));
@@ -301,8 +300,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testSuperTypes33() {
         expectProblems.clear();
         assertProblemEquals(expectProblems, getVjoSemanticProblem(
@@ -311,8 +310,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     
     @Test
     @Ignore //Bug exist here
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testOTypeDef() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -321,8 +320,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testImpl4() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.generic.satisfies.", "Implement4.js", this.getClass());
@@ -330,8 +329,8 @@ public class GenericBugFixTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testImpl5() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(

@@ -20,7 +20,7 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.ModuleInfo;
+
 
 /**
  * EqualsSample1.java
@@ -29,7 +29,7 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @since JDK 1.5
  */
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
  public class EqualsSample1 extends VjoValidationBaseTester {
 
     @Before

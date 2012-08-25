@@ -3,7 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.jsnativetypes"/>
+	<!--  <classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.jsnativetypes"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jst"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.javatojs"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.util"/>
@@ -15,10 +15,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.web.html"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.vjojavalib"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.vjolib"/>
-	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/ant.jar"/>
-	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/JUnitNexGen.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.test.util"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.active"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/org.eclipse.jdt.core_3.6.1.v_A68_R36x.jar"/>
+	-->
 	<classpathentry kind="output" path="bin"/>
 </classpath>

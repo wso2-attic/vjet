@@ -11,5 +11,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.extmod.rhino"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.rt.active"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/JUnitNexGen.jar"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

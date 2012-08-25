@@ -7,20 +7,19 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.astjst;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.NOJARRUN;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
+
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class TestTemplateCreationUtilTests {
 	
 //	private Map<String, List<String>> xpathMap;
@@ -58,8 +57,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test Comment Spec")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test Comment Spec")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testCommentSpec() throws Exception {
 		String xmlFileTest = "/astjst/CommentSpec.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -67,8 +66,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test etype")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test etype")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testETypeTest() throws Exception {
 		String xmlFileTest = "/astjst/ETypeTest.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -76,8 +75,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Common test scenerios")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Common test scenerios")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testJstTestInput() throws Exception {
 		String xmlFileTest = "/astjst/JstTestInput.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -85,8 +84,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test otype")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test otype")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testOTypeTest() throws Exception {
 		String xmlFileTest = "/astjst/OTypeTest.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -94,8 +93,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test inner types")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test inner types")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testInnerTest() throws Exception {
 		String xmlFileTest = "/astjst/InnerTest.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -103,8 +102,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test statements")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test statements")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testStatementsTest() throws Exception {
 		String xmlFileTest = "/astjst/StatementsTest.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -112,8 +111,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test param types")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test param types")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testParamTypeTest() throws Exception {
 		String xmlFileTest = "/astjst/ParamTypeTest.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -121,8 +120,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test ECMA Native")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test ECMA Native")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testECMANativeTest() throws Exception {
 		String xmlFileTest = "/astjst/ECMANativeTests.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -130,8 +129,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test ECMA statements")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test ECMA statements")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testECMAStatements() throws Exception {
 		String xmlFileTest = "/astjst/ECMAStatementsTests.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -139,8 +138,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test ECMA operators")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test ECMA operators")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testECMAOperators() throws Exception {
 		String xmlFileTest = "/astjst/ECMAOperatorsTests.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -148,8 +147,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test ECMA Expressions")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test ECMA Expressions")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testECMAExpressions() throws Exception {
 		String xmlFileTest = "/astjst/ECMAExpressionsTests.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -157,8 +156,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test common scenarios")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test common scenarios")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testTestInput() throws Exception {
 		String xmlFileTest = "/astjst/TestInput.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -166,8 +165,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test Native props")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test Native props")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testJsNativeTypesProps() throws Exception {
 		String xmlFileTest = "/astjst/JsNativePropsTests.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -175,8 +174,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test Native protos")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test Native protos")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testJsNativeTypesProtos() throws Exception {
 		String xmlFileTest = "/astjst/JsNativeProtosTests.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -184,8 +183,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test global methods")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test global methods")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	@Ignore
 	public void ignoredTestGlobalMethods() throws Exception {
 		String xmlFileTest = "/astjst/GlobalMethodsTests.xml";
@@ -194,8 +193,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test //8148
-	@Description("Test parital")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test parital")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testBug8148() throws Exception {
 		String xmlFileTest = "/partials/PartialBugs.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -203,8 +202,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test //8009
-	@Description("Variables used in annonymous function")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Variables used in annonymous function")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testBug8009() throws Exception {
 		String xmlFileTest = "/astjst/BugFixes.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -212,8 +211,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test //7625
-	@Description("JstIdentifier for LabelStatement")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("JstIdentifier for LabelStatement")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testBug7625() throws Exception {
 		String xmlFileTest = "/astjst/BugFixes.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -221,8 +220,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("To test single file, single test")
-	@Category({P5,UNIT,FAST,NOJARRUN})
+	//@Description("To test single file, single test")
+	//@Category({P5,UNIT,FAST,NOJARRUN})
 	public void testSingleFileSingleTest() throws Exception {
 		int testCase = 1;
 		String xmlFileTest = "/astjst/JstTestInput.xml";
@@ -231,8 +230,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("Test JST")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("Test JST")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testBugFixes() throws Exception {
 		String xmlFileTest = "/BugJsFiles/JSTTestFile.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();
@@ -240,8 +239,8 @@ public class TestTemplateCreationUtilTests {
 	}
 	
 	@Test
-	@Description("test vjo.Class APIs")
-	@Category({P3,UNIT,FAST,NOJARRUN})
+	//@Description("test vjo.Class APIs")
+	//@Category({P3,UNIT,FAST,NOJARRUN})
 	public void testVjoClassAPI() throws Exception {
 		String xmlFileTest = "/astjst/VjoClassTest.xml";
 		AstJstTestDelegator util1 = new AstJstTestDelegator();

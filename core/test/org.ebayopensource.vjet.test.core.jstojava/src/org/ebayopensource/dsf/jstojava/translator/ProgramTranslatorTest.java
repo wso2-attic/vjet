@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -22,12 +22,11 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ProgramTranslatorTest extends BaseTest {
 
 	//@Test
@@ -37,8 +36,8 @@ public class ProgramTranslatorTest extends BaseTest {
 	/**
 	 * Generic test. Asserting that jstType is creating correctly
 	 */
-	@Test @Category({P5, FAST, UNIT})
-	@Description("Generic test. Asserting that jstType is creating correctly")
+	@Test //@Category({P5, FAST, UNIT})
+	//@Description("Generic test. Asserting that jstType is creating correctly")
 	public void testProcessUnit1() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"programTranslatorTestFile.txt", null);
@@ -57,7 +56,7 @@ public class ProgramTranslatorTest extends BaseTest {
 
 	}
 
-	@Test @Category({P1, FAST, UNIT})
+	@Test //@Category({P1, FAST, UNIT})
 	public void testProcessUnit2() {
 		IJstType jstType = SyntaxTreeFactory2.createJST(null, null);
 		assertNull(jstType);

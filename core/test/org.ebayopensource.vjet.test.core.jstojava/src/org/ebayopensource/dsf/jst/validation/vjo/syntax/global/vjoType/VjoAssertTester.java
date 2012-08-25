@@ -11,9 +11,9 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.global.vjoType;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -23,14 +23,13 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 
 /**
  * 
  * 
  */
-@Category( { P1, FAST, UNIT })
+//@Category( { P1, FAST, UNIT })
 public class VjoAssertTester extends VjoValidationBaseTester {
     @Before
     public void setUp() {
@@ -38,8 +37,8 @@ public class VjoAssertTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Vjo assert method can be invoked")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Vjo assert method can be invoked")
     public void testVjoAssert() {
     	expectProblems.add(createNewProblem(
                 MethodProbIds.UndefinedMethod, 7, 0));

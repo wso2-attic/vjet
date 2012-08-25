@@ -17,7 +17,6 @@ import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
 import org.ebayopensource.dsf.javatojs.control.ICodeGenPathResolver;
 import org.ebayopensource.dsf.javatojs.control.ITranslationInitializer;
 import org.ebayopensource.dsf.javatojs.control.TranslationController;
-import org.ebayopensource.dsf.javatojs.tests.TestHelper;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.javatojs.util.VjoFiler;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
@@ -25,6 +24,7 @@ import org.ebayopensource.dsf.jsgen.shared.generate.JsrGenerator;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
 import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.ebayopensource.vjet.test.util.TestHelper;
 
 public class MainTranslator {
 	

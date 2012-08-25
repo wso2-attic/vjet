@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.inherits;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -21,18 +21,17 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoInheritsTest extends VjoValidationBaseTester {
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test unused private methods ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test unused private methods ")
     public void testInherits() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.UnusedPrivateMethod,
@@ -46,8 +45,8 @@ public class VjoInheritsTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test inherits visbility invoving field and method ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test inherits visbility invoving field and method ")
     public void testInherits2() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -67,8 +66,8 @@ public class VjoInheritsTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test unused active needs ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test unused active needs ")
     public void testInherits3() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -80,8 +79,8 @@ public class VjoInheritsTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("No validation error for typespace in square brackets in inherits section")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("No validation error for typespace in square brackets in inherits section")
     public void testInherits4() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(

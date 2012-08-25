@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -30,16 +30,15 @@ import org.eclipse.mod.wst.jsdt.internal.compiler.ast.MethodDeclaration;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.ObjectLiteral;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class BlockTranslatorTest extends BaseTest {
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Tests JstBlock statement. JstBlock statement should contain MtdInvocationExpr & BreakStmt")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Tests JstBlock statement. JstBlock statement should contain MtdInvocationExpr & BreakStmt")
 	// depends on StatementTranslator.toBreakStmt(BreakStatement, JstType,
 	// IJstNode)
 	public void testProcessField() throws Exception {

@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -24,21 +24,20 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class TypeTranslatorTest extends BaseTest {
 
 	//@Test
 	public void testConstructor() {
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test incomplete VJET itype should parse non-null jst. " +
-			"Also it should have bare minimum information baout vjet type")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test incomplete VJET itype should parse non-null jst. " +
+//			"Also it should have bare minimum information baout vjet type")
 	public void testProcessIType() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"iTypeTranslatorTestFile.txt", null);
@@ -47,9 +46,9 @@ public class TypeTranslatorTest extends BaseTest {
 		assertTrue(jstType.isInterface());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test incomplete VJET etype should parse non-null jst. " +
-			"Also it should have bare minimum information baout vjet type")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test incomplete VJET etype should parse non-null jst. " +
+//			"Also it should have bare minimum information baout vjet type")
 	public void testProcessEType() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"eTypeTranslatorTestFile.txt", null);
@@ -59,9 +58,9 @@ public class TypeTranslatorTest extends BaseTest {
 		assertTrue(jstType.isEnum());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test VJET mtype should parse non-null jst. " +
-			"Also it should have required statements and expressions in jst type")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test VJET mtype should parse non-null jst. " +
+//			"Also it should have required statements and expressions in jst type")
 	public void testProcessMType() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"mTypeTranslatorTestFile.txt", null);
@@ -71,9 +70,9 @@ public class TypeTranslatorTest extends BaseTest {
 		assertTrue(jstType.isMixin());
 	}
 	
-	@Test @Category({P5, FAST, UNIT})
-	@Description("Test incomplete VJET atype should parse non-null jst. " +
-			"Also it should have bare minimum information baout vjet type")
+	@Test //@Category({P5, FAST, UNIT})
+	//@Description("Test incomplete VJET atype should parse non-null jst. " +
+//			"Also it should have bare minimum information baout vjet type")
 	public void testProcessAType() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"aTypeTranslatorTestFile.txt", null);
@@ -83,9 +82,9 @@ public class TypeTranslatorTest extends BaseTest {
 		assertTrue(jstType.getModifiers().isAbstract());
 	}
 	
-	@Test @Category({P5, FAST, UNIT})
-	@Description("Test incomplete VJET atype should parse non-null jst. " +
-			"Also it should have bare minimum information baout vjet type")
+	@Test //@Category({P5, FAST, UNIT})
+	//@Description("Test incomplete VJET atype should parse non-null jst. " +
+//			"Also it should have bare minimum information baout vjet type")
 	public void testProcessFType() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"fTypeTranslatorTestFile.txt", null);
@@ -96,9 +95,9 @@ public class TypeTranslatorTest extends BaseTest {
 		assertNotNull(jstType.getSimpleName());
 	}
 
-	@Test @Category({P5, FAST, UNIT})
-	@Description("Test incomplete VJET atype should parse non-null jst. " +
-			"Also it should have bare minimum information baout vjet type")
+	@Test //@Category({P5, FAST, UNIT})
+	//@Description("Test incomplete VJET atype should parse non-null jst. " +
+//			"Also it should have bare minimum information baout vjet type")
 	public void testProcessType1() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"typeTranslatorTestFile.js.txt", null);

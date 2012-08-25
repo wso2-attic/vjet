@@ -7,35 +7,34 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.net.URL;
 
-import org.ebayopensource.dsf.javatojs.tests.TestHelper;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjet.test.util.TestHelper;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class JsFormattingTests {
 	@Test
 	@org.junit.Ignore
-	@Category({P2,UNIT,FAST})
-	@Description("Test generated js matches gold file.")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Test generated js matches gold file.")
 	public void testFormatting() throws IOException{
 //		File jsFile = new File(
 //				ResourceUtil.getResource(this.getClass(), "FormattingTest1.js.txt").getFile());
@@ -57,9 +56,9 @@ public class JsFormattingTests {
 	  }
 	
 	@Test
-	@Category({P2,UNIT,FAST})
 	@Ignore("jsdoc comments are not working correctly")
-	@Description("Test generated js matches gold file.")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Test generated js matches gold file.")
 	public void testFormattingComments() throws IOException{
 //		File jsFile = new File(
 //				ResourceUtil.getResource(this.getClass(), "FormattingTest2.js.txt").getFile());

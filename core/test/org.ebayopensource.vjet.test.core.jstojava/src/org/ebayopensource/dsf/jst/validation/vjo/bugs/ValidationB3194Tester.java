@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.bugs;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,9 +27,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Bug 2192
@@ -37,8 +36,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
 public class ValidationB3194Tester extends VjoValidationBaseTester {
 
     @Before
@@ -51,8 +50,8 @@ public class ValidationB3194Tester extends VjoValidationBaseTester {
 
     @Test
     @Ignore
-    @Category( { P3, FAST, UNIT })
-    @Description("Test variable name start with _")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test variable name start with _")
     public void testBugfix() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem("bugs.b3194/",
                 "Bug3194.js", this.getClass());

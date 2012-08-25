@@ -15,9 +15,9 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.generic;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -26,9 +26,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Class/Interface description
@@ -36,8 +35,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class GenericImplTester extends VjoValidationBaseTester {
     @Before
     public void setUp() {
@@ -45,8 +44,8 @@ public class GenericImplTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testImpl1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.generic.satisfies.", "Implement1.js", this.getClass());
@@ -54,8 +53,8 @@ public class GenericImplTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testImpl2() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.generic.satisfies.", "Implement2.js", this.getClass());
@@ -63,8 +62,8 @@ public class GenericImplTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testImpl3() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.generic.satisfies.", "Implement3.js", this.getClass());
@@ -72,8 +71,8 @@ public class GenericImplTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testImpl4() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.generic.satisfies.", "Implement4.js", this.getClass());
@@ -81,8 +80,8 @@ public class GenericImplTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testImpl5() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(

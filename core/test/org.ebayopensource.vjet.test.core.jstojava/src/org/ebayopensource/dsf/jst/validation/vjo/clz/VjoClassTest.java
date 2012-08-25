@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.clz;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.List;
 
@@ -20,19 +20,18 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoClassTest extends VjoValidationBaseTester {
 
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test initilize itself")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test initilize itself")
     public void testClz() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -42,8 +41,8 @@ public class VjoClassTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test undefined function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test undefined function")
     public void testInherits() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.UndefinedFunction,
@@ -62,8 +61,8 @@ public class VjoClassTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test inner class visibility")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test inner class visibility")
     public void testInnerClass() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(

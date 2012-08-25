@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -24,12 +24,11 @@ import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.FileUtils;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoNSTests {
 	private HashMap<String,String> outerVJExpectedProp = new HashMap<String,String>();
 	private HashMap<String,String> innerVJExpectedProp1 = new HashMap<String,String>();
@@ -82,8 +81,8 @@ public class VjoNSTests {
 	}
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Assert vj$ property for outer type")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Assert vj$ property for outer type")
 	public  void testOuterVJ() throws Exception {
 		String name = "vjDollar.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -107,8 +106,8 @@ public class VjoNSTests {
 	}	
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Assert vj$ property for inner type")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Assert vj$ property for inner type")
 	public  void testInnerVJ() throws Exception {
 		String name = "vjDollar.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -132,8 +131,8 @@ public class VjoNSTests {
 	}	
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Assert vj$ property for 2nd level inner type")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Assert vj$ property for 2nd level inner type")
 	public  void testInnerVJ2() throws Exception {
 		String name = "vjDollar.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -157,8 +156,8 @@ public class VjoNSTests {
 	}	
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Assert vj$ property for static inner type")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Assert vj$ property for static inner type")
 	public  void testInnerStaticVJ() throws Exception {
 		String name = "vjDollar.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -182,8 +181,8 @@ public class VjoNSTests {
 	}
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Assert vj$ property for 2nd level static inner type")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Assert vj$ property for 2nd level static inner type")
 	public  void testInnerStaticVJ2() throws Exception {
 		String name = "vjDollar.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -208,8 +207,8 @@ public class VjoNSTests {
 	
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Assert vj$ property for 3rd level static inner type")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Assert vj$ property for 3rd level static inner type")
 	public  void testInnerStaticVJ3() throws Exception {
 		String name = "vjDollar.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -253,8 +252,8 @@ public class VjoNSTests {
 	
 	
 	@Test //TODO - Work in progress, need more coverage
-	@Category({P1, UNIT, FAST})
-	@Description("Generic assertions for vj$ property")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Generic assertions for vj$ property")
 	public void testVj$() throws Exception {
 		String name = "vjDollar.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);

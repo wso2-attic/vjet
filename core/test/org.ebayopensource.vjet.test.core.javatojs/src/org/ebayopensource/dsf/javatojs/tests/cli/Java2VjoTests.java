@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.cli;
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -46,11 +46,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class Java2VjoTests {
 
 	private PrintStream sysout = System.out;
@@ -139,8 +138,8 @@ public class Java2VjoTests {
 	}
 	
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo usage with null arg")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo usage with null arg")
 	public void paramNull() throws IOException, SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		Java2Vjo.main(null);
 		Field field = Java2Vjo.class.getDeclaredField("s_help");
@@ -153,8 +152,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo usage with empty arg list")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo usage with empty arg list")
 	public void paramEmpty() throws IOException, SecurityException,
 			NoSuchFieldException, IllegalArgumentException,
 			IllegalAccessException {
@@ -168,8 +167,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo behavior with no file paths are specified")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo behavior with no file paths are specified")
 	public void noFilePaths() throws IOException {
 		String[] params = new String[] { "-verbose" };
 		Java2Vjo.main(params);
@@ -178,8 +177,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo with -help arg")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo with -help arg")
 	public void helpOnly() throws IOException, IllegalArgumentException,
 			IllegalAccessException, SecurityException, NoSuchFieldException {
 		String[] params = new String[] { "-help" };
@@ -193,8 +192,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo with other help args")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo with other help args")
 	public void helpWithOthers() throws IOException, SecurityException,
 			NoSuchFieldException, IllegalArgumentException,
 			IllegalAccessException {
@@ -211,8 +210,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo usage with invalid file path")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo usage with invalid file path")
 	public void invalidFilePath() {
 		String[] args = new String[] { "jfkladjfldkasf", "-verbose" };
 		Java2Vjo.main(args);
@@ -223,8 +222,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo with invalid param")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo with invalid param")
 	public void invalidParam() throws IOException {
 
 		File filePath = getDirectDir(Dependent.class);
@@ -234,8 +233,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo with expected param")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo with expected param")
 	public void defaultTest() throws IOException {
 
 		File filePath = getDirectDir(Goo.class);
@@ -247,8 +246,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo with trace params, -verbose, -trace")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo with trace params, -verbose, -trace")
 	public void verboseTrace() throws IOException {
 		File filePath = getDirectDir(Goo.class);
 		String[] args = new String[] { "-verbose", filePath.getCanonicalPath(), "-trace" };
@@ -259,8 +258,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo with param to turn off jsr")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo with param to turn off jsr")
 	public void noJsrGen() throws IOException, InterruptedException {
 		
 		File filePath = getDirectDir(H.class);
@@ -272,8 +271,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo valid directory path as param")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo valid directory path as param")
 	public void dirPath() throws IOException {
 		File filePath = getDirectDir(H.class);
 		String[] args = new String[] { "-verbose",
@@ -285,8 +284,8 @@ public class Java2VjoTests {
 	}
 
 //	@Test
-//	@Category( { P1, FUNCTIONAL })
-//	@Description("Test Java2Vjo with a list of directories")
+//	//@Category( { P1, FUNCTIONAL })
+//	//@Description("Test Java2Vjo with a list of directories")
 //	public void onDemandDiffDir() throws IOException {
 //		
 //		File filePath = getDirectDir(Boo.class);
@@ -303,8 +302,8 @@ public class Java2VjoTests {
 //	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Java2Vjo with -tt option and using a file")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Java2Vjo with -tt option and using a file")
 	public void targetTranslationFile() throws IOException {
 		File filePath = getDirectDir(Boo.class);
 		String[] args = new String[] { filePath.getCanonicalPath(), "-nojsr", "-verbose", "-tt" };
@@ -315,8 +314,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Java2Vjo with -tt option and using a directory")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Java2Vjo with -tt option and using a directory")
 	public void targetTranslationDir() throws IOException {
 		File filePath = getDirectDir(Boo.class);
 		String[] args = new String[] {filePath.getParentFile().getCanonicalPath(),
@@ -332,8 +331,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Java2Vjo with a list of files")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Java2Vjo with a list of files")
 	public void multipleFiles() throws IOException {
 
 		File filePath = getDirectDir(Boo.class);
@@ -348,8 +347,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Java2Vjo a mix of files and directories")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Java2Vjo a mix of files and directories")
 	public void dirFileCombo() throws IOException {
 		File filePath = getDirectDir(Foo.class);
 		File filePath2 = getDirectDir(Doo.class);
@@ -364,8 +363,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo with lots of empty space in the midst of args")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo with lots of empty space in the midst of args")
 	public void addtlSpaces() throws IOException {
 
 		File filePath = new File(getDirectDir(Foo.class),Foo.class.getSimpleName()+".java");
@@ -377,8 +376,8 @@ public class Java2VjoTests {
 	}
 
 	@Test
-	@Category( { P5, FUNCTIONAL })
-	@Description("Test Java2Vjo for the case-insensitiveness of options")
+	//@Category( { P5, FUNCTIONAL })
+	//@Description("Test Java2Vjo for the case-insensitiveness of options")
 	public void optionsCase() throws IOException {
 		File filePath = new File(getDirectDir(Foo.class),Foo.class.getSimpleName()+".java");
 		String[] args = new String[] { filePath.getCanonicalPath(), "-Verbose ", "-TT", };

@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +23,14 @@ import org.ebayopensource.dsf.ts.TypeSpace;
 import org.ebayopensource.dsf.ts.graph.DependencyGraph;
 import org.ebayopensource.dsf.ts.group.Group;
 import org.ebayopensource.dsf.ts.group.Project;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class DependencyGraphTests extends BaseTest {
 	
-	@Category( { P1, UNIT })
-	@Description("Test dependency graph for a single group")
+	//@Category( { P1, UNIT })
+	//@Description("Test dependency graph for a single group")
 	public void testSingleGroup() {
 		
 		JstCache.getInstance().clear();
@@ -81,8 +80,8 @@ public class DependencyGraphTests extends BaseTest {
 		assertEquals(3, graph.getAllDependents(typeA, false).size());
 	}
 
-	@Category( { P1, UNIT })
-	@Description("Test dependency graph for a multiple groups")
+	//@Category( { P1, UNIT })
+	//@Description("Test dependency graph for a multiple groups")
 	public void testMultiGroups() {
 		
 		System.out.println("*** Multi-groups ***");
@@ -103,8 +102,8 @@ public class DependencyGraphTests extends BaseTest {
 		assertEquals(1, graph2.getUnresolvedNodes().size());
 	}
 	
-	@Category( { P3, UNIT })
-	@Description("Test dependency graph for a combination of groups")
+	//@Category( { P3, UNIT })
+	//@Description("Test dependency graph for a combination of groups")
 	public void testCombinedGroups(){
 		
 		System.out.println("*** Combined groups ***");
@@ -123,8 +122,8 @@ public class DependencyGraphTests extends BaseTest {
 		doAssertions(ts);
 	}
 	
-	@Category( { P4, UNIT })
-	@Description("Test additions of types to a dependency graph")
+	//@Category( { P4, UNIT })
+	//@Description("Test additions of types to a dependency graph")
 	public void testAddType(){
 		
 		
@@ -151,8 +150,8 @@ public class DependencyGraphTests extends BaseTest {
 		doAssertions(ts);
 	}
 	
-	@Category( { P1, UNIT })
-	@Description("Test addition of types to a dependency graph")
+	//@Category( { P1, UNIT })
+	//@Description("Test addition of types to a dependency graph")
 	public void testAddTypes(){
 		
 		System.out.println("*** Update graph ***");

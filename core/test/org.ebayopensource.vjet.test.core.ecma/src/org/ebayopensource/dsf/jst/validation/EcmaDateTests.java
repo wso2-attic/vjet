@@ -13,9 +13,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -26,9 +26,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * EcmaDateTests.java
@@ -36,8 +35,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@Category( { P3, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class EcmaDateTests extends VjoValidationBaseTester {
 
     @Before
@@ -57,8 +56,8 @@ public class EcmaDateTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test DSF project, To validate false positive ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test DSF project, To validate false positive ")
     @Ignore("d2 = Date.parse(Date(1969,11,31,16,0,0,1));")
     public void testEcmaDateTests() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(

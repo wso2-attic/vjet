@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.engine;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.io.File;
 import java.net.URL;
@@ -44,9 +44,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.ebay.junitnexgen.category.Category;
 
-@Category({P1,FAST,UNIT})
+//@Category({P1,FAST,UNIT})
 public class VjoCcEngineTestUtil extends VjoCcBaseTest {
 	public VjoCcCtx ctx = getEmptyContext();
 	private TypeName calledName;

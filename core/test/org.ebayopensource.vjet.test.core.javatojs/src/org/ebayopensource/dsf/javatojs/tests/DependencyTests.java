@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
+
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -30,9 +30,9 @@ import org.ebayopensource.dsf.javatojs.util.JavaToJsHelper;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+import org.ebayopensource.vjet.test.util.TestHelper;
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class DependencyTests{
 	
 	public static final TraceId ID = TranslationTraceId.TEST;
@@ -69,8 +69,8 @@ public class DependencyTests{
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Compare expected and actual vjo outcomes for a class with an unknown dependency")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Compare expected and actual vjo outcomes for a class with an unknown dependency")
 	public void testUnknownDependencyType(){
 		getTracer().startGroup(ID, new TraceAttr("name", "UnknownDependency"));
 		Class srcType = Dependency.class;

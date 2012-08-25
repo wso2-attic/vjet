@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstdoc;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static junit.framework.Assert.assertTrue;
 
 import java.net.URL;
@@ -20,15 +20,14 @@ import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 public class SimpleJsDocTests {
 
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("AST Recovery tests with and without errors")
+	//@Category({P1, UNIT, FAST})
+	//@Description("AST Recovery tests with and without errors")
 	public void testDocs1() throws Exception {
 		
 		
@@ -56,8 +55,8 @@ public class SimpleJsDocTests {
 	
 	}
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("AST Recovery tests with and without errors")
+	//@Category({P1, UNIT, FAST})
+	//@Description("AST Recovery tests with and without errors")
 	public void testDocsNestedTypes() throws Exception {
 		
 		
@@ -88,8 +87,8 @@ public class SimpleJsDocTests {
 		
 	}
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("AST Recovery tests with and without errors")
+	//@Category({P1, UNIT, FAST})
+	//@Description("AST Recovery tests with and without errors")
 	public void testDocsGlobals() throws Exception {
 		
 		

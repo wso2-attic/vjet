@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -21,16 +21,15 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ExpectsTranslatorTest extends BaseTest{
 
-	@Test @Description("Partial Mtype JS file should produce meaningful JSTType. " +
-	"Type name and package should be proper along with expects for itype")
+	@Test //@Description("Partial Mtype JS file should produce meaningful JSTType. " +
+//	"Type name and package should be proper along with expects for itype")
 	public void testExpects() {
 		CompilationUnitDeclaration ast = prepareAst("expectsTranslatorTestFile.js.txt",
 				null);

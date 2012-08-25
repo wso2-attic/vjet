@@ -7,12 +7,12 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt.mtype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
+
+
 
 import java.util.List;
 
@@ -23,18 +23,17 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoMTypeTest extends VjoValidationBaseTester{
 
 	List<VjoSemanticProblem> actualProblems = null;
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test validation warning for unused type in needs section")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test validation warning for unused type in needs section")
 	@Ignore
 	public void testMType() throws Exception {
 		expectProblems.clear();
@@ -42,24 +41,24 @@ public class VjoMTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test MType is defined properly and there should not be any validation error/warning")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test MType is defined properly and there should not be any validation error/warning")
 	public void testMixin() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.mtype.", "Mixin1.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test MType is defined properly and there should not be any validation error/warning")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test MType is defined properly and there should not be any validation error/warning")
 	public void testMixType() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.mtype.", "Employee1.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P4,FAST,UNIT})
-	@Description("Test validation error for non existing type usage and redundant needs")
+	@Test //@Category({P4,FAST,UNIT})
+	//@Description("Test validation error for non existing type usage and redundant needs")
 	public void testBaseMType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 2,0));
@@ -70,8 +69,8 @@ public class VjoMTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P4,FAST,UNIT})
-	@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
+	@Test //@Category({P4,FAST,UNIT})
+	//@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
 	public void testBadMType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2,  0));
@@ -79,8 +78,8 @@ public class VjoMTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P4,FAST,UNIT})
-	@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
+	@Test //@Category({P4,FAST,UNIT})
+	//@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
 	public void testBadMType1() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2,  0));
@@ -89,8 +88,8 @@ public class VjoMTypeTest extends VjoValidationBaseTester{
 	}
 	
 	
-	@Test @Category({P2,FAST,UNIT})
-	@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
+	@Test //@Category({P2,FAST,UNIT})
+	//@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
 	public void testBadMType3() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2,  0));
@@ -98,8 +97,8 @@ public class VjoMTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P2,FAST,UNIT})
-	@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
+	@Test //@Category({P2,FAST,UNIT})
+	//@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
 	public void testBadMType4() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2,  0));
@@ -107,8 +106,8 @@ public class VjoMTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P2,FAST,UNIT})
-	@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
+	@Test //@Category({P2,FAST,UNIT})
+	//@Description("Test MType can have only needs, satisfies, expects, props, protos, options and endtype sections")
 	public void testBadMType5() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2,  0));

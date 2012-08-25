@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -44,12 +44,11 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class StatementTranslatorTest extends BaseTest {
 
 	private static final String NULL_STATEMENT = "The statement is null";
@@ -90,8 +89,8 @@ public class StatementTranslatorTest extends BaseTest {
 
 	private static final String FILE_STATEMENT_TRANSLATOR_TEST = "statementTranslatorTestFile.txt";
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test the for loop statement including boolean condition and the loop block statement")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test the for loop statement including boolean condition and the loop block statement")
 	public void testForStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("forStatement.js.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -137,8 +136,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, forStmt.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test the for-in loop statement including boolean condition and the loop block statement")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test the for-in loop statement including boolean condition and the loop block statement")
 	public void testForInStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("forInStatement.js.txt",
 				null);
@@ -171,8 +170,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, forInStmt.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test the if conditional statement including boolean condition and the conditional block")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test the if conditional statement including boolean condition and the conditional block")
 	public void testIfStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("ifStatement.js.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -266,8 +265,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, ifStmt.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test the switch conditional statement including boolean condition and the conditional block")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test the switch conditional statement including boolean condition and the conditional block")
 	public void testSwitchStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("switchStatement.js.txt",
 				null);
@@ -360,8 +359,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, switchStatement.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test the while loop statement including boolean condition and the loop block")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test the while loop statement including boolean condition and the loop block")
 	public void testWhileStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("whileStatement.js.txt",
 				null);
@@ -409,8 +408,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, whileStatement.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test do-while loop statement including boolean condition and loop block")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test do-while loop statement including boolean condition and loop block")
 	public void testDoWhileStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("doWhileStatement.js.txt",
 				null);
@@ -458,8 +457,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, doWhileStatement.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test assignment expression in construcuts statement")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test assignment expression in construcuts statement")
 	public void testAssigment() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("assigment.js.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -482,8 +481,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertEquals("5", jstInitializer.getExpr().toExprText());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test return statement")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test return statement")
 	public void testReturnStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("returnStatement.js.txt",
 				null);
@@ -509,8 +508,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, rtnStatement.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test throws statement in js file")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test throws statement in js file")
 	public void testThrowStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("throwStatement.js.txt",
 				null);
@@ -534,8 +533,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertEquals("\"Error\"", throwStatement.getExpression().toExprText());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test continue statement in loop")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test continue statement in loop")
 	public void testContinueStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("continueStatement.js.txt",
 				null);
@@ -572,8 +571,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, continueStmt.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test break statement in loop")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test break statement in loop")
 	public void testBreakStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("breakStatement.js.txt",
 				null);
@@ -610,8 +609,8 @@ public class StatementTranslatorTest extends BaseTest {
 		assertNotNull(NO_SOURCE, breakStmt.getSource());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test try statement in js file")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test try statement in js file")
 	public void testTryStatement() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("tryStatement.js.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -674,8 +673,8 @@ public class StatementTranslatorTest extends BaseTest {
 				0)).toSimpleTermText());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test local declaration in constructs in vjet js file")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test local declaration in constructs in vjet js file")
 	public void testLocalDeclaration() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("localDeclaration.js.txt",
 				null);

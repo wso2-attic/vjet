@@ -8,14 +8,13 @@
  *******************************************************************************/
 package org.ebayopensource.vjo.runtime.tests.section.globals;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FF;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
+
+
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
-import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Module;
 import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 
@@ -24,14 +23,14 @@ public class GlobalsTests extends BaseTestClass {
 
  
 	@Test
-	@Category( { P2, FF })
+	//@Category( { P2, FF })
 	@Module("VjoRuntimeTests")
 	public void testSimpleGlobalsTests_FIREFOX() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.FIREFOX_3);
 	}
 	
 	@Test
-	@Category( { P2, FF })
+	//@Category( { P2, FF })
 	@Module("VjoRuntimeTests")
 	public void testAttemptToClobberGlobalTests_FIREFOX() throws Exception {
 		RuntimeException exp = runJsTestNoAssert("org.ebayopensource.vjo.runtime.tests.section.globals.ClobberGlobal", BrowserType.FIREFOX_3);
@@ -41,7 +40,7 @@ public class GlobalsTests extends BaseTestClass {
 	}
 	
 	@Test
-	@Category( { P2, FF })
+	//@Category( { P2, FF })
 	@Module("VjoRuntimeTests")
 	public void testDontPromoteToGlobalTests_FIREFOX() throws Exception {
 		runJsTest("org.ebayopensource.vjo.runtime.tests.section.globals.DontPromoteToGlobal", 
@@ -51,7 +50,7 @@ public class GlobalsTests extends BaseTestClass {
 	
 	
 	@Test
-	@Category( { P2, FF })
+	//@Category( { P2, FF })
 	@Module("VjoRuntimeTests")
 	public void testPromotingExistingType_FIREFOX() throws Exception {
 		runJsTest("org.ebayopensource.vjo.runtime.tests.section.globals.PromoteExistingType", 
@@ -61,7 +60,7 @@ public class GlobalsTests extends BaseTestClass {
 	
 	
 	@Test
-	@Category( { P2, FF })
+	//@Category( { P2, FF })
 	@Module("VjoRuntimeTests")
 	public void testSimpleInheritanceTests_FIREFOX() throws Exception {
 		runJsTest("org.ebayopensource.vjo.runtime.tests.section.globals.TypeB", 

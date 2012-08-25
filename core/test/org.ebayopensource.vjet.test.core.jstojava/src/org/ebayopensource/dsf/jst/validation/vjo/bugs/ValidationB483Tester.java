@@ -14,11 +14,11 @@
 // * Technologies.
 // */
 //package org.ebayopensource.dsf.jst.validation.vjo.bugs;
-//import com.ebay.junitnexgen.category.ModuleInfo;
 //
-//import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-//import static com.ebay.junitnexgen.category.Category.Groups.P3;
-//import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+//
+//
+//
+//
 //
 //import java.util.List;
 //
@@ -28,8 +28,7 @@
 //import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 //import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 //import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
-//import com.ebay.junitnexgen.category.Category;
-//import com.ebay.junitnexgen.category.Description;
+////import com.ebay.junitnexgen.category.Description;
 //
 ///**
 // * Bug 482
@@ -37,8 +36,8 @@
 // * @author <a href="mailto:liama@ebay.com">liama</a>
 // * @since JDK 1.5
 // */
-//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-//@Category( { P3, FAST, UNIT })
+////@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+////@Category( { P3, FAST, UNIT })
 //public class ValidationB483Tester extends VjoValidationBaseTester {
 //
 //    @Before
@@ -49,8 +48,8 @@
 //    }
 //
 //    @Test
-//    @Category( { P3, FAST, UNIT })
-//    @Description("Test mtype didn't have mixinProps method")
+//    //@Category( { P3, FAST, UNIT })
+//    //@Description("Test mtype didn't have mixinProps method")
 //    public void testBugfix() {
 //        List<VjoSemanticProblem> problems = getVjoSemanticProblem("bugs.b483/",
 //                "Mbug483.js", this.getClass());

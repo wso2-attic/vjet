@@ -13,9 +13,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.fundamentals;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -26,9 +26,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * ImplementationTest.java
@@ -36,8 +35,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@Category( { P3, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ImplementationTest extends VjoValidationBaseTester {
 
     @Before
@@ -50,8 +49,8 @@ public class ImplementationTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("To test VjoPro project false positive")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("To test VjoPro project false positive")
     public void testImplementationTest() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "vjoPro.samples.fundamentals.", "ImplementationTest.js", this

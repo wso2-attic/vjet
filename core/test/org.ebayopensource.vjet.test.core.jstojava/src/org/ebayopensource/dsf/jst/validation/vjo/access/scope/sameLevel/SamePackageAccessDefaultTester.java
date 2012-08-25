@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.access.scope.sameLevel;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -25,9 +25,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * private
@@ -35,8 +34,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class SamePackageAccessDefaultTester extends VjoValidationBaseTester {
     
     @Before
@@ -45,8 +44,8 @@ public class SamePackageAccessDefaultTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test access same package type's instance property wihch declared as default")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test access same package type's instance property wihch declared as default")
     public void testAccesVisible1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "access.scope.defaultModifier.",

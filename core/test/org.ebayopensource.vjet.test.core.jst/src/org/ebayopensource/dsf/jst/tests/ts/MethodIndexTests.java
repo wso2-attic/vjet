@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import java.util.List;
 import java.util.Map;
@@ -23,14 +23,13 @@ import org.ebayopensource.dsf.ts.TypeSpace;
 import org.ebayopensource.dsf.ts.method.MethodIndex;
 import org.ebayopensource.dsf.ts.method.MethodName;
 import org.ebayopensource.dsf.ts.type.TypeName;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class MethodIndexTests extends BaseTest {
-	@Category( { P1, UNIT })
-	@Description("Test method indexes")
+	//@Category( { P1, UNIT })
+	//@Description("Test method indexes")
 	public void testDependents(){
 		
 		TestDataHelper.clear();

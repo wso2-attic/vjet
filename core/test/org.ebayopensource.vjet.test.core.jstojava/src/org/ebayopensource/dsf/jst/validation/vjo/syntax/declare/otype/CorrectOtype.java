@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.declare.otype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -26,9 +26,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Class/Interface description
@@ -36,8 +35,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class CorrectOtype extends VjoValidationBaseTester {
     @Before
     public void setUp(){
@@ -45,8 +44,8 @@ public class CorrectOtype extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test declared mtype with unexpect block")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test declared mtype with unexpect block")
     public void testOTypes() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.declare.otype.","Deotype.js", this.getClass());
@@ -54,8 +53,8 @@ public class CorrectOtype extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test declared mtype with unexpect block")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test declared mtype with unexpect block")
     public void testOTypes1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.declare.otype.","Defbug1.js", this.getClass());
@@ -63,8 +62,8 @@ public class CorrectOtype extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test declared mtype with unexpect block")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test declared mtype with unexpect block")
     public void testOTypes2() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 9, 0));

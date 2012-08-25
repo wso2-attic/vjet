@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/JUnitNexGen.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.test.util"/>
 	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/org.eclipse.jdt.core_3.6.1.v_A68_R36x.jar"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

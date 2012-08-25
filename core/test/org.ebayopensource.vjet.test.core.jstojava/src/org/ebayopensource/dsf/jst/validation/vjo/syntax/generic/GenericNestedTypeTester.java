@@ -15,9 +15,9 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.generic;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -29,9 +29,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Class/Interface description
@@ -39,8 +38,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     @Before
     public void setUp() {
@@ -48,8 +47,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.generic.nested.", "NestedType1.js", this.getClass());
@@ -57,8 +56,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes2() {
         expectProblems.clear();
 //        expectProblems.add(createNewProblem(NOTSUREPROBLEMID, 2, 0));
@@ -68,8 +67,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes3() {
         expectProblems.clear();
 //        expectProblems.add(createNewProblem(NOTSUREPROBLEMID, 2, 0));
@@ -79,8 +78,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes4() {
         expectProblems.clear();
 //        expectProblems.add(createNewProblem(NOTSUREPROBLEMID, 2, 0));
@@ -90,8 +89,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes5() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -101,8 +100,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     
     @Test
     @Ignore
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes6() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -111,8 +110,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes7() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.TypeMismatch, 10, 0));
@@ -122,8 +121,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes9() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 16, 0));
@@ -133,8 +132,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes10() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -144,8 +143,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     
     @Ignore
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes11() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -155,8 +154,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     
     @Ignore
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes12() {
         expectProblems.clear();
 //        expectProblems.add(createNewProblem(NOTSUREPROBLEMID, lineNumber, colNumber))
@@ -166,8 +165,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes13() {
         expectProblems.clear();
 //        expectProblems.add(createNewProblem(NOTSUREPROBLEMID, lineNumber, colNumber))
@@ -177,8 +176,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes14() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -187,8 +186,8 @@ public class GenericNestedTypeTester  extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter as generic")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter as generic")
     public void testNestedTypes15() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.TypeMismatch, 17, 0));

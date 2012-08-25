@@ -561,7 +561,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug8610: Test whether the given path is unexisting and the
+	 * //@Description("Bug8610: Test whether the given path is unexisting and the
 	 *                        returned message level.")
 	 */
 	public void testUnexistingProjectLocation() {
@@ -587,7 +587,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug6386: VJET Wizard: VJO settings should be VJET
+	 * //@Description("Bug6386: VJET Wizard: VJO settings should be VJET
 	 *                        settings.")
 	 */
 	public void testBug6386() {
@@ -602,7 +602,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug3278: 1-Search->Text->Workspace...->New...->VJET Working
+	 * //@Description("Bug3278: 1-Search->Text->Workspace...->New...->VJET Working
 	 *                        Set. 2-Click 'VJET Working Set' 3-Click Next.
 	 *                        Title is 'VJET Working Set'. ")
 	 */
@@ -660,7 +660,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug8492: VJET Wizard: After creating project and package in
+	 * //@Description("Bug8492: VJET Wizard: After creating project and package in
 	 *                        package explorer, creating a type in
 	 *                        scriptexplorer, prefixes the source folder to
 	 *                        package. ")
@@ -693,7 +693,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 	/**
 	 * @throws MalformedURLException
 	 * @Test
-	 * @Description("Bug6134: VJET Prefs: VJET->BuildPath should not have error
+	 * //@Description("Bug6134: VJET Prefs: VJET->BuildPath should not have error
 	 *                        message.")
 	 */
 	// public void testBug6134() throws MalformedURLException {
@@ -730,7 +730,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 	 * @throws Exception
 	 * @throws MalformedURLException
 	 * @Test
-	 * @Description("Bug2138: 1. New JavaScript File doesn't make any sense
+	 * //@Description("Bug2138: 1. New JavaScript File doesn't make any sense
 	 *                        let's remove it 2. New JavaScript project doesn't
 	 *                        make any sense let's remove it 3. Make the order
 	 *                        of the wizards be similar to Java VJO Package VJO
@@ -797,7 +797,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 	 * case--"org.ebayopensource.vjet.eclipse.ui.test.fragment.CTypeTest" for this bug.
 	 * 
 	 * @Test
-	 * @Description("Bug2856: VJET Wizard: VJO Interface and Java Interface
+	 * //@Description("Bug2856: VJET Wizard: VJO Interface and Java Interface
 	 *                        diffs.")
 	 */
 	public void testBug2856() {
@@ -812,7 +812,7 @@ public class VjoWizardTests extends AbstractWizardTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug6519: VJET: VJET OType and Source Folder missing from
+	 * //@Description("Bug6519: VJET: VJET OType and Source Folder missing from
 	 *                        VJET JS Browsing File menu ")
 	 */
 	public void testBug6519() throws Exception {

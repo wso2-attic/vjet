@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -36,12 +36,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoJstUtilTests {
 	private IJstType type;
 
@@ -55,8 +54,8 @@ public class VjoJstUtilTests {
 	}
 
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test leaf node from JstUtil for ctype")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test leaf node from JstUtil for ctype")
 	public void testCtype() {
 		BaseJstNode node = JstUtil.getLeafNode(type, 23, 23);
 		assertNotNull(node);
@@ -65,8 +64,8 @@ public class VjoJstUtilTests {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test leaf node from JstUtil for inner type")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test leaf node from JstUtil for inner type")
 	public void testInnerType() {
 		BaseJstNode node = JstUtil.getLeafNode(type, 60, 74);
 		assertNotNull(node);
@@ -75,8 +74,8 @@ public class VjoJstUtilTests {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test leaf node from JstUtil for static prop in inner type")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test leaf node from JstUtil for static prop in inner type")
 	public void testInnerProp() {
 		BaseJstNode node = JstUtil.getLeafNode(type, 119, 119);
 		assertNotNull(node);
@@ -90,8 +89,8 @@ public class VjoJstUtilTests {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test leaf node from JstUtil for static function in inner type")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test leaf node from JstUtil for static function in inner type")
 	public void testInnerFunc() {
 		BaseJstNode node = JstUtil.getLeafNode(type, 181, 181);
 		assertNotNull(node);
@@ -108,8 +107,8 @@ public class VjoJstUtilTests {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test overloaded constructors")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test overloaded constructors")
 	public void testOverLoadedConst() {
 		
 		//Get dispatcher method constructor
@@ -122,8 +121,8 @@ public class VjoJstUtilTests {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test overloaded methods")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test overloaded methods")
 	public void testOverLoadedMethod() {
 		List<BaseJstNode> nodes = JstUtil.getAllNodes(type, 781, 781);
 		assertTrue(nodes.size() == 2);
@@ -132,8 +131,8 @@ public class VjoJstUtilTests {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test arguments in overloaded methods")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test arguments in overloaded methods")
 	public void testArgs() {
 		BaseJstNode node = JstUtil.getLeafNode(type, 796, 796);
 		assertNotNull(node);

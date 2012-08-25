@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
@@ -23,9 +23,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -34,7 +33,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class MultiLineVarTest implements ICommentConstants {
 	
 	private JstType jstType = null;
@@ -50,8 +49,8 @@ public class MultiLineVarTest implements ICommentConstants {
 	}
 	
 	@Test @Ignore
-	@Category({P2,UNIT,FAST})
-	@Description("Test single line value")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Test single line value")
 	public void verifySingleLineVar() {
 		IJstProperty prop = jstType.getInstanceProperty("foo");
 		assertEquals("'This is wholly on a single line'", 
@@ -59,8 +58,8 @@ public class MultiLineVarTest implements ICommentConstants {
 	}
 	
 	@Test @Ignore
-	@Category({P2,UNIT,FAST})
-	@Description("Test multiple line value")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Test multiple line value")
 	public void verifyMultiLineVar() {
 		IJstProperty prop = jstType.getInstanceProperty("bar");
 		assertEquals("'This is on multiple lines'", 

@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.label;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,8 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * For vjo init block
@@ -37,13 +36,13 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class LabelTests extends VjoValidationBaseTester {
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test pulicate label in while statments")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test pulicate label in while statments")
     public void testDuplicateLabels() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.label.", "DuplicateLabel.js", this.getClass());
@@ -55,8 +54,8 @@ public class LabelTests extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test no exist label situation")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test no exist label situation")
     public void testNoneExistLabels() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.label.", "NoneExistLabel.js", this.getClass());

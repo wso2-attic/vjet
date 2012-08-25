@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.jsnative;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -18,18 +18,17 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoJsNativeTest extends VjoValidationBaseTester {
 
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test js native codes and function such like: alert and so on ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test js native codes and function such like: alert and so on ")
     public void testJsNative() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -39,8 +38,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test JS special codes ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test JS special codes ")
     public void testJsSpecial() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -50,8 +49,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test Navigator type ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test Navigator type ")
     public void testNavigator() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -61,8 +60,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test native types ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test native types ")
     public void testNativeTypes() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -72,8 +71,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test anonymous function codes ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test anonymous function codes ")
     public void testAnonymousFunction() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -83,8 +82,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test dom realted codes ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test dom realted codes ")
     public void testDom() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -94,8 +93,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test event binding codes ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test event binding codes ")
     public void testEventBind() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -105,8 +104,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test BooleanLiteral js code ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test BooleanLiteral js code ")
     public void testBooleanLiteralTest() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -116,8 +115,8 @@ public class VjoJsNativeTest extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-	@Description("Test Forward reference js code ")
+    //@Category( { P1, FAST, UNIT })
+	//@Description("Test Forward reference js code ")
     public void testForwardReference() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 5, 0));

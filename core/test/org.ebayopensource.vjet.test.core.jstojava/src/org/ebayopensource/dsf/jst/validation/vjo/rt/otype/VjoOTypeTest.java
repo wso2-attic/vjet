@@ -7,11 +7,11 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt.otype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
+
 
 import java.util.List;
 
@@ -23,17 +23,16 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoOTypeTest extends VjoValidationBaseTester{
 	List<VjoSemanticProblem> actualProblems = null;
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Sanity Test, OType defined properly should not produce validation error/warning")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Sanity Test, OType defined properly should not produce validation error/warning")
 	public void testOType() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.otype.", "OType.js", this.getClass());
@@ -41,8 +40,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 	}
 	
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType1() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -50,8 +49,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType2() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -59,8 +58,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType3() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -70,8 +69,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType4() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -79,8 +78,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType5() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -88,8 +87,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 		
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType7() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -97,8 +96,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType8() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -106,8 +105,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test OType can have only defs and endType sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test OType can have only defs and endType sections")
 	public void testBadOType9() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod,2,0)); 
@@ -115,8 +114,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Sanity Test, OType should be allowed to be nested in other meta types, except for otype themselves")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Sanity Test, OType should be allowed to be nested in other meta types, except for otype themselves")
 	public void testOTypeNested() throws Exception {
 		expectProblems.clear();
 //		expectProblems.add(createNewProblem(VjoSyntaxProbIds.OTypeWithInnerTypes, 1, 0));
@@ -125,9 +124,9 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P2,FAST,UNIT})
+	@Test //@Category({P2,FAST,UNIT})
 	@Ignore("more investigation since this test is not just testing defs and endtype sections")
-	@Description("Test OType can have only defs and endType sections")
+	//@Description("Test OType can have only defs and endType sections")
 	public void testOTypeUser() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(TypeProbIds.IncompatibleTypesInEqualityOperator, 32, 0));
@@ -141,8 +140,8 @@ public class VjoOTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P2,FAST,UNIT})
-	@Description("Test nested otypes, callbacks")
+	@Test //@Category({P2,FAST,UNIT})
+	//@Description("Test nested otypes, callbacks")
 	public void testOTypeAsCallbacks() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 8, 0));

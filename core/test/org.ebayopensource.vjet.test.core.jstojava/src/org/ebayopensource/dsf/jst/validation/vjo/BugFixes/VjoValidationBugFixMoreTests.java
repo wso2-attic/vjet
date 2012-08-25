@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.BugFixes;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +24,11 @@ import org.ebayopensource.dsf.jst.JstProblemId;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     List<VjoSemanticProblem> actualProblems = null;
 
@@ -42,8 +41,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("user should not be able to add properties to vjo.Enum")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("user should not be able to add properties to vjo.Enum")
     // Bug 1074
     public void testAddPropertyToEnum() throws Exception {
         expectProblems.clear();
@@ -55,8 +54,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test assign string boolean and int")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test assign string boolean and int")
     // Bug 4007
     public void testCompatibleTypes() throws Exception {
         expectProblems.clear();
@@ -77,8 +76,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test empty needs")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test empty needs")
     // Bug 356
     public void testEmptyNeeds_1() throws Exception {
         expectProblems.clear();
@@ -91,8 +90,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test empty needs")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test empty needs")
     // Bug 356
     public void testEmptyNeeds_2() throws Exception {
         expectProblems.clear();
@@ -121,8 +120,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 475
-    @Category( { P3, FAST, UNIT })
-    @Description("Test undefined method")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test undefined method")
     public void testExpectsInIType() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -140,8 +139,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4280
-    @Category( { P3, FAST, UNIT })
-    @Description("Test final peroperty initilize ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test final peroperty initilize ")
     public void testFinalInConstructs_1() throws Exception {
         expectProblems.clear();
         // final property isn't initialized, should be allowed in constructor
@@ -160,8 +159,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4280
-    @Category( { P3, FAST, UNIT })
-    @Description("Test final peroperty initilize ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test final peroperty initilize ")
     public void testFinalInConstructs_2() throws Exception {
         expectProblems.clear();
         // expectProblems.add(createNewProblem(FieldProbIds.FinalFieldAssignment,
@@ -176,8 +175,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 478
-    @Category( { P1, FAST, UNIT })
-    @Description("Test metype inherits ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test metype inherits ")
     public void testInheritsInMType() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -193,8 +192,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 481
-    @Category( { P1, FAST, UNIT })
-    @Description("Test mtype inits block ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test mtype inits block ")
     public void testInitsInMType() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -207,8 +206,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 1159
-    @Category( { P1, FAST, UNIT })
-    @Description("Test create etype ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test create etype ")
     public void testInstantiateEnum() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -222,8 +221,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 490
-    @Category( { P3, FAST, UNIT })
-    @Description("Test duplicate method name ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test duplicate method name ")
     public void testMethodsWithSameName_1() throws Exception {
         expectProblems.clear();
         
@@ -247,8 +246,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 490
-    @Category( { P3, FAST, UNIT })
-    @Description("Test duplicate method name ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test duplicate method name ")
     public void testMethodsWithSameName_2() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -278,8 +277,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 490
-    @Category( { P3, FAST, UNIT })
-    @Description("Test duplicate method name ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test duplicate method name ")
     public void testMethodsWithSameName_3() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 25,
@@ -302,8 +301,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 490
-    @Category( { P3, FAST, UNIT })
-    @Description("Test duplicate method name ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test duplicate method name ")
     public void testMethodsWithSameName_4() throws Exception {
         expectProblems.clear();
         // bugfix by roy, redundant errors removed, test resource sequence
@@ -332,8 +331,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test duplicate method name ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test duplicate method name ")
     public void testMethodsWithSameName_5() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -346,8 +345,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 476
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Itype mixin mtype ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Itype mixin mtype ")
     public void testMixinInIType() throws Exception {
         expectProblems.clear();
         // bugfix by roy, empty function body is allowed for abstract method
@@ -366,8 +365,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 482
-    @Category( { P1, FAST, UNIT })
-    @Description("Test mtype mixin mtype ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test mtype mixin mtype ")
     public void testMixinInMType() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -382,8 +381,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
 //    @Test
 //    // Bug 477
-//    @Category( { P3, FAST, UNIT })
-//    @Description("Test itype mixin  ")
+//    //@Category( { P3, FAST, UNIT })
+//    //@Description("Test itype mixin  ")
 //    public void testMixinPropsInIType() throws Exception {
 //        expectProblems.clear();
 //        // expectProblems.add(createNewProblem(MethodProbIds.BodyForAbstractMethod,
@@ -401,8 +400,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
 //    @Test
 //    // Bug 483
-//    @Category( { P3, FAST, UNIT })
-//    @Description("Test itype mixin  ")
+//    //@Category( { P3, FAST, UNIT })
+//    //@Description("Test itype mixin  ")
 //    public void testMixinPropsInMType() throws Exception {
 //        expectProblems.clear();
 //        expectProblems
@@ -417,8 +416,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 796
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Multiple inherit  ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Multiple inherit  ")
     public void testMultipleInherits_1() throws Exception {
         expectProblems.clear();
         // expectProblems.add(createNewProblem(VjoSyntaxProbIds.MultipleInherits,
@@ -435,8 +434,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 796
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Multiple inherit  ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Multiple inherit  ")
     public void testMultipleInherits_2() throws Exception {
         expectProblems.clear();
         // expectProblems.add(createNewProblem(VjoSyntaxProbIds.MultipleInherits,
@@ -453,8 +452,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 796
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Multiple inherit  ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Multiple inherit  ")
     public void testMultipleInherits_3() throws Exception {
         expectProblems.clear();
         // bugfix by roy, empty body rule is now loosen
@@ -469,8 +468,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 303
-    @Category( { P3, FAST, UNIT })
-    @Description("Test itype satisfy")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test itype satisfy")
     public void testSatisfiesInIType_1() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -486,8 +485,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 303
-    @Category( { P3, FAST, UNIT })
-    @Description("Test itype satisfy")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test itype satisfy")
     public void testSatisfiesInIType_2() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -506,8 +505,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 479
-    @Category( { P3, FAST, UNIT })
-    @Description("Test mtype satisfy")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test mtype satisfy")
     public void testSatisfiesInMType_1() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -518,8 +517,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 305
-    @Category( { P1, FAST, UNIT })
-    @Description("Test itype include static function")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test itype include static function")
     public void testStaticFuncITypeError_1() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -532,8 +531,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 305
-    @Category( { P1, FAST, UNIT })
-    @Description("Test itype include static function")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test itype include static function")
     public void testStaticFuncITypeError_2() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -546,8 +545,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4446
-    @Category( { P1, FAST, UNIT })
-    @Description("Test assignment is invalid")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test assignment is invalid")
     public void testTypeCase_1() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -574,8 +573,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 353
-    @Category( { P1, FAST, UNIT })
-    @Description("Test type object start with vjo")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test type object start with vjo")
     public void testTypeSpaceWithVjoPrefix_1() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -586,8 +585,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 1170
-    @Category( { P1, FAST, UNIT })
-    @Description("Test undefined variable")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test undefined variable")
     public void testUndefinedVar() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -598,8 +597,8 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 394
-    @Category( { P3, FAST, UNIT })
-    @Description("Test parameter delcarate as void")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test parameter delcarate as void")
     public void testVoidParam_1() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 6,
@@ -616,7 +615,7 @@ public class VjoValidationBugFixMoreTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 394
-    @Description("Test parameter delcarate as void")
+    //@Description("Test parameter delcarate as void")
     public void testVoidParam_2() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 6,

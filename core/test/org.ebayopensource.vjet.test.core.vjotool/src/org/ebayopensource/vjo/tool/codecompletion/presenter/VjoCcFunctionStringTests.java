@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.presenter;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
@@ -19,12 +19,11 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 	
 	private MockVjoCcPresenter presenter = new MockVjoCcPresenter();
@@ -179,7 +178,7 @@ public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 	}
 	
 	@Test
-	@Description("Tests for NPE if the method does not have return type")
+	//@Description("Tests for NPE if the method does not have return type")
 	public void testMethodStrNoReturn(){
 		String method = "func1";
 		String js = "BugJsFiles.Bug6554";

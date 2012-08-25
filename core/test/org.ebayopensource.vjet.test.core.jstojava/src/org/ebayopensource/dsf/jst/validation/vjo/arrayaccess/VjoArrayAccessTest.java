@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.arrayaccess;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -18,18 +18,17 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoArrayAccessTest extends VjoValidationBaseTester {
 
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test accessbility for array")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test accessbility for array")
     public void testArrayAccess() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VarProbIds.UndefinedName, 5, 0));
@@ -40,8 +39,8 @@ public class VjoArrayAccessTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test invoking array's accessbility ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test invoking array's accessbility ")
     public void testArrayParamType() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -53,8 +52,8 @@ public class VjoArrayAccessTest extends VjoValidationBaseTester {
     // syntax error remove
     
 //    @Test
-//    @Category( { P1, FAST, UNIT })
-//    @Description("Test accessbility ")
+//    //@Category( { P1, FAST, UNIT })
+//    //@Description("Test accessbility ")
 ////    @Ignore("Syntax error")
 //    public void testBadArray() throws Exception {
 //        expectProblems.clear();

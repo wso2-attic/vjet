@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -30,20 +30,19 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ProtosTranslatorTest extends BaseTest {
 
 	//@Test
 	public void testConstructor() {
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test the different assignment expressions and methods in protos section")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test the different assignment expressions and methods in protos section")
 	public void testProcessProtos() throws Exception {
 		// prepare data
 		CompilationUnitDeclaration ast = prepareAst(
@@ -102,8 +101,8 @@ public class ProtosTranslatorTest extends BaseTest {
 	}
 	
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test the different arithmatic and assignment expressions in protos section")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test the different arithmatic and assignment expressions in protos section")
 	public void testProtos() throws Exception {
 		// prepare data
 		CompilationUnitDeclaration ast = prepareAst(

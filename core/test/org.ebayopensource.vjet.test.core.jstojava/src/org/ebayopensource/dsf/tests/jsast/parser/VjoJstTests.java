@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -30,18 +30,17 @@ import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoJstTests {
 
 
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test parsed js file")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test parsed js file")
 	 public void testSimpleJsAST() throws IOException{
 	 
 //		File simple1 = new File(ResourceUtil.getResource(VjoJstTests.class, "simplevjo.js.txt").getFile());
@@ -72,8 +71,8 @@ public class VjoJstTests {
 	  }
 
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test definition js file with static methods and blocks")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test definition js file with static methods and blocks")
 	 public void testTypeWithDef() throws IOException{
 	 
 //		File simple1 = new File(ResourceUtil.getResource(VjoJstTests.class, "typewithdef.js.txt").getFile());
@@ -90,8 +89,8 @@ public class VjoJstTests {
 	
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test parsed js with inner type")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test parsed js with inner type")
 	 public void testTypeWithInnerType() throws IOException{
 	 
 //		File simple1 = new File(ResourceUtil.getResource(VjoJstTests.class,
@@ -108,8 +107,8 @@ public class VjoJstTests {
 	
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test parsed js with Itype")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test parsed js with Itype")
 	 public void testIType() throws IOException{
 	 
 //		File simple1 = new File(ResourceUtil.getResource(VjoJstTests.class, "simpleitype.js.txt").getFile());
@@ -127,8 +126,8 @@ public class VjoJstTests {
 	
 
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test parsed js with Atype")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test parsed js with Atype")
 	 public void testAType() throws IOException{
 	 
 //		File simple1 = new File(ResourceUtil.getResource(VjoJstTests.class, "simpleatype.js.txt").getFile());
@@ -146,8 +145,8 @@ public class VjoJstTests {
 	
 
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test parsed js with Enum type")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test parsed js with Enum type")
 	 public void testEnumType() throws IOException{
 	 
 //		File simple1 = new File(ResourceUtil.getResource(VjoJstTests.class, "simplevjoenum.js.txt").getFile());
@@ -163,8 +162,8 @@ public class VjoJstTests {
 	  }
 
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test parsed js with Object literal in ctype")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test parsed js with Object literal in ctype")
 	public void testOL1() throws Exception {
 		
 		TranslateCtx ctx = new TranslateCtx();

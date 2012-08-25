@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -34,9 +34,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -46,7 +45,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  *
  */
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class CommentConstructorsWithArgsTest implements ICommentConstants {
 	
 	private IJstType jstType = null;
@@ -98,8 +97,8 @@ public class CommentConstructorsWithArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies constructors declared")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies constructors declared")
 	public void verifyConstructor() {
 		
 		IJstMethod constructor = jstType.getConstructor();
@@ -118,8 +117,8 @@ public class CommentConstructorsWithArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies constructors with no args declared")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies constructors with no args declared")
 	public void verifyNoArgsConstructor() {
 		if (testNumber == -1) {
 			IJstMethod constructor = jstType.getConstructor();
@@ -139,8 +138,8 @@ public class CommentConstructorsWithArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies constructors with 1 args declared")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies constructors with 1 args declared")
 	public void verifyOneArgConstructor() {
 		if (testNumber == 0) {
 			IJstMethod constructor = jstType.getConstructor();
@@ -164,8 +163,8 @@ public class CommentConstructorsWithArgsTest implements ICommentConstants {
 	
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies constructors with 1 variable args declared")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies constructors with 1 variable args declared")
 	public void verifyOneVariableArgConstructor() {
 		if (testNumber == 2) {
 			IJstMethod constructor = jstType.getConstructor();
@@ -187,8 +186,8 @@ public class CommentConstructorsWithArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies constructors with 2 args declared")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies constructors with 2 args declared")
 	public void verifyTwoArgsConstructor() {
 		if (testNumber == 3) {
 			IJstMethod constructor = jstType.getConstructor();
@@ -211,8 +210,8 @@ public class CommentConstructorsWithArgsTest implements ICommentConstants {
 	}
 
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies constructors with 1 args and 1 variable args declared")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies constructors with 1 args and 1 variable args declared")
 	public void verifyArgPlusVariableArgConstructor() {
 		if (testNumber == 5) {
 			IJstMethod constructor = jstType.getConstructor();

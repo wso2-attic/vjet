@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import org.ebayopensource.dsf.jst.IJstParseController;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -19,18 +19,17 @@ import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.FileUtils;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoSyntaxParsingTests {
 
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Parses and validates ctype")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Parses and validates ctype")
 	public void testCtype() throws Exception {
 		
 		String name = "ctype.txt";
@@ -50,8 +49,8 @@ public class VjoSyntaxParsingTests {
 	}
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Parses and validates array type declared")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Parses and validates array type declared")
 	public void testArraytype() throws Exception {
 		
 		String name = "x.js";
@@ -72,8 +71,8 @@ public class VjoSyntaxParsingTests {
 	}
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Parses and validates property declared public and final")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Parses and validates property declared public and final")
 	public void testPublicFinal() throws Exception {
 		
 		String name = "vjopublicfinal.txt";
@@ -92,8 +91,8 @@ public class VjoSyntaxParsingTests {
 	}
 	
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Correct parsing spaces in comments")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Correct parsing spaces in comments")
 	public void testSpaceComment() throws Exception {
 		
 		String name = "vjospacecomment.txt";

@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.data.custom.meta;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -29,15 +29,14 @@ import org.ebayopensource.dsf.jst.datatype.JstReservedTypes;
 import org.ebayopensource.dsf.jst.declaration.JstFactory;
 import org.ebayopensource.dsf.jst.term.SimpleLiteral;
 import org.ebayopensource.dsf.jst.token.IExpr;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class CustomMethodTests {
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test custom method translations")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test custom method translations")
 	public void testGetMethod(){
 		
 		

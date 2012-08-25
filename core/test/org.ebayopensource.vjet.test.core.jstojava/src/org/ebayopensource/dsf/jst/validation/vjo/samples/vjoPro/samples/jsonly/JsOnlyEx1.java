@@ -13,9 +13,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.samples.vjoPro.samples.jsonly;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,9 +27,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * JsOnlyEx1.java
@@ -37,8 +36,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@Category( { P3, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class JsOnlyEx1 extends VjoValidationBaseTester {
 
     @Before
@@ -52,8 +51,8 @@ public class JsOnlyEx1 extends VjoValidationBaseTester {
 
     @Test
     @Ignore
-    @Category( { P3, FAST, UNIT })
-    @Description("bug to be filed, after overloading bugfix, found issue in parser that addEventListener was errorly bound, should be EventDispatcher#addEventLisener, actual is Window#addEventListener")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("bug to be filed, after overloading bugfix, found issue in parser that addEventListener was errorly bound, should be EventDispatcher#addEventLisener, actual is Window#addEventListener")
     public void testJsOnlyEx1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 VjoValidationBaseTester.VJLIB_FOLDER, "vjoPro.samples.jsonly.",

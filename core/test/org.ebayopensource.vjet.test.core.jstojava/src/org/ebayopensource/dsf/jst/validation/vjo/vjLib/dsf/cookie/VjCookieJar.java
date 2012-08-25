@@ -13,9 +13,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.vjLib.dsf.cookie;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -30,9 +30,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * VjCookieJar.java
@@ -40,8 +39,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@Category( { P3, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjCookieJar extends VjoValidationBaseTester {
 
     @Before
@@ -116,8 +115,8 @@ public class VjCookieJar extends VjoValidationBaseTester {
 
     @Test
     @Ignore("need to look into jearly")
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Vjo vj lib project, To validate false positive ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Vjo vj lib project, To validate false positive ")
     public void testVjCookieJar() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 VjoValidationBaseTester.VJLIB_FOLDER, "vjoPro.dsf.cookie.",

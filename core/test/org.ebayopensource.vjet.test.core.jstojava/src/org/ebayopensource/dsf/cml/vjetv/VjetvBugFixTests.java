@@ -15,9 +15,9 @@
  */
 package org.ebayopensource.dsf.cml.vjetv;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,8 +30,7 @@ import org.ebayopensource.dsf.jstojava.cml.vjetv.util.FileOperator;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 
 /**
  * Class/Interface description
@@ -50,8 +49,8 @@ public class VjetvBugFixTests extends TestCase {
 
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test line is null")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test line is null")
     public void testBug11711() {
         String command = "@testBp" + File.separator + "ArgFile1.txt";
         m_conf = new HeadlessParserConfigure();
@@ -61,8 +60,8 @@ public class VjetvBugFixTests extends TestCase {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test null parameter")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test null parameter")
     public void testBug11712() {
         ArrayList<File> lists = new ArrayList<File>();
         lists.add(new File(currentPath + "/testBp/testJS.jar"));
@@ -71,8 +70,8 @@ public class VjetvBugFixTests extends TestCase {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test null parameter")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test null parameter")
     public void testBug11714() {
         ArrayList<File> lists = new ArrayList<File>();
         lists.add(new File(currentPath + "/testBp/testJS.jar"));
@@ -81,8 +80,8 @@ public class VjetvBugFixTests extends TestCase {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test print null parameter")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test print null parameter")
     public void testBug11713() {
         ArrayList<File> lists = new ArrayList<File>();
         lists.add(new File(currentPath + "/testBp/testJS.jar"));

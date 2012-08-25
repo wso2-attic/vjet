@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.data.custom;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
+
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Ignore;
@@ -17,15 +17,14 @@ import org.junit.Test;
 
 import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
 import org.ebayopensource.dsf.javatojs.control.ITranslationInitializer;
-import org.ebayopensource.dsf.javatojs.tests.TestHelper;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.javatojs.util.JstToJavaHelper;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstType;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+import org.ebayopensource.vjet.test.util.TestHelper;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class AllCustomTranslationTests {
 
 	private static ITranslationInitializer s_initializer;
@@ -50,96 +49,96 @@ public class AllCustomTranslationTests {
 	}
 	
 //	@Test
-//	@Category( { P1, FUNCTIONAL,NOJARRUN })
-//	@Description("Test Handler type")
+//	//@Category( { P1, FUNCTIONAL,NOJARRUN })
+//	//@Description("Test Handler type")
 //	public void testHandlers() {
 //		TestHelper.testType(Handlers.class, getInitializer());
 //		getCtx().getTraceManager().close();
 //	}
 
 //	@Test
-//	@Category( { P1, FUNCTIONAL,NOJARRUN })
-//	@Description("Test variable type lookup")
+//	//@Category( { P1, FUNCTIONAL,NOJARRUN })
+//	//@Description("Test variable type lookup")
 //	public void testVarTypeLookup() {
 //		TestHelper.testType(VarTypeLookup.class, getInitializer());
 //		getCtx().getTraceManager().close();
 //	}
 //	@Test
-//	@Category( { P1, FUNCTIONAL,NOJARRUN })
-//	@Description("Test AHtml Types")
+//	//@Category( { P1, FUNCTIONAL,NOJARRUN })
+//	//@Description("Test AHtml Types")
 //	public void testAHtmlTypes() {
 //		TestHelper.testType(AHtmlTypes.class, getInitializer());
 //		getCtx().getTraceManager().close();
 //	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test forcing to fully qualified types")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test forcing to fully qualified types")
 	public void testForceFullyQualified() {
 		TestHelper.testType(ForceFullyQualified.class, getInitializer());
 		getCtx().getTraceManager().close();
 	}
 	
 //	@Test
-//	@Category( { P1, FUNCTIONAL })
-//	@Description("Test Customized Types")
+//	//@Category( { P1, FUNCTIONAL })
+//	//@Description("Test Customized Types")
 //	public void testCustomizedAs() {
 //		TestHelper.testType(CustomizedAs.class, getInitializer());
 //		getCtx().getTraceManager().close();
 //	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test overloaded methods")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test overloaded methods")
 	public void testOverloadedMethods() {
 		TestHelper.testType(OverloadedMethods.class, getInitializer());
 	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test overloaded constructors")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test overloaded constructors")
 	public void testOverloadedConstructors() {
 		TestHelper.testType(OverloadedConstructors.class, getInitializer());
 	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test var arg methods")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test var arg methods")
 	public void testVarArgMethods() {
 		TestHelper.testType(VarArgMethods.class, getInitializer());
 	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Rename")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Rename")
 	public void testRename() {
 		TestHelper.testType(Rename.class, getInitializer());
 	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Java only")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Java only")
 	public void testJavaOnly() {
 		TestHelper.testType(JavaOnlyTests.class, getInitializer());
 	}
 	
 //	@Test
-//	@Category( { P1, FUNCTIONAL,NOJARRUN })
-//	@Description("Test JS proxy")
+//	//@Category( { P1, FUNCTIONAL,NOJARRUN })
+//	//@Description("Test JS proxy")
 //	public void testJsProxy(){
 //		TestHelper.testType(JsProxyTests.class, getInitializer());
 //	}
 	
 //	@Test
-//	@Category( { P1, FUNCTIONAL,NOJARRUN })
-//	@Description("Test Curry type")
+//	//@Category( { P1, FUNCTIONAL,NOJARRUN })
+//	//@Description("Test Curry type")
 //	public void testCurry(){
 //		TestHelper.testType(CurryTests.class, getInitializer());
 //	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Java lang types")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Java lang types")
 	@Ignore
 	public void testJavaLangTypes() {
 		JstCache.getInstance().clear();

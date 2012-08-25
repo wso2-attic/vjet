@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import java.util.List;
 
@@ -16,15 +16,14 @@ import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ts.JstQueryExecutor;
 import org.ebayopensource.dsf.ts.TypeSpace;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class QueryTests extends BaseTest {
 	
-	@Category( { P1, UNIT })
-	@Description("Test type searches")
+	//@Category( { P1, UNIT })
+	//@Description("Test type searches")
 	public void testTypeSearch(){
 		
 		TestDataHelper.clear();
@@ -36,8 +35,8 @@ public class QueryTests extends BaseTest {
 		assertEquals(0, ts.getType("FOO").size());
 	}
 
-	@Category( { P1, UNIT })
-	@Description("Test finding with JstQueryExecutor")
+	//@Category( { P1, UNIT })
+	//@Description("Test finding with JstQueryExecutor")
 	public void testFindNeeded(){
 		
 		TypeSpace<IJstType,IJstNode> ts = loadTypeSpace();
@@ -60,8 +59,8 @@ public class QueryTests extends BaseTest {
 		assertEquals(0, needed.size());
 	}
 	
-	@Category( { P1, UNIT })
-	@Description("Test querying of sub types")
+	//@Category( { P1, UNIT })
+	//@Description("Test querying of sub types")
 	public void testFindSubTypes(){
 		
 		TypeSpace<IJstType,IJstNode> ts = loadTypeSpace();
@@ -78,8 +77,8 @@ public class QueryTests extends BaseTest {
 		assertEquals(0, needed.size());
 	}
 	
-	@Category( { P1, UNIT })
-	@Description("Test querying of satisfiers")
+	//@Category( { P1, UNIT })
+	//@Description("Test querying of satisfiers")
 	public void testFindSatisfiers(){
 		
 		TypeSpace<IJstType,IJstNode> ts = loadTypeSpace();

@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.exclude.policy;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -21,8 +21,7 @@ import org.ebayopensource.dsf.javatojs.tests.exclude.TestTargetTranslator;
 import org.ebayopensource.dsf.javatojs.tests.exclude.TestTargetTranslator.ClassList;
 import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import org.ebayopensource.dsf.javatojs.translate.policy.ITranslationPolicy;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 import org.ebayopensource.dsf.logger.LogLevel;
 
 
@@ -33,8 +32,8 @@ import org.ebayopensource.dsf.logger.LogLevel;
 public class TestClass {
 	
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test exclusion policies")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test exclusion policies")
 	@Ignore
 	public void test1() {
 		final BuildController build = new BuildController();
@@ -56,8 +55,8 @@ public class TestClass {
 	}
 	
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test exclusion policies")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test exclusion policies")
 	@Ignore
 	public void test2() {
 		final BuildController build = new BuildController();
@@ -78,8 +77,8 @@ public class TestClass {
 	}
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test exclusion policies")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test exclusion policies")
 	public void test3() {
 		final BuildController build = new BuildController();
 		build.reset();
@@ -107,8 +106,8 @@ public class TestClass {
 	}
 	
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test exclusion policies")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test exclusion policies")
 	@Ignore
 	public void test4() {
 		final BuildController build = new BuildController();

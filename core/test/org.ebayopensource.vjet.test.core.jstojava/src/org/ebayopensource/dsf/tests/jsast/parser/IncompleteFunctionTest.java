@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
@@ -26,9 +26,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -37,7 +36,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  *
  */
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class IncompleteFunctionTest implements ICommentConstants {
 	
 	private IScriptUnit jstUnit = null;
@@ -64,8 +63,8 @@ public class IncompleteFunctionTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("verify syntax problems")
+	//@Category({P1, UNIT, FAST})
+	//@Description("verify syntax problems")
 	public void verifyFunctionBody() {
 		assertEquals(3, jstUnit.getProblems().size());
 	}

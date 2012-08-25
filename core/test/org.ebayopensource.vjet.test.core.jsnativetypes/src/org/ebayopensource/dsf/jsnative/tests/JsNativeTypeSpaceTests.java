@@ -58,6 +58,7 @@ import org.ebayopensource.dsf.jstojava.loader.DefaultJstTypeLoader;
 import org.ebayopensource.dsf.ts.ITypeSpace;
 import org.ebayopensource.dsf.ts.group.IGroup;
 import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjo.lib.IResourceResolver;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.TsLibLoader;
 import org.junit.After;
@@ -65,10 +66,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.ModuleInfo;
+
 import org.ebayopensource.dsf.common.Z;
 
-@ModuleInfo(value="JsNativeResource",subModuleId="JsNativeResource")
+//@ModuleInfo(value="JsNativeResource",subModuleId="JsNativeResource")
 public class JsNativeTypeSpaceTests {
 
 	@Before
@@ -78,6 +79,11 @@ public class JsNativeTypeSpaceTests {
 
 	@Test
 	public void testJavaPrimitiveTypes() {
+		
+		IResourceResolver jstLibResolver = JstLibResolver.getInstance()
+				.setSdkEnvironment(new VJetSdkEnvironment(new String[0], "DefaultSdk"));
+
+		LibManager.getInstance().setResourceResolver(jstLibResolver);
 		
 		JstTypeSpaceMgr mgr = new JstTypeSpaceMgr(getController(), getLoader()).initialize();
 		TsLibLoader.loadJavaPrimitiveLib(mgr);
@@ -94,6 +100,11 @@ public class JsNativeTypeSpaceTests {
 
 	@Test
 	public void testJsNativeTypeSpace() {
+		
+		IResourceResolver jstLibResolver = JstLibResolver.getInstance()
+				.setSdkEnvironment(new VJetSdkEnvironment(new String[0], "DefaultSdk"));
+
+		LibManager.getInstance().setResourceResolver(jstLibResolver);
 		
 		JstTypeSpaceMgr mgr = new JstTypeSpaceMgr(getController(), getLoader()).initialize();
 		TsLibLoader.loadJsNativeGlobalLib(mgr);

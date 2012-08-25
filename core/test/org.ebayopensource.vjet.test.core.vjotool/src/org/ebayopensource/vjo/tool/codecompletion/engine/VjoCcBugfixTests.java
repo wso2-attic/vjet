@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.engine;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,12 +35,11 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcBugfixTests extends VjoCcBaseTest {
 	private VjoCcEngine engine;
 	
@@ -97,7 +96,7 @@ public class VjoCcBugfixTests extends VjoCcBaseTest {
 	}
 	
 	@Test //Bug8457
-	@Description("Test code proposal for empty square brackets in needs section")
+	//@Description("Test code proposal for empty square brackets in needs section")
 	public void testNeedsEmptySquareBracket() {
 		String js = "BugJsFiles.NeedsProposal";
 		String[] names = new String[] {"BugJsFiles", 
@@ -217,7 +216,7 @@ public class VjoCcBugfixTests extends VjoCcBaseTest {
 	}
 	
 	@Test //Bug7895
-	@Description("Code proposal for variables after . and before semicolon")
+	//@Description("Code proposal for variables after . and before semicolon")
 	public void testBug7895() {
 		String js = "BugJsFiles.Bug7895";
 		String[] names = new String[] {"valueOf","getAttribute","eval"};

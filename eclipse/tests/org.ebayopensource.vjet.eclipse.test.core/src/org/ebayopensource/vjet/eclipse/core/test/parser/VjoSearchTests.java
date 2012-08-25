@@ -197,7 +197,7 @@ public class VjoSearchTests extends AbstractSearchModelTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug3300: It tests the main method references")
+	 * //@Description("Bug3300: It tests the main method references")
 	 * @throws ModelException
 	 */
 	public void testOnMainMethodReference() throws ModelException {
@@ -246,7 +246,7 @@ public class VjoSearchTests extends AbstractSearchModelTests {
 	 * @throws Exception
 	 * @throws MalformedURLException
 	 * @Test
-	 * @Description("Bug3274: VJET: Invalid search returns error window with
+	 * //@Description("Bug3274: VJET: Invalid search returns error window with
 	 *                        DLTK instead of VJO.")
 	 */
 	public void testBug3274() {

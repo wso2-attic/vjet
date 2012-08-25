@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
+
+
 import static org.junit.Assert.assertEquals;
 
 import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
@@ -22,12 +22,12 @@ import org.ebayopensource.dsf.javatojs.tests.data.datatype.PrimitiveSrc;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.TestArray;
 import org.ebayopensource.dsf.javatojs.tests.data.datatype.TestCollections;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
+import org.ebayopensource.vjet.test.util.TestHelper;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class VjoDataTypeTests  {
 
 	private static ITranslationInitializer s_initializer;
@@ -46,24 +46,24 @@ public class VjoDataTypeTests  {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of Object and Class types")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of Object and Class types")
 	public void testObjectAndClass() {
 		Class srcType = ObjectAndClass.class;
 		TestHelper.testType(srcType, getInitializer());
 	}
 
 //	@Test
-//	@Category( { P4, FUNCTIONAL })
-//	@Description("Test translation of Object methods")
+//	//@Category( { P4, FUNCTIONAL })
+//	//@Description("Test translation of Object methods")
 //	public void testObjectMethods() {
 //		Class srcType = ObjectMethods.class;
 //		TestHelper.testType(srcType, getInitializer());
 //	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of array usage")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of array usage")
 	public void testArray() {
 		Class srcType = TestArray.class;
 		TestHelper helper = new TestHelper(srcType, getInitializer());
@@ -72,8 +72,8 @@ public class VjoDataTypeTests  {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of Collections")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of Collections")
 	public void testCollections() {
 		Class srcType = TestCollections.class;
 		TestHelper helper = new TestHelper(srcType, getInitializer());
@@ -82,8 +82,8 @@ public class VjoDataTypeTests  {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of Enum")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of Enum")
 	public void testEnum() {
 		Class srcType = CoinEnum.class;
 		TestHelper helper = new TestHelper(srcType, getInitializer());
@@ -92,8 +92,8 @@ public class VjoDataTypeTests  {
 	}
 	
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of Simple Enum")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of Simple Enum")
 	public void testEnumSimple() {
 		Class srcType = CoinSimpleEnum.class;
 		TestHelper helper = new TestHelper(srcType, getInitializer());
@@ -102,8 +102,8 @@ public class VjoDataTypeTests  {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of Complex Enum")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of Complex Enum")
 	public void testEnumComplex() {
 		Class srcType = CoinComplexEnum.class;
 		TestHelper helper = new TestHelper(srcType, getInitializer());
@@ -112,8 +112,8 @@ public class VjoDataTypeTests  {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of primitives")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of primitives")
 	public void testPrimitive() {
 		Class srcType = PrimitiveSrc.class;
 		TestHelper helper = new TestHelper(srcType, getInitializer());
@@ -122,8 +122,8 @@ public class VjoDataTypeTests  {
 	}
 	
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test translation of arrays of primitives")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test translation of arrays of primitives")
 	public void testPrimitiveArray() {
 		Class srcType = ArraySrc.class;
 		TestHelper helper = new TestHelper(srcType, getInitializer());

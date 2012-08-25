@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
 import org.ebayopensource.dsf.ts.event.EventListenerStatus;
@@ -16,15 +16,14 @@ import org.ebayopensource.dsf.ts.event.ITypeSpaceEventListener;
 import org.ebayopensource.dsf.ts.event.TypeSpaceEvent;
 import org.ebayopensource.dsf.ts.event.TypeSpaceEvent.EventId;
 import org.ebayopensource.dsf.ts.event.type.AddTypeEvent;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class NotificationTests extends BaseTest {
 	
-	@Category( { P1, UNIT })
-	@Description("Test notifications from event listeners")
+	//@Category( { P1, UNIT })
+	//@Description("Test notifications from event listeners")
 	public void testNotification(){
 		final JstTypeSpaceMgr tsMgr = new JstTypeSpaceMgr(null, null);
 		tsMgr.registerTypeSpaceEventListener(createListener());

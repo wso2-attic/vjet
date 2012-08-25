@@ -7,6 +7,12 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
+<parent>
+	<groupId>org.ebayopensource.vjet.core</groupId>
+   	<artifactId>org.ebayopensource.vjet.core-parent</artifactId>
+   	<version>1.0.0-SNAPSHOT</version>
+</parent>
+
   <modules>
       	<module>org.ebayopensource.vjet.test.util</module>
       	<module>org.ebayopensource.vjet.test.core.jst</module>
@@ -17,19 +23,8 @@
       	<module>org.ebayopensource.vjet.test.rt.vjoruntime</module>
   </modules>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <vjet-version>1.0.0-SNAPSHOT</vjet-version>
-  </properties>
 
-  <dependencies>
-      <!-- Testing Dependencies -->
-      <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.8.1</version>
-      </dependency>
-  </dependencies>
+
 
   <build>
     <sourceDirectory>${project.basedir}/none</sourceDirectory> 
@@ -84,7 +79,6 @@
                      <tasks>
                         <property name="jarDir" value="${project.parent.basedir}/org.ebayopensource.vjet.test.util/lib"/>
                        	<property name="destDir" value="${basedir}/target/classes"/>
-                       	<property name="includeValue" value="JUnitNexGen.jar"/>
                         <ant antfile="${project.parent.basedir}/build.xml" />
                      </tasks>
                   </configuration>
@@ -183,20 +177,6 @@
           <artifactId>maven-assembly-plugin</artifactId>
           <version>2.1</version>
         </plugin>
-        <!--  
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.5</version>
-          <dependencies>
-		      <dependency>
-		        <groupId>junit</groupId>
-		        <artifactId>junit</artifactId>
-		        <version>4.8.1</version>
-		      </dependency>
-		  </dependencies>
-        </plugin>
-        -->
         <plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-surefire-plugin</artifactId>

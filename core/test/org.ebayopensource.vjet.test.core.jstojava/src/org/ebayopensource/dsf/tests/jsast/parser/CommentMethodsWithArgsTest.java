@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -35,9 +35,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -47,7 +46,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  *
  */
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class CommentMethodsWithArgsTest implements ICommentConstants {
 	
 	private static final int NUM_METHODS = 8;
@@ -96,8 +95,8 @@ public class CommentMethodsWithArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with args declared - Number of methods(instance/static), and method name")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with args declared - Number of methods(instance/static), and method name")
 	public void verifyMethods() {
 		
 		IJstMethod cons = jstType.getConstructor();
@@ -128,9 +127,9 @@ public class CommentMethodsWithArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 1 args declared - " +
-			"AccessScope, static, return type and arguments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 1 args declared - " +
+//			"AccessScope, static, return type and arguments")
 	public void verifyOneArgMethods() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"0");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -151,9 +150,9 @@ public class CommentMethodsWithArgsTest implements ICommentConstants {
 	
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 1 variable args declared - " +
-			"AccessScope, static, return type and arguments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 1 variable args declared - " +
+//			"AccessScope, static, return type and arguments")
 	public void verifyOneVariableArgMethods() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"2");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -173,9 +172,9 @@ public class CommentMethodsWithArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 2 args declared - " +
-			"AccessScope, static, return type and arguments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 2 args declared - " +
+//			"AccessScope, static, return type and arguments")
 	public void verifyTwoArgsMethods() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"3");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -197,9 +196,9 @@ public class CommentMethodsWithArgsTest implements ICommentConstants {
 
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 1 args and 1 variable arg declared - " +
-			"AccessScope, static, return type and arguments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 1 args and 1 variable arg declared - " +
+//			"AccessScope, static, return type and arguments")
 	public void verifyArgPlusVariableArgMethods() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"5");
 		String access = jMethod.getModifiers().getAccessScope();

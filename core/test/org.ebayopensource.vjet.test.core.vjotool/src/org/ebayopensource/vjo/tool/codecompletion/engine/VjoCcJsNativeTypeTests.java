@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.engine;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.SLOW;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.io.File;
 import java.io.IOException;
@@ -37,11 +37,10 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcJsNativeTypeTests extends VjoCcBaseTest {
 	private VjoCcEngine engine;
 	
@@ -51,7 +50,7 @@ public class VjoCcJsNativeTypeTests extends VjoCcBaseTest {
 	}
 	
 	
-	@Test @Category({SLOW})
+	@Test //@Category({SLOW})
 	public void testJsNativeProps() throws Exception {
 		String js = "engine.NativeTypeTest";
 		String pkg = "org.ebayopensource.dsf.jsnative";
@@ -100,7 +99,7 @@ public class VjoCcJsNativeTypeTests extends VjoCcBaseTest {
 		}
 	}
 	
-	@Test @Category({SLOW})
+	@Test //@Category({SLOW})
 	public void testJsNativeProtos() throws Exception {
 		String js = "engine.NativeTypeProtosTest";
 		String pkg = "org.ebayopensource.dsf.jsnative";

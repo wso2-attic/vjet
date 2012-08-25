@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.typecheck.array;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -28,9 +28,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * For test the in array types in Equality Operator.
@@ -39,9 +38,9 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P3, FAST, UNIT })
-@Description("Test assign value to array children's type mismatch")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
+//@Description("Test assign value to array children's type mismatch")
 public class ArrayType3Tester extends VjoValidationBaseTester {
 
     @Before
@@ -55,8 +54,8 @@ public class ArrayType3Tester extends VjoValidationBaseTester {
 
     @Test
     @Ignore
-    @Category( { P3, FAST, UNIT })
-    @Description("Test assign value to array children's type mismatch")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test assign value to array children's type mismatch")
     public void testCompartibleType2() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "ArrayType3Tester.js", this.getClass());

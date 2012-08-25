@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.NOJARRUN;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
+
+
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,12 +21,11 @@ import org.junit.Before;
 import org.junit.Ignore;
 
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.FileUtils;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class GetClasspathTest {
 	@Before
 	public  void updateAntFile() throws UnsupportedEncodingException, FileNotFoundException, IOException, URISyntaxException{
@@ -47,8 +46,8 @@ public class GetClasspathTest {
 	}
   
 	@Ignore("Required, unless this test can run in dynamic view and is able to run on ICE boxes")
-	@Category( { P5, FUNCTIONAL,NOJARRUN })
-	@Description("Test that java2js can run on the command line")
+	//@Category( { P5, FUNCTIONAL,NOJARRUN })
+	//@Description("Test that java2js can run on the command line")
 	public void runAnt() throws IOException,
 			URISyntaxException, InterruptedException {
 		String antFilePath = new File(JavaSourceLocator.getInstance().getSourceUrl(GetClasspathTest.class).getPath()).getParent() + File.separator + "GetClassPathTestAnt.xml";

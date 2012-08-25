@@ -7,27 +7,26 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.data.control;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
 import static org.junit.Assert.*;
 
 import org.ebayopensource.dsf.javatojs.control.TranslationController;
 import org.ebayopensource.dsf.javatojs.tests.data.control.initializers.InitializerA;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class InitializationTests {
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test Initialization ordering")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test Initialization ordering")
 	public void testInitialization(){
 		
 		InitializerA initializer = new InitializerA();
