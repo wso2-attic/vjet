@@ -8,9 +8,9 @@
  *******************************************************************************/
 
 package org.ebayopensource.dsf.jst.validation.vjo.bugs;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -20,12 +20,11 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P3, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ValidationB8756Tester extends VjoValidationBaseTester {
 
     @Before
@@ -35,8 +34,8 @@ public class ValidationB8756Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test constructor's wrong number of argument")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test constructor's wrong number of argument")
     public void testBugfix() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem("bugs.bug8756/",
                 "JsA1.js", this.getClass());

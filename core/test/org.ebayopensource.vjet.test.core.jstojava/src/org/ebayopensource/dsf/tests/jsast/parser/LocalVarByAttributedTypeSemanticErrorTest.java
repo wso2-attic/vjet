@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -31,9 +31,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -42,7 +41,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class LocalVarByAttributedTypeSemanticErrorTest implements ICommentConstants {
 	
 	private static final String fileName = FOLDER + "/LocalVarByAttributedTypeSemanticError.vjo";
@@ -65,8 +64,8 @@ public class LocalVarByAttributedTypeSemanticErrorTest implements ICommentConsta
 	}
 		
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local variables as attributed type with semantic error")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local variables as attributed type with semantic error")
 	public void verifyLocalVariableByAttributedTypeError() {
 		IJstMethod bar = jstType.getStaticMethod("bar");
 		for(IStmt stmt: bar.getBlock().getStmts()){

@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -37,17 +37,16 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ExpressionTranslatorTest extends BaseTest {
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test Object Creation Expression in vjet js file." +
-			" Js name, package and expressions should be proper in jst type.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test Object Creation Expression in vjet js file." +
+//			" Js name, package and expressions should be proper in jst type.")
 	public void testObjectCreationExpression() {
 		CompilationUnitDeclaration ast = prepareAst("objectCreationExprTranslatorTestFile.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -76,9 +75,9 @@ public class ExpressionTranslatorTest extends BaseTest {
 		assertEquals("\"w+\"", objCrtnExpr.getInvocationExpr().getArgs().get(0).toExprText());	
 	}
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test Simple Literal Expression in vjet js file." +
-			" Js name, package and expressions should be proper in jst type.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test Simple Literal Expression in vjet js file." +
+//			" Js name, package and expressions should be proper in jst type.")
 	public void testSimpleLiteralExpression(){
 		CompilationUnitDeclaration ast = prepareAst("simpleLiteralTranslatorTestFile.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -104,9 +103,9 @@ public class ExpressionTranslatorTest extends BaseTest {
 		
 	}	
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test Postfix Expression in vjet js file." +
-			" Js name, package and expressions should be proper in jst type.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test Postfix Expression in vjet js file." +
+//			" Js name, package and expressions should be proper in jst type.")
 	public void testPostFixExpression(){
 		
 		CompilationUnitDeclaration ast = prepareAst("postFixExprTranslatorTestFile.txt", null);
@@ -123,9 +122,9 @@ public class ExpressionTranslatorTest extends BaseTest {
 	
 	}
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test chaining Expression in vjet js file. LHS and RHS expressions should be proper." +
-			" Js name, package and all parts of chaing expressions should be proper in jst type.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test chaining Expression in vjet js file. LHS and RHS expressions should be proper." +
+//			" Js name, package and all parts of chaing expressions should be proper in jst type.")
 	public void testProcessExpression2() {
 		
 		CompilationUnitDeclaration ast = prepareAst("expressionTranslatorTestFile.txt", null);
@@ -260,9 +259,9 @@ public class ExpressionTranslatorTest extends BaseTest {
 		assertNull(rr.getQualifier());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test Postfix Expression in vjet js file." +
-			" Js name, package and all parts of postfix expressions should be proper in jst type.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test Postfix Expression in vjet js file." +
+//			" Js name, package and all parts of postfix expressions should be proper in jst type.")
 	public void testPostFixExpression2() {
 		CompilationUnitDeclaration ast = prepareAst("postFixExprTranslatorTestFile2.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -296,9 +295,9 @@ public class ExpressionTranslatorTest extends BaseTest {
 		assertNull(ident3.getQualifier());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test Postfix Expression in vjet js file." +
-			" Js name, package and all parts of postfix expressions should be proper in jst type.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test Postfix Expression in vjet js file." +
+//			" Js name, package and all parts of postfix expressions should be proper in jst type.")
 	public void testPrefixExpression() {
 		CompilationUnitDeclaration ast = prepareAst("prefixExprTranslatorTestFile.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -319,9 +318,9 @@ public class ExpressionTranslatorTest extends BaseTest {
 		assertNull(ident.getQualifier());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test Method Invocation Expression in vjet js file. LHS and RHS expressions should be proper." +
-			" Js name, package and all parts of chaing expressions should be proper in jst type.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test Method Invocation Expression in vjet js file. LHS and RHS expressions should be proper." +
+//			" Js name, package and all parts of chaing expressions should be proper in jst type.")
 	public void testMtdInvocationExpr() {
 		CompilationUnitDeclaration ast = prepareAst("MtdInvocationExprTranslatorTest.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());
@@ -351,9 +350,9 @@ public class ExpressionTranslatorTest extends BaseTest {
 		assertEquals("Test", invocationExpr.getMethodIdentifier().toExprText());
 	}
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test chaining Expression in vjet js file." +
-			" Js name, package and Array declaration JstIdentifier should be proper.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test chaining Expression in vjet js file." +
+//			" Js name, package and Array declaration JstIdentifier should be proper.")
 	public void testArrayAccessExpression() {
 		CompilationUnitDeclaration ast = prepareAst("arrayReferenceTranslatorTestFile.txt", null);
 		IJstType jstType = SyntaxTreeFactory2.createJST(ast, new TranslateCtx());

@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -30,9 +30,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.mod.javascript.Kit;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -41,7 +40,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class GlobalVarByAttributedTypeTest implements ICommentConstants {
 	
 	private static final String fileName = FOLDER + "/GlobalVarByAttributedType.vjo";
@@ -64,8 +63,8 @@ public class GlobalVarByAttributedTypeTest implements ICommentConstants {
 	}
 		
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local variables declared as attributed type")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local variables declared as attributed type")
 	public void verifyLocalVariableByAttributedType() {
 		validateGlobalVar(jstType.getGlobalVar("intGlobal"));
 		

@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -36,9 +36,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -47,7 +46,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class LocalVarByAttributedTypeTest implements ICommentConstants {
 	
 	private static final String fileName = FOLDER + "/LocalVarByAttributedType.vjo";
@@ -70,8 +69,8 @@ public class LocalVarByAttributedTypeTest implements ICommentConstants {
 	}
 		
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local variables declared as attributed type")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local variables declared as attributed type")
 	public void verifyLocalVariableByAttributedType() {
 		IJstMethod bar = jstType.getStaticMethod("bar");
 		for(IStmt stmt: bar.getBlock().getStmts()){

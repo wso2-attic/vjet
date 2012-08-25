@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.advisor;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.SLOW;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,16 +29,15 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
 
 /**
  * Test if the VjoCcTypeProposalAdvisor can calculate out the correct proposal data
  * 
  *
  */
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcTypeProposalAdvisorTest extends VjoCcBaseTest {
 	private VjoCcTypeProposalAdvisor advisor = new VjoCcTypeProposalAdvisor();
 	
@@ -111,7 +110,7 @@ public class VjoCcTypeProposalAdvisorTest extends VjoCcBaseTest {
 		}
 	}
 	
-	@Test @Category({SLOW})
+	@Test //@Category({SLOW})
 	public void testTypeProposalAdvisor(){
 		VjoCcCtx ctx = getEmptyContext();
 		ctx.setActingType(getJstType());

@@ -14,9 +14,9 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcCtxTest extends VjoCcBaseTest {
 	@Test
 	public void testNeedInsertNeedsExprForInnerType() {

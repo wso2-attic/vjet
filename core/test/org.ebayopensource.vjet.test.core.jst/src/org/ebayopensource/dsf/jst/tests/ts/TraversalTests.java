@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import java.util.List;
 import java.util.Map;
@@ -19,15 +19,14 @@ import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.traversal.JstDepthFirstTraversal;
 import org.ebayopensource.dsf.jst.ts.util.MethodDependencyVisitor;
 import org.ebayopensource.dsf.ts.method.MethodName;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class TraversalTests extends BaseTest {
 		
-	@Category( { P1, UNIT })
-	@Description("Test traversals in a single group")
+	//@Category( { P1, UNIT })
+	//@Description("Test traversals in a single group")
 	public void testSingleGroup() {
 		
 		JstCache.getInstance().clear();

@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.overriden;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -19,19 +19,18 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoOverrideTest extends VjoValidationBaseTester {
 
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
     @Ignore("Syntax error")
-    @Category( { P1, FAST, UNIT })
+    //@Category( { P1, FAST, UNIT })
     public void testAlone() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -41,8 +40,8 @@ public class VjoOverrideTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test override visibility")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test override visibility")
     public void testOverride() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(

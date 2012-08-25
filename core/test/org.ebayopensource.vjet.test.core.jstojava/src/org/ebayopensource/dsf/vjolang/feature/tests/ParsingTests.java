@@ -7,13 +7,13 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
+
+
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -46,12 +46,11 @@ import org.ebayopensource.vjo.lib.TsLibLoader;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.FileUtils;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ParsingTests {
 
 	static final String GROUP_PROJ = "TEST_PROJ_GROUP";
@@ -73,8 +72,8 @@ public class ParsingTests {
 	
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Parses and validates js with primitive types in props")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Parses and validates js with primitive types in props")
 	public void primitiveAsProps() throws Exception{
 		
 		String name = "primitiveAsProps.txt";
@@ -100,8 +99,8 @@ public class ParsingTests {
 
 	@Test
 	@Ignore
-	@Category({P2, UNIT, FAST})
-	@Description("Validates Arguments type")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Validates Arguments type")
 	public void  bugArgumentsType() throws Exception{
 		
 		String name = "bugArguments.js";
@@ -142,8 +141,8 @@ public class ParsingTests {
 
 	
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Parsing HTML Code hiding comments")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Parsing HTML Code hiding comments")
 	public void  htmlcodehiding() throws Exception{
 		
 		// fix for object literal field translator
@@ -158,8 +157,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Validates arguments in method")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Validates arguments in method")
 	public void testArgumentsInMethod() throws Exception {
 		String name = "simpletype.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -187,8 +186,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Validates method invocation")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Validates method invocation")
 	public void testMtdInvocation() throws Exception {
 		
 		String name = "methodinv.txt";
@@ -201,8 +200,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Parses empty file")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Parses empty file")
 	public void testEmptyFile() throws Exception {
 		
 		String name = "empty.txt";
@@ -215,8 +214,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Parsing partial file")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Parsing partial file")
 	public void testVjoPartialType() throws Exception {
 		
 		String name = "vjopartialtype.txt";
@@ -229,8 +228,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Parsing partial OType. Bug8085")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Parsing partial OType. Bug8085")
 	public void testVjoPartialOType() throws Exception {
 		
 		String name = "PartialOType.js";
@@ -243,8 +242,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Parsing js with property comments")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Parsing js with property comments")
 	public void testCommentTest() throws Exception {
 		
 		String name = "propcommenttest.txt";
@@ -259,8 +258,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P5, UNIT, FAST})
-	@Description("Parsing mtype copy")
+	//@Category({P5, UNIT, FAST})
+	//@Description("Parsing mtype copy")
 	public void testMtypeCopy() throws Exception {
 		
 		/**
@@ -274,8 +273,8 @@ public class ParsingTests {
 	
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Parsing native types")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Parsing native types")
 	public void testVjoGeneratorForNative() throws Exception {
 		VjoParser p = new VjoParser();
 
@@ -296,8 +295,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Parsing and asserting array of types inherited and satisfied")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Parsing and asserting array of types inherited and satisfied")
 	public void testVjoAsArray() throws Exception {
 		String name = "vjoasarray.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -311,8 +310,8 @@ public class ParsingTests {
 	
 
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Correct translation of RegExpLiteral")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Correct translation of RegExpLiteral")
 	public void testbug1425() throws Exception {
 		String name = "bug1425.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -321,8 +320,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Variable Comments parsed correctly")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Variable Comments parsed correctly")
 	public void testbug2024() throws Exception {
 		String name = "bug2024.txt";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);
@@ -331,9 +330,9 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("method return type: String should compatible with its definition " +
-			"return type: HTMLFormElement of the method: foo in the expression: return ref;")
+	//@Category({P2, UNIT, FAST})
+	//@Description("method return type: String should compatible with its definition " +
+//			"return type: HTMLFormElement of the method: foo in the expression: return ref;")
 	public void testbug5515() throws Exception {
 	
 //		//>public void f(String x);
@@ -378,9 +377,9 @@ public class ParsingTests {
 	
 	@Test
 	@Ignore
-	@Category({P5, UNIT, FAST})
-	@Description("property name: length is undefined in the expression: eval.length." +
-			"Test case com.ebay.tools.vjet2.core.test.bug.BugVerifyTests.test5069() added")
+	//@Category({P5, UNIT, FAST})
+	//@Description("property name: length is undefined in the expression: eval.length." +
+//			"Test case com.ebay.tools.vjet2.core.test.bug.BugVerifyTests.test5069() added")
 	public void testbug5069() throws Exception {
 		
 //		//>public void f(String x);
@@ -418,8 +417,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P3, UNIT, FAST})
-	@Description("Parsing js with variable name as keyword")
+	//@Category({P3, UNIT, FAST})
+	//@Description("Parsing js with variable name as keyword")
 	public void testbugKeywordNewParserBug() throws Exception {
 		
 //		//>public void f(String x);
@@ -463,8 +462,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Parsing js with nested type")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Parsing js with nested type")
 	public void testbugNestedTypesJst() throws Exception {
 		
 //		//>public void f(String x);
@@ -504,8 +503,8 @@ public class ParsingTests {
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Parsing js with void method returning value")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Parsing js with void method returning value")
 	public void test5109() throws Exception {
 		
 //		//>public void f(String x);
@@ -545,8 +544,8 @@ public class ParsingTests {
 	
 	
 	@Test
-	@Category({P3, FUNCTIONAL, FAST})
-	@Description("Parsing js with variable in inits was add to JstType as child directly.")
+	//@Category({P3, FUNCTIONAL, FAST})
+	//@Description("Parsing js with variable in inits was add to JstType as child directly.")
 	public void testbug5172() throws Exception {
 		String name = "bug5172.js";
 		String file = FileUtils.getResourceAsString(ParsingTests.class, name);

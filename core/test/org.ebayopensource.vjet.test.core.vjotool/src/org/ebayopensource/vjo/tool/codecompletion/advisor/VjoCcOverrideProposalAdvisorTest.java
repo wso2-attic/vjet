@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.advisor;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.Iterator;
 import java.util.List;
@@ -26,11 +26,10 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcOverrideProposalAdvisorTest extends VjoCcBaseTest {
 	private VjoCcOverrideProposalAdvisor advisor = 
 		new VjoCcOverrideProposalAdvisor();

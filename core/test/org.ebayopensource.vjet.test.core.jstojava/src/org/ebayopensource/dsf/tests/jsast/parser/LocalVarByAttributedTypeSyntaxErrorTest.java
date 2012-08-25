@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -26,9 +26,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -37,7 +36,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class LocalVarByAttributedTypeSyntaxErrorTest implements ICommentConstants {
 	
 	private static final String fileName = FOLDER + "/LocalVarByAttributedTypeSyntaxError.vjo";
@@ -60,8 +59,8 @@ public class LocalVarByAttributedTypeSyntaxErrorTest implements ICommentConstant
 	}
 		
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local variables as attributed type with syntax error")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local variables as attributed type with syntax error")
 	public void verifyLocalVariableByAttributedTypeError() {
 		
 		ErrorReporter er = ctx.getErrorReporter();

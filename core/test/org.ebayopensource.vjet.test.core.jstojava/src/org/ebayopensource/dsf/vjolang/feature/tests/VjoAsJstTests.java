@@ -9,16 +9,16 @@
 package org.ebayopensource.dsf.vjolang.feature.tests;
 import org.junit.Ignore;
 
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 @Ignore
 @Deprecated
 public class VjoAsJstTests {
 
 //	@Test
-//	@Category({P2, UNIT, FAST})
-//	@Description("Generate ctype, etype, itype, otype, mtype")
+//	//@Category({P2, UNIT, FAST})
+//	//@Description("Generate ctype, etype, itype, otype, mtype")
 //	public void testVjo() throws Exception {
 //		
 //		JstCache.getInstance().addLib(LibManager.getInstance().getJavaPrimitiveLib());

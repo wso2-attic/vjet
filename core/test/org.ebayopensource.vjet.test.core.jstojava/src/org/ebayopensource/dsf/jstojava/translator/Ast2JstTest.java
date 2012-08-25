@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -31,17 +31,16 @@ import org.ebayopensource.dsf.jstojava.translator.robust.completion.JstCompletio
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class Ast2JstTest extends BaseTest {
 
-	@Test @Category({P2,FAST, UNIT})
-	@Description("Partial JS file should produce meaningful JSTType. " +
-			"Type name and package should be proper")
+	@Test //@Category({P2,FAST, UNIT})
+	//@Description("Partial JS file should produce meaningful JSTType. " +
+//			"Type name and package should be proper")
 	public void testType() {
 		CompilationUnitDeclaration ast = prepareAst("ast2jstTestType.js.txt",
 				null);
@@ -52,9 +51,9 @@ public class Ast2JstTest extends BaseTest {
 				.getPackage().getName());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Vjo needs defined in older style should not blow up JstType. " +
-			"JstType should have imports information")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Vjo needs defined in older style should not blow up JstType. " +
+//			"JstType should have imports information")
 	public void testNeeds() {
 		CompilationUnitDeclaration ast = prepareAst("ast2jstTestNeeds.js.txt",
 				null);
@@ -64,9 +63,9 @@ public class Ast2JstTest extends BaseTest {
 		assertNotNull("Cant get import", type.getImport("MyClass1"));
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with satisfies should translate to meaningful JstType." +
-			" itypes in satisfies should be present in JstType")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with satisfies should translate to meaningful JstType." +
+//			" itypes in satisfies should be present in JstType")
 	public void testSatisfies() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"ast2jstTestSatisfies.js.txt", null);
@@ -85,9 +84,9 @@ public class Ast2JstTest extends BaseTest {
 		}
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with inherits should translate to meaningful JstType." +
-			" ctypes in inherits should be present in JstType")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with inherits should translate to meaningful JstType." +
+//			" ctypes in inherits should be present in JstType")
 	public void testInherits() {
 		CompilationUnitDeclaration ast = prepareAst(
 				"ast2jstTestInherits.js.txt", null);
@@ -99,9 +98,9 @@ public class Ast2JstTest extends BaseTest {
 				.getName());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with inits should translate to meaningful JstType." +
-			" JstType should have proper inits section")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with inits should translate to meaningful JstType." +
+//			" JstType should have proper inits section")
 	public void testInits() {
 		CompilationUnitDeclaration ast = prepareAst("ast2jstTestInits.js.txt",
 				null);
@@ -111,9 +110,9 @@ public class Ast2JstTest extends BaseTest {
 		assertEquals(1, inits.size());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with fields should translate to meaningful JstType." +
-			" JstType should have proper fields")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with fields should translate to meaningful JstType." +
+//			" JstType should have proper fields")
 	public void testFields() {
 		CompilationUnitDeclaration ast = prepareAst("ast2jstTestFields.js.txt",
 				null);
@@ -135,9 +134,9 @@ public class Ast2JstTest extends BaseTest {
 		assertTrue(k.getModifiers().isPublic());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with methods should translate to meaningful JstType." +
-			" JstType should have proper methods information")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with methods should translate to meaningful JstType." +
+//			" JstType should have proper methods information")
 	public void testMethod() {
 
 		CompilationUnitDeclaration ast = prepareAst("ast2jst.js.txt", null);
@@ -164,9 +163,9 @@ public class Ast2JstTest extends BaseTest {
 		assertEquals("bar", jstMethod.getName().getName());
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with singleton pattern should translate to " +
-			"meaningful JstType. JstType should have MtdInvocationExpr")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with singleton pattern should translate to " +
+//			"meaningful JstType. JstType should have MtdInvocationExpr")
 	public void testCallMethodCompletion() {
 
 		CompilationUnitDeclaration ast = prepareAst("ast2jstMethod.js.txt",
@@ -217,8 +216,8 @@ public class Ast2JstTest extends BaseTest {
 		assertTrue("Must be contains object type " + class1.getName(), contains);
 	}
 
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with inits should translate to meaningful JstType.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with inits should translate to meaningful JstType.")
 	public void testResolveErrors() throws IOException {
 
 		IJstType jstType = createJstType("ast2jstProblemMethod.js.txt");			
@@ -238,9 +237,9 @@ public class Ast2JstTest extends BaseTest {
 		return jstType;
 	}
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with inits should translate to meaningful JstType." +
-			" JstType should be able resolve  and bind the alias JstIdentifier")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with inits should translate to meaningful JstType." +
+//			" JstType should be able resolve  and bind the alias JstIdentifier")
 	public void testAlias() throws IOException{
 		IJstType type = createJstType("ast2jsttestAlias.js.txt");
 		
@@ -252,9 +251,9 @@ public class Ast2JstTest extends BaseTest {
 		 
 	}
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with inits should translate to meaningful JstType." +
-			" JstType should have info about inner ctype")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with inits should translate to meaningful JstType." +
+//			" JstType should have info about inner ctype")
 	public void testInnerClass() throws IOException{
 		IJstType type = createJstType("ast2jstTestInnerClass.js.txt");
 		IJstType jstType = type.getEmbededType("MyInnerClass");		
@@ -278,9 +277,9 @@ public class Ast2JstTest extends BaseTest {
 		return content.indexOf(keyword);
 	}
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Partail JS file with inits should translate to meaningful JstType." +
-			" JstType should not blow up if endType is not last statement in js")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Partail JS file with inits should translate to meaningful JstType." +
+//			" JstType should not blow up if endType is not last statement in js")
 	public void testEndType() throws IOException {			
 		IJstType type = createJstType("ast2jstTestEndType.js.txt");
 		IJstMethod method = type.getMethod("staticDoIt");
@@ -292,8 +291,8 @@ public class Ast2JstTest extends BaseTest {
 		
 	}
 	
-//	@Test @Category({P1, FAST, UNIT})
-//	@Description("Partail JS file with inits should translate to meaningful JstType.")
+//	@Test //@Category({P1, FAST, UNIT})
+//	//@Description("Partail JS file with inits should translate to meaningful JstType.")
 ////	@Ignore
 //	public void testTry() throws IOException {
 //		IJstType type = createJstType("ast2jstTestTry.js.txt");

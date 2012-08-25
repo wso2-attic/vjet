@@ -41,9 +41,9 @@ import org.ebayopensource.vjo.meta.VjoKeywords;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="JsNativeResource",subModuleId="JsNativeResource")
+
+//@ModuleInfo(value="JsNativeResource",subModuleId="JsNativeResource")
 public class JsNativePreBuildTests  extends TestCase {
 	
 	private static final String YELL = "@@@@@@@@@@@@@@@@@@@@@@@@@@@";
@@ -619,12 +619,12 @@ public class JsNativePreBuildTests  extends TestCase {
 	}
 	
 	private static InputStream getJsNativeGlobalSerializedStreamFromSource() {
-		String jsNativeFile = ResourceHelper.getInstance().getJsNativeGlobalObjectsFileName();
+		String jsNativeFile = "org_ebayopensource_dsf_jsnative_global.ser";
 		return getJsNativeSerializedStream(s_outputFolder, jsNativeFile);
 	}
 	
 	private static InputStream getJsBrowserObjectsSerializedStreamFromSource() {
-		String jsNativeFile = ResourceHelper.getInstance().getJsBrowserFileName();
+		String jsNativeFile = "org_ebayopensource_dsf_jsnative.ser";
 		return getJsNativeSerializedStream(s_outputFolder, jsNativeFile);
 	}
 	

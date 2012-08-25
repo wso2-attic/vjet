@@ -456,7 +456,7 @@ public class VjoSourceElementParserTests extends AbstractVjoModelTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug4136: It tests same type but in different packages
+	 * //@Description("Bug4136: It tests same type but in different packages
 	 *                        should be displayed in outline view")
 	 * @throws ModelException
 	 */
@@ -490,7 +490,7 @@ public class VjoSourceElementParserTests extends AbstractVjoModelTests {
 
 	/**
 	 * @Test
-	 * @Description("Bug4749: the highlight area always is shown wrong when we
+	 * //@Description("Bug4749: the highlight area always is shown wrong when we
 	 *                        click the method in the outline. Now it is no
 	 *                        behavior if the method we click in the outline
 	 *                        view is not in current editor, only handle the

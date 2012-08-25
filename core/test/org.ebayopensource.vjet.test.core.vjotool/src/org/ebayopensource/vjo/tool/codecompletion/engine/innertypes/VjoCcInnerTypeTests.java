@@ -7,19 +7,18 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.engine.innertypes;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.SLOW;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcInnerTypeTests {
 	@Test
 	public void testCtypeWithCTypeProposals() {
@@ -31,7 +30,7 @@ public class VjoCcInnerTypeTests {
 		testUtil.testCcProposals();
 	}
 	
-	@Test @Category({SLOW})
+	@Test //@Category({SLOW})
 	public void testCtypeWithCType1Proposals() {
 		VjoCcInnerTypeTestUtil testUtil = new VjoCcInnerTypeTestUtil();
 		testUtil.sampleJs = "innertypes/OuterType1Test.js";
@@ -41,7 +40,7 @@ public class VjoCcInnerTypeTests {
 		testUtil.testCcProposals();
 	}
 	
-	@Test @Category({SLOW})
+	@Test //@Category({SLOW})
 	public void testCtypeWithITypeProposals() {
 		VjoCcInnerTypeTestUtil testUtil = new VjoCcInnerTypeTestUtil();
 		testUtil.sampleJs = "innertypes/CTypeWithITypeTest.js";
@@ -51,7 +50,7 @@ public class VjoCcInnerTypeTests {
 		testUtil.testCcProposals();
 	}
 	
-	@Test @Category({SLOW})
+	@Test //@Category({SLOW})
 	@Ignore("this test was not running due to NPE in framework")
 	public void ignoredTestCtypeWithETypeProposals() {
 		VjoCcInnerTypeTestUtil testUtil = new VjoCcInnerTypeTestUtil();

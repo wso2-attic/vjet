@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.with;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -19,19 +19,18 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoWithTest extends VjoValidationBaseTester {
 
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test with function")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test with function")
     public void testWith() throws Exception {
         expectProblems.clear();
         // bugfix by roy, with statement supresses all errors in it now as
@@ -45,8 +44,8 @@ public class VjoWithTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test nested with delcaration")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test nested with delcaration")
     public void testNestedWith() throws Exception {
         expectProblems.clear();
         // bugfix by roy, line number updated as test js resource was updated
@@ -60,8 +59,8 @@ public class VjoWithTest extends VjoValidationBaseTester {
     
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test nested with delcaration")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test nested with delcaration")
     public void testReturenWith() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.TypeMismatch, 13, 0));

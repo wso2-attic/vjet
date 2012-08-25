@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRule;
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.IVjoSemanticRuleSet;
@@ -25,12 +25,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P3, FAST, UNIT })
-@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
+
+
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
 public class VjoValidationTest {
 
     @Before
@@ -39,8 +38,8 @@ public class VjoValidationTest {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test vjo semantic rule is not null")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test vjo semantic rule is not null")
     public void testRuleRepo() {
         Assert.assertNotNull(VjoSemanticRuleRepo.getInstance());
         Assert.assertNotNull(VjoSemanticRuleRepo.getInstance().getRuleSets());

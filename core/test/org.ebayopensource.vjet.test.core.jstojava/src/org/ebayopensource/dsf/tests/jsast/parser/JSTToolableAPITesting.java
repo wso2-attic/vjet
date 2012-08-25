@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.net.URL;
 import java.util.List;
@@ -21,19 +21,18 @@ import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 
 public class JSTToolableAPITesting {
 
 
 	@Test
-	@Category({P4,UNIT,FAST})
-	@Description("Displays Type detials on console")
+	//@Category({P4,UNIT,FAST})
+	//@Description("Displays Type detials on console")
 	public void main() {
 		URL simple1 = JSTToolableAPITesting.class.getResource("simplevjo.js.txt");
 		IJstType type = new VjoParser().addLib(LibManager.getInstance().getJsNativeGlobalLib())

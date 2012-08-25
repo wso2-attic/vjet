@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -26,12 +26,12 @@ import org.ebayopensource.dsf.javatojs.tests.data.structure.SameMemberNameData;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+import org.ebayopensource.vjet.test.util.TestHelper;
 
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class JsrGeneratorTests {
 
 	private static ITranslationInitializer s_initializerA;
@@ -73,8 +73,8 @@ public class JsrGeneratorTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test translation of methods")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test translation of methods")
 	public void testMethods() {
 
 		Class srcType = Methods.class;
@@ -91,8 +91,8 @@ public class JsrGeneratorTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test translation of instance and static members")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test translation of instance and static members")
 	public void testProperties() {
 		Class srcType = Properties.class;
 		TestHelper helper = new TestHelper(srcType, getInitializerB());
@@ -108,8 +108,8 @@ public class JsrGeneratorTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test translation of overloaded methods")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test translation of overloaded methods")
 	public void testOverloading() {
 		Class srcType = Overloadings.class;
 		TestHelper helper = new TestHelper(srcType, getInitializerB());
@@ -126,8 +126,8 @@ public class JsrGeneratorTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test that translation where a member name and method name are the same results in errors")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test that translation where a member name and method name are the same results in errors")
 	public void testSameMemberNames() {
 		Class srcType = SameMemberNameData.class;
 		TestHelper helper = new TestHelper(srcType, getInitializerA());
@@ -143,8 +143,8 @@ public class JsrGeneratorTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test translation where two classes have the same simple name but different names when fully resolved")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test translation where two classes have the same simple name but different names when fully resolved")
 //	@Ignore("complex test case should be simplified into multiple asserts")
 	public void testSameSimpleNameForMemberType() {
 		Class srcType = vjo.ebay.dsf.javatojs.tests.data.structure.SameSimpleNameForMemberTypeTest.class;
@@ -179,8 +179,8 @@ public class JsrGeneratorTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test translation of unused imports")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test translation of unused imports")
 	public void testUnusedImports() {
 		Class srcType = InheritanceTest.class;
 		TestHelper helper = new TestHelper(srcType, getInitializerA());
@@ -197,8 +197,8 @@ public class JsrGeneratorTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test translation of inheritance hierarchies")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test translation of inheritance hierarchies")
 	public void testInheritance() {
 		Class srcType = InheritanceTest.class;
 		TestHelper helper = new TestHelper(srcType, getInitializerA());
@@ -218,8 +218,8 @@ public class JsrGeneratorTests {
 	// with a name ending in Jsr to be present, however other general test setup logic
 	// associated with this suite, deletes all files ending in Jsr as part of cleanup.
 //	@Test
-//	@Category( { P1, FUNCTIONAL })
-//	@Description("Test that any class having name with suffix 'Jsr' should not be considered as Jsr")
+//	//@Category( { P1, FUNCTIONAL })
+//	//@Description("Test that any class having name with suffix 'Jsr' should not be considered as Jsr")
 //	public void testDummyJsr() {
 //		Class srcType = DummyJsrTest.class;
 //		TestHelper helper = new TestHelper(srcType, getInitializerB());
@@ -234,8 +234,8 @@ public class JsrGeneratorTests {
 //	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test translation of inactive imports, no dependency should get added")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test translation of inactive imports, no dependency should get added")
 	public void testInactiveImports() {
 		Class<?> srcType = InactiveNeeds.class;
 		TestHelper helper = new TestHelper(srcType, getInitializerA());

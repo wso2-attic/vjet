@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -26,12 +26,11 @@ import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class MixinTranslatorTest extends BaseTest{
 
 	IJstType mtype;
@@ -62,8 +61,8 @@ public class MixinTranslatorTest extends BaseTest{
 		JstCache.getInstance().addType((JstType) mtype2);
 	}
 	
-	@Test @Category({P1, FAST, UNIT})
-	@Description("Test Ctype mixin with mtype. check the package and type information.")
+	@Test //@Category({P1, FAST, UNIT})
+	//@Description("Test Ctype mixin with mtype. check the package and type information.")
 	public void testMixin() {
 		CompilationUnitDeclaration ast = prepareAst("mixinTranslatorTestFile.js.txt",
 				null);

@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -33,9 +33,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -44,7 +43,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class MultiValuedParamTest implements ICommentConstants {
 	
 	private static final String fileName = FOLDER + "/MultiValuedParam.vjo";
@@ -67,8 +66,8 @@ public class MultiValuedParamTest implements ICommentConstants {
 	}
 		
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local function overloading supported")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local function overloading supported")
 	public void verifyMethodOverloadingWithMultiValueParameters() {
 		final IJstMethod bar = jstType.getStaticMethod("bar");
 		verifyFunctionSignature(bar);
@@ -109,8 +108,8 @@ public class MultiValuedParamTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local function overloading supported")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local function overloading supported")
 	public void verifyMethodOverloadingWithMultiValueParametersFoo() {
 		final IJstMethod foo = jstType.getStaticMethod("foo");
 		verifyMoreFunctionSignature(foo);
@@ -137,8 +136,8 @@ public class MultiValuedParamTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local function overloading supported optional + multi value")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local function overloading supported optional + multi value")
 	public void verifyMethodOverloadingWithMultiValueParametersFun() {
 		final IJstMethod fun = jstType.getStaticMethod("fun");
 		verifyCombinedFunctionSignature(fun);
@@ -165,8 +164,8 @@ public class MultiValuedParamTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local function overloading supported optional + multi value")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local function overloading supported optional + multi value")
 	public void verifyMethodOverloadingWithMultiValueParametersMore() {
 		final IJstMethod fun = jstType.getStaticMethod("more");
 		verifyCombinedMoreFunctionSignature(fun);

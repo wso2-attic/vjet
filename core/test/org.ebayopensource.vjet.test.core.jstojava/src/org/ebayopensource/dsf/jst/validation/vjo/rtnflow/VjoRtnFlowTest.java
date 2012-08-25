@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rtnflow;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -18,17 +18,16 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoRtnFlowTest extends VjoValidationBaseTester {
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test vjo.needs_impl;")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test vjo.needs_impl;")
     public void testRtnFlow() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ShouldReturnValue,

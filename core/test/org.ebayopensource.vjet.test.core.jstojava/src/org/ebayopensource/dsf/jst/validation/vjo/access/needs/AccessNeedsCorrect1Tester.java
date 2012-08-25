@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.access.needs;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -25,9 +25,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  *  Access needs import type
@@ -35,8 +34,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class AccessNeedsCorrect1Tester extends VjoValidationBaseTester {
     @Before
     public void setUp() {
@@ -44,8 +43,8 @@ public class AccessNeedsCorrect1Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test access needs type")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test access needs type")
     public void testAccesVisible1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "access.needs.","AccessNeedsSample1.js", this

@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
+
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,12 +31,12 @@ import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
-import org.ebayopensource.dsf.logger.LogLevel;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+import org.ebayopensource.dsf.logger.LogLevel;
+import org.ebayopensource.vjet.test.util.TestHelper;
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class MultiPassTests {
 
 	public static final TraceId ID = TranslationTraceId.TEST;
@@ -71,8 +71,8 @@ public class MultiPassTests {
 
 	}
 //	@Test
-//	@Category( { P1, FUNCTIONAL })
-//	@Description("Test targeted translation")
+//	//@Category( { P1, FUNCTIONAL })
+//	//@Description("Test targeted translation")
 //	@Ignore
 //	public void testTargetedTranslation() {
 //
@@ -102,8 +102,8 @@ public class MultiPassTests {
 //		// assertEquals(4, jstType.getImplicitDependency().size());
 //	}
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test on demand translation")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test on demand translation")
 	public void testOnDemandTranslation() {
 
 		reset();

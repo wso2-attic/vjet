@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.bugfixes;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +19,18 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoBugFixes extends VjoValidationBaseTester {
 
    
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test or statement with null")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test or statement with null")
     public void testBugOrStmt() throws Exception {
     	 List<VjoSemanticProblem> actualProblems = new ArrayList();
     	 expectProblems.clear();
@@ -44,8 +43,8 @@ public class VjoBugFixes extends VjoValidationBaseTester {
     }
 
     
-    @Category( { P1, FAST, UNIT })
-    @Description("Test or statement with null")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test or statement with null")
     public void testBugGeneric() throws Exception {
     	List<VjoSemanticProblem> actualProblems = new ArrayList();
 //    	actualProblems.add(createNewProblem(TypeProbIds.IncompatibleTypesInEqualityOperator, 20, 0));

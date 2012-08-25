@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -31,9 +31,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.mod.javascript.Kit;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -42,7 +41,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class ExplicitStaticTest implements ICommentConstants {
 	
 	private static final String fileName = FOLDER + "/ExplicitStatic.vjo";
@@ -65,8 +64,8 @@ public class ExplicitStaticTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies variables explicitly declared static")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies variables explicitly declared static")
 	public void verifyExplicitStaticVar() {
 		IJstProperty prop = jstType.getStaticProperty("foo");
 		JstModifiers jm = prop.getModifiers();
@@ -77,8 +76,8 @@ public class ExplicitStaticTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies functions explicitly declared static")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies functions explicitly declared static")
 	public void verifyExplicitStaticFunction() {
 		IJstMethod prop = jstType.getStaticMethod("bar");
 		JstModifiers jm = prop.getModifiers();
@@ -89,8 +88,8 @@ public class ExplicitStaticTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies no error in case of explicitly declaration of static")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies no error in case of explicitly declaration of static")
 	public void verifyNoErrors() {
 		ErrorReporter er = ctx.getErrorReporter();
 		assertFalse(er.hasErrors());

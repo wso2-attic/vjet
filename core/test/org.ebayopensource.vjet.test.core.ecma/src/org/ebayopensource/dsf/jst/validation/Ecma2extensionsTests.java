@@ -13,9 +13,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -24,9 +24,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Ecma2extensionsTests.java
@@ -34,8 +33,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@Category( { P3, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class Ecma2extensionsTests extends VjoValidationBaseTester {
 
     @Before
@@ -45,8 +44,8 @@ public class Ecma2extensionsTests extends VjoValidationBaseTester {
 
     @Test
     @Ignore("Line 105. Functino's name" + "function's property")
-    @Category( { P3, FAST, UNIT })
-    @Description("Test DSF project, To validate false positive ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test DSF project, To validate false positive ")
     public void testEcma2extensionsTests() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "dsf.jslang.feature.tests.", "Ecma2extensionsTests.js", this

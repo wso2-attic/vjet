@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -24,21 +24,20 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P5, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P5, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class NeedsTranslatorTest extends BaseTest {
 
 	//@Test
 	public void testConstructor() {
 	}
 
-	@Test @Category({P5, FAST, UNIT})
-	@Description("Test Ctype needs section. check the package and type information."
-			+ " This test is old test and tests older style which is not supported anymore")
+	@Test //@Category({P5, FAST, UNIT})
+	//@Description("Test Ctype needs section. check the package and type information."
+//			+ " This test is old test and tests older style which is not supported anymore")
 	public void testProcessNeeds() throws Exception {
 		CompilationUnitDeclaration ast = prepareAst("needsTransTestFile.txt",
 				null);

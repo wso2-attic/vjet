@@ -15,9 +15,9 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.bugs;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -28,8 +28,7 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 
 /**
  * Class/Interface description
@@ -37,7 +36,7 @@ import com.ebay.junitnexgen.category.Description;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@Category( { P3, FAST, UNIT })
+//@Category( { P3, FAST, UNIT })
 public class Validation4890Tester extends VjoValidationBaseTester {
 
     @Before
@@ -50,8 +49,8 @@ public class Validation4890Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test undefiend field and method")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test undefiend field and method")
     public void testBugfix() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "bugs.b4890/", "B4890.js", this.getClass());

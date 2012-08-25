@@ -10,9 +10,8 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.vjodef"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.javatojs"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.core.jstojava"/>
-	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/ant.jar"/>
-	<classpathentry kind="lib" path="/org.ebayopensource.vjet.test.util/lib/JUnitNexGen.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.jsnativetypes"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.ebayopensource.vjet.resource.vjolib"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

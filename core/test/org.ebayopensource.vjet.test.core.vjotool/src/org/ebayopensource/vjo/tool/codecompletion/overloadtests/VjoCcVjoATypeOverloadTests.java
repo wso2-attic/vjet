@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion.overloadtests;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +20,10 @@ import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class VjoCcVjoATypeOverloadTests extends VjoCcBaseTest{
 	
 	private VjoCcOverloadUtil overloadUtil;

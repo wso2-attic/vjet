@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
+
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayOutputStream;
@@ -21,16 +21,15 @@ import org.ebayopensource.af.common.error.ErrorList;
 import org.ebayopensource.af.common.error.ErrorObject;
 import org.ebayopensource.dsf.javatojs.report.DefaultErrorReporter;
 import org.ebayopensource.dsf.javatojs.report.ErrorReporter;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
 
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class ErrorReporterTests {
 	
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test ErrorReporter functionality")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test ErrorReporter functionality")
 	public void testError() {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		ErrorReporter reporter = new DefaultErrorReporter(new PrintStream(
@@ -60,8 +59,8 @@ public class ErrorReporterTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test the error reporting capabilities of ErrorReporter can be turned off")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test the error reporting capabilities of ErrorReporter can be turned off")
 	public void testErrorDisabled() {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		ErrorReporter reporter = new DefaultErrorReporter(new PrintStream(
@@ -75,8 +74,8 @@ public class ErrorReporterTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test the warning reporting capabilities of ErrorReporter")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test the warning reporting capabilities of ErrorReporter")
 	public void testWarning() {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		ErrorReporter reporter = new DefaultErrorReporter(new PrintStream(
@@ -106,8 +105,8 @@ public class ErrorReporterTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test the warning reporting capabilities of ErrorReporter can be turned off")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test the warning reporting capabilities of ErrorReporter can be turned off")
 	public void testWarningDisabled() {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream();
 		ErrorReporter reporter = new DefaultErrorReporter(new PrintStream(

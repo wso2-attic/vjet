@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.ex;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.List;
 
@@ -22,18 +22,17 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoExTest extends VjoValidationBaseTester {
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test vjo.needs_impl;")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test vjo.needs_impl;")
     public void testIValidation() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -43,8 +42,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parameter mismatch ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parameter mismatch ")
     public void testEx1() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.ParameterMismatch, 9,
@@ -60,8 +59,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P4, FAST, UNIT })
-    @Description("Test not visbility methods ")
+    //@Category( { P4, FAST, UNIT })
+    //@Description("Test not visbility methods ")
     public void testEx2() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.NotVisibleMethod, 15,
@@ -77,8 +76,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P4, FAST, UNIT })
-    @Description("Test needs other exist valid type ")
+    //@Category( { P4, FAST, UNIT })
+    //@Description("Test needs other exist valid type ")
     public void testEx3() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -88,8 +87,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P4, FAST, UNIT })
-    @Description("Test undefined methods ")
+    //@Category( { P4, FAST, UNIT })
+    //@Description("Test undefined methods ")
     public void testEx4() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -107,8 +106,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test abstract ctype constructors initailize ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test abstract ctype constructors initailize ")
     public void testEx5() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -118,8 +117,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P4, FAST, UNIT })
-    @Description("Test class path is not correct ")
+    //@Category( { P4, FAST, UNIT })
+    //@Description("Test class path is not correct ")
     public void testEx6() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.IsClassPathCorrect, 1,
@@ -131,8 +130,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test unused active needs ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test unused active needs ")
     public void testEx7() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -144,8 +143,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test invoked type exist in type space but not import ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test invoked type exist in type space but not import ")
     public void testEx8() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -159,8 +158,8 @@ public class VjoExTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test not exist package situation ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test not exist package situation ")
     public void testBadPackage() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(TypeProbIds.IsClassPathCorrect, 1,

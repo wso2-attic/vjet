@@ -15,9 +15,9 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.needs;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,9 +27,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Class/Interface description
@@ -37,7 +36,7 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
+//@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
 public class InactiveNeedsTester extends VjoValidationBaseTester {
 
     @Before
@@ -46,8 +45,8 @@ public class InactiveNeedsTester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Inactive Needs with type which unexist in typespace")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Inactive Needs with type which unexist in typespace")
     public void testIfstatement1() {
         expectProblems.add(createNewProblem(
                 VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 1, 0));
@@ -57,8 +56,8 @@ public class InactiveNeedsTester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Inactive Needs with type which exist in typespace")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Inactive Needs with type which exist in typespace")
     public void testIfstatement2() {
         expectProblems.clear();
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(

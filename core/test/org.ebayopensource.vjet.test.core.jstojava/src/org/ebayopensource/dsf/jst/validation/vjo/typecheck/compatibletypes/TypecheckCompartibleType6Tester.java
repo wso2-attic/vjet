@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.typecheck.compatibletypes;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -26,9 +26,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Type check for compartible type
@@ -36,8 +35,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
 public class TypecheckCompartibleType6Tester extends VjoValidationBaseTester {
 
     @Before
@@ -52,8 +51,8 @@ public class TypecheckCompartibleType6Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test incomatible situation betwween string and int.Number")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test incomatible situation betwween string and int.Number")
     public void testCompartibleType1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "typecheck.compartible.", "typecheckCompartibleType6.js", this

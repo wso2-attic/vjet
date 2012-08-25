@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import java.util.List;
 import java.util.Map;
@@ -29,23 +29,25 @@ import org.ebayopensource.dsf.ts.method.MethodIndex;
 import org.ebayopensource.dsf.ts.property.PropertyIndex;
 import org.ebayopensource.dsf.ts.property.PropertyName;
 import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjo.lib.IResourceResolver;
+import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Before;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class TypeEventTests extends BaseTest {
 	
 	@Before
 	public void clearCache() {
 		JstCache.getInstance().clear();
+		
 	}
 	
 	
-	@Category( { P1, UNIT })
-	@Description("Test addition of event types")
+	//@Category( { P1, UNIT })
+	//@Description("Test addition of event types")
 	public void testAddTypeEvents(){
 		
 		TestDataHelper.clear();
@@ -86,8 +88,8 @@ public class TypeEventTests extends BaseTest {
 		assertEquals(7, dependents.size());
 	}
 
-	@Category( { P1, UNIT })
-	@Description("Test modifications of type events")
+	//@Category( { P1, UNIT })
+	//@Description("Test modifications of type events")
 //	@Ignore("problem with library manager java 2 js renaming")
 	public void testModifyTypeEvents(){
 
@@ -237,8 +239,8 @@ public class TypeEventTests extends BaseTest {
 		assertEquals(7, dependents.size());
 	}
 
-	@Category( { P1, UNIT })
-	@Description("Test renaming of type events")
+	//@Category( { P1, UNIT })
+	//@Description("Test renaming of type events")
 	public void testRenameTypeEvents(){
 
 		final JstTypeSpaceMgr tsMgr = getTypeSpaceManager();
@@ -294,8 +296,8 @@ public class TypeEventTests extends BaseTest {
 				((JstType)typeA).setSimpleName("A");
 	}
 
-	@Category( { P1, UNIT })
-	@Description("Test removal of type events")
+	//@Category( { P1, UNIT })
+	//@Description("Test removal of type events")
 	public void testRemoveTypeEvents() throws Exception{
 
 		final JstTypeSpaceMgr tsMgr = getTypeSpaceManager();

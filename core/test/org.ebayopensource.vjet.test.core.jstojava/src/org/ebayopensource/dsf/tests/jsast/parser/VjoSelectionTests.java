@@ -8,10 +8,10 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -26,12 +26,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoSelectionTests {
 	private IJstType type;
 
@@ -43,8 +42,8 @@ public class VjoSelectionTests {
 	}
 
 	@Test
-	@Category({P4,UNIT,FAST})
-	@Description("Verifies imports declared using deprecated getNode method")
+	//@Category({P4,UNIT,FAST})
+	//@Description("Verifies imports declared using deprecated getNode method")
 	public void testImports() {
 		Object node = JstUtil.getNode(type, 17, 17);
 		assertEquals("Wrong node type selected", JstTypeReference.class,
@@ -55,8 +54,8 @@ public class VjoSelectionTests {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies imports declared")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies imports declared")
 	public void testImports2() {
 		Object node = JstUtil.getLeafNode(type, 17, 17);
 		assertEquals("Wrong node type selected", JstTypeReference.class,
@@ -67,8 +66,8 @@ public class VjoSelectionTests {
 	}
 
 	@Test
-	@Category({P4,UNIT,FAST})
-	@Description("Verifies inherits declared using deprecated getNode method")
+	//@Category({P4,UNIT,FAST})
+	//@Description("Verifies inherits declared using deprecated getNode method")
 	public void testExtends() {
 		Object node = JstUtil.getNode(type, 160, 160);
 		assertEquals("Wrong node type selected", JstTypeReference.class,
@@ -79,8 +78,8 @@ public class VjoSelectionTests {
 	}
 	
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies inherits declared")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies inherits declared")
 	public void testExtends2() {
 		Object node = JstUtil.getLeafNode(type, 160, 160);
 		assertEquals("Wrong node type selected", JstTypeReference.class,

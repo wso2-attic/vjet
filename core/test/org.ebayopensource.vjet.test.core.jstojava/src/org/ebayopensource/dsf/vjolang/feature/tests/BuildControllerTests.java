@@ -7,20 +7,19 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.net.URL;
 
 import org.ebayopensource.dsf.jstojava.controller.BuildController;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class BuildControllerTests {
 
 	
@@ -42,8 +41,8 @@ public class BuildControllerTests {
 	static final String TEST_D = "TestD";
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Generates jsr and java files")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Generates jsr and java files")
 	public void testGeneration() throws Exception {
 		
 		BuildController c = new BuildController();

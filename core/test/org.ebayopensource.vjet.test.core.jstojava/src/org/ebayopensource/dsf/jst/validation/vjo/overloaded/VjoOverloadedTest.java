@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.overloaded;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -17,19 +17,18 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoOverloadedTest extends VjoValidationBaseTester {
 
     List<VjoSemanticProblem> actualProblems = null;
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test methods overload ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test methods overload ")
     public void testOverloaded() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -39,8 +38,8 @@ public class VjoOverloadedTest extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test methods overload in interface ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test methods overload in interface ")
     public void testOverloadedInterface() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(
@@ -50,8 +49,8 @@ public class VjoOverloadedTest extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test methods overload ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test methods overload ")
     public void testVariable() throws Exception {
         expectProblems.clear();
         actualProblems = getVjoSemanticProblem(

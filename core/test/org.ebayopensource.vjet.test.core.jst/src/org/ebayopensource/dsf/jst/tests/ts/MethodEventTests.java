@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -21,15 +21,14 @@ import org.ebayopensource.dsf.ts.event.method.RenameMethodEvent;
 import org.ebayopensource.dsf.ts.method.MethodName;
 import org.ebayopensource.dsf.ts.property.PropertyName;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class MethodEventTests extends BaseTest {
 	
-	@Category( { P1, UNIT })
-	@Description("Test rename of method events")
+	//@Category( { P1, UNIT })
+	//@Description("Test rename of method events")
 	public void testRenameMethodEvents(){
 
 		JstTypeSpaceMgr tsMgr = getTypeSpaceManager();
@@ -57,8 +56,8 @@ public class MethodEventTests extends BaseTest {
 		((JstMethod)mtdGetName).setName("getName");
 	}
 
-	@Category( { P1, UNIT })
-	@Description("Test removal of method events")
+	//@Category( { P1, UNIT })
+	//@Description("Test removal of method events")
 	public void testRemoveAddMethodEvents(){
 
 		JstTypeSpaceMgr tsMgr = getTypeSpaceManager();

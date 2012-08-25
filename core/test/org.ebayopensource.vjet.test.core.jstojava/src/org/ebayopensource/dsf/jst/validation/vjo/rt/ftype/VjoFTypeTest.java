@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt.ftype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -20,26 +20,25 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoFTypeTest extends VjoValidationBaseTester{
 	
 	List<VjoSemanticProblem> actualProblems = null;
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation error for non existing type usage and redundant needs")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation error for non existing type usage and redundant needs")
 	public void testFType() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.ftype.", "FType.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation error for non existing type usage and redundant needs")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation error for non existing type usage and redundant needs")
 	public void testFTypeUser() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 25, 0));

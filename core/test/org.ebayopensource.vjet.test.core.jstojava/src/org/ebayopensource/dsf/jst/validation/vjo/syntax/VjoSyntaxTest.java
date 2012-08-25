@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.syntax;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.List;
 
@@ -22,19 +22,18 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoSyntaxTest extends VjoValidationBaseTester{
 	
 	List<VjoSemanticProblem> actualProblems = null;
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Ctype can have only one inherits statement. " +
-			"Multiple inherits statements will result in validation error")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Ctype can have only one inherits statement. " +
+//			"Multiple inherits statements will result in validation error")
 	public void testDupInherits() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 2, 0));
@@ -46,8 +45,8 @@ public class VjoSyntaxTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P5,FAST,UNIT})
-	@Description("Test VJET validation if no type is defined.")
+	@Test //@Category({P5,FAST,UNIT})
+	//@Description("Test VJET validation if no type is defined.")
 	@Ignore("No type here")
 	public void testNoType() throws Exception {
 		expectProblems.clear();
@@ -55,9 +54,9 @@ public class VjoSyntaxTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation warning for redundant needs. The types provided in satisfies, " +
-			"inherits, mixin are honorary needs and not required to be added inot needs statement")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation warning for redundant needs. The types provided in satisfies, " +
+//			"inherits, mixin are honorary needs and not required to be added inot needs statement")
 	public void testSyntaxCombined() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownMissingImport, 15, 0));
@@ -70,8 +69,8 @@ public class VjoSyntaxTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Tests the proper package name usage in decalring a VJET type.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Tests the proper package name usage in decalring a VJET type.")
 	public void testBadTypeName() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(TypeProbIds.IsClassPathCorrect, 1, 0));

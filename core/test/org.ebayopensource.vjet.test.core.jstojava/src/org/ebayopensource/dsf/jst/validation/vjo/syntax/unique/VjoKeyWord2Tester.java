@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.unique;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,9 +27,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Vjo key word 2 tester
@@ -37,7 +36,7 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoKeyWord2Tester extends VjoValidationBaseTester {
 
     @Before
@@ -51,8 +50,8 @@ public class VjoKeyWord2Tester extends VjoValidationBaseTester {
 
     @Test
     @Ignore
-    @Category( { P3, FAST, UNIT })
-    @Description("Test vjo keyword unique")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test vjo keyword unique")
     public void testOverrideType1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.unique/", "VjoKeyWord2.js", this.getClass());

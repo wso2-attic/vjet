@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -26,11 +26,10 @@ import org.ebayopensource.dsf.javatojs.tests.data.build.j2j.N;
 import org.ebayopensource.dsf.javatojs.tests.data.build.j2j.subdir2.J;
 import org.ebayopensource.dsf.javatojs.tests.data.build.j2jma.P;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class VjoPrebuildAntTest {
 	
 	@BeforeClass
@@ -39,8 +38,8 @@ public class VjoPrebuildAntTest {
 	
 	@Ignore("Required, unless this test can be fixed to run using Ant")
 	@Test
-	@Category( { P5, INTEGRATION })
-	@Description("Test translation operation using Ant")
+	//@Category( { P5, INTEGRATION })
+	//@Description("Test translation operation using Ant")
 	public void runAnt() throws IOException,
 			URISyntaxException, InterruptedException {
 		String path = new File(ResourceUtil.getResource(VjoPrebuildAntTest.class,

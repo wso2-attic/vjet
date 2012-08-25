@@ -7,12 +7,12 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt.ctype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
+
+
 
 import java.util.List;
 
@@ -24,18 +24,17 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoCTypeTest extends VjoValidationBaseTester{
 	
 	List<VjoSemanticProblem> actualProblems = null;
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation error for non existing type usage and redundant needs")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation error for non existing type usage and redundant needs")
 	public void testCType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 2, 0));
@@ -49,17 +48,17 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test CType is defined properly and there should not be any validation error/warning")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test CType is defined properly and there should not be any validation error/warning")
 	public void testBaseCType() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.ctype.", "BaseCType.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
-			"props, protos, options, inits and endtype sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
+//			"props, protos, options, inits and endtype sections")
 	public void testBadCType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -67,9 +66,9 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
-			"props, protos, options, inits and endtype sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
+//			"props, protos, options, inits and endtype sections")
 	public void testBadCType1() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -78,9 +77,9 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
-			"props, protos, options, inits and endtype sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
+//			"props, protos, options, inits and endtype sections")
 	public void testBadCType2() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -88,9 +87,9 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
-			"props, protos, options, inits and endtype sections")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("Test CType can have only needs, satisfies, inherits, mixin, " +
+//			"props, protos, options, inits and endtype sections")
 	public void testBadCType4() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -98,8 +97,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test CType must implement the abstract methods of itype it is satisfying")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test CType must implement the abstract methods of itype it is satisfying")
 	public void testBadCType3() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 1, 0));
@@ -107,8 +106,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test every VJET JS must end with endType() section")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test every VJET JS must end with endType() section")
 	public void testBadCType5() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.MissingEndType,1, 0));
@@ -116,8 +115,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test every VJET JS must have only one props, protos")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test every VJET JS must have only one props, protos")
 	public void testBadCType6() throws Exception {
 		expectProblems.clear();
 //		expectProblems.add(createNewProblem(VjoSyntaxProbIds.MultipleProps,4, 0));
@@ -127,8 +126,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P4,FAST,UNIT})
-	@Description("Test every VJET JS must have only one props, protos")
+	@Test //@Category({P4,FAST,UNIT})
+	//@Description("Test every VJET JS must have only one props, protos")
 	public void testBadCType7() throws Exception {
 		expectProblems.clear();
 //		expectProblems.add(createNewProblem(VjoSyntaxProbIds.MultipleProtos,4, 0));
@@ -138,8 +137,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test every VJET JS must end with endType() section")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test every VJET JS must end with endType() section")
 	@Ignore
 	public void testBadCType8() throws Exception {
 		expectProblems.clear();
@@ -148,8 +147,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation error for non existing type usage and redundant needs")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation error for non existing type usage and redundant needs")
 	public void testBadCType9() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.NameSpaceCollision,3, 0));
@@ -160,9 +159,9 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation error for non existing type usage and redundant needs." +
-			" Also, two types of the same name are imported (needs), one of them must have alias.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation error for non existing type usage and redundant needs." +
+//			" Also, two types of the same name are imported (needs), one of them must have alias.")
 	public void testBadCTypeA() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.NameSpaceCollision,2, 0));
@@ -173,8 +172,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P2,FAST,UNIT})
-	@Description("Test validation warning for not using private method in the type")
+	@Test //@Category({P2,FAST,UNIT})
+	//@Description("Test validation warning for not using private method in the type")
 	public void testBadCTypeB() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UnusedPrivateMethod, 5, 0));
@@ -183,8 +182,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test validation warning for not importing (needs) the types used in comments and functions/var")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test validation warning for not importing (needs) the types used in comments and functions/var")
 	public void testBadCTypeC() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.TypeUnknownMissingImport, 5, 0));
@@ -195,8 +194,8 @@ public class VjoCTypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test proper usage of alias for needs. No validation warning/errors")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test proper usage of alias for needs. No validation warning/errors")
 	public void testCTypeAlias() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.ctype.", "CTypeAlias.js", this.getClass());

@@ -7,15 +7,14 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.runtime.tests.metatype;
-import static com.ebay.junitnexgen.category.Category.Groups.FF;
-import static com.ebay.junitnexgen.category.Category.Groups.IE;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
+
+
+
+
 
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
-import com.ebay.junitnexgen.category.Category;
 import com.ebay.junitnexgen.category.Module;
 import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 
@@ -23,27 +22,27 @@ public class BooleanTests extends BaseTestClass {
 	private static final String NATIVETYPES_TEST_VJO = "org.ebayopensource.vjo.runtime.tests.metatype.jstests.BooleanTests";
 
 	@Test
-	@Category( { P1, IE })
+	//@Category( { P1, IE })
 	@Module("VjoRuntimeTests")
 	public void testBooleanTests_MSIE() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.IE_8);
 	}
 
 	@Test
-	@Category( {P2,FF })
+	//@Category( {P2,FF })
 	@Module("VjoRuntimeTests")
 	public void testBooleanTests_FIREFOX() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.FIREFOX_3);
 	}
 
 //	@Test
-//	@Category( {P2,OPERA })
+//	//@Category( {P2,OPERA })
 //	public void booleanTests_OPERA() throws Exception {
 //		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.OPERA_9);
 //	}
 //
 //	@Test
-//	@Category( {P2,SAFARI })
+//	//@Category( {P2,SAFARI })
 //	public void booleanTests_SAFARI() throws Exception {
 //		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.SAFARI_3);
 //	}

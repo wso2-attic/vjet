@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.mixin;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,9 +27,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Class/Interface description
@@ -37,8 +36,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
 public class MixinType4Tester extends VjoValidationBaseTester {
 
     @Before
@@ -51,8 +50,8 @@ public class MixinType4Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test mixin function for ctype with confilict field and method situation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test mixin function for ctype with confilict field and method situation")
     public void testIfstatement1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.mixintype/", "PersonConflit.js", this.getClass());
@@ -60,8 +59,8 @@ public class MixinType4Tester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test mixin function for ctype with confilict field and method situation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test mixin function for ctype with confilict field and method situation")
     public void testMixinConflicts() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.mixintype/", "EmployeeConflictsPerson.js", this.getClass());

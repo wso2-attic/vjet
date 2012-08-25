@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -48,11 +48,10 @@ import org.ebayopensource.dsf.javatojs.tests.data.build.subdir.subdir2.subdir3.C
 import org.ebayopensource.dsf.javatojs.translate.config.CodeGenConfig;
 import org.ebayopensource.dsf.javatojs.util.JavaToJsHelper;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value = "DsfPrebuild", subModuleId = "JavaToJs")
+
+
+//@ModuleInfo(value = "DsfPrebuild", subModuleId = "JavaToJs")
 public class PreBuildTests {
 
 	private static final String SRC_DIR_NAME = "src";
@@ -154,16 +153,16 @@ public class PreBuildTests {
 	}
 
 	@Test(expected = BuildException.class)
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test that J2JsBuildTask throws BuildException if src dir is set to null")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test that J2JsBuildTask throws BuildException if src dir is set to null")
 	public void srcDirNull() {
 		J2JsBuildTask task = new J2JsBuildTask();
 		task.execute();
 	}
 
 	@Test(expected = BuildException.class)
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test that J2JsBuildTask throws BuildException if project dir is set to null")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test that J2JsBuildTask throws BuildException if project dir is set to null")
 	public void projectDirNull() {
 		J2JsBuildTask task = new J2JsBuildTask();
 		task.setSourceDirs("src");
@@ -171,8 +170,8 @@ public class PreBuildTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test J2JsBuildTask where no vjo codegen is requested")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test J2JsBuildTask where no vjo codegen is requested")
 	public void noVjoCodegen() throws URISyntaxException, IOException {
 		J2JsBuildTask task = new J2JsBuildTask();
 
@@ -214,8 +213,8 @@ public class PreBuildTests {
 	}
 
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test J2JsBuildTask where vjo codegen is requested")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test J2JsBuildTask where vjo codegen is requested")
 	public void hasVjoCodegen() throws URISyntaxException {
 		J2JsBuildTask task = new J2JsBuildTask();
 
@@ -232,8 +231,8 @@ public class PreBuildTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test J2JsBuildTask where Java2Js code generator properties are read from a property file")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test J2JsBuildTask where Java2Js code generator properties are read from a property file")
 	public void testJava2JsProperties() throws URISyntaxException {
 		String codeGenPropPath = 
 		new File (getDirectDir(this.getClass()),"java2js.properties").getAbsolutePath();
@@ -254,8 +253,8 @@ public class PreBuildTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test J2JsBuildTask's parallel option")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test J2JsBuildTask's parallel option")
 	public void testParallel() throws URISyntaxException {
 		J2JsBuildTask task = new J2JsBuildTask();
 
@@ -270,8 +269,8 @@ public class PreBuildTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test J2JsBuildTask's trace option")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test J2JsBuildTask's trace option")
 	public void testTrace() throws URISyntaxException,
 			UnsupportedEncodingException, FileNotFoundException, IOException {
 		J2JsBuildTask task = new J2JsBuildTask();
@@ -289,8 +288,8 @@ public class PreBuildTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test J2JsBuildTask's getters and setters")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test J2JsBuildTask's getters and setters")
 	public void testGetSet() {
 		J2JsBuildTask task = new J2JsBuildTask();
 		task.setEnableParallel(true);

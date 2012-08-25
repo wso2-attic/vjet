@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertNotNull;
 
 import java.util.HashMap;
@@ -23,16 +23,15 @@ import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration
 import org.eclipse.mod.wst.jsdt.internal.compiler.impl.CompilerOptions;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class CommentRecorderParserTest {
 
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Compiles js file without errors")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Compiles js file without errors")
 	public void test1() throws Exception {
 		CompilationUnitDeclaration ast = SyntaxTreeFactory2.createAST(null,
 				null, "src/org.ebayopensource.dsf/tests/jsast/parser/simplevjo.js.txt",

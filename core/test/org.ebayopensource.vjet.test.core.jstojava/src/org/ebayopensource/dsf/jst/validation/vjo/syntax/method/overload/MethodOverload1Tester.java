@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.method.overload;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,9 +27,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Class/Interface description
@@ -37,8 +36,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P1, FAST, UNIT })
 public class MethodOverload1Tester extends VjoValidationBaseTester {
 
     @Before
@@ -49,8 +48,8 @@ public class MethodOverload1Tester extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test overload with different args")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test overload with different args")
     public void testInterfaceType1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.methodOverload/", "methodOverload2.js", this.getClass());
@@ -58,8 +57,8 @@ public class MethodOverload1Tester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test overload with different modifier")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test overload with different modifier")
     public void testOverloadModifiers() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -71,8 +70,8 @@ public class MethodOverload1Tester extends VjoValidationBaseTester {
     
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test overload with different modifier")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test overload with different modifier")
     public void testOverloadModifiers2() {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -82,8 +81,8 @@ public class MethodOverload1Tester extends VjoValidationBaseTester {
         assertProblemEquals(expectProblems, problems);
     }
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test overload with different modifier")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test overload with different modifier")
     public void methodOverloadOpt1() {
     	expectProblems.clear();
     	expectProblems.add(createNewProblem(

@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -35,9 +35,8 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -46,7 +45,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  * 
  *
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class LocalVarAsFunctionTest implements ICommentConstants {
 	
 	private static final String fileName = FOLDER + "/LocalVarAsFunction.vjo";
@@ -69,8 +68,8 @@ public class LocalVarAsFunctionTest implements ICommentConstants {
 	}
 		
 	@Test
-	@Category({P2,UNIT,FAST})
-	@Description("Verifies local variables declared as function")
+	//@Category({P2,UNIT,FAST})
+	//@Description("Verifies local variables declared as function")
 	public void verifyLocalVariableAsFunctionFunction() {
 		IJstMethod bar = jstType.getStaticMethod("bar");
 		JstModifiers jm = bar.getModifiers();

@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import org.ebayopensource.dsf.javatojs.tests.BaseRoundTripTest;
+import org.ebayopensource.vjet.test.util.BaseRoundTripTest;
 
 @RunWith(value=Parameterized.class)
 public class Js2JsRoundTripTests extends BaseRoundTripTest {

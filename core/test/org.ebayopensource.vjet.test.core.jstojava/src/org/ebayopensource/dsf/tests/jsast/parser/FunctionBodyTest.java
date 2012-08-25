@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.net.URL;
 import java.util.Arrays;
@@ -28,9 +28,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -39,7 +38,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  *
  */
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class FunctionBodyTest implements ICommentConstants {
 	
 	private IJstType jstType = null;
@@ -66,8 +65,8 @@ public class FunctionBodyTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1, UNIT, FAST})
-	@Description("Generates vjo and verifies function body.")
+	//@Category({P1, UNIT, FAST})
+	//@Description("Generates vjo and verifies function body.")
 	public void verifyFunctionBody() {
 		VjoGenerator generator = new VjoGenerator(new GeneratorCtx(CodeStyle.PRETTY));
 		generator.writeVjo(jstType);  

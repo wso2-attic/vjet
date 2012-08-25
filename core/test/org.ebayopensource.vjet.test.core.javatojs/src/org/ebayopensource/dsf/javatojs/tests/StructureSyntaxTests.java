@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FUNCTIONAL;
-import static com.ebay.junitnexgen.category.Category.Groups.P4;
+
+
 import static org.junit.Assert.assertEquals;
 
 import org.ebayopensource.dsf.javatojs.control.DefaultTranslationInitializer;
@@ -69,14 +69,14 @@ import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.javatojs.util.JstToJavaHelper;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.declaration.JstType;
+import org.ebayopensource.vjet.test.util.TestHelper;
 import org.junit.After;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@ModuleInfo(value = "DsfPrebuild", subModuleId = "JavaToJs")
+
+
+//@ModuleInfo(value = "DsfPrebuild", subModuleId = "JavaToJs")
 public class StructureSyntaxTests {
 
 	// private static ITranslationInitializer s_initializer;
@@ -112,191 +112,191 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that cast operations are translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that cast operations are translated correctly")
 	public void testCast() {
 		TestHelper.testType(Cast.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that blocks are translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that blocks are translated correctly")
 	public void testBlocks() {
 		TestHelper.testType(Blocks.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that a bean java class can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that a bean java class can be translated correctly")
 	public void testEmployee() {
 		TestHelper.testType(Employee.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that field declarations can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that field declarations can be translated correctly")
 	public void testFieldDecalarations() {
 		TestHelper.testType(Fields.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that field declarations can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that field declarations can be translated correctly")
 	public void testMethods() {
 		TestHelper.testType(Methods.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that nested types can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that nested types can be translated correctly")
 	public void testNestedTypes() {
 		TestHelper.testType(NestedTypes.class, getInitializer());
 		getCtx().getTraceManager().close();
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that inner types can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that inner types can be translated correctly")
 	public void testNestedInnerTypes() {
 		TestHelper.testType(NestedInnerTypes.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that nested static types can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that nested static types can be translated correctly")
 	public void testNestedStatic() {
 		TestHelper.testType(A.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that nested instances can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that nested instances can be translated correctly")
 	public void testNestedInstance() {
 		TestHelper.testType(B.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that deeply embedded static types can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that deeply embedded static types can be translated correctly")
 	public void testDeepEmbededStatic() {
 		TestHelper.testType(DeepEmbededStatic.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that deeply embedded static types can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that deeply embedded static types can be translated correctly")
 	public void testEmbededPath() {
 		TestHelper.testType(EmbededPath.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that deeply embedded instances can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that deeply embedded instances can be translated correctly")
 	public void testDeepEmbededInstance() {
 		TestHelper.testType(DeepEmbededInstance.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that deeply nested types can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that deeply nested types can be translated correctly")
 	public void testUseNested() {
 		TestHelper.testType(UseNested.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that local types can be translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that local types can be translated correctly")
 	public void testLocalType() {
 		TestHelper.testType(LocalType.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of 'this' is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of 'this' is translated correctly")
 	public void testThisNS() {
 		TestHelper.testType(This.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of super/static is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of super/static is translated correctly")
 	public void testSuperStaticNS() {
 		TestHelper.testType(SuperStatic.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of super/static instance is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of super/static instance is translated correctly")
 	public void testSuperInstanceNS() {
 		TestHelper.testType(SuperInstance.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of super/static from other classes is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of super/static from other classes is translated correctly")
 	public void testUseSuperStaicPty() {
 		TestHelper.testType(UseSuperStaticPty.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of super/static methods is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of super/static methods is translated correctly")
 	public void testUseSuperStaicMtd() {
 		TestHelper.testType(UseSuperStaticMtd.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of static imported fields is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of static imported fields is translated correctly")
 	public void testStaticImportedField() {
 		TestHelper.testType(StaticImportedField.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of static imported method is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of static imported method is translated correctly")
 	public void testStaticImportedMethod() {
 		TestHelper.testType(StaticImportedMethod.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of on demand imports is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of on demand imports is translated correctly")
 	public void testOnDemandImports() {
 		TestHelper.testType(OnDemandImports.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of on-demand in fields is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of on-demand in fields is translated correctly")
 	public void testOnDemandInField() {
 		TestHelper.testType(OnDemandInField.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of on-demand in methods is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of on-demand in methods is translated correctly")
 	public void testOnDemandInMethod() {
 		TestHelper.testType(OnDemandInMethod.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of fully qualified types is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of fully qualified types is translated correctly")
 	public void testFullyQualifiedUsage() {
 		TestHelper.testType(FullyQualifiedUsage.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that expressions are translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that expressions are translated correctly")
 	public void testExpressions() {
 		TestHelper.testType(Expressions.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that statements are translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that statements are translated correctly")
 	public void testStatements() {
 		TestHelper.testType(Statements.class, getInitializer());
 		JstCache c = JstCache.getInstance();
@@ -307,29 +307,29 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that sibling types are translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that sibling types are translated correctly")
 	public void testSiblingTypes() {
 		TestHelper.testType(SiblingTypes.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of 'throws' is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of 'throws' is translated correctly")
 	public void testThrows() {
 		TestHelper.testType(Throws.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of  'try'-'throw' is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of  'try'-'throw' is translated correctly")
 	public void testThrowTry() {
 		TestHelper.testType(ThrowTry.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage arrays is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage arrays is translated correctly")
 	public void testArray() {
 		TestHelper.testType(Array.class, getInitializer());
 		assertEquals(0, TestHelper.getTranslationController(getInitializer())
@@ -337,36 +337,36 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of embedded types is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of embedded types is translated correctly")
 	public void testEmbededType() {
 		TestHelper.testType(EmbededType.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of identifiers is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of identifiers is translated correctly")
 	public void testIdentifiers() {
 		TestHelper.testType(Identifiers.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test that usage of identifiers is translated correctly")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test that usage of identifiers is translated correctly")
 	public void testInstanceAccess() {
 		TestHelper.testType(InstanceAccess.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of interfaces")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of interfaces")
 	public void testInterfaces() {
 		TestHelper.testType(Interface.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation Enum")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation Enum")
 	public void testEnum() {
 		TestHelper
 				.testType(
@@ -375,15 +375,15 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of initializers")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of initializers")
 	public void testInitializer() {
 		TestHelper.testType(Initializer.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of overloading constructs")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of overloading constructs")
 	public void testOverloading() {
 		TestHelper.testType(Overloadings.class, getInitializer());
 		assertEquals(0, TestHelper.getTranslationController(getInitializer())
@@ -391,50 +391,50 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of dispatch ordering")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of dispatch ordering")
 	public void testDispatchingOrder() {
 		TestHelper.testType(DispatchingOrder.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of dispatch ordering")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of dispatch ordering")
 	public void testOverloadingWithIType() {
 		TestHelper.testType(OverloadingWithIType.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of dispatch ordering")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of dispatch ordering")
 	public void testOverloadingMultipleArgs() {
 		TestHelper.testType(OverloadingMultipleArgs.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of method resolving constructs")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of method resolving constructs")
 	public void testResolveMethod() {
 		TestHelper.testType(ResolveMethod.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of Boxing/Unboxing and the choice of methods")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of Boxing/Unboxing and the choice of methods")
 	public void testFindMethod() {
 		TestHelper.testType(FindMethod.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation various constructors with varying signatures")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation various constructors with varying signatures")
 	public void testFindConstructor() {
 		TestHelper.testType(FindConstructor.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of synchronized structs")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of synchronized structs")
 	public void testSynchronized() {
 		TestHelper.testType(Synchronized.class, getInitializer());
 		assertEquals(0, TestHelper.getTranslationController(getInitializer())
@@ -442,8 +442,8 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of inheritance hierarchies")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of inheritance hierarchies")
 	public void testInheritance() {
 		TestHelper.testType(Inheritance.class, getInitializer());
 		assertEquals(0, TestHelper.getTranslationController(getInitializer())
@@ -451,8 +451,8 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of Generics")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of Generics")
 	public void testGenerics() {
 		// TODO - The Date usage in Generics.java is not handled correctly now
 		// for JSR
@@ -477,8 +477,8 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test translation of fully qualified types")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test translation of fully qualified types")
 	public void testFullyQualifiedTypes() {
 		TestHelper.testType(FullyQualifiedTypes.class, getInitializer());
 		assertEquals(0, TestHelper.getTranslationController(getInitializer())
@@ -486,36 +486,36 @@ public class StructureSyntaxTests {
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test AutoBoxing and UnBoxing")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test AutoBoxing and UnBoxing")
 	public void testAutoboxingUnboxing() {
 		TestHelper.testType(AutoboxingUnboxingTests.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test Numeric AutoBoxing")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test Numeric AutoBoxing")
 	public void testNumericAutoBoxing() {
 		TestHelper.testType(NumericAutoBoxing.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test Boolean AutoBoxing")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test Boolean AutoBoxing")
 	public void testBooleanAutoBoxing() {
 		TestHelper.testType(BooleanAutoBoxing.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test Char AutoBoxing")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test Char AutoBoxing")
 	public void testCharAutoBoxing() {
 		TestHelper.testType(CharAutoBoxing.class, getInitializer());
 	}
 
 	@Test
-	@Category({ P4, FUNCTIONAL })
-	@Description("Test Generic AutoBoxing")
+	//@Category({ P4, FUNCTIONAL })
+	//@Description("Test Generic AutoBoxing")
 	public void testGenericAutoBoxing() {
 		TestHelper.testType(GenericAutoBoxing.class, getInitializer());
 	}

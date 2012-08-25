@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -37,16 +37,15 @@ import org.ebayopensource.dsf.jstojava.parser.comments.VjComment;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value = "DsfPrebuild", subModuleId = "JsToJava")
 public class CommentParsingTest extends BaseTest {
 
 	@Test
-	@Description("Test the comments placement and its association with js statements")
+	//@Description("Test the comments placement and its association with js statements")
 	public void testProcessComments() {
 		CompilationUnitDeclaration ast = prepareAst("commentTestFile.js.txt",
 				null);
@@ -98,7 +97,7 @@ public class CommentParsingTest extends BaseTest {
 	}
 
 	@Test
-	@Description("Test the comments placement and its association with js statements")
+	//@Description("Test the comments placement and its association with js statements")
 	public void testAttributedTypeComments() {
 		JsCommentMeta m;
 		m= parseComment("//< Foo:bar");
@@ -139,7 +138,7 @@ public class CommentParsingTest extends BaseTest {
 	}
 
 	@Test
-	@Description("Test the generics comments")
+	//@Description("Test the generics comments")
 	public void testMethodsInComments() {
 		JsCommentMeta m;
 		m =parseComment("//< public String foo(String, int, Number)");
@@ -181,7 +180,7 @@ public class CommentParsingTest extends BaseTest {
 	}
 
 	@Test
-	@Description("Test the generics comments")
+	//@Description("Test the generics comments")
 	public void testGenericsInComments() {
 		parseComment("//< Foo<E>");
 		parseComment("//< GenericOuter<T extends Number>");
@@ -193,7 +192,7 @@ public class CommentParsingTest extends BaseTest {
 
 	}
 	@Test
-	@Description("Test the generics comments")
+	//@Description("Test the generics comments")
 	public void testModifiersInComments() {
 		parseComment("//< public");
 		parseComment("//< private");
@@ -207,7 +206,7 @@ public class CommentParsingTest extends BaseTest {
 	}
 
 	@Test
-	@Description("Test the generics comments")
+	//@Description("Test the generics comments")
 	public void testNegativeComments() {
 		parseComment("//> public abstract final", DIRECTION.FORWARD, true);
 

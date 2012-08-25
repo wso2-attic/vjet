@@ -7,15 +7,14 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.vjolang.feature.tests.comments;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P2;
-import static com.ebay.junitnexgen.category.Category.Groups.P5;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import org.ebayopensource.dsf.javatojs.tests.TestHelper;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
 import org.ebayopensource.dsf.jsgen.shared.vjo.GeneratorCtx;
 import org.ebayopensource.dsf.jsgen.shared.vjo.VjoGenerator;
@@ -25,28 +24,29 @@ import org.ebayopensource.dsf.jst.IScriptProblem;
 import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jstojava.controller.JstParseController;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjet.test.util.TestHelper;
+//import org.ebayopensource.vjet.test.util.TestHelper;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.FileUtils;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoCommentTest {
 
 
 	@Test
-	@Category({P5, UNIT, FAST})
-	@Description("Blank test method")
+	//@Category({P5, UNIT, FAST})
+	//@Description("Blank test method")
 	public void testAnnotations() throws Exception {
 		
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Test casting in comments parsed")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Test casting in comments parsed")
 	public void testCast() throws IOException {
 		IScriptUnit unit = compareText("SimpleCast.vjo");
 		//TODO: test ArrayInitializers
@@ -54,15 +54,15 @@ public class VjoCommentTest {
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Test dynamic type parsed")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Test dynamic type parsed")
 	public void testDynamic() throws IOException {
 		compareText("SimpleDynamic.vjo");
 	}
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Test inactive needs parsed")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Test inactive needs parsed")
 	public void testInactiveNeeds() throws IOException {
 		compareText("SimpleINeeds.vjo");
 		compareText("TestCommentsUsingVjoSections.vjo");
@@ -72,10 +72,10 @@ public class VjoCommentTest {
 
 	
 	@Test
-	@Category({P2, UNIT, FAST})
-	@Description("Test false negative. Errors should occur incase of final atype," +
-			" final final ctype, method declared abstract in ctype," +
-			" method declaration with incorrect format")
+	//@Category({P2, UNIT, FAST})
+	//@Description("Test false negative. Errors should occur incase of final atype," +
+//			" final final ctype, method declared abstract in ctype," +
+//			" method declaration with incorrect format")
 	public void testErrors() throws Exception{
 		IScriptUnit unit = checkErrors("AbstractFinal.vjo");
 		assertEquals(1, unit.getProblems().size());

@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.codegen;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -39,12 +39,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class CodeGenJsrDiff  {
 		
 	private static final String FOLDER = "data";
@@ -455,8 +454,8 @@ public class CodeGenJsrDiff  {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Test generated js matches gold file.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Test generated js matches gold file.")
 	public void verifyStrings() throws IOException {
 		String testString = null;	
 		try {

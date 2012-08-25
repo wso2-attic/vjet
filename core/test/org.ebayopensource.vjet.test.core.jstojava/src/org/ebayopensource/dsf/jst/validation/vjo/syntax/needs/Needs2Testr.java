@@ -14,9 +14,9 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.syntax.needs;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,9 +27,8 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 
 /**
  * Needs test2
@@ -37,10 +36,10 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 
-@Category( { P1, FAST, UNIT })
-@Description("Needs with type which unexist in typespace")
+//@Category( { P1, FAST, UNIT })
+//@Description("Needs with type which unexist in typespace")
 public class Needs2Testr extends VjoValidationBaseTester {
 
 
@@ -53,8 +52,8 @@ public class Needs2Testr extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Needs with type which unexist in typespace")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Needs with type which unexist in typespace")
     public void testIfstatement1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "syntax.needs/",

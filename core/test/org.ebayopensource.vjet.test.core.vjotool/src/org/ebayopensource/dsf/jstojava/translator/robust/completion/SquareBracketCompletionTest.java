@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.translator.robust.completion;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertNotNull;
 
 import org.ebayopensource.dsf.jst.IJstParseController;
@@ -17,8 +17,7 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
 
 /**
  * Test case to validate parser for various scenes in "mixin" block. The test
@@ -28,8 +27,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * 
  * 
  */
-@Category({P1,FAST,UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
+//@Category({P1,FAST,UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="VJET")
 public class SquareBracketCompletionTest extends BaseTest {
 
 	/**

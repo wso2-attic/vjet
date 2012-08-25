@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.generics;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -20,10 +20,9 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
 
-@Category( { P3, FAST, UNIT })
+
+//@Category( { P3, FAST, UNIT })
 public class GenericsExample1 extends VjoValidationBaseTester {
 
     @Before
@@ -32,8 +31,8 @@ public class GenericsExample1 extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("To test VjoPro project false positive")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("To test VjoPro project false positive")
     public void testGenericsExample1() {
     	expectProblems.add(createNewProblem(FieldProbIds.StaticReferenceToNonStaticType, 6, 0));
     	

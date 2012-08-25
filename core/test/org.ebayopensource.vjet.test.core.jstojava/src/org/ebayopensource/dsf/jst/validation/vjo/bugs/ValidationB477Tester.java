@@ -14,16 +14,15 @@
  * Technologies.
  */
 package org.ebayopensource.dsf.jst.validation.vjo.bugs;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import org.ebayopensource.dsf.jsgen.shared.ids.MethodProbIds;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
 
 /**
  * Bug 477
@@ -31,8 +30,8 @@ import com.ebay.junitnexgen.category.ModuleInfo;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
-@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@Category( { P3, FAST, UNIT })
 public class ValidationB477Tester extends VjoValidationBaseTester {
 
     @Before

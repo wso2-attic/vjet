@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.exclude.policy.inheritance;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
 
 import java.util.List;
 
@@ -19,8 +19,7 @@ import org.ebayopensource.dsf.javatojs.tests.exclude.TestTargetTranslator;
 import org.ebayopensource.dsf.javatojs.tests.exclude.TestTargetTranslator.ClassList;
 import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import org.ebayopensource.dsf.javatojs.translate.policy.ITranslationPolicy;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 
 
 /*
@@ -30,8 +29,8 @@ import com.ebay.junitnexgen.category.Description;
 public class TestClass {
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test exclusion policies for inheritance")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test exclusion policies for inheritance")
 	public void test1() {
 		final BuildController build = new BuildController();
 		//build.setUseOnDemand(false);

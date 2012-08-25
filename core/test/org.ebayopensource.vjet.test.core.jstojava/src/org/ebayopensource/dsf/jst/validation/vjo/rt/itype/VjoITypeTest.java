@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.rt.itype;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.List;
 
@@ -21,19 +21,18 @@ import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;
 import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category({P1, FAST, UNIT})
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category({P1, FAST, UNIT})
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoITypeTest extends VjoValidationBaseTester{
 	
 	List<VjoSemanticProblem> actualProblems = null;
 	
-	@Test @Category({P3,FAST,UNIT})
-	@Description("If needs statement has a type not being used aactively in js, " +
-			"it's redundant and produce validation warning")
+	@Test //@Category({P3,FAST,UNIT})
+	//@Description("If needs statement has a type not being used aactively in js, " +
+//			"it's redundant and produce validation warning")
 	public void testIType() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(TypeProbIds.UnusedActiveNeeds, 1, 0));
@@ -41,16 +40,16 @@ public class VjoITypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Sanity test for itype. No validation error should be produced.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Sanity test for itype. No validation error should be produced.")
 	public void testBaseIType() throws Exception {
 		expectProblems.clear();
 		actualProblems = getVjoSemanticProblem("org.ebayopensource.dsf.jst.validation.vjo.rt.itype.", "BaseIType.js", this.getClass());
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test IType can not have satisfies statement.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test IType can not have satisfies statement.")
 	public void testBadIType1() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -58,8 +57,8 @@ public class VjoITypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test IType can not have invalid statement.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test IType can not have invalid statement.")
 	public void testBadIType2() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -67,8 +66,8 @@ public class VjoITypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test IType can not have defs statement.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test IType can not have defs statement.")
 	public void testBadIType3() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.UndefinedMethod, 2, 0));
@@ -79,8 +78,8 @@ public class VjoITypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test IType can not have any statement in method decalred in protos section")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test IType can not have any statement in method decalred in protos section")
 	public void testBadIType4() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(MethodProbIds.BodyForAbstractMethod, 3, 0));
@@ -88,8 +87,8 @@ public class VjoITypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test IType can not have properties defined in protos block.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test IType can not have properties defined in protos block.")
 	public void testBadIType5() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.ITypeWithInstanceProperty, 3, 0));
@@ -97,8 +96,8 @@ public class VjoITypeTest extends VjoValidationBaseTester{
 		assertProblemEquals(expectProblems, actualProblems);
 	}
 	
-	@Test @Category({P1,FAST,UNIT})
-	@Description("Test IType methods/properties can not any other access modifier except public.")
+	@Test //@Category({P1,FAST,UNIT})
+	//@Description("Test IType methods/properties can not any other access modifier except public.")
 	public void testBadIType6() throws Exception {
 		expectProblems.clear();
 		expectProblems.add(createNewProblem(VjoSyntaxProbIds.ITypeAllowsOnlyPublicModifier, 4,  0));

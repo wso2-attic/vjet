@@ -7,10 +7,10 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.BugFixes;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.P3;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,18 +29,17 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-@Category( { P1, FAST, UNIT })
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+
+
+//@Category( { P1, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     @Test
     // Bug 4753
     // @Ignore //TODO - Bug 7725 created to fix this test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test alias must be found at current space via this.vj$")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test alias must be found at current space via this.vj$")
     public void testAliasError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>();
         final List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -54,8 +53,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     
     @Test
     // Bug 8786
-    @Category( { P1, FAST, UNIT })
-    @Description("Test alias must be found at current space via this.vj$")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test alias must be found at current space via this.vj$")
     public void testBug8786() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -68,8 +67,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     @Test
     // Bug 4753
     // @Ignore //TODO - Bug 7725 created to fix this test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test alias must be found at current space via this.vj$")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test alias must be found at current space via this.vj$")
     public void testAliasErrorExtn() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>();
         expectedProblems.add(createNewProblem(TypeProbIds.UnusedActiveNeeds,
@@ -83,8 +82,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test no NPE before process context")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test no NPE before process context")
     // Bug 3942
     public void testBug3942Error() throws Exception {
         try {
@@ -101,8 +100,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test no NPE before process context")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test no NPE before process context")
     // Bug 3943
     public void testBug3943Error() throws Exception {
         final List<VjoSemanticProblem> problems = getVjoSemanticProblem(
@@ -112,8 +111,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Tets correctly parser qualifier name")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Tets correctly parser qualifier name")
     // Bug 3944
     // @Ignore //Bug 7832
     public void testBug3944Error() throws Exception {
@@ -128,8 +127,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Tets undefined function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Tets undefined function")
     // Bug 3945
     public void testBug3945Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>();
@@ -158,8 +157,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 3947
-    @Category( { P3, FAST, UNIT })
-    @Description("test vjo.getType().clazz")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test vjo.getType().clazz")
     @Ignore("linking seems to be problem for vjo.getType().clazz works when you run test standalone but not in multiple case")
     public void testBug3947Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>();
@@ -173,8 +172,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("test correctlly get type name from model")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test correctlly get type name from model")
     // Bug 3981
     public void testBug3981Error() throws Exception {
         try {
@@ -191,8 +190,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test arguments numerb is wrong with expected")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test arguments numerb is wrong with expected")
     // Bug 4591
     // @Ignore
     public void testBug4591Error() throws Exception {
@@ -210,8 +209,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     //  
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test create Function. Navigator. Array ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test create Function. Navigator. Array ")
     // Bug 4790, 4402, 3865, 3941, 4627, 4894, 4752, 3972, 5004, 5006
     public void testBug4626Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>();
@@ -225,8 +224,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     @Test
     // Bug 4630
     // @Ignore
-    @Category( { P1, FAST, UNIT })
-    @Description("test two vjo.ctype exist  ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test two vjo.ctype exist  ")
     public void testBug4630Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>();
         expectedProblems.add(createNewProblem(
@@ -240,8 +239,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4699
-    @Category( { P3, FAST, UNIT })
-    @Description("test return value 1.0 match definition type ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test return value 1.0 match definition type ")
     public void testBug4699Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -252,8 +251,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test can't assign a type to a vaiable ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test can't assign a type to a vaiable ")
     // Bug 4743
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug4743Error() throws Exception {
@@ -267,8 +266,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4754
-    @Category( { P3, FAST, UNIT })
-    @Description("test redefined local variable ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test redefined local variable ")
     public void testBug4754Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -281,8 +280,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test create Function. Navigator. Array ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test create Function. Navigator. Array ")
     // Bug 4790
     public void testBug4790Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -294,8 +293,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test undefined method ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test undefined method ")
     // Bug 4791
     public void testBug4791Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -312,8 +311,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test ctype only exist inits block ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test ctype only exist inits block ")
     // Bug 4827
     public void testBug4827Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -326,8 +325,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4926
-    @Category( { P3, FAST, UNIT })
-    @Description("test defined varibale in inits block ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test defined varibale in inits block ")
     public void testBug4926Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -338,8 +337,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test anotation args number is differ with actual args number ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test anotation args number is differ with actual args number ")
     // Bug 4985
     public void testBug4985Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -351,8 +350,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test invlok static method from init block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test invlok static method from init block")
     // Bug 4987
     public void testBug4987Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -364,8 +363,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test method return type incompatible with declared type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test method return type incompatible with declared type")
     // Bug 4991
     public void testBug4991Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -381,8 +380,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Ignore
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("test overload the return type different invoving void situation")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test overload the return type different invoving void situation")
     // Bug 4993
     public void testBug4993Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -397,8 +396,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test invoking type is not import but exist in type space")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test invoking type is not import but exist in type space")
     // Bug 4997
     public void testBug4997Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -414,8 +413,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4998
-    @Category( { P1, FAST, UNIT })
-    @Description("test @SUPRESSTYPECHECK tag")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test @SUPRESSTYPECHECK tag")
     public void testBug4998Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -427,8 +426,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 5000
-    @Category( { P1, FAST, UNIT })
-    @Description("test prototype value of ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test prototype value of ")
     public void testBug5000Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -440,8 +439,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 5002
-    @Category( { P1, FAST, UNIT })
-    @Description("test create Date object with number ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test create Date object with number ")
     public void testBug5002Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -452,8 +451,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test alert method can be invloked ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test alert method can be invloked ")
     // Bug 5013
     public void testBug5013Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -465,8 +464,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test alert method argment is an invoking expression")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test alert method argment is an invoking expression")
     // Bug 5061
     public void testBug5061Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -478,8 +477,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test alert method can be exist in props block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test alert method can be exist in props block")
     // Bug 5065
     public void testBug5065Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -491,8 +490,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("test alert method argment is an expression of array object invoking method or field ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("test alert method argment is an expression of array object invoking method or field ")
     // Bug 5066
     public void testBug5066Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -504,8 +503,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test alert method can give accept arguemtn such as RegExp.$1  ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test alert method can give accept arguemtn such as RegExp.$1  ")
     // Bug 5079
     public void testBug5079Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -517,8 +516,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test alert method can give accept arguemtent as variable invoking expression  ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test alert method can give accept arguemtent as variable invoking expression  ")
     // Bug 5080
     public void testBug5080Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -530,8 +529,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test alert method can give accept arguemtent as variable invoking expression  ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test alert method can give accept arguemtent as variable invoking expression  ")
     // Bug 5103
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug5103Error() throws Exception {
@@ -544,8 +543,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test document can be used directly ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test document can be used directly ")
     // Bug 5108
     public void testBug5108Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -557,8 +556,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test ctype can be declared as saitisfied IType ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test ctype can be declared as saitisfied IType ")
     // Bug 5152
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug5152Error() throws Exception {
@@ -571,8 +570,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test parseFloat can be used directly ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test parseFloat can be used directly ")
     // Bug 5234
     public void testBug5234Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -585,8 +584,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 5293
-    @Category( { P3, FAST, UNIT })
-    @Description("Test type reference ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test type reference ")
     public void testBug5293Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -597,8 +596,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test mutiply assignment with one var declaration ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test mutiply assignment with one var declaration ")
     // Bug 5296
     public void testBug5296Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -610,8 +609,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test alert argument can be accept by array.name and array.location ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test alert argument can be accept by array.name and array.location ")
     // Bug 5297
     public void testBug5297Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -645,8 +644,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     // }
     //  
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test encodeURIComponent method can be used directly ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test encodeURIComponent method can be used directly ")
     // Bug 5305
     public void testBug5305Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -658,8 +657,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test mutiply satisfy situation ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test mutiply satisfy situation ")
     // Bug 5318
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug5318Error() throws Exception {
@@ -679,8 +678,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("static field can be initilize at inits block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("static field can be initilize at inits block")
     public void testBug5346Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -691,8 +690,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("arguments is bound with Array type,")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("arguments is bound with Array type,")
     public void testBug5349Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -703,8 +702,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Assignment with var to var")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Assignment with var to var")
     public void testBug5395Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -715,8 +714,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Outer ctype delcared as private")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Outer ctype delcared as private")
     public void testBug5397Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -730,8 +729,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test unkonw type in type space")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test unkonw type in type space")
     // @Ignore
     public void testBug5398Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -746,8 +745,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test unkonw type in type space")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test unkonw type in type space")
     public void testBug5399Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -761,8 +760,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test method return type is differ with declared")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test method return type is differ with declared")
     public void testBug5464Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -775,8 +774,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test invoking static field or fucntion from protos block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test invoking static field or fucntion from protos block")
     public void testBug5466Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -792,8 +791,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Support ?: expression")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Support ?: expression")
     public void testBug5482Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -804,8 +803,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Get field style")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Get field style")
     public void testBug5483Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -816,8 +815,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test child and faterh construcours all missed anoation ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test child and faterh construcours all missed anoation ")
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug5485Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -829,8 +828,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test method atuo binding return type ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test method atuo binding return type ")
     public void testBug5513Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -841,8 +840,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test invloking array with index ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test invloking array with index ")
     public void testBug5514Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -864,8 +863,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test anotation function lost () and return with this ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test anotation function lost () and return with this ")
     public void testBug5516Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -876,8 +875,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test empty protos block have no valdiation error")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test empty protos block have no valdiation error")
     public void testBug5612Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -888,8 +887,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test final field assignment")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test final field assignment")
     public void testBug5678Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -905,8 +904,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test if statement exist in block")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test if statement exist in block")
     // test case is ignored as this requires a backend support of block
     // statement in method body
     public void testBug5685Error() throws Exception {
@@ -919,8 +918,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test switch expression return statements")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test switch expression return statements")
     public void testBug5710Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -934,8 +933,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test support inner function return statement")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test support inner function return statement")
     public void testBug5720Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -946,8 +945,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test overload method modifiers")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test overload method modifiers")
     public void testBug5783Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -961,8 +960,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test java key words")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test java key words")
     public void testBug5880Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -978,8 +977,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test overrriden static methods")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test overrriden static methods")
     public void testBug5891Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -993,8 +992,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test return statements in inits block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test return statements in inits block")
     public void testBug5908Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1005,8 +1004,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test private constructure")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test private constructure")
     // Bug 6056
     public void testBug6056Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1018,8 +1017,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test undefined name in alert method")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test undefined name in alert method")
     public void testBug6100Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1032,8 +1031,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test method is overridden by child of child js file")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test method is overridden by child of child js file")
     // Bug 6184f method is overridden by child of child js file
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6184Error() throws Exception {
@@ -1046,8 +1045,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test multiprops block and protos block in itype ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test multiprops block and protos block in itype ")
     // Bug 6191
     public void testBug6191Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1066,8 +1065,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test otype related issues:multi endtype(). function block")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test otype related issues:multi endtype(). function block")
     // Bug 6217
     public void testBug6217Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1092,8 +1091,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test reduce overriden visibility")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test reduce overriden visibility")
     // Bug 6222
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6222Error1() throws Exception {
@@ -1109,8 +1108,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test unimplement method from iType")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test unimplement method from iType")
     // Bug 6222
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6222Error2() throws Exception {
@@ -1126,8 +1125,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test unimplement method from iType")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test unimplement method from iType")
     // Bug 6222
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6222Error3() throws Exception {
@@ -1143,8 +1142,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test unimplement method from iType, but ctype no protos and props block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test unimplement method from iType, but ctype no protos and props block")
     // Bug 6239
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6239Error() throws Exception {
@@ -1160,8 +1159,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test Otype can't as an inner type")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test Otype can't as an inner type")
     // Bug 6246
     public void testBug6246Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1176,8 +1175,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test itype can't be defined with final")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test itype can't be defined with final")
     // Bug 6247
     public void testBug6247Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1192,8 +1191,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test itype mtype can't be initilized")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test itype mtype can't be initilized")
     // Bug 6310
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6310Error() throws Exception {
@@ -1210,8 +1209,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test itype mtype can't be initilized")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test itype mtype can't be initilized")
     // Bug 6310
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug8846Error() throws Exception {
@@ -1229,8 +1228,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test ctype inherits atype which have abstract method")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test ctype inherits atype which have abstract method")
     // Bug 6312
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6312Error() throws Exception {
@@ -1246,8 +1245,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test multi overloaded methods exist in itype. But ctype only implement one method")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test multi overloaded methods exist in itype. But ctype only implement one method")
     // Bug 6351
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6351Error() throws Exception {
@@ -1263,8 +1262,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test arguments field in current function's property and function")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test arguments field in current function's property and function")
     public void testBug6358Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1275,8 +1274,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test mtype expect itype which have some function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test mtype expect itype which have some function")
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6445Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1288,8 +1287,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test ctype and inner type have same name")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test ctype and inner type have same name")
     public void testBug6451Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1303,8 +1302,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test create static innertype, and instance innertype")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test create static innertype, and instance innertype")
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6452Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1316,8 +1315,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test ctype mix mtype, and mtype's function and property can be used")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test ctype mix mtype, and mtype's function and property can be used")
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6465Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1329,8 +1328,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test etype only eixt values and inits block")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test etype only eixt values and inits block")
     public void testBug6476Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1341,8 +1340,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test itype's modifier and method's mdofier")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test itype's modifier and method's mdofier")
     public void testBug6512Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1358,8 +1357,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test assign etype's value to a variable")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test assign etype's value to a variable")
     // @Ignore //parser issue that enum values couldn't be parsed if etype has
     // satisfies
     // unignored in 7725 bugfix, parser seems to be working in this case now
@@ -1373,8 +1372,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test itype's inner type is marked final by default")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test itype's inner type is marked final by default")
     // when inner typs is itype, all members become both abstract and final
     // which caused the validation error
     // from validation perspective, it's better that parser could
@@ -1389,8 +1388,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test itype can't exist instance property")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test itype can't exist instance property")
     public void testBug6545Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1406,8 +1405,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test function without anonation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test function without anonation")
     public void testBug6550Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1418,8 +1417,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test itype public function is overriden with default access specifier")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test itype public function is overriden with default access specifier")
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6555Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1451,8 +1450,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test ctype extends itself")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test ctype extends itself")
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testBug6557Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems3 = new ArrayList<VjoSemanticProblem>(
@@ -1467,8 +1466,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test ctype name can't be named wtih number")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test ctype name can't be named wtih number")
     public void testBug6564Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems3 = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1482,8 +1481,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test etype constructor argsments type match issue")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test etype constructor argsments type match issue")
     public void testBug6565Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1494,8 +1493,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test this.base")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test this.base")
     public void testBug6566Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1509,8 +1508,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test static property in instance inner class")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test static property in instance inner class")
     public void testBug6603Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1526,8 +1525,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test override static methods")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test override static methods")
     public void testBug6628Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1541,8 +1540,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test methods both have static and abstract modifier")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test methods both have static and abstract modifier")
     public void testBug6759Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1563,8 +1562,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     // @Ignore //TODO - Bug 7725 created to fix this test
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Itype fucntion is duplicate with mixined mtype function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Itype fucntion is duplicate with mixined mtype function")
     public void testBug6803Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1587,8 +1586,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test mtype satisfy itype")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test mtype satisfy itype")
     public void testBug8830Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1599,8 +1598,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test args number is not correct")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test args number is not correct")
     public void testBug8833Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1619,8 +1618,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test not import type which exist in type space")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test not import type which exist in type space")
     public void testBug8836Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1633,8 +1632,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test array child type follow array delclared type")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test array child type follow array delclared type")
     public void testBug7013Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1648,8 +1647,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test type start with capital letter")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test type start with capital letter")
     public void testBug7207Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1663,8 +1662,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test crate innertype with vjo.make method")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test crate innertype with vjo.make method")
     public void testBug7252Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1675,8 +1674,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test final field initilize with different type from delcared type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test final field initilize with different type from delcared type")
     public void testBug7255Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 6);
@@ -1700,8 +1699,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test inner type have same type name")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test inner type have same type name")
     public void testBug7503Error() throws Exception {
 //        final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
 //                0);
@@ -1718,8 +1717,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Literal Validation Error")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Literal Validation Error")
     public void testBug7671Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1735,8 +1734,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test assign a funtion to a variable")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test assign a funtion to a variable")
     public void testBug7731Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1747,8 +1746,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test redefined local variable")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test redefined local variable")
     public void testBug7752Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1764,8 +1763,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test type name not be empty")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test type name not be empty")
     public void testBug7776Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1785,8 +1784,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test no implement method in ctyp which no proto and propos block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test no implement method in ctyp which no proto and propos block")
     public void testBug7921Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1800,8 +1799,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Mtyp as an inner type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Mtyp as an inner type")
     public void testBug8028Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1815,8 +1814,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test initilze outer type in innertype")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test initilze outer type in innertype")
     public void testBug8030Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1828,8 +1827,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test invoking undeinfied function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test invoking undeinfied function")
     public void testBug8119Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1843,8 +1842,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test no return statement")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test no return statement")
     public void testBug8123Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1858,8 +1857,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test final field initilize")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test final field initilize")
     public void testBug8311Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1870,8 +1869,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test final field initilize in etype")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test final field initilize in etype")
     public void testBug8311ETypeError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1882,8 +1881,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test invoking static function in inits block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test invoking static function in inits block")
     public void testBug8450Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1894,8 +1893,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test inactive needs function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test inactive needs function")
     public void testBug8455Error() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1910,8 +1909,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test not needs type but exist in type space")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test not needs type but exist in type space")
     public void testBugBadImport() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1929,8 +1928,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test try catch block return range")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test try catch block return range")
     public void testBugCatchException() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1944,8 +1943,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test etype values have same value")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test etype values have same value")
     public void testBugDupEnumValue() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -1959,8 +1958,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test ctype can be initilize with generic")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test ctype can be initilize with generic")
     // bug8464 filed
     public void testBugGenerics() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -1986,8 +1985,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test ctype can be initilize for a static field")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test ctype can be initilize for a static field")
     public void testBugInitFailure() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2008,8 +2007,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test invoking inner type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test invoking inner type")
     public void testBugInnerType() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2020,8 +2019,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test nested with statements")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test nested with statements")
     public void testBugNestedWith() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2061,8 +2060,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test nested inner type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test nested inner type")
     public void testBugOOM() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2073,8 +2072,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test type path is different with actual path")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test type path is different with actual path")
     // Bug 4788
     public void testBugOtherTypeUsageError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2091,8 +2090,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test variable delcared as String, then support variable dot string method and field")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test variable delcared as String, then support variable dot string method and field")
     public void testBugStringConcat() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2103,8 +2102,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test overload methods with conflict situation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test overload methods with conflict situation")
     public void testBugConflictOverloading() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 2);
@@ -2120,8 +2119,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test overload methods with arg type mismatch situation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test overload methods with arg type mismatch situation")
     public void testBugOverloadingArgTypeMismatch() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 2);
@@ -2132,8 +2131,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test support typeof function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test support typeof function")
     public void testBugTypeOfUndefined() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 2);
@@ -2144,8 +2143,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test support vjo.class[]")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test support vjo.class[]")
     public void testBugVjoClass() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2157,8 +2156,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     // @Ignore //TODO - Bug 7725 created to fix this test
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test method vjo.make ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test method vjo.make ")
     public void testBugVjoMake() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2172,8 +2171,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test document and form's property ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test document and form's property ")
     // Bug 4829
     public void testDocumentMethodsError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2186,8 +2185,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4690
-    @Category( { P1, FAST, UNIT })
-    @Description("Test dynamic property")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test dynamic property")
     public void testDynamicPropertyError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2199,8 +2198,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4628
-    @Category( { P1, FAST, UNIT })
-    @Description("Test missing endType")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test missing endType")
     public void testEndTypeError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2214,8 +2213,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test missing end type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test missing end type")
     // Bug 4667
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testEndTypeErrorExtn() throws Exception {
@@ -2231,8 +2230,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test variable type mismatch with fuction return type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test variable type mismatch with fuction return type")
     // Bug 4839
     public void testGenericTypeMethodError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2248,8 +2247,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     // Bug 4792
-    @Category( { P3, FAST, UNIT })
-    @Description("Test support no annotation situation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test support no annotation situation")
     public void testIdentifierNotDefinedError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2260,8 +2259,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test support no annotation situation for multi variables")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test support no annotation situation for multi variables")
     // Bug 4792
     public void testIdentifierNotDefinedError1() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2273,8 +2272,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test support no annotation situation for array")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test support no annotation situation for array")
     // Bug 4792
     public void testIdentifierNotDefinedError2() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2286,8 +2285,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test invalid syntax situation dot.x")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test invalid syntax situation dot.x")
     // Bug 4667
     public void testIncorrectVjoSyntaxError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2304,8 +2303,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test invalid syntax situation dot.x")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test invalid syntax situation dot.x")
     // Bug 4667
     public void testIncorrectVjoSyntaxMoreError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2322,8 +2321,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test instance property in itype")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test instance property in itype")
     // Bug 4680
     public void testITypeMethodBodyError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2340,8 +2339,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test instance property in itype")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test instance property in itype")
     // Bug 4679
     public void testITypeProtosPropertiesError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2356,8 +2355,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test ctype mixin mtype")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test ctype mixin mtype")
     // Bug 4687
     // @Ignore //TODO - Bug 7725 created to fix this test
     public void testMTypeObjectLiteralError() throws Exception {
@@ -2370,8 +2369,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Math's static function and Date initilize")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Math's static function and Date initilize")
     // Bug 5003, 5002, 5073, 5072, 5068, 5067, 5064, 5021, 5014, 5108, 5142
     public void testMultipleBugsCtypeError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2383,8 +2382,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test multi props error")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test multi props error")
     // Bug 4632Extn
     public void testMultiplePropsError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2403,8 +2402,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test multi protos error")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test multi protos error")
     // Bug 4632
     public void testMultipleProtosError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2421,8 +2420,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test inactive issues")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test inactive issues")
     // Bug 4668
     public void testNameSpaceCollisionError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2436,8 +2435,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
 
     @Test
     @Ignore
-    @Category( { P3, FAST, UNIT })
-    @Description("Test inactive issues")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test inactive issues")
     // Bug 4668
     public void testNameSpaceCollisionError4() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2456,8 +2455,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test return null")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test return null")
     // Bug 4702
     public void testReturnNullError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2469,8 +2468,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test return type mismatch wtih declaration")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test return type mismatch wtih declaration")
     // Bug 4696
     public void testReturnTypeError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2484,8 +2483,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test return type with void situation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test return type with void situation")
     // Bug 4696
     public void testReturnTypeErrorExtn1() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2500,8 +2499,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test assignment self type to variable")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test assignment self type to variable")
     // Bug 4732
     public void testThisAssignmentError() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2513,8 +2512,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test assignment self type to variable")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test assignment self type to variable")
     // Bug 4732
     public void testThisAssignmentErrorExtn() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2537,8 +2536,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test not exist property in array ")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test not exist property in array ")
     public void testUnexistProp() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(FieldProbIds.UndefinedField, 7, 0));
@@ -2550,8 +2549,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test typeof")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test typeof")
     public void testTypeOF() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(FieldProbIds.UndefinedField, 8, 0));
@@ -2562,8 +2561,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test borderWidth constants")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test borderWidth constants")
     public void testBug7915Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2573,8 +2572,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Mtype and Otype as inner type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Mtype and Otype as inner type")
     public void testBug8405Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -2590,8 +2589,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test enume property in inits block")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test enume property in inits block")
     public void testBugEnumPropertyInit() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2602,8 +2601,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test parent and child have same field situation")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test parent and child have same field situation")
     public void testBugFieldHidesParentField() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2617,8 +2616,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test nested function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test nested function")
     public void testBugNestedFunction() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2629,8 +2628,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test unimplement ctype methods")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test unimplement ctype methods")
     public void testBugConfusingITypeUnimplemented() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
                 0);
@@ -2644,8 +2643,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test undefiend mthods's problem type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test undefiend mthods's problem type")
     public void testBug8490Error() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -2684,8 +2683,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test instanceof ")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test instanceof ")
     public void testBug7928Error() throws Exception {
         expectProblems.clear();
 
@@ -2696,8 +2695,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Can't support var innerType = new o situation")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Can't support var innerType = new o situation")
     public void testBug8553Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VarProbIds.UndefinedName, 10,
@@ -2709,8 +2708,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("gloable variable error problem type")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("gloable variable error problem type")
     public void testBug8605Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VarProbIds.LooseVarDecl, 7, 0));
@@ -2725,8 +2724,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Test Boolean valueof() issues")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Test Boolean valueof() issues")
     public void testBug8624Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2736,8 +2735,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test unimplement methods issues")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test unimplement methods issues")
     public void testBug8654Error() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -2749,8 +2748,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Support no annoation function's args")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Support no annoation function's args")
     public void testBug8669Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2760,8 +2759,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Nested type reutn")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Nested type reutn")
     public void testBug8670Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2771,8 +2770,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Use global variable in one statement")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Use global variable in one statement")
     public void testBug8671Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VarProbIds.LooseVarDecl, 5, 0));
@@ -2784,8 +2783,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Void method returns value, down to warning")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Void method returns value, down to warning")
     public void testBug8702Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -2797,8 +2796,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("No validation in expected section of MType")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("No validation in expected section of MType")
     public void testBug6400Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2808,8 +2807,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("No validation in expected section of MType")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("No validation in expected section of MType")
     public void testBug4832Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2819,8 +2818,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Inactive needs")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Inactive needs")
     // Bug 4668
     public void testNameSpaceCollisionError2() throws Exception {
         expectProblems.clear();
@@ -2835,8 +2834,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Inactive needs")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Inactive needs")
     public void testBug4668Inactive1() throws Exception {
         expectProblems.add(createNewProblem(
          VjoSyntaxProbIds.TypeUnknownNotInTypeSpace, 1, 0));
@@ -2848,8 +2847,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Private constructor")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Private constructor")
     public void testBug8707Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -2867,8 +2866,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Final variable initiated at con and init")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Final variable initiated at con and init")
     public void testBug8717Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2878,8 +2877,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     // Bug 4668
-    @Category( { P1, FAST, UNIT })
-    @Description("active needs issues")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("active needs issues")
     @Test
     public void testNameSpaceCollisionError3() throws Exception {
         final List<VjoSemanticProblem> expectedProblems = new ArrayList<VjoSemanticProblem>(
@@ -2900,8 +2899,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("int plus String such like 3+D")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("int plus String such like 3+D")
     public void testBug8698Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2911,8 +2910,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Method name conflict")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Method name conflict")
     public void testBug8714Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.AmbiguousMethod, 11,
@@ -2924,8 +2923,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("parseFloat takes String type, fix in js code according to Homayoun now")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("parseFloat takes String type, fix in js code according to Homayoun now")
     public void testBug8715Error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2935,8 +2934,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Invokeing gloabl function")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Invokeing gloabl function")
     public void testBug8747Error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(MethodProbIds.UndefinedFunction, 8,
@@ -2948,8 +2947,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("Special idintifer")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("Special idintifer")
     public void testBug8751error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2959,8 +2958,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("int to boolean must be type mismatch error")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("int to boolean must be type mismatch error")
     public void testBug8710error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -2974,8 +2973,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Arg as string [] issue")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Arg as string [] issue")
     public void testBug8822error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(
@@ -2987,8 +2986,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("This. base issue")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("This. base issue")
     public void testBug8841error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -2998,8 +2997,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("mtype issue")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("mtype issue")
     public void testBug8851error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -3014,8 +3013,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("This. base issue")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("This. base issue")
     public void testBug8780error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -3025,8 +3024,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("return; as return undefined")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("return; as return undefined")
     public void testBug8949error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -3036,8 +3035,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("This. base issue")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("This. base issue")
     public void testBug8878error() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -3049,8 +3048,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("instanceof should be supported")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("instanceof should be supported")
     public void testBug8623error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -3060,8 +3059,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
 
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("same variable name used in different for-in statement")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("same variable name used in different for-in statement")
     public void testBug8834error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(VarProbIds.RedefinedLocal, 13, 0));
@@ -3072,8 +3071,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("if the name in comment is constructs and return type is not void, it should produce warning for not returning a return type.")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("if the name in comment is constructs and return type is not void, it should produce warning for not returning a return type.")
     public void testBug8875error() throws Exception {
         expectProblems.clear();
         expectProblems
@@ -3085,8 +3084,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("if this.X x is an Object or reference type. should skip validate")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("if this.X x is an Object or reference type. should skip validate")
     public void testBug8977error() throws Exception {
         expectProblems.clear();
         expectProblems.add(createNewProblem(FieldProbIds.FieldInitializationDependsOnUnintializedTypes,
@@ -3098,8 +3097,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P3, FAST, UNIT })
-    @Description("types without constructor and extends interfaces should leave as itype, not ctype")
+    //@Category( { P3, FAST, UNIT })
+    //@Description("types without constructor and extends interfaces should leave as itype, not ctype")
     public void testBug9133error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(
@@ -3109,8 +3108,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("test java lib type here")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test java lib type here")
     public void testBug5476error() throws Exception {
         expectProblems.clear();
 //        removed by huzhou@ebay.com as it requires java2js dependencies
@@ -3122,8 +3121,8 @@ public class VjoValidationBugFixTests extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("test java lib type here")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("test java lib type here")
     public void testBug9650error() throws Exception {
         expectProblems.clear();
         final List<VjoSemanticProblem> actualProblems = getVjoSemanticProblem(

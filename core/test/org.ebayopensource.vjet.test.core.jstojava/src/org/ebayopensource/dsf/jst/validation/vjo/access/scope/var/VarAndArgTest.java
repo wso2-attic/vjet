@@ -8,9 +8,9 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.validation.vjo.access.scope.var;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -19,8 +19,7 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 
 public class VarAndArgTest extends VjoValidationBaseTester {
 	 @Before
@@ -29,8 +28,8 @@ public class VarAndArgTest extends VjoValidationBaseTester {
 	    }
 	    
 	    @Test
-	    @Category( { P1, FAST, UNIT })
-	    @Description("Test arg hiding external var")
+	    //@Category( { P1, FAST, UNIT })
+	    //@Description("Test arg hiding external var")
 	    public void testAccesVisible1() {
 	        List<VjoSemanticProblem> problems = getVjoSemanticProblem(
 	                "access.scope.var.","VarAndArgTest.js", this

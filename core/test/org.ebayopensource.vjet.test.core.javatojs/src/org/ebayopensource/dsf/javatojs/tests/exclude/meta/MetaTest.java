@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests.exclude.meta;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
 
 import java.util.List;
 
@@ -18,8 +18,7 @@ import org.ebayopensource.dsf.javatojs.control.BuildController;
 import org.ebayopensource.dsf.javatojs.tests.exclude.TestTargetTranslator;
 import org.ebayopensource.dsf.javatojs.tests.exclude.TestTargetTranslator.ClassList;
 import org.ebayopensource.dsf.javatojs.trace.TranslateError;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 import org.ebayopensource.dsf.logger.LogLevel;
 
 /*
@@ -29,8 +28,8 @@ import org.ebayopensource.dsf.logger.LogLevel;
 public class MetaTest {
 	
 	@Test
-	@Category( { P1, FUNCTIONAL })
-	@Description("Test usage of custom meta data during translation")
+	//@Category( { P1, FUNCTIONAL })
+	//@Description("Test usage of custom meta data during translation")
 	public void testMeta() {
 
 		final BuildController build = new BuildController(new TestConfigInitializer());

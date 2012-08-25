@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -35,9 +35,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -47,7 +46,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  *
  */
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class CommentMultipleArgsTest implements ICommentConstants {
 	
 	private static final int NUM_METHODS = 17;
@@ -100,8 +99,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args in comments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args in comments")
 	public void verifyMethods() {
 		
 		IJstMethod cons = jstType.getConstructor();
@@ -134,8 +133,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args of itself in comments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args of itself in comments")
 	public void verifyMultipleArgItself() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"0");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -157,8 +156,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args of itself as wrapper in comments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args of itself as wrapper in comments")
 	public void verifyMultipleArgItselfAsWrapper() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"1");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -180,8 +179,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args of itself twice in comments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args of itself twice in comments")
 	public void verifyMultipleArgItselfTwice() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"2");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -203,8 +202,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args of itself twice as wrapper in comments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args of itself twice as wrapper in comments")
 	public void verifyMultipleArgItselfTwiceAsWrapper() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"3");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -226,9 +225,9 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args of itself twice " +
-			"as primitive and as wrapper in comments")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args of itself twice " +
+//			"as primitive and as wrapper in comments")
 	public void verifyMultipleArgItselfAndAsWrapper() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"4");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -251,8 +250,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with args followed by multiple args")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with args followed by multiple args")
 	public void verifyArgPlusMultipleArg() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"5");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -279,8 +278,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args followed by args")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args followed by args")
 	public void verifyMultipleArgPlusArg() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"6");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -307,8 +306,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 2 multiple args")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 2 multiple args")
 	public void verifyTwoMultipleArgs() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"7");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -337,8 +336,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args followed by variable arg")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args followed by variable arg")
 	public void verifyMultipleArgPlusVariableArg() {
 		IJstMethod foo12 = jstType.getMethod(PREFIX_METHOD+"12");
 		assertTrue(foo12.isDispatcher());
@@ -377,8 +376,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}	
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 3 multiple args")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 3 multiple args")
 	public void verifyThreeMultipleArgs() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"13");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -411,8 +410,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}	
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 2 multiple args as wrapper")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 2 multiple args as wrapper")
 	public void verifyTwoMultipleArgsAsWrappers() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"14");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -440,8 +439,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with multiple args with primitives and wrappers")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with multiple args with primitives and wrappers")
 	public void verifyMultipleArgWithBothPrimitivesAndWrappers() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"15");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -478,8 +477,8 @@ public class CommentMultipleArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods with 2 multiple args with primitives and wrappers")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods with 2 multiple args with primitives and wrappers")
 	public void verifyTwoMultipleArgWithBothPrimitivesAndWrappers() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"16");
 		String access = jMethod.getModifiers().getAccessScope();

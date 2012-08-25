@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -35,9 +35,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -47,7 +46,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  *
  */
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class CommentMethodsNoArgsTest implements ICommentConstants {
 	
 	private static final int NUM_METHODS = 11;
@@ -92,8 +91,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies type. Ctype/Atype/Itype/Etype/Mtype.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies type. Ctype/Atype/Itype/Etype/Mtype.")
 	public void verifyKind() {
 		switch (kind) {
 		case 'c': 
@@ -118,8 +117,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods declared - Number of methods(instance/static), and method name")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods declared - Number of methods(instance/static), and method name")
 	public void verifyMethods() {
 		
 		IJstMethod cons = jstType.getConstructor();
@@ -150,8 +149,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are static")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are static")
 	public void verifyStaticVar() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"0");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -166,8 +165,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are static and final")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are static and final")
 	public void verifyStaticFinalMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"1");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -182,8 +181,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are public and static")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are public and static")
 	public void verifyPublicStaticMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"2");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -198,8 +197,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are public, static and final")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are public, static and final")
 	public void verifyPublicStaticFinalMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"3");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -214,8 +213,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are final, public and static")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are final, public and static")
 	public void verifyFinalPublicStaticMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"4");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -230,8 +229,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are private and static")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are private and static")
 	public void verifyPrivateStaticMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"5");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -246,8 +245,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are private, static and final")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are private, static and final")
 	public void verifyPrivateStaticFinalMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"6");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -262,8 +261,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are final, private and static")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are final, private and static")
 	public void verifyFinalPrivateStaticFinalMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"7");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -278,8 +277,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are protected")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are protected")
 	public void verifyProtectedMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"8");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -294,8 +293,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are protected and final")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are protected and final")
 	public void verifyProtectedFinalMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"9");
 		String access = jMethod.getModifiers().getAccessScope();
@@ -310,8 +309,8 @@ public class CommentMethodsNoArgsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies methods are final and protected")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies methods are final and protected")
 	public void verifyFinalProtectedMethod() {
 		IJstMethod jMethod = jstType.getMethod(PREFIX_METHOD+"10");
 		String access = jMethod.getModifiers().getAccessScope();

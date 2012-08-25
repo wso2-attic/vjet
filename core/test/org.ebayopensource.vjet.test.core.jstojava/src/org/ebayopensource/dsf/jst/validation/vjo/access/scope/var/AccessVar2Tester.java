@@ -15,9 +15,9 @@
  */
 package org.ebayopensource.dsf.jst.validation.vjo.access.scope.var;
 
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 
 import java.util.List;
 
@@ -27,8 +27,7 @@ import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+
 
 /**
  * Access var correct 1tester
@@ -36,7 +35,7 @@ import com.ebay.junitnexgen.category.Description;
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-@Category( { P1, FAST, UNIT })
+//@Category( { P1, FAST, UNIT })
 public class AccessVar2Tester extends VjoValidationBaseTester {
 
     @Before
@@ -46,8 +45,8 @@ public class AccessVar2Tester extends VjoValidationBaseTester {
     }
     
     @Test
-    @Category( { P1, FAST, UNIT })
-    @Description("Test access different socpe's variable")
+    //@Category( { P1, FAST, UNIT })
+    //@Description("Test access different socpe's variable")
     public void testAccesVisible1() {
         List<VjoSemanticProblem> problems = getVjoSemanticProblem(
                 "access.scope.var.","AccessVar2Tester.js", this

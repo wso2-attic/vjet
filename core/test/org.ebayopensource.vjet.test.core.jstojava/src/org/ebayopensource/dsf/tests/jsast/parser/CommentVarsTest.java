@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.tests.jsast.parser;
-import static com.ebay.junitnexgen.category.Category.Groups.FAST;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -34,9 +34,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 
 /**
@@ -46,7 +45,7 @@ import org.ebayopensource.dsf.common.resource.ResourceUtil;
  *
  */
 @RunWith(value=Parameterized.class)
-@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
 public class CommentVarsTest implements ICommentConstants {
 	
 	private static final String PREFIX_VAR = "count";
@@ -111,8 +110,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies type. Ctype/Atype/Itype/Etype/Mtype.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies type. Ctype/Atype/Itype/Etype/Mtype.")
 	public void verifyKind() {
 		switch (kind) {
 		case 'c': 
@@ -137,8 +136,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared.")
 	public void verifyVars() {
 		List<IJstProperty> varMap = null;
 		if (isStatic) {
@@ -175,8 +174,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are static.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are static.")
 	public void verifyStaticVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"0");
 		String access = jp.getModifiers().getAccessScope();
@@ -191,8 +190,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are static and final.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are static and final.")
 	public void verifyStaticFinalVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"1");
 		String access = jp.getModifiers().getAccessScope();
@@ -208,8 +207,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are static and public access.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are static and public access.")
 	public void verifyPublicStaticVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"2");
 		String access = jp.getModifiers().getAccessScope();
@@ -224,8 +223,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are public, static and final.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are public, static and final.")
 	public void verifyPublicStaticFinalVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"3");
 		String access = jp.getModifiers().getAccessScope();
@@ -242,8 +241,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are final, public and static.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are final, public and static.")
 	public void verifyFinalPublicStaticVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"4");
 		String access = jp.getModifiers().getAccessScope();
@@ -258,8 +257,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are private and static.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are private and static.")
 	public void verifyPrivateStaticVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"5");
 		String access = jp.getModifiers().getAccessScope();
@@ -274,8 +273,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are private, static and final.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are private, static and final.")
 	public void verifyPrivateStaticFinalVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"6");
 		String access = jp.getModifiers().getAccessScope();
@@ -291,8 +290,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are private, static and final.")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are private, static and final.")
 	public void verifyFinalPrivateStaticFinalVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"7");
 		String access = jp.getModifiers().getAccessScope();
@@ -307,8 +306,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are protected")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are protected")
 	public void verifyProtectedVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"8");
 		String access = jp.getModifiers().getAccessScope();
@@ -323,8 +322,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are protected and final")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are protected and final")
 	public void verifyProtectedFinalVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"9");
 		String access = jp.getModifiers().getAccessScope();
@@ -340,8 +339,8 @@ public class CommentVarsTest implements ICommentConstants {
 	}
 	
 	@Test 
-	@Category({P1,UNIT,FAST})
-	@Description("Verifies properties declared are final and protected")
+	//@Category({P1,UNIT,FAST})
+	//@Description("Verifies properties declared are final and protected")
 	public void verifyFinalProtectedVar() {
 		IJstProperty jp = jstType.getProperty(PREFIX_VAR+"10");
 		String access = jp.getModifiers().getAccessScope();

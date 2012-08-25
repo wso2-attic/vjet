@@ -7,9 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
-import com.ebay.junitnexgen.category.ModuleInfo;
 
-import static com.ebay.junitnexgen.category.Category.Groups.*;
+
+
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -27,10 +27,10 @@ import org.ebayopensource.dsf.javatojs.trace.TranslateError;
 import org.ebayopensource.dsf.javatojs.trace.TranslationTraceId;
 import org.ebayopensource.dsf.javatojs.translate.TranslateCtx;
 import org.ebayopensource.dsf.jsgen.shared.generate.CodeStyle;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
+import org.ebayopensource.vjet.test.util.TestHelper;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class FilterTests {
 
 	public static final TraceId ID = TranslationTraceId.TEST;
@@ -57,8 +57,8 @@ public class FilterTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test the exclude-all filter with the Translation Controller")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test the exclude-all filter with the Translation Controller")
 	public void testExcludeAll() {
 		TranslationController controller = TestHelper.getTranslationController(getInitializer());
 		testType(ExcludeAll.class, controller, true, false);
@@ -66,8 +66,8 @@ public class FilterTests {
 	}
 
 	@Test
-	@Category( { P4, FUNCTIONAL })
-	@Description("Test the exclude-rest filter with the Translation Controller")
+	//@Category( { P4, FUNCTIONAL })
+	//@Description("Test the exclude-rest filter with the Translation Controller")
 	public void testExcludeRest() {
 
 		TranslationController controller = TestHelper.getTranslationController(getInitializer());

@@ -7,8 +7,8 @@
  *
  *******************************************************************************/
 package org.ebayopensource.dsf.jst.tests.ts;
-import static com.ebay.junitnexgen.category.Category.Groups.P1;
-import static com.ebay.junitnexgen.category.Category.Groups.UNIT;
+
+
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,16 +18,15 @@ import java.util.List;
 import org.ebayopensource.dsf.jst.IJstLib;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.ts.util.JstTypeSerializer;
-import com.ebay.junitnexgen.category.Category;
-import com.ebay.junitnexgen.category.Description;
-import com.ebay.junitnexgen.category.ModuleInfo;
+
+
 import org.ebayopensource.vjo.lib.LibManager;
 
-@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JavaToJs")
 public class JstTypeSerializerTests extends BaseTest {
 	
-	@Category( { P1, UNIT })
-	@Description("Test Jst Type Serialization and Deserialization")
+	//@Category( { P1, UNIT })
+	//@Description("Test Jst Type Serialization and Deserialization")
 	public void testSerializeDeserialize() {
 		
 		IJstLib jstLib = LibManager.getInstance().getJavaPrimitiveLib();
