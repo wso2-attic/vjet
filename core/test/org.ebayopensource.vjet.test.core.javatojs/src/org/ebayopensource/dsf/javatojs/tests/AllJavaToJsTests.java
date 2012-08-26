@@ -46,7 +46,6 @@ public class AllJavaToJsTests {
 
 	@BeforeClass
 	public static void setup() {
-		// TODO Auto-generated method stub
 		IResourceResolver jstLibResolver = JstLibResolver
 				.getInstance()
 				.setSdkEnvironment(
