@@ -18,6 +18,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileReader;
+import java.net.URL;
 
 import org.ebayopensource.dsf.jst.IJstMethod;
 import org.ebayopensource.dsf.jst.IJstType;
@@ -35,6 +36,7 @@ import org.mozilla.mod.javascript.Kit;
 
 
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
+import org.eclipse.core.runtime.FileLocator;
 
 /**
  * Tests if explicit static in .props is ok
@@ -56,8 +58,12 @@ public class ChainOfFunctionInvocationTest implements ICommentConstants {
 		ctx = new TranslateCtx();
 
 		// get file
-		File resource= new File(ResourceUtil.getResource(ChainOfFunctionInvocationTest.class,
-				                fileName).getFile());
+		URL url = ResourceUtil.getResource(ChainOfFunctionInvocationTest.class,
+                fileName);
+		if(url.getProtocol().startsWith("bundleresource")){
+			url = FileLocator.resolve(url);
+		}
+		File resource= new File(url.getFile());
 //		URL url = ResourceUtil.getResource(BadCommentTest.class,fileName);
 		String fileAsString = Kit.readReader(new FileReader(resource));
 		jstType = p.parse(fileName, resource.getAbsolutePath(), fileAsString, ctx).getType();

@@ -13,6 +13,7 @@ import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.BaseJstNode;
+import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstArg;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
@@ -27,6 +28,7 @@ import org.ebayopensource.dsf.jst.declaration.JstType;
 import org.ebayopensource.dsf.jst.expr.FieldAccessExpr;
 import org.ebayopensource.dsf.jst.expr.FuncExpr;
 import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.JsCommentMetaNode;
 import org.ebayopensource.dsf.jst.term.JstLiteral;
 import org.ebayopensource.dsf.jst.term.NV;
 import org.ebayopensource.dsf.jst.term.ObjLiteral;
@@ -253,6 +255,16 @@ public class DefsTranslator extends BasePropsProtosTranslator {
 				if (meta != null) {
 					jstType = TranslateHelper.findType(m_ctx, meta.getTyping(),
 							meta);
+					
+					// done with meta array removing from tree
+//					meta = null;
+//					List<BaseJstNode> children = literal.getChildren();
+//					for (IJstNode child : children) {
+//						if (child instanceof JsCommentMetaNode) {
+//							literal.removeChild(child);
+//							break;
+//						}
+//					}
 				}
 
 			}

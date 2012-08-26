@@ -27,6 +27,7 @@ import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.JstProblemId;
 import org.ebayopensource.dsf.jst.declaration.JstCache;
 import org.ebayopensource.dsf.jst.ts.JstTypeSpaceMgr;
+import org.ebayopensource.vjo.lib.IResourceResolver;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -64,8 +65,17 @@ public abstract class VjoValidationBaseTester {
     
     @BeforeClass
     public static void start(){
-    	JstCache.getInstance().clear();
-    	LibManager.getInstance().clear();
+    	
+    	IResourceResolver jstLibResolver = org.ebayopensource.dsf.jstojava.test.utils.JstLibResolver
+				.getInstance()
+				.setSdkEnvironment(
+						new org.ebayopensource.dsf.jstojava.test.utils.VJetSdkEnvironment(
+								new String[0], "DefaultSdk"));
+
+		LibManager.getInstance().setResourceResolver(jstLibResolver);
+    	
+//    	JstCache.getInstance().clear();
+//    	LibManager.getInstance().clear();
     }
     
     
@@ -75,7 +85,7 @@ public abstract class VjoValidationBaseTester {
     	syntaxlist.clear();
     	tempList.clear();
     	expectProblems.clear();
-    	singleTypeSpace = null;
+//    	singleTypeSpace = null;
     	expectProblems.clear();
     	
 	}

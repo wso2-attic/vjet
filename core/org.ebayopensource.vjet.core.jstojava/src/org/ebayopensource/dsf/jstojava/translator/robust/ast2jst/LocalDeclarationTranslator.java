@@ -26,6 +26,7 @@ import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.declaration.JstVars;
 import org.ebayopensource.dsf.jst.expr.AssignExpr;
 import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.JsCommentMetaNode;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
 import org.ebayopensource.dsf.jstojava.parser.comments.CommentCollector;
@@ -55,13 +56,27 @@ public class LocalDeclarationTranslator extends
 			//translate the children 1st
 			IExpr init = null;
 			List<IJsCommentMeta> metaList = null;
+			
 			if (statement.initialization != null) {
 				init = (IExpr) getTranslatorAndTranslate(statement.initialization);
+				BaseJstNode initBaseNode = (BaseJstNode)init;
 				if(init != null && init instanceof BaseJstNode){//check if init consumes the comment
-					metaList = TranslateHelper.findMetaFromExpr((BaseJstNode)init);
+					metaList = TranslateHelper.findMetaFromExpr(initBaseNode);
+					
 				}
 				if(metaList != null){
 					init = TranslateHelper.getCastable(init, metaList, m_ctx);
+					// done with meta array removing from tree
+					
+//					metaList = null;
+//					List<BaseJstNode> children = initBaseNode.getChildren();
+//					for (IJstNode child : children) {
+//						if (child instanceof JsCommentMetaNode) {
+//							initBaseNode.removeChild(child);
+//							break;
+//						}
+//					}
+					
 				}
 				else{
 					init = TranslateHelper.getCastable(init, statement, m_ctx);
@@ -77,7 +92,8 @@ public class LocalDeclarationTranslator extends
 				meta = metaList.get(0);
 			}
 			else if(init != null && init instanceof BaseJstNode){//check if init consumes the comment
-				metaList = TranslateHelper.findMetaFromExpr((BaseJstNode)init);
+				BaseJstNode initBaseNode = (BaseJstNode)init;
+				metaList = TranslateHelper.findMetaFromExpr(initBaseNode);
 				if(metaList != null && metaList.size() > 0){
 					meta = metaList.iterator().next();
 				}

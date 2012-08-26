@@ -22,7 +22,6 @@ import org.ebayopensource.dsf.jst.IScriptUnit;
 import org.ebayopensource.dsf.jst.IWritableScriptUnit;
 import org.ebayopensource.dsf.jst.ResolutionResult;
 import org.ebayopensource.dsf.jst.declaration.JstBlock;
-import org.ebayopensource.dsf.jst.declaration.JstProxyType;
 import org.ebayopensource.dsf.jst.declaration.JstType;
 
 import org.ebayopensource.dsf.jst.lib.IJstLibProvider;

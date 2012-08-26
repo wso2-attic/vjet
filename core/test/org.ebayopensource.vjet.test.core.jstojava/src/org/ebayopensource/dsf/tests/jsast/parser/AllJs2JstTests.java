@@ -19,7 +19,6 @@ import org.junit.runners.Suite;
 	CommentMethodsWithArgsTest.class,
 	CommentConstructorsWithArgsTest.class,
 	CommentMultipleArgsTest.class,
-	BadCommentTest.class,
 	MultiLineVarTest.class,
 	ExplicitStaticTest.class,
 	VoidParameterTest.class,

@@ -37,7 +37,6 @@ import org.junit.runners.Suite.SuiteClasses;
     org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.enums.eTypeDefStyle1Client.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.enums.eTypeDefStyle2.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.enums.eTypeDefStyle2Client.class,
-    org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.enums.eTypeForLoopEx.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.enums.eTypeSample.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.foundations.CommentDeclarationSample.class,
     org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.foundations.Employee.class,

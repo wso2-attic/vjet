@@ -37,6 +37,9 @@ public class ReturnStatementTranslator extends
 				}
 				if(metaList != null){
 					expr = TranslateHelper.getCastable((IExpr)stmt, metaList, m_ctx);
+					// remove after using
+					metaList = null;
+					
 				}
 				else{
 					expr = TranslateHelper.getCastable((IExpr)stmt, statement, m_ctx);

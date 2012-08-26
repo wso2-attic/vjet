@@ -33,6 +33,7 @@ import org.mozilla.mod.javascript.Kit;
 
 
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
+import org.eclipse.core.runtime.FileLocator;
 
 /**
  * Tests if explicit static in .props is ok
@@ -54,9 +55,12 @@ public class GlobalVarByAttributedTypeTest implements ICommentConstants {
 		ctx = new TranslateCtx();
 
 		// get file
-		File resource= new File(ResourceUtil.getResource(GlobalVarByAttributedTypeTest.class,
-				                fileName).getFile());
-		URL url = ResourceUtil.getResource(BadCommentTest.class,fileName);
+		URL url = ResourceUtil.getResource(GlobalVarByAttributedTypeTest.class,
+                fileName);
+		if(url.getProtocol().startsWith("bundleresource")){
+			url = FileLocator.resolve(url);
+		}
+		File resource= new File(url.getFile());
 		String fileAsString = Kit.readReader(new FileReader(resource));
 		jstType = p.parse(fileName, resource.getAbsolutePath(), fileAsString, ctx).getType();
 		assertNotNull(jstType);

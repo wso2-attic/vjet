@@ -28,6 +28,7 @@
 				<configuration>
 					<testSuite>${project.artifactId}</testSuite>
 					<testClass>org.ebayopensource.dsf.jst.tests.AllJstTests</testClass>
+					<argLine>-Xms512m -Xmx512m</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

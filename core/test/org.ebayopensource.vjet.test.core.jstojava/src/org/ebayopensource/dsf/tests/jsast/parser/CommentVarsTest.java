@@ -26,6 +26,7 @@ import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.dsf.jst.util.JstTypeHelper;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
+import org.ebayopensource.vjo.lib.IResourceResolver;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.junit.After;
 import org.junit.Before;
@@ -104,6 +105,10 @@ public class CommentVarsTest implements ICommentConstants {
 	@Before
 	public void setUpJst() throws Exception {
 		// get file
+		IResourceResolver jstLibResolver = org.ebayopensource.dsf.jstojava.test.utils.JstLibResolver.getInstance()
+				.setSdkEnvironment(new org.ebayopensource.dsf.jstojava.test.utils.VJetSdkEnvironment(new String[0], "DefaultSdk"));
+
+		LibManager.getInstance().setResourceResolver(jstLibResolver);
 		URL simple1 = ResourceUtil.getResource(this.getClass(),fileName);
 		jstType = new VjoParser().addLib(LibManager.getInstance().getJsNativeGlobalLib())
 			.parse(null, simple1).getType();

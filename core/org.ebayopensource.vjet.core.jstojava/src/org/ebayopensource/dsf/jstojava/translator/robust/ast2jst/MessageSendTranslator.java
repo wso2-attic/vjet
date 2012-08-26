@@ -12,11 +12,13 @@ import java.util.List;
 
 import org.ebayopensource.dsf.jsgen.shared.ids.ScopeIds;
 import org.ebayopensource.dsf.jst.BaseJstNode;
+import org.ebayopensource.dsf.jst.IJstNode;
 import org.ebayopensource.dsf.jst.JstSource;
 import org.ebayopensource.dsf.jst.declaration.JstMethod;
 import org.ebayopensource.dsf.jst.expr.FuncExpr;
 import org.ebayopensource.dsf.jst.expr.MtdInvocationExpr;
 import org.ebayopensource.dsf.jst.meta.IJsCommentMeta;
+import org.ebayopensource.dsf.jst.meta.JsCommentMetaNode;
 import org.ebayopensource.dsf.jst.term.JstIdentifier;
 import org.ebayopensource.dsf.jst.term.JstProxyIdentifier;
 import org.ebayopensource.dsf.jst.token.IExpr;
@@ -92,6 +94,17 @@ public class MessageSendTranslator extends
 						}
 						if(metaList != null){
 							jstArg = TranslateHelper.getCastable((IExpr)stmt, metaList, m_ctx);
+							// remove the node from jst tree due to memory footprint and performance issue
+							metaList = null;
+//							BaseJstNode baseJstNode = (BaseJstNode)stmt;
+//							List<BaseJstNode> children = baseJstNode.getChildren();
+//							for (IJstNode child : children) {
+//								if (child instanceof JsCommentMetaNode) {
+//									baseJstNode.removeChild(child);
+//									child = null;
+//									break;
+//								}
+//							}
 						}
 						else{
 							jstArg = TranslateHelper.getCastable(

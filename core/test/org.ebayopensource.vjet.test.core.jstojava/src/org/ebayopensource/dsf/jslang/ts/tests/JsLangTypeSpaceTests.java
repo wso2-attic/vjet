@@ -11,6 +11,7 @@ package org.ebayopensource.dsf.jslang.ts.tests;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 
@@ -37,11 +38,30 @@ import org.ebayopensource.dsf.ts.event.type.ModifyTypeEvent;
 import org.ebayopensource.dsf.ts.event.type.RemoveTypeEvent;
 import org.ebayopensource.dsf.ts.event.type.RenameTypeEvent;
 import org.ebayopensource.dsf.ts.type.TypeName;
+import org.ebayopensource.vjo.lib.IResourceResolver;
+import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.TsLibLoader;
 import org.junit.Test;
 
 public class JsLangTypeSpaceTests {
 
+	
+	interface Locator {
+		URL resolve(URL url);
+	}
+
+	static class EclipseLocator implements Locator {
+		public URL resolve(URL url) {
+			try {
+				return org.eclipse.core.runtime.FileLocator.resolve(url);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+	
 	
 	@Test
 	public void testJsLangLoad() throws Exception {
@@ -53,10 +73,23 @@ public class JsLangTypeSpaceTests {
 		JstTypeSpaceMgr ts = new JstTypeSpaceMgr(controller, new DefaultJstTypeLoader());
 //		addTraceEvents(ts);
 		ts.initialize();
+		
+		IResourceResolver jstLibResolver = org.ebayopensource.dsf.jstojava.test.utils.JstLibResolver
+				.getInstance()
+				.setSdkEnvironment(
+						new org.ebayopensource.dsf.jstojava.test.utils.VJetSdkEnvironment(
+								new String[0], "DefaultSdk"));
+
+		LibManager.getInstance().setResourceResolver(jstLibResolver);
+
+		
 		TsLibLoader.loadDefaultLibs(ts);
 //		printTypes(ts);
 		
 		URL url = this.getClass().getClassLoader().getResource("dsf/jslang/feature/tests/EcmaArrayTests.js");
+		if(url.getProtocol().startsWith("bundleresource")){
+			url = new EclipseLocator().resolve(url);
+		}
 		String path = url.getFile();
 		System.out.println("path = " + path);
 

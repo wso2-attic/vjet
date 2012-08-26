@@ -31,7 +31,6 @@ import org.junit.runners.Suite.SuiteClasses;
     ValidationB470Tester.class,
     ValidationB475Tester.class,
     ValidationB476Tester.class,
-    ValidationB477Tester.class,
     ValidationB478Tester.class,
     ValidationB479Tester.class,
     ValidationB481Tester.class,

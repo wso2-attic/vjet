@@ -73,7 +73,7 @@
 				<configuration>
 					<testSuite>${project.artifactId}</testSuite>
 					<testClass>org.ebayopensource.dsf.AllJsToJavaTests</testClass>
-					<argLine>-Djava.source.path=${basedir}/target/test-classes</argLine>
+					<argLine>-Djava.source.path=${basedir}/target/test-classes -Xms512m -Xmx512m</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
