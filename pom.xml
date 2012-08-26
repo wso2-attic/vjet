@@ -36,11 +36,6 @@
         <url>http://m2eclipse.sonatype.org/sites/m2e</url>
         <layout>p2</layout>
      </repository>
-     <repository>
-        <id>vjetdependency</id>
-        <url>http://dl.dropbox.com/u/15417274/vjet_dependencies/</url>
-        <layout>p2</layout>
-     </repository>
     <repository>
       <id>ebayopensource-releases</id>
       <name>eBayOpenSource Release Repository</name>

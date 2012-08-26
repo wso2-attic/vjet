@@ -1,12 +1,12 @@
 <JavaToJst><Controller method="TargetedTranslation"><DependencyPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.NestedTypes" mode="Dependency,Declaration" thread="1">
  <Dependents/>
- <Time start="13:17:39:093" end="13:17:39:107" duration="14"/>
-</Task></DependencyPhase><DeclarationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.Super" mode="Dependency,Declaration" thread="23">
+ <Time start="15:28:09:775" end="15:28:09:788" duration="13"/>
+</Task></DependencyPhase><DeclarationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.Super" mode="Dependency,Declaration" thread="26">
  <Dependents/>
- <Time start="13:17:39:115" end="13:17:39:116" duration="1"/>
+ <Time start="15:28:09:797" end="15:28:09:798" duration="1"/>
 </Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.Methods" mode="Dependency,Declaration" thread="25">
  <Dependents/>
- <Time start="13:17:39:115" end="13:17:39:121" duration="6"/>
+ <Time start="15:28:09:797" end="15:28:09:803" duration="6"/>
 </Task></DeclarationPhase><ImplementationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.NestedTypes" mode="Dependency,Declaration,Impl" thread="1">
- <Time start="13:17:39:122" end="13:17:39:205" duration="83"/>
-</Task></ImplementationPhase><Time start="13:17:39:084" end="13:17:39:216" duration="132"/></Controller></JavaToJst>
+ <Time start="15:28:09:805" end="15:28:09:887" duration="82"/>
+</Task></ImplementationPhase><Time start="15:28:09:764" end="15:28:09:898" duration="134"/></Controller></JavaToJst>

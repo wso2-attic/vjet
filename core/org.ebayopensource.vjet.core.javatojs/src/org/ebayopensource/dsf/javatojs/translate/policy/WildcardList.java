@@ -91,9 +91,9 @@ public class WildcardList {
 		WildcardList wildcardList = new WildcardList();
 		wildcardList.addWildcard("*.test.*.*");
 		
-		System.out.println(wildcardList.contains("com.ebay.test.Abc.java"));
-		System.out.println(wildcardList.contains("com.ebay.1test.Abc.java"));
-		System.out.println(wildcardList.contains("com.ebay.test.Abc.text"));
+		System.out.println(wildcardList.contains("pkg.test.Abc.java"));
+		System.out.println(wildcardList.contains("pkg.1test.Abc.java"));
+		System.out.println(wildcardList.contains("pkg.test.Abc.text"));
 	}
 
 }

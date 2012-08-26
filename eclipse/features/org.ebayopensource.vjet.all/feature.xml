@@ -13,7 +13,7 @@
       provider-name="eBay Open Source">
 
    <description url="https://www.ebayopensource.org/index.php/VJET/HomePage">
-     VJET JavaScript IDE replaces standard text editors or simple JavaScript editors used by many JavaScript developers today and brings common IDE features to JavaScript. VJET JavaScript helps developers focus on coding by providing assistance and support during the full development lifecycle.
+      VJET JavaScript IDE replaces standard text editors or simple JavaScript editors used by many JavaScript developers today and brings common IDE features to JavaScript. VJET JavaScript helps developers focus on coding by providing assistance and support during the full development lifecycle.
    </description>
 
    <copyright url="http://www.example.com/copyright">
@@ -292,10 +292,6 @@ a jury trial in any resulting litigation.
    </license>
 
    <includes
-         id="org.ebayopensource.vjet.extmod.rhino"
-         version="1.0.0.qualifier"/>
-
-   <includes
          id="org.ebayopensource.vjet.extmod.jsdt"
          version="1.0.0.qualifier"/>
 
@@ -329,6 +325,10 @@ a jury trial in any resulting litigation.
 
    <includes
          id="org.eclipse.equinox.server.jetty"
+         version="0.0.0"/>
+
+   <includes
+         id="org.ebayopensource.vjet.extmod.rhino"
          version="0.0.0"/>
 
 </feature>

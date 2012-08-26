@@ -99,9 +99,9 @@ public interface IClassR {
 //    String JsNativeSimpleName = "JsNative";
     String NativeJsProxyName = "org.ebayopensource.dsf.dap.proxy.NativeJsProxy";
     String NativeJsProxySimpleName = "NativeJsProxy";
-    String ScriptableName = "com.ebay.internal.org.mozilla.javascript.Scriptable";
+    String ScriptableName = "org.mozilla.mod.javascript.Scriptable";
     String ScriptableSimpleName = "Scriptable";
-    String IJsJavaProxyName = "com.ebay.internal.org.mozilla.javascript.IJsJavaProxy";
+    String IJsJavaProxyName = "org.mozilla.mod.javascript.IJsJavaProxy";
     String IJsJavaProxySimpleName = "IJsJavaProxy";
     String NativeJsTypeRef = "org.ebayopensource.dsf.dap.proxy.NativeJsTypeRef";
     String NativeJsTypeRefSimpleName = "NativeJsTypeRef";
@@ -109,6 +109,7 @@ public interface IClassR {
     String INativeJsFuncProxySimpleName = "INativeJsFuncProxy";
     String NativeJsFuncProxy = "org.ebayopensource.dsf.dap.proxy.NativeJsFuncProxy";
     String NativeJsFuncProxySimpleName = "NativeJsFuncProxy";
+    // TODO find EventDispatcher
     String EventDispatcherXName = "com.ebay.vjox.EventDispatcherX";
     String EventDispatcherXSimpleName = "EventDispatcherX";
     String EventDispatcherName = "vjo.dsf.EventDispatcher";
@@ -137,7 +138,6 @@ public interface IClassR {
     String ArrayProxySimapleName = "Array";
     String JTypeName = "org.ebayopensource.dsf.dap.proxy.JType";
     String JTypeSimpleName = "JType";
-//    String RhinoFunctionName = "com.ebay.internal.org.mozilla.javascript.Function";
     String JFunctionName = "org.ebayopensource.dsf.dap.proxy.JFunction";
     String JFunctionNameX = "org.ebayopensource.dsf.dap.proxy.JFunctionX";
     String JFunctionSimapleName = "JFunction";

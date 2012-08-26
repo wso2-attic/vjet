@@ -34,4 +34,3 @@ Export-Package: org.ebayopensource.vjet.eclipse.console,
  org.ebayopensource.vjet.eclipse.internal.launching,
  org.ebayopensource.vjet.eclipse.launching,
  org.ebayopensource.vjet.eclipse.launching.html
-Import-Package: com.ebay.kernel.util

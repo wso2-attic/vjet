@@ -75,20 +75,12 @@ public class VjetvHeadlessConfigure extends IHeadlessLauncherConfigure {
         this.m_reportLevel = reportLevel;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.ebay.cli.model.AEVLauncherConfigure#getReportPath()
-     */
+ 
     public String getReportPath() {
         return m_reportPath;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.ebay.cli.model.AEVLauncherConfigure#getReprotType()
-     */
+    
     public String getReprotType() {
         return m_reportType;
     }

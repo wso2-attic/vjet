@@ -96,31 +96,18 @@ public class HeadlessParserConfigure extends IHeadlessParserConfigure {
         return m_reportLevel;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.ebay.cli.model.AEVLauncherConfigure#getReportPath()
-     */
     @Override
     public String getReportPath() {
         return m_reportPath;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.ebay.cli.model.AEVLauncherConfigure#getReprotType()
-     */
+
     @Override
     public String getReprotType() {
         return m_reportType;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.ebay.cli.model.AEVLauncherConfigure#getSourceLocation()
-     */
+
     @Override
     public HashSet<File> getSourceLocation() {
         return m_sourceLocation;
@@ -134,11 +121,7 @@ public class HeadlessParserConfigure extends IHeadlessParserConfigure {
         return m_validatedJSFiles;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.ebay.cli.model.AEVLauncherConfigure#init()
-     */
+
     @Override
     public void init() {
     }

@@ -29,7 +29,7 @@ import org.ebayopensource.vjo.lib.LibManager;
 
 public class GenJsBrowserJsr {
 
-	private static final String COM_EBAY_JSNATIVE_JSR = "com.ebay.jsbrowser.jsr";
+	private static final String JSNATIVE_JSR = "org.ebayopensource.vjet.jsbrowser.jsr";
 
 
 	
@@ -49,7 +49,7 @@ public class GenJsBrowserJsr {
 			try{
 			JstPackage package1 = type.getPackage();
 			if(package1==null){
-				package1 = new JstPackage(COM_EBAY_JSNATIVE_JSR);
+				package1 = new JstPackage(JSNATIVE_JSR);
 			}
 ////			
 //			type.setPackage(package1);
