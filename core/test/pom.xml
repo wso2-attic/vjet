@@ -21,6 +21,7 @@
       	<module>org.ebayopensource.vjet.test.core.javatojs</module>
       	<module>org.ebayopensource.vjet.test.core.vjotool</module>
       	<module>org.ebayopensource.vjet.test.rt.vjoruntime</module>
+	<module>org.ebayopensource.vjet.test.core.ecma</module>
   </modules>
 
 
