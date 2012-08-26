@@ -12,6 +12,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.ebayopensource.dsf.jstojava.parser.SyntaxTreeFactory2;
 import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.jstojava.translator.TranslateCtx;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.mod.wst.jsdt.internal.compiler.ast.CompilationUnitDeclaration;
 import org.eclipse.mod.wst.jsdt.internal.compiler.batch.CompilationUnit;
 import org.eclipse.mod.wst.jsdt.internal.compiler.env.ICompilationUnit;
@@ -68,6 +70,14 @@ public abstract class BaseTest {
 		URL resource = null;
 		if (input == null && filename != null) {
 			resource = getClass().getResource(filename);
+			if(resource.getProtocol().contains("bundleresource")){
+				try {
+					resource = FileLocator.resolve(resource);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			filename = resource.getPath();
 		}
 		File file = new File(filename);

@@ -11,6 +11,8 @@ package org.ebayopensource.vjo.tool.codecompletion.engine;
 
 
 
+import static org.junit.Assert.assertTrue;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -43,8 +46,8 @@ import org.junit.Test;
 public class VjoCcBugfixTests extends VjoCcBaseTest {
 	private VjoCcEngine engine;
 	
-	@BeforeClass
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
 	}
 	
@@ -167,33 +170,33 @@ public class VjoCcBugfixTests extends VjoCcBaseTest {
 		}
 	}
 	
-	@Test //Bug5348
-	@Ignore("determine issue with _defineGetter__")
-	public void testBug5348() {
-		String js = "BugJsFiles.GenericCtype";
-		IJstType date = getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "Date");
-		List<String> strList = getSuggestions(date);
-		strList.addAll(getSuggestions(getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "Object")));
-		String[] names = new String[] {};
-		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
-		int position = lastPositionInFile("date.", jstType);
-		
-		checkProposals(jstType, position, strList.toArray(names));
-	}
+//	@Test //Bug5348
+//	@Ignore("determine issue with _defineGetter__")
+//	public void testBug5348() {
+//		String js = "BugJsFiles.GenericCtype";
+//		IJstType date = getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "Date");
+//		List<String> strList = getSuggestions(date);
+//		strList.addAll(getSuggestions(getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "Object")));
+//		String[] names = new String[] {};
+//		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
+//		int position = lastPositionInFile("date.", jstType);
+//		
+//		checkProposals(jstType, position, strList.toArray(names));
+//	}
 	
-	@Test //Bug5502
-	@Ignore("determine issue with _defineGetter__")
-	public void testBug5502() {
-		String js = "BugJsFiles.GenericCtype";
-		IJstType date = getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "String");
-		List<String> strList = getSuggestions(date);
-		strList.addAll(getSuggestions(getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "Object")));
-		String[] names = new String[] {};
-		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
-		int position = lastPositionInFile("this.validProp2.", jstType);
-		
-		checkProposals(jstType, position, strList.toArray(names));
-	}
+//	@Test //Bug5502
+//	@Ignore("determine issue with _defineGetter__")
+//	public void testBug5502() {
+//		String js = "BugJsFiles.GenericCtype";
+//		IJstType date = getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "String");
+//		List<String> strList = getSuggestions(date);
+//		strList.addAll(getSuggestions(getJstType(JstTypeSpaceMgr.JS_NATIVE_GRP, "Object")));
+//		String[] names = new String[] {};
+//		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
+//		int position = lastPositionInFile("this.validProp2.", jstType);
+//		
+//		checkProposals(jstType, position, strList.toArray(names));
+//	}
 	
 	@Test //Bug5502
 	public void testBug5502_1() {

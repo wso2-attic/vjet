@@ -76,13 +76,6 @@ public class VjoCcPropMethodProposalAdvisorTest extends VjoCcBaseTest {
 				"nonStaticPropAdvisor.ProtosAdvisorIType");
 	}
 
-	
-    @Test
-    @Ignore //TODO See http://quickbugstage.arch.ebay.com/show_bug.cgi?id=8045
-	public void testCTypeComplex() {
-		testPropMethods(CodeCompletionUtil.GROUP_NAME,
-				"nonStaticPropAdvisor.ProtosAdvisorTest1");
-	}
 
 	@Test
 	public void testMethodsCharByChar1() {
@@ -97,19 +90,6 @@ public class VjoCcPropMethodProposalAdvisorTest extends VjoCcBaseTest {
 		}
 	}
 
-	@Test
-	@Ignore("come back to this")
-	public void testMethodsCharByChar2() {
-		TypeName typeName = new TypeName(CodeCompletionUtil.GROUP_NAME,
-				"nonStaticPropAdvisor.ProtosAdvisorTest1");
-		IJstType actingType = getJstType(typeName);
-		Assert.assertNotNull(actingType);
-		List<IJstMethod> methods = getJstMethods(actingType);
-		for (IJstMethod method : methods) {
-			List<String> charList = getStringComboForMethod(method);
-			testWithCharactersMethod(charList, actingType, methods);
-		}
-	}
 
 	@Test
 	public void testPropsCharByChar1() {

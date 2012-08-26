@@ -29,6 +29,7 @@ import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -41,7 +42,7 @@ import org.junit.Test;
 public class VjoCcFunctionBugsTests extends VjoCcBaseTest {
 	private VjoCcEngine engine;
 	
-	@BeforeClass
+	@Before
 	public void setUp() throws Exception {
 		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
 	}
@@ -74,16 +75,16 @@ public class VjoCcFunctionBugsTests extends VjoCcBaseTest {
 	/**
 	 * TODO Put the proper logic to check the function arguments
 	 */
-	@Test //Bug4918
-	@Ignore
-	public void testOverloadedProposalsProps() {
-		String js = "presenter.FunctionPosition";
-		String[] names = new String[] {"compute", "compute", "compute"};
-		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
-		int position = firstBeforePositionInFile("this.staticFunc1(", jstType);
-		
-		checkProposals(jstType, position, names);
-	}
+//	@Test //Bug4918
+//	@Ignore
+//	public void testOverloadedProposalsProps() {
+//		String js = "presenter.FunctionPosition";
+//		String[] names = new String[] {"compute", "compute", "compute"};
+//		IJstType jstType = getJstType(CodeCompletionUtil.GROUP_NAME, js);
+//		int position = firstBeforePositionInFile("this.staticFunc1(", jstType);
+//		
+//		checkProposals(jstType, position, names);
+//	}
 	
 	@Test //Bug5029
 	public void testFQNAccessCTypeProps() {

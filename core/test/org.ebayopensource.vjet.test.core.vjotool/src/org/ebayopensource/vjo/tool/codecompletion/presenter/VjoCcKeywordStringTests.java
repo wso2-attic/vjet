@@ -11,6 +11,8 @@ package org.ebayopensource.vjo.tool.codecompletion.presenter;
 
 
 
+import static org.junit.Assert.assertTrue;
+
 import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.junit.Test;

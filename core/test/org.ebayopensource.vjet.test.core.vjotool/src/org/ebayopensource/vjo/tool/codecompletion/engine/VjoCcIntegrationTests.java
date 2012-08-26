@@ -19,8 +19,7 @@ import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
+import org.junit.Before;
 import org.junit.Test;
 
 
@@ -31,8 +30,8 @@ public class VjoCcIntegrationTests extends VjoCcBaseTest {
 	
 	private VjoCcEngine engine;
 	
-	@BeforeClass
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
 	}
 	
@@ -62,16 +61,16 @@ public class VjoCcIntegrationTests extends VjoCcBaseTest {
 		
 	}
 	
-	@Test
-	@Ignore("this test was not running due to NPE in framework")
-	public void testIShoppingProposals() {
-		VjoCcEngineTestUtil testUtil = new VjoCcEngineTestUtil();
-		testUtil.sampleJs = "engine/IShoppingTest.js";
-		testUtil.testJs = "engine.IShopping";
-		testUtil.xmlFile = "engine/Shopping_TestData.xml";
-		
-		testUtil.testCcProposals();
-	}
+//	@Test
+//	@Ignore("this test was not running due to NPE in framework")
+//	public void testIShoppingProposals() {
+//		VjoCcEngineTestUtil testUtil = new VjoCcEngineTestUtil();
+//		testUtil.sampleJs = "engine/IShoppingTest.js";
+//		testUtil.testJs = "engine.IShopping";
+//		testUtil.xmlFile = "engine/Shopping_TestData.xml";
+//		
+//		testUtil.testCcProposals();
+//	}
 	
 	@Test
 	public void testShoppingCategoryProposals() {
@@ -93,36 +92,26 @@ public class VjoCcIntegrationTests extends VjoCcBaseTest {
 		testUtil.testCcProposals();
 	}
 	
-	@Test
-	@Ignore
-	public void testGenericShoppingProposals() {
-		VjoCcEngineTestUtil testUtil = new VjoCcEngineTestUtil();
-		testUtil.sampleJs = "engine/GenericShoppingTest.js";
-		testUtil.testJs = "engine.GenericShopping";
-		testUtil.xmlFile = "engine/Shopping_TestData.xml";
-		
-		testUtil.testCcProposals();
-	}
+//	@Test
+//	@Ignore
+//	public void testGenericShoppingProposals() {
+//		VjoCcEngineTestUtil testUtil = new VjoCcEngineTestUtil();
+//		testUtil.sampleJs = "engine/GenericShoppingTest.js";
+//		testUtil.testJs = "engine.GenericShopping";
+//		testUtil.xmlFile = "engine/Shopping_TestData.xml";
+//		
+//		testUtil.testCcProposals();
+//	}
 	
-	@Test
-	@Ignore("this test was not running due to NPE in framework")
-	public void testShoppingProposals() {
-		VjoCcEngineTestUtil testUtil = new VjoCcEngineTestUtil();
-		testUtil.sampleJs = "engine/ShoppingTest.js";
-		testUtil.testJs = "engine.Shopping";
-		testUtil.xmlFile = "engine/Shopping_TestData.xml";
-		
-		testUtil.testCcProposals();
-	}
+//	@Test
+//	@Ignore("this test was not running due to NPE in framework")
+//	public void testShoppingProposals() {
+//		VjoCcEngineTestUtil testUtil = new VjoCcEngineTestUtil();
+//		testUtil.sampleJs = "engine/ShoppingTest.js";
+//		testUtil.testJs = "engine.Shopping";
+//		testUtil.xmlFile = "engine/Shopping_TestData.xml";
+//		
+//		testUtil.testCcProposals();
+//	}
 
-	@Test
-	@Ignore //TODO huzhou@ebay.com find the source back
-	public void testLocalVarAsFunctionProposals() {
-		VjoCcEngineTestUtil testUtil = new VjoCcEngineTestUtil();
-		testUtil.sampleJs = "engine/LocalVarAsFunctionTest.js";
-		testUtil.testJs = "engine.LocalVarAsFunction";
-		testUtil.xmlFile = "engine/LocalVarAsFunction_TestData.xml";
-		
-		testUtil.testCcProposals();
-	}
 }

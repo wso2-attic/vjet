@@ -14,6 +14,7 @@ package org.ebayopensource.vjo.tool.codecompletion.presenter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,8 @@ import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtxForTest;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngineTestUtil;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.eclipse.core.runtime.AssertionFailedException;
+import org.eclipse.core.runtime.FileLocator;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -66,8 +69,8 @@ public class VjoCcMethodPropReplaceStrTests extends VjoCcBaseTest {
 	
 	
 
-	@BeforeClass
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		ctx = getEmptyContext();
 	}
 	
@@ -76,6 +79,14 @@ public class VjoCcMethodPropReplaceStrTests extends VjoCcBaseTest {
 	public void testCcProposals(){
 		initialize();
 		URL url = this.getClass().getClassLoader().getResource(sampleJs);
+		if(url.getProtocol().contains("bundleresource")){
+			try {
+				url = FileLocator.resolve(url);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		Map<Integer, List<String>> map = filterPositions(getFileContents(url
 				.getFile()));
 		testCodeCompletionProposals(map);
@@ -187,6 +198,9 @@ public class VjoCcMethodPropReplaceStrTests extends VjoCcBaseTest {
 	private void getPositionAdvisorMapping() {
 		try {
 			URL url = VjoCcEngineTestUtil.class.getClassLoader().getResource(xmlFile);
+			if(url.getProtocol().contains("bundleresource")){
+				url = FileLocator.resolve(url);
+			}
 			File file = new File(url.getFile());
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 					.newInstance();

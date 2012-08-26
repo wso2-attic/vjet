@@ -20,7 +20,6 @@ import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcCTypeProposalAdvi
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcConstructorGenProposalAdvisorTest;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcEnumElementAdvisorTest;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcFunctionGenProposalAdvisorTest;
-import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcGlobalAdvisorTest;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcInterfaceProposalAdvisorTest;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcKeywordInMethodProposalAdvisorTest;
 import org.ebayopensource.vjo.tool.codecompletion.advisor.VjoCcNeedsItemProposalAdvisorTest;
@@ -74,7 +73,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	VjoCcCTypeProposalAdvisorTest.class,
 	VjoCcEnumElementAdvisorTest.class,
 	VjoCcFunctionGenProposalAdvisorTest.class,
-	VjoCcGlobalAdvisorTest.class,
 	VjoCcInterfaceProposalAdvisorTest.class,
 	VjoCcKeywordInMethodProposalAdvisorTest.class,
 	VjoCcNeedsItemProposalAdvisorTest.class,

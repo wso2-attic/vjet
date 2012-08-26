@@ -7,6 +7,9 @@
  *
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
 import org.ebayopensource.dsf.jst.IJstType;

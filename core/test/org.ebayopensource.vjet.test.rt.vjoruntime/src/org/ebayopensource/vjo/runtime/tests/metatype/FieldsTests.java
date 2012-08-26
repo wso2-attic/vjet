@@ -12,12 +12,10 @@ package org.ebayopensource.vjo.runtime.tests.metatype;
 
 
 
+import org.ebayopensource.dsf.jsnative.anno.BrowserType;
+import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import org.ebayopensource.dsf.jsnative.anno.BrowserType;
-import com.ebay.junitnexgen.category.Module;
-import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 
 public class FieldsTests extends BaseTestClass {
 	private static final String FIELDS_TEST_VJO = "org.ebayopensource.vjo.runtime.tests.metatype.jstests.FieldsTests";
@@ -25,7 +23,7 @@ public class FieldsTests extends BaseTestClass {
 	@Test
 	
 	//@Category( {P1,IE })
-	@Module("VjoRuntimeTests")
+//	@Module("VjoRuntimeTests")
 	public void testFieldsTests_MSIE() throws Exception {
 		runJsTest(FIELDS_TEST_VJO, BrowserType.IE_8);
 	}
@@ -33,7 +31,7 @@ public class FieldsTests extends BaseTestClass {
 	@Test
 	@Ignore
 	//@Category( {P2,FF })
-	@Module("VjoRuntimeTests")
+//	@Module("VjoRuntimeTests")
 	public void testFieldsTests_FIREFOX() throws Exception {
 		runJsTest(FIELDS_TEST_VJO, BrowserType.FIREFOX_3);
 	}

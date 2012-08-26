@@ -11,6 +11,7 @@ package org.ebayopensource.vjo.tool.codecompletion.engine.innertypes;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,7 @@ import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.eclipse.core.runtime.FileLocator;
 import org.junit.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -60,6 +62,14 @@ public class VjoCcInnerTypeTestUtil extends VjoCcBaseTest {
 		initialize();
 		System.out.println("sample js file loading:" +sampleJs);
 		URL url = this.getClass().getClassLoader().getResource(sampleJs);
+		if(url.getProtocol().contains("bundleresource")){
+			try {
+				url = FileLocator.resolve(url);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		Map<Integer, List<String>> map = filterPositions(getFileContents(url
 				.getFile()));
 		testCodeCompletionProposals(map);
@@ -179,6 +189,9 @@ public class VjoCcInnerTypeTestUtil extends VjoCcBaseTest {
 		try {
 			URL url = VjoCcInnerTypeTestUtil.class.getClassLoader()
 					.getResource(xmlFile);
+			if(url.getProtocol().startsWith("bundleresource")){
+				url = FileLocator.resolve(url);
+			}
 			File file = new File(url.getFile());
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 					.newInstance();

@@ -11,6 +11,9 @@ package org.ebayopensource.vjo.tool.codecompletion.presenter;
 
 
 
+import static org.junit.Assert.assertTrue;
+import junit.framework.Assert;
+
 import org.ebayopensource.dsf.jst.IJstType;
 import org.ebayopensource.dsf.jst.declaration.JstModifiers;
 import org.ebayopensource.vjo.tool.codecompletion.CodeCompletionUtils;
@@ -108,15 +111,15 @@ public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 		testOverRideStr(expected, method);
 	}
 	
-	@Test
-	@Ignore //TODO need get confirmation on how to deal with default method which was overloaded from SJC team
-	public void testFunctionOverRideStr2(){
-		String method = "staticFunc1";
-		String expected = "//>public String staticFunc1(String s1, int n1)" + getLineSeparator()
-			+ "staticFunc1 : function( s1,  n1){" + getLineSeparator() + "\t" + 
-			getCursorPos() + "return this.base.staticFunc1(s1, n1);" + getLineSeparator() + "}";
-		testOverRideStr(expected, method);
-	}
+//	@Test
+//	@Ignore //TODO need get confirmation on how to deal with default method which was overloaded from SJC team
+//	public void testFunctionOverRideStr2(){
+//		String method = "staticFunc1";
+//		String expected = "//>public String staticFunc1(String s1, int n1)" + getLineSeparator()
+//			+ "staticFunc1 : function( s1,  n1){" + getLineSeparator() + "\t" + 
+//			getCursorPos() + "return this.base.staticFunc1(s1, n1);" + getLineSeparator() + "}";
+//		testOverRideStr(expected, method);
+//	}
 	
 	@Test
 //	@Ignore //TODO need get confirmation on how to deal with default method which was overloaded from SJC team
@@ -297,7 +300,7 @@ public class VjoCcFunctionStringTests extends VjoCcBaseTest {
 	private void testOverRideStr(String expected, String method){
 		String js = "presenter.FunctionPosition";
 		IJstType type = getJstType(CodeCompletionUtil.GROUP_NAME, js);
-		assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
+		Assert.assertNotNull("Can not find JstType: presenter.FunctionPosition", type);
 		String replaceString = 
 			presenter.getReplaceStringForOverrideProposal(type.getMethod(method), "\t");
 		assertTrue("Get wrong replaceString, Expected " + expected

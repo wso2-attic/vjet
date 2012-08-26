@@ -30,6 +30,7 @@ import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.eclipse.core.runtime.FileLocator;
 import org.junit.Assert;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -161,6 +162,9 @@ public abstract class VjoCcBaseHandlerTestUtil extends VjoCcBaseTest {
 		try {
 			URL url = VjoCcHandlerTest.class.getClassLoader().getResource(
 					xmlFile);
+			if(url.getProtocol().contains("bundleresource")){
+				url = FileLocator.resolve(url);
+			}
 			File file = new File(url.getFile());
 			DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory
 					.newInstance();

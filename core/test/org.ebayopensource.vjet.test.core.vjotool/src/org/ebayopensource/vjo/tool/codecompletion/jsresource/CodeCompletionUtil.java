@@ -38,9 +38,11 @@ import org.ebayopensource.dsf.ts.event.type.RemoveTypeEvent;
 import org.ebayopensource.dsf.ts.event.type.RenameTypeEvent;
 import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
+import org.ebayopensource.vjo.lib.IResourceResolver;
 import org.ebayopensource.vjo.lib.LibManager;
 import org.ebayopensource.vjo.lib.ResourceHelper;
 import org.ebayopensource.vjo.lib.TsLibLoader;
+import org.eclipse.core.runtime.FileLocator;
 
 public class CodeCompletionUtil {
 	public static Boolean fullyLoaded = true;
@@ -88,6 +90,14 @@ public class CodeCompletionUtil {
 	public static JstTypeSpaceMgr getInitailTypeSpace() {
 		JstTypeSpaceMgr ts = null;
 		try {
+			IResourceResolver jstLibResolver = org.ebayopensource.vjet.test.util.JstLibResolver
+					.getInstance()
+					.setSdkEnvironment(
+							new org.ebayopensource.vjet.test.util.VJetSdkEnvironment(
+									new String[0], "DefaultSdk"));
+
+			LibManager.getInstance().setResourceResolver(jstLibResolver);
+			
 			controller = new JstParseController(new VjoParser());
 			ts = new JstTypeSpaceMgr(controller, new DefaultJstTypeLoader());
 			ts.initialize();
@@ -257,6 +267,10 @@ public class CodeCompletionUtil {
 			if (u == null){
 				u = JavaSourceLocator.getInstance().getSourceUrl(CodeCompletionUtil.class.getName());
 			}
+			if(u.getProtocol().contains("bundleresource")){
+				u = FileLocator.resolve(u);
+			}
+			
 			if(u.getProtocol().equalsIgnoreCase("jar")){
 				String path = u.getFile();
 				if (path.startsWith("file:/")){

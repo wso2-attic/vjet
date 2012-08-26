@@ -14,133 +14,21 @@
 	</parent>
 
 	<groupId>org.ebayopensource.vjet.test</groupId>
-	<artifactId>test-core-vjotool</artifactId>
+	<artifactId>org.ebayopensource.vjet.test.core.vjotool</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>eclipse-test-plugin</packaging>
 	<name>VJET: VjoTool Tests</name>
-
-	<dependencies>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.test</groupId>
-			<artifactId>test-utils</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.resource</groupId>
-			<artifactId>org.ebayopensource.vjet.resource.jsnativetypes</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.resource</groupId>
-			<artifactId>org.ebayopensource.vjet.resource.vjolib</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.vjotool</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.vjodef</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.jsnative</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.extmod</groupId>
-			<artifactId>org.ebayopensource.vjet.extmod.rhino</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-
-	</dependencies>
-
-	<properties>
-		<java.source.path>${basedir}/src:${basedir}/artifact</java.source.path>
-	</properties>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-resources-1</id>
-						<!-- here the phase you need -->
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/test-classes/artifact</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/src</directory>
-									<filtering>false</filtering>
-									<excludes>
-										<exclude>**/*.java</exclude>
-									</excludes>
-								</resource>
-								<resource>
-									<directory>${basedir}/artifact</directory>
-									<includes>
-										<include>**/*.js</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-					<execution>
-						<id>copy-resources-2</id>
-						<!-- here the phase you need -->
-						<phase>validate</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${basedir}/target/test-classes/</outputDirectory>
-							<resources>
-								<resource>
-									<directory>${basedir}/artifact</directory>
-									<includes>
-										<include>**/*.xml</include>
-										<include>**/*.java</include>
-										<include>**/*.js</include>
-									</includes>
-								</resource>
-								<resource>
-									<directory>${basedir}/src</directory>
-									<includes>
-										<include>**/*.java</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
 				<configuration>
-					<systemPropertyVariables>
-						<java.source.path>${java.source.path}</java.source.path>
-					</systemPropertyVariables>
-					<enableAssertions>false</enableAssertions>
-					<testFailureIgnore>false</testFailureIgnore>
-					<includes>
-						<include>**/*Test.java</include>
-						<include>**/*Tests.java</include>
-					</includes>
-					<excludes>
-						<exclude>**/All*Tests.java</exclude>
-						<exclude>**/*Base*.java</exclude>
-						<exclude>**/*ForTest.java</exclude>
-					</excludes>
+					<testSuite>${project.artifactId}</testSuite>
+					<testClass>org.ebayopensource.vjo.tool.codecompletion.AllVjoCcTestSuite</testClass>
+					<argLine>-Djava.source.path=${basedir}/src:${basedir}/artifact -Xms512m -Xmx512m</argLine>
 				</configuration>
 			</plugin>
 		</plugins>

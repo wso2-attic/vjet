@@ -8,14 +8,19 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.javatojs.tests;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
-
 import org.ebayopensource.dsf.javatojs.tests.cli.Java2VjoTests;
 import org.ebayopensource.dsf.javatojs.tests.data.control.AllControlTests;
 import org.ebayopensource.dsf.javatojs.tests.data.custom.AllCustomTranslationTests;
 import org.ebayopensource.dsf.javatojs.tests.data.custom.meta.AllCustomMetaTests;
 import org.ebayopensource.dsf.javatojs.tests.generics.GenericsTest;
+import org.ebayopensource.vjet.test.util.JstLibResolver;
+import org.ebayopensource.vjet.test.util.VJetSdkEnvironment;
+import org.ebayopensource.vjo.lib.IResourceResolver;
+import org.ebayopensource.vjo.lib.LibManager;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses( { 
 	JsrGeneratorTests.class,
@@ -27,7 +32,6 @@ import org.ebayopensource.dsf.javatojs.tests.generics.GenericsTest;
 	ErrorReporterTests.class,
 	DependencyTests.class,
 	FilterTests.class,
-	GetClasspathTest.class,
 	PreBuildTests.class, 
 //	BuildTests.class,	// keep after PreBuildTests
 	VjoPrebuildAntTest.class,
@@ -40,4 +44,16 @@ import org.ebayopensource.dsf.javatojs.tests.generics.GenericsTest;
 	})
 public class AllJavaToJsTests {
 
+	@BeforeClass
+	public static void setup() {
+		// TODO Auto-generated method stub
+		IResourceResolver jstLibResolver = JstLibResolver
+				.getInstance()
+				.setSdkEnvironment(
+						new VJetSdkEnvironment(
+								new String[0], "DefaultSdk"));
+
+		LibManager.getInstance().setResourceResolver(jstLibResolver);
+	}
+	
 }

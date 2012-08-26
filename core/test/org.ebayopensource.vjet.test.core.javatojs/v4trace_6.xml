@@ -1,0 +1,12 @@
+<JavaToJst><Controller method="TargetedTranslation"><DependencyPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.NestedTypes" mode="Dependency,Declaration" thread="1">
+ <Dependents/>
+ <Time start="13:17:39:093" end="13:17:39:107" duration="14"/>
+</Task></DependencyPhase><DeclarationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.Super" mode="Dependency,Declaration" thread="23">
+ <Dependents/>
+ <Time start="13:17:39:115" end="13:17:39:116" duration="1"/>
+</Task><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.Methods" mode="Dependency,Declaration" thread="25">
+ <Dependents/>
+ <Time start="13:17:39:115" end="13:17:39:121" duration="6"/>
+</Task></DeclarationPhase><ImplementationPhase><Task type="org.ebayopensource.dsf.javatojs.tests.data.structure.NestedTypes" mode="Dependency,Declaration,Impl" thread="1">
+ <Time start="13:17:39:122" end="13:17:39:205" duration="83"/>
+</Task></ImplementationPhase><Time start="13:17:39:084" end="13:17:39:216" duration="132"/></Controller></JavaToJst>

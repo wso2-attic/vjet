@@ -22,15 +22,4 @@
    <packaging>eclipse-plugin</packaging>
    <name>VJET: Test Utils</name>
    
-   <build>
-   		<sourceDirectory>${project.basedir}/src</sourceDirectory> 
-	    <testSourceDirectory>${project.basedir}/none</testSourceDirectory>
-	   	<plugins>
-	   		<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-		    </plugin>
-	   	</plugins>
-   </build>
-   
 </project>

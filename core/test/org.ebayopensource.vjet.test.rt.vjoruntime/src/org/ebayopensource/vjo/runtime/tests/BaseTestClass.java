@@ -16,6 +16,7 @@ import org.ebayopensource.dsf.jsrunner.JsRunner;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
 import org.ebayopensource.vjo.jsunit.VjoJsUnit;
 import org.ebayopensource.vjo.runner.VjoRunner;
+import org.eclipse.core.runtime.FileLocator;
 import org.junit.Assert;
 import org.mozilla.mod.javascript.JavaScriptException;
 
@@ -40,7 +41,9 @@ public class BaseTestClass {
 	
 	URL fileUrl = JavaSourceLocator.getInstance().getSourceUrl(
 			fullyQualifiedVjoName, ".js");
-	
+	if(fileUrl.getProtocol().contains("bundleresource")){
+		fileUrl = FileLocator.resolve(fileUrl);
+	}
 	VjoRunner runner = new VjoRunner(new JsRunner.ProgramInfo() {
 		public BrowserType getBrowserType() {
 			return browserType;

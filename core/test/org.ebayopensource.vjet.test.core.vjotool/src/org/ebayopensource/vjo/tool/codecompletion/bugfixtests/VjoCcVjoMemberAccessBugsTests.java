@@ -31,6 +31,7 @@ import org.ebayopensource.vjo.tool.codecompletion.IVjoCcProposalData;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.engine.VjoCcEngine;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -41,8 +42,8 @@ import org.junit.Test;
 public class VjoCcVjoMemberAccessBugsTests extends VjoCcBaseTest {
 	private VjoCcEngine engine;
 	
-	@BeforeClass
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		engine = new VjoCcEngine(CodeCompletionUtil.getJstParseController());
 	}
 	@Test //Bug2157

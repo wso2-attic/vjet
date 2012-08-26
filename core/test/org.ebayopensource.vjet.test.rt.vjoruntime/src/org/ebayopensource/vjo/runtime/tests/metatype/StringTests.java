@@ -13,25 +13,23 @@ package org.ebayopensource.vjo.runtime.tests.metatype;
 
 
 
-import org.junit.Test;
-
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
-import com.ebay.junitnexgen.category.Module;
 import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
+import org.junit.Test;
 
 public class StringTests extends BaseTestClass {
 	private static final String NATIVETYPES_TEST_VJO = "org.ebayopensource.vjo.runtime.tests.metatype.jstests.StringTests";
 
 	@Test
 	//@Category( { P1, IE })
-	@Module("VjoRuntimeTests")
+//	@Module("VjoRuntimeTests")
 	public void testStringTests_MSIE() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.IE_8);
 	}
 
 	@Test
 	//@Category( { P2, FF })
-	@Module("VjoRuntimeTests")
+//	@Module("VjoRuntimeTests")
 	public void testStringTests_FIREFOX() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.FIREFOX_3);
 	}

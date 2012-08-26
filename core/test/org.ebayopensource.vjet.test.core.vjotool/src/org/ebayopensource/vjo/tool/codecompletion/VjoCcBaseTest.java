@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.ebayopensource.vjo.tool.codecompletion;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
 
 import org.ebayopensource.dsf.jsnative.anno.Constructor;
 import org.ebayopensource.dsf.jsnative.anno.Function;
@@ -27,8 +27,9 @@ import org.ebayopensource.dsf.jstojava.parser.VjoParser;
 import org.ebayopensource.dsf.ts.type.TypeName;
 import org.ebayopensource.dsf.util.JavaSourceLocator;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
+import org.eclipse.core.runtime.FileLocator;
 
-public abstract class VjoCcBaseTest extends TestCase {
+public abstract class VjoCcBaseTest{
 
 	private static JstTypeSpaceMgr m_jstTypeSpaceMgr;
 	
@@ -39,6 +40,8 @@ public abstract class VjoCcBaseTest extends TestCase {
 	public void reset(){
 		//m_jstTypeSpaceMgr = null;
 	}
+	
+	
 	
 	/**
 	 * @param typeName
@@ -178,6 +181,14 @@ public abstract class VjoCcBaseTest extends TestCase {
 		if (url == null) {
 			typeName = typeName.replace(".", "/");
 			url = this.getClass().getClassLoader().getResource(typeName + suffix);
+		}
+		if(url.getProtocol().contains("bundleresource")){
+			try {
+				url = FileLocator.resolve(url);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return url;
 	}

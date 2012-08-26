@@ -8,9 +8,9 @@ Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: 
-  org.ebayopensource.vjet.extmod.rhino;visibility:=reexport,
-  org.ebayopensource.vjet.core.vjodef;visibility:=reexport,
-  org.ebayopensource.vjet.rt.active;visibility:=reexport
+ org.ebayopensource.vjet.extmod.rhino;visibility:=reexport,
+ org.ebayopensource.vjet.core.vjodef;visibility:=reexport,
+ org.ebayopensource.vjet.rt.active;visibility:=reexport
 Export-Package: 
   org.ebayopensource.vjo.coverage,
   org.ebayopensource.vjo.jsunit,

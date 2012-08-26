@@ -17,128 +17,30 @@
    </parent>
 
    <groupId>org.ebayopensource.vjet.test</groupId>
-   <artifactId>test-core-vjoruntime</artifactId>
+   <artifactId>org.ebayopensource.vjet.test.rt.vjoruntime</artifactId>
    <version>1.0.0-SNAPSHOT</version>
-   <packaging>jar</packaging>
+   <packaging>eclipse-test-plugin</packaging>
    <name>VJET: VjoRuntime Tests</name>
    
-   <dependencies>
-   		<dependency>
-   			<groupId>org.ebayopensource.vjet.test</groupId>
-   			<artifactId>test-utils</artifactId>
-   			<version>1.0.0-SNAPSHOT</version>
-   		</dependency>
-   		<dependency>
-			<groupId>org.ebayopensource.vjet.extmod</groupId>
-   			<artifactId>org.ebayopensource.vjet.extmod.rhino</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-   			<artifactId>org.ebayopensource.vjet.core.util</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-   			<artifactId>org.ebayopensource.vjet.core.jsnative</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-   			<artifactId>org.ebayopensource.vjet.core.vjodef</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-   			<artifactId>org.ebayopensource.vjet.rt.active</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-   			<artifactId>org.ebayopensource.vjet.rt.vjoruntime</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-   			<artifactId>org.ebayopensource.vjet.rt.liveconnect</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-   			<artifactId>org.ebayopensource.vjet.rt.jsdebugger</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-   			<artifactId>org.ebayopensource.vjet.rt.jsdi</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.web</groupId>
-   			<artifactId>org.ebayopensource.vjet.web.kernel</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.web</groupId>
-   			<artifactId>org.ebayopensource.vjet.web.html</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.web</groupId>
-   			<artifactId>org.ebayopensource.vjet.web.cssparser</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.resource</groupId>
-			<artifactId>org.ebayopensource.vjet.resource.jsnativetypes</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.resource</groupId>
-			<artifactId>org.ebayopensource.vjet.resource.vjolib</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-   </dependencies>
 
    <properties>
    		<java.source.path>${basedir}/target/test-classes</java.source.path>
    </properties>
+   
+   	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<testSuite>${project.artifactId}</testSuite>
+					<testClass>org.ebayopensource.vjo.runtime.tests.AllVjoRuntimeTests</testClass>
+					<argLine>-Djava.source.path=${basedir}/src:${basedir}/../../runtime/org.ebayopensource.vjet.rt.vjoruntime/src -Xms512m -Xmx512m</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
-   <build>
-   		<plugins>
-   			<plugin>
-	   			<groupId>org.apache.maven.plugins</groupId>
-		        <artifactId>maven-resources-plugin</artifactId>
-		        <executions>
-		          <execution>
-		            <id>copy-resources-1</id>
-		            <!-- here the phase you need -->
-		            <phase>validate</phase>
-		            <goals>
-		              <goal>copy-resources</goal>
-		            </goals>
-		            <configuration>
-		              <outputDirectory>${basedir}/target/test-classes</outputDirectory>
-		              <resources>          
-		                <resource>
-		                  <directory>${basedir}/../org.ebayopensource.vjet.rt.vjoruntime/src</directory>
-		                  <filtering>false</filtering>
-		                  <includes>
-					          <exclude>**/*.js</exclude>
-					      </includes>
-		                </resource>
-		                <resource>
-		                  <directory>${basedir}/src</directory>
-		                  <filtering>false</filtering>
-		                  <includes>
-					          <exclude>**/*.js</exclude>
-					      </includes>
-		                </resource>
-		              </resources>              
-		            </configuration>            
-		          </execution>
-		        </executions>
-	        </plugin>
-   		</plugins>
-   </build>
+
 </project>

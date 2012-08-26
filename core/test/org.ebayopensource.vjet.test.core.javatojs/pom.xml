@@ -14,89 +14,11 @@
 	</parent>
 
 	<groupId>org.ebayopensource.vjet.test</groupId>
-	<artifactId>test-core-javatojs</artifactId>
+	<artifactId>org.ebayopensource.vjet.test.core.javatojs</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>eclipse-test-plugin</packaging>
 	<name>VJET: JavaToJs Tests</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.test</groupId>
-			<artifactId>test-utils</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.util</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.jsgenshared</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.javatojs</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-			<artifactId>org.ebayopensource.vjet.rt.active</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.rt</groupId>
-			<artifactId>org.ebayopensource.vjet.rt.active.javatojs</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.web</groupId>
-			<artifactId>org.ebayopensource.vjet.web.kernel</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.web</groupId>
-			<artifactId>org.ebayopensource.vjet.web.html</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.resource</groupId>
-			<artifactId>org.ebayopensource.vjet.resource.jsnativetypes</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.resource</groupId>
-			<artifactId>org.ebayopensource.vjet.resource.vjolib</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.resource</groupId>
-			<artifactId>org.ebayopensource.vjet.resource.vjojavalib</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.jsnative</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant-nodeps</artifactId>
-			<version>1.8.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.extmod</groupId>
-			<artifactId>org.ebayopensource.vjet.extmod.rhino</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ebayopensource.vjet.core</groupId>
-			<artifactId>org.ebayopensource.vjet.core.vjodef</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
-		</dependency>
-
-	</dependencies>
 
 	<properties>
 		<java.source.path>${basedir}/src</java.source.path>
@@ -104,30 +26,14 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.8.1</version>
+				<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
 				<configuration>
-					<systemPropertyVariables>
-						<java.source.path>${java.source.path}</java.source.path>
-					</systemPropertyVariables>
-					<forkMode>always</forkMode>
-					<trimStackTrace>false</trimStackTrace>
-					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
-					<enableAssertions>false</enableAssertions>
-					<testFailureIgnore>false</testFailureIgnore>
-					<includes>
-						<include>**/*Test.java</include>
-						<include>**/*Tests.java</include>
-					</includes>
-					<excludes>
-						<exclude>**/All*Tests.java</exclude>
-						<exclude>**/*Base*.java</exclude>
-						<exclude>**/aexclude/*.java</exclude>
-						<!-- Not included in AllJavaToJsTests -->
-						<exclude>**/Js2JsRoundTripTests.java</exclude>
-					</excludes>
+					<testSuite>${project.artifactId}</testSuite>
+					<testClass>org.ebayopensource.dsf.javatojs.tests.AllJavaToJsTests</testClass>
+					<argLine>-Djava.source.path=${basedir}/src:${basedir}/../org.ebayopensource.vjet.test.util/src  -Xms512m -Xmx1024m -XX:MaxPermSize=256m</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
