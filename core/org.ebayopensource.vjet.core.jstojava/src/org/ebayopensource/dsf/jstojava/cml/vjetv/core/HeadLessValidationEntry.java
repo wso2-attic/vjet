@@ -6,13 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: HeadLessValidationEntry.java, Jan 25, 2010, 11:33:44 PM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
+
 package org.ebayopensource.dsf.jstojava.cml.vjetv.core;
 
 import org.ebayopensource.dsf.jstojava.cml.vjetv.messages.Messages;

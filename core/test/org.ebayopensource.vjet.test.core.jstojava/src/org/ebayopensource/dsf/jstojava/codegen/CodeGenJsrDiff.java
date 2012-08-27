@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.ebayopensource.dsf.jstojava.codegen;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

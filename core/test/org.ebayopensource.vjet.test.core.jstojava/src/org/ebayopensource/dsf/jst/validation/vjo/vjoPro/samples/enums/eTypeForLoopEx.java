@@ -6,24 +6,28 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.ebayopensource.dsf.jstojava.cml.vjetv.core;
+package org.ebayopensource.dsf.jst.validation.vjo.vjoPro.samples.enums;
 
-import org.ebayopensource.dsf.jstojava.cml.vjetv.core.impl.EVHeadlessLauncher;
+
+
+
+import org.ebayopensource.dsf.jst.validation.vjo.VjoValidationBaseTester;
+import org.junit.Before;
+
+
 
 /**
- * Class/Interface description
+ * eTypeForLoopEx.java
  *
  * @author <a href="mailto:liama@ebay.com">liama</a>
  * @since JDK 1.5
  */
-public class LauncherFactory {
-    
-    /**
-     * Get vjet headless launcher
-     * 
-     * @return {@link IHeadLessLauncher}
-     */
-    public static IHeadLessLauncher getVjetValidationLauncher(){
-        return new EVHeadlessLauncher();
+//@Category( { P3, FAST, UNIT })
+//@ModuleInfo(value="DsfPrebuild",subModuleId="JsToJava")
+public class eTypeForLoopEx extends VjoValidationBaseTester {
+
+    @Before
+    public void setUp() {
+        expectProblems.clear();
     }
 }

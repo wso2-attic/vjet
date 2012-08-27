@@ -6,13 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: ValidateParser.java, Dec 20, 2009, 7:22:24 PM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
 package org.ebayopensource.dsf.jstojava.cml.vjetv.core;
 
 import java.io.BufferedReader;

@@ -56,6 +56,7 @@ public class JsFormattingTests {
 	  }
 	
 	@Test
+
 	@Ignore("jsdoc comments are not working correctly")
 	//@Category({P2,UNIT,FAST})
 	//@Description("Test generated js matches gold file.")

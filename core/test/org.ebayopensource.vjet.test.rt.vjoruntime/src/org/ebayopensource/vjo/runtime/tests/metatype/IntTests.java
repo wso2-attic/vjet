@@ -8,11 +8,8 @@
  *******************************************************************************/
 package org.ebayopensource.vjo.runtime.tests.metatype;
 
-
-
-
-
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
+
 import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 import org.junit.Test;
 
@@ -21,14 +18,12 @@ public class IntTests extends BaseTestClass {
 
 	@Test
 	//@Category( {P1,IE })
-//	@Module("VjoRuntimeTests")
 	public void testIntTests_MSIE() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.IE_8);
 	}
 
 	@Test
-	//@Category( {P2,FF })
-//	@Module("VjoRuntimeTests")
+
 	public void testJsTestCase01_FIREFOX() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.FIREFOX_3);
 	}

@@ -9,8 +9,6 @@
 package org.ebayopensource.vjo.tool.codecompletion.engine;
 
 
-
-
 import static org.junit.Assert.assertTrue;
 
 import java.net.URL;
@@ -34,8 +32,6 @@ import org.ebayopensource.vjo.tool.codecompletion.VjoCcBaseTest;
 import org.ebayopensource.vjo.tool.codecompletion.VjoCcCtx;
 import org.ebayopensource.vjo.tool.codecompletion.jsresource.CodeCompletionUtil;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 

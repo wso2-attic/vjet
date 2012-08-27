@@ -31,10 +31,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.mod.javascript.Kit;
 
-
-
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 import org.eclipse.core.runtime.FileLocator;
+
 
 /**
  * Tests if explicit static in .props is ok

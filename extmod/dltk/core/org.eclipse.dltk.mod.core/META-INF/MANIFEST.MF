@@ -59,7 +59,7 @@ Export-Package: org.ebayopensource.vjet.eclipse.core,
  org.eclipse.dltk.mod.utils
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.core.filesystem;bundle-version="1.3.200",
+Require-Bundle: org.eclipse.core.filesystem,
  org.eclipse.core.resources,
  org.eclipse.core.runtime,
  javax.xml

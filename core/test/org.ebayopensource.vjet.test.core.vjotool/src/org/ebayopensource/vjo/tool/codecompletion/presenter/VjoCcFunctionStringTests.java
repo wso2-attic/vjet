@@ -9,8 +9,6 @@
 package org.ebayopensource.vjo.tool.codecompletion.presenter;
 
 
-
-
 import static org.junit.Assert.assertTrue;
 import junit.framework.Assert;
 

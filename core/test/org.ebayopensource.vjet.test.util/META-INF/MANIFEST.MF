@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Util
+Bundle-Name: VJET Core Test Utils
 Bundle-SymbolicName: org.ebayopensource.vjet.test.util;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.ebayopensource.dsf.test.utils.vjo,

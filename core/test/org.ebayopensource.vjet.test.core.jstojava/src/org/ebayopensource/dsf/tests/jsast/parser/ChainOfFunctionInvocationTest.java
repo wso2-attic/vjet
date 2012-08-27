@@ -9,8 +9,6 @@
 package org.ebayopensource.dsf.tests.jsast.parser;
 
 
-
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -33,10 +31,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mozilla.mod.javascript.Kit;
 
-
-
 import org.ebayopensource.dsf.common.resource.ResourceUtil;
 import org.eclipse.core.runtime.FileLocator;
+
 
 /**
  * Tests if explicit static in .props is ok

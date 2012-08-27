@@ -17,19 +17,17 @@ import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 import org.junit.Test;
 
 
+
 public class BootstrappingTests extends BaseTestClass {
 	private static final String FIELDS_TEST_VJO = "org.ebayopensource.vjo.runtime.tests.metatype.jstests.BootstrappingTests";
 
 	@Test
-	//@Category( { P1, IE })
-	//@Module("VjoRuntimeTests")
+
 	public void testBootstrappingTests_MSIE() throws Exception {
 		runJsTest(FIELDS_TEST_VJO, BrowserType.IE_8);
 	}
 
 	@Test
-	//@Category( { P2, FF })
-	//@Module("VjoRuntimeTests")
 	public void testBootstrappingTests_FIREFOX() throws Exception {
 		runJsTest(FIELDS_TEST_VJO, BrowserType.FIREFOX_3);
 	}

@@ -6,20 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: VjoProjectRuleCache.java, May 16, 2010, 10:33:59 PM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
-/* 
- * $Id: VjoProjectRuleCache.java, May 16, 2010, 10:33:59 PM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
 package org.ebayopensource.dsf.jsgen.shared.validation.vjo;
 
 import java.util.HashMap;

@@ -6,13 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: IHeadLessLaucher.java, Dec 24, 2009, 9:16:08 PM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
+
 package org.ebayopensource.dsf.jstojava.cml.vjetv.core;
 
 import org.ebayopensource.dsf.jstojava.cml.vjetv.model.IHeadLessLauncherResult;

@@ -18,8 +18,6 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-test-plugin</packaging>
 	<name>VJET: JavaToJs Tests</name>
-
-
 	<properties>
 		<java.source.path>${basedir}/src</java.source.path>
 	</properties>

@@ -15,6 +15,7 @@ package org.ebayopensource.vjo.runtime.tests.metatype;
 import org.junit.Test;
 
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
+
 import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 
 public class BooleanTests extends BaseTestClass {
@@ -28,8 +29,6 @@ public class BooleanTests extends BaseTestClass {
 	}
 
 	@Test
-	//@Category( {P2,FF })
-	//@Module("VjoRuntimeTests")
 	public void testBooleanTests_FIREFOX() throws Exception {
 		runJsTest(NATIVETYPES_TEST_VJO, BrowserType.FIREFOX_3);
 	}

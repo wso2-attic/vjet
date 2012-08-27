@@ -6,13 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: EVLauncherResult.java, Dec 21, 2009, 12:28:22 AM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
+
 package org.ebayopensource.dsf.jstojava.cml.vjetv.model.impl;
 
 import java.util.HashMap;

@@ -6,13 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: HandlessParserConfigure.java, Dec 20, 2009, 9:20:15 PM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
 package org.ebayopensource.dsf.jstojava.cml.vjetv.model.impl;
 
 import java.io.File;

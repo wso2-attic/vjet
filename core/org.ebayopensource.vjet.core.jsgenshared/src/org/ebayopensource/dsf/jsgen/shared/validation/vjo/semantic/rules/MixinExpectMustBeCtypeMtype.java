@@ -6,13 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: MixinExpectMustBeCtypeMtype.java, Jun 2, 2010, 1:06:34 AM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
 package org.ebayopensource.dsf.jsgen.shared.validation.vjo.semantic.rules;
 
 import org.ebayopensource.dsf.jsgen.shared.validation.vjo.VjoSemanticProblem;

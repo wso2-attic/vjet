@@ -6,13 +6,6 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-/* 
- * $Id: EVHeadleassTask.java, Jan 4, 2010, 6:24:06 PM, liama. Exp$
- *
- * Copyright (c) 2006-2009 Ebay Technologies. All Rights Reserved.
- * This software program and documentation are copyrighted by Ebay 
- * Technologies.
- */
 package org.ebayopensource.dsf.jstojava.cml.vjetv.core.impl;
 
 import java.io.File;

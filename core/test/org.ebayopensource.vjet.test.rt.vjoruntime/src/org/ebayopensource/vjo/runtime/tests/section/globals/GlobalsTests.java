@@ -13,6 +13,7 @@ package org.ebayopensource.vjo.runtime.tests.section.globals;
 import static org.junit.Assert.fail;
 
 import org.ebayopensource.dsf.jsnative.anno.BrowserType;
+
 import org.ebayopensource.vjo.runtime.tests.BaseTestClass;
 import org.junit.Test;
 
@@ -50,6 +51,7 @@ public class GlobalsTests extends BaseTestClass {
 	@Test
 	//@Category( { P2, FF })
 //	@Module("VjoRuntimeTests")
+
 	public void testPromotingExistingType_FIREFOX() throws Exception {
 		runJsTest("org.ebayopensource.vjo.runtime.tests.section.globals.PromoteExistingType", 
 				BrowserType.FIREFOX_3);
@@ -60,6 +62,7 @@ public class GlobalsTests extends BaseTestClass {
 	@Test
 	//@Category( { P2, FF })
 //	@Module("VjoRuntimeTests")
+
 	public void testSimpleInheritanceTests_FIREFOX() throws Exception {
 		runJsTest("org.ebayopensource.vjo.runtime.tests.section.globals.TypeB", 
 				BrowserType.FIREFOX_3);
