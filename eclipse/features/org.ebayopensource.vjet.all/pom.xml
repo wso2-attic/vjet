@@ -19,6 +19,6 @@
     <groupId>org.ebayopensource.vjet.eclipse.features</groupId>
    	<artifactId>org.ebayopensource.vjet.all</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>eclipse-repository</packaging>
+	<packaging>eclipse-feature</packaging>
 	<name>VJET: P2 Repo</name>
 </project>
