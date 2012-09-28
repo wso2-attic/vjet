@@ -8,6 +8,9 @@
    <extension-point id="functionreturntype" name="Function Return Type Resolver" schema="schema/functionreturntype.exsd"/>
    <extension-point id="otypedef" name="OType definition resolver" schema="schema/otypedef.exsd"/>
 
+	
+
+	
    <extension
          id="org.ebayopensource.vjet.core.nature"
          name="%vjetNature"
@@ -21,7 +24,7 @@
    <extension
          point="org.eclipse.core.runtime.contentTypes">
       <content-type
-            file-extensions="js"
+            file-extensions="jag"
             id="org.eclipse.dltk.mod.vjoContentType"
             name="%vjoContentType"
             priority="high">

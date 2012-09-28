@@ -647,7 +647,7 @@ public class VjoEditor extends JavaScriptEditor {
 //        			System.out.println("no type info for model");
         			String groupName = getTypspaceGroupFromURI(input);
         			
-        			typeName = typeName.substring(1, typeName.lastIndexOf(".js"));
+        			typeName = typeName.substring(1, typeName.lastIndexOf(".jag"));
 					NativeVjoSourceModule m2= new NativeVjoSourceModule( CodeassistUtils.getDefaultNativeSourceFolder(groupName), groupName,
         					typeName);
         			m2.setJstType(CodeassistUtils.findJstType(groupName, typeName));

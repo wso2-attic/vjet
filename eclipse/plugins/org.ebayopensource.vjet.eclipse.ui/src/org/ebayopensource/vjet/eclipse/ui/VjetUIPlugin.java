@@ -131,7 +131,7 @@ public class VjetUIPlugin extends AbstractUIPlugin implements IStartup {
         //End of added
 		setPluginInstance(this);
 
-		new WorkbenchJob("Starting VJET UI plugin") {
+		new WorkbenchJob("Starting VJET UI plugin with jaggery") {
 			
 			@Override
 			public IStatus runInUIThread(IProgressMonitor arg0) {

@@ -33,6 +33,7 @@ public class JavascriptPartitionScanner extends RuleBasedPartitionScanner {
 		IToken singleComment = new Token(
 				IJavaScriptPartitions.JS_SINGLE_COMMENT);
 		IToken multiComment = new Token(IJavaScriptPartitions.JS_MULTI_COMMENT);
+		IToken jsString = new Token(IJavaScriptPartitions.JS_STRING);
 
 		IToken jsDoc = new Token(IJavaScriptPartitions.JS_DOC);
 
@@ -40,7 +41,9 @@ public class JavascriptPartitionScanner extends RuleBasedPartitionScanner {
 		rules.add(new MultiLineRule("/**", "*/", jsDoc, (char) 0, true));
 
 		rules.add(new MultiLineRule("/*", "*/", multiComment, (char) 0, true)); //$NON-NLS-1$ //$NON-NLS-2$
-		rules.add(new EndOfLineRule("//", singleComment)); //$NON-NLS-1$		
+		//rules.add(new MultiLineRule("<%//", "*>", multiComment, (char) 0, true)); //$NON-NLS-1$ //$NON-NLS-2$
+		//	rules.add(new MultiLineRule("<%", "%>", multiComment, (char) 0, true)); //$NON-NLS-1$ //$NON-NLS-2$
+		rules.add(new EndOfLineRule("//", singleComment)); //$NON-NLS-1$	
 		// Add rule for character constants.
 		rules.add(new SingleLineRule("'", "'", string, '\\'));
 		rules.add(new MultiLineRule("\"", "\"", string, '\\'));
